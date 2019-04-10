@@ -1,0 +1,143 @@
+{% extends "views/components/widgets/base.htm" %}
+{% load i18n %}
+
+{% block form %}
+<div class="row widget-wrapper">
+    <div class="form-group">
+        <label class="control-label widget-input-label" for="" data-bind="text:label"></label>
+        <!-- ko if: node -->
+        <i data-bind="css: {'ion-asterisk widget-label-required': node.isrequired}"></i>
+        <!-- /ko -->
+        <div class="col-xs-12 dropzone" data-bind="dropzone: dropzoneOptions">
+            <div class="file-select-window">
+                <div class="bord-top pad-ver file-select">
+                    <div class="">
+                        <h2>Upload Documents</h2>
+                        <h4>Import document files related to your communication</h4>
+                    </div>
+                    <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass, disable: disabled">
+                        <i class="fa fa-file"></i>
+                        <span>{% trans "Select Docuents" %}</span>
+                    </button>
+                    <br>
+                    <p>Adding documents to this Communication record is <span><strong>optional</strong></span>. <br>You may upload as many documents as you wish, but the maximum size of any single file is 200MB.</p>
+
+                    <!-- <div class="btn-group pull-right">
+                        <button id="dz-remove-btn" class="btn btn-danger cancel" type="reset" data-bind="click: reset">
+                            <i class="ion ion-close"></i>
+                        </button>
+                    </div> -->
+                </div>
+                <div class="file-upload-footer">
+                    <span>Allowed document formats: .txt, .docx, .xls. Other formats will be ignored.</span>
+                </div>
+            </div>
+            <div>
+                <h4>Uploaded Files</h4>
+                <div class="file-upload-options">
+                    <input data-bind="" type="text" name="search-string" placeholder="find a file...">
+                    <span data-bind="html: displayValue() + ' files uploaded'"></span>
+                    <button type="button" class="btn btn-file-upload-reset" data-bind="click: reset">
+                        <span>delete all files</span>
+                    </button>
+                </div>
+            </div>
+            <div class="dz-previews" data-bind="css: uniqueidClass">
+                <!-- ko foreach: filesJSON -->
+                    <div class="file-upload-card">
+                        <div class="media-body">
+                            <div class="media-block">
+                                <div class="media-left">
+                                    <span><i class="fa fa-file"></i></span>
+                                    <!-- ko if: ko.unwrap(type).indexOf('image') >= 0 -->
+                                    <img class="dz-img" width="50" height="50" data-bind="attr: {src: ko.unwrap(url) ? url : content }">
+                                    <!-- /ko -->
+                                </div>
+                                <div class="media-body file-upload-card-detail">
+                                    <div class="media-left">
+                                        <span class="text-main text-bold mar-no text-overflow" data-bind="text: name"></span>
+                                        <!-- ko if: $data.error -->
+                                        <span class="dz-error text-danger text-sm" data-bind="text: '{% trans "error" %}'"></span>
+                                        <!-- /ko -->
+                                        <span class="text-sm">Annotate</span>
+                                    </div>
+                                    <div class="file-upload-card-detail-right">
+                                        <div class="media-right" data-bind="click: $parent.removeFile">
+                                            <button class="btn btn-xs btn-danger btn-file-cancel"><i class="ion ion-close"></i></button>
+                                        </div>
+                                        <div class="">
+                                            <span class="text-sm" data-bind="html: $parent.formatSize($data)"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                        </div>
+                        <!-- <div class="media-right" data-bind="click: $parent.removeFile">
+                            <button class="btn btn-xs btn-danger dz-cancel"><i class="ion ion-close"></i></button>
+                        </div> -->
+                    </div>
+                <!-- /ko -->
+            </div>
+            <div>
+                <button type="button" class="btn btn-file-upload-limit" data-bind="">
+                    <span>Show first 5 files <i class="fa fa-caret-down"></i></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<template id="file-widget-dz-preview"><span></span></template>
+{% endblock form %}
+
+{% block config_form %}
+<div class="control-label">
+    {% trans "Accepted Files" %}
+</div>
+<div class="col-xs-12 pad-no crud-widget-container">
+    <input type="" placeholder="{% trans "Accepted Files" %}" id="" class="form-control input-md widget-input" data-bind="value: acceptedFiles, valueUpdate: 'keyup'">
+</div>
+
+<div class="control-label">
+    {% trans "Max File Size (mb)" %}
+</div>
+<div class="col-xs-12 pad-no crud-widget-container">
+    <input type="number" placeholder="{% trans "Max File Size (mb)" %}" id="" class="form-control input-md widget-input" data-bind="value: maxFilesize">
+</div>
+{% endblock config_form %}
+
+{% block report %}
+<dt data-bind="text: label"></dt>
+
+<!-- ko if: uploadedFiles().length === 0 -->
+<dd>{% trans "None" %}</dd>
+<!-- /ko -->
+
+<!-- ko foreach: reportFiles() -->
+<dd>
+    <a class="" data-bind="attr: {href: url}">
+        <i class="ion ion-forward"></i>
+        <span data-bind="text: name"></span>
+    </a>
+</dd>
+<!-- /ko -->
+
+<!-- ko if: reportImages().length > 0 -->
+<dd>
+    <div id="report-image-grid" class="report-image-grid">
+        <!-- ko foreach: reportImages() -->
+        <div class="rp-image-grid-item">
+            <a id="" class="" target="_blank" data-bind="attr: {href: url}">
+                <img class="img-responsive" data-bind="attr: {src: url, alt: name}">
+            </a>
+        </div>
+        <!-- /ko -->
+    </div>
+</dd>
+<!-- /ko -->
+{% endblock report %}
+
+{% block display_value %}
+<span data-bind="text: displayValue() + ' {% trans "files uploaded" %}'"></span>
+{% endblock display_value %}
