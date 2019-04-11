@@ -23,6 +23,22 @@ define([
             var self = this;
             FileWidgetViewModel.apply(this, [params]);
             this.selectedFile = ko.observable();
+            this.filter = ko.observable("");
+            this.filteredList = ko.computed(function() {
+                var filter = self.filter();
+                filter = filter.toLowerCase();
+                var arr = [];
+                var lowerName = "";
+                if(filter) {
+                    self.filesJSON().forEach(function(f, i) {
+                        lowerName = f.name.toLowerCase();
+                        if(lowerName.includes(filter)) {
+                            arr.push(self.filesJSON()[i]);
+                        }
+                    });
+                }
+                return arr;
+            });
 
             this.selectedFile(this.filesJSON()[0]);
 
@@ -34,7 +50,28 @@ define([
                 if (val.length > 1 && self.selectedFile() === undefined) {
                     self.selectedFile(val[0]);
                 }
-            })
+            });
+
+            this.showQty = ko.observable();
+            this.minQty = ko.computed(function() {
+                if(self.filesJSON().length > 5) {
+                    return 'visible';
+                } else {
+                    return 'hidden';
+                }
+            });
+
+            this.pagedList = function(list) {
+                var arr = [];
+                var i = 0;
+                if(list.length > self.showQty()) {
+                    while(arr.length < self.showQty()) {
+                        arr.push(list[i++]);
+                    }
+                    return arr;
+                }
+                return list;
+            }
 
             this.removeFile = function(file) {
                 var filePosition;
