@@ -1,0 +1,48 @@
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">Active Consultations</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <input type="text" style="width: 100%"/>
+        </div>
+        <div class="col-sm-6" style="text-align: right">
+            <span>sort by:</span>
+            <input type="text" />
+            <i class="text-center fa fa-th"></i>
+            <i class="text-center fa fa-bars"></i>
+        </div>
+    </div>
+ 
+    <div class="row">
+        <div class="col-sm-12">
+            <div data-bind="foreach: active_items">
+                <div class="card-grid-item">
+                    <div class="panel mar-no">
+                        <!-- Function Name -->
+                        <div class="panel-heading">
+                            <h3 id="f1-name" class="panel-title library-card-panel-title"><i class="text-center fa fa-code"></i> <span data-bind="text: title"></span></h3>
+                        </div>
+
+                        <!-- Abstract -->
+                        <div class="panel-body library-card-body">
+                            <p data-bind="text: description">no description</p>
+                        </div>
+
+                        <!-- Selectable -->
+                        <div class="selectable" style="display: none;">
+                            <i class="ion-ios-checkmark"></i>
+                        </div>
+
+                        <!-- card Tools -->
+                        <div class="panel-footer" style="height: 53px;">
+                            <p data-bind="text: author">no author</p>
+                        </div>
+                    </div>
+                </div>
+            </div>    
+        </div>
+    </div>
+          
+</div>
