@@ -1,0 +1,116 @@
+
+<div class="container" style="margin: 30px;">
+    <div class="row">
+        <div class="col-sm-12">Active Consultations</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6">
+            <select data-bind="chosen: {width: '50%'}, value: ''" data-placeholder="filter consultations..."></select>
+        </div>
+        <div class="col-sm-6">
+            <span>sort by:</span>
+            <select data-bind="chosen: {width: '50%'}, value: ''">
+                <option value="1" selected>most recent</option>
+                <option value="2" >something else</option>
+                <option value="3">option 3</option>
+            </select>
+            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === '' }" class="text-center fa fa-th" style="font-size: 28px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 28px;"></i></button>
+            
+            
+        </div>
+    </div>
+ 
+    <div class="row">
+        <div class="col-sm-12">
+            <!-- ko  -->
+            
+            <div data-bind="visible: layout() === 'grid'">
+                <div data-bind="foreach: active_items">
+                    <div class="card-grid-item">
+                        <div class="panel mar-no">
+                            <!-- Function Name -->
+                            <div style="position: absolute; width: 270px; border: solid 1px lightgrey; margin: 9px; padding: 15px; background-color: white;">
+                                <div data-bind="text: title"></div>
+                                <div data-bind="text: consultation_type"></div>
+                            </div>
+
+                            <div style="height: 200px; padding: 90px; text-align: center; background-color: #f8fbff;">
+                                map
+                            </div>
+
+                            <div style="border: solid 1px #eaeaea;display: flex;padding: 10px;">
+                                <div style="flex-grow: 1; border-right: solid 1px #eaeaea; text-align: center;">
+                                    <div>Jan, 30 2019</div>
+                                    <div>Due date</div>
+                                </div>
+                                <div style="flex-grow: 1; text-align: center;">
+                                    <div>Jan, 30 2019</div>
+                                    <div>Due date</div>
+                                </div>
+                            </div>
+
+                            <div style="height: 116px; padding: 10px;">
+                                <p data-bind="text: description">no description</p>
+                            </div>
+
+                            <div class="panel-footer" style="padding: 0px">
+                                <div class="ep-toolbar">
+                                    <div class="ep-tools-title">
+                                        <div data-bind="text: author" style="font-size: 15px; padding: 12px 0px 0px 12px;">no author</div>
+                                    </div>
+                                    <a href="" class="ep-tools ep-tools-right" data-bind="">
+                                        <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="settings">
+                                          <i class="fa fa-cog"></i>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /ko -->
+
+            <div data-bind="visible: layout() !== 'grid'">
+                <div data-bind="foreach: active_items">
+                    <div style="width: 100%; height: 100px; display: flex; border: solid 1px lightgrey; margin-bottom: 10px;">
+                        <div style="width: 200px; text-align: center; background-color: #f8fbff; border-right: solid 1px lightgrey;">
+                            map
+                        </div>
+
+                        <div style="width: 270px; border-right: solid 1px lightgrey; padding: 15px; background-color: white; flex: 0 1 auto;">
+                            <div data-bind="text: title"></div>
+                            <div data-bind="text: consultation_type"></div>
+                        </div>
+
+                        <div style="width: 200px; display: flex; padding: 10px; border-right: solid 1px lightgrey; background-color: #f9f9bd;">
+                            <div style="flex-grow: 1; border-right: solid 1px #eaeaea; text-align: center;">
+                                <div>Jan, 30 2019</div>
+                                <div>Due date</div>
+                            </div>
+                            <div style="flex-grow: 1; text-align: center;">
+                                <div>Jan, 30 2019</div>
+                                <div>Due date</div>
+                            </div>
+                        </div>
+
+                        <div class="panel-body" style="width: 100%; border-right: solid 1px lightgrey;">
+                            <p data-bind="text: description">no description</p>
+                        </div>
+
+                        <div style="padding: 0px; display: flex; flex-direction: column; flex: 0 1 auto; width: 200px; background-color: white;">
+                            <div data-bind="text: author" style="font-size: 15px; padding: 5px 0px 0px 5px; background-color: #e6e6e6;">no author</div>
+                            <div style="margin: auto" data-toggle="tooltip" data-original-title="settings">
+                                <i class="fa fa-cog"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>  
+            </div>  
+            <!-- /ko -->     
+        </div>
+    </div>
+          
+</div>
