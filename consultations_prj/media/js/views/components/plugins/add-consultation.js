@@ -8,10 +8,20 @@ define([
         viewModel: function(params) {
             var self = this;
             params.steps = [
-                {title: 'Step 1', description: 'A description here', component: 'new-tile-step', graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a'},
-                {title: 'Step 2', description: 'A very long and verboser description here that explains many different things about the workflow step'},
-                {title: 'Step 3'},
-                {title: 'Step 4', description: 'Another description here'}
+                {
+                    title: 'Step 1', 
+                    description: 'A description here',
+                    component: 'new-tile-step',
+                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
+                    nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null
+                },
+                {
+                    title: 'Step 2',
+                    description: 'Another description here'
+                }
             ];
             
             Workflow.apply(this, [params]);
