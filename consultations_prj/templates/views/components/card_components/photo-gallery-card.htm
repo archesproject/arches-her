@@ -70,15 +70,15 @@
             <div class="thumbnail-container" data-bind="gallery: photoGallery.pan, duration: 400, scrolldistance: 100, thumbnailclass: 'gallery-thumbnails'">
                 <div class="thumbnail-gallery-controls left" data-bind="click: function(){photoGallery.updatePan('left')}"><i class="fa fa-angle-left"></i></div>
                 <div class="gallery-thumbnails">
-                    <!-- ko foreach: card.tiles() -->
+                    <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
                     <div style='position: relative'>
                         <div data-bind="click: function(){console.log(this)}, visible: false">
                             <button class="btn btn-xs dz-cancel"><i class="ion ion-close"></i></button>
                         </div>
-                        <!--ko if: getUrl -->
-                        <img class="dz-img" data-bind="attr: {src: getUrl !== undefined ? getUrl() : '' }, click: $parent.photoGallery.selectItem">
+                        <!--ko if: $parent.getUrl(tile) -->
+                        <img class="dz-img" data-bind="attr: {src: $parent.getUrl(tile) !== undefined ? $parent.getUrl(tile) : '' }, click: $parent.photoGallery.selectItem">
                         <!--/ko-->
-                        <!--ko if: getUrl === undefined -->
+                        <!--ko if: $parent.getUrl(tile) === undefined -->
                         <img class="dz-img" data-bind="attr: {src: '' }, click: $parent.photoGallery.selectItem">
                         <!--/ko-->
                     </div>

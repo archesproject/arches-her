@@ -12,22 +12,20 @@ define([
 
             this.photoGallery = new PhotoGallery();
 
-            this.card.tiles().forEach(function(tile){
-                var url
-                var getUrl = function(){
-                    _.each(tile.data,
-                        function(v, k) {
-                            val = ko.unwrap(v);
-                            if (Array.isArray(val)
-                                && val.length == 1
-                                && (ko.unwrap(val[0].url) || ko.unwrap(val[0].content))) {
-                                    url = ko.unwrap(val[0].url) || ko.unwrap(val[0].content);
-                                }
-                            });
-                        return url
-                    };
-                _.extend(tile, {getUrl: getUrl})
-            })
+
+            this.getUrl = function(tile){
+                _.each(tile.data,
+                    function(v, k) {
+                        val = ko.unwrap(v);
+                        if (Array.isArray(val)
+                            && val.length == 1
+                            && (ko.unwrap(val[0].url) || ko.unwrap(val[0].content))) {
+                                url = ko.unwrap(val[0].url) || ko.unwrap(val[0].content);
+                            }
+                        });
+                    console.log(url)
+                    return url
+                };
 
             // getUrl should instead be a function that takes a tile and returns it's url
 
@@ -38,7 +36,7 @@ define([
                         return tile.selected() === true
                     });
                 if (selected) {
-                        photo = selected.getUrl();
+                        photo = this.getUrl(selected);
                     }
                 return photo;
             }, this);
@@ -61,7 +59,7 @@ define([
                     this.on("addedfile", function(file) {
                         var newtile;
                         newtile = self.card.getNewTile();
-                        newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f'](file)
+                        newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f'](file);
                         self.form.saveTile(newtile);
                     }, self);
 
@@ -71,9 +69,6 @@ define([
                     });
                 }
             };
-
-
-
 
             this.tabItems = [
                 {'name': 'alpha', 'icon': 'fa fa-android'},
