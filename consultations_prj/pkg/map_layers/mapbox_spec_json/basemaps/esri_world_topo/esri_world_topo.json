@@ -1,0 +1,17 @@
+{
+    "name": "ESRI World Topo",
+    "sources": {
+        "ESRI World Topo": {
+            "type": "raster",
+            "tiles": ["https://services.arcgisonline.com/arcgis/rest/services/World_Topo_Map/MapServer/WMTS/tile/1.0.0/World_Topo_Map/default/default028mm/{z}/{y}/{x}.png"],
+            "tileSize": 256
+        }
+    },
+    "layers": [
+        {
+        "source": "ESRI World Topo",
+        "type": "raster",
+        "id": "agoltopo"
+        }
+    ]
+}
