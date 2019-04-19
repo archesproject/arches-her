@@ -12,8 +12,8 @@ define([
 
             this.photoGallery = new PhotoGallery();
 
-
             this.getUrl = function(tile){
+                var url = '';
                 _.each(tile.data,
                     function(v, k) {
                         val = ko.unwrap(v);
@@ -23,11 +23,8 @@ define([
                                 url = ko.unwrap(val[0].url) || ko.unwrap(val[0].content);
                             }
                         });
-                    console.log(url)
                     return url
                 };
-
-            // getUrl should instead be a function that takes a tile and returns it's url
 
             this.displayContent = ko.pureComputed(function(){
                 var photo;
@@ -43,39 +40,41 @@ define([
 
             if (!this.displayContent()) {
                 if (this.card.tiles().length > 0) {
-                    this.card.tiles()[0].selected(true)
                 }
             }
 
+            this.removeTile = function(val){
+                val.deleteTile();
+            }
 
-            this.dropzoneOptions = {
-                url: "arches.urls.root",
-                dictDefaultMessage: '',
-                autoProcessQueue: false,
-                autoQueue: false,
-                previewsContainer: '#hidden-dz-previews',
-                init: function() {
-                    self.dropzone = this;
-                    this.on("addedfile", function(file) {
-                        var newtile;
-                        newtile = self.card.getNewTile();
-                        newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f'](file);
-                        self.form.saveTile(newtile);
-                    }, self);
-
-                    this.on("error", function(file, error) {
-                        file.error = error;
-                        console.log(error);
-                    });
-                }
-            };
+            // this.dropzoneOptions = {
+            //     url: "arches.urls.root",
+            //     dictDefaultMessage: '',
+            //     autoProcessQueue: false,
+            //     autoQueue: false,
+            //     previewsContainer: '#hidden-dz-previews',
+            //     init: function() {
+            //         self.dropzone = this;
+            //         this.on("addedfile", function(file) {
+            //             var newtile;
+            //             newtile = self.card.getNewTile();
+            //             newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f'](file);
+            //             self.form.saveTile(newtile);
+            //             console.log(self);
+            //         }, self);
+            //
+            //         this.on("error", function(file, error) {
+            //             file.error = error;
+            //             console.log(error);
+            //         });
+            //     }
+            // };
 
             this.tabItems = [
-                {'name': 'alpha', 'icon': 'fa fa-android'},
-                {'name': 'beta', 'icon': 'fa fa-anchor'},
-                {'name': 'delta', 'icon': 'fa fa-camera'}
+                {'name': 'edit', 'icon': 'fa fa-pencil'},
+                {'name': 'beta', 'icon': 'fa fa-android'},
             ];
-
+            console.log('setting stuff')
             this.activeTab = ko.observable();
             this.setActiveTab = function(tabname){
                 var name = this.activeTab() === tabname ? '' : tabname;
