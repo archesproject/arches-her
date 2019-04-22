@@ -15,6 +15,7 @@
     height: 100%;
     padding: 15px;
     background-color: #fff;
+    overflow-y: auto;
 }
 
 .card-control-panel-tabs.nav.nav-tabs {
@@ -61,10 +62,6 @@
 .gallery-container {
     position: relative;
 }
-
-
-
-
 
 .gallery-thumbnails {
     display: inline-flex;
@@ -115,6 +112,14 @@
     padding: 0.5px 3.5px;
 }
 
+.gallery-controls {
+    display: flex;
+    position:absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+}
+
 .thumbnail-gallery-controls {
     width: 30px;
     height: 105px;
@@ -148,11 +153,12 @@
 /* In core core arches */
 
 .file-upload-footer {
-    text-align: left;
-    padding: 15px 15px 15px 15px;
     background: #e6e6e6;
-    color: rgb(89, 56, 255);
-    height: fit-content;
+    color: rgb(89, 56, 255);;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 10px;
 }
 
 .file-select {
