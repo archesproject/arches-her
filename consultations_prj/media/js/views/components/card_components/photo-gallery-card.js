@@ -2,7 +2,8 @@ define([
     'knockout',
     'underscore',
     'viewmodels/card-component',
-    'viewmodels/photo-gallery'
+    'viewmodels/photo-gallery',
+    'bindings/slide'
 ], function(ko, _, CardComponentViewModel, PhotoGallery) {
     return ko.components.register('photo-gallery-card', {
         viewModel: function(params) {
@@ -25,6 +26,8 @@ define([
                         });
                     return url
                 };
+
+            this.showThumbnails = ko.observable(false);
 
             this.displayContent = ko.pureComputed(function(){
                 var photo;
@@ -74,8 +77,8 @@ define([
                 {'name': 'edit', 'icon': 'fa fa-pencil'},
                 {'name': 'beta', 'icon': 'fa fa-android'},
             ];
-            console.log('setting stuff')
-            this.activeTab = ko.observable();
+
+            this.activeTab = ko.observable('edit');
             this.setActiveTab = function(tabname){
                 var name = this.activeTab() === tabname ? '' : tabname;
                 this.activeTab(name);

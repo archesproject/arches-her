@@ -120,6 +120,13 @@
     height: 100%;
 }
 
+.gallery-controls.new-tile {
+    background: #fff;
+    justify-content: center;
+    width: 100%
+}
+
+
 .thumbnail-gallery-controls {
     width: 30px;
     height: 105px;
@@ -140,13 +147,27 @@
     border-right: solid 1px #333;
 }
 
-
 .thumbnail-container {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.show-thumbnails-btn {
+    padding: 4px;
+    margin-left: 10px;
+    width: 100px;
+    background-color: #fff;
+    opacity: 0.6;
+}
+
+
+.thumbnail-gallery-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: absolute;
-    bottom: 0px
+    bottom: 0px;
+    width: 100%;
 }
 
 

@@ -14,14 +14,14 @@
                 <img class="dz-img" style = "width: 100%; height: 100%" data-bind="attr: {src: ko.unwrap(displayContent)}" ></img>
             </div>
             <!--/ko-->
-            <div class="thumbnail-container" data-bind="gallery: photoGallery.pan, duration: 400, scrolldistance: 100, thumbnailclass: 'gallery-thumbnails'">
+
+            <div class="thumbnail-gallery-container">
+            <div class='show-thumbnails-btn' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: showThumbnails() ? '{% trans "open" %}' : '{% trans "close" %}'"></div>
+            <div class="thumbnail-container" data-bind="gallery: photoGallery.pan, duration: 400, scrolldistance: 100, thumbnailclass: 'gallery-thumbnails', slide: showThumbnails, duration: 100, direction: {direction: 'down'}, easing: 'slide'">
                 <div class="thumbnail-gallery-controls left" data-bind="click: function(){photoGallery.updatePan('left')}"><i class="fa fa-angle-left"></i></div>
                 <div class="gallery-thumbnails">
                     <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
                     <div style='position: relative'>
-                        <div data-bind="click: function(){console.log(this)}, visible: false">
-                            <button class="btn btn-xs dz-cancel"><i class="ion ion-close"></i></button>
-                        </div>
                         <!--ko if: $parent.getUrl(tile) -->
                         <div data-bind="click: $parent.removeTile, visible: ko.unwrap(selected)">
                             <button class="btn btn-xs dz-cancel"><i class="ion ion-close"></i></button>
@@ -39,38 +39,39 @@
                 </div>
                 <div class="thumbnail-gallery-controls right" data-bind="click: function(){photoGallery.updatePan('right')}"><i class="fa fa-angle-right"></i></div>
             </div>
+            </div>
         </div>
     </div>
 
-    <div class="gallery-controls">
 
+    <!--ko if: self.displayContent() !== undefined -->
+
+    <div class="gallery-controls" data-bind="css: {'new-tile': self.displayContent() === undefined }">
         <div>
 
             <!--ko if: activeTab() === 'edit' -->
             <div class="tab-pane card-control-panel">
                 <form class="widgets" style="margin-bottom: 20px; width: 350px;">
-                    <div data-bind="foreach: {
-                data:card.widgets, as: 'widget'
-            }">
+                    <div data-bind="foreach: {data:card.widgets, as: 'widget'}">
                         <!--ko if: widget.node_id() !== '6b8fea59-5a0e-11e9-b593-c4b301baab9f'-->
                         <div data-bind='component: {
-                name: self.form.widgetLookup[widget.widget_id()].name,
-                params: {
-                    formData: self.tile.formData,
-                    tile: self.tile,
-                    form: self.form,
-                    config: widget.configJSON,
-                    label: widget.label(),
-                    value: self.tile.data[widget.node_id()],
-                    node: self.form.nodeLookup[widget.node_id()],
-                    expanded: self.expanded,
-                    graph: self.form.graph,
-                    type: "resource-editor",
-                    disabled: !self.card.isWritable && !self.preview
-                }
-            }, css:{ "active": widget.selected, "hover": widget.hovered, "widget-preview": self.preview
-        }, click: function(data, e) { if (!widget.selected() && self.preview) {widget.selected(true);}
-    }, event: { mouseover: function(){ if (self.preview){widget.hovered(true) } }, mouseout: function(){ if (self.preview){widget.hovered(null)} } }, visible: widget.visible'></div>
+                                    name: self.form.widgetLookup[widget.widget_id()].name,
+                                    params: {
+                                        formData: self.tile.formData,
+                                        tile: self.tile,
+                                        form: self.form,
+                                        config: widget.configJSON,
+                                        label: widget.label(),
+                                        value: self.tile.data[widget.node_id()],
+                                        node: self.form.nodeLookup[widget.node_id()],
+                                        expanded: self.expanded,
+                                        graph: self.form.graph,
+                                        type: "resource-editor",
+                                        disabled: !self.card.isWritable && !self.preview
+                                    }
+                                }, css:{ "active": widget.selected, "hover": widget.hovered, "widget-preview": self.preview
+                            }, click: function(data, e) { if (!widget.selected() && self.preview) {widget.selected(true);}
+                        }, event: { mouseover: function(){ if (self.preview){widget.hovered(true) } }, mouseout: function(){ if (self.preview){widget.hovered(null)} } }, visible: widget.visible'></div>
                         <!-- /ko -->
                     </div>
                 </form>
@@ -114,6 +115,61 @@
             </ul>
         </div>
     </div>
+    <!--/ko-->
+
+    <!--ko if: self.displayContent() === undefined -->
+    <div class="gallery-controls new-tile">
+    <div>
+
+        <!--ko if: activeTab() === 'edit' -->
+        <div class="tab-pane card-control-panel">
+            <form class="widgets">
+                <div data-bind="foreach: {data:card.widgets, as: 'widget'}">
+                    <!--ko if: widget.node_id() !== '6b8fea59-5a0e-11e9-b593-c4b301baab9f'-->
+                    <div data-bind='component: {
+                                name: self.form.widgetLookup[widget.widget_id()].name,
+                                params: {
+                                    formData: self.tile.formData,
+                                    tile: self.tile,
+                                    form: self.form,
+                                    config: widget.configJSON,
+                                    label: widget.label(),
+                                    value: self.tile.data[widget.node_id()],
+                                    node: self.form.nodeLookup[widget.node_id()],
+                                    expanded: self.expanded,
+                                    graph: self.form.graph,
+                                    type: "resource-editor",
+                                    disabled: !self.card.isWritable && !self.preview
+                                }
+                            }, css:{ "active": widget.selected, "hover": widget.hovered, "widget-preview": self.preview
+                        }, click: function(data, e) { if (!widget.selected() && self.preview) {widget.selected(true);}
+                    }, event: { mouseover: function(){ if (self.preview){widget.hovered(true) } }, mouseout: function(){ if (self.preview){widget.hovered(null)} } }, visible: widget.visible'></div>
+                    <!-- /ko -->
+                </div>
+            </form>
+
+            <div class="install-buttons">
+                <!-- ko if: tile.dirty() -->
+                <!-- ko if: provisionalTileViewModel && !provisionalTileViewModel.tileIsFullyProvisional() && card.isWritable -->
+                <button class="btn btn-shim btn-danger btn-labeled btn-lg fa fa-times" data-bind="click: tile.reset">{% trans 'Cancel edit' %}</button>
+                <!-- /ko -->
+                    <!-- ko if: tile.tileid -->
+                    <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: function () { console.log(tile); self.form.saveTile(tile); }, css: {disabled: (!card.isWritable && !self.preview), 'btn-mint': card.isWritable }">{% trans 'Save edit' %}</button>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <!-- ko if: !tile.tileid -->
+                <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: function () { console.log(tile); self.form.saveTile(tile); }, css: {disabled: (!card.isWritable && !self.preview), 'btn-mint': card.isWritable }">{% trans 'Add'  %}</button>
+                <!-- /ko -->
+            </div>
+
+        </div>
+        <!--/ko-->
+
+    </div>
+    </div>
+    <!--/ko-->
+
+
 </div>
 
 {% endblock form_widgets %}
