@@ -9,9 +9,9 @@
         <i data-bind="css: {'ion-asterisk widget-label-required': node.isrequired}"></i>
         <!-- /ko -->
         <div class="col-xs-12 dropzone" data-bind="dropzone: dropzoneOptions">
-            <div class="file-select-window">
+            <div class="file-select-window" data-bind="visible: filesJSON().length === 0">
                 <div class="bord-top pad-ver file-select">
-                    <div class="">
+                    <div style="padding: 5px">
                         <h2>{% trans "Upload Documents" %}</h2>
                         <h4>{% trans "Import document files related to your communication" %}</h4>
                     </div>
@@ -20,7 +20,12 @@
                         <span>{% trans "Select Documents" %}</span>
                     </button>
                     <br>
-                    <p>{% trans "Adding documents to this Communication record is <span><strong>optional</strong></span>. <br>You may upload as many documents as you wish, but the maximum size of any single file is 200MB." %}</p>
+                    <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
+                        <span><strong>{% trans "optional." %}</strong></span>
+                        <br>
+                        {% trans "You may upload as many documents as you wish, but the maximum size of any single file is " %}
+                        <span data-bind="text: maxFilesize() + 'MB.'"></span>
+                    </div>
 
                     <!-- <div class="btn-group pull-right">
                         <button id="dz-remove-btn" class="btn btn-danger cancel" type="reset" data-bind="click: reset">
@@ -29,23 +34,27 @@
                     </div> -->
                 </div>
                 <div class="file-upload-footer">
-                    <span>{% trans "Allowed document formats: .txt, .docx, .xls. Other formats will be ignored." %}</span>
+                    <span>{% trans "Allowed document formats:" %} <span data-bind="text: acceptedFiles() + '. '"></span><span>{% trans "Other formats will be ignored." %}</span>
                 </div>
             </div>
             <div>
+                <!--ko if: filesJSON().length > 0-->
                 <h4>{% trans "Uploaded Files" %}</h4>
                 <div class="file-upload-options">
+                    <!--ko if: filesJSON().length > 1-->
                     <input data-bind="textInput: filter" type="text" placeholder="{% trans "find a file..." %}" class="file-upload-filter">
                     <!-- ko if: filter() -->
                     <span data-bind="text: filteredList().length+' out of '+filesJSON().length+' files match filter'"></span>
                     <!-- /ko -->
+                    <!--/ko-->
                     <!-- ko if: (!filter() || filter() == "") -->
-                    <span data-bind="text: {% trans "displayValue() + ' files uploaded'" %}""></span>
+                    <span data-bind="text: filesJSON().length + '{% trans " file(s) uploaded" %}'"></span>
                     <!-- /ko -->
                     <button type="button" class="btn btn-file-upload-reset" data-bind="click: reset">
                         <span>{% trans "delete all files" %}</span>
                     </button>
                 </div>
+                <!--/ko-->
             </div>
             <div class="dz-previews" data-bind="css: uniqueidClass">
             <!-- ko if: !filter() -->

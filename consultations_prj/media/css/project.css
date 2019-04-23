@@ -1,3 +1,68 @@
+.card-display-panel {
+    border: 1px solid #999;
+    position: relative;
+    width: calc(100% - 55px);
+    min-height: 400px;
+    height: inherit;
+    top: 0px;
+    left: 0px
+}
+
+.card-control-panel {
+    width: fit-content;
+    min-width: 300px;
+    border: 1px solid #999;
+    height: 100%;
+    padding: 15px;
+    background-color: #fff;
+    overflow-y: auto;
+}
+
+.card-control-panel-tabs.nav.nav-tabs {
+    background-color: #ccc;
+    width: 55px
+}
+
+.card-control-panel-tabs.nav.nav-tabs li {
+    background-color: #ccc;
+    border-bottom: solid 1px #999;
+    border-top: solid 1px #999;
+    border-left: solid 1px #999;
+    width: 55px;
+}
+
+.card-control-panel-tabs.nav.nav-tabs li.active {
+    background-color: #fff;
+    margin-left: -1px;
+    width: calc(100% + 1px);
+    border-left: 1px solid #fff;
+}
+
+.tab-container .nav-tabs li a {
+    margin-right: 0px;
+}
+
+.gallery-container .tab-container .tab-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.tab-container {
+    border-right: solid 1px #999;
+    border-bottom: solid 1px #999;
+    background-color: #ededed;
+    height: -webkit-fill-available;
+}
+
+.card-control-panel .tab-pane {
+    display: inline-flex;
+}
+
+.gallery-container {
+    position: relative;
+}
+
 .gallery-thumbnails {
     display: inline-flex;
     align-items: center;
@@ -47,6 +112,21 @@
     padding: 0.5px 3.5px;
 }
 
+.gallery-controls {
+    display: flex;
+    position:absolute;
+    right: 0px;
+    top: 0px;
+    height: 100%;
+}
+
+.gallery-controls.new-tile {
+    background: #fff;
+    justify-content: center;
+    width: 100%
+}
+
+
 .thumbnail-gallery-controls {
     width: 30px;
     height: 105px;
@@ -67,24 +147,39 @@
     border-right: solid 1px #333;
 }
 
-
 .thumbnail-container {
-    width: 100%;
     display: flex;
     justify-content: space-between;
+}
+
+.show-thumbnails-btn {
+    padding: 4px;
+    margin-left: 10px;
+    width: 100px;
+    background-color: #fff;
+    opacity: 0.6;
+}
+
+
+.thumbnail-gallery-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     position: absolute;
-    bottom: 0px
+    bottom: 0px;
+    width: 100%;
 }
 
 
 /* In core core arches */
 
 .file-upload-footer {
-    text-align: left;
-    padding: 15px 15px 15px 15px;
     background: #e6e6e6;
-    color: rgb(89, 56, 255);
-    height: fit-content;
+    color: rgb(89, 56, 255);;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding-left: 10px;
 }
 
 .file-select {
