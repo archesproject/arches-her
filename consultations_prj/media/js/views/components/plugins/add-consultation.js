@@ -12,27 +12,25 @@ define([
             params.steps = [
                 {
                     title: 'Assign Address',
-                    description: 'Update Node Here',
+                    description: 'Assign an address to your application area. Use the address as the default name',
                     component: 'get-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: 'e857704a-53d8-11e9-b05a-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-tag',
-                    output: ko.observable(),
-                    applyOutputToTarget: ko.observable(false)
+                    icon: 'fa-envelope'
                 },
                 {
                     title: 'Assign Name',
-                    description: 'A description here',
+                    description: 'Assign a name to your application area',
                     component: 'set-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    input: ko.observable()
+                    icon: 'fa-tag'
                 },
                 {
                     title: 'Step 3',
@@ -48,7 +46,11 @@ define([
                 if (activeStep && activeStep.complete() && activeStep._index < self.steps.length - 1) {
                     self.previousStep = activeStep;
                     self.activeStep(self.steps[activeStep._index+1]);
-                    if (self.activeStep().input && self.previousStep.output) {
+                    self.activeStep().resourceid = self.previousStep.resourceid
+                    if (self.previousStep.output) {
+                        if (!self.activeStep().input) {
+                            self.activeStep().input = ko.observable();
+                        }
                         self.activeStep().input(self.previousStep.output());
                     }
                 }

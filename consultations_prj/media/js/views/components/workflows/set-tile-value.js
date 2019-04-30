@@ -7,9 +7,9 @@ define([
 ], function(_, $, arches, ko, NewTileStep) {
 
     function viewModel(params) {
-        var self = this;
         NewTileStep.apply(this, [params]);
-        this.input = params.input;
+        var self = this;
+        self.input = params.input;
         self.tile.subscribe(function(val) {
             if(val) {
                 if(self.input()) {
