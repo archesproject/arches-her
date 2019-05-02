@@ -1,8 +1,14 @@
 import os
+import inspect
+APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
 #ADMINS = (
 #)
 
+RESOURCE_EDITOR_GROUPS = (
+    'Resource Editor',
+    'Crowdsource Editor'
+)
 
 #ADMIN_MEDIA_PREFIX = '/media/admin/'
 
@@ -27,32 +33,32 @@ import os
 #AUTH_PASSWORD_VALIDATORS = [
 #    {
 #        "NAME": "arches.app.utils.password_validation.NumericPasswordValidator"
-#    }, 
+#    },
 #    {
-#        "NAME": "arches.app.utils.password_validation.SpecialCharacterValidator", 
+#        "NAME": "arches.app.utils.password_validation.SpecialCharacterValidator",
 #        "OPTIONS": {
 #            "special_characters": [
-#                "!", 
-#                "@", 
-#                "#", 
-#                ")", 
-#                "(", 
-#                "*", 
-#                "&", 
-#                "^", 
-#                "%", 
+#                "!",
+#                "@",
+#                "#",
+#                ")",
+#                "(",
+#                "*",
+#                "&",
+#                "^",
+#                "%",
 #                "$"
 #            ]
 #        }
-#    }, 
+#    },
 #    {
 #        "NAME": "arches.app.utils.password_validation.HasNumericCharacterValidator"
-#    }, 
+#    },
 #    {
 #        "NAME": "arches.app.utils.password_validation.HasUpperAndLowerCaseValidator"
-#    }, 
+#    },
 #    {
-#        "NAME": "arches.app.utils.password_validation.MinLengthValidator", 
+#        "NAME": "arches.app.utils.password_validation.MinLengthValidator",
 #        "OPTIONS": {
 #            "min_length": 9
 #        }
@@ -63,7 +69,7 @@ import os
 
 #CACHES = {
 #    "default": {
-#        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache", 
+#        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
 #        "LOCATION": "127.0.0.1:11211"
 #    }
 #}
@@ -80,28 +86,28 @@ import os
 #COPYRIGHT_YEAR = '2016'
 
 
-#DATABASES = {
-#    "default": {
-#        "ATOMIC_REQUESTS": False, 
-#        "AUTOCOMMIT": True, 
-#        "CONN_MAX_AGE": 0, 
-#        "ENGINE": "django.contrib.gis.db.backends.postgis", 
-#        "HOST": "localhost", 
-#        "NAME": "arches", 
-#        "OPTIONS": {}, 
-#        "PASSWORD": "postgis", 
-#        "PORT": "5432", 
-#        "POSTGIS_TEMPLATE": "template_postgis_20", 
-#        "TEST": {
-#            "CHARSET": None, 
-#            "COLLATION": None, 
-#            "MIRROR": None, 
-#            "NAME": None
-#        }, 
-#        "TIME_ZONE": None, 
-#        "USER": "postgres"
-#    }
-#}
+DATABASES = {
+   "default": {
+       "ATOMIC_REQUESTS": False,
+       "AUTOCOMMIT": True,
+       "CONN_MAX_AGE": 0,
+       "ENGINE": "django.contrib.gis.db.backends.postgis",
+       "HOST": "localhost",
+       "NAME": "consultations",
+       "OPTIONS": {},
+       "PASSWORD": "postgis",
+       "PORT": "5432",
+       "POSTGIS_TEMPLATE": "template_postgis_20",
+       "TEST": {
+           "CHARSET": None,
+           "COLLATION": None,
+           "MIRROR": None,
+           "NAME": None
+       },
+       "TIME_ZONE": None,
+       "USER": "postgres"
+   }
+}
 
 
 
@@ -114,6 +120,14 @@ import os
 
 #DEBUG = True
 
+ELASTICSEARCH_PREFIX = 'consultations'
+
+
+#Set IMPORT/EXPORT Date format
+DATE_IMPORT_EXPORT_FORMAT='%d/%m/%Y'
+
+ANALYSIS_COORDINATE_SYSTEM_SRID = 27700 #Coord sys units must be meters
+
 
 #ELASTICSEARCH_CONNECTION_OPTIONS = {
 #    "timeout": 30
@@ -123,11 +137,27 @@ import os
 
 #ELASTICSEARCH_HOSTS = [
 #    {
-#        "host": "localhost", 
+#        "host": "localhost",
 #        "port": 9200
 #    }
 #]
 
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.filebased.FileBasedCache',
+        'LOCATION': os.path.join(APP_ROOT, 'tmp', 'djangocache'),
+        'OPTIONS': {
+            'MAX_ENTRIES': 1000
+        }
+    }
+    # 'default': {
+    #     'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+    #     'LOCATION': '127.0.0.1:11211',
+    # }
+}
+
+CACHE_BY_USER = {'anonymous': 3600  * 24, 'admin': 300}
 
 #ELASTICSEARCH_HTTP_PORT = 9200
 
@@ -179,23 +209,23 @@ import os
 
 
 #LOGGING = {
-#    "disable_existing_loggers": False, 
+#    "disable_existing_loggers": False,
 #    "handlers": {
 #        "file": {
-#            "class": "logging.FileHandler", 
-#            "filename": "/arches/arches.log", 
+#            "class": "logging.FileHandler",
+#            "filename": "/arches/arches.log",
 #            "level": "DEBUG"
 #        }
-#    }, 
+#    },
 #    "loggers": {
 #        "arches": {
 #            "handlers": [
 #                "file"
-#            ], 
-#            "level": "DEBUG", 
+#            ],
+#            "level": "DEBUG",
 #            "propagate": True
 #        }
-#    }, 
+#    },
 #    "version": 1
 #}
 
@@ -213,7 +243,7 @@ import os
 
 
 #MIDDLEWARE_CLASSES = [
-#    "django.middleware.common.CommonMiddleware", 
+#    "django.middleware.common.CommonMiddleware",
 #    "django.middleware.csrf.CsrfViewMiddleware"
 #]
 
@@ -230,11 +260,11 @@ import os
 
 
 #ONTOLOGY_EXT = [
-#    "CRMsci_v1.2.3.rdfs.xml", 
-#    "CRMarchaeo_v1.4.rdfs.xml", 
-#    "CRMgeo_v1.2.rdfs.xml", 
-#    "CRMdig_v3.2.1.rdfs.xml", 
-#    "CRMinf_v0.7.rdfs.xml", 
+#    "CRMsci_v1.2.3.rdfs.xml",
+#    "CRMarchaeo_v1.4.rdfs.xml",
+#    "CRMgeo_v1.2.rdfs.xml",
+#    "CRMdig_v3.2.1.rdfs.xml",
+#    "CRMinf_v0.7.rdfs.xml",
 #    "arches_crm_enhancements.xml"
 #]
 
@@ -279,25 +309,25 @@ import os
 
 #TEMPLATES = [
 #    {
-#        "APP_DIRS": True, 
-#        "BACKEND": "django.template.backends.django.DjangoTemplates", 
+#        "APP_DIRS": True,
+#        "BACKEND": "django.template.backends.django.DjangoTemplates",
 #        "DIRS": [
 #            "/arches/app/templates"
-#        ], 
+#        ],
 #        "OPTIONS": {
 #            "context_processors": [
-#                "django.contrib.auth.context_processors.auth", 
-#                "django.template.context_processors.debug", 
-#                "django.template.context_processors.i18n", 
-#                "django.template.context_processors.media", 
-#                "django.template.context_processors.static", 
-#                "django.template.context_processors.tz", 
-#                "django.template.context_processors.request", 
-#                "django.contrib.messages.context_processors.messages", 
-#                "arches.app.utils.context_processors.livereload", 
-#                "arches.app.utils.context_processors.map_info", 
+#                "django.contrib.auth.context_processors.auth",
+#                "django.template.context_processors.debug",
+#                "django.template.context_processors.i18n",
+#                "django.template.context_processors.media",
+#                "django.template.context_processors.static",
+#                "django.template.context_processors.tz",
+#                "django.template.context_processors.request",
+#                "django.contrib.messages.context_processors.messages",
+#                "arches.app.utils.context_processors.livereload",
+#                "arches.app.utils.context_processors.map_info",
 #                "arches.app.utils.context_processors.app_settings"
-#            ], 
+#            ],
 #            "debug": True
 #        }
 #    }
@@ -306,7 +336,7 @@ import os
 
 
 #TILE_CACHE_CONFIG = {
-#    "name": "Disk", 
+#    "name": "Disk",
 #    "path": "/arches/tileserver/cache"
 #}
 
@@ -320,4 +350,3 @@ import os
 #USE_TZ = False
 
 #WSGI_APPLICATION = 'arches.wsgi.application'
-
