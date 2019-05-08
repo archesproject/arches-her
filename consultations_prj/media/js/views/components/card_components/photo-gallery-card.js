@@ -6,6 +6,7 @@ define([
     'viewmodels/card-component',
     'viewmodels/photo-gallery',
     'bindings/slide',
+    'bindings/fadeVisible',
     'bindings/dropzone'
 ], function(ko, _, Dropzone, uuid, CardComponentViewModel, PhotoGallery) {
     return ko.components.register('photo-gallery-card', {

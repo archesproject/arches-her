@@ -15,9 +15,10 @@
             </div>
             <!--/ko-->
 
-            <div class="thumbnail-gallery-container">
-            <div class='show-thumbnails-btn' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: showThumbnails() ? '{% trans "open" %}' : '{% trans "close" %}'"></div>
-            <div class="thumbnail-container" data-bind="gallery: photoGallery.pan, duration: 400, scrolldistance: 100, thumbnailclass: 'gallery-thumbnails', slide: showThumbnails, duration: 100, direction: {direction: 'down'}, easing: 'slide'">
+            <div class='show-thumbnails-btn closed' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: '{% trans "open" %}', fadeVisible: showThumbnails, delay:400, fade: 200"></div>
+            <div class="thumbnail-gallery-container" data-bind="slide: showThumbnails, duration: 100, direction: {direction: 'down'}, easing: 'slide'">
+            <div class='show-thumbnails-btn open' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: '{% trans "close" %}'"></div>
+            <div class="thumbnail-container" data-bind="gallery: photoGallery.pan, duration: 400, scrolldistance: 100, thumbnailclass: 'gallery-thumbnails'">
                 <div class="thumbnail-gallery-controls left" data-bind="click: function(){photoGallery.updatePan('left')}"><i class="fa fa-angle-left"></i></div>
                 <div class="gallery-thumbnails">
                     <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
