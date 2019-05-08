@@ -1,10 +1,14 @@
 define([
     'knockout',
     'underscore',
+    'dropzone',
+    'uuid',
     'viewmodels/card-component',
     'viewmodels/photo-gallery',
-    'bindings/slide'
-], function(ko, _, CardComponentViewModel, PhotoGallery) {
+    'bindings/slide',
+    'bindings/fadeVisible',
+    'bindings/dropzone'
+], function(ko, _, Dropzone, uuid, CardComponentViewModel, PhotoGallery) {
     return ko.components.register('photo-gallery-card', {
         viewModel: function(params) {
             params.configKeys = ['acceptedFiles', 'maxFilesize'];
@@ -26,6 +30,11 @@ define([
                         });
                     return url
                 };
+
+            this.unique_id = uuid.generate();
+            this.uniqueidClass = ko.computed(function() {
+                return "unique_id_" + self.unique_id;
+            });
 
             this.showThumbnails = ko.observable(false);
 
@@ -50,28 +59,45 @@ define([
                 val.deleteTile();
             }
 
-            // this.dropzoneOptions = {
-            //     url: "arches.urls.root",
-            //     dictDefaultMessage: '',
-            //     autoProcessQueue: false,
-            //     autoQueue: false,
-            //     previewsContainer: '#hidden-dz-previews',
-            //     init: function() {
-            //         self.dropzone = this;
-            //         this.on("addedfile", function(file) {
-            //             var newtile;
-            //             newtile = self.card.getNewTile();
-            //             newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f'](file);
-            //             self.form.saveTile(newtile);
-            //             console.log(self);
-            //         }, self);
-            //
-            //         this.on("error", function(file, error) {
-            //             file.error = error;
-            //             console.log(error);
-            //         });
-            //     }
-            // };
+            this.dropzoneOptions = {
+                url: "arches.urls.root",
+                dictDefaultMessage: '',
+                autoProcessQueue: false,
+                autoQueue: false,
+                clickable: ".fileinput-button." + this.uniqueidClass(),
+                previewsContainer: '#hidden-dz-previews',
+                init: function() {
+                    self.dropzone = this;
+                    this.on("addedfile", function(file) {
+                        var newtile;
+                        newtile = self.card.getNewTile();
+                        console.log('adding tile')
+                        var tilevalue = {
+                            name: file.name,
+                            accepted: true,
+                            height: file.height,
+                            lastModified: file.lastModified,
+                            size: file.size,
+                            status: file.status,
+                            type: file.type,
+                            width: file.width,
+                            url: null,
+                            file_id: null,
+                            index: 0,
+                            content: URL.createObjectURL(file),
+                            error: file.error
+                        };
+                        newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f']([tilevalue]);
+                        newtile.formData.append('file-list_' + 'e60af863-5d48-11e9-b44f-c4b301baab9f', file, file.name);
+                        self.form.saveTile(newtile);
+                    }, self);
+
+                    this.on("error", function(file, error) {
+                        file.error = error;
+                        console.log(error);
+                    });
+                }
+            };
 
             this.tabItems = [
                 {'name': 'edit', 'icon': 'fa fa-pencil'},
