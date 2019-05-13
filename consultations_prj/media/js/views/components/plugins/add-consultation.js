@@ -44,15 +44,10 @@ define([
                 var previousStep;
                 var activeStep = self.activeStep();
                 if (activeStep && activeStep.complete() && activeStep._index < self.steps.length - 1) {
+                    this.updateUrl(activeStep, 'forward')
                     self.previousStep = activeStep;
                     self.activeStep(self.steps[activeStep._index+1]);
                     self.activeStep().resourceid = self.previousStep.resourceid
-                    if (self.previousStep.output) {
-                        if (!self.activeStep().input) {
-                            self.activeStep().input = ko.observable();
-                        }
-                        self.activeStep().input(self.previousStep.output());
-                    }
                 }
             };
             self.ready(true);
