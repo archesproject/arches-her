@@ -9,12 +9,12 @@ define([
     function viewModel(params) {
         NewTileStep.apply(this, [params]);
         var self = this;
-        self.input = params.input;
+        var urlparams = params.parseUrlParams()
         self.tile.subscribe(function(val) {
             if(val) {
-                if(self.input()) {
-                    if (self.input().applyOutputToTarget()) {
-                        val.data[self.input().targetnode](self.input().value);
+                if(urlparams) {
+                    if (urlparams.applyOutputToTarget) {
+                        val.data[urlparams.targetnode](urlparams.value);
                     }
                 }
             }
