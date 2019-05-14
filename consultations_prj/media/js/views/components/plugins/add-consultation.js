@@ -120,10 +120,10 @@ define([
                     parenttileid: null,
                     icon: 'fa-users'
                 },
-                {
-                    title: 'Step 3',
-                    description: 'Another description here',
-                }
+                // {
+                //     title: 'Step 3',
+                //     description: 'Another description here',
+                // }
             ];
 
             Workflow.apply(this, [params]);
