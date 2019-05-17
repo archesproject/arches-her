@@ -73,28 +73,28 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <div class="menu-container">
-                    <ul class="nav navbar-nav">
-                        <li class="page-scroll">
+                    <ul class="nav navbar-nav splash-nav">
+                        <!-- <li class="page-scroll">
                             <a href="#about">{% trans "About Arches" %}</a>
-                        </li>
-                        <li class="page-scroll">
+                        </li> -->
+                        <!-- <li class="page-scroll">
                             <a href="#services">{% trans "Capabilities" %}</a>
+                        </li> -->
+                        <li class="page-scroll">
+                            <a href="#news">{% trans "New" %}</a>
                         </li>
                         <li class="page-scroll">
-                            <a href="#news">{% trans "News" %}</a>
-                        </li>
-                        <li class="page-scroll">
-                            <a href="{% url 'search_home' %}">{% trans "Search" %}</a>
+                            <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
                         {% if user|can_create_resource_instance %}
                         <li class="page-scroll">
-                            <a href="{% url 'resource' %}">{% trans "Manage Data" %}</a>
+                            <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
                         </li>
                         {% endif %}
                         {% if user|has_group:"Graph Editor" %}
-                        <li class="page-scroll">
+                        <!-- <li class="page-scroll">
                             <a href="{% url 'graph' '' %}">{% trans "Design" %}</a>
-                        </li>
+                        </li> -->
                         {% endif %}
                         <li class="page-scroll" style="display: flex; flex-direction: row">
                             {% if user.username == 'anonymous' %}
@@ -103,7 +103,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             </a>
                             {% else %}
                             <a id="auth-link" data-bind="click: function(){showAuthMenu(!showAuthMenu())}">
-                                {% trans "Welcome" %} {{ user.first_name|default:user.username }}
+                                {% trans "Welcome, " %} {{ user.first_name|default:user.username }}<span style="font-size: 11px;">{% trans "(logoff)" %}</span>
                             </a>
                             <span class="fa fa-chevron-circle-down auth-options" data-bind="click: function(){showAuthMenu(!showAuthMenu())}"></span>
 
