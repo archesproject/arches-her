@@ -55,67 +55,48 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
     <!--=== Header ===-->
     <nav class="splash-nav navbar navbar-fixed-top" role="navigation">
-        <div class="container nav-container">
-
-            <div class="menu-container page-scroll">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                    <span class="sr-only">{% trans "Toggle navigation" %}</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-
-                <a class="navbar-brand" style="padding-top: 5px;" href="#intro">
-                    <div style="background-color: #DDDDDD; width: 64px; height: 64px; border-radius: 100%;"><img src="{% static 'img/landing/arches_logo_dark.png' %}" style="height: 48px; width: 48px;" alt="Logo"></div>
-                </a>
+        <div class="nav-container">
+            <div class="navbar-brand-disco">
+                <div class="navbar-brand-disco-icon">
+                    <img src="{% static 'img/landing/arches_logo_dark.png' %}" style="height: 48px; width: 48px;" alt="Logo">
+                </div>
+                <div>
+                    <h2>DISCO</h2>
+                    <span>Data Integration for Science and Conservation</span>
+                </div>
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav splash-list">
-                        <!-- <li class="page-scroll">
-                            <a href="#about">{% trans "About Arches" %}</a>
-                        </li> -->
-                        <!-- <li class="page-scroll">
-                            <a href="#services">{% trans "Capabilities" %}</a>
-                        </li> -->
+                        {% if user.username == 'anonymous' %}
+                        <li>
+                            <a id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">
+                                <button>{% trans "Login" %}</button>
+                            </a>
+                        </li>
+                        {% else %}
                         <li class="page-scroll">
-                            <a href="#news">{% trans "New" %}</a>
+                            <a href="{% url 'consultations' %}">{% trans "New" %}</a>
                         </li>
                         <li class="page-scroll">
                             <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
-                        {% if user|can_create_resource_instance %}
-                        <li class="page-scroll">
-                            <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
-                        </li>
-                        {% endif %}
-                        {% if user|has_group:"Graph Editor" %}
-                        <!-- <li class="page-scroll">
-                            <a href="{% url 'graph' '' %}">{% trans "Design" %}</a>
-                        </li> -->
-                        {% endif %}
-                        <li class="page-scroll" >
-                            {% if user.username == 'anonymous' %}
-                            <a id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">
-                                {% trans "Login" %}
-                            </a>
-                            {% else %}
-                            <a href="{% url 'user_profile_manager' %}">
-                                {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
-                            </a></li>
-                            <li><a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans 'Logoff' %}</a>
-                            <!-- <span class="fa fa-chevron-circle-down auth-options" data-bind="click: function(){showAuthMenu(!showAuthMenu())}"></span> -->
-
+                            {% if user|can_create_resource_instance %}
+                            <li class="page-scroll">
+                                <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
+                            </li>
                             {% endif %}
+                        <li class="page-scroll" >
+                            <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
+                                {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
+                            </a>
                         </li>
-                        <!-- ko if: showAuthMenu -->
-                        <!-- <ul class="auth-options">
-                            <li><a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans 'Logout' %}</a></li>
-                            <li><a href="{% url 'user_profile_manager' %}">{% trans 'User Profile' %}</a></li>
-                        </ul> -->
-                        <!-- /ko -->
+                        <li>
+                            <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                        </li>
+                        {% endif %}
                     </ul>
                 </div>
             </div>
@@ -131,29 +112,30 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="fullscreenbanner">
                 <ul>
                     <!-- SLIDE 1 -->
-                    <li data-transition="slideright" data-slotamount="5" data-masterspeed="700" data-title="Slide 1">
+                    <li data-transition="slideright" data-slotamount="9" data-masterspeed="700" data-title="Slide 1">
                         <!-- MAIN IMAGE -->
                         <img src="{% static 'img/landing/Getty_Museum_at_Night.jpg' %}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
 
                         <!-- LAYERS -->
-                        <div class="tp-caption rs-caption-1 sft start text-bold" delay="4500" data-x="center" data-hoffset="0" data-y="100" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
-                            Arches
+                        <!-- NEW LAYER -->
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="0" data-hoffset="0" data-y="500" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2>{% trans "Manage Conservation Information" %}</h2>
+                            <p>{% trans "Use DISCO to manage and secure your conservation information" %}</p>
+                            <a>{% trans "Learn more..." %}</a>
                         </div>
 
-                        <!-- LAYER -->
-                        <div class="tp-caption rs-caption-2 sft" data-x="center" data-hoffset="0" data-y="200" data-speed="1000" data-start="3000" data-easing="Power4.easeOut" data-endspeed="300" data-endeasing="Power1.easeIn" data-captionhidden="off" style="z-index: 6">
-                            {% trans "A Data Management and Integration Platform<br> To Preserve and Protect Cultural Heritage." %}
+                        <!-- NEW LAYER -->
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="500" data-hoffset="0" data-y="500" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2>{% trans "Search and Discovery" %}</h2>
+                            <p>{% trans "Use DISCO to manage and secure your conservation information" %}</p>
+                            <a>{% trans "Learn more..." %}</a>
                         </div>
 
-                        <!-- LAYER -->
-                        <div class="tp-caption rs-caption-3 sft" data-x="center" data-hoffset="0" data-y="360" data-speed="800" data-start="3500" data-easing="Power4.easeOut" data-endspeed="300" data-endeasing="Power1.easeIn" data-captionhidden="off" style="z-index: 6">
-                            <span class="page-scroll"><a href="#about" class="btn-u btn-brd btn-brd-hover btn-u-light">{% trans "Learn More" %}</a></span>
-                            {% if user.username == 'anonymous' %}
-                            <span class="page-scroll"><a href="{% url 'auth' %}?next={% url 'graph' '' %}" class="btn-u btn-brd btn-brd-hover btn-u-light">{% trans "Login" %}</a></span>
-                            {% endif %}
-                            {% if user|can_create_resource_instance %}
-                            <span class="page-scroll"><a href="{% url 'resource' %}" class="btn-u btn-brd btn-brd-hover btn-u-light">{% trans "Manage Data" %}</a></span>
-                            {% endif %}
+                        <!-- NEW LAYER -->
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="900" data-hoffset="0" data-y="500" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2>{% trans "Support Research" %}</h2>
+                            <p>{% trans "Access DISCO information to support research outcomes" %}</p>
+                            <a>{% trans "Learn more..." %}</a>
                         </div>
 
                         <!-- Attribution -->
@@ -168,166 +150,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         </div>
     </section>
     <!-- End Intro Section -->
-
-
-    <!--  About Section -->
-    <section class="about-section section-first" style="padding-top: 0px;">
-
-
-        <div id="about" class="about-image bg-grey">
-            <div class="container">
-                <div class="title-v1">
-                    <h1>{% trans "What is Arches" %}</h1>
-                    <p>{% trans "Arches is <strong>awesome</strong> technology designed to ease Cultural Heritage data management.<br> Use Arches to build an inventory of cultural heritage assets such as objects, research activities, areas, datasets, and people or  organizations." %}</p>
-                </div>
-                <div class="img-center">
-                    <img class="img-responsive" src="{% static 'img/landing/disco.jpg' %}" alt="">
-                </div>
-            </div>
-        </div>
-
-    </section>
-    <!--  About Section -->
-
-    <!-- Services Section -->
-    <section id="services">
-        <div class="container content-lg">
-            <div class="title-v1">
-                <h2>{% trans "Capabilities" %}</h2>
-                <p>{% trans "Arches can <strong> streamline your work</strong> so that you can focus on managing your assets.<br> Build interoperable, shareable, and secure <strong> cultural heritage data repositories</strong> as a natural part of your workflow." %}</p>
-            </div>
-
-            <div class="row service-box-v1">
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-block service-block-default">
-                        <i class="icon-custom icon-lg icon-bg-u rounded-x fa fa-lightbulb-o"></i>
-                        <h2 class="heading-md">{% trans "Manage Heritage Inventories" %}</h2>
-                        <p></p>
-                        <ul class="list-unstyled">
-                            <li>{% trans "Heritage Objects" %}</li>
-                            <li>{% trans "Research Activities" %}</li>
-                            <li>{% trans "People and Orgnizations" %}</li>
-                            <li>{% trans "Important Areas" %}</li>
-                            <li>{% trans "Documents and Images" %}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-6">
-                    <div class="service-block service-block-default">
-                        <i class="icon-custom icon-lg icon-bg-u rounded-x icon-line icon-present"></i>
-                        <h2 class="heading-md">{% trans "Research Data" %}</h2>
-                        <p></p>
-                        <ul class="list-unstyled">
-                            <li>{% trans "Manage Digital Datasets" %}</li>
-                            <li>{% trans "Visualize Spectra" %}</li>
-                            <li>{% trans "Easy Dataset Import" %}</li>
-                            <li>{% trans "View & Manage Data" %}</li>
-                            <li>{% trans "Easy Access" %}</li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 col-sm-12">
-                    <div class="service-block service-block-default">
-                        <i class="icon-custom icon-lg icon-bg-u rounded-x icon-line icon-rocket"></i>
-                        <h2 class="heading-md">{% trans "Interpretations & Results" %}</h2>
-                        <p></p>
-                        <ul class="list-unstyled">
-                            <li>{% trans "Manage Data Interpretations" %}</li>
-                            <li>{% trans "Share Research Results" %}</li>
-                            <li>{% trans "Tie Results to Iconography" %}</li>
-                            <li>{% trans "Centralize Results" %}</li>
-                            <li>{% trans "Publish Results" %}</li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- End Services Section -->
-
-    <!-- News Section -->
-    <section id="news" class="news-section bg-grey" >
-        <div class="container content-lg">
-            <div class="title-v1">
-                <h2>{% trans "Latest News" %}</h2>
-                <p></p>
-            </div>
-
-            <div class="row news-v1 text-center">
-                Add your content here
-            </div>
-
-            <!-- <div class="row news-v1">
-                <div class="col-md-4 md-margin-bottom-40">
-                    <div class="news-v1-in">
-                        <img class="img-responsive" src="{% static 'img/landing/img1.jpg' %}" alt="">
-                        <h3><a href="#">At vero eos et accusamus</a></h3>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.</p>
-                        <ul class="list-inline news-v1-info">
-                            <li><span>By</span> <a href="#">Arches Project Team</a></li>
-                            <li>|</li>
-                            <li><i class="fa fa-clock-o"></i> March 02, 2016</li>
-                            <li class="pull-right"><a href="#"><i class="fa fa-comments-o"></i> 14</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4 md-margin-bottom-40">
-                    <div class="news-v1-in">
-                        <img class="img-responsive" src="{% static 'img/landing/img4.jpg' %}" alt="">
-                        <h3><a href="#">Voluptatum deleniti atque</a></h3>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.</p>
-                        <ul class="list-inline news-v1-info">
-                            <li><span>By</span> <a href="#">Catherine Patterson</a></li>
-                            <li>|</li>
-                            <li><i class="fa fa-clock-o"></i> July 02, 2015</li>
-                            <li class="pull-right"><a href="#"><i class="fa fa-comments-o"></i> 07</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="news-v1-in">
-                        <img class="img-responsive" src="{% static 'img/landing/img3.jpg' %}" alt="">
-                        <h3><a href="#">Accusamus et iusto odio dignissimos</a></h3>
-                        <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores.</p>
-                        <ul class="list-inline news-v1-info">
-                            <li><span>By</span> <a href="#">Karen Trentleman</a></li>
-                            <li>|</li>
-                            <li><i class="fa fa-clock-o"></i> July 02, 2015</li>
-                            <li class="pull-right"><a href="#"><i class="fa fa-comments-o"></i> 22</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div> -->
-        </div>
-    </section>
-    <!-- End News Section -->
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="contacts-section">
-        <div class="copyright-section">
-            <p>{{copyright_year}} &copy; {{copyright_text}} </p>
-            <ul class="social-icons">
-                <li>
-                    <a href="#" data-original-title="Facebook" class="social_facebook rounded-x"></a>
-                </li>
-                <li>
-                    <a href="#" data-original-title="Twitter" class="social_twitter rounded-x"></a>
-                </li>
-                <li>
-                    <a href="#" data-original-title="Google Plus" class="social_googleplus rounded-x"></a>
-                </li>
-                <li>
-                    <a href="#" data-original-title="Pinterest" class="social_pintrest rounded-x"></a>
-                </li>
-                <li>
-                    <a href="#" data-original-title="Linkedin" class="social_linkedin rounded-x"></a>
-                </li>
-            </ul>
-            <span class="page-scroll"><a href="#intro"><i class="fa fa-angle-double-up back-to-top"></i></a></span>
-        </div>
-    </section>
-    <!-- End Contact Section -->
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-migrate/1.4.0/jquery-migrate.min.js"></script>
