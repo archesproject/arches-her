@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
     'views/components/workflows/set-tile-value',
-    'views/components/workflows/get-tile-value'
+    'views/components/workflows/get-tile-value',
+    'views/components/workflows/set-reference-numbers'
 ], function(ko, Workflow, Step) {
     return ko.components.register('add-consultation', {
         viewModel: function(params) {
@@ -33,8 +34,15 @@ define([
                     icon: 'fa-tag'
                 },
                 {
-                    title: 'Step 3',
-                    description: 'Another description here',
+                    title: 'Add Ref Numbers',
+                    description: 'step to add ref numbers using new wkflow step',
+                    component: 'set-reference-numbers',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '3c79d87a-53f2-11e9-a14e-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-hashtag'
                 }
             ];
 
