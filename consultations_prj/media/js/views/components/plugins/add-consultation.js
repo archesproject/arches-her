@@ -8,10 +8,13 @@ define([
 ], function(ko, Workflow, Step) {
     return ko.components.register('add-consultation', {
         viewModel: function(params) {
+
             var self = this;
+
             params.steps = [
                 {
                     title: 'Assign Address',
+                    name: 'assignaddress',
                     description: 'Assign an address to your application area. Use the address as the default name',
                     component: 'get-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
@@ -23,6 +26,7 @@ define([
                 },
                 {
                     title: 'Assign Name',
+                    name: 'setname',
                     description: 'Assign a name to your application area',
                     component: 'set-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
@@ -40,16 +44,33 @@ define([
 
             Workflow.apply(this, [params]);
 
-            this.next = function(){
-                var previousStep;
-                var activeStep = self.activeStep();
-                if (activeStep && activeStep.complete() && activeStep._index < self.steps.length - 1) {
-                    this.updateUrl(activeStep, 'forward')
-                    self.previousStep = activeStep;
-                    self.activeStep(self.steps[activeStep._index+1]);
-                    self.activeStep().resourceid = self.previousStep.resourceid
+            this.updateState = self.activeStep.subscribe(function(val) {
+                var activeStep = val;
+                var previousStep = self.previousStep();
+                if (previousStep) {
+                    self.state.steps[ko.unwrap(previousStep.name)] = previousStep.value();
+                    self.state.activestep = val._index;
+                    self.state.previousstep = previousStep._index;
+                    self.updateUrl();
                 }
-            };
+                if (ko.unwrap(activeStep.name) === 'assignaddress') {
+                    activeStep.requirements = self.state.steps.assignaddress;
+                }
+                if (ko.unwrap(activeStep.name) === 'setname') {
+                    if (self.state.steps['assignaddress']) {
+                        var tiledata = self.state.steps['assignaddress'].tile
+                        var tilevals = _.map(tiledata, function(v, k) {return v})
+                        var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
+                        activeStep.requirements = self.state.steps.setname || {};
+                        activeStep.requirements.applyOutputToTarget = self.state.steps['assignaddress'].applyOutputToTarget;
+                        activeStep.requirements.targetnode = '1b95fb70-53ef-11e9-9001-dca90488358a';
+                        activeStep.requirements.targetnodegroup = 'c5f909b5-53c7-11e9-a3ac-dca90488358a';
+                        activeStep.requirements.value = nodeval;
+                    }
+                }
+                self.previousStep(val);
+            });
+
             self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/add-consultation.htm' }
