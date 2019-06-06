@@ -13,10 +13,9 @@ define([
 
             params.steps = [
                 {
-                    title: 'Assign Address',
-                    name: 'assignaddress',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'get-tile-value',
+                    title: 'Related Heritage Resources',
+                    description: 'Click on the Heritage Assets, Activities, and other resources related to this',
+                    component: 'new-tile-step',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: '2c82277d-53db-11e9-934b-dca90488358a',
                     resourceid: null,
@@ -25,12 +24,11 @@ define([
                     icon: 'fa-code-fork'
                 },
                 {
-                    title: 'Assign Name',
-                    name: 'setname',
-                    description: 'Assign a name to your application area',
-                    component: 'set-tile-value',
-                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
+                    title: 'Application Details',
+                    description: 'Summary of the Application and Consultation Type',
+                    component: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '04723f59-53f2-11e9-b091-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
