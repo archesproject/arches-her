@@ -7,6 +7,8 @@ define([
 ], function(_, $, arches, ko, AddRefStep) {
 
     function viewModel(params) {
+        // console.log(params.parenttileid());
+        // console.log(params);
         AddRefStep.apply(this, [params]);
         var self = this;
         var urlparams = params.parseUrlParams();
