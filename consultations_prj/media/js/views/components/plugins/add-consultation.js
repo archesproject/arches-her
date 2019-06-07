@@ -16,11 +16,11 @@ define([
                     component: 'views/components/workflows/get-tile-value',
                     componentname: 'get-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: '2c82277d-53db-11e9-934b-dca90488358a',
+                    nodegroupid: 'e857704a-53d8-11e9-b05a-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-code-fork'
+                    icon: 'fa-envelope'
                 },
                 {
                     title: 'Assign Name',
@@ -33,12 +33,37 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    icon: 'fa-tag'
+                },
+                {
+                    title: 'Related Heritage Resources',
+                    description: 'Click on the Heritage Assets, Activities, and other resources related to this',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
+                    nodegroupid: '2c82277d-53db-11e9-934b-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-code-fork'
+                },
+                {
+                    title: 'Application Details',
+                    description: 'Summary of the Application and Consultation Type',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '04723f59-53f2-11e9-b091-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
                     icon: 'fa-list-alt'
                 },
                 {
                     title: 'Reference Numbers',
                     description: 'Application Reference Numbers',
-                    component: 'new-tile-step',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
                     graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
                     nodegroupid: '3c79d87a-53f2-11e9-a14e-dca90488358a',
                     resourceid: null,
@@ -49,18 +74,20 @@ define([
                 {
                     title: 'Application Proposal',
                     description: 'Summary of the Application that will be reviewed under this Consultation',
-                    component: 'new-tile-step',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
                     graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
                     nodegroupid: 'f34ebbd4-53f3-11e9-b649-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'far-clipboard'
+                    icon: 'fa-clipboard'
                 },
                 {
                     title: 'Contacts',
                     description: 'Identify the key people/organizations associated with this consultation',
-                    component: 'new-tile-step',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
                     graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
                     nodegroupid: '17c07f07-53f5-11e9-9c94-dca90488358a',
                     resourceid: null,
