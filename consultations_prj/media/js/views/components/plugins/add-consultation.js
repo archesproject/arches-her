@@ -13,33 +13,64 @@ define([
 
             params.steps = [
                 {
-                    title: 'Assign Address',
-                    name: 'assignaddress',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'get-tile-value',
+                    title: 'Related Heritage Resources',
+                    description: 'Click on the Heritage Assets, Activities, and other resources related to this',
+                    component: 'new-tile-step',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: 'e857704a-53d8-11e9-b05a-dca90488358a',
+                    nodegroupid: '2c82277d-53db-11e9-934b-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-envelope'
+                    icon: 'fa-code-fork'
                 },
                 {
-                    title: 'Assign Name',
-                    name: 'setname',
-                    description: 'Assign a name to your application area',
-                    component: 'set-tile-value',
-                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
+                    title: 'Application Details',
+                    description: 'Summary of the Application and Consultation Type',
+                    component: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '04723f59-53f2-11e9-b091-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-tag'
+                    icon: 'fa-list-alt'
                 },
                 {
-                    title: 'Step 3',
-                    description: 'Another description here',
-                }
+                    title: 'Reference Numbers',
+                    description: 'Application Reference Numbers',
+                    component: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '3c79d87a-53f2-11e9-a14e-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-hashtag'
+                },
+                {
+                    title: 'Application Proposal',
+                    description: 'Summary of the Application that will be reviewed under this Consultation',
+                    component: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: 'f34ebbd4-53f3-11e9-b649-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'far-clipboard'
+                },
+                {
+                    title: 'Contacts',
+                    description: 'Identify the key people/organizations associated with this consultation',
+                    component: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '17c07f07-53f5-11e9-9c94-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-users'
+                },
+                // {
+                //     title: 'Step 3',
+                //     description: 'Another description here',
+                // }
             ];
 
             Workflow.apply(this, [params]);
