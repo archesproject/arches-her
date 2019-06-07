@@ -44,7 +44,7 @@ define([
 
             Workflow.apply(this, [params]);
 
-            this.updateState = self.activeStep.subscribe(function(val) {
+            this.updateState = function(val) {
                 var activeStep = val;
                 var previousStep = self.previousStep();
                 if (previousStep) {
@@ -69,7 +69,9 @@ define([
                     }
                 }
                 self.previousStep(val);
-            });
+            }
+
+            self.activeStep.subscribe(this.updateState);
 
             self.ready(true);
         },
