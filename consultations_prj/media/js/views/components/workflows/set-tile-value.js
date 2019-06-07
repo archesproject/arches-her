@@ -19,7 +19,7 @@ define([
         self.requirements = params.requirements;
         params.tile = self.tile;
 
-        params.value = function(){
+        params.stateProperties = function(){
                 return {
                     resourceid: ko.unwrap(params.resourceid),
                     tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,

@@ -1,10 +1,7 @@
 define([
     'knockout',
     'viewmodels/workflow',
-    'viewmodels/workflow-step',
-    'views/components/workflows/new-tile-step',
-    'views/components/workflows/set-tile-value',
-    'views/components/workflows/get-tile-value'
+    'viewmodels/workflow-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('add-consultation', {
         viewModel: function(params) {
@@ -16,7 +13,8 @@ define([
                     title: 'Assign Address',
                     name: 'assignaddress',
                     description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'get-tile-value',
+                    component: 'views/components/workflows/get-tile-value',
+                    componentname: 'get-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: 'e857704a-53d8-11e9-b05a-dca90488358a',
                     resourceid: null,
@@ -28,7 +26,8 @@ define([
                     title: 'Assign Name',
                     name: 'setname',
                     description: 'Assign a name to your application area',
-                    component: 'set-tile-value',
+                    component: 'views/components/workflows/set-tile-value',
+                    componentname: 'set-tile-value',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
                     resourceid: null,
@@ -48,7 +47,7 @@ define([
                 var activeStep = val;
                 var previousStep = self.previousStep();
                 if (previousStep) {
-                    self.state.steps[ko.unwrap(previousStep.name)] = previousStep.value();
+                    self.state.steps[ko.unwrap(previousStep.name)] = previousStep.stateProperties();
                     self.state.activestep = val._index;
                     self.state.previousstep = previousStep._index;
                     self.updateUrl();
