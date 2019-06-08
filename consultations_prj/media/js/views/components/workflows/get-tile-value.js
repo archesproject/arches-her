@@ -17,6 +17,8 @@ define([
 
         NewTileStep.apply(this, [params]);
 
+        this.nameheading = params.nameheading;
+        this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
         params.tile = self.tile;
 

@@ -15,12 +15,14 @@ define([
                     description: 'Assign an address to your application area. Use the address as the default name',
                     component: 'views/components/workflows/get-tile-value',
                     componentname: 'get-tile-value',
-                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: 'e857704a-53d8-11e9-b05a-dca90488358a',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '9dc86b0c-6c48-11e9-8cbe-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-envelope'
+                    icon: 'fa-envelope',
+                    nameheading: 'Consultation Name',
+                    namelabel: 'Make the Consultation Name the same as the Consultation Address'
                 },
                 {
                     title: 'Assign Name',
@@ -28,8 +30,8 @@ define([
                     description: 'Assign a name to your application area',
                     component: 'views/components/workflows/set-tile-value',
                     componentname: 'set-tile-value',
-                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: 'e6f0688a-53f1-11e9-93a2-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -40,7 +42,7 @@ define([
                     description: 'Click on the Heritage Assets, Activities, and other resources related to this',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
-                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
                     nodegroupid: '2c82277d-53db-11e9-934b-dca90488358a',
                     resourceid: null,
                     tileid: null,
@@ -122,8 +124,8 @@ define([
                         var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
                         activeStep.requirements = self.state.steps.setname || {};
                         activeStep.requirements.applyOutputToTarget = self.state.steps['assignaddress'].applyOutputToTarget;
-                        activeStep.requirements.targetnode = '1b95fb70-53ef-11e9-9001-dca90488358a';
-                        activeStep.requirements.targetnodegroup = 'c5f909b5-53c7-11e9-a3ac-dca90488358a';
+                        activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
+                        activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
                         activeStep.requirements.value = nodeval;
                     }
                 }
