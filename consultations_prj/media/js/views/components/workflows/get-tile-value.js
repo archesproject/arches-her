@@ -17,10 +17,12 @@ define([
 
         NewTileStep.apply(this, [params]);
 
+        this.nameheading = params.nameheading;
+        this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
         params.tile = self.tile;
 
-        params.value = function(){
+        params.stateProperties = function(){
                 return {
                     resourceid: ko.unwrap(params.resourceid),
                     tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
@@ -37,5 +39,6 @@ define([
             require: 'text!templates/views/components/workflows/get-tile-value.htm'
         }
     });
+
     return viewModel;
 });
