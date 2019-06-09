@@ -38,12 +38,12 @@ define([
                     icon: 'fa-tag'
                 },
                 {
-                    title: 'Related Heritage Resources',
-                    description: 'Click on the Heritage Assets, Activities, and other resources related to this',
+                    title: 'Related Application Area',
+                    description: 'Identify the Development Area for this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: '2c82277d-53db-11e9-934b-dca90488358a',
+                    nodegroupid: 'daf936f5-540a-11e9-8a83-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -96,11 +96,7 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-users'
-                },
-                // {
-                //     title: 'Step 3',
-                //     description: 'Another description here',
-                // }
+                }
             ];
 
             Workflow.apply(this, [params]);
