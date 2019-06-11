@@ -96,6 +96,17 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-users'
+                },
+                {
+                    title: 'Add Consulation Complete',
+                    description: 'Choose and option below',
+                    component: 'views/components/workflows/final-step',
+                    componentname: 'final-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    icon: 'fa-check',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null
                 }
             ];
 
