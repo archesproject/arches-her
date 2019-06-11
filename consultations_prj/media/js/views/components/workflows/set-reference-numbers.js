@@ -21,6 +21,7 @@ define([
                 }
             }
         });
+        console.log(self.card());
     };
 
     return ko.components.register('set-reference-numbers', {

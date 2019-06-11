@@ -216,10 +216,13 @@
     display: flex;
     flex-direction: column;
     flex-grow: 1;
+    padding: 24px 24px 0 24px;
 }
 
 .workflows-ref-number-card {
-    border: 1px solid rgb(190, 190, 190);
+    border: 1px solid #e8e8e8;
+    border-radius: 2px;
+    background-color: white;
     padding: 15px 5px 15px 15px;
     display: flex;
     flex-direction: row;
@@ -230,12 +233,38 @@
     flex-direction: row;
 }
 
-.card-info-details {
+div.card-info div {
     margin-left: 12px;
 }
 
-.workflows-ref-number-card div > div {
+.card-info-details {
+    color: #5d768f;
+    padding-left: 12px;
+}
+
+.card-info-details > h4 {
+    margin-bottom: 2px;
+    /* margin-left: 12px; */
+}
+
+
+
+.workflows-ref-number-card div div {
     margin: 0;
+}
+
+.workflows-ref-number-card > div.card-info ~ div {
+    display: flex;
+    flex-direction: row;
+    color: #4f9ce9;
+    font-size: 14px;
+    cursor: pointer;
+    height: 32px;
+    /* align-self: flex-end; */
+} 
+
+.workflows-ref-number-card > div.card-info ~ div span {
+    margin-right: 6px;
 }
 
 /* In core core arches */
