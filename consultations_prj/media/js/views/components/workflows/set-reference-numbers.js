@@ -7,21 +7,34 @@ define([
 ], function(_, $, arches, ko, AddRefStep) {
 
     function viewModel(params) {
-        // console.log(params.parenttileid());
-        // console.log(params);
+
+        if (!params.resourceid() && params.requirements){
+            params.resourceid(params.requirements.resourceid);
+            params.tileid(params.requirements.tileid);
+        }
+
         AddRefStep.apply(this, [params]);
         var self = this;
-        var urlparams = params.parseUrlParams();
+        self.requirements = params.requirements;
+        params.tile = self.tile;
+
+        params.stateProperties = function(){
+                return {
+                    resourceid: ko.unwrap(params.resourceid),
+                    tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
+                    tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
+                }
+            };
+
         self.tile.subscribe(function(val) {
             if(val) {
-                if(urlparams) {
-                    if (urlparams.applyOutputToTarget) {
-                        val.data[urlparams.targetnode](urlparams.value);
+                if(self.requirements) {
+                    if (self.requirements.applyOutputToTarget) {
+                        val.data[self.requirements.targetnode](self.requirements.value);
                     }
                 }
             }
         });
-        console.log(self.card());
     };
 
     return ko.components.register('set-reference-numbers', {
