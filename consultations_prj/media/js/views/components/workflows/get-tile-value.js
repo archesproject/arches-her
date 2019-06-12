@@ -9,34 +9,27 @@ define([
     function viewModel(params) {
         var self = this;
         params.applyOutputToTarget = ko.observable(true);
-        NewTileStep.apply(this, [params]);
-        this.applyOutputToTarget = params.applyOutputToTarget;
 
-        self.tile.subscribe(function(a){console.log(a)});
-        params.getForwardUrlParams = ko.pureComputed(function(){
-            var value = '';
-            if (ko.unwrap(self.tile)) {
-                _.each(koMapping.toJS(self.tile().data), function(v, k) {
-                    if(v) {
-                        value += ' ' + v
-                    }
-                });
-            }
-            forwardParams = {
-                applyOutputToTarget: params.applyOutputToTarget,
-                graphid: params.graphid,
-                icon: params.icon,
-                iconClass: params.iconClass,
-                loading: params.loading,
-                nodegroupid: params.nodegroupid,
-                parenttileid: params.parenttileid,
-                resourceid: params.resourceid,
-                targetnode: '1b95fb70-53ef-11e9-9001-dca90488358a',
-                targetnodegroup: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
-                value: value
-            }
-            return koMapping.toJS(forwardParams);
-        });
+        if (!params.resourceid() && params.requirements){
+            params.resourceid(params.requirements.resourceid);
+            params.tileid(params.requirements.tileid);
+        }
+
+        NewTileStep.apply(this, [params]);
+
+        this.nameheading = params.nameheading;
+        this.namelabel = params.namelabel;
+        this.applyOutputToTarget = params.applyOutputToTarget;
+        params.tile = self.tile;
+
+        params.stateProperties = function(){
+                return {
+                    resourceid: ko.unwrap(params.resourceid),
+                    tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
+                    tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined,
+                    applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
+                }
+            };
     };
 
 
@@ -46,5 +39,6 @@ define([
             require: 'text!templates/views/components/workflows/get-tile-value.htm'
         }
     });
+
     return viewModel;
 });
