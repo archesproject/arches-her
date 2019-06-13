@@ -116,25 +116,24 @@ define([
                 var activeStep = val;
                 var previousStep = self.previousStep();
                 if (previousStep) {
-                    self.state.steps[ko.unwrap(previousStep.name)] = previousStep.stateProperties();
+                    self.state.steps[previousStep._index] = previousStep.stateProperties();
+                    self.state.steps[previousStep._index].complete = ko.unwrap(previousStep.complete);
                     self.state.activestep = val._index;
                     self.state.previousstep = previousStep._index;
                     self.updateUrl();
                 }
-                if (ko.unwrap(activeStep.name) === 'assignaddress') {
-                    activeStep.requirements = self.state.steps.assignaddress;
+                if (activeStep._index === 0 || activeStep._index === undefined) {
+                    activeStep.requirements = self.state.steps[0];
                 }
-                if (ko.unwrap(activeStep.name) === 'setname') {
-                    if (self.state.steps['assignaddress']) {
-                        var tiledata = self.state.steps['assignaddress'].tile
-                        var tilevals = _.map(tiledata, function(v, k) {return v})
-                        var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
-                        activeStep.requirements = self.state.steps.setname || {};
-                        activeStep.requirements.applyOutputToTarget = self.state.steps['assignaddress'].applyOutputToTarget;
-                        activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
-                        activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
-                        activeStep.requirements.value = nodeval;
-                    }
+                if (activeStep._index === 1) {
+                    var tiledata = self.state.steps[0].tile
+                    var tilevals = _.map(tiledata, function(v, k) {return v})
+                    var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
+                    activeStep.requirements = self.state.steps[1] || {};
+                    activeStep.requirements.applyOutputToTarget = self.state.steps[0].applyOutputToTarget;
+                    activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
+                    activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
+                    activeStep.requirements.value = nodeval;
                 }
                 self.previousStep(val);
             }
