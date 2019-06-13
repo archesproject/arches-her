@@ -67,8 +67,7 @@ define([
                     component: 'views/components/workflows/new-multi-tile-step',
                     componentname: 'new-multi-tile-step',
                     graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    // nodegroupid: '3c79d87a-53f2-11e9-a14e-dca90488358a', //reference numbers nodegroup
-                    nodegroupid: '9dc86b0c-6c48-11e9-8cbe-dca90488358a', //address nodegroup
+                    nodegroupid: '3c79d87a-53f2-11e9-a14e-dca90488358a',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
