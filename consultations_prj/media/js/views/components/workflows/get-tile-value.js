@@ -25,8 +25,8 @@ define([
         params.stateProperties = function(){
                 return {
                     resourceid: ko.unwrap(params.resourceid),
-                    tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
-                    tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined,
+                    tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                    tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
                     applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
                 }
             };
