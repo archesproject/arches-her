@@ -115,29 +115,32 @@ define([
             this.updateState = function(val) {
                 var activeStep = val;
                 var previousStep = self.previousStep();
+                var resourceId;
                 if (previousStep) {
                     self.state.steps[previousStep._index] = previousStep.stateProperties();
                     self.state.steps[previousStep._index].complete = ko.unwrap(previousStep.complete);
                     self.state.activestep = val._index;
                     self.state.previousstep = previousStep._index;
+                    if (!resourceId) {
+                        resourceId = !!previousStep.resourceid ? ko.unwrap(previousStep.resourceid) : null;
+                        self.state.resourceid = resourceId;
+                        activeStep.requirements.resourceid = self.state.resourceid;
+                    }
                     self.updateUrl();
-                }
-                if (activeStep._index === 0 || activeStep._index === undefined) {
-                    activeStep.requirements = self.state.steps[0];
-                }
-                if (activeStep._index === 1) {
+                } else {
+                    activeStep.requirements = self.state.steps[activeStep._index] || {};
+                    activeStep.requirements.resourceid = self.state.resourceid;
+                } if (activeStep._index === 1) {
                     var tiledata = self.state.steps[0].tile
                     var tilevals = _.map(tiledata, function(v, k) {return v})
                     var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
-                    activeStep.requirements = self.state.steps[1] || {};
                     activeStep.requirements.applyOutputToTarget = self.state.steps[0].applyOutputToTarget;
+                    activeStep.requirements.resourceid = self.state.steps[0].resourceid;
                     activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
                     activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
                     activeStep.requirements.value = nodeval;
-                } else {
-                    activeStep.requirements = self.state.steps[activeStep._index];
                 }
-                self.previousStep(val);
+                self.previousStep(activeStep);
             }
 
             self.activeStep.subscribe(this.updateState);
