@@ -116,7 +116,7 @@ define([
                     namelabel: '[no label]'
                 },
                 {
-                    title: 'Site Visit Recommendations',
+                    title: 'Recommendations',
                     name: 'siterecommendations',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
@@ -130,12 +130,27 @@ define([
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
                 },
+                // {
+                //     title: 'Site Photos',
+                //     name: 'sitephotos',
+                //     description: '',
+                //     component: 'views/components/workflows/new-tile-step',
+                //     componentname: 'new-tile-step',
+                //     graphid: '0a06b0ee-6c46-11e9-abff-dca90488358a',
+                //     nodegroupid: '4451d38f-6c47-11e9-83e0-dca90488358a',
+                //     resourceid: null,
+                //     tileid: null,
+                //     parenttileid: null,
+                //     icon: 'fa-camera',
+                //     nameheading: 'New Site Visit',
+                //     namelabel: '[no label]'
+                // },
                 {
-                    title: 'Site Photos',
-                    name: 'sitephotos',
+                    title: 'Site Photos (Upload)',
+                    name: 'sitephotosupload',
                     description: '',
-                    component: 'views/components/workflows/final-step',
-                    componentname: 'final-step',
+                    component: 'views/components/workflows/set-tile-value',
+                    componentname: 'set-tile-value',
                     graphid: '0a06b0ee-6c46-11e9-abff-dca90488358a',
                     nodegroupid: '4451d38f-6c47-11e9-83e0-dca90488358a',
                     resourceid: null,
@@ -144,7 +159,38 @@ define([
                     icon: 'fa-camera',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
-                }
+                },
+                {
+                    title: 'Site Photos (Gallery)',
+                    name: 'sitephotosgallery',
+                    description: '',
+                    component: 'views/components/workflows/get-tile-value',
+                    componentname: 'get-tile-value',
+                    graphid: '0a06b0ee-6c46-11e9-abff-dca90488358a',
+                    nodegroupid: '4451d38f-6c47-11e9-83e0-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-camera',
+                    nameheading: 'New Site Visit',
+                    namelabel: '[no label]'
+                },
+                {
+                    title: 'Site Visit Workflow Complete',
+                    name: 'sitevisitcomplete',
+                    description: '',
+                    component: 'views/components/workflows/final-step',
+                    componentname: 'final-step',
+                    graphid: '0a06b0ee-6c46-11e9-abff-dca90488358a',
+                    nodegroupid: '',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-check',
+                    nameheading: 'New Site Visit',
+                    namelabel: '[no label]'
+                },
+
             ];
 
             Workflow.apply(this, [params]);
