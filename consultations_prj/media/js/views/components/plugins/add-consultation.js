@@ -134,6 +134,8 @@ define([
                     activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
                     activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
                     activeStep.requirements.value = nodeval;
+                } else {
+                    activeStep.requirements = self.state.steps[activeStep._index];
                 }
                 self.previousStep(val);
             }
