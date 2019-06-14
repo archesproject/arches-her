@@ -70,6 +70,17 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-camera'
+                },
+                {
+                    title: 'Communication Workflow Complete',
+                    description: 'Choose and option below',
+                    component: 'views/components/workflows/final-step',
+                    componentname: 'final-step',
+                    graphid:  '97b30d4c-6c4a-11e9-853f-dca90488358a',
+                    icon: 'fa-check',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null
                 }
             ];
 
