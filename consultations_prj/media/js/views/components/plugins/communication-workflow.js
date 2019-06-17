@@ -75,17 +75,6 @@ define([
 
             Workflow.apply(this, [params]);
 
-            this.updateState = function(activeStep) {
-                var previousStep = self.previousStep();
-                if (previousStep) {
-                    self.state.steps[ko.unwrap(previousStep.name)] = previousStep.stateProperties();
-                    self.state.activestep = activeStep._index;
-                    self.state.previousstep = previousStep._index;
-                    self.updateUrl();
-                }
-                self.previousStep(activeStep);
-            };
-
             self.activeStep.subscribe(this.updateState);
 
             self.ready(true);

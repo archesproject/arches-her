@@ -3,7 +3,7 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step'
 ], function(ko, Workflow, Step) {
-    return ko.components.register('add-consultation', {
+    return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
 
             var self = this;
@@ -147,6 +147,6 @@ define([
 
             self.ready(true);
         },
-        template: { require: 'text!templates/views/components/plugins/add-consultation.htm' }
+        template: { require: 'text!templates/views/components/plugins/consultation-workflow.htm' }
     });
 });
