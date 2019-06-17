@@ -54,11 +54,11 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 <body id="body" data-spy="scroll" data-target=".splash-nav" class="demo-lightbox-gallery">
 
     <!--=== Header ===-->
-    <nav class="splash-nav navbar navbar-fixed-top" role="navigation">
+    <nav class="cons-splash-nav navbar navbar-fixed-top" role="navigation">
         <div class="nav-container">
             <div class="navbar-brand-disco">
                 <div class="navbar-brand-disco-icon">
-                    <img src="{% static 'img/landing/arches_logo_dark.png' %}" style="height: 48px; width: 48px;" alt="Logo">
+                    <img src="{% static 'img/landing/arches_logo_dark.png' %}" style="height: 80px; width: 80px; text-align: center;" alt="Arches Logo">
                 </div>
                 <div>
                     <h2>{% trans "Arches Consultations" %}</h2>
@@ -69,34 +69,30 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <div class="menu-container">
-                    <ul class="nav navbar-nav splash-list">
-                        {% if user.username == 'anonymous' %}
-                        <li>
-                            <a id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">
-                                <button>{% trans "Login" %}</button>
-                            </a>
-                        </li>
-                        {% else %}
+                    <ul class="nav navbar-nav cons-splash-list">
                         <li class="page-scroll">
                             <a href="{% url 'consultations' %}">{% trans "New" %}</a>
                         </li>
                         <li class="page-scroll">
                             <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
-                            {% if user|can_create_resource_instance %}
-                            <li class="page-scroll">
-                                <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
-                            </li>
-                            {% endif %}
-                        <li class="page-scroll" >
-                            <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
-                                {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                        {% if user|can_create_resource_instance %}
+                        <li class="page-scroll">
+                            <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
                         </li>
                         {% endif %}
+                        <li class="page-scroll">
+                            {% if user.username == 'anonymous' %}
+                                <a id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
+                            {% else %}
+                                <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
+                                    {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>
