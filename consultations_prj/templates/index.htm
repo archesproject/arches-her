@@ -70,33 +70,29 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav splash-list">
-                        {% if user.username == 'anonymous' %}
-                        <li>
-                            <a id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">
-                                <button>{% trans "Login" %}</button>
-                            </a>
-                        </li>
-                        {% else %}
                         <li class="page-scroll">
                             <a href="{% url 'consultations' %}">{% trans "New" %}</a>
                         </li>
                         <li class="page-scroll">
                             <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
-                            {% if user|can_create_resource_instance %}
-                            <li class="page-scroll">
-                                <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
-                            </li>
-                            {% endif %}
-                        <li class="page-scroll" >
-                            <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
-                                {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                        {% if user|can_create_resource_instance %}
+                        <li class="page-scroll">
+                            <a href="{% url 'resource' %}">{% trans "Manage" %}</a>
                         </li>
                         {% endif %}
+                        <li class="page-scroll">
+                            {% if user.username == 'anonymous' %}
+                                <a id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
+                            {% else %}
+                                <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
+                                    {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
+                                </a>
+                            </li>
+                            <li>
+                                <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                            {% endif %}
+                        </li>
                     </ul>
                 </div>
             </div>
