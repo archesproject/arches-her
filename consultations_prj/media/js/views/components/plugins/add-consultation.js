@@ -99,7 +99,7 @@ define([
                 },
                 {
                     title: 'Add Consulation Complete',
-                    description: 'Choose and option below',
+                    description: 'Choose an option below',
                     component: 'views/components/workflows/final-step',
                     componentname: 'final-step',
                     graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
