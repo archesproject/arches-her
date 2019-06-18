@@ -118,8 +118,6 @@ define([
 
             self.activeStep.subscribe(this.updateState);
 
-
-
             self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/application-area.htm' }
