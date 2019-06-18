@@ -73,6 +73,17 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-bookmark'
+                },
+                {
+                    title: 'Application Area Complete',
+                    description: 'Choose and option below',
+                    component: 'views/components/workflows/final-step',
+                    componentname: 'final-step',
+                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
+                    icon: 'fa-check',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null
                 }
             ];
 
