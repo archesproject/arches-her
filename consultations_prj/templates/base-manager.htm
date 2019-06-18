@@ -31,68 +31,71 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% block body %}
 
-            {% block navheader %}
+    {% if 'consultations' in request.path %}
+        {% block navheader %}
             {% block mainnav %}
-                    {% block header %}
-                        {{ block.super }}
-                    {% endblock header %}
-        <div id="workflow-container">
-            <div class="workflow-panel">
-                <div class="workflow-panel-header">
-                    <a><span><i class="fa fa-chevron-circle-left"></i>{% trans "Project Tasks" %}</span></a>
-                    <hr>
+                {% block header %}
+                    {{ block.super }}
+                {% endblock header %}
+                <div id="workflow-container">
+                    <div class="workflow-panel">
+                        <div class="workflow-panel-header">
+                            <a><span><i class="fa fa-chevron-circle-left"></i>{% trans "Project Tasks" %}</span></a>
+                            <hr>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{% trans "Active Projects" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'consultations' %}"><span>{% trans "New" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="{% url 'search_home' %}"><span>{% trans "Find" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>{% trans "Reports" %}</span></a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{% trans "Manage Account" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>{% trans "Settings" %}</span></a>
+                            </li>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{% trans "Help" %}</span></a>
+                            </li>
+                            <li>
+                                <a href="#"><span>{% trans "About" %}</span></a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    {% block main_content %}
+                    <div class="content-panel">
+                        <div class="flex plugin-main" data-bind="component: {
+                            name: plugin.componentname,
+                            params: plugin.config
+                        }"></div>
+                    </div>
+                    {% endblock main_content %}
                 </div>
-                <ul>
-                    <li>
-                        <a href="#"><span>{% trans "Active Projects" %}</span></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'consultations' %}"><span>{% trans "New" %}</span></a>
-                    </li>
-                    <li>
-                        <a href="{% url 'search_home' %}"><span>{% trans "Find" %}</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span>{% trans "Reports" %}</span></a>
-                    </li>
-                </ul>
-                <hr>
-                <ul>
-                    <li>
-                        <a href="#"><span>{% trans "Manage Account" %}</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span>{% trans "Settings" %}</span></a>
-                    </li>
-                </ul>
-                <hr>
-                <ul>
-                    <li>
-                        <a href="#"><span>{% trans "Help" %}</span></a>
-                    </li>
-                    <li>
-                        <a href="#"><span>{% trans "About" %}</span></a>
-                    </li>
-                </ul>
-            </div>
 
-            {% block main_content %}
-                <div class="content-panel">
-                    <div class="flex plugin-main" data-bind="component: {
-                        name: plugin.componentname,
-                        params: plugin.config
-                    }"></div>
-                </div>
-            {% endblock main_content %}
-        </div>
-    </div>
+            {% endblock mainnav %}
+        {% endblock navheader %}
 
-    
-    {% endblock mainnav %}
-    {% endblock navheader %}
+        {% block aside_container %}
+        {% endblock aside_container %}
 
-    {% block aside_container %}
-    {% endblock aside_container %}
+    {% else %}
+        {{ block.super }}
+    {% endif %}
 
 {% endblock body %}
 
