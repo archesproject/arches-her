@@ -16,37 +16,61 @@
             </select>
             <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === '' }" class="text-center fa fa-th" style="font-size: 28px;"></i></button>
             <button class="btn" data-bind="click: function(){setLayout('');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 28px;"></i></button>
-            
-            
+
+
         </div>
     </div>
- 
+
     <div class="row">
         <div class="col-sm-12">
             <!-- ko  -->
-            
+
             <div data-bind="visible: layout() === 'grid'">
                 <div data-bind="foreach: active_items">
                     <div class="card-grid-item">
                         <div class="panel mar-no">
                             <!-- Function Name -->
-                            <div style="position: absolute; width: 270px; border: solid 1px lightgrey; margin: 9px; padding: 15px; background-color: white;">
+                            <div class="active-cons-header">
                                 <div data-bind="text: title"></div>
                                 <div data-bind="text: consultation_type"></div>
                             </div>
 
-                            <div style="height: 200px; padding: 90px; text-align: center; background-color: #f8fbff;">
-                                map
+                            <div class="active-cons-map-container">
+
+                              <div class="active-cons-map">
+                                <img data-bind="attr: { src: $parent.mapImageURL }"></img>
+
+                                <div>
+                                    <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
+                                    <span>© Mapbox © OpenStreetMap</span>
+                                </div>
+
+                              </div>
+
+                                <!-- ko if: !$parent.mapImageURL() -->
+                                <div id="map" class="relative" style="height: 200px; opacity: 1;" data-bind="mapboxgl: {
+                                    mapOptions: {
+                                      style: 'mapbox://styles/mapbox/streets-v11',
+                                      preserveDrawingBuffer: true
+                                    },
+                                    data: 'mapData',
+                                    afterRender: function(map) {
+                                      $parent.setupMap(map, $data);
+                                    }
+                                  }">
+                                </div>
+                                <!-- /ko -->
                             </div>
 
-                            <div style="border: solid 1px #eaeaea;display: flex;padding: 10px;">
-                                <div style="flex-grow: 1; border-right: solid 1px #eaeaea; text-align: center;">
-                                    <div>Jan, 30 2019</div>
-                                    <div>Due date</div>
+
+                            <div class="active-cons-stubs">
+                                <div class="active-cons-stub-left">
+                                    <div class="active-cons-stub-val" data-bind="text: date_val">Date</div>
+                                    <div class="active-cons-stub-label" data-bind="text: date_label">Due Date</div>
                                 </div>
-                                <div style="flex-grow: 1; text-align: center;">
-                                    <div>Jan, 30 2019</div>
-                                    <div>Due date</div>
+                                <div class="active-cons-stub-right">
+                                    <div class="active-cons-stub-val" data-bind="text: application_val">Application</div>
+                                    <div class="active-cons-stub-label" data-bind="text: application_label">Type</div>
                                 </div>
                             </div>
 
@@ -57,7 +81,7 @@
                             <div class="panel-footer" style="padding: 0px">
                                 <div class="ep-toolbar">
                                     <div class="ep-tools-title">
-                                        <div data-bind="text: author" style="font-size: 15px; padding: 12px 0px 0px 12px;">no author</div>
+                                        <div data-bind="text: author">no author</div>
                                     </div>
                                     <a href="" class="ep-tools ep-tools-right" data-bind="">
                                         <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="settings">
@@ -72,7 +96,7 @@
             </div>
 
             <!-- /ko -->
-
+            <!-- ko -->
             <div data-bind="visible: layout() !== 'grid'">
                 <div data-bind="foreach: active_items">
                     <div style="width: 100%; height: 100px; display: flex; border: solid 1px lightgrey; margin-bottom: 10px;">
@@ -107,10 +131,10 @@
                             </div>
                         </div>
                     </div>
-                </div>  
-            </div>  
-            <!-- /ko -->     
+                </div>
+            </div>
+            <!-- /ko -->
         </div>
     </div>
-          
+
 </div>
