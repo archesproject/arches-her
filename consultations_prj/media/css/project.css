@@ -232,3 +232,82 @@
     margin: 30px 0;
 
 }
+
+div.active-cons-header {
+    position: absolute; 
+    width: 270px; 
+    border: solid 1px lightgrey; 
+    margin: 9px; 
+    padding: 15px; 
+    background-color: white;
+}
+
+div.active-cons-map-container {
+    height: 200px; 
+    width: 288px; 
+    padding: 0px; 
+    text-align: center; 
+    background-color: #f8fbff;
+}
+
+.active-cons-map-container span {
+    font-size: 8px;
+}
+
+div.active-cons-map {
+    height:inherit;
+    width:inherit;
+}
+
+div.active-cons-map > img {
+    max-width: 100%;
+    height: auto;
+    z-index: -1;
+}
+
+div.active-cons-map > div {
+    z-index: 1;
+    position: absolute;
+    width: inherit;
+    padding: 0 1px 0 4px;
+    height: auto;
+    top: 182px;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+div.active-cons-map > div > span {
+    display: inline-block;
+}
+
+div.active-cons-stubs {
+    border: solid 1px #eaeaea;
+    display: flex;
+    padding: 10px;
+}
+
+div.active-cons-stub-left {
+    flex-grow: 1; 
+    border-right: solid 1px #eaeaea; 
+    text-align: center;
+}
+
+div.active-cons-stub-right {
+    flex-grow: 1; 
+    text-align: center;
+}
+
+div.ep-tools-title > div {
+    font-size: 15px; 
+    padding: 12px 0px 0px 12px;
+}
+
+div.active-cons-stub-val {
+    font-size: 14px;
+}
+
+div.active-cons-stub-label {
+    font-size: 11px;
+}
