@@ -1,8 +1,9 @@
 define([
     'knockout',
-    'bindings/chosen'
+    'bindings/chosen',
+    'bindings/mapbox-gl'
 ], function(ko) {
-    return ko.components.register('active-consultations', {
+    return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
             this.title = 'Active Consultations';
@@ -10,6 +11,16 @@ define([
             this.setLayout = function(layout){
                 self.layout(layout);
             };
+            this.mapImageURL = ko.observable('');
+
+            this.setupMap = function(map, data) {
+              map.on('load', function() {
+                console.log(data)
+                self.mapImageURL(map.getCanvas().toDataURL("image/jpeg"));
+                data.map_image_url = self.mapImageURL
+              })
+            }
+
 
             this.active_items = [
                 {title: '34 Victoria Street, Westminster', description: 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for', author: 'Sarah Harrison', consultation_type: 'Planning application - minor'},
@@ -49,7 +60,7 @@ define([
             //     });
             // }
 
-            
+
 
         },
         template: { require: 'text!templates/views/components/plugins/active-consultations.htm' }
