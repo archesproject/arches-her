@@ -34,9 +34,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     {% if 'consultations' in request.path %}
         {% block navheader %}
             {% block mainnav %}
-                {% block header %}
-                    {{ block.super }}
-                {% endblock header %}
                 <div id="workflow-container">
                     <div class="workflow-panel">
                         <div class="workflow-panel-header">
@@ -76,15 +73,20 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                             </li>
                         </ul>
                     </div>
-
-                    {% block main_content %}
-                    <div class="content-panel">
-                        <div class="flex plugin-main" data-bind="component: {
-                            name: plugin.componentname,
-                            params: plugin.config
-                        }"></div>
+                    <div class="workflow-content">
+                        {% block header %}
+                            {{ block.super }}
+                        {% endblock header %}
+                        {% block main_content %}
+                        <div class="content-panel">
+                            <div class="flex plugin-main" data-bind="component: {
+                                name: plugin.componentname,
+                                params: plugin.config
+                            }"></div>
+                        </div>
+                        {% endblock main_content %}
                     </div>
-                    {% endblock main_content %}
+
                 </div>
 
             {% endblock mainnav %}
