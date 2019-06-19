@@ -34,6 +34,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     {% if 'consultations' in request.path %}
         {% block navheader %}
             {% block mainnav %}
+            {% if 'consultations' in request.path %}
                 <div id="workflow-container">
                     <div class="workflow-panel">
                         <div class="workflow-panel-header">
@@ -88,6 +89,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                     </div>
 
                 </div>
+            {% else %}
+        {{ block.super }}
+    {% endif %}
 
             {% endblock mainnav %}
         {% endblock navheader %}
