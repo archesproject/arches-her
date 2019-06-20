@@ -89,33 +89,6 @@ define([
 
             Workflow.apply(this, [params]);
 
-            this.updateState = function(val) {
-                var activeStep = val;
-                var previousStep = self.previousStep();
-                if (previousStep) {
-                    self.state.steps[ko.unwrap(previousStep.name)] = previousStep.stateProperties();
-                    self.state.activestep = val._index;
-                    self.state.previousstep = previousStep._index;
-                    self.updateUrl();
-                }
-                if (ko.unwrap(activeStep.name) === 'assignaddress') {
-                    activeStep.requirements = self.state.steps.assignaddress;
-                }
-                if (ko.unwrap(activeStep.name) === 'setname') {
-                    if (self.state.steps['assignaddress']) {
-                        var tiledata = self.state.steps['assignaddress'].tile
-                        var tilevals = _.map(tiledata, function(v, k) {return v})
-                        var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
-                        activeStep.requirements = self.state.steps.setname || {};
-                        activeStep.requirements.applyOutputToTarget = self.state.steps['assignaddress'].applyOutputToTarget;
-                        activeStep.requirements.targetnode = '1b95fb70-53ef-11e9-9001-dca90488358a';
-                        activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
-                        activeStep.requirements.value = nodeval;
-                    }
-                }
-                self.previousStep(val);
-            }
-
             self.activeStep.subscribe(this.updateState);
 
             self.ready(true);
