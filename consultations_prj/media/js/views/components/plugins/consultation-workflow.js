@@ -133,7 +133,7 @@ define([
                 } if (activeStep._index === 1) {
                     var tiledata = self.state.steps[0].tile
                     var tilevals = _.map(tiledata, function(v, k) {return v})
-                    var nodeval = tilevals[0] + "," + tilevals[1] + " " + tilevals[2];
+                    var nodeval = tilevals[2] + ", " + tilevals[0] + " " + tilevals[1];
                     activeStep.requirements.applyOutputToTarget = self.state.steps[0].applyOutputToTarget;
                     activeStep.requirements.resourceid = self.state.steps[0].resourceid;
                     activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
