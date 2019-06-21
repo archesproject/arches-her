@@ -13,14 +13,45 @@ define([
             this.setLayout = function(layout){
                 self.layout(layout);
             };
-            this.loading = ko.observable(false);
+            this.loading = ko.observable(true);
             this.mapImageURL = ko.observable('');
 
-            // this.active_items = ko.observableArray([]);
+            this.active_items = ko.observableArray([
+                {
+                    "title": '34 Victoria Street, Westminster', 
+                    "proposal": 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for, blah blah blah blah blah 18929 28288929 129128312 031820381 0238 102 83012 8301283 01283 012830 12830 128301 2830128 310v00  00', 
+                    "author": 'Sarah Harrison', 
+                    "consultation_type": 'Planning application - minor', 
+                    "date_val": 'Jan 30 2018', 
+                    "date_label": 'Due date', 
+                    "application_val": 'Post Application', 
+                    "application_label": 'Type'
+                },
+                {
+                    "title": '18 Minster Yard, Kensington', 
+                    "proposal": 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for', 
+                    "author": 'Laura O\'Gorman', 
+                    "consultation_type": 'Planning application - major', 
+                    "date_val": 'Feb 01 2018', 
+                    "date_label": 'Due date', 
+                    "application_val": 'Post Application', 
+                    "application_label": 'Type'
+                },
+                {
+                    "title": 'Bishops Palace, East Hall', 
+                    "proposal": 'Another description here', 
+                    "author": 'Stewart Cakebread', 
+                    "consultation_type": 'Planning application - major', 
+                    "date_val": 'Feb 05 2018', 
+                    "date_label": 'Due date', 
+                    "application_val": 'Post Application', 
+                    "application_label": 'Type'
+                }
+            ]);
 
             this.setupMap = function(map, data) {
               map.on('load', function() {
-                console.log(data)
+                // console.log(data)
                 self.mapImageURL(map.getCanvas().toDataURL("image/jpeg"));
                 data.map_image_url = self.mapImageURL
               })
@@ -33,11 +64,10 @@ define([
                 data: self.queryString,
                 context: this,
                 success: function(response) {
-                    console.log(response.results.hits.hits);
                     response.results.hits.hits.forEach( function(hit) {
                         self.active_items.push({"_consultation": hit["_source"], "_id": hit["_id"]});
-                        self.active_items
                     });
+                    self.setNodeIds();
                     self.loading(false);
                     // var data = this.viewModel.searchResults.updateResults(response);
                     // this.viewModel.alert(false);
@@ -49,32 +79,62 @@ define([
                 },
             });
 
-            this.iterateKeys = function() {
-                Object.keys(tile["data"]).forEach( function(key) { //to copy all node_ids
-                    item[key] = tile["data"[key]];
-                });
-            }
+            // this.iterateKeys = function() {
+            //     Object.keys(tile["data"]).forEach( function(key) { //to copy all node_ids
+            //         item[key] = tile["data"[key]];
+            //     });
+            // }
 
             this.setNodeIds = function() {
-                self.active_items.forEach( function(item) {
-                    item["tiles"].forEach( function(tile) {
-                        switch(tile["nodegroup_id"]) { //to copy only specific node_ids
-                            case "04723f59-53f2-11e9-b091-dca90488358a": //consultation details
-                                item["23f845c0-6d24-11e9-b5d0-dca90488358a"] = tile["data"["23f845c0-6d24-11e9-b5d0-dca90488358a"]];
-                                break;
-                        }
-                        Object.keys(tile["data"]).forEach( function(key) { //to copy all node_ids
-                            item[key] = tile["data"[key]];
-                        })
-                    })
-                })
-            }
-
-            this.active_items = [
-                {title: '34 Victoria Street, Westminster', description: 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for', author: 'Sarah Harrison', consultation_type: 'Planning application - minor', date_val: 'Jan 30 2018', date_label: 'Due date', application_val: 'Post Application', application_label: 'Type'},
-                {title: '18 Minster Yard, Kensington', description: 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for', author: 'Laura O\'Gorman', consultation_type: 'Planning application - major', date_val: 'Feb 01 2018', date_label: 'Due date', application_val: 'Post Application', application_label: 'Type'},
-                {title: 'Bishops Palace, East Hall', description: 'Another description here', author: 'Stewart Cakebread', consultation_type: 'Planning application - major', date_val: 'Feb 05 2018', date_label: 'Due date', application_val: 'Post Application', application_label: 'Type'}
-            ];
+                ko.utils.arrayForEach(self.active_items(), function(item) {
+                    if(item["_consultation"]) {
+                        item["_consultation"]["tiles"].forEach( function(tile) {
+                            switch(tile["nodegroup_id"]) {
+                                case "04723f59-53f2-11e9-b091-dca90488358a": //consultation details -- concept select (not multi)
+                                    item["23f845c0-6d24-11e9-b5d0-dca90488358a"] = tile["data"]["23f845c0-6d24-11e9-b5d0-dca90488358a"]; //Application Type
+                                    item["86ebeb8f-6d24-11e9-826c-dca90488358a"] = tile["data"]["86ebeb8f-6d24-11e9-826c-dca90488358a"]; //Consultation Status
+                                    item["c24b0e40-6d23-11e9-b710-dca90488358a"] = tile["data"]["c24b0e40-6d23-11e9-b710-dca90488358a"]; //Consultation Type
+                                    item["5ee5f3fa-6d24-11e9-8d9d-dca90488358a"] = tile["data"]["5ee5f3fa-6d24-11e9-8d9d-dca90488358a"]; //Development Type
+                                    break;
+                                case "17c07f07-53f5-11e9-9c94-dca90488358a": //contacts -- resource inst select, multi-select
+                                    item["0eb94b28-6c4a-11e9-9cc1-dca90488358a"] = tile["data"]["0eb94b28-6c4a-11e9-9cc1-dca90488358a"]; //Agent
+                                    item["20b7d2f5-6c4a-11e9-ba38-dca90488358a"] = tile["data"]["20b7d2f5-6c4a-11e9-ba38-dca90488358a"]; //Application Area Representative
+                                    item["36a6c511-6c49-11e9-b450-dca90488358a"] = tile["data"]["36a6c511-6c49-11e9-b450-dca90488358a"]; //Casework Officer
+                                    item["f4ed9651-6c49-11e9-8eb7-dca90488358a"] = tile["data"]["f4ed9651-6c49-11e9-8eb7-dca90488358a"]; //Owner
+                                    item["d3033421-6c49-11e9-b310-dca90488358a"] = tile["data"]["d3033421-6c49-11e9-b310-dca90488358a"]; //Planning Officer
+                                    break;
+                                case "f34ebbd4-53f3-11e9-b649-dca90488358a": //proposal -- rich text
+                                    item["proposal"] = tile["data"]["f34ebbd4-53f3-11e9-b649-dca90488358a"];
+                                    break;
+                                case "9dc86b0c-6c48-11e9-8cbe-dca90488358a": //address -- text
+                                    item["Postal Code"] = tile["data"]["9dc872f0-6c48-11e9-a2e3-dca90488358a"];
+                                    item["Street Number/Name"] = tile["data"]["9dc87480-6c48-11e9-ad10-dca90488358a"];
+                                    item["Town/City"] = tile["data"]["9dc870ae-6c48-11e9-aa71-dca90488358a"];
+                                    break;
+                                case "b979d03d-53f2-11e9-91e4-dca90488358a": //dates -- datepicker (might no longer be in consultation?)
+                                    item["0316def5-5675-11e9-8804-dca90488358a"] = tile["data"]["0316def5-5675-11e9-8804-dca90488358a"]; //Completion Date
+                                    item["49f806e6-5674-11e9-a5b2-dca90488358a"] = tile["data"]["49f806e6-5674-11e9-a5b2-dca90488358a"]; //Consultation Log Date
+                                    item["eb2bebeb-5674-11e9-8ec3-dca90488358a"] = tile["data"]["eb2bebeb-5674-11e9-8ec3-dca90488358a"]; //Due Date
+                                    break;
+                                case "80be5b5c-5675-11e9-b68d-dca90488358a": //map -- mapwidget
+                                    item["80be6194-5675-11e9-8571-dca90488358a"] = tile["data"]["80be6194-5675-11e9-8571-dca90488358a"];
+                                    break;
+                                default:
+                                    break;
+                            }
+                        });
+                        item["title"] = item["Street Number/Name"]+", "+item["Town/City"];
+                        item["author"] = "n/a";
+                        item["consultation_type"] = "n/a";
+                        item["date_val"] = "01/01/2020";
+                        item["date_label"] = 'Due date';
+                        item["application_val"] = "n/a";
+                        item["application_label"] = "Type";
+                        console.log(item);
+                    }
+                });
+                self.loading(false);
+            };
 
 
             // this.doQuery = function() {
