@@ -39,7 +39,7 @@
                             <div class="active-cons-map-container">
 
                               <div class="active-cons-map">
-                                <img data-bind="attr: { src: $parent.mapImageURL }"></img>
+                                <img data-bind="attr: { src: $data.mapImageUrl() }"></img>
 
                                 <div>
                                     <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
@@ -52,9 +52,11 @@
                                 <div id="map" class="relative" style="height: 200px; opacity: 1;" data-bind="mapboxgl: {
                                     mapOptions: {
                                       style: 'mapbox://styles/mapbox/streets-v11',
+                                      center: $data.center,
+                                      zoom: $data.zoom,
                                       preserveDrawingBuffer: true
                                     },
-                                    data: 'mapData',
+                                    data: $parent.mapData(),
                                     afterRender: function(map) {
                                       $parent.setupMap(map, $data);
                                     }
@@ -99,7 +101,7 @@
 
             <!-- /ko -->
             <!-- ko -->
-            <div data-bind="visible: layout() !== 'grid'">
+            <!-- <div data-bind="visible: layout() !== 'grid'">
                 <div data-bind="foreach: active_items">
                     <div style="width: 100%; height: 100px; display: flex; border: solid 1px lightgrey; margin-bottom: 10px;">
                         <div style="width: 200px; text-align: center; background-color: #f8fbff; border-right: solid 1px lightgrey;">
@@ -134,7 +136,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <!-- /ko -->
         </div>
     </div>

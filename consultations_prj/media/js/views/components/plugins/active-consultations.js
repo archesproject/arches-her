@@ -1,9 +1,10 @@
 define([
     'knockout',
     'arches',
+    'jquery',
     'bindings/chosen',
     'bindings/mapbox-gl'
-], function(ko, arches) {
+], function(ko, arches, $) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
@@ -13,50 +14,26 @@ define([
             this.setLayout = function(layout){
                 self.layout(layout);
             };
+            this.mapData = ko.observable();
             this.loading = ko.observable(true);
             this.mapImageURL = ko.observable('');
 
-            this.active_items = ko.observableArray([
-                {
-                    "title": '34 Victoria Street, Westminster', 
-                    "proposal": 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for, blah blah blah blah blah 18929 28288929 129128312 031820381 0238 102 83012 8301283 01283 012830 12830 128301 2830128 310v00  00', 
-                    "author": 'Sarah Harrison', 
-                    "consultation_type": 'Planning application - minor', 
-                    "date_val": 'Jan 30 2018', 
-                    "date_label": 'Due date', 
-                    "application_val": 'Post Application', 
-                    "application_label": 'Type'
-                },
-                {
-                    "title": '18 Minster Yard, Kensington', 
-                    "proposal": 'Consultation/Proposal description, limited to just the first few lines in the consultation so that users can quickly scan and see if it is the consultation they are looking for', 
-                    "author": 'Laura O\'Gorman', 
-                    "consultation_type": 'Planning application - major', 
-                    "date_val": 'Feb 01 2018', 
-                    "date_label": 'Due date', 
-                    "application_val": 'Post Application', 
-                    "application_label": 'Type'
-                },
-                {
-                    "title": 'Bishops Palace, East Hall', 
-                    "proposal": 'Another description here', 
-                    "author": 'Stewart Cakebread', 
-                    "consultation_type": 'Planning application - major', 
-                    "date_val": 'Feb 05 2018', 
-                    "date_label": 'Due date', 
-                    "application_val": 'Post Application', 
-                    "application_label": 'Type'
-                }
-            ]);
+            this.active_items = ko.observableArray([]);
 
             this.setupMap = function(map, data) {
-              map.on('load', function() {
-                // console.log(data)
-                self.mapImageURL(map.getCanvas().toDataURL("image/jpeg"));
-                data.map_image_url = self.mapImageURL
-              })
+                if(data["80be6194-5675-11e9-8571-dca90488358a"] != undefined) {
+                    self.mapData(data["80be6194-5675-11e9-8571-dca90488358a"]);
+                } else {
+                    self.mapData('mapData');
+                }
+
+                map.on('load', function() {
+                    data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
+                });
+                $("#map").remove();
+
             };
-            this.queryString = "http://localhost:8000/search/resources?paging-filter=1&resource-type-filter=%5B%7B%22graphid%22%3A%2208359c2e-53f0-11e9-b212-dca90488358a%22%2C%22name%22%3A%22Consultation%22%2C%22inverted%22%3Afalse%7D%5D&tiles";
+            this.queryString = "http://localhost:8000/search/resources?paging-filter=none&resource-type-filter=%5B%7B%22graphid%22%3A%2208359c2e-53f0-11e9-b212-dca90488358a%22%2C%22name%22%3A%22Consultation%22%2C%22inverted%22%3Afalse%7D%5D&tiles";
 
             this.getConsultations = $.ajax({
                 type: "GET",
@@ -69,8 +46,6 @@ define([
                     });
                     self.setNodeIds();
                     self.loading(false);
-                    // var data = this.viewModel.searchResults.updateResults(response);
-                    // this.viewModel.alert(false);
                 },
                 error: function(response, status, error) {
                     if(this.updateRequest.statusText !== 'abort'){
@@ -78,12 +53,6 @@ define([
                     }
                 },
             });
-
-            // this.iterateKeys = function() {
-            //     Object.keys(tile["data"]).forEach( function(key) { //to copy all node_ids
-            //         item[key] = tile["data"[key]];
-            //     });
-            // }
 
             this.setNodeIds = function() {
                 ko.utils.arrayForEach(self.active_items(), function(item) {
@@ -114,10 +83,17 @@ define([
                                 case "b979d03d-53f2-11e9-91e4-dca90488358a": //dates -- datepicker (might no longer be in consultation?)
                                     item["0316def5-5675-11e9-8804-dca90488358a"] = tile["data"]["0316def5-5675-11e9-8804-dca90488358a"]; //Completion Date
                                     item["49f806e6-5674-11e9-a5b2-dca90488358a"] = tile["data"]["49f806e6-5674-11e9-a5b2-dca90488358a"]; //Consultation Log Date
-                                    item["eb2bebeb-5674-11e9-8ec3-dca90488358a"] = tile["data"]["eb2bebeb-5674-11e9-8ec3-dca90488358a"]; //Due Date
+                                    item["date_val"] = tile["data"]["eb2bebeb-5674-11e9-8ec3-dca90488358a"]; //Due Date
                                     break;
                                 case "80be5b5c-5675-11e9-b68d-dca90488358a": //map -- mapwidget
                                     item["80be6194-5675-11e9-8571-dca90488358a"] = tile["data"]["80be6194-5675-11e9-8571-dca90488358a"];
+                                    // console.log(typeof item["80be6194-5675-11e9-8571-dca90488358a"]["features"][0]["geometry"]["coordinates"][0]);
+                                    if(typeof item["80be6194-5675-11e9-8571-dca90488358a"]["features"][0]["geometry"]["coordinates"][0] != "number") {
+                                        item["center"] = item["80be6194-5675-11e9-8571-dca90488358a"]["features"][0]["geometry"]["coordinates"][0][0];
+                                    } else {
+                                        item["center"] = item["80be6194-5675-11e9-8571-dca90488358a"]["features"][0]["geometry"]["coordinates"];
+                                    }
+                                    item["zoom"] = 10;
                                     break;
                                 default:
                                     break;
@@ -126,11 +102,14 @@ define([
                         item["title"] = item["Street Number/Name"]+", "+item["Town/City"];
                         item["author"] = "n/a";
                         item["consultation_type"] = "n/a";
-                        item["date_val"] = "01/01/2020";
+                        // item["date_val"] = "01/01/2020";
                         item["date_label"] = 'Due date';
                         item["application_val"] = "n/a";
                         item["application_label"] = "Type";
-                        console.log(item);
+                        item["mapImageUrl"] = ko.observable();
+                        if(!item["center"]) { item["center"] = [0,0]; }
+                        if(!item["zoom"]) { item["zoom"] = 0; }
+                        if(!item["proposal"]) { item["proposal"] = "(no proposal)";}
                     }
                 });
                 self.loading(false);
