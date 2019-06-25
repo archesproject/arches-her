@@ -19,7 +19,7 @@ define([
 
     return ko.components.register('newfile-widget', {
         viewModel: function(params) {
-            params.configKeys = ['acceptedFiles', 'maxFilesize'];
+            params.configKeys = ['acceptedFiles', 'maxFilesize', 'maxFiles'];
             var self = this;
             FileWidgetViewModel.apply(this, [params]);
             this.selectedFile = ko.observable();
@@ -97,7 +97,7 @@ define([
                 }
             };
         },
-        template: { 
+        template: {
             require: 'text!widget-templates/newfile'
         }
     });
