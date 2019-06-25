@@ -4,8 +4,10 @@ define([
 
 
     GalleryViewModel = function() {
+        this.selectedItem;
         this.selectItem = function(val){
-            if (val.selected) {
+            if (val && val.selected) {
+                this.selectedItem = val;
                 val.selected(true);
             }
         }
