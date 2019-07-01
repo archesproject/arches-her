@@ -39,6 +39,7 @@ define([
                 },
                 {
                     title: 'Related Application Area',
+                    name: 'setrelatedapplicationarea',
                     description: 'Identify the Development Area for this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -50,7 +51,8 @@ define([
                     icon: 'fa-code-fork'
                 },
                 {
-                    title: 'Application Details',
+                    title: 'Application Details - 1',
+                    name: 'settypedetails',
                     description: 'Summary of the Application and Consultation Type',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -62,7 +64,21 @@ define([
                     icon: 'fa-list-alt'
                 },
                 {
+                    title: 'Application Details - 2',
+                    name: 'setdatedetails',
+                    description: 'Summary of the Application and Consultation Type',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: 'b979d03d-53f2-11e9-91e4-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-list-alt'
+                },
+                {
                     title: 'Reference Numbers',
+                    name: 'setrefnumbers',
                     description: 'Application Reference Numbers',
                     component: 'views/components/workflows/new-multi-tile-step',
                     componentname: 'new-multi-tile-step',
