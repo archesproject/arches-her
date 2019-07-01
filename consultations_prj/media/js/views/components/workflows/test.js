@@ -42,7 +42,8 @@ define([
     return ko.components.register('test', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/new-tile-step.htm'
+            // require: 'text!templates/views/components/workflows/new-tile-step.htm'
+            require: 'text!templates/views/components/workflows/test.htm'
         }
     });
     return viewModel;
