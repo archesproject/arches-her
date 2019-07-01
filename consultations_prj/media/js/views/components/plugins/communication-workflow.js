@@ -60,18 +60,6 @@ define([
                     icon: 'fa-clipboard'
                 },
                 {
-                    title: 'Upload Documents',
-                    description: 'Document Upload',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
-                    nodegroupid: '70fd3940-6d1f-11e9-87dd-dca90488358a',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-camera'
-                },
-                {
                     title: 'Set Type',
                     description: 'Select Template type',
                     component: 'views/components/workflows/new-tile-step',
@@ -82,6 +70,18 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag'
+                },
+                {
+                    title: 'Upload Documents',
+                    description: 'Document Upload',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
+                    nodegroupid: '70fd3940-6d1f-11e9-87dd-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-camera'
                 }
             ];
 
