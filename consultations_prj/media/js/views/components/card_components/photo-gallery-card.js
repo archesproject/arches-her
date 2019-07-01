@@ -14,8 +14,9 @@ define([
             params.configKeys = ['acceptedFiles', 'maxFilesize'];
             var self = this;
             CardComponentViewModel.apply(this, [params]);
-
             this.photoGallery = new PhotoGallery();
+            this.lastSelected = 0;
+            this.selected = ko.observable();
 
             this.getUrl = function(tile){
                 var url = '';
@@ -38,25 +39,59 @@ define([
 
             this.showThumbnails = ko.observable(false);
 
+            this.selectDefault = function(){
+                var self = this;
+                return function() {
+                    var selectedIndex = self.card.tiles.indexOf(self.selected())
+                    if(self.card.tiles().length > 0 && selectedIndex === -1) {
+                        selectedIndex = 0;
+                    }
+                    self.card.tiles()[selectedIndex]
+                    self.photoGallery.selectItem(self.card.tiles()[selectedIndex])
+                }
+            };
+            this.defaultSelector = this.selectDefault();
+
             this.displayContent = ko.pureComputed(function(){
                 var photo;
+                var selectedIndex = 0;
                 var selected = this.card.tiles().find(
                     function(tile){
                         return tile.selected() === true
                     });
                 if (selected) {
+                        this.selected(selected);
                         photo = this.getUrl(selected);
                     }
+                else {
+                    this.selected(undefined);
+                }
                 return photo;
             }, this);
 
             if (!this.displayContent()) {
+                var selectedIndex = 0;
                 if (this.card.tiles().length > 0) {
+                    this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
                 }
             }
 
+            this.displayContent.subscribe(function(val){
+                if (this.card.tiles().length > 0 && !this.selected()) {
+                    var self = this;
+                    setTimeout(self.defaultSelector, 150);
+                }
+            }, this);
+
             this.removeTile = function(val){
+                var tileCount = this.parent.tiles().length;
+                var index = this.parent.tiles.indexOf(val);
                 val.deleteTile();
+                // console.log('deleteinglksdjft tile')
+                // if (this.parent.tiles().length >  0) {
+                //     console.log('setting the next back')
+                //     this.parent.tiles()[index - 1].selected(true);
+                // }
             }
 
             this.dropzoneOptions = {
@@ -71,7 +106,6 @@ define([
                     this.on("addedfile", function(file) {
                         var newtile;
                         newtile = self.card.getNewTile();
-                        console.log('adding tile')
                         var tilevalue = {
                             name: file.name,
                             accepted: true,
@@ -87,8 +121,13 @@ define([
                             content: URL.createObjectURL(file),
                             error: file.error
                         };
-                        newtile.data['e60af863-5d48-11e9-b44f-c4b301baab9f']([tilevalue]);
-                        newtile.formData.append('file-list_' + 'e60af863-5d48-11e9-b44f-c4b301baab9f', file, file.name);
+                        Object.keys(newtile.data).forEach(function(val){
+                            if (newtile.datatypeLookup && newtile.datatypeLookup[val] === 'file-list') {
+                                targetNode = val;
+                            }
+                        });
+                        newtile.data[targetNode]([tilevalue]);
+                        newtile.formData.append('file-list_' + targetNode, file, file.name);
                         self.form.saveTile(newtile);
                     }, self);
 
@@ -100,8 +139,7 @@ define([
             };
 
             this.tabItems = [
-                {'name': 'edit', 'icon': 'fa fa-pencil'},
-                {'name': 'beta', 'icon': 'fa fa-android'},
+                {'name': 'edit', 'icon': 'fa fa-pencil'}
             ];
 
             this.activeTab = ko.observable('edit');
