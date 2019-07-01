@@ -30,216 +30,78 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 
 {% block body %}
-    {{ block.super }}
 
-    {% block mainnav %}
-    <nav id="mainnav-container">
-        <div id="mainnav">
-            {% block navbar %}
-            <div id="mainnav-menu-wrap">
-                <div class="nano">
-                    <div class="nano-content" tabindex="0">
-                        <ul id="mainnav-menu" class="list-group">
-
-
-                            {% if 'consultations' in request.path %}
-                            
-                            {% for p in plugins %}
-                            <li{% if main_script == "views/plugin" and plugin.pluginid == p.pluginid  %} class="active-sub"{% endif %}>
-                                {% if p.name == "Dashboard" %}
-                                <a href="{% url 'consultations:plugins' p.pluginid %}" data-bind="css: {'nav-item-disabled': !inSearch() }" alt="Click Search to use Dashboard">
-                                {% elif p.slug is not None %}
-                                <a href="{% url 'consultations:plugins' p.slug %}" data-bind="click: navigate.bind(this, '{% url 'consultations:plugins' p.slug %}') ">
-                                {% else %}
-                                <a href="{% url 'consultations:plugins' p.pluginid %}" data-bind="click: navigate.bind(this, '{% url 'consultations:plugins' p.pluginid %}') ">
-                                {% endif %}
-                                    <i class="{{p.icon}}"></i>
-                                    <span class="menu-title">
-                                        {{p.name}}
-                                    </span>
-                                </a>
+    {% if 'consultations' in request.path %}
+        {% block navheader %}
+            {% block mainnav %}
+            {% if 'consultations' in request.path %}
+                <div id="workflow-container">
+                    <div class="workflow-panel">
+                        <div class="workflow-panel-header">
+                            <a><span><i class="fa fa-chevron-circle-left"></i>{% trans "Project Tasks" %}</span></a>
+                            <hr>
+                        </div>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{% trans "Active Projects" %}</span></a>
                             </li>
-                            {% endfor %}
-
-                            {% else %}
-
-                            <!-- Tools -->
-                            <li class="list-header">{% trans "Tools" %}</li>
-
-                            <!-- System Settings list item -->
-                            {% if request.user|has_group:"System Administrator" %}
-                            <li{% if "views/resource" in main_script and is_system_settings is True %} class="active-sub"{% endif %}>
-                                <a href="{% url 'config' %}" data-bind="click: navigate.bind(this, '{% url 'config' %}') ">
-                                    <i class="ti-alarm-clock"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Manage System Settings" %}</strong>
-                                    </span>
-                                </a>
-                                <ul class="collapse in pop-in arches" data-bind="css:{'expanded-nav': navExpanded()}">
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="{% url 'config' %}" data-bind="click: navigate.bind(this, '{% url 'config' %}')">{% trans "System Settings" %}</a>
-                                    </li>
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="{% url 'graph' system_settings_graphid %}" data-bind="click: navigate.bind(this, '{% url 'graph_designer' system_settings_graphid %}')">{% trans "System Settings Graph" %}</a>
-                                    </li>
-                                </ul>
+                            <li>
+                                <a href="{% url 'consultations' %}"><span>{% trans "New" %}</span></a>
                             </li>
-                            {% endif %}
-
-                            <li{% if "views/search" in main_script %} class="active-sub"{% endif %}>
-                                <a href="{% url 'search_home' %}" data-bind="click:function () { navigate('{% url 'search_home' %}') }">
-                                    <i class="fa fa-search"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Search" %}</strong>
-                                    </span>
-                                </a>
+                            <li>
+                                <a href="{% url 'search_home' %}"><span>{% trans "Find" %}</span></a>
                             </li>
-
-                            <!--Menu list item-->
-                            {% if request.user|can_edit_resource_instance %}
-                            <li{% if "views/resource" in main_script and is_system_settings is False %} class="active-sub"{% endif %}>
-                                <a href="{% url 'resource' %}" data-bind="click: navigate.bind(this, '{% url 'resource' %}') ">
-                                    <i class="fa fa-building-o"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Add New Resource" %}</strong>
-                                    </span>
-                                </a>
-                                <ul class="collapse in pop-in arches" data-bind="css:{'expanded-nav': navExpanded()}">
-                                    <!-- ko foreach: createableResources -->
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="#" data-bind="click: disable_instance_creation ? null: $parent.navigate.bind(this, '{% url 'add_resource' 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' %}'.replace('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', graphid)),
-                                            css: { 'arches-menu-item-disabled': disable_instance_creation },
-                                            attr: {
-                                                href: disable_instance_creation ? '#' : ('{% url 'add_resource' 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa' %}'.replace('aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa', graphid))
-                                            }">
-                                            <i class="fa arches-menu-icon" data-bind="css: iconclass || 'fa fa-question'"></i> <span data-bind="text:name"></span></a>
-                                    </li>
-                                    <!-- /ko -->
-                                </ul>
+                            <li>
+                                <a href="#"><span>{% trans "Reports" %}</span></a>
                             </li>
-                            {% endif %}
-
-                            <!--Menu list item-->
-                            {% if request.user|has_group:"Graph Editor" %}
-                            <li{% if "views/graph" in main_script %} class="active-sub"{% endif %}>
-                                <a href="#" data-bind="click: navigate.bind(this, '{% url 'graph' '' %}') ">
-                                    <i class="fa fa-bookmark"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Arches Designer" %}</strong>
-                                    </span>
-                                </a>
-                                <ul class="collapse in pop-in arches" data-bind="css:{'expanded-nav': navExpanded()}">
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu"  href="{% url 'graph' '' %}" data-bind="click: navigate.bind(this, '{% url 'graph' '' %}')">{% trans "Resource Models" %}</a>
-                                    </li>
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="{% url 'graph' '' %}#branches" data-bind="click: navigate.bind(this, '{% url 'graph' '' %}#branches')">{% trans "Branches" %}</a>
-                                    </li>
-                                </ul>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{% trans "Manage Account" %}</span></a>
                             </li>
-                            {% endif %}
-
-                            <!--Menu list item-->
-                            {% if request.user|has_group:"Application Administrator" %}
-                            <li{% if "views/map-layer-manager" in main_script %} class="active-sub"{% endif %}>
-                                <a href="{% url 'map_layer_manager' %}" data-bind="click: navigate.bind(this, '{% url 'map_layer_manager' %}') ">
-                                    <i class="fa fa-server"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Map Layer Manager" %}</strong>
-                                    </span>
-                                </a>
-                                <ul class="collapse in pop-in arches" data-bind="css:{'expanded-nav': navExpanded()}">
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="{% url 'map_layer_manager' %}" data-bind="click: navigate.bind(this, '{% url 'map_layer_manager' %}')">{% trans "Resource Layers" %}</a>
-                                    </li>
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="{% url 'map_layer_manager' %}#basemaps" data-bind="click: navigate.bind(this, '{% url 'map_layer_manager' %}#basemaps')">{% trans "Basemaps" %}</a>
-                                    </li>
-                                    <li class="link-submenu-item">
-                                        <a class="link-submenu" href="{% url 'map_layer_manager' %}#overlays" data-bind="click: navigate.bind(this, '{% url 'map_layer_manager' %}#overlays')">{% trans "Overlays" %}</a>
-                                    </li>
-                                </ul>
+                            <li>
+                                <a href="#"><span>{% trans "Settings" %}</span></a>
                             </li>
-
-                            <li{% if "views/mobile-survey-manager" in main_script %} class="active-sub"{% endif %}>
-                                <a href="{% url 'collector_manager' %}" data-bind="click: navigate.bind(this, '{% url 'collector_manager' %}') ">
-                                    <i class="fa fa-globe"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Arches Collector Manager" %}</strong>
-                                    </span>
-                                </a>
+                        </ul>
+                        <hr>
+                        <ul>
+                            <li>
+                                <a href="#"><span>{% trans "Help" %}</span></a>
                             </li>
-                            {% endif %}
-
-
-                            <!-- Recently Added -->
-                            {% if request.user|can_edit_resource_instance %}
-                            <li{% if 'edit-history' in main_script %} class="active-sub"{% endif %}>
-                                <a href="{% url 'edit_history' %}" data-bind="click: navigate.bind(this, '{% url 'edit_history' %}') ">
-                                    <i class="ti-ticket"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Recent Edits" %}</strong>
-                                    </span>
-                                </a>
+                            <li>
+                                <a href="#"><span>{% trans "About" %}</span></a>
                             </li>
-                            {% endif %}
-
-                            <!-- Profile Manager -->
-                            {% if user.is_authenticated and request.user.username != 'anonymous' %}
-                            <li{% if "user-profile-manager" in main_script %} class="active-sub"{% endif %}>
-                                <a href="{% url 'user_profile_manager' %}" data-bind="click: navigate.bind(this, '{% url 'user_profile_manager' %}') ">
-                                    <i class="fa fa-user"></i>
-                                    <span class="menu-title">
-                                        <strong>{% trans "Profile Manager" %}</strong>
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-
-                            <li class="list-divider-dark"></li>
-
-                            <!-- Tools -->
-                            <li class="list-header">{% trans "Modules" %}</li>
-
-                            {% if request.user|has_group:"RDM Administrator" %}
-                            <!--Menu list item-->
-                            <li{% if main_script == "rdm" %} class="active-sub"{% endif %}>
-                                <a href="{% url 'rdm' '' %}" data-bind="click: navigate.bind(this, '{% url 'rdm' '' %}') ">
-                                    <i class="fa fa-align-left"></i>
-                                    <span class="menu-title">
-                                        {% trans "Reference Data Manager" %}
-                                    </span>
-                                </a>
-                            </li>
-                            {% endif %}
-
-                            {% for p in plugins %}
-                            <li{% if main_script == "views/plugin" and plugin.pluginid == p.pluginid  %} class="active-sub"{% endif %}>
-                                {% if p.name == "Dashboard" %}
-                                <a href="{% url 'plugins' p.pluginid %}" data-bind="css: {'nav-item-disabled': !inSearch() }" alt="Click Search to use Dashboard">
-                                {% elif p.slug is not None %}
-                                <a href="{% url 'plugins' p.slug %}" data-bind="click: navigate.bind(this, '{% url 'plugins' p.slug %}') ">
-                                {% else %}
-                                <a href="{% url 'plugins' p.pluginid %}" data-bind="click: navigate.bind(this, '{% url 'plugins' p.pluginid %}') ">
-                                {% endif %}
-                                    <i class="{{p.icon}}"></i>
-                                    <span class="menu-title">
-                                        {{p.name}}
-                                    </span>
-                                </a>
-                            </li>
-                            {% endfor %}
-
-                            {% endif %}
                         </ul>
                     </div>
-                </div>
-            </div>
-            {% endblock navbar %}
-        </div>
-    </nav>
-    {% endblock mainnav %}
+                    <div class="workflow-content">
+                        {% block header %}
+                            {{ block.super }}
+                        {% endblock header %}
+                        {% block main_content %}
+                        <div class="content-panel">
+                            <div class="flex plugin-main" data-bind="component: {
+                                name: plugin.componentname,
+                                params: plugin.config
+                            }"></div>
+                        </div>
+                        {% endblock main_content %}
+                    </div>
 
+                </div>
+            {% else %}
+        {{ block.super }}
+    {% endif %}
+
+            {% endblock mainnav %}
+        {% endblock navheader %}
+
+        {% block aside_container %}
+        {% endblock aside_container %}
+
+    {% else %}
+        {{ block.super }}
+    {% endif %}
 
 {% endblock body %}
 
