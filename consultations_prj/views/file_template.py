@@ -35,7 +35,7 @@ from django.utils.html import strip_tags
 from django.utils.translation import ugettext as _
 from django.utils.decorators import method_decorator
 from django.views.generic import View
-# from docx import Document
+from docx import Document
 from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
 from arches.app.utils.decorators import group_required

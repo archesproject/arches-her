@@ -70,6 +70,18 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-camera'
+                },
+                {
+                    title: 'Set Type',
+                    description: 'Select Template type',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
+                    nodegroupid: '23e1ac91-6c4b-11e9-8641-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-tag'
                 }
             ];
 
