@@ -62,8 +62,8 @@ define([
                 {
                     title: 'Set Type',
                     description: 'Select Template type',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
+                    component: 'views/components/workflows/test',
+                    componentname: 'test',
                     graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
                     nodegroupid: '23e1ac91-6c4b-11e9-8641-dca90488358a',
                     resourceid: null,

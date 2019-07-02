@@ -36,14 +36,67 @@ define([
                 }
             }
         });
-        console.log(self);
+        console.log(self, params);
+
+        self.saveTile = function(tile, callback) {
+            self.loading(true);
+            tile.save(function(response) {
+                self.loading(false);
+                self.alert(
+                    new AlertViewModel(
+                        'ep-alert-red',
+                        response.responseJSON.message[0],
+                        response.responseJSON.message[1],
+                        null,
+                        function(){ return; }
+                    )
+                );
+            }, function(tile) {
+                console.log("Were in save", tile, params);
+                $.ajax({
+                    type: "GET",
+                    url: arches.urls.filetemplate,
+                    data: {
+                        "resourceinstance_id": tile["resourceinstance_id"],
+                        "template_id": tile["data"][0]
+                    },
+                    // data: JSON.stringify({
+                    //     tiles: koMapping.toJS(tiles)
+                    // }),
+                    // context: self,
+                    success: function(response) {
+                        console.log("success");
+                        // console.log(response);
+                    },
+                    error: function(response, status, error) {
+                        console.log(response);
+                        if(response.statusText !== 'abort'){
+                            this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                        }
+                    }
+                });
+                // params.resourceid(tile.resourceinstance_id);
+                // params.tileid(tile.tileid);
+                // self.resourceId(tile.resourceinstance_id);
+                // self.complete(true);
+                // if (typeof callback === 'function') {
+                //     callback.apply(null, arguments);
+                // }
+                // self.tile(self.card().getNewTile());
+                // self.tile().reset();
+                // setTimeout(function() {
+                //     self.tile().reset();
+                // }, 1);
+                self.loading(false);
+            });
+        };
     };
 
     return ko.components.register('test', {
         viewModel: viewModel,
         template: {
-            // require: 'text!templates/views/components/workflows/new-tile-step.htm'
-            require: 'text!templates/views/components/workflows/test.htm'
+            require: 'text!templates/views/components/workflows/new-tile-step.htm'
+            // require: 'text!templates/views/components/workflows/test.htm'
         }
     });
     return viewModel;

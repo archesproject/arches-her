@@ -48,6 +48,7 @@ from arches.app.models.system_settings import settings
 from arches.app.views.base import BaseManagerView
 from arches.app.views.base import MapBaseManagerView
 import arches.app.views.search as search
+from pprint import pprint as pp
 
 # This should probably be added using a django app. 
 # The view should take the name of a docx template file, 
@@ -76,21 +77,15 @@ class FileTemplateView(View):
 
     # Somehow get the docx file from the server
 
-    def get(request): 
+    def get(self, request): 
         # resource_instanceid, templateid 
-        graphs = models.GraphModel.objects.filter(isresource=True).exclude(graphid=settings.SYSTEM_SETTINGS_RESOURCE_MODEL_ID)
-        resources = []
-        all_ordered_card_ids = []
-        proj = MobileSurvey.objects.get(id=surveyid)
-        all_ordered_card_ids = proj.get_ordered_cards()
-        active_graphs = set([unicode(card.graph_id) for card in models.CardModel.objects.filter(cardid__in=all_ordered_card_ids)])
-        for i, graph in enumerate(graphs):
-            cards = []
-            if unicode(graph.graphid) in active_graphs:
-                cards = [Card.objects.get(pk=card.cardid) for card in models.CardModel.objects.filter(graph=graph)]
-                resources.append({'name': graph.name, 'id': graph.graphid, 'subtitle': graph.subtitle, 'iconclass': graph.iconclass, 'cards': cards})
+        # print 'hello from get'
+        data = JSONDeserializer().deserialize(request.body)
+        pp(data)
+        resourceinstance_id = request.GET.get('resourceinstance_id', None)
+        resource = models.Resource.objects.get(resourceinstanceid=resourceinstance_id)
 
-        return JSONResponse({'success': True, 'resources': resources})
+        return JSONResponse({'resource': resource})
 
 
     def get_template(self, concept_id):
@@ -201,12 +196,4 @@ class FileTemplateView(View):
     #     }
 
     #     return render(request, 'views/mobile-survey-manager.htm', context)
-
-
-
-    # def post(self, request, templateid):
-    #     data = JSONDeserializer().deserialize(request.body)
-        
-
-    #     return JSONResponse({'success': True, 'template': template})
 
