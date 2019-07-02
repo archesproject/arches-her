@@ -24,7 +24,7 @@ from datetime import timedelta
 from django.db import transaction
 from django.shortcuts import render
 from django.db.models import Count
-from django.contrib.auth.models import User, Group
+# from django.contrib.auth.models import User, Group
 from django.contrib.gis.geos import MultiPolygon
 from django.contrib.gis.geos import Polygon
 from django.core.urlresolvers import reverse
@@ -38,30 +38,22 @@ from django.views.generic import View
 from docx import Document
 from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
-from arches.app.utils.decorators import group_required
-from arches.app.utils.geo_utils import GeoUtils
-from arches.app.utils.couch import Couch
+# from arches.app.utils.decorators import group_required
+# from arches.app.utils.geo_utils import GeoUtils
+# from arches.app.utils.couch import Couch
 from arches.app.models import models
 from arches.app.models.card import Card
 from arches.app.models.resource import Resource
-from arches.app.models.system_settings import settings
-from arches.app.views.base import BaseManagerView
-from arches.app.views.base import MapBaseManagerView
+# from arches.app.models.system_settings import settings
+# from arches.app.views.base import BaseManagerView
+# from arches.app.views.base import MapBaseManagerView
 import arches.app.views.search as search
-from pprint import pprint as pp
-
-# This should probably be added using a django app. 
-# The view should take the name of a docx template file, 
-# populate the template with tile data and return the processed xml (probably just as a string). 
-# This consultations app may have a model that stores the the template name along with what tiles are needed to complete the template.
-
-# basically: assume the template has {{variable}} written in it. Write a function to find and replace these, given tile data
+from pprint import pprint
 
 # first: iterate through the following:
 # --sections (header.paragraphs/.tables, footer.paragraphs/.tables)...runs
 # --document.paragraphs/.tables...runs
 
-# "Letter Type" is likely a concept in a concept-list
 
 class FileTemplateView(View):
 
@@ -69,23 +61,22 @@ class FileTemplateView(View):
     tile_data = ''
 
     # Presumably we get the following:
-    # - concept_id of the selected correspondence_type
+    # - concept_id of the selected letter
     # (Passed in via tile:)
-    #   - graph_id of correspondence
     #   - resourceinstance_id for this resource
     #   - date value 
 
-    # Somehow get the docx file from the server
-
-    def get(self, request): 
-        # resource_instanceid, templateid 
-        # print 'hello from get'
-        data = JSONDeserializer().deserialize(request.body)
-        pp(data)
+    def get(self, request, data): 
+        # data = JSONDeserializer().deserialize(request.body)
+        pprint(data)
+        print request.method
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
-        resource = models.Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        # resource = models.Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        if resourceinstance_id is not None:
+            # return JSONResponse({'resource': resource, 'data': data})
+            return JSONResponse(resourceinstance_id)
 
-        return JSONResponse({'resource': resource})
+        return HttpResponseNotFound()
 
 
     def get_template(self, concept_id):
@@ -160,40 +151,4 @@ class FileTemplateView(View):
         # perhaps replaces {{custom_object}} with pre-determined text structure with custom style/format
 
         return True
-
-
-
-
-    # def get(self, request):
-    #     mobile_survey_models = models.MobileSurveyModel.objects.order_by('name')
-    #     mobile_surveys = []
-    #     serializer = JSONSerializer()
-    #     for survey in mobile_survey_models:
-    #         survey.deactivate_expired_survey()
-    #         serialized_survey = serializer.serializeToPython(survey)
-    #         serialized_survey['edited_by'] = {
-    #             'username': survey.lasteditedby.username,
-    #             'first': survey.lasteditedby.first_name,
-    #             'last': survey.lasteditedby.last_name,
-    #             'id': survey.lasteditedby.id
-    #             }
-    #         serialized_survey['created_by'] = created_by = {
-    #             'username': survey.createdby.username,
-    #             'first': survey.createdby.first_name,
-    #             'last': survey.createdby.last_name,
-    #             'id': survey.createdby.id
-    #             }
-    #         mobile_surveys.append(serialized_survey)
-    #     context = self.get_context_data(
-    #         mobile_surveys=serializer.serialize(mobile_surveys, sort_ks=False),
-    #         main_script='views/mobile-survey-manager',
-    #     )
-    #     context['nav']['title'] = _('Arches Collector Manager')
-    #     context['nav']['icon'] = 'fa-server'
-    #     context['nav']['help'] = {
-    #         'title': _('Arches Collector Manager'),
-    #         'template': 'arches-collector-manager-help',
-    #     }
-
-    #     return render(request, 'views/mobile-survey-manager.htm', context)
 

@@ -52,7 +52,7 @@ define([
                     )
                 );
             }, function(tile) {
-                console.log("Were in save", tile, params);
+                console.log("in save", tile, params);
                 $.ajax({
                     type: "GET",
                     url: arches.urls.filetemplate,
@@ -63,10 +63,9 @@ define([
                     // data: JSON.stringify({
                     //     tiles: koMapping.toJS(tiles)
                     // }),
-                    // context: self,
-                    success: function(response) {
-                        console.log("success");
-                        // console.log(response);
+                    context: self,
+                    success: function(responseText, status, response) {
+                        console.log(response);
                     },
                     error: function(response, status, error) {
                         console.log(response);
