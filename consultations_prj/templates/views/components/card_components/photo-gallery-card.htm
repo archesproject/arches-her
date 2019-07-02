@@ -120,16 +120,16 @@
 
     <!--ko if: self.displayContent() === undefined -->
     <div class="gallery-controls new-tile">
-        <div data-bind="dropzone: dropzoneOptions">
+        <div class="gallery-instruction-panel" data-bind="dropzone: dropzoneOptions">
             <div class="file-select-window">
                <div class="bord-top pad-ver file-select">
                    <div class="" style="padding: 5px">
                        <h2>{% trans 'Upload Photographs' %}</h2>
                        <h4>{% trans 'Import document files related to your communication' %}</h4>
                    </div>
-                   <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
+                   <button type="button" class="btn btn-lg btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
                        <i class="fa fa-file"></i>
-                       <span>{% trans "Select Documents" %}</span>
+                       <span>{% trans "Select Images" %}</span>
                    </button>
                    <br>
                    <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
