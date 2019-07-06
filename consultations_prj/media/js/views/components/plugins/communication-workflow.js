@@ -10,6 +10,18 @@ define([
         viewModel: function(params) {
             var self = this;
             params.steps = [
+                {
+                    title: 'Communication Details',
+                    description: 'Identify the related consultation',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
+                    nodegroupid: 'a5901911-6d1e-11e9-8674-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-fork'
+                },
                 // {
                 //     title: 'Communication Details',
                 //     description: 'Date, Subject, and Type of Communication',

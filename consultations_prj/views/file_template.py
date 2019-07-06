@@ -74,9 +74,11 @@ class FileTemplateView(View):
         template_id = request.GET.get('template_id')
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        consultation_instance_id = resouce.tiles.data['a5901911-6d1e-11e9-8674-dca90488358a'] # iterate/fix this
+        consultation = Resource.objects.get(resourceinstance_id=consultation_instance_id)
         template = self.get_template(template_id)
         self.doc = Document(template)
-        self.get_tile_data()
+        self.get_tile_data(consultation)
         if resourceinstance_id is not None:
             return JSONResponse({'resource': self.resource, 'template_id': template_id})
 
@@ -102,9 +104,9 @@ class FileTemplateView(View):
         return template_path
 
 
-    def get_tile_data(self):
+    def get_tile_data(self, consultation):
+        # need to lookup consultation using Communication.Related_Consultation node
         # need to get various consultation data as well, incl site visit, actors
-        # thus right now, need to know which other graphs in advance
         
         # from here need to lookup the widget labels and tile.data of each node
         # pseudo-code:
