@@ -55,16 +55,13 @@ define([
                 console.log("in save", tile, params);
                 $.ajax({
                     type: "GET",
-                    url: arches.urls.filetemplate,
+                    url: arches.urls.root + 'filetemplate',
                     data: {
                         "resourceinstance_id": tile["resourceinstance_id"],
-                        "template_id": tile["data"][0]
+                        "template_id": tile["data"]["23e1ac91-6c4b-11e9-8641-dca90488358a"]
                     },
-                    // data: JSON.stringify({
-                    //     tiles: koMapping.toJS(tiles)
-                    // }),
                     context: self,
-                    success: function(responseText, status, response) {
+                    success: function(responseText, status, response){
                         console.log(response);
                     },
                     error: function(response, status, error) {

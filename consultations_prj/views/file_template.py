@@ -44,10 +44,11 @@ from arches.app.utils.response import JSONResponse
 from arches.app.models import models
 from arches.app.models.card import Card
 from arches.app.models.resource import Resource
-# from arches.app.models.system_settings import settings
+from arches.app.models.system_settings import settings
 # from arches.app.views.base import BaseManagerView
 # from arches.app.views.base import MapBaseManagerView
 import arches.app.views.search as search
+import os
 from pprint import pprint
 
 # first: iterate through the following:
@@ -58,7 +59,7 @@ from pprint import pprint
 class FileTemplateView(View):
 
     doc = None
-    tile_data = ''
+    tile_data = None
 
     # Presumably we get the following:
     # - concept_id of the selected letter
@@ -66,35 +67,48 @@ class FileTemplateView(View):
     #   - resourceinstance_id for this resource
     #   - date value 
 
-    def get(self, request, data): 
+    def get(self, request): 
         # data = JSONDeserializer().deserialize(request.body)
-        pprint(data)
-        print request.method
+        # pprint(data)
+        # print request.method
+        template_id = request.GET.get('template_id')
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
-        # resource = models.Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        template = self.get_template(template_id)
+        self.doc = Document(template)
+        self.get_tile_data()
         if resourceinstance_id is not None:
-            # return JSONResponse({'resource': resource, 'data': data})
-            return JSONResponse(resourceinstance_id)
+            return JSONResponse({'resource': self.resource, 'template_id': template_id})
 
         return HttpResponseNotFound()
 
 
-    def get_template(self, concept_id):
-        # not sure what the proper way to load the actual file onto the server is.
-        # Lib docs say Document() needs either a path to the .docx file or a "file-like object". 
+    def get_template(self, template_id):
+        template_path = None
+        template_dict = {
+            "a26c77ff-1d04-4b76-a45f-417f7ed24333":'', # Addit Cond Text
+            "8c12a812-8000-4ec9-913d-c6fd516117f2":'', # Arch Rec Text
+            "01dec356-e72e-40e6-b1b1-b847b9799d2f":'GLAAS Planning Letter A - No Progression - template.docx', # Letter A
+            "320abc26-db82-44a6-be11-8d44aaa23365":'', # Letter A2
+            "fd15c6c7-e94d-4914-8d51-a98bda6f4a7b":'', # Letter B1
+            "8cc91474-11ce-47d9-b886-f0e3fc49d277":'GLAAS Planning Letter B2 - Predetermination - template.docx', # Letter B2
+            "08bb630d-a27b-45bc-a13f-567b428018c5":'GLAAS Planning Letter C - Condition two stage - template.docx' # Letter C
+            }
+        for key, value in template_dict.items():
+            if key == template_id:
+                template_path = os.path.join(settings.APP_ROOT, 'docx', value)
+                pprint(template_path)
 
-        template_file = models.CorrespondenceTemplate.objects.get(templateid=concept_id) # this model does not exist yet
-        file_name = template_file["path"] # this step might be unnecessary
-        self.doc = Document(file_name)
-
-        # use dict to get file path, lookup in local dir in Proj
+        return template_path
 
 
-    def get_tile_data(self, resource_instance_id):
-        resource_instance = Resource.objects.get(resourceinstanceid = resource_instance_id)
+    def get_tile_data(self):
+        # need to get various consultation data as well, incl site visit, actors
+        # thus right now, need to know which other graphs in advance
+        
         # from here need to lookup the widget labels and tile.data of each node
         # pseudo-code:
-        # for tile in resource_instance.tiles:
+        # for tile in self.resource.tiles:
         #   self.tile_data[tile] = {}
         #   self.tile_data[tile][widgetid] = tile.data[widgetid]
         #   if tile.data[widgetlabel] is not None: 
