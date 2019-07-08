@@ -42,7 +42,7 @@ DATABASES = {
         "OPTIONS": {},
         "PASSWORD": "postgis",
         "PORT": "5432",
-        "POSTGIS_TEMPLATE": "template_postgis",
+        "POSTGIS_TEMPLATE": "template_postgis_20",
         "TEST": {
             "CHARSET": None,
             "COLLATION": None,
