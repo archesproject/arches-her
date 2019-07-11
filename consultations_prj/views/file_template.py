@@ -214,58 +214,73 @@ class FileTemplateView(View):
     def replace_string(self, document, k, v):
         # this would be most efficient to iterate through a string list at once, 
         if v is not None and k is not None:
-            print 'good'
-            # print (k,v)
-
             doc = document
-            style = None
+            t_style = None
+            p_style = None
+            run_style = None
 
             if len(doc.paragraphs) > 0:
                 for p in doc.paragraphs:
                     if k in p.text:
-                        print (k,'key is in p:',p.text)
-                        style = p.runs[0].style
+                        # print (k,'key is in p:',p.text)
+                        p_style = p.style
+                        run_style = p.runs[0].style
                         p.text = p.text.replace(k, v) # might need "<" or "{{" around k
-                        p.runs[0].style = style
-                        print p.text
+                        p.style = p_style
+                        p.runs[0].style = run_style
 
             if len(doc.tables) > 0:
                 for table in doc.tables:
                     for row in table.rows:
                         for cell in row.cells:
                             if k in cell.text:
-                                print (k, 'key is in cell:',cell.text)
-                                style = table.style
+                                # print (k, 'key is in cell:',cell.text)
+                                t_style = table.style
+                                p_style = cell.paragraphs[0].style
+                                run_style = cell.paragraphs[0].runs[0].style
                                 cell.text = cell.text.replace(k, v) # might need "<" or "{{" around k
-                                table.style = style
-                                print cell.text
+                                table.style = t_style
+                                cell.paragraphs[0].style = p_style
+                                cell.paragraphs[0].runs[0].style = run_style
             
             if len(doc.sections) > 0:
                 for section in doc.sections:
                     for p in section.footer.paragraphs:
                         if k in p.text:
-                            style = p.runs[0].style
+                            p_style = p.style
+                            run_style = p.runs[0].style
                             p.text = p.text.replace(k, v) # might need "<" or "{{" around k
-                            p.runs[0].style = style
+                            p.style = p_style
+                            p.runs[0].style = run_style
                     for table in section.footer.tables:
                         for row in table.rows:
                             for cell in row.cells:
                                 if k in cell.text:
-                                    style = table.style
+                                    t_style = table.style
+                                    p_style = cell.paragraphs[0].style
+                                    run_style = cell.paragraphs[0].runs[0].style
                                     cell.text = cell.text.replace(k, v) # might need "<" or "{{" around k
-                                    table.style = style
+                                    table.style = t_style
+                                    cell.paragraphs[0].style = p_style
+                                    cell.paragraphs[0].runs[0].style = run_style
                     for p in section.header.paragraphs:
                         if k in p.text:
-                            style = p.runs[0].style
+                            p_style = p.style
+                            run_style = p.runs[0].style
                             p.text = p.text.replace(k, v) # might need "<" or "{{" around k
-                            p.runs[0].style = style
+                            p.style = p_style
+                            p.runs[0].style = run_style
                     for table in section.header.tables:
                         for row in table.rows:
                             for cell in row.cells:
                                 if k in cell.text:
-                                    style = table.style
+                                    t_style = table.style
+                                    p_style = cell.paragraphs[0].style
+                                    run_style = cell.paragraphs[0].runs[0].style
                                     cell.text = cell.text.replace(k, v) # might need "<" or "{{" around k
-                                    table.style = style
+                                    table.style = t_style
+                                    cell.paragraphs[0].style = p_style
+                                    cell.paragraphs[0].runs[0].style = run_style
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
