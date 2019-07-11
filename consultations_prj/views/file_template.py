@@ -17,6 +17,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
 import json
+import collections
 import couchdb
 import urlparse
 from datetime import datetime
@@ -44,6 +45,7 @@ from arches.app.utils.response import JSONResponse
 from arches.app.models import models
 from arches.app.models.card import Card
 from arches.app.models.resource import Resource
+from arches.app.models.graph import Graph
 from arches.app.models.system_settings import settings
 # from arches.app.views.base import BaseManagerView
 # from arches.app.views.base import MapBaseManagerView
@@ -59,7 +61,8 @@ from pprint import pprint
 class FileTemplateView(View):
 
     doc = None
-    tile_data = None
+    tile_data = {}
+    resource = None
 
     # Presumably we get the following:
     # - concept_id of the selected letter
@@ -73,19 +76,36 @@ class FileTemplateView(View):
         # print request.method
         template_id = request.GET.get('template_id')
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
+        # pprint(resourceinstance_id)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
-        consultation_instance_id = resouce.tiles.data['a5901911-6d1e-11e9-8674-dca90488358a'] # iterate/fix this
-        consultation = Resource.objects.get(resourceinstance_id=consultation_instance_id)
-        template = self.get_template(template_id)
-        self.doc = Document(template)
-        self.get_tile_data(consultation)
+        self.resource.load_tiles()
+        consultation_instance_id = None
+        consultation = None
+        for tile in self.resource.tiles:
+            if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
+                consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
+
+        template_path = self.get_template_path(template_id)
+        self.doc = Document(template_path)
+
+        if consultation_instance_id is not None:
+            consultation = Resource.objects.get(resourceinstanceid=consultation_instance_id)
+            consultation.load_tiles()
+            self.get_tile_data(consultation)
+            pprint(self.tile_data)
+            for obj in self.tile_data.values():
+                self.replace_string(self.doc, obj['widget_label'], obj.items()[1][1])
+            
+            self.doc.save('A_edited.docx')
+
+        # self.get_tile_data(consultation)
         if resourceinstance_id is not None:
             return JSONResponse({'resource': self.resource, 'template_id': template_id})
 
         return HttpResponseNotFound()
 
 
-    def get_template(self, template_id):
+    def get_template_path(self, template_id):
         template_path = None
         template_dict = {
             "a26c77ff-1d04-4b76-a45f-417f7ed24333":'', # Addit Cond Text
@@ -107,55 +127,119 @@ class FileTemplateView(View):
     def get_tile_data(self, consultation):
         # need to lookup consultation using Communication.Related_Consultation node
         # need to get various consultation data as well, incl site visit, actors
-        
-        # from here need to lookup the widget labels and tile.data of each node
-        # pseudo-code:
-        # for tile in self.resource.tiles:
-        #   self.tile_data[tile] = {}
-        #   self.tile_data[tile][widgetid] = tile.data[widgetid]
-        #   if tile.data[widgetlabel] is not None: 
-        #       self.tile_data[tile][widgetlabel] = tile.data[widgetlabel]
-        #   for datum in tile[data]:
-        #       self.tile_data[tile][datum] = tile[data][datum]
 
-        self.tile_data = {"name":"Bob", "Role":"Director"}
+        for tile in consultation.tiles:
+            # self.tile_data[tile.tileid] = {}
+            # self.tile_data[tile.tileid]['widget_label'] = None
+            # print ('has', len(tile.data.keys()), 'data keys')
+            for key, value in tile.data.items():
+                # print (key, value)
+                key = str(key)
+                tile.tileid = str(tile.tileid)
+                self.tile_data[tile.tileid] = collections.OrderedDict()
+                self.tile_data[tile.tileid]['widget_label'] = None
+                self.tile_data[tile.tileid][key] = str(tile.data[key])
+                widget = None
+                try:
+                    widget = models.CardXNodeXWidget.objects.get(node_id=key)
+                except Exception as e:
+                    print ('===NO WIDGET FOR===:', self.tile_data[tile.tileid])
+                if widget is not None:
+                    self.tile_data[tile.tileid]['widget_label'] = str(widget.label)
+                    # pprint(self.tile_data[tile.tileid])
+                    
+
+    
+    def collect_card_widget_node_data(self, graph_obj, graph, parentcard, nodegroupids=[]):
+        nodegroupids.append(str(parentcard.nodegroup_id))
+        for node in graph_obj['nodes']:
+            if node['nodegroup_id'] == str(parentcard.nodegroup_id):
+                found = False
+                for widget in graph_obj['widgets']:
+                    if node['nodeid'] == str(widget.node_id):
+                        found = True
+                        try:
+                            collection_id = node['config']['rdmCollection']
+                            concept_collection = Concept().get_child_collections_hierarchically(collection_id, offset=None)
+                            widget.config['options'] = concept_collection
+                        except Exception as e:
+                            pass
+                        break
+                if not found:
+                    for card in graph_obj['cards']:
+                        if card['nodegroup_id'] == node['nodegroup_id']:
+                            widget = models.DDataType.objects.get(pk=node['datatype']).defaultwidget
+                            if widget:
+                                widget_model = models.CardXNodeXWidget()
+                                widget_model.node_id = node['nodeid']
+                                widget_model.card_id = card['cardid']
+                                widget_model.widget_id = widget.pk
+                                widget_model.config = widget.defaultconfig
+                                try:
+                                    collection_id = node['config']['rdmCollection']
+                                    if collection_id:
+                                        concept_collection = Concept().get_child_collections_hierarchically(collection_id, offset=None)
+                                        widget_model.config['options'] = concept_collection
+                                except Exception as e:
+                                    pass
+                                widget_model.label = node['name']
+                                graph_obj['widgets'].append(widget_model)
+                            break
+
+                if node['datatype'] == 'resource-instance' or node['datatype'] == 'resource-instance-list':
+                    if node['config']['graphid'] is not None:
+                        try:
+                            graphuuid = uuid.UUID(node['config']['graphid'][0])
+                            graph_id = unicode(graphuuid)
+                        except ValueError as e:
+                            graphuuid = uuid.UUID(node['config']['graphid'])
+                            graph_id = unicode(graphuuid)
+                        node['config']['options'] = []
+                        for resource_instance in Resource.objects.filter(graph_id=graph_id):
+                            node['config']['options'].append({'id': str(resource_instance.pk), 'name': resource_instance.displayname})
+
+        for subcard in parentcard.cards:
+            self.collect_card_widget_node_data(graph_obj, graph, subcard, nodegroupids)
+
+        return graph_obj
 
     
     def replace_string(self, document, k, v):
         # this would be most efficient to iterate through a string list at once, 
-        doc = document
+        if v is not None and k is not None:
+            doc = document
 
-        if len(doc.paragraphs) > 0:
-            for p in doc.paragraphs:
-                if k in p.text:
-                    p.text.replace("{{"+k+"}}", v)
-
-        if len(doc.tables) > 0:
-            for table in doc.tables:
-                for row in table.rows:
-                    for cell in row.cells:
-                        if k in cell.text:
-                            cell.text.replace("{{"+k+"}}", v)
-        
-        if len(doc.sections) > 0:
-            for section in doc.sections:
-                for p in section.footer.paragraphs:
+            if len(doc.paragraphs) > 0:
+                for p in doc.paragraphs:
                     if k in p.text:
                         p.text.replace("{{"+k+"}}", v)
-                for table in section.footer.tables:
+
+            if len(doc.tables) > 0:
+                for table in doc.tables:
                     for row in table.rows:
                         for cell in row.cells:
                             if k in cell.text:
                                 cell.text.replace("{{"+k+"}}", v)
             
-                for p in section.header.paragraphs:
-                    if k in p.text:
-                        p.text.replace("{{"+k+"}}", v)
-                for table in section.header.tables:
-                    for row in table.rows:
-                        for cell in row.cells:
-                            if k in cell.text:
-                                cell.text.replace("{{"+k+"}}", v)
+            if len(doc.sections) > 0:
+                for section in doc.sections:
+                    for p in section.footer.paragraphs:
+                        if k in p.text:
+                            p.text.replace("{{"+k+"}}", v)
+                    for table in section.footer.tables:
+                        for row in table.rows:
+                            for cell in row.cells:
+                                if k in cell.text:
+                                    cell.text.replace("{{"+k+"}}", v)
+                
+                    for p in section.header.paragraphs:
+                        if k in p.text:
+                            p.text.replace("{{"+k+"}}", v)
+                    for table in section.header.tables:
+                        for row in table.rows:
+                            for cell in row.cells:
+                                if k in cell.text:
+                                    cell.text.replace("{{"+k+"}}", v)
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
