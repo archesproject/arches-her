@@ -218,12 +218,15 @@ class FileTemplateView(View):
             # print (k,v)
 
             doc = document
+            style = None
 
             if len(doc.paragraphs) > 0:
                 for p in doc.paragraphs:
                     if k in p.text:
                         print (k,'key is in p:',p.text)
+                        style = p.style
                         p.text = p.text.replace(k, v) # might need "<" or "{{" around k
+                        p.style = style
                         print p.text
 
             if len(doc.tables) > 0:
@@ -232,28 +235,37 @@ class FileTemplateView(View):
                         for cell in row.cells:
                             if k in cell.text:
                                 print (k, 'key is in cell:',cell.text)
+                                style = table.style
                                 cell.text = cell.text.replace(k, v) # might need "<" or "{{" around k
+                                table.style = style
                                 print cell.text
             
             if len(doc.sections) > 0:
                 for section in doc.sections:
                     for p in section.footer.paragraphs:
                         if k in p.text:
+                            style = p.style
                             p.text = p.text.replace(k, v) # might need "<" or "{{" around k
+                            p.style = style
                     for table in section.footer.tables:
                         for row in table.rows:
                             for cell in row.cells:
                                 if k in cell.text:
+                                    style = table.style
                                     cell.text = cell.text.replace(k, v) # might need "<" or "{{" around k
-                
+                                    table.style = style
                     for p in section.header.paragraphs:
                         if k in p.text:
+                            style = p.style
                             p.text = p.text.replace(k, v) # might need "<" or "{{" around k
+                            p.style = style
                     for table in section.header.tables:
                         for row in table.rows:
                             for cell in row.cells:
                                 if k in cell.text:
+                                    style = table.style
                                     cell.text = cell.text.replace(k, v) # might need "<" or "{{" around k
+                                    table.style = style
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
