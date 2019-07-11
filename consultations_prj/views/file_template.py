@@ -87,6 +87,9 @@ class FileTemplateView(View):
 
         template_path = self.get_template_path(template_id)
         self.doc = Document(template_path)
+        new_file_name = None
+        new_file_path = None
+        file_url = None
 
         if consultation_instance_id is not None:
             consultation = Resource.objects.get(resourceinstanceid=consultation_instance_id)
@@ -94,13 +97,17 @@ class FileTemplateView(View):
             self.get_tile_data(consultation)
             pprint(self.tile_data)
             for obj in self.tile_data.values():
+                print ('iterating over',obj)
                 self.replace_string(self.doc, obj['widget_label'], obj.items()[1][1])
-            
-            self.doc.save('A_edited.docx')
+            # media/docx
+            new_file_name = 'A_edited.docx'
+            new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
+            file_url = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
+            self.doc.save(new_file_path)
 
         # self.get_tile_data(consultation)
         if resourceinstance_id is not None:
-            return JSONResponse({'resource': self.resource, 'template_id': template_id})
+            return JSONResponse({'resource': self.resource, 'template_id': template_id, 'url': file_url })
 
         return HttpResponseNotFound()
 
@@ -207,39 +214,46 @@ class FileTemplateView(View):
     def replace_string(self, document, k, v):
         # this would be most efficient to iterate through a string list at once, 
         if v is not None and k is not None:
+            print 'good'
+            # print (k,v)
+
             doc = document
 
             if len(doc.paragraphs) > 0:
                 for p in doc.paragraphs:
                     if k in p.text:
-                        p.text.replace("{{"+k+"}}", v)
+                        print (k,'key is in p:',p.text)
+                        p.text.replace(k, v) # might need "<" or "{{" around k
+                        print p.text
 
             if len(doc.tables) > 0:
                 for table in doc.tables:
                     for row in table.rows:
                         for cell in row.cells:
                             if k in cell.text:
-                                cell.text.replace("{{"+k+"}}", v)
+                                print (k, 'key is in cell:',cell.text)
+                                cell.text.replace(k, v) # might need "<" or "{{" around k
+                                print cell.text
             
             if len(doc.sections) > 0:
                 for section in doc.sections:
                     for p in section.footer.paragraphs:
                         if k in p.text:
-                            p.text.replace("{{"+k+"}}", v)
+                            p.text.replace(k, v) # might need "<" or "{{" around k
                     for table in section.footer.tables:
                         for row in table.rows:
                             for cell in row.cells:
                                 if k in cell.text:
-                                    cell.text.replace("{{"+k+"}}", v)
+                                    cell.text.replace(k, v) # might need "<" or "{{" around k
                 
                     for p in section.header.paragraphs:
                         if k in p.text:
-                            p.text.replace("{{"+k+"}}", v)
+                            p.text.replace(k, v) # might need "<" or "{{" around k
                     for table in section.header.tables:
                         for row in table.rows:
                             for cell in row.cells:
                                 if k in cell.text:
-                                    cell.text.replace("{{"+k+"}}", v)
+                                    cell.text.replace(k, v) # might need "<" or "{{" around k
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
