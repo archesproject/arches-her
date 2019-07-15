@@ -53,7 +53,7 @@ from arches.app.datatypes.datatypes import DataTypeFactory
 # from arches.app.views.base import MapBaseManagerView
 import arches.app.views.search as search
 import os
-import pprint
+from pprint import pprint
 
 
 class FileTemplateView(View):
@@ -140,75 +140,75 @@ class FileTemplateView(View):
 
     
     def replace_string(self, document, key, v):
+        # Note that the intent here is to preserve how things are styled in the docx
+        # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
+        # advantage of the former is that replacing run.text preserves styling, replacing p.text does not
+        
         if v is not None and key is not None:
             k = "{{"+key+"}}"
             doc = document
+            styles = document.styles
+            pprint(styles)
+            # for s in styles:
+            #     print(s.name)
+            doc_style = styles['Normal']
+            foot_style = styles['Footer']
+            head_style = styles['Header']
             t_style = None
-            p_style = None
+            # p_style = None
             run_style = None
 
             if len(doc.paragraphs) > 0:
                 for p in doc.paragraphs:
-                    if k in p.text:
-                        # print (k,'key is in p:',p.text)
-                        p_style = p.style
-                        run_style = p.runs[0].style
-                        p.text = p.text.replace(k, v)
-                        p.style = p_style
-                        p.runs[0].style = run_style
+                    for run in p.runs:
+                        if k in run.text:
+                            run_style = run.style
+                            run.text = run.text.replace(k, v)
 
             if len(doc.tables) > 0:
                 for table in doc.tables:
                     for row in table.rows:
                         for cell in row.cells:
-                            if k in cell.text:
-                                # print (k, 'key is in cell:',cell.text)
-                                t_style = table.style
-                                p_style = cell.paragraphs[0].style
-                                run_style = cell.paragraphs[0].runs[0].style
-                                cell.text = cell.text.replace(k, v)
-                                table.style = t_style
-                                cell.paragraphs[0].style = p_style
-                                cell.paragraphs[0].runs[0].style = run_style
+                            for p in cell.paragraphs:
+                                for run in p.runs:
+                                    if k in run.text:
+                                        # t_style = table.style
+                                        run_style = run.style
+                                        run.text = run.text.replace(k, v)
+                                        # table.style = t_style
             
             if len(doc.sections) > 0:
                 for section in doc.sections:
                     for p in section.footer.paragraphs:
-                        if k in p.text:
-                            p_style = p.style
-                            run_style = p.runs[0].style
-                            p.text = p.text.replace(k, v)
-                            p.style = p_style
-                            p.runs[0].style = run_style
+                        for run in p.runs:
+                            if k in run.text:
+                                run_style = run.style
+                                run.text = run.text.replace(k, v)
                     for table in section.footer.tables:
                         for row in table.rows:
                             for cell in row.cells:
-                                if k in cell.text:
-                                    t_style = table.style
-                                    p_style = cell.paragraphs[0].style
-                                    run_style = cell.paragraphs[0].runs[0].style
-                                    cell.text = cell.text.replace(k, v)
-                                    table.style = t_style
-                                    cell.paragraphs[0].style = p_style
-                                    cell.paragraphs[0].runs[0].style = run_style
+                                for p in cell.paragraphs:
+                                    for run in p.runs:
+                                        if k in run.text:
+                                            # t_style = table.style
+                                            run_style = run.style
+                                            run.text = run.text.replace(k, v)
+                                            # table.style = t_style
                     for p in section.header.paragraphs:
-                        if k in p.text:
-                            p_style = p.style
-                            run_style = p.runs[0].style
-                            p.text = p.text.replace(k, v)
-                            p.style = p_style
-                            p.runs[0].style = run_style
+                        for run in p.runs:
+                            if k in run.text:
+                                run_style = run.style
+                                run.text = run.text.replace(k, v)
                     for table in section.header.tables:
                         for row in table.rows:
                             for cell in row.cells:
-                                if k in cell.text:
-                                    t_style = table.style
-                                    p_style = cell.paragraphs[0].style
-                                    run_style = cell.paragraphs[0].runs[0].style
-                                    cell.text = cell.text.replace(k, v)
-                                    table.style = t_style
-                                    cell.paragraphs[0].style = p_style
-                                    cell.paragraphs[0].runs[0].style = run_style
+                                for p in cell.paragraphs:
+                                    for run in p.runs:
+                                        if k in run.text:
+                                            # t_style = table.style
+                                            run_style = run.style
+                                            run.text = run.text.replace(k, v)
+                                            # table.style = t_style
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
