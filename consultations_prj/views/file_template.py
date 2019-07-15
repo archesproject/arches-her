@@ -103,7 +103,7 @@ class FileTemplateView(View):
 
     def get_template_path(self, template_id):
         template_path = None
-        template_dict = {
+        template_dict = { # keys are conceptids from "Letters" concept list; values are known file names
             "a26c77ff-1d04-4b76-a45f-417f7ed24333":'', # Addit Cond Text
             "8c12a812-8000-4ec9-913d-c6fd516117f2":'', # Arch Rec Text
             "01dec356-e72e-40e6-b1b1-b847b9799d2f":'GLAAS Planning Letter A - No Progression - template.docx', # Letter A
@@ -119,20 +119,34 @@ class FileTemplateView(View):
 
         return template_path
 
+    """
+    def get_letter_X(self, consultation, datatype_factory):
+        # dict of string/node pairs specific to docx template
+        template_dict = {
+           string_key1: 'node_id1',
+           string_key2: 'node_id2'
+        }
+        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
+    """
+
+
     def get_letter_A(self, consultation, datatype_factory):
-        template_dict = { # arbitrary strkey (from docx template): 'nodeid'
+        template_dict = {
             'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
             'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
             'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
             'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
             'Action': '8b171540-6d1e-11e9-ac56-dca90488358a'
         }
+        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
 
-        for tile in consultation.tiles:
+
+    def replace_in_letter(self, tiles, template_dict, datatype_factory):
+        for tile in tiles:
             for key, value in template_dict.items():
                 if value in tile.data:
-                    print 'success!'
-                    print (tile.data)
+                    # print 'success!'
+                    # print (tile.data)
                     my_node = models.Node.objects.get(nodeid=value)
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
@@ -149,8 +163,6 @@ class FileTemplateView(View):
             doc = document
             styles = document.styles
             pprint(styles)
-            # for s in styles:
-            #     print(s.name)
             doc_style = styles['Normal']
             foot_style = styles['Footer']
             head_style = styles['Header']
