@@ -101,7 +101,7 @@ class FileTemplateView(View):
             #     html_file.close()
 
         if resourceinstance_id is not None:
-            return JSONResponse({'resource': self.resource, 'template': new_file_path })
+            return JSONResponse({'resource': self.resource, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
 
         return HttpResponseNotFound()
 
