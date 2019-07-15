@@ -92,7 +92,6 @@ define([
         viewModel: viewModel,
         template: {
             require: 'text!templates/views/components/workflows/new-tile-step.htm'
-            // require: 'text!templates/views/components/workflows/file-template.htm'
         }
     });
     return viewModel;
