@@ -88,11 +88,11 @@ define([
         };
     };
 
-    return ko.components.register('test', {
+    return ko.components.register('file-template', {
         viewModel: viewModel,
         template: {
             require: 'text!templates/views/components/workflows/new-tile-step.htm'
-            // require: 'text!templates/views/components/workflows/test.htm'
+            // require: 'text!templates/views/components/workflows/file-template.htm'
         }
     });
     return viewModel;

@@ -59,7 +59,6 @@ from pprint import pprint
 class FileTemplateView(View):
 
     doc = None
-    tile_data = {}
     resource = None
 
 
@@ -76,7 +75,8 @@ class FileTemplateView(View):
             if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
                 consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
 
-        template_path = self.get_template_path(template_id)
+        template_name = self.get_template_path(template_id)
+        template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
         self.doc = Document(template_path)
         new_file_name = None
         new_file_path = None
@@ -84,9 +84,13 @@ class FileTemplateView(View):
         if consultation_instance_id is not None:
             consultation = Resource.objects.get(resourceinstanceid=consultation_instance_id)
             consultation.load_tiles()
-            if 'GLAAS Planning Letter A - No Progression - template.docx' in template_path:
-                self.get_letter_A(consultation, datatype_factory)
-            new_file_name = 'A_edited.docx'
+
+            if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
+                self.edit_letter_A(consultation, datatype_factory)
+            elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
+                self.edit_letter_B2(consultation, datatype_factory)
+
+            new_file_name = 'edited_'+template_name
             new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
             self.doc.save(new_file_path)
             # with open(new_file_path, "rb") as docx_file:
@@ -97,12 +101,12 @@ class FileTemplateView(View):
             #     html_file.close()
 
         if resourceinstance_id is not None:
-            return JSONResponse({'resource': self.resource, 'template_id': template_id })
+            return JSONResponse({'resource': self.resource, 'template': new_file_path })
 
         return HttpResponseNotFound()
 
+
     def get_template_path(self, template_id):
-        template_path = None
         template_dict = { # keys are conceptids from "Letters" concept list; values are known file names
             "a26c77ff-1d04-4b76-a45f-417f7ed24333":'', # Addit Cond Text
             "8c12a812-8000-4ec9-913d-c6fd516117f2":'', # Arch Rec Text
@@ -114,13 +118,13 @@ class FileTemplateView(View):
             }
         for key, value in template_dict.items():
             if key == template_id:
-                template_path = os.path.join(settings.APP_ROOT, 'docx', value)
-                pprint(template_path)
+                return value
 
-        return template_path
+        return None
+
 
     """
-    def get_letter_X(self, consultation, datatype_factory):
+    def edit_letter_X(self, consultation, datatype_factory):
         # dict of string/node pairs specific to docx template
         template_dict = {
            string_key1: 'node_id1',
@@ -130,13 +134,25 @@ class FileTemplateView(View):
     """
 
 
-    def get_letter_A(self, consultation, datatype_factory):
+    def edit_letter_A(self, consultation, datatype_factory):
         template_dict = {
             'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
             'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
             'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
             'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
             'Action': '8b171540-6d1e-11e9-ac56-dca90488358a'
+        }
+        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
+
+    
+    def edit_letter_B2(self, consultation, datatype_factory):
+        template_dict = {
+            'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
+            'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
+            'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
+            'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
+            'Action': '8b171540-6d1e-11e9-ac56-dca90488358a',
+            'Site Name': '???'
         }
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
 
@@ -161,12 +177,12 @@ class FileTemplateView(View):
         if v is not None and key is not None:
             k = "{{"+key+"}}"
             doc = document
-            styles = document.styles
-            pprint(styles)
-            doc_style = styles['Normal']
-            foot_style = styles['Footer']
-            head_style = styles['Header']
-            t_style = None
+            # some of these are probably unnecessary
+            # styles = document.styles
+            # pprint(styles)
+            # foot_style = styles['Footer']
+            # head_style = styles['Header']
+            # t_style = None
             # p_style = None
             run_style = None
 

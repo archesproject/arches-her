@@ -74,8 +74,8 @@ define([
                 {
                     title: 'Set Type',
                     description: 'Select Template type',
-                    component: 'views/components/workflows/test',
-                    componentname: 'test',
+                    component: 'views/components/workflows/file-template',
+                    componentname: 'file-template',
                     // component: 'views/components/workflows/new-tile-step',
                     // componentname: 'new-tile-step',
                     graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
