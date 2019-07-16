@@ -34,7 +34,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     {% if 'consultations' in request.path %}
         {% block navheader %}
             {% block mainnav %}
-            {% if 'consultations' in request.path %}
+            {% if 'plugins' in request.path %}
                 <div id="workflow-container">
                     <div class="workflow-panel">
                         <div class="workflow-panel-header">
@@ -42,34 +42,25 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                             <hr>
                         </div>
                         <ul>
-                            <li>
-                                <a href="#"><span>{% trans "Active Projects" %}</span></a>
+                            <li class="workflow-main-nav-item">
+                                <a href="{% url 'active-consultations' %}"><span>{% trans "Active Projects" %}</span></a>
                             </li>
-                            <li>
-                                <a href="{% url 'consultations' %}"><span>{% trans "New" %}</span></a>
+                            <li class="workflow-main-nav-item">
+                                <a href="{% url 'init-workflow' %}"><span>{% trans "New" %}</span></a>
                             </li>
-                            <li>
+                            <li class="workflow-main-nav-item">
                                 <a href="{% url 'search_home' %}"><span>{% trans "Find" %}</span></a>
                             </li>
-                            <li>
+                            <li class="workflow-main-nav-item">
                                 <a href="#"><span>{% trans "Reports" %}</span></a>
                             </li>
                         </ul>
                         <hr>
                         <ul>
-                            <li>
-                                <a href="#"><span>{% trans "Manage Account" %}</span></a>
-                            </li>
-                            <li>
-                                <a href="#"><span>{% trans "Settings" %}</span></a>
-                            </li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li>
+                            <li class="workflow-main-nav-item">
                                 <a href="#"><span>{% trans "Help" %}</span></a>
                             </li>
-                            <li>
+                            <li class="workflow-main-nav-item">
                                 <a href="#"><span>{% trans "About" %}</span></a>
                             </li>
                         </ul>
@@ -104,4 +95,3 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     {% endif %}
 
 {% endblock body %}
-
