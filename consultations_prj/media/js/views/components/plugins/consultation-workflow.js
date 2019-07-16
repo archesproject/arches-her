@@ -51,6 +51,19 @@ define([
                     icon: 'fa-code-fork'
                 },
                 {
+                    title: 'Consultation Location',
+                    name: 'consultationlocation',
+                    description: 'Set geospatial location for this consultation',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '80be5b5c-5675-11e9-b68d-dca90488358a',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-map-marker'
+                },
+                {
                     title: 'Application Details - 1',
                     name: 'settypedetails',
                     description: 'Summary of the Application and Consultation Type',
