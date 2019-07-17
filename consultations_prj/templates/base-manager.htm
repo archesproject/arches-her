@@ -23,15 +23,16 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% block css %}
     {{ block.super }}
-    {% if 'consultations' in request.path %}
+    {% if 'plugins' in request.path %}
     <link href="{% static 'css/consultations.css' %}" rel="stylesheet">
     {% endif %}
 {% endblock css%}
 
+{% block body_attributes %}style="overflow-y:hidden;"{% endblock %}
 
 {% block body %}
 
-    {% if 'consultations' in request.path %}
+    {% if 'plugins' in request.path %}
         {% block navheader %}
             {% block mainnav %}
             {% if 'plugins' in request.path %}
