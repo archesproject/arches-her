@@ -36,6 +36,7 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag'
+                    class: 'hide-address-name'
                 },
                 {
                     title: 'Related Application Area',
