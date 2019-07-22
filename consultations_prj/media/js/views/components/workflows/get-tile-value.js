@@ -4,11 +4,11 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/group-tile-step'
-], function(_, $, arches, ko, koMapping, GroupTileStep) {
+    'views/components/workflows/new-tile-step'
+], function(_, $, arches, ko, koMapping, NewTileStep) {
     function viewModel(params) {
         var self = this;
-        GroupTileStep.apply(this, [params]);
+        NewTileStep.apply(this, [params]);
         params.applyOutputToTarget = ko.observable(true);
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
