@@ -52,18 +52,20 @@ define([
         };
 
         self.applyOutputToTarget.subscribe(function(val){
-            if (val && self.tiles.length > 0) {
+            if (val && self.tiles && self.tiles.length > 0) {
                 self.updateTargetTile(self.tiles);
             }
         });
 
         self.onSaveSuccess = function(tiles) {
             self.tiles = tiles;
-            params.resourceid(tiles[0].resourceinstance_id);
-            self.resourceId(tiles[0].resourceinstance_id);
+            if (self.tiles.length > 0) {
+                params.resourceid(tiles[0].resourceinstance_id);
+                self.resourceId(tiles[0].resourceinstance_id);
+            }
             if (self.applyOutputToTarget()) {
                 self.updateTargetTile(tiles)
-            };
+            }
             if (self.completeOnSave === true) {
                 self.complete(true);
             }
