@@ -50,7 +50,7 @@ define([
                     parenttileid: null,
                     icon: 'fa-map-marker'
                 },
-                { //graphs did not load correctly
+                {
                     title: 'Related Heritage Resources',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
