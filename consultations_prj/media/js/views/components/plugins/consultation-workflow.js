@@ -10,6 +10,7 @@ define([
 
             params.steps = [
                 {
+<<<<<<< HEAD
                     title: 'Assign Name',
                     name: 'setname',
                     description: 'Assign a name to your application area',
@@ -21,6 +22,26 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag'
+=======
+                    title: 'Assign Address',
+                    name: 'assignaddress',
+                    description: 'Assign an address to your application area. Use the address as the default name',
+                    component: 'views/components/workflows/get-tile-value',
+                    componentname: 'get-tile-value',
+                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    nodegroupid: '9dc86b0c-6c48-11e9-8cbe-dca90488358a',
+                    nodegroups: ['9dc86b0c-6c48-11e9-8cbe-dca90488358a', 'e6f0688a-53f1-11e9-93a2-dca90488358a'],
+                    resourceid: null,
+                    tileid: null,
+                    tileids: [],
+                    parenttileid: null,
+                    icon: 'fa-envelope',
+                    nameheading: 'Consultation Name',
+                    namelabel: 'Make the Consultation Name the same as the Consultation Address',
+                    targetnode: 'e6f0688a-53f1-11e9-93a2-dca90488358a',
+                    targetnodegroup: 'e6f0688a-53f1-11e9-93a2-dca90488358a',
+                    class: 'hide-address-name'
+>>>>>>> master
                 },
                 {
                     title: 'Related Application Area',
@@ -144,15 +165,6 @@ define([
                 } else {
                     activeStep.requirements = self.state.steps[activeStep._index] || {};
                     activeStep.requirements.resourceid = self.state.resourceid;
-                } if (activeStep._index === 1) {
-                    var tiledata = self.state.steps[0].tile
-                    var tilevals = _.map(tiledata, function(v, k) {return v})
-                    var nodeval = tilevals[2] + ", " + tilevals[0] + " " + tilevals[1];
-                    activeStep.requirements.applyOutputToTarget = self.state.steps[0].applyOutputToTarget;
-                    activeStep.requirements.resourceid = self.state.steps[0].resourceid;
-                    activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
-                    activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
-                    activeStep.requirements.value = nodeval;
                 }
                 self.previousStep(activeStep);
             }
