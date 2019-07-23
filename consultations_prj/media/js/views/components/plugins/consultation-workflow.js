@@ -10,19 +10,6 @@ define([
 
             params.steps = [
                 {
-                    title: 'Assign Name',
-                    name: 'setname',
-                    description: 'Assign a name to your application area',
-                    component: 'views/components/workflows/new-tile-value',
-                    componentname: 'new-tile-value',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
-                },
-                {
                     title: 'Related Application Area',
                     name: 'setrelatedapplicationarea',
                     description: 'Identify the Development Area for this Consultation',
@@ -34,6 +21,19 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-code-fork'
+                },
+                {
+                    title: 'Assign Name',
+                    name: 'setname',
+                    description: 'Assign a name to your application area',
+                    component: 'views/components/workflows/new-tile-value',
+                    componentname: 'new-tile-value',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-tag'
                 },
                 {
                     title: 'Consultation GeoJSON',
