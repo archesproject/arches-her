@@ -10,7 +10,6 @@ define([
 
             params.steps = [
                 {
-<<<<<<< HEAD
                     title: 'Assign Name',
                     name: 'setname',
                     description: 'Assign a name to your application area',
@@ -22,26 +21,6 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag'
-=======
-                    title: 'Assign Address',
-                    name: 'assignaddress',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/get-tile-value',
-                    componentname: 'get-tile-value',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: '9dc86b0c-6c48-11e9-8cbe-dca90488358a',
-                    nodegroups: ['9dc86b0c-6c48-11e9-8cbe-dca90488358a', 'e6f0688a-53f1-11e9-93a2-dca90488358a'],
-                    resourceid: null,
-                    tileid: null,
-                    tileids: [],
-                    parenttileid: null,
-                    icon: 'fa-envelope',
-                    nameheading: 'Consultation Name',
-                    namelabel: 'Make the Consultation Name the same as the Consultation Address',
-                    targetnode: 'e6f0688a-53f1-11e9-93a2-dca90488358a',
-                    targetnodegroup: 'e6f0688a-53f1-11e9-93a2-dca90488358a',
-                    class: 'hide-address-name'
->>>>>>> master
                 },
                 {
                     title: 'Related Application Area',
