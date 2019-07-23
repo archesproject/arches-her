@@ -14,8 +14,8 @@ define([
                     title: 'Assign Address',
                     name: 'assignaddress',
                     description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/get-tile-value',
-                    componentname: 'get-tile-value',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: '5fea7890-9cbb-11e9-ae86-00224800b26d',
                     resourceid: null,
@@ -50,7 +50,7 @@ define([
                     parenttileid: null,
                     icon: 'fa-map-marker'
                 },
-                { //graphs did not load correctly
+                {
                     title: 'Related Heritage Resources',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
