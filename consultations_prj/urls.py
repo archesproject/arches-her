@@ -10,7 +10,7 @@ urlpatterns = [
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
     url(r'^consultations/active', RedirectView.as_view(url='/plugins/active-consultations'),
         name='active-consultations'),
-    url(r'^consultations/active', ActiveConsultationsView.as_view(url='/plugins/activeconsultations'),
+    url(r'^consultations/active', ActiveConsultationsView.as_view(),
         name='activeconsultations'),
     url(r'^consultations/consultation-workflow', RedirectView.as_view(url='/plugins/consultation-workflow'),
         name='consultation-workflow'),
