@@ -73,10 +73,11 @@ class ActiveConsultationsView(View):
         for consultation in consultations:
             consultation.load_tiles()
             tile_dict = {consultation.tiles}
-            for key, value in tile_dict.items():
+            # for key, value in tile_dict.items():
                 #iterate through tiles, check for the above, then add to list, push relevant tiles into response
             # pprint(tile_dict)
 
+        
         if graph_id is not None:
             return JSONResponse({'thing':'okay' })
 

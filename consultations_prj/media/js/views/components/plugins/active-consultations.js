@@ -19,6 +19,7 @@ define([
             this.mapImageURL = ko.observable('');
 
             this.active_items = ko.observableArray([]);
+            this.listOfIds = [];
 
             this.setupMap = function(map, data) {
                 if(data["80be6194-5675-11e9-8571-dca90488358a"] != undefined) {
@@ -33,33 +34,37 @@ define([
                 $("#map").remove();
 
             };
-            this.queryString = "http://localhost:8000/search/resources?paging-filter=none&resource-type-filter=%5B%7B%22graphid%22%3A%2208359c2e-53f0-11e9-b212-dca90488358a%22%2C%22name%22%3A%22Consultation%22%2C%22inverted%22%3Afalse%7D%5D&tiles";
+            this.queryString = "http://localhost:8000/search?paging-filter=1&resource-type-filter=%5B%7B%22graphid%22%3A%228d41e49e-a250-11e9-9eab-00224800b26d%22%2C%22name%22%3A%22GLHER_Consultation_Complex%22%2C%22inverted%22%3Afalse%7D%5D";
+            // this.queryString = "http://localhost:8000/search?paging-filter=1&advanced-search=%5B%7B%22op%22%3A%22and%22%2C%228d41e4dd-a250-11e9-9032-00224800b26d%22%3A%7B%22op%22%3A%22%22%2C%22val%22%3A%22%22%7D%2C%228d41e4d5-a250-11e9-b968-00224800b26d%22%3A%7B%22op%22%3A%22%22%2C%22val%22%3A%22%22%7D%2C%228d41e4cc-a250-11e9-87b3-00224800b26d%22%3A%7B%22op%22%3A%22%22%2C%22val%22%3A%22%22%7D%2C%228d41e4d3-a250-11e9-8977-00224800b26d%22%3A%7B%22op%22%3A%22!%22%2C%22val%22%3A%22149f3488-70ba-4ec0-aa49-d37bf879d133%22%7D%7D%5D"
 
-            this.getConsultations = $.ajax({
-                type: "GET",
-                url: arches.urls.search_results,
-                data: self.queryString,
-                context: this,
-                success: function(response) {
-                    response.results.hits.hits.forEach( function(hit) {
-                        self.active_items.push({"_consultation": hit["_source"], "_id": hit["_id"]});
-                    });
-                    self.setNodeIds();
-                    self.loading(false);
-                },
-                error: function(response, status, error) {
-                    if(this.updateRequest.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
-                    }
-                },
-            });
+            // this.getConsultations = $.ajax({
+            //     type: "GET",
+            //     url: arches.urls.search_results,
+            //     data: self.queryString,
+            //     context: this,
+            //     success: function(response) {
+            //         response.results.hits.hits.forEach( function(hit) {
+            //             console.log(hit);
+            //             self.listOfIds.push(hit["_id"]);
+                        
+            //             // self.active_items.push({"_consultation": hit["_source"], "_id": hit["_id"]});
+            //         });
+            //         // self.setNodeIds();
+            //         self.loading(false);
+            //     },
+            //     error: function(response, status, error) {
+            //         if(this.updateRequest.statusText !== 'abort'){
+            //             this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+            //         }
+            //     },
+            // }).then(self.hitView());
 
             this.hitView = function() {
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
                     data: {
-                        "graph_id": '8d41e49e-a250-11e9-9eab-00224800b26d'
+                        "instance_ids": self.listOfIds
                     },
                     context: self,
                     success: function(responseText, status, response){
@@ -73,6 +78,28 @@ define([
                     }
                 });
             }
+
+            this.getConsultations = $.ajax({
+                type: "GET",
+                url: arches.urls.search_results,
+                data: self.queryString,
+                context: this,
+                success: function(response) {
+                    response.results.hits.hits.forEach( function(hit) {
+                        console.log(hit);
+                        self.listOfIds.push(hit["_id"]);
+                        
+                        // self.active_items.push({"_consultation": hit["_source"], "_id": hit["_id"]});
+                    });
+                    // self.setNodeIds();
+                    self.loading(false);
+                },
+                error: function(response, status, error) {
+                    if(this.updateRequest.statusText !== 'abort'){
+                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                    }
+                },
+            }).then(self.hitView());
 
             this.setNodeIds = function() {
                 ko.utils.arrayForEach(self.active_items(), function(item) {
