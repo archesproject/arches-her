@@ -19,7 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 import json
 import collections
 import couchdb
-# import mammoth
 import urlparse
 from datetime import datetime
 from datetime import timedelta
@@ -63,10 +62,10 @@ class ActiveConsultationsView(View):
     def get(self, request): 
         # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
-        template_id = request.GET.get('template_id')
-        resourceinstance_id = request.GET.get('resourceinstance_id', None)
+        graph_id = request.GET.get('graph_id')
+        # resourceinstance_id = request.GET.get('resourceinstance_id', None)
 
-        consultations = Resource.objects.filter(graphid='8d41e49e-a250-11e9-9eab-00224800b26d')
+        consultations = Resource.objects.filter(graphid=graph_id)
 
         # consultation_details nodeid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
         # (child node) consultation_status = '8d41e4d3-a250-11e9-8977-00224800b26d'
@@ -75,6 +74,11 @@ class ActiveConsultationsView(View):
             consultation.load_tiles()
             tile_dict = {consultation.tiles}
             pprint(tile_dict)
+
+        if graph_id is not None:
+            return JSONResponse({'thing':'okay' })
+
+        return HttpResponseNotFound()
                 
 
 
@@ -85,25 +89,6 @@ class ActiveConsultationsView(View):
     #     for tile in self.resource.tiles: # self.resource is of communication model
     #         if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
     #             consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
-
-    #     template_name = self.get_template_path(template_id)
-    #     template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
-
-    #     if consultation_instance_id is not None:
-    #         consultation = Resource.objects.get(resourceinstanceid=consultation_instance_id)
-    #         consultation.load_tiles()
-
-    #         new_file_name = 'edited_'+template_name
-    #         new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
-    #         self.doc.save(new_file_path)
-
-
-    #     if resourceinstance_id is not None:
-    #         return JSONResponse({'resource': self.resource, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
-
-    #     return HttpResponseNotFound()
-
-
 
     # def replace_in_letter(self, tiles, template_dict, datatype_factory):
     #     for tile in tiles:
