@@ -54,6 +54,27 @@ define([
                 },
             });
 
+            this.hitView = function() {
+                $.ajax({
+                    type: "GET",
+                    url: arches.urls.root + 'filetemplate',
+                    data: {
+                        "resourceinstance_id": tile["resourceinstance_id"], //instance of Communication
+                        "template_id": tile["data"]["23e1ac91-6c4b-11e9-8641-dca90488358a"]
+                    },
+                    context: self,
+                    success: function(responseText, status, response){
+                        console.log(response.responseJSON);
+                    },
+                    error: function(response, status, error) {
+                        console.log(response);
+                        if(response.statusText !== 'abort'){
+                            this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                        }
+                    }
+                });
+            }
+
             this.setNodeIds = function() {
                 ko.utils.arrayForEach(self.active_items(), function(item) {
                     if(item["_consultation"]) {
