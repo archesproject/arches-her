@@ -44,6 +44,7 @@ from arches.app.utils.response import JSONResponse
 from arches.app.models import models
 from arches.app.models.card import Card
 from arches.app.models.resource import Resource
+from arches.app.models.tile import Tile
 from arches.app.models.graph import Graph
 from arches.app.models.system_settings import settings
 from arches.app.datatypes.datatypes import DataTypeFactory
@@ -62,45 +63,55 @@ class ActiveConsultationsView(View):
     def get(self, request): 
         # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
-        graph_id = request.GET.get('graph_id')
-        # resourceinstance_id = request.GET.get('resourceinstance_id', None)
+        ids = None
+        exclude_list = []
+        tiles = {}
+        exclude_statuses = ["Aborted","Completed"]
+        cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
+        # pprint(request.GET)
+        ids = request.GET.get('instance_ids')
+        ids = json.loads(ids)
 
-        consultations = Resource.objects.filter(graphid=graph_id)
+        consultations = Resource.objects.filter(resourceinstanceid__in=ids)
+        exclude_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d') # tiles w/ cons details, the nodegroup
+        cons_status_node = models.Node.objects.get(nodeid=cons_status_node_id)
+        datatype = datatype_factory.get_instance(cons_status_node.datatype)
+        
+        for tile in exclude_tiles:
+            if cons_status_node_id in tile.data.keys():
+                tile_status = datatype.get_display_value(tile, cons_status_node)
+                # pprint(tile_status)
+                if tile_status in exclude_statuses:
+                    exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
+
+        filtered_consultations = None
+        filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
+        print ('filtered=',len(filtered_consultations))
+        print ('excluded=',len(exclude_list))
+        for consultation in filtered_consultations:
+            _id = str(consultation.resourceinstanceid)
+            consultation.load_tiles()
+            tiles[_id] = {}
+            for tile in consultation.tiles:
+                # print ('tile', tile.data)
+                for k, v in tile.data.items():
+                    node = models.Node.objects.get(nodeid=k)
+                    try:
+                        datatype = datatype_factory.get_instance(cons_status_node.datatype)
+                        val = datatype.get_display_value(tile, node)
+                    except Exception as e: # no known display_value for datatype
+                        val = v
+                    tiles[_id][node.name] = val
+
+        # pprint(tiles)
+
 
         # consultation_details nodeid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
         # (child node) consultation_status = '8d41e4d3-a250-11e9-8977-00224800b26d'
 
-        for consultation in consultations:
-            consultation.load_tiles()
-            tile_dict = {consultation.tiles}
-            # for key, value in tile_dict.items():
-                #iterate through tiles, check for the above, then add to list, push relevant tiles into response
-            # pprint(tile_dict)
-
         
-        if graph_id is not None:
-            return JSONResponse({'thing':'okay' })
+        if filtered_consultations is not None:
+            return JSONResponse({'tile_dict': tiles })
 
         return HttpResponseNotFound()
-                
-
-
-    #     self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
-    #     self.resource.load_tiles()
-    #     consultation_instance_id = None
-    #     consultation = None
-    #     for tile in self.resource.tiles: # self.resource is of communication model
-    #         if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
-    #             consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
-
-    # def replace_in_letter(self, tiles, template_dict, datatype_factory):
-    #     for tile in tiles:
-    #         for key, value in template_dict.items():
-    #             if value in tile.data:
-    #                 # print 'success!'
-    #                 # print (tile.data)
-    #                 my_node = models.Node.objects.get(nodeid=value)
-    #                 datatype = datatype_factory.get_instance(my_node.datatype)
-    #                 lookup_val = datatype.get_display_value(tile, my_node)
-    #                 self.replace_string(self.doc, key, lookup_val)
 
