@@ -16,43 +16,13 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import json
-import collections
-import couchdb
-import urlparse
-from datetime import datetime
-from datetime import timedelta
-from django.db import transaction
-from django.shortcuts import render
-from django.db.models import Count
-# from django.contrib.auth.models import User, Group
-from django.contrib.gis.geos import MultiPolygon
-from django.contrib.gis.geos import Polygon
-from django.core.urlresolvers import reverse
-from django.core.mail import EmailMultiAlternatives
 from django.http import HttpRequest, HttpResponseNotFound
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
-from django.utils.translation import ugettext as _
-from django.utils.decorators import method_decorator
 from django.views.generic import View
-from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
-# from arches.app.utils.decorators import group_required
-# from arches.app.utils.geo_utils import GeoUtils
-# from arches.app.utils.couch import Couch
 from arches.app.models import models
-from arches.app.models.card import Card
 from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
-from arches.app.models.graph import Graph
-from arches.app.models.system_settings import settings
 from arches.app.datatypes.datatypes import DataTypeFactory
-# from arches.app.views.base import BaseManagerView
-# from arches.app.views.base import MapBaseManagerView
-import arches.app.views.search as search
-import os
-from pprint import pprint
 
 
 class ActiveConsultationsView(View):
@@ -73,10 +43,7 @@ class ActiveConsultationsView(View):
                 if tile_status in exclude_statuses:
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
 
-        filtered_consultations = None
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
-        print ('filtered=',len(filtered_consultations))
-        print ('excluded=',len(exclude_list))
         for consultation in filtered_consultations:
             _id = str(consultation.resourceinstanceid)
             consultation.load_tiles()
