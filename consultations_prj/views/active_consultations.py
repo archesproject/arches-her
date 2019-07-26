@@ -57,30 +57,19 @@ from pprint import pprint
 
 class ActiveConsultationsView(View):
 
-    resource = None
-
-
     def get(self, request): 
-        # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
-        ids = None
         exclude_list = []
         tiles = {}
         exclude_statuses = ["Aborted","Completed"]
         cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
-        # pprint(request.GET)
-        ids = request.GET.get('instance_ids')
-        ids = json.loads(ids)
-
-        consultations = Resource.objects.filter(resourceinstanceid__in=ids)
-        exclude_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d') # tiles w/ cons details, the nodegroup
+        cons_details_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d')
         cons_status_node = models.Node.objects.get(nodeid=cons_status_node_id)
         datatype = datatype_factory.get_instance(cons_status_node.datatype)
         
-        for tile in exclude_tiles:
+        for tile in cons_details_tiles:
             if cons_status_node_id in tile.data.keys():
                 tile_status = datatype.get_display_value(tile, cons_status_node)
-                # pprint(tile_status)
                 if tile_status in exclude_statuses:
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
 
@@ -93,7 +82,6 @@ class ActiveConsultationsView(View):
             consultation.load_tiles()
             tiles[_id] = {}
             for tile in consultation.tiles:
-                # print ('tile', tile.data)
                 for k, v in tile.data.items():
                     node = models.Node.objects.get(nodeid=k)
                     try:
@@ -102,12 +90,6 @@ class ActiveConsultationsView(View):
                     except Exception as e: # no known display_value for datatype
                         val = v
                     tiles[_id][node.name] = val
-
-        # pprint(tiles)
-
-
-        # consultation_details nodeid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
-        # (child node) consultation_status = '8d41e4d3-a250-11e9-8977-00224800b26d'
 
         
         if filtered_consultations is not None:
