@@ -33,6 +33,14 @@ class ActiveConsultationsView(View):
         tiles = {}
         exclude_statuses = ["Aborted","Completed"]
         cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
+        active_cons_node_list = {
+            "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
+            "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
+            "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
+            "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
+            "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
+            "Owner":"8d41e4e1-a250-11e9-8d14-00224800b26d"
+        }
         cons_details_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d')
         cons_status_node = models.Node.objects.get(nodeid=cons_status_node_id)
         datatype = datatype_factory.get_instance(cons_status_node.datatype)
@@ -50,13 +58,15 @@ class ActiveConsultationsView(View):
             tiles[_id] = {}
             for tile in consultation.tiles:
                 for k, v in tile.data.items():
-                    node = models.Node.objects.get(nodeid=k)
-                    try:
-                        datatype = datatype_factory.get_instance(cons_status_node.datatype)
-                        val = datatype.get_display_value(tile, node)
-                    except Exception as e: # no known display_value for datatype
-                        val = v
-                    tiles[_id][node.name] = val
+                    if k in active_cons_node_list.values():
+                        node = models.Node.objects.get(nodeid=k)
+                        try:
+                            datatype = datatype_factory.get_instance(cons_status_node.datatype)
+                            val = datatype.get_display_value(tile, node)
+                        except Exception as e: # no typed display_value for datatype, e.g. resource, string, geojson
+                            val = v
+
+                        tiles[_id][node.name] = val
 
         
         if filtered_consultations is not None:
