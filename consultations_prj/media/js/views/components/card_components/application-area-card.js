@@ -14,11 +14,11 @@ define([
                 
                 params.map = ko.observable();
                 params.map.subscribe(function(map) {
-                    map.on('draw.modechange', function(e) {
+                    map.on('draw.modechange', function() {
                         self.setSelectAreaLayersVisibility(false);
                     });
                     
-                    map.on('draw.selectionchange', function(e) {
+                    map.on('draw.selectionchange', function() {
                         self.setSelectAreaLayersVisibility(false);
                     });
                 });
@@ -57,7 +57,7 @@ define([
                 return selectLayerIds.indexOf(feature.layer.id) >= 0;
             };
             
-            self.selectApplicationArea = function(feature, data) {
+            self.selectApplicationArea = function(feature) {
                 console.log(feature);
             };
         },

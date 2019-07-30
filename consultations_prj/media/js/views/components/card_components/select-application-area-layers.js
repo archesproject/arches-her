@@ -1,8 +1,6 @@
-define([
-], function() {
-    var applicationAreaNodeId = "6c923175-53d9-11e9-8c78-dca90488358a";
+define([], function() {
     var areaSelectColor = "#f0c200";
-    return function selectApplicationAreaLayers(resourceId) {
+    return function(resourceId) {
         return [{
             "id": "select-application-area-polygon-fill",
             "type": "fill",
