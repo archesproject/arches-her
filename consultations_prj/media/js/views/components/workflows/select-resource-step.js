@@ -11,7 +11,7 @@ define([
 ], function(_, $, arches, ko, koMapping, GraphModel, CardViewModel, ProvisionalTileViewModel, AlertViewModel) {
     function viewModel(params) {
         var self = this;
-        // console.log(params);
+        console.log(params);
         if (!params.resourceid() && params.requirements){
             // console.log('whats this?',params.requirements.resourceid);
             params.resourceid(params.requirements.resourceid);
@@ -148,7 +148,7 @@ define([
             console.log(params);
             if (self.resValue() != null) {
                 console.log(self.resValue());
-                params.resourceId = self.resValue();
+                params.resourceid(self.resValue());
                 self.complete(true);
             }
         }
@@ -167,10 +167,10 @@ define([
         };
 
     }
-    ko.components.register('get-consultation', {
+    ko.components.register('select-resource-step', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/get-consultation.htm'
+            require: 'text!templates/views/components/workflows/select-resource-step.htm'
         }
     });
     return viewModel;
