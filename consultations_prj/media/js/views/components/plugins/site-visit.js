@@ -10,21 +10,21 @@ define([
         viewModel: function(params) {
             var self = this;
             params.steps = [
-                // { //here need a widget just to select which an instance of consultation
-                //     title: 'Site Visit Details - Related Consultation',
-                //     name: 'sitevisitdetailsrelatedconsultation',
-                //     description: '',
-                //     component: 'views/components/workflows/new-tile-step',
-                //     componentname: 'new-tile-step',
-                //     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                //     nodegroupid: '',
-                //     resourceid: null,
-                //     tileid: null,
-                //     parenttileid: null,
-                //     icon: 'fa-tag',
-                //     nameheading: 'New Site Visit',
-                //     namelabel: '[no label]'
-                // },
+                {
+                    title: 'Site Visit Details - Related Consultation',
+                    name: 'sitevisitdetailsrelatedconsultation',
+                    description: '',
+                    component: 'views/components/workflows/get-consultation',
+                    componentname: 'get-consultation',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-tag',
+                    nameheading: 'New Site Visit',
+                    namelabel: '[no label]'
+                },
                 {
                     title: 'Site Visit Details - Visit Date',
                     name: 'sitevisitdetailsdate',
