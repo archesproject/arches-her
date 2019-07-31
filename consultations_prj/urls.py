@@ -3,12 +3,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from consultations_prj.views.main import ConsultationView
 from django.views.generic import RedirectView
+from consultations_prj.views.active_consultations import ActiveConsultationsView
 
 urlpatterns = [
     url(r'^', include('arches.urls')),
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
     url(r'^consultations/active', RedirectView.as_view(url='/plugins/active-consultations'),
         name='active-consultations'),
+    url(r'^activeconsultations', ActiveConsultationsView.as_view(),
+        name='activeconsultations'),
     url(r'^consultations/consultation-workflow', RedirectView.as_view(url='/plugins/consultation-workflow'),
         name='consultation-workflow'),
     url(r'^consultations/application-area', RedirectView.as_view(url='/plugins/application-area'),
