@@ -8,5 +8,5 @@
             pageVm: $root
         }
     } --><!-- /ko -->
-    <button class="btn btn-mint btn-labeled fa fa-plus" data-bind="click: function(){saveResourceInstance();}">Add</button>
+    <button class="btn btn-mint btn-labeled fa fa-plus" data-bind="click: function(){setResourceInstance();}, css: {'disabled': !resValue()}">Continue</button>
 </div>

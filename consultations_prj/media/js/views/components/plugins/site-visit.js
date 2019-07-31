@@ -8,6 +8,11 @@ define([
 ], function(ko, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
+            console.log(params);
+            if (!params.resourceid) {
+                params.resourceid = ko.observable();
+            }
+            console.log(params);
             var self = this;
             params.steps = [
                 {
@@ -33,7 +38,7 @@ define([
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag',
@@ -48,7 +53,7 @@ define([
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '3f18a062-a251-11e9-bd25-00224800b26d',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag',
@@ -63,7 +68,7 @@ define([
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-user-plus',
@@ -78,7 +83,7 @@ define([
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: 'bef92340-a251-11e9-81db-00224800b26d',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-lightbulb-o',
@@ -93,7 +98,7 @@ define([
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: 'cbf8ed4f-a251-11e9-8f8c-00224800b26d',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-clipboard',
@@ -108,7 +113,7 @@ define([
                     componentname: 'photo-gallery-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: 'd8c9b821-a251-11e9-879b-00224800b26d',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-camera',
@@ -123,7 +128,7 @@ define([
                     componentname: 'final-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '',
-                    resourceid: params.resourceid(),
+                    resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-check',
