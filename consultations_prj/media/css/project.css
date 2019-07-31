@@ -240,6 +240,7 @@ div.active-cons-header {
     margin: 9px;
     padding: 15px;
     background-color: white;
+    z-index: 1;
 }
 
 div.active-cons-header ~ div div, div.active-cons-header ~ div p {
@@ -252,6 +253,7 @@ div.active-cons-map-container {
     padding: 0px;
     text-align: center;
     background-color: #f8fbff;
+    position: relative;
 }
 
 .active-cons-map-container span {
@@ -267,6 +269,10 @@ div.active-cons-map > img {
     max-width: 100%;
     height: auto;
     z-index: -1;
+}
+
+img.active-cons-map-disabled {
+    opacity: 0.2;
 }
 
 div.active-cons-map > div {

@@ -39,8 +39,10 @@
                             <div class="active-cons-map-container">
 
                               <div class="active-cons-map">
-                                <img data-bind="attr: { src: $data.mapImageUrl() }"></img>
-
+                                  <!-- ko if: !$data.zoom -->
+                                  <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >No Geometry Defined in Consultation</span>
+                                  <!-- /ko -->
+                                <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data.zoom}"></img>
                                 <div>
                                     <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
                                     <span>© Mapbox © OpenStreetMap</span>
@@ -53,7 +55,7 @@
                                     mapOptions: {
                                       style: 'mapbox://styles/mapbox/streets-v11',
                                       center: $data.center,
-                                      zoom: 15,
+                                      zoom: $data.zoom,
                                       preserveDrawingBuffer: true
                                     },
                                     data: $data['Geospatial Location'],
