@@ -1,10 +1,11 @@
 define([
     'knockout',
     'mapbox-gl',
+    'uuid',
     'views/components/cards/map',
     'views/components/card_components/select-application-area-layers',
     'text!templates/views/components/card_components/application-area-map-popup.htm'
-], function(ko, mapboxgl, MapCardViewModel, selectApplicationAreaLayers, popupTemplate) {
+], function(ko, mapboxgl, uuid, MapCardViewModel, selectApplicationAreaLayers, popupTemplate) {
     return ko.components.register('application-area-card', {
         viewModel: function(params) {
             var self = this;
@@ -39,6 +40,10 @@ define([
             
             MapCardViewModel.apply(this, [params]);
             
+            this.geoJSONString.subscribe(function() {
+                self.setSelectAreaLayersVisibility(false);
+            });
+            
             this.popupTemplate = popupTemplate;
             
             this.setDrawTool = function(tool) {
@@ -58,7 +63,18 @@ define([
             };
             
             self.selectApplicationArea = function(feature) {
-                console.log(feature);
+                var newFeature = {
+                    "id": uuid.generate(),
+                    "type": "Feature",
+                    "properties": {
+                        "nodeId": self.newNodeId
+                    },
+                    "geometry": JSON.parse(feature.properties.geojson)
+                };
+                self.draw.add(newFeature);
+                self.updateTiles();
+                self.popup.remove();
+                self.editFeature(newFeature);
             };
         },
         template: {

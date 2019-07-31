@@ -15,7 +15,7 @@
 				},
 				"simplify": 0.2,
 				"queries": [
-					"SELECT resourceinstanceid::text, tileid::text, (row_number() over ()) as __id__, geom AS __geometry__, st_asgeojson(geom) as geojson FROM mv_geojson_geoms WHERE nodeid = '6c923175-53d9-11e9-8c78-dca90488358a'"
+					"SELECT resourceinstanceid::text, tileid::text, (row_number() over ()) as __id__, geom AS __geometry__, st_asgeojson(st_transform(geom, 4326)) as geojson FROM mv_geojson_geoms WHERE nodeid = '6c923175-53d9-11e9-8c78-dca90488358a'"
 				]
 			}
 		},
