@@ -32,8 +32,8 @@
                         <div class="panel mar-no">
                             <!-- Function Name -->
                             <div class="active-cons-header">
-                                <div data-bind="text: title"></div>
-                                <div data-bind="text: consultation_type"></div>
+                                <div data-bind="text: Name"></div>
+                                <div data-bind="text: $data['Consultation Type']"></div>
                             </div>
 
                             <div class="active-cons-map-container">
@@ -48,15 +48,15 @@
 
                               </div>
 
-                                <!-- ko if: !$parent.mapImageURL() -->
+                                <!-- ko if: $data.mapImageUrl() == false -->
                                 <div id="map" class="relative" style="height: 200px; opacity: 1;" data-bind="mapboxgl: {
                                     mapOptions: {
                                       style: 'mapbox://styles/mapbox/streets-v11',
                                       center: $data.center,
-                                      zoom: $data.zoom,
+                                      zoom: 15,
                                       preserveDrawingBuffer: true
                                     },
-                                    data: $parent.mapData(),
+                                    data: $data['Geospatial Location'],
                                     afterRender: function(map) {
                                       $parent.setupMap(map, $data);
                                     }
@@ -68,23 +68,23 @@
 
                             <div class="active-cons-stubs">
                                 <div class="active-cons-stub-left">
-                                    <div class="active-cons-stub-val" data-bind="text: date_val">Date</div>
-                                    <div class="active-cons-stub-label" data-bind="text: date_label">Due Date</div>
+                                    <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'n/a'"></div>
+                                    <div class="active-cons-stub-label" data-bind="">Target Date</div>
                                 </div>
                                 <div class="active-cons-stub-right">
-                                    <div class="active-cons-stub-val" data-bind="text: application_val">Application</div>
-                                    <div class="active-cons-stub-label" data-bind="text: application_label">Type</div>
+                                    <div class="active-cons-stub-val" data-bind="text: $data['Consultation Type'] || 'n/a'"></div>
+                                    <div class="active-cons-stub-label" data-bind="">Type</div>
                                 </div>
                             </div>
 
                             <div style="height: 116px; padding: 10px;">
-                                <p data-bind="text: proposal">no description</p>
+                                <p data-bind="text: $data['Proposal'] || 'n/a'"></p>
                             </div>
 
                             <div class="panel-footer" style="padding: 0px">
                                 <div class="ep-toolbar">
                                     <div class="ep-tools-title">
-                                        <div data-bind="text: author, click: function(){console.log($parent.active_items());}">no author</div>
+                                        <div data-bind="text: $data['Owner'] || 'n/a'"></div>
                                     </div>
                                     <a href="" class="ep-tools ep-tools-right" data-bind="">
                                         <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="settings">
