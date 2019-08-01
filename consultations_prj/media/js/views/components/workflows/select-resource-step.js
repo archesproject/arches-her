@@ -19,20 +19,21 @@ define([
         this.resValue = ko.observable();
         this.applyOutputToTarget = params.applyOutputToTarget;
 
-        this.workflowStepClass = ko.pureComputed(function() {
-            return self.applyOutputToTarget() ? params.class() : '';
-        }, viewModel);
+        // this.workflowStepClass = ko.pureComputed(function() {
+        //     return self.applyOutputToTarget() ? params.class() : '';
+        // }, viewModel);
 
         params.tile = self.tile;
 
         params.stateProperties = function(){
-                return {
-                    resourceid: ko.unwrap(params.resourceid),
-                    tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
-                    tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-                    applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
-                }
-            };
+            return {
+                resourceid: ko.unwrap(params.resourceid),
+                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
+                applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
+            }
+        };
+        console.log(params);
 
         self.updateTargetTile = function(tiles){
             var targetresult;
@@ -62,8 +63,7 @@ define([
             console.log(params);
             if (self.resValue() != null) {
                 console.log(self.resValue());
-                params.requirements.resourceid(self.resValue());
-                // self.complete(true);
+                params.requirements.resourceid = self.resValue();
             }
         }
 
@@ -82,7 +82,7 @@ define([
         }
     };
 
-    return ko.components.register('select-resource-step', {
+    ko.components.register('select-resource-step', {
         viewModel: viewModel,
         template: {
             require: 'text!templates/views/components/workflows/select-resource-step.htm'

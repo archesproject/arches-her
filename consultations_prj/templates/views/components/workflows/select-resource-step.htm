@@ -1,7 +1,7 @@
-<!-- ko if: tile() && card() -->
+
 <div class="padded-workflow-step">
     <div class="workflows-get-tile-value"><h4 data-bind="text: nameheading"></h4>
-        <div>
+        <div data-bind="click: function(){console.log()}">
             <!-- ko component: {
                 name: 'resource-instance-select-widget',
                 params: {
@@ -13,7 +13,8 @@
             } --><!-- /ko -->
         </div>
     </div>
-    <div data-bind="class: workflowStepClass">
+    <!-- ko if: tile() && card() -->
+    <div data-bind="">
         <div data-bind="component: {
             name: cardComponentLookup[card().model.component_id()].componentname,
             params: {
@@ -27,5 +28,6 @@
         }">
         </div>
     </div>
+    <!-- /ko -->
 </div>
-<!-- /ko -->
+
