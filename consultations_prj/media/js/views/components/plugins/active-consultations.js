@@ -39,6 +39,7 @@ define([
                             keyPair[1]["Geospatial Location"] = {"features": [{"geometry":{"coordinates":[0,0]}}]};
                             keyPair[1]["zoom"] = 0;
                         }
+                        console.log(keyPair[1]["Geospatial Location"]);
                         if(typeof keyPair[1]["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0] != "number") {
                             keyPair[1]["center"] = keyPair[1]["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0][0];
                         } else {
