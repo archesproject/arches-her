@@ -28,26 +28,24 @@ import json
 
 class ActiveConsultationsView(View):
 
-    datatype_factory = DataTypeFactory()
-
     def get(self, request): 
-        # datatype_factory = DataTypeFactory()
+        datatype_factory = DataTypeFactory()
         cons_details_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d')
-        exclude_list = self.build_exclude_list(cons_details_tiles)
+        exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
-        tiles = self.get_tile_dict(filtered_consultations)
+        tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
         if filtered_consultations is not None:
             return JSONResponse({'tile_dict': tiles })
 
         return HttpResponseNotFound()
 
     
-    def build_exclude_list(self, tiles):
+    def build_exclude_list(self, tiles, datatype_factory):
         exclude_list = []
         exclude_statuses = ["Aborted","Completed"]
         cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
         cons_status_node = models.Node.objects.get(nodeid=cons_status_node_id)
-        datatype = self.datatype_factory.get_instance(cons_status_node.datatype)
+        datatype = datatype_factory.get_instance(cons_status_node.datatype)
         for tile in tiles:
             if cons_status_node_id in tile.data.keys():
                 tile_status = datatype.get_display_value(tile, cons_status_node)
@@ -57,7 +55,7 @@ class ActiveConsultationsView(View):
         return exclude_list
 
 
-    def get_tile_dict(self, consultations):
+    def get_tile_dict(self, consultations, datatype_factory):
         tiles = {}
         active_cons_node_list = {
             "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
@@ -77,7 +75,7 @@ class ActiveConsultationsView(View):
                     if k in active_cons_list_vals:
                         node = models.Node.objects.get(nodeid=k)
                         try:
-                            datatype = self.datatype_factory.get_instance(node.datatype)
+                            datatype = datatype_factory.get_instance(node.datatype)
                             val = datatype.get_display_value(tile, node)
                             if k == active_cons_node_list["Map"]:
                                 val = json.loads(val)
