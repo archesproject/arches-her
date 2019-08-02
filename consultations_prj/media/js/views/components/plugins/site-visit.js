@@ -31,21 +31,6 @@ define([
                     namelabel: '[no label]'
                 },
                 {
-                    title: 'Site Visit Details - Location Description',
-                    name: 'sitevisitdetailslocdesc',
-                    description: '',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '3f18a062-a251-11e9-bd25-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag',
-                    nameheading: 'Location Description',
-                    namelabel: 'Describe the site visit location'
-                },
-                {
                     title: 'Site Visit Attendees',
                     name: 'siteattendees',
                     description: '',

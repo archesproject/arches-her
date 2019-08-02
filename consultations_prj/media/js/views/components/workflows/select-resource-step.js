@@ -14,6 +14,7 @@ define([
             params.resourceid(params.requirements.resourceid);
             params.tileid(params.requirements.tileid);
         }
+        self.loading(true);
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.resValue = ko.observable();
@@ -24,6 +25,19 @@ define([
             console.log(params.resourceid());
         }, this);
         console.log(params);
+        console.log(this);
+        this.card.subscribe(function(val){
+            console.log(ko.unwrap(val));
+            if(ko.unwrap(val) != undefined) {
+                this.loading(false);
+            }
+        }, this);
+        this.tile.subscribe(function(val){
+            console.log(ko.unwrap(val));
+            if(ko.unwrap(val) != undefined) {
+                this.loading(false);
+            }
+        }, this);
 
         params.tile = self.tile;
 
