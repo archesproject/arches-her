@@ -129,7 +129,7 @@ define([
                     icon: 'fa-check',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
-                },
+                }
 
             ];
 
