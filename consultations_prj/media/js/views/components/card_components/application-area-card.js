@@ -11,7 +11,8 @@ define([
             var self = this;
             
             if (params.tile) {
-                params.layers = selectApplicationAreaLayers(params.tile.resourceinstance_id);
+                var applicationAreaLayers = selectApplicationAreaLayers(params.tile.resourceinstance_id);
+                params.layers = applicationAreaLayers;
                 
                 params.map = ko.observable();
                 params.map.subscribe(function(map) {
@@ -28,7 +29,7 @@ define([
             this.setSelectAreaLayersVisibility = function(visibility) {
                 var map = self.map();
                 if (map) {
-                    params.layers.forEach(function(layer) {
+                    applicationAreaLayers.forEach(function(layer) {
                         map.setLayoutProperty(
                             layer.id,
                             'visibility',
@@ -62,7 +63,7 @@ define([
             };
             
             self.isApplicationArea = function(feature) {
-                var selectLayerIds = params.layers.map(function(layer) {
+                var selectLayerIds = applicationAreaLayers.map(function(layer) {
                     return layer.id;
                 });
                 return selectLayerIds.indexOf(feature.layer.id) >= 0;
