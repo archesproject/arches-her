@@ -40,6 +40,12 @@ define([
             
             MapCardViewModel.apply(this, [params]);
             
+            this.isFeatureClickable = function(feature) {
+                var tool = self.selectedTool();
+                if (tool && tool !== 'select_area') return false;
+                return feature.properties.resourceinstanceid;
+            };
+            
             this.geoJSONString.subscribe(function() {
                 self.setSelectAreaLayersVisibility(false);
             });
