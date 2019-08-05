@@ -10,33 +10,6 @@ define([
 
             params.steps = [
                 {
-                    title: 'Consultation Dates',
-                    name: 'setdatedetails',
-                    description: 'Consultation Dates',
-                    component: 'views/components/workflows/hide-card-step',
-                    componentname: 'hide-card-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
-                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    class: 'hide-completion-date',
-                    icon: 'fa-calendar-o'
-                },
-                {
-                    title: 'Consultation Details',
-                    name: 'setconsdetails',
-                    description: 'Consultation Details',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4c0-a250-11e9-a7e3-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-list-alt'
-                },
-                {
                     title: 'Related Application Area',
                     name: 'setrelatedapplicationarea',
                     description: 'Identify the Development Area for this Consultation',
@@ -48,19 +21,6 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-code-fork'
-                },
-                {
-                    title: 'Consultation GeoJSON',
-                    name: 'consultationlocation',
-                    description: 'Set geospatial data for this consultation',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4c6-a250-11e9-a54d-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-map-marker'
                 },
                 {
                     title: 'Assign Name',
@@ -76,6 +36,19 @@ define([
                     icon: 'fa-tag'
                 },
                 {
+                    title: 'Consultation GeoJSON',
+                    name: 'consultationlocation',
+                    description: 'Set geospatial data for this consultation',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4c6-a250-11e9-a54d-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-map-marker'
+                },
+                {
                     title: 'Consultation Conditions',
                     name: 'settypedetails',
                     description: 'Consultation Conditions',
@@ -87,6 +60,33 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-list-alt'
+                },
+                {
+                    title: 'Consultation Details',
+                    name: 'setconsdetails',
+                    description: 'Consultation Details',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4c0-a250-11e9-a7e3-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-list-alt'
+                },
+                {
+                    title: 'Consultation Dates',
+                    name: 'setdatedetails',
+                    description: 'Consultation Dates',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
+                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    class: 'hide-completion-date',
+                    icon: 'fa-calendar-o'
                 },
                 {
                     title: 'Reference Numbers',
