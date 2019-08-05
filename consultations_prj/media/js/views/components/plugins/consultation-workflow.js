@@ -62,17 +62,31 @@ define([
                     icon: 'fa-list-alt'
                 },
                 {
-                    title: 'Consultation Dates',
-                    name: 'setdatedetails',
-                    description: 'Consultation Dates',
+                    title: 'Consultation Details',
+                    name: 'setconsdetails',
+                    description: 'Consultation Details',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
+                    nodegroupid: '8d41e4c0-a250-11e9-a7e3-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-list-alt'
+                },
+                {
+                    title: 'Consultation Dates',
+                    name: 'setdatedetails',
+                    description: 'Consultation Dates',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
+                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    class: 'hide-completion-date',
+                    icon: 'fa-calendar-o'
                 },
                 {
                     title: 'Reference Numbers',
