@@ -25,13 +25,13 @@ define([
         params.tile = self.tile;
 
         params.stateProperties = function(){
-                return {
-                    resourceid: ko.unwrap(params.resourceid),
-                    tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
-                    tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-                    applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
-                }
+            return {
+                resourceid: ko.unwrap(params.resourceid),
+                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
+                applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
             };
+        };
 
         self.updateTargetTile = function(tiles){
             var targetresult;
@@ -39,13 +39,13 @@ define([
             var sourcetile;
             var targetvals;
             tiles.forEach(function(tile){
-                    if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
-                        targettile = tile;
-                    } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
-                        sourcetile = tile;
-                    }
-                });
-            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)})
+                if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
+                    targettile = tile;
+                } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
+                    sourcetile = tile;
+                }
+            });
+            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v);});
             targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
             targettile.data[params.targetnode()](targetresult);
             targettile.save();
@@ -64,13 +64,13 @@ define([
                 self.resourceId(tiles[0].resourceinstance_id);
             }
             if (self.applyOutputToTarget()) {
-                self.updateTargetTile(tiles)
+                self.updateTargetTile(tiles);
             }
             if (self.completeOnSave === true) {
                 self.complete(true);
             }
-        }
-    };
+        };
+    }
 
     return ko.components.register('get-tile-value', {
         viewModel: viewModel,
@@ -78,6 +78,5 @@ define([
             require: 'text!templates/views/components/workflows/get-tile-value.htm'
         }
     });
-
-    return viewModel;
+    
 });
