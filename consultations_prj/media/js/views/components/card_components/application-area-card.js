@@ -9,22 +9,20 @@ define([
     return ko.components.register('application-area-card', {
         viewModel: function(params) {
             var self = this;
+            var resourceId = params.tile ? params.tile.resourceinstance_id : '';
+            var applicationAreaLayers = selectApplicationAreaLayers(resourceId);
+            params.layers = applicationAreaLayers;
             
-            if (params.tile) {
-                var applicationAreaLayers = selectApplicationAreaLayers(params.tile.resourceinstance_id);
-                params.layers = applicationAreaLayers;
-                
-                params.map = ko.observable();
-                params.map.subscribe(function(map) {
-                    map.on('draw.modechange', function() {
-                        self.setSelectAreaLayersVisibility(false);
-                    });
-                    
-                    map.on('draw.selectionchange', function() {
-                        self.setSelectAreaLayersVisibility(false);
-                    });
+            params.map = ko.observable();
+            params.map.subscribe(function(map) {
+                map.on('draw.modechange', function() {
+                    self.setSelectAreaLayersVisibility(false);
                 });
-            }
+                
+                map.on('draw.selectionchange', function() {
+                    self.setSelectAreaLayersVisibility(false);
+                });
+            });
             
             this.setSelectAreaLayersVisibility = function(visibility) {
                 var map = self.map();
@@ -38,6 +36,11 @@ define([
                     });
                 }
             };
+            
+            params.additionalDrawOptions = [{
+                value: "select_area",
+                text: "Select application area"
+            }];
             
             MapCardViewModel.apply(this, [params]);
             
@@ -85,7 +88,7 @@ define([
             };
         },
         template: {
-            require: 'text!templates/views/components/card_components/application-area-card.htm'
+            require: 'text!templates/views/components/cards/map.htm'
         }
     });
 });
