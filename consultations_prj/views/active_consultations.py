@@ -18,7 +18,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from django.http import HttpRequest, HttpResponseNotFound
 from django.views.generic import View
+from django.core.paginator import Paginator
 from arches.app.utils.response import JSONResponse
+from arches.app.utils.pagination import get_paginator # unneeded?
 from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
@@ -34,6 +36,8 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
         tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
+        page_ct = 10
+        p = Paginator(tiles, page_ct)
         if filtered_consultations is not None:
             return JSONResponse({'tile_dict': tiles })
 
@@ -86,3 +90,8 @@ class ActiveConsultationsView(View):
 
         return tiles
 
+
+    def paginate_active_consultations(self, related_resources, page, request):
+        total = related_resources['total']
+        paginator, pages = get_paginator(request, related_resources, total, page, settings.RELATED_RESOURCES_PER_PAGE)
+        page = paginator.page(page)
