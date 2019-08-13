@@ -36,7 +36,7 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
         tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
-        page_ct = 3
+        page_ct = 6 # should probably be set somewhere else, maybe settings?
         paginator = Paginator(tiles, page_ct)
         page_results = paginator.page(page_num)
         pages = []
