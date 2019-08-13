@@ -39,7 +39,8 @@ define([
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
+                    // nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d', // visit attendees
+                    nodegroupid: "8d41e4bd-a250-11e9-89e8-00224800b26d", //Consultation Proposal -- strictly used for testing component
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
