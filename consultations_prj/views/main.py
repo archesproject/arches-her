@@ -5,5 +5,5 @@ from arches.app.views.plugin import PluginView
 
 class ConsultationView(PluginView):
 
-    def get(self, request, pluginid=None, slug='add-consultation'):
+    def get(self, request, pluginid=None, slug='consultation-workflow'):
         return super(ConsultationView, self).get(request, pluginid=pluginid, slug=slug)

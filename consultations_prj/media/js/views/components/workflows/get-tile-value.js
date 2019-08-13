@@ -8,18 +8,20 @@ define([
 ], function(_, $, arches, ko, koMapping, NewTileStep) {
     function viewModel(params) {
         var self = this;
+        NewTileStep.apply(this, [params]);
         params.applyOutputToTarget = ko.observable(true);
-
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
             params.tileid(params.requirements.tileid);
         }
-
-        NewTileStep.apply(this, [params]);
-
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
+
+        this.workflowStepClass = ko.pureComputed(function() {
+            return self.applyOutputToTarget() ? params.class() : '';
+        }, viewModel);
+
         params.tile = self.tile;
 
         params.stateProperties = function(){
@@ -30,8 +32,45 @@ define([
                     applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
                 }
             };
-    };
 
+        self.updateTargetTile = function(tiles){
+            var targetresult;
+            var targettile;
+            var sourcetile;
+            var targetvals;
+            tiles.forEach(function(tile){
+                    if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
+                        targettile = tile;
+                    } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
+                        sourcetile = tile;
+                    }
+                });
+            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)})
+            targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
+            targettile.data[params.targetnode()](targetresult);
+            targettile.save();
+        };
+
+        self.applyOutputToTarget.subscribe(function(val){
+            if (val && self.tiles && self.tiles.length > 0) {
+                self.updateTargetTile(self.tiles);
+            }
+        });
+
+        self.onSaveSuccess = function(tiles) {
+            self.tiles = tiles;
+            if (self.tiles.length > 0) {
+                params.resourceid(tiles[0].resourceinstance_id);
+                self.resourceId(tiles[0].resourceinstance_id);
+            }
+            if (self.applyOutputToTarget()) {
+                self.updateTargetTile(tiles)
+            }
+            if (self.completeOnSave === true) {
+                self.complete(true);
+            }
+        }
+    };
 
     return ko.components.register('get-tile-value', {
         viewModel: viewModel,

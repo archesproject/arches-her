@@ -10,71 +10,83 @@ define([
 
             params.steps = [
                 {
-                    title: 'Assign Address',
-                    name: 'assignaddress',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/get-tile-value',
-                    componentname: 'get-tile-value',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: '9dc86b0c-6c48-11e9-8cbe-dca90488358a',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-envelope',
-                    nameheading: 'Consultation Name',
-                    namelabel: 'Make the Consultation Name the same as the Consultation Address'
-                },
-                {
-                    title: 'Assign Name',
-                    name: 'setname',
-                    description: 'Assign a name to your application area',
-                    component: 'views/components/workflows/set-tile-value',
-                    componentname: 'set-tile-value',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: 'e6f0688a-53f1-11e9-93a2-dca90488358a',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
-                },
-                {
                     title: 'Related Application Area',
                     name: 'setrelatedapplicationarea',
                     description: 'Identify the Development Area for this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: 'daf936f5-540a-11e9-8a83-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4ba-a250-11e9-9b20-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-code-fork'
                 },
                 {
-                    title: 'Application Details - 1',
-                    name: 'settypedetails',
-                    description: 'Summary of the Application and Consultation Type',
+                    title: 'Assign Name',
+                    name: 'setname',
+                    description: 'Assign a name to your application area',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: '04723f59-53f2-11e9-b091-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-tag'
+                },
+                {
+                    title: 'Consultation GeoJSON',
+                    name: 'consultationlocation',
+                    description: 'Set geospatial data for this consultation',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4c6-a250-11e9-a54d-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-map-marker'
+                },
+                {
+                    title: 'Consultation Conditions',
+                    name: 'settypedetails',
+                    description: 'Consultation Conditions',
+                    component: 'views/components/workflows/new-tile-step',
+                    componentname: 'new-tile-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e49f-a250-11e9-b6b3-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-list-alt'
                 },
                 {
-                    title: 'Application Details - 2',
-                    name: 'setdatedetails',
-                    description: 'Summary of the Application and Consultation Type',
+                    title: 'Consultation Details',
+                    name: 'setconsdetails',
+                    description: 'Consultation Details',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: 'b979d03d-53f2-11e9-91e4-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4c0-a250-11e9-a7e3-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-list-alt'
+                },
+                {
+                    title: 'Consultation Dates',
+                    name: 'setdatedetails',
+                    description: 'Consultation Dates',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
+                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    class: 'hide-completion-date',
+                    icon: 'fa-calendar-o'
                 },
                 {
                     title: 'Reference Numbers',
@@ -82,8 +94,8 @@ define([
                     description: 'Application Reference Numbers',
                     component: 'views/components/workflows/new-multi-tile-step',
                     componentname: 'new-multi-tile-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: '3c79d87a-53f2-11e9-a14e-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4a2-a250-11e9-82f1-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -94,8 +106,8 @@ define([
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: 'f34ebbd4-53f3-11e9-b649-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4bd-a250-11e9-89e8-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -106,8 +118,8 @@ define([
                     description: 'Identify the key people/organizations associated with this consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
-                    nodegroupid: '17c07f07-53f5-11e9-9c94-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4a8-a250-11e9-aff0-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -118,7 +130,7 @@ define([
                     description: 'Choose an option below',
                     component: 'views/components/workflows/final-step',
                     componentname: 'final-step',
-                    graphid: '08359c2e-53f0-11e9-b212-dca90488358a',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
@@ -146,15 +158,6 @@ define([
                 } else {
                     activeStep.requirements = self.state.steps[activeStep._index] || {};
                     activeStep.requirements.resourceid = self.state.resourceid;
-                } if (activeStep._index === 1) {
-                    var tiledata = self.state.steps[0].tile
-                    var tilevals = _.map(tiledata, function(v, k) {return v})
-                    var nodeval = tilevals[2] + ", " + tilevals[0] + " " + tilevals[1];
-                    activeStep.requirements.applyOutputToTarget = self.state.steps[0].applyOutputToTarget;
-                    activeStep.requirements.resourceid = self.state.steps[0].resourceid;
-                    activeStep.requirements.targetnode = 'e6f0688a-53f1-11e9-93a2-dca90488358a';
-                    activeStep.requirements.targetnodegroup = ko.unwrap(activeStep.nodegroupid);
-                    activeStep.requirements.value = nodeval;
                 }
                 self.previousStep(activeStep);
             }

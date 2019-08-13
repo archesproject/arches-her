@@ -76,22 +76,11 @@ define([
                 }
             }
 
-            this.displayContent.subscribe(function(val){
-                if (this.card.tiles().length > 0 && !this.selected()) {
-                    var self = this;
-                    setTimeout(self.defaultSelector, 150);
-                }
-            }, this);
-
             this.removeTile = function(val){
                 var tileCount = this.parent.tiles().length;
                 var index = this.parent.tiles.indexOf(val);
                 val.deleteTile();
-                // console.log('deleteinglksdjft tile')
-                // if (this.parent.tiles().length >  0) {
-                //     console.log('setting the next back')
-                //     this.parent.tiles()[index - 1].selected(true);
-                // }
+                setTimeout(self.defaultSelector, 150);
             }
 
             this.dropzoneOptions = {
