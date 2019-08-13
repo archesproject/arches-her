@@ -166,16 +166,16 @@ class FileTemplateView(View):
                     replace_in_runs(section.footer.paragraphs, k, v)
                     iterate_tables(section.footer.tables, k, v)
                     replace_in_runs(section.header.paragraphs, k, v)
-                    iterate_tables(section.header.tables, k, v):
+                    iterate_tables(section.header.tables, k, v)
 
-        def replace_in_runs(p_list, k, v)
+        def replace_in_runs(p_list, k, v):
             for paragraph in p_list:
                 for run in paragraph.runs:
                     if k in run.text:
                         run_style = run.style
                         run.text = run.text.replace(k, v)
 
-        def iterate_tables(t_list, k, v)
+        def iterate_tables(t_list, k, v):
             for table in t_list:
                 for row in table.rows:
                     for cell in row.cells:
