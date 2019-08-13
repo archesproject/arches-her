@@ -15,6 +15,7 @@ define([
             params.tileid(params.requirements.tileid);
         }
         self.loading(true);
+        this.graphid = params.graphid();
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.resValue = ko.observable();
