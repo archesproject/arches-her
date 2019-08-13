@@ -16,44 +16,17 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-import json
-import collections
-import couchdb
-# import mammoth
-import urlparse
-from datetime import datetime
-from datetime import timedelta
-from django.db import transaction
-from django.shortcuts import render
-from django.db.models import Count
-# from django.contrib.auth.models import User, Group
-from django.contrib.gis.geos import MultiPolygon
-from django.contrib.gis.geos import Polygon
-from django.core.urlresolvers import reverse
-from django.core.mail import EmailMultiAlternatives
 from django.http import HttpRequest, HttpResponseNotFound
-from django.template.loader import render_to_string
-from django.utils.html import strip_tags
 from django.utils.translation import ugettext as _
-from django.utils.decorators import method_decorator
 from django.views.generic import View
 from docx import Document
 from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
-# from arches.app.utils.decorators import group_required
-# from arches.app.utils.geo_utils import GeoUtils
-# from arches.app.utils.couch import Couch
 from arches.app.models import models
-from arches.app.models.card import Card
 from arches.app.models.resource import Resource
-from arches.app.models.graph import Graph
 from arches.app.models.system_settings import settings
 from arches.app.datatypes.datatypes import DataTypeFactory
-# from arches.app.views.base import BaseManagerView
-# from arches.app.views.base import MapBaseManagerView
-import arches.app.views.search as search
 import os
-from pprint import pprint
 
 
 class FileTemplateView(View):
@@ -161,8 +134,6 @@ class FileTemplateView(View):
         for tile in tiles:
             for key, value in template_dict.items():
                 if value in tile.data:
-                    # print 'success!'
-                    # print (tile.data)
                     my_node = models.Node.objects.get(nodeid=value)
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
@@ -178,8 +149,6 @@ class FileTemplateView(View):
             k = "{{"+key+"}}"
             doc = document
             # some of these are probably unnecessary
-            # styles = document.styles
-            # pprint(styles)
             # foot_style = styles['Footer']
             # head_style = styles['Header']
             # t_style = None
@@ -187,56 +156,30 @@ class FileTemplateView(View):
             run_style = None
 
             if len(doc.paragraphs) > 0:
-                for p in doc.paragraphs:
-                    for run in p.runs:
-                        if k in run.text:
-                            run_style = run.style
-                            run.text = run.text.replace(k, v)
+                replace_in_runs(doc.paragraphs, k, v)
 
             if len(doc.tables) > 0:
-                for table in doc.tables:
-                    for row in table.rows:
-                        for cell in row.cells:
-                            for p in cell.paragraphs:
-                                for run in p.runs:
-                                    if k in run.text:
-                                        # t_style = table.style
-                                        run_style = run.style
-                                        run.text = run.text.replace(k, v)
-                                        # table.style = t_style
+                iterate_tables(doc.tables, k, v)
             
             if len(doc.sections) > 0:
                 for section in doc.sections:
-                    for p in section.footer.paragraphs:
-                        for run in p.runs:
-                            if k in run.text:
-                                run_style = run.style
-                                run.text = run.text.replace(k, v)
-                    for table in section.footer.tables:
-                        for row in table.rows:
-                            for cell in row.cells:
-                                for p in cell.paragraphs:
-                                    for run in p.runs:
-                                        if k in run.text:
-                                            # t_style = table.style
-                                            run_style = run.style
-                                            run.text = run.text.replace(k, v)
-                                            # table.style = t_style
-                    for p in section.header.paragraphs:
-                        for run in p.runs:
-                            if k in run.text:
-                                run_style = run.style
-                                run.text = run.text.replace(k, v)
-                    for table in section.header.tables:
-                        for row in table.rows:
-                            for cell in row.cells:
-                                for p in cell.paragraphs:
-                                    for run in p.runs:
-                                        if k in run.text:
-                                            # t_style = table.style
-                                            run_style = run.style
-                                            run.text = run.text.replace(k, v)
-                                            # table.style = t_style
+                    replace_in_runs(section.footer.paragraphs, k, v)
+                    iterate_tables(section.footer.tables, k, v)
+                    replace_in_runs(section.header.paragraphs, k, v)
+                    iterate_tables(section.header.tables, k, v):
+
+        def replace_in_runs(p_list, k, v)
+            for paragraph in p_list:
+                for run in paragraph.runs:
+                    if k in run.text:
+                        run_style = run.style
+                        run.text = run.text.replace(k, v)
+
+        def iterate_tables(t_list, k, v)
+            for table in t_list:
+                for row in table.rows:
+                    for cell in row.cells:
+                        replace_in_runs(cell.paragraphs, k, v)
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
