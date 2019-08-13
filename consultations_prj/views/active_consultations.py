@@ -36,10 +36,9 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
         tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
-        page_ct = 6 # should probably be set somewhere else, maybe settings?
+        page_ct = 6 # should probably be set somewhere else, either sent from VM via request or in settings file?
         paginator = Paginator(tiles, page_ct)
         page_results = paginator.page(page_num)
-        pages = []
         if page_results.has_next() is True:
             next_page_number = page_results.next_page_number()
         else:
@@ -49,8 +48,18 @@ class ActiveConsultationsView(View):
         else:
             prev_page_number = False
         page_ct = paginator.num_pages
-        for x in xrange(page_ct):
-            pages.append(x+1)
+        pages = [page_num]
+        if paginator.num_pages > 1: # all below creates abridged page list UI
+            before = range(1, page_num)
+            after = range(page_num+1, paginator.num_pages+1)
+            default_ct = 2
+            ct_before = default_ct if len(after) > default_ct else default_ct*2-len(after)
+            ct_after = default_ct if len(before) > default_ct else default_ct*2-len(before)
+            if len(before) > ct_before:
+                before = [1,None]+before[-1*(ct_before-1):]
+            if len(after) > ct_after:
+                after = after[0:ct_after-1]+[None,paginator.num_pages]
+            pages = before+pages+after
 
         page_config = {
             'current_page':page_num,
