@@ -2,12 +2,15 @@ from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
 from consultations_prj.views.main import ConsultationView
+from consultations_prj.views.file_template import FileTemplateView
 from django.views.generic import RedirectView
 from consultations_prj.views.active_consultations import ActiveConsultationsView
 
 urlpatterns = [
     url(r'^', include('arches.urls')),
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
+    # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
+    url(r'^filetemplate', FileTemplateView.as_view(), name='filetemplate'),
     url(r'^consultations/active', RedirectView.as_view(url='/plugins/active-consultations'),
         name='active-consultations'),
     url(r'^activeconsultations', ActiveConsultationsView.as_view(),
