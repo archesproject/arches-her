@@ -3,6 +3,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from consultations_prj.views.main import ConsultationView
 from consultations_prj.views.file_template import FileTemplateView
+from django.views.generic import RedirectView
+from consultations_prj.views.active_consultations import ActiveConsultationsView
 
 urlpatterns = [
     url(r'^', include('arches.urls')),
