@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
     'views/components/workflows/set-tile-value',
-    'views/components/workflows/get-tile-value'
+    'views/components/workflows/get-tile-value',
+    'views/components/workflows/select-resource-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
@@ -20,9 +21,10 @@ define([
                     name: 'sitevisitdetailsrelatedconsultation',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
+                    componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d', //Visit Date
+                    // nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d', //Visit Date
+                    nodegroupid: "8d41e4ab-a250-11e9-87d1-00224800b26d", //Consultation Name -- strictly used for testing component
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,

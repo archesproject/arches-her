@@ -21,27 +21,14 @@ define([
         this.applyOutputToTarget = params.applyOutputToTarget;
         this.resValue.subscribe(function(val){
             params.requirements.resourceid = ko.unwrap(val);
-            params.resourceid(ko.unwrap(val));
-            console.log(params.resourceid());
-        }, this);
-        console.log(params);
-        console.log(this);
-        this.card.subscribe(function(val){
-            console.log(ko.unwrap(val));
-            if(ko.unwrap(val) != undefined) {
-                this.loading(false);
-            }
-        }, this);
-        this.tile.subscribe(function(val){
-            console.log(ko.unwrap(val));
-            if(ko.unwrap(val) != undefined) {
-                this.loading(false);
-            }
+            self.tile().resourceinstance_id = ko.unwrap(val);
+            params.resourceid(ko.unwrap(val)); //redundant with setting params.requirements.resourceid?
         }, this);
 
+        this.card.subscribe(function(val){ if(ko.unwrap(val) != undefined) { this.loading(false); } }, this);
+        this.tile.subscribe(function(val){ if(ko.unwrap(val) != undefined) { this.loading(false); } }, this);
         params.tile = self.tile;
-
-        params.stateProperties = function(){
+        params.stateProperties = function() {
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
@@ -55,9 +42,7 @@ define([
                 params.resourceid(tiles[0].resourceinstance_id);
                 self.resourceId(tiles[0].resourceinstance_id);
             }
-            if (self.completeOnSave === true) {
-                self.complete(true);
-            }
+            if (self.completeOnSave === true) { self.complete(true); }
         }
     };
 
