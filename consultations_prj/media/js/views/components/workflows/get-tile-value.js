@@ -17,10 +17,13 @@ define([
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
+        this.tileMethod = params.config.fn || ko.observable();
+        this.sourceNodeIds = params.config.sourcenodeids || [];
 
-        this.workflowStepClass = ko.pureComputed(function() {
-            return self.applyOutputToTarget() ? params.class() : '';
-        }, viewModel);
+        // this.workflowStepClass = ko.pureComputed(function() {
+        //     return self.applyOutputToTarget() ? params.class() : '';
+        // }, viewModel);
+        this.workflowStepClass = params.class || ko.observable();
 
         params.tile = self.tile;
 
@@ -37,14 +40,25 @@ define([
             var targetresult;
             var targettile;
             var sourcetile;
-            var targetvals;
+            var targetvals, someData;
+            tiles = params.requirements.tiles;
+
             tiles.forEach(function(tile){
-                    if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
-                        targettile = tile;
-                    } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
-                        sourcetile = tile;
+                console.log(tile);
+                self.sourceNodeIds.forEach(function(nodeid) {
+                    if (tile["data"][nodeid] != undefined) {
+                        someData = tile["data"][nodeid]();
+                        //somehow display this data via lookup
+                        //get it into the workflowstep's tile.data
                     }
-                });
+                })
+
+                // if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
+                //     targettile = tile;
+                // } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
+                //     sourcetile = tile;
+                // }
+            });
             targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)})
             targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
             targettile.data[params.targetnode()](targetresult);
@@ -52,8 +66,8 @@ define([
         };
 
         self.applyOutputToTarget.subscribe(function(val){
-            if (val && self.tiles && self.tiles.length > 0) {
-                self.updateTargetTile(self.tiles);
+            if (val && params.requirements.tiles.length > 0) {
+                self.updateTargetTile(params.requirements.tiles);
             }
         });
 
@@ -63,9 +77,7 @@ define([
                 params.resourceid(tiles[0].resourceinstance_id);
                 self.resourceId(tiles[0].resourceinstance_id);
             }
-            if (self.applyOutputToTarget()) {
-                self.updateTargetTile(tiles)
-            }
+            // self.updateTargetTile(tiles)
             if (self.completeOnSave === true) {
                 self.complete(true);
             }
