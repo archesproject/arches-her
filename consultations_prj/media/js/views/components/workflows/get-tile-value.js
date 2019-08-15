@@ -17,8 +17,10 @@ define([
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
-        this.tileMethod = params.config.fn || ko.observable();
+
         this.sourceNodeIds = params.config.sourcenodeids || [];
+        this.targetNodeId = params.config.targetnodeid;
+        this.tileMethod = params.config.fn;
 
         // this.workflowStepClass = ko.pureComputed(function() {
         //     return self.applyOutputToTarget() ? params.class() : '';
@@ -37,32 +39,28 @@ define([
             };
 
         self.updateTargetTile = function(tiles){
-            var targetresult;
-            var targettile;
-            var sourcetile;
-            var targetvals, someData;
+    
+            var someData, retVal;
+            var argsNeeded = self.sourceNodeIds.length;
+            var args = {};
             tiles = params.requirements.tiles;
 
             tiles.forEach(function(tile){
                 console.log(tile);
-                self.sourceNodeIds.forEach(function(nodeid) {
-                    if (tile["data"][nodeid] != undefined) {
-                        someData = tile["data"][nodeid]();
-                        //somehow display this data via lookup
-                        //get it into the workflowstep's tile.data
+                self.sourceNodeIds.forEach(function(srcnodeid) {
+                    if (tile["data"][srcnodeid] != undefined) { // found the right data
+                        someData = tile["data"][srcnodeid]();
+                        //someData = lookupDisplay(someData)
+                        args[srcnodeid] = someData;
+                        if (Object.keys(args).length == argsNeeded) {
+                            retVal = self.tileMethod(args);
+                            self.tile.data[self.targetNodeId](retVal);
+                            self.tile.save();
+                        }
                     }
-                })
-
-                // if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
-                //     targettile = tile;
-                // } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
-                //     sourcetile = tile;
-                // }
+                });
             });
-            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)})
-            targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
-            targettile.data[params.targetnode()](targetresult);
-            targettile.save();
+            console.log("Error - insufficient data to populate tile");
         };
 
         self.applyOutputToTarget.subscribe(function(val){

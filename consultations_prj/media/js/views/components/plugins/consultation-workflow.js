@@ -35,8 +35,11 @@ define([
                     parenttileid: null,
                     icon: 'fa-tag',
                     config: {
-                        fn:function(){},
-                        sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"]
+                        fn:function(args){ // # of (k,v) == sourcenodeids.length
+                            var name = args["8d41e4ba-a250-11e9-9b20-00224800b26d"];
+                            return ('consultation for '+name); },
+                        sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"],
+                        targetnodeid: "8d41e4ab-a250-11e9-87d1-00224800b26d"
                     }
                 },
                 {
