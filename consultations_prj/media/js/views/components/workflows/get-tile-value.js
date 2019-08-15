@@ -9,6 +9,7 @@ define([
     function viewModel(params) {
         var self = this;
         NewTileStep.apply(this, [params]);
+        self.loading(true);
         params.applyOutputToTarget = ko.observable(true);
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
@@ -17,9 +18,12 @@ define([
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
+        this.checkBox = ko.observable(false);
 
-        this.sourceNodeIds = params.config.sourcenodeids || [];
-        this.targetNodeId = params.config.targetnodeid;
+        if(!!params.config.sourcenodeids()) {
+            this.sourceNodeIds = params.config.sourcenodeids();
+        } else this.sourceNodeIds = [];
+        this.targetNodeId = ko.unwrap(params.config.targetnodeid);
         this.tileMethod = params.config.fn;
 
         // this.workflowStepClass = ko.pureComputed(function() {
@@ -38,30 +42,47 @@ define([
                 }
             };
 
-        self.updateTargetTile = function(tiles){
+        self.updateTargetTile = function(){
+            /**
+             * Expected from params.config: 
+             *  config: {
+             *     fn: function(argsObj){
+             *              //custom function
+             *         },
+             *     sourcenodeids: [], //arr of nodeids
+             *     targetnodeid: "1234-abcd-5678-efgh"
+             *  }
+             * Note that argsObj.keys.length == sourcenodeids.length
+             */
     
-            var someData, retVal;
+            var tileData = false, retVal = false;
             var argsNeeded = self.sourceNodeIds.length;
             var args = {};
             tiles = params.requirements.tiles;
+            // self.tile();
 
             tiles.forEach(function(tile){
-                console.log(tile);
                 self.sourceNodeIds.forEach(function(srcnodeid) {
-                    if (tile["data"][srcnodeid] != undefined) { // found the right data
-                        someData = tile["data"][srcnodeid]();
-                        //someData = lookupDisplay(someData)
-                        args[srcnodeid] = someData;
+                    if (ko.unwrap(tile["data"][srcnodeid])) { // found the right data
+                        tileData = tile["data"][srcnodeid]();
+                        //tileData = lookupDisplay(tileData)
+                        args[srcnodeid] = tileData;
                         if (Object.keys(args).length == argsNeeded) {
                             retVal = self.tileMethod(args);
-                            self.tile.data[self.targetNodeId](retVal);
-                            self.tile.save();
+                            self.tile().data[self.targetNodeId](retVal);
                         }
                     }
                 });
             });
-            console.log("Error - insufficient data to populate tile");
+            if (!retVal) { console.log("Error - insufficient data to populate tile"); }
         };
+
+        self.tile.subscribe(function(tile){
+            if(ko.unwrap(tile) && self.loading()) {
+                self.updateTargetTile();
+                self.loading(false);
+            }
+        })
 
         self.applyOutputToTarget.subscribe(function(val){
             if (val && params.requirements.tiles.length > 0) {
@@ -75,7 +96,7 @@ define([
                 params.resourceid(tiles[0].resourceinstance_id);
                 self.resourceId(tiles[0].resourceinstance_id);
             }
-            // self.updateTargetTile(tiles)
+            self.updateTargetTile();
             if (self.completeOnSave === true) {
                 self.complete(true);
             }
@@ -88,6 +109,4 @@ define([
             require: 'text!templates/views/components/workflows/get-tile-value.htm'
         }
     });
-
-    return viewModel;
 });

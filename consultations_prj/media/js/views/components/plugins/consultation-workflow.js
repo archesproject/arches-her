@@ -36,9 +36,10 @@ define([
                     icon: 'fa-tag',
                     config: {
                         fn:function(args){ // # of (k,v) == sourcenodeids.length
-                            var name = args["8d41e4ba-a250-11e9-9b20-00224800b26d"];
-                            return ('consultation for '+name); },
-                        sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"],
+                            var name = args["8d41e4de-a250-11e9-973b-00224800b26d"];
+                            return 'consultation for '+name;
+                        },
+                        sourcenodeids: ["8d41e4de-a250-11e9-973b-00224800b26d"],
                         targetnodeid: "8d41e4ab-a250-11e9-87d1-00224800b26d"
                     }
                 },
@@ -161,6 +162,7 @@ define([
                         self.state.resourceid = resourceId;
                         activeStep.requirements.resourceid = self.state.resourceid;
                     }
+                    activeStep.requirements.tiles = previousStep.requirements.tiles;
                     self.updateUrl();
                 } else {
                     activeStep.requirements = self.state.steps[activeStep._index] || {};
