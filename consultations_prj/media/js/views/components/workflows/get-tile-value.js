@@ -9,7 +9,14 @@ define([
     function viewModel(params) {
         var self = this;
         NewTileStep.apply(this, [params]);
-        self.loading(true);
+
+        var updateTileSubscription = self.loading.subscribe(function(val){
+            if(!val) {
+                self.loading(true);
+                self.updateTargetTile();
+                updateTileSubscription.dispose();
+            }
+        });
         params.applyOutputToTarget = ko.observable(true);
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
@@ -22,9 +29,9 @@ define([
 
         if(!!params.config.sourcenodeids()) {
             this.sourceNodeIds = params.config.sourcenodeids();
+            this.targetNodeId = ko.unwrap(params.config.targetnodeid);
+            this.tileMethod = params.config.fn;
         } else this.sourceNodeIds = [];
-        this.targetNodeId = ko.unwrap(params.config.targetnodeid);
-        this.tileMethod = params.config.fn;
 
         // this.workflowStepClass = ko.pureComputed(function() {
         //     return self.applyOutputToTarget() ? params.class() : '';
@@ -34,61 +41,51 @@ define([
         params.tile = self.tile;
 
         params.stateProperties = function(){
-                return {
-                    resourceid: ko.unwrap(params.resourceid),
-                    tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
-                    tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-                    applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
-                }
-            };
+            return {
+                resourceid: ko.unwrap(params.resourceid),
+                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
+                applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
+            }
+        };
 
         self.updateTargetTile = function(){
             /**
              * Expected from params.config: 
              *  config: {
-             *     fn: function(argsObj){
-             *              //custom function
+             *     fn: function(argsObj, callback){
+             *              //logic
+             *              //callback(returnValue)
              *         },
              *     sourcenodeids: [], //arr of nodeids
              *     targetnodeid: "1234-abcd-5678-efgh"
              *  }
              * Note that argsObj.keys.length == sourcenodeids.length
+             * i.e. each tile datum is an argument you need
              */
     
-            var tileData = false, retVal = false;
+            var tileData;
             var argsNeeded = self.sourceNodeIds.length;
             var args = {};
-            tiles = params.requirements.tiles;
-            // self.tile();
+            tiles = params.requirements.tiles; // i.e tiles in workflow state
 
-            tiles.forEach(function(tile){
-                self.sourceNodeIds.forEach(function(srcnodeid) {
-                    if (ko.unwrap(tile["data"][srcnodeid])) { // found the right data
+            self.sourceNodeIds.forEach(function(srcnodeid) {
+                tiles.forEach(function(tile){
+                    if (ko.unwrap(tile["data"][srcnodeid])) {
                         tileData = tile["data"][srcnodeid]();
-                        //tileData = lookupDisplay(tileData)
                         args[srcnodeid] = tileData;
                         if (Object.keys(args).length == argsNeeded) {
-                            retVal = self.tileMethod(args);
-                            self.tile().data[self.targetNodeId](retVal);
+                            self.tileMethod(args, function(val){
+                                if(ko.unwrap(val) != undefined) {
+                                    self.tile().data[self.targetNodeId](ko.unwrap(val));
+                                    self.loading(false);
+                                }
+                            });
                         }
                     }
                 });
             });
-            if (!retVal) { console.log("Error - insufficient data to populate tile"); }
         };
-
-        self.tile.subscribe(function(tile){
-            if(ko.unwrap(tile) && self.loading()) {
-                self.updateTargetTile();
-                self.loading(false);
-            }
-        })
-
-        self.applyOutputToTarget.subscribe(function(val){
-            if (val && params.requirements.tiles.length > 0) {
-                self.updateTargetTile(params.requirements.tiles);
-            }
-        });
 
         self.onSaveSuccess = function(tiles) {
             self.tiles = tiles;
@@ -96,11 +93,8 @@ define([
                 params.resourceid(tiles[0].resourceinstance_id);
                 self.resourceId(tiles[0].resourceinstance_id);
             }
-            self.updateTargetTile();
-            if (self.completeOnSave === true) {
-                self.complete(true);
-            }
-        }
+            if (self.completeOnSave === true) { self.complete(true); }
+        };
     };
 
     return ko.components.register('get-tile-value', {

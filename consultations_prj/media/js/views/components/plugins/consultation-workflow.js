@@ -1,8 +1,10 @@
 define([
     'knockout',
+    'jquery',
+    'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step'
-], function(ko, Workflow, Step) {
+], function(ko, $, arches, Workflow, Step) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
 
@@ -35,9 +37,15 @@ define([
                     parenttileid: null,
                     icon: 'fa-tag',
                     config: {
-                        fn:function(args){ // # of (k,v) == sourcenodeids.length
-                            var name = args["8d41e4de-a250-11e9-973b-00224800b26d"];
-                            return 'consultation for '+name;
+                        fn:function(args, callback){
+                            var resourceId = args["8d41e4de-a250-11e9-973b-00224800b26d"];
+                            var displayName = ko.observable();
+                            self.updateDisplayName(resourceId, displayName);
+                            displayName.subscribe(function(name) {
+                                if(ko.unwrap(name)) {
+                                    callback('Consultation for '+ko.unwrap(name));
+                                }
+                            });
                         },
                         sourcenodeids: ["8d41e4de-a250-11e9-973b-00224800b26d"],
                         targetnodeid: "8d41e4ab-a250-11e9-87d1-00224800b26d"
@@ -170,6 +178,17 @@ define([
                 }
                 self.previousStep(activeStep);
             }
+
+            this.displayname = ko.observable();
+
+            this.updateDisplayName = function(resourceId, displayname) {
+                $.get(
+                    arches.urls.resource_descriptors + ko.unwrap(resourceId),
+                    function(descriptors) {
+                        displayname(descriptors.displayname);
+                    }
+                );
+            };
 
             self.activeStep.subscribe(this.updateState);
 
