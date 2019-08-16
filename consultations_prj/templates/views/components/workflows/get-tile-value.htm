@@ -1,5 +1,6 @@
 <!-- ko if: tile() && card() && loading() == false-->
 <div class="padded-workflow-step">
+    <!-- ko if: checkBox() -->
     <div class="workflows-get-tile-value"><h4 data-bind="text: nameheading"></h4>
         <div class="checkbox">
             <label class="form-checkbox form-normal form-primary" data-bind="css: {'active': applyOutputToTarget}" style="padding-left: 25px; padding-top: 3px;">
@@ -8,6 +9,7 @@
             </label>
         </div>
     </div>
+    <!-- /ko -->
     <div data-bind="class: workflowStepClass">
         <div data-bind="component: {
             name: cardComponentLookup[card().model.component_id()].componentname,

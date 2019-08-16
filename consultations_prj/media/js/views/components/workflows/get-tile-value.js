@@ -26,6 +26,7 @@ define([
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
         this.checkBox = ko.observable(false);
+        if(params.config.checkbox) { this.checkBox(true); }
 
         if(!!params.config.sourcenodeids()) {
             this.sourceNodeIds = params.config.sourcenodeids();
