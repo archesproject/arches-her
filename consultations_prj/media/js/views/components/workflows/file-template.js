@@ -9,6 +9,13 @@ define([
 
     function viewModel(params) {
 
+        // get the template value from the tile from prev step, (done)
+        // make request to do the docx work and retrieve the file (done)
+        // -- file retrieval: name it with date (easy enough)
+        // -- and create a link to download it via the download btn
+        // -- upload new file to dropzone?
+        // populate file-list widget with existing other tile data?
+
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
             params.tileid(params.requirements.tileid);
@@ -18,6 +25,7 @@ define([
         var self = this;
         self.requirements = params.requirements;
         params.tile = self.tile;
+        
 
         params.stateProperties = function(){
                 return {
@@ -38,27 +46,21 @@ define([
         });
         console.log(self, params);
 
-        self.saveTile = function(tile, callback) {
-            self.loading(true);
-            tile.save(function(response) {
-                self.loading(false);
-                self.alert(
-                    new AlertViewModel(
-                        'ep-alert-red',
-                        response.responseJSON.message[0],
-                        response.responseJSON.message[1],
-                        null,
-                        function(){ return; }
-                    )
-                );
-            }, function(tile) {
-                console.log("in save", tile, params);
+        this.retrieveFile = function() {
+            var tiles = params.requirements.tiles;
+            var letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
+            var templateId = false;
+
+            tiles.forEach(function(tile){
+                if (ko.unwrap(tile["data"][letterTypeNodeId])) { templateId = tile["data"][letterTypeNodeId](); }
+            });
+            if(templateId) {
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'filetemplate',
                     data: {
-                        "resourceinstance_id": tile["resourceinstance_id"], //instance of Communication
-                        "template_id": tile["data"]["23e1ac91-6c4b-11e9-8641-dca90488358a"]
+                        "resourceinstance_id": params.resourceid(),
+                        "template_id": templateId
                     },
                     context: self,
                     success: function(responseText, status, response){
@@ -71,21 +73,9 @@ define([
                         }
                     }
                 });
-                // params.resourceid(tile.resourceinstance_id);
-                // params.tileid(tile.tileid);
-                // self.resourceId(tile.resourceinstance_id);
-                // self.complete(true);
-                // if (typeof callback === 'function') {
-                //     callback.apply(null, arguments);
-                // }
-                // self.tile(self.card().getNewTile());
-                // self.tile().reset();
-                // setTimeout(function() {
-                //     self.tile().reset();
-                // }, 1);
-                self.loading(false);
-            });
-        };
+            }
+            self.loading(false);
+        }
     };
 
     return ko.components.register('file-template', {

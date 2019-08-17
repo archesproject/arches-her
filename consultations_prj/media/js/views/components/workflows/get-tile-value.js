@@ -68,7 +68,7 @@ define([
             var tileData;
             var argsNeeded = self.sourceNodeIds.length;
             var args = {};
-            tiles = params.requirements.tiles; // i.e tiles in workflow state
+            var tiles = params.requirements.tiles; // i.e tiles in workflow state
 
             self.sourceNodeIds.forEach(function(srcnodeid) {
                 tiles.forEach(function(tile){

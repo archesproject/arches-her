@@ -1,0 +1,7 @@
+{% extends "views/components/cards/default.htm" %}
+{% load i18n %}
+
+{% block form_widgets %}
+<!-- download file, button appears upon selection -->
+<button class="btn btn-shim btn-labeled btn-lg fa fa-download btn-mint" data-bind="click: function(){complete(true)}">Download .docx</button>
+{% endblock form_widgets %}
