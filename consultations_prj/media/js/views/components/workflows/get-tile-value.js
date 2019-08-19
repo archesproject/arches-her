@@ -47,12 +47,12 @@ define([
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
                 tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
                 applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
-            }
+            };
         };
 
         self.updateTargetTile = function(){
             /**
-             * Expected from params.config: 
+             * Expected from params.config:
              *  config: {
              *     fn: function(argsObj, callback){
              *              //logic
@@ -64,11 +64,11 @@ define([
              * Note that argsObj.keys.length == sourcenodeids.length
              * i.e. each tile datum is an argument you need
              */
-    
+
             var tileData;
             var argsNeeded = self.sourceNodeIds.length;
             var args = {};
-            tiles = params.requirements.tiles; // i.e tiles in workflow state
+            var tiles = params.requirements.tiles; // i.e tiles in workflow state
 
             self.sourceNodeIds.forEach(function(srcnodeid) {
                 tiles.forEach(function(tile){
@@ -96,7 +96,7 @@ define([
             }
             if (self.completeOnSave === true) { self.complete(true); }
         };
-    };
+    }
 
     return ko.components.register('get-tile-value', {
         viewModel: viewModel,
