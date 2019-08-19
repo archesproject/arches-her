@@ -27,29 +27,16 @@ define([
                 {
                     title: 'Assign Name',
                     name: 'setname',
-                    description: 'Assign a name to your application area',
-                    component: 'views/components/workflows/get-tile-value',
-                    componentname: 'get-tile-value',
+                    description: 'Assign a name to your consultation',
+                    component: 'views/components/workflows/consultation-name-step',
+                    componentname: 'consultation-name-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag',
-                    config: {
-                        fn:function(args, callback){
-                            var resourceId = args["8d41e4de-a250-11e9-973b-00224800b26d"];
-                            var displayName = ko.observable();
-                            self.updateDisplayName(resourceId, displayName);
-                            displayName.subscribe(function(name) {
-                                if(ko.unwrap(name)) {
-                                    callback('Consultation for '+ko.unwrap(name));
-                                }
-                            });
-                        },
-                        sourcenodeids: ["8d41e4de-a250-11e9-973b-00224800b26d"],
-                        targetnodeid: "8d41e4ab-a250-11e9-87d1-00224800b26d"
-                    }
+                    sourcenodeids: ["8d41e4de-a250-11e9-973b-00224800b26d"]
                 },
                 {
                     title: 'Consultation GeoJSON',
@@ -178,17 +165,6 @@ define([
                 }
                 self.previousStep(activeStep);
             }
-
-            this.displayname = ko.observable();
-
-            this.updateDisplayName = function(resourceId, displayname) {
-                $.get(
-                    arches.urls.resource_descriptors + ko.unwrap(resourceId),
-                    function(descriptors) {
-                        displayname(descriptors.displayname);
-                    }
-                );
-            };
 
             self.activeStep.subscribe(this.updateState);
 
