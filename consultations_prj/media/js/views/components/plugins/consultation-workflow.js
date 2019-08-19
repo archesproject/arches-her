@@ -25,19 +25,34 @@ define([
                     icon: 'fa-code-fork'
                 },
                 {
-                    title: 'Assign Name',
-                    name: 'setname',
-                    description: 'Assign a name to your consultation',
-                    component: 'views/components/workflows/consultation-name-step',
-                    componentname: 'consultation-name-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
+                    title: 'Consultation Dates',
+                    name: 'setdatedetails',
+                    description: 'Consultation Dates',
+                    component: 'views/components/workflows/consultation-dates-step',
+                    componentname: 'consultation-dates-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
+                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-tag',
-                    sourcenodeids: ["8d41e4de-a250-11e9-973b-00224800b26d"]
+                    class: 'hide-completion-date',
+                    icon: 'fa-calendar-o',
+                    sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"]
                 },
+                // {
+                //     title: 'Assign Name',
+                //     name: 'setname',
+                //     description: 'Assign a name to your consultation',
+                //     component: 'views/components/workflows/consultation-name-step',
+                //     componentname: 'consultation-name-step',
+                //     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                //     nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
+                //     resourceid: null,
+                //     tileid: null,
+                //     parenttileid: null,
+                //     icon: 'fa-tag',
+                //     sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"]
+                // },
                 {
                     title: 'Consultation GeoJSON',
                     name: 'consultationlocation',
@@ -52,19 +67,6 @@ define([
                     icon: 'fa-map-marker'
                 },
                 {
-                    title: 'Consultation Conditions',
-                    name: 'settypedetails',
-                    description: 'Consultation Conditions',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e49f-a250-11e9-b6b3-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-list-alt'
-                },
-                {
                     title: 'Consultation Details',
                     name: 'setconsdetails',
                     description: 'Consultation Details',
@@ -76,20 +78,6 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-list-alt'
-                },
-                {
-                    title: 'Consultation Dates',
-                    name: 'setdatedetails',
-                    description: 'Consultation Dates',
-                    component: 'views/components/workflows/hide-card-step',
-                    componentname: 'hide-card-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
-                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    class: 'hide-completion-date',
-                    icon: 'fa-calendar-o'
                 },
                 {
                     title: 'Reference Numbers',
@@ -157,7 +145,7 @@ define([
                         self.state.resourceid = resourceId;
                         activeStep.requirements.resourceid = self.state.resourceid;
                     }
-                    activeStep.requirements.tiles = previousStep.requirements.tiles;
+                    // activeStep.requirements.tiles = previousStep.requirements.tiles;
                     self.updateUrl();
                 } else {
                     activeStep.requirements = self.state.steps[activeStep._index] || {};
