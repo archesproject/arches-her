@@ -3,7 +3,6 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/get-tile-value',
     'views/components/workflows/select-resource-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('correspondence-workflow', {

@@ -3,16 +3,13 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/get-tile-value',
     'views/components/workflows/select-resource-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
-            console.log(params);
             if (!params.resourceid) {
                 params.resourceid = ko.observable();
             }
-            console.log(params);
             var self = this;
             params.steps = [
                 {
