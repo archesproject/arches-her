@@ -3,7 +3,8 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/get-tile-value'
+    'views/components/workflows/get-tile-value',
+    'views/components/workflows/select-resource-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('correspondence-workflow', {
         viewModel: function(params) {
@@ -12,8 +13,8 @@ define([
                 {
                     title: 'Correspondence Details',
                     description: 'New Correspondence',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
+                    component: 'views/components/workflows/select-resource-step',
+                    componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
                     resourceid: null,

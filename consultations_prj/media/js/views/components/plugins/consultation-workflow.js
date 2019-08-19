@@ -1,8 +1,10 @@
 define([
     'knockout',
+    'jquery',
+    'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step'
-], function(ko, Workflow, Step) {
+], function(ko, $, arches, Workflow, Step) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
 
@@ -26,14 +28,28 @@ define([
                     title: 'Assign Name',
                     name: 'setname',
                     description: 'Assign a name to your application area',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
+                    component: 'views/components/workflows/get-tile-value',
+                    componentname: 'get-tile-value',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-tag'
+                    icon: 'fa-tag',
+                    config: {
+                        fn:function(args, callback){
+                            var resourceId = args["8d41e4de-a250-11e9-973b-00224800b26d"];
+                            var displayName = ko.observable();
+                            self.updateDisplayName(resourceId, displayName);
+                            displayName.subscribe(function(name) {
+                                if(ko.unwrap(name)) {
+                                    callback('Consultation for '+ko.unwrap(name));
+                                }
+                            });
+                        },
+                        sourcenodeids: ["8d41e4de-a250-11e9-973b-00224800b26d"],
+                        targetnodeid: "8d41e4ab-a250-11e9-87d1-00224800b26d"
+                    }
                 },
                 {
                     title: 'Consultation GeoJSON',
@@ -154,6 +170,7 @@ define([
                         self.state.resourceid = resourceId;
                         activeStep.requirements.resourceid = self.state.resourceid;
                     }
+                    activeStep.requirements.tiles = previousStep.requirements.tiles;
                     self.updateUrl();
                 } else {
                     activeStep.requirements = self.state.steps[activeStep._index] || {};
@@ -161,6 +178,17 @@ define([
                 }
                 self.previousStep(activeStep);
             }
+
+            this.displayname = ko.observable();
+
+            this.updateDisplayName = function(resourceId, displayname) {
+                $.get(
+                    arches.urls.resource_descriptors + ko.unwrap(resourceId),
+                    function(descriptors) {
+                        displayname(descriptors.displayname);
+                    }
+                );
+            };
 
             self.activeStep.subscribe(this.updateState);
 

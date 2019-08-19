@@ -3,35 +3,27 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/get-tile-value'
+    'views/components/workflows/get-tile-value',
+    'views/components/workflows/select-resource-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
+            console.log(params);
+            if (!params.resourceid) {
+                params.resourceid = ko.observable();
+            }
+            console.log(params);
             var self = this;
             params.steps = [
-                // { //here need a widget just to select which an instance of consultation
-                //     title: 'Site Visit Details - Related Consultation',
-                //     name: 'sitevisitdetailsrelatedconsultation',
-                //     description: '',
-                //     component: 'views/components/workflows/new-tile-step',
-                //     componentname: 'new-tile-step',
-                //     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                //     nodegroupid: '',
-                //     resourceid: null,
-                //     tileid: null,
-                //     parenttileid: null,
-                //     icon: 'fa-tag',
-                //     nameheading: 'New Site Visit',
-                //     namelabel: '[no label]'
-                // },
                 {
-                    title: 'Site Visit Details - Visit Date',
-                    name: 'sitevisitdetailsdate',
+                    title: 'Site Visit Details - Related Consultation',
+                    name: 'sitevisitdetailsrelatedconsultation',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
+                    componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d',
+                    // nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d', //Visit Date
+                    nodegroupid: "8d41e4ab-a250-11e9-87d1-00224800b26d", //Consultation Name -- strictly used for testing component
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -40,28 +32,14 @@ define([
                     namelabel: '[no label]'
                 },
                 {
-                    title: 'Site Visit Details - Location Description',
-                    name: 'sitevisitdetailslocdesc',
-                    description: '',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '3f18a062-a251-11e9-bd25-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag',
-                    nameheading: 'Location Description',
-                    namelabel: 'Describe the site visit location'
-                },
-                {
                     title: 'Site Visit Attendees',
                     name: 'siteattendees',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
+                    // nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d', // visit attendees
+                    nodegroupid: "8d41e4bd-a250-11e9-89e8-00224800b26d", //Consultation Proposal -- strictly used for testing component
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,

@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from django.http import HttpRequest, HttpResponseNotFound
 from django.views.generic import View
+from django.core.paginator import Paginator
 from arches.app.utils.response import JSONResponse
 from arches.app.models import models
 from arches.app.models.resource import Resource
@@ -29,13 +30,50 @@ import json
 class ActiveConsultationsView(View):
 
     def get(self, request): 
+        page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
         datatype_factory = DataTypeFactory()
         cons_details_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d')
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
         tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
+        page_ct = 6 # should probably be set somewhere else, either sent from VM via request or in settings file?
+        paginator = Paginator(tiles, page_ct)
+        page_results = paginator.page(page_num)
+        if page_results.has_next() is True:
+            next_page_number = page_results.next_page_number()
+        else:
+            next_page_number = False
+        if page_results.has_previous() is True:
+            prev_page_number = page_results.previous_page_number()
+        else:
+            prev_page_number = False
+        page_ct = paginator.num_pages
+        pages = [page_num]
+        if paginator.num_pages > 1: # all below creates abridged page list UI
+            before = range(1, page_num)
+            after = range(page_num+1, paginator.num_pages+1)
+            default_ct = 2
+            ct_before = default_ct if len(after) > default_ct else default_ct*2-len(after)
+            ct_after = default_ct if len(before) > default_ct else default_ct*2-len(before)
+            if len(before) > ct_before:
+                before = [1,None]+before[-1*(ct_before-1):]
+            if len(after) > ct_after:
+                after = after[0:ct_after-1]+[None,paginator.num_pages]
+            pages = before+pages+after
+
+        page_config = {
+            'current_page':page_num,
+            'end_index':page_results.end_index(),
+            'has_next':page_results.has_next(),
+            'has_other_pages':page_results.has_other_pages(),
+            'has_previous':page_results.has_previous(),
+            'next_page_number':next_page_number,
+            'pages':pages,
+            'previous_page_number':prev_page_number,
+            'start_index':page_results.start_index()
+        }
         if filtered_consultations is not None:
-            return JSONResponse({'tile_dict': tiles })
+            return JSONResponse({'page_results': page_results.object_list, 'paginator': page_config})
 
         return HttpResponseNotFound()
 
@@ -56,7 +94,7 @@ class ActiveConsultationsView(View):
 
 
     def get_tile_dict(self, consultations, datatype_factory):
-        tiles = {}
+        tiles = []
         active_cons_node_list = {
             "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
             "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
@@ -67,9 +105,8 @@ class ActiveConsultationsView(View):
         }
         active_cons_list_vals = active_cons_node_list.values()
         for consultation in consultations:
-            _id = str(consultation.resourceinstanceid)
+            res = {}
             consultation.load_tiles()
-            tiles[_id] = {}
             for tile in consultation.tiles:
                 for k, v in tile.data.items():
                     if k in active_cons_list_vals:
@@ -82,7 +119,8 @@ class ActiveConsultationsView(View):
                         except Exception as e:
                             val = v
 
-                        tiles[_id][node.name] = val
+                        res[node.name] = val
+            tiles.append(res)
 
         return tiles
 
