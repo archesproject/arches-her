@@ -3,7 +3,6 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/set-tile-value',
     'views/components/workflows/get-tile-value'
 ], function(ko, Workflow, Step) {
     return ko.components.register('application-area', {
@@ -24,19 +23,6 @@ define([
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address'
-                },
-                {
-                    title: 'Assign Name',
-                    name: 'setname',
-                    description: 'Assign a name to your application area',
-                    component: 'views/components/workflows/set-tile-value',
-                    componentname: 'set-tile-value',
-                    graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
-                    nodegroupid: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
                 },
                 {
                     title: 'Area Map',
