@@ -3,12 +3,12 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/hide-card-step'
-], function($, arches, ko, koMapping, HideCardStep) {
+    'views/components/workflows/new-tile-step'
+], function($, arches, ko, koMapping, NewTileStep) {
     function viewModel(params) {
         // console.log(HideCardStep);
 
-        HideCardStep.apply(this, [params]);
+        NewTileStep.apply(this, [params]);
         // self.loading(true);
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
@@ -36,6 +36,8 @@ define([
         this.consultationNameNodeId = '8d41e4ab-a250-11e9-87d1-00224800b26d';
         this.appAreaNodeId = "8d41e4de-a250-11e9-973b-00224800b26d";
         this.relatedAppAreaNodeId = '8d41e4ba-a250-11e9-9b20-00224800b26d';
+
+        this.workflowStepClass = ko.unwrap(params.class());
 
         this.logDateNodeId = ko.observable();
 
