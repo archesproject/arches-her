@@ -9,43 +9,38 @@ define([
     function viewModel(params) {
         var self = this;
         NewTileStep.apply(this, [params]);
-        params.applyOutputToTarget = ko.observable(true);
-        if (!params.resourceid() && params.requirements){
-            params.resourceid(params.requirements.resourceid);
-            params.tileid(params.requirements.tileid);
+        this.resValue = ko.observable();
+        if (!params.resourceid()) {
+            params.resourceid(params.workflow.state.resourceid);
         }
-        self.loading(true);
+        if (params.workflow.state.steps[params._index]) {
+            params.tileid(params.workflow.state.steps[params._index].tileid);
+        }
+        this.disableResourceSelection = ko.observable(false);
+        if (params.workflow.state.resourceid) {
+            this.resValue(params.workflow.state.resourceid);
+            this.disableResourceSelection(true);
+        }
+        this.loading(true);
         this.graphid = params.graphid();
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
-        this.resValue = ko.observable();
-        this.applyOutputToTarget = params.applyOutputToTarget;
         this.resValue.subscribe(function(val){
-            params.requirements.resourceid = ko.unwrap(val);
-            self.tile().resourceinstance_id = ko.unwrap(val);
-            params.resourceid(ko.unwrap(val)); //redundant with setting params.requirements.resourceid?
+            if (ko.unwrap(self.tile)) {
+                self.tile().resourceinstance_id = ko.unwrap(val);
+            }
+            params.resourceid(ko.unwrap(val));
         }, this);
 
         this.card.subscribe(function(val){ if(ko.unwrap(val) != undefined) { this.loading(false); } }, this);
         this.tile.subscribe(function(val){ if(ko.unwrap(val) != undefined) { this.loading(false); } }, this);
         params.tile = self.tile;
-        params.stateProperties = function() {
-            return {
-                resourceid: ko.unwrap(params.resourceid),
-                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
-                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-            }
-        };
 
-        self.onSaveSuccess = function(tiles) {
-            self.tiles = tiles;
-            if (self.tiles.length > 0) {
-                params.resourceid(tiles[0].resourceinstance_id);
-                self.resourceId(tiles[0].resourceinstance_id);
-            }
-            if (self.completeOnSave === true) { self.complete(true); }
-        }
-    };
+        this.setStateProperties = function(){
+            params.workflow.state.steps[params._index] = params.getStateProperties();
+            this.disableResourceSelection(true);
+        };
+    }
 
     ko.components.register('select-resource-step', {
         viewModel: viewModel,

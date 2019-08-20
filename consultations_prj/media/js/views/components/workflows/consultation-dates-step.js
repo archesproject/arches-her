@@ -8,18 +8,22 @@ define([
     function viewModel(params) {
 
         NewTileStep.apply(this, [params]);
-        if (!params.resourceid() && params.requirements){
-            params.resourceid(params.requirements.resourceid);
-            params.tileid(params.requirements.tileid);
+        var self = this;
+
+        if (!params.resourceid()) {
+            params.resourceid(params.workflow.state.resourceid);
+        }
+        if (params.workflow.state.steps[params._index]) {
+            params.tileid(params.workflow.state.steps[params._index].tileid);
         }
 
-        var self = this;
-        
-        self.requirements = params.requirements;
+        var url = arches.urls.api_card + (ko.unwrap(params.resourceid) || ko.unwrap(params.graphid));
+
+
         params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
 
-        params.stateProperties = function(){
+        params.getStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
@@ -98,6 +102,8 @@ define([
                 params.tileid(tile.tileid);
                 self.resourceId(tile.resourceinstance_id);
             }
+            self.setStateProperties();
+            params.workflow.updateUrl();
             if (self.completeOnSave === true) { self.complete(true); }
         };
     };

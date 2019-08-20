@@ -10,7 +10,7 @@ define([
         var self = this;
         params.completeOnSave = false;
         NewTileStep.apply(this, [params]);
-    };
+    }
 
     return ko.components.register('photo-gallery-step', {
         viewModel: viewModel,
