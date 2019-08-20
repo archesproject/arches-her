@@ -54,21 +54,21 @@ define([
             var nameCard = self.topCards.find(function(topCard) {
                 return topCard.nodegroupid == self.consultationNameNodeId;
             });
-            var nameCardTile = nameCard.getNewTile()
+            var nameCardTile = nameCard.getNewTile();
             nameCardTile.data[self.consultationNameNodeId](self.concatName());
             nameCardTile.save();
-        }
+        };
 
         this.formatDate = function(date) {
             var formatted = date.getFullYear()+'-'+ ('0' + (date.getMonth()+1)).slice(-2)+'-'+('0' + date.getDate()).slice(-2);
             return formatted;
-        }
+        };
 
         this.addDays = function(date, days) {
             var copy = new Date(Number(date));
             copy.setDate(date.getDate() + days);
             return self.formatDate(copy);
-        }
+        };
 
         self.tile.subscribe(function(val) {
             var resourceids, logDateVal, targetDateVal;
