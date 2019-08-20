@@ -19,9 +19,9 @@ define([
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
                 tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-            }
+            };
         };
-    };
+    }
 
     return ko.components.register('hide-card-step', {
         viewModel: viewModel,
