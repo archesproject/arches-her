@@ -136,7 +136,7 @@ define([
                 var previousStep = self.previousStep();
                 var resourceId;
                 if (previousStep) {
-                    self.state.steps[previousStep._index] = previousStep.stateProperties();
+                    self.state.steps[previousStep._index] = previousStep.getStateProperties();
                     self.state.steps[previousStep._index].complete = ko.unwrap(previousStep.complete);
                     self.state.activestep = val._index;
                     self.state.previousstep = previousStep._index;
