@@ -36,23 +36,8 @@ define([
                     tileid: null,
                     parenttileid: null,
                     class: 'hide-completion-date',
-                    icon: 'fa-calendar-o',
-                    sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"]
+                    icon: 'fa-calendar-o'
                 },
-                // {
-                //     title: 'Assign Name',
-                //     name: 'setname',
-                //     description: 'Assign a name to your consultation',
-                //     component: 'views/components/workflows/consultation-name-step',
-                //     componentname: 'consultation-name-step',
-                //     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                //     nodegroupid: '8d41e4ab-a250-11e9-87d1-00224800b26d',
-                //     resourceid: null,
-                //     tileid: null,
-                //     parenttileid: null,
-                //     icon: 'fa-tag',
-                //     sourcenodeids: ["8d41e4ba-a250-11e9-9b20-00224800b26d"]
-                // },
                 {
                     title: 'Consultation GeoJSON',
                     name: 'consultationlocation',
