@@ -10,13 +10,6 @@ define([
         var self = this;
         NewTileStep.apply(this, [params]);
 
-        var updateTileSubscription = self.loading.subscribe(function(val){
-            if(!val) {
-                self.loading(true);
-                self.updateTargetTile();
-                updateTileSubscription.dispose();
-            }
-        });
         params.applyOutputToTarget = ko.observable(true);
         if (!params.resourceid() && params.requirements){
             params.resourceid(params.requirements.resourceid);
@@ -25,19 +18,11 @@ define([
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
-        this.checkBox = ko.observable(false);
         if(params.config.checkbox) { this.checkBox(true); }
 
-        if(!!params.config.sourcenodeids()) {
-            this.sourceNodeIds = params.config.sourcenodeids();
-            this.targetNodeId = ko.unwrap(params.config.targetnodeid);
-            this.tileMethod = params.config.fn;
-        } else this.sourceNodeIds = [];
-
-        // this.workflowStepClass = ko.pureComputed(function() {
-        //     return self.applyOutputToTarget() ? params.class() : '';
-        // }, viewModel);
-        this.workflowStepClass = params.class || ko.observable();
+        this.workflowStepClass = ko.pureComputed(function() {
+            return self.applyOutputToTarget() ? params.class() : '';
+        }, viewModel);
 
         params.tile = self.tile;
 
@@ -50,43 +35,27 @@ define([
             };
         };
 
-        self.updateTargetTile = function(){
-            /**
-             * Expected from params.config:
-             *  config: {
-             *     fn: function(argsObj, callback){
-             *              //logic
-             *              //callback(returnValue)
-             *         },
-             *     sourcenodeids: [], //arr of nodeids
-             *     targetnodeid: "1234-abcd-5678-efgh"
-             *  }
-             * Note that argsObj.keys.length == sourcenodeids.length
-             * i.e. each tile datum is an argument you need
-             */
+        self.updateTargetTile = function(tiles){
+            var targetresult, targettile, sourcetile, targetvals;
 
-            var tileData;
-            var argsNeeded = self.sourceNodeIds.length;
-            var args = {};
-            var tiles = params.requirements.tiles; // i.e tiles in workflow state
-
-            self.sourceNodeIds.forEach(function(srcnodeid) {
-                tiles.forEach(function(tile){
-                    if (ko.unwrap(tile["data"][srcnodeid])) {
-                        tileData = tile["data"][srcnodeid]();
-                        args[srcnodeid] = tileData;
-                        if (Object.keys(args).length == argsNeeded) {
-                            self.tileMethod(args, function(val){
-                                if(ko.unwrap(val) != undefined) {
-                                    self.tile().data[self.targetNodeId](ko.unwrap(val));
-                                    self.loading(false);
-                                }
-                            });
-                        }
-                    }
-                });
+            tiles.forEach(function(tile){
+                if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
+                    targettile = tile;
+                } else if (tile.nodegroup_id === ko.unwrap(params.nodegroupid)) {
+                    sourcetile = tile;
+                }
             });
+            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)});
+            targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
+            targettile.data[params.targetnode()](targetresult);
+            targettile.save();
         };
+
+        self.applyOutputToTarget.subscribe(function(val){
+            if (val && self.tiles && self.tiles.length > 0) {
+                self.updateTargetTile(self.tiles);
+            }
+        });
 
         self.onSaveSuccess = function(tiles) {
             self.tiles = tiles;
@@ -94,6 +63,7 @@ define([
                 params.resourceid(tiles[0].resourceinstance_id);
                 self.resourceId(tiles[0].resourceinstance_id);
             }
+            if (self.applyOutputToTarget()) { self.updateTargetTile(tiles); }
             if (self.completeOnSave === true) { self.complete(true); }
         };
     }
