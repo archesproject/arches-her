@@ -26,8 +26,10 @@ define([
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.resValue.subscribe(function(val){
-            self.tile().resourceinstance_id = ko.unwrap(val);
-            params.resourceid(ko.unwrap(val)); //redundant with setting params.requirements.resourceid?
+            if (ko.unwrap(self.tile)) {
+                self.tile().resourceinstance_id = ko.unwrap(val);
+            }
+            params.resourceid(ko.unwrap(val));
         }, this);
 
         this.card.subscribe(function(val){ if(ko.unwrap(val) != undefined) { this.loading(false); } }, this);
@@ -38,7 +40,7 @@ define([
             params.workflow.state.steps[params._index] = params.getStateProperties();
             this.disableResourceSelection(true);
         };
-    };
+    }
 
     ko.components.register('select-resource-step', {
         viewModel: viewModel,

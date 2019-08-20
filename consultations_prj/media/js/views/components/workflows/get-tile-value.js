@@ -11,10 +11,13 @@ define([
         NewTileStep.apply(this, [params]);
 
         params.applyOutputToTarget = ko.observable(true);
-        if (!params.resourceid() && params.requirements){
-            params.resourceid(params.requirements.resourceid);
-            params.tileid(params.requirements.tileid);
+        if (!params.resourceid()) {
+            params.resourceid(params.workflow.state.resourceid);
         }
+        if (params.workflow.state.steps[params._index]) {
+            params.tileid(params.workflow.state.steps[params._index].tileid);
+        }
+
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
