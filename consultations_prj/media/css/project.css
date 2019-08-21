@@ -233,6 +233,19 @@
 
 }
 
+.projects-grid {
+    margin-left: -10px;
+}
+
+.projects-grid .card-grid-item {
+    margin: 10px;
+    border: 1px solid #bbb;
+}
+
+.projects-grid .card-grid-item:hover {
+    border: 1px solid steelblue;
+}
+
 div.active-cons-header {
     position: absolute;
     width: 270px;
@@ -240,12 +253,19 @@ div.active-cons-header {
     margin: 9px;
     padding: 15px;
     background-color: white;
+    opacity: .8;
     z-index: 1;
 }
 
-div.active-cons-header ~ div div, div.active-cons-header ~ div p {
-    overflow: hidden;
+.active-cons-header-title {
+    color: #25476A;
+    font-weight: 600;
+    font-size: 13px;
 }
+
+/* div.active-cons-header ~ div div, div.active-cons-header ~ div p {
+    overflow: hidden;
+} */
 
 div.active-cons-map-container {
     height: 200px;
@@ -298,15 +318,53 @@ div.active-cons-stubs {
     padding: 10px;
 }
 
+.active-cons-stubs.status-ok {
+    background: ##7BB800;
+}
+
+.status-ok div.active-cons-stub-val {
+    color: #fff;
+}
+
+.status-ok div.active-cons-stub-label {
+    color: #fff;
+}
+
+.active-cons-stubs.status-late {
+    background: #CD0074;
+}
+
+.status-late div.active-cons-stub-val {
+    color: #fff;
+}
+
+.status-late div.active-cons-stub-label {
+    color: #fff;
+}
+
+.active-cons-stubs.status-warning {
+    background: yellow;
+}
+
+.status-warning div.active-cons-stub-val {
+    color: #9B9B00;
+}
+
+.status-warning div.active-cons-stub-label {
+    color: #9B9B00;
+}
+
 div.active-cons-stub-left {
     flex-grow: 1;
     border-right: solid 1px #eaeaea;
     text-align: center;
+    width: 120px;
 }
 
 div.active-cons-stub-right {
     flex-grow: 1;
     text-align: center;
+    width: 150px;
 }
 
 div.ep-tools-title > div {
@@ -315,11 +373,32 @@ div.ep-tools-title > div {
 }
 
 div.active-cons-stub-val {
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #25476A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.active-cons-stub-label {
     font-size: 11px;
+    color: #777;
+}
+
+.active-cons-stub-summary {
+    font-size: 12px;
+    color: #727272;
+    height: 116px;
+    padding: 10px 15px;
+}
+
+.active-cons-stub-summary-text {
+    width: 265px;
+    overflow: hidden;
+    height: 98px;
+    /* white-space: nowrap;
+    text-overflow: ellipsis; */
 }
 
 .workflow-main-nav-item {
@@ -343,4 +422,42 @@ div.hide-address-name div:nth-child(3) > form:nth-child(2).widgets
 
 div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3) {
     visibility: hidden;
+}
+
+.ep-toolbar.cons {
+    border-top: 1px solid #ddd;
+    background: #f8f8f8;
+}
+
+.cons .ep-tools-right {
+    background: #f2f2f2;
+    border-top: 1px solid #ddd;
+}
+
+.cons-owner-title-panel {
+    height: 50px;
+    font-size: 13px;
+    color: #25476A;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.cons-owner-title {
+    padding: 15px;
+    font-weight: 600;
+}
+
+.active-cons-map .map-credit a.mapboxgl-ctrl-logo {
+    margin: -5px 0 -3px 3px;
+}
+
+.active-cons-table-container {
+    padding: 20px 0px;
+}
+
+.active-cons-table-clip-field {
+    width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }

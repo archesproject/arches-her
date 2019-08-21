@@ -29,14 +29,14 @@ import json
 
 class ActiveConsultationsView(View):
 
-    def get(self, request): 
+    def get(self, request):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
         datatype_factory = DataTypeFactory()
         cons_details_tiles = Tile.objects.filter(nodegroup_id='8d41e4c0-a250-11e9-a7e3-00224800b26d')
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
         tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
-        page_ct = 6 # should probably be set somewhere else, either sent from VM via request or in settings file?
+        page_ct = 8 # should probably be set somewhere else, either sent from VM via request or in settings file?
         paginator = Paginator(tiles, page_ct)
         page_results = paginator.page(page_num)
         if page_results.has_next() is True:
@@ -77,7 +77,7 @@ class ActiveConsultationsView(View):
 
         return HttpResponseNotFound()
 
-    
+
     def build_exclude_list(self, tiles, datatype_factory):
         exclude_list = []
         exclude_statuses = ["Aborted","Completed"]
@@ -123,4 +123,3 @@ class ActiveConsultationsView(View):
             tiles.append(res)
 
         return tiles
-
