@@ -63,7 +63,7 @@ define([
                 size: file.size,
                 status: file.status,
                 type: file.type,
-                width: file.width,
+                width: null,
                 url: null,
                 file_id: null,
                 index: 0,
