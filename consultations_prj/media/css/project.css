@@ -233,6 +233,19 @@
 
 }
 
+.projects-grid {
+    margin-left: -10px;
+}
+
+.projects-grid .card-grid-item {
+    margin: 10px;
+    border: 1px solid #bbb;
+}
+
+.projects-grid .card-grid-item:hover {
+    border: 1px solid steelblue;
+}
+
 div.active-cons-header {
     position: absolute;
     width: 270px;
@@ -240,12 +253,19 @@ div.active-cons-header {
     margin: 9px;
     padding: 15px;
     background-color: white;
+    opacity: .8;
     z-index: 1;
 }
 
-div.active-cons-header ~ div div, div.active-cons-header ~ div p {
-    overflow: hidden;
+.active-cons-header-title {
+    color: #25476A;
+    font-weight: 600;
+    font-size: 13px;
 }
+
+/* div.active-cons-header ~ div div, div.active-cons-header ~ div p {
+    overflow: hidden;
+} */
 
 div.active-cons-map-container {
     height: 200px;
@@ -315,11 +335,21 @@ div.ep-tools-title > div {
 }
 
 div.active-cons-stub-val {
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #25476A;
 }
 
 div.active-cons-stub-label {
     font-size: 11px;
+    color: #777;
+}
+
+.active-cons-stub-summary {
+    font-size: 12px;
+    color: #727272;
+    height: 116px;
+    padding: 10px 15px;
 }
 
 .workflow-main-nav-item {
@@ -340,4 +370,8 @@ div.hide-address-name div:nth-child(3) > form:nth-child(2) > div:nth-child(1) {
 
 div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3) {
     visibility: hidden;
+}
+
+.active-cons-map .map-credit a.mapboxgl-ctrl-logo {
+    margin: -5px 0 -3px 3px;
 }
