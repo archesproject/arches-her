@@ -21,8 +21,6 @@ define([
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
-        if(params.config.checkbox) { this.checkBox(true); }
-
         this.workflowStepClass = ko.pureComputed(function() {
             return self.applyOutputToTarget() ? params.class() : '';
         }, viewModel);
@@ -40,7 +38,6 @@ define([
 
         self.updateTargetTile = function(tiles){
             var targetresult, targettile, sourcetile, targetvals;
-
             tiles.forEach(function(tile){
                 if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
                     targettile = tile;
@@ -48,8 +45,14 @@ define([
                     sourcetile = tile;
                 }
             });
-            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)});
-            targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
+
+            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v);});
+            var building = targetvals[2] ? targetvals[2] + ", " : '';
+            var street   = targetvals[1] ? targetvals[1] + ", " : '';
+            var locality = targetvals[3] ? targetvals[3] + ", " : '';
+            var city     = targetvals[4] ? targetvals[4] + ", " : '';
+            var postcode = targetvals[0] ? targetvals[0] : '';
+            targetresult = building + street + locality + city + postcode;
             targettile.data[params.targetnode()](targetresult);
             targettile.save();
         };
