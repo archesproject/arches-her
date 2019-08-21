@@ -14,8 +14,8 @@
                 <option value="2" >something else</option>
                 <option value="3">option 3</option>
             </select>
-            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === '' }" class="text-center fa fa-th" style="font-size: 28px;"></i></button>
-            <button class="btn" data-bind="click: function(){setLayout('');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 28px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === '' }" class="text-center fa fa-th" style="font-size: 24px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 24px;"></i></button>
 
 
         </div>
@@ -68,11 +68,11 @@
 
                         <div class="active-cons-stubs">
                             <div class="active-cons-stub-left">
-                                <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'n/a'"></div>
+                                <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'Date not entered'"></div>
                                 <div class="active-cons-stub-label" data-bind="">Target Date</div>
                             </div>
                             <div class="active-cons-stub-right">
-                                <div class="active-cons-stub-val" data-bind="text: $data['Consultation Type'] || 'n/a'"></div>
+                                <div class="active-cons-stub-val" data-bind="text: $data['Consultation Type'] || 'Type not entered'"></div>
                                 <div class="active-cons-stub-label" data-bind="">Type</div>
                             </div>
                         </div>
