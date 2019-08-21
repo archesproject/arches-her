@@ -3,7 +3,7 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/get-tile-value'
+    'views/components/workflows/app-area-name-step'
 ], function(ko, Workflow, Step) {
     return ko.components.register('application-area', {
         viewModel: function(params) {
@@ -13,8 +13,8 @@ define([
                     title: 'Assign Address',
                     name: 'assignaddress',
                     description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/get-tile-value',
-                    componentname: 'get-tile-value',
+                    component: 'views/components/workflows/app-area-name-step',
+                    componentname: 'app-area-name-step',
                     graphid: '336d34e3-53c3-11e9-ba5f-dca90488358a',
                     nodegroupid: '5fea7890-9cbb-11e9-ae86-00224800b26d',
                     targetnodegroup: 'c5f909b5-53c7-11e9-a3ac-dca90488358a',

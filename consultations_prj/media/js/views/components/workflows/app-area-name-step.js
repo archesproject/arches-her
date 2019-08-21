@@ -74,10 +74,10 @@ define([
         };
     }
 
-    return ko.components.register('get-tile-value', {
+    return ko.components.register('app-area-name-step', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/get-tile-value.htm'
+            require: 'text!templates/views/components/workflows/app-area-name-step.htm'
         }
     });
 });
