@@ -16,6 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
+from datetime import datetime
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
 from django.views.generic import View
@@ -63,7 +64,7 @@ class FileTemplateView(View):
             elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
                 self.edit_letter_B2(consultation, datatype_factory)
 
-            new_file_name = 'edited_'+template_name
+            new_file_name = 'gen_'+datetime.today()+'_'+template_name
             new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
             self.doc.save(new_file_path)
             # with open(new_file_path, "rb") as docx_file:
@@ -74,7 +75,7 @@ class FileTemplateView(View):
             #     html_file.close()
 
         if resourceinstance_id is not None:
-            return JSONResponse({'resource': self.resource, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
+            return JSONResponse({'resource': self.resource, 'file': self.doc, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
 
         return HttpResponseNotFound()
 
