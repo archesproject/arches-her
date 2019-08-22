@@ -1,3 +1,175 @@
+.file-upload-filter {
+    margin-right: 5px;
+}
+
+.file-upload-card {
+    border: 1px solid #c4c4c4;
+    border-radius: 2px;
+    padding: 6px 8px 3px 15px;
+    background: #f6f6f6;
+    color: #01113c;
+}
+
+.file-upload-options {
+    padding-bottom: 8px;
+}
+
+.btn-file-upload-reset {
+    color: #489EED;
+    font-size: 12px;
+    float: right;
+}
+
+
+.file-upload-card-detail-right {
+    min-width: 85px;
+    float: right;
+    margin-top: 6px;
+}
+
+div.workflow-content {
+    flex-grow: 2;
+}
+
+.workflow-select-desc {
+    font-size: 12px;
+    padding-top: 10px;
+}
+
+.workflow-select-card-container-title {
+    font-size: 1.5em;
+    font-weight: 500;
+    padding-left: 30px;
+    margin-top: 5px;
+    margin-bottom: -15px;
+}
+
+.workflow-select-card-container {
+    display: flex;
+    flex-grow: inherit;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.workflow-select-card {
+    width: 200px;
+    height: 200px;
+    padding: 10px;
+    color: white;
+    text-align: center;
+    border: 1px solid #777;
+    border-radius: 1px;
+    margin: 10px;
+    opacity: 0.85;
+}
+
+.workflow-select-card:hover {
+    opacity: 1.0;
+    border: 1px solid black;
+}
+
+.btn-file-upload-limit {
+    color: #489EED;
+    font-size: 12px;
+    float: left;
+}
+
+.btn-file-cancel {
+    background: #01113c;
+    border-radius: 50%;
+    border: none;
+}
+
+.workflow-panel-header a span {
+    font-size: 16px;
+    color: white;
+    margin-bottom: 12px;
+    margin-left: 20px;
+    padding-right: 50px;
+    width: 100%;
+}
+
+.workflow-panel-header {
+    padding-top: 20px;
+}
+
+.workflow-panel-header > hr {
+    border-color: #142638;
+    width: 100%;
+}
+
+.sub-title {
+    font-weight: 600;
+}
+
+
+.workflow-panel {
+    background: #26476a;
+    /* width: 12%; */
+    color: white;
+}
+
+div.workflow-panel {
+    min-width: 250px;
+}
+
+.workflow-panel ul {
+    /* text-decoration: none; */
+    list-style-type: none;
+    /* padding-left: 12px; */
+    margin-bottom: 20px;
+    min-height: 200px;
+    padding-left: 0;
+    /* border-bottom: #fff; */
+    border-width: 2px;
+}
+
+.workflow-panel i {
+    margin-right: 12px;
+}
+
+.workflow-panel li {
+    padding-top: 12px;
+    padding-left: 30px;
+    padding-bottom: 12px;
+}
+
+.workflow-panel li:hover {
+    background-color: #5f7892;
+}
+
+.workflow-panel > hr {
+    border-color: white;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+
+.workflow-panel li a span {
+    color: white;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.workflow-select-wf-icon {
+    color: white;
+    font-size: 40px;
+}
+
+.workflow-select-title {
+    font-size: 1.4em;
+    font-weight: 500;
+}
+
+.workflow-select-wf-circle {
+    width: 80px;
+    height: 80px;
+    display: inline-block;
+    text-align: center;
+    padding: 18px;
+    border-radius: 40px;
+}
+
 .card-display-panel {
     border: 1px solid #999;
     position: relative;
@@ -233,6 +405,19 @@
 
 }
 
+.projects-grid {
+    margin-left: -10px;
+}
+
+.projects-grid .card-grid-item {
+    margin: 10px;
+    border: 1px solid #bbb;
+}
+
+.projects-grid .card-grid-item:hover {
+    border: 1px solid steelblue;
+}
+
 div.active-cons-header {
     position: absolute;
     width: 270px;
@@ -240,12 +425,19 @@ div.active-cons-header {
     margin: 9px;
     padding: 15px;
     background-color: white;
+    opacity: .8;
     z-index: 1;
 }
 
-div.active-cons-header ~ div div, div.active-cons-header ~ div p {
-    overflow: hidden;
+.active-cons-header-title {
+    color: #25476A;
+    font-weight: 600;
+    font-size: 13px;
 }
+
+/* div.active-cons-header ~ div div, div.active-cons-header ~ div p {
+    overflow: hidden;
+} */
 
 div.active-cons-map-container {
     height: 200px;
@@ -298,15 +490,53 @@ div.active-cons-stubs {
     padding: 10px;
 }
 
+.active-cons-stubs.status-ok {
+    background: ##7BB800;
+}
+
+.status-ok div.active-cons-stub-val {
+    color: #fff;
+}
+
+.status-ok div.active-cons-stub-label {
+    color: #fff;
+}
+
+.active-cons-stubs.status-late {
+    background: #CD0074;
+}
+
+.status-late div.active-cons-stub-val {
+    color: #fff;
+}
+
+.status-late div.active-cons-stub-label {
+    color: #fff;
+}
+
+.active-cons-stubs.status-warning {
+    background: yellow;
+}
+
+.status-warning div.active-cons-stub-val {
+    color: #9B9B00;
+}
+
+.status-warning div.active-cons-stub-label {
+    color: #9B9B00;
+}
+
 div.active-cons-stub-left {
     flex-grow: 1;
     border-right: solid 1px #eaeaea;
     text-align: center;
+    width: 120px;
 }
 
 div.active-cons-stub-right {
     flex-grow: 1;
     text-align: center;
+    width: 150px;
 }
 
 div.ep-tools-title > div {
@@ -315,11 +545,32 @@ div.ep-tools-title > div {
 }
 
 div.active-cons-stub-val {
-    font-size: 14px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #25476A;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 div.active-cons-stub-label {
     font-size: 11px;
+    color: #777;
+}
+
+.active-cons-stub-summary {
+    font-size: 12px;
+    color: #727272;
+    height: 116px;
+    padding: 10px 15px;
+}
+
+.active-cons-stub-summary-text {
+    width: 265px;
+    overflow: hidden;
+    height: 98px;
+    /* white-space: nowrap;
+    text-overflow: ellipsis; */
 }
 
 .workflow-main-nav-item {
@@ -331,17 +582,59 @@ li.workflow-main-nav-item a {
     display: block;
 }
 
-div.hide-address-name div:nth-child(3) > form:nth-child(2) > div:nth-child(1) {
+div.hide-address-name div:nth-child(3) > form:nth-child(1).widgets,
+div.hide-address-name div:nth-child(3) > form:nth-child(2).widgets
+ {
     visibility: hidden;
     height: 0;
     padding: 0;
     width: 0;
+    margin: -20px;
 }
 
 div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3) {
     visibility: hidden;
 }
 
+<<<<<<< HEAD
 div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     visibility: hidden;
+=======
+.ep-toolbar.cons {
+    border-top: 1px solid #ddd;
+    background: #f8f8f8;
+}
+
+.cons .ep-tools-right {
+    background: #f2f2f2;
+    border-top: 1px solid #ddd;
+}
+
+.cons-owner-title-panel {
+    height: 50px;
+    font-size: 13px;
+    color: #25476A;
+    margin-right: auto;
+    overflow: hidden;
+}
+
+.cons-owner-title {
+    padding: 15px;
+    font-weight: 600;
+}
+
+.active-cons-map .map-credit a.mapboxgl-ctrl-logo {
+    margin: -5px 0 -3px 3px;
+}
+
+.active-cons-table-container {
+    padding: 20px 0px;
+}
+
+.active-cons-table-clip-field {
+    width: 40%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+>>>>>>> master
 }

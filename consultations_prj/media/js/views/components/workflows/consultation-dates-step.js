@@ -8,18 +8,22 @@ define([
     function viewModel(params) {
 
         NewTileStep.apply(this, [params]);
-        if (!params.resourceid() && params.requirements){
-            params.resourceid(params.requirements.resourceid);
-            params.tileid(params.requirements.tileid);
+        var self = this;
+
+        if (!params.resourceid()) {
+            params.resourceid(params.workflow.state.resourceid);
+        }
+        if (params.workflow.state.steps[params._index]) {
+            params.tileid(params.workflow.state.steps[params._index].tileid);
         }
 
-        var self = this;
-        
-        self.requirements = params.requirements;
+        var url = arches.urls.api_card + (ko.unwrap(params.resourceid) || ko.unwrap(params.graphid));
+
+
         params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
 
-        params.stateProperties = function(){
+        params.getStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
@@ -32,8 +36,8 @@ define([
         this.consultationNameNodeId = '8d41e4ab-a250-11e9-87d1-00224800b26d';
         this.appAreaNodeId = "8d41e4de-a250-11e9-973b-00224800b26d";
         this.relatedAppAreaNodeId = '8d41e4ba-a250-11e9-9b20-00224800b26d';
-        this.logDateNode = "8d41e4cf-a250-11e9-a86d-00224800b26d";
-        this.targetDateNode = "8d41e4cb-a250-11e9-9cf2-00224800b26d";
+        this.logDateNodeId = "8d41e4cf-a250-11e9-a86d-00224800b26d";
+        this.targetDateNodeId = "8d41e4cb-a250-11e9-9cf2-00224800b26d";
 
         this.workflowStepClass = ko.unwrap(params.class());
 
@@ -73,17 +77,17 @@ define([
         self.tile.subscribe(function(val) {
             var resourceids, logDateVal, targetDateVal;
             var DefaultTargetDateLeadTime = 22, relatedAppAreaTile = self.getTiles(self.relatedAppAreaNodeId)[0];
-            if(!ko.unwrap(self.displayName)) {
+            if(!ko.unwrap(self.displayName) && !ko.unwrap(val.data[self.targetDateNodeId])) {
                 resourceids = ko.unwrap(relatedAppAreaTile.data[self.appAreaNodeId]);
                 self.getResourceDisplayName(resourceids);
             }
             if(val) {
-                self.tile().data[self.logDateNode].subscribe(function(val) {
+                self.tile().data[self.logDateNodeId].subscribe(function(val) {
                     logDateVal = new Date(val);
                     if (logDateVal != 'Invalid Date') {
                         self.concatName('Consultation for '+self.displayName()+' on '+logDateVal.toLocaleDateString());
                         targetDateVal = self.addDays(logDateVal, DefaultTargetDateLeadTime);
-                        self.tile().data[self.targetDateNode](targetDateVal);
+                        self.tile().data[self.targetDateNodeId](targetDateVal);
                     }
                 });
             }
@@ -98,6 +102,8 @@ define([
                 params.tileid(tile.tileid);
                 self.resourceId(tile.resourceinstance_id);
             }
+            self.setStateProperties();
+            params.workflow.updateUrl();
             if (self.completeOnSave === true) { self.complete(true); }
         };
     };

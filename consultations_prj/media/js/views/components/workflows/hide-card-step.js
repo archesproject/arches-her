@@ -8,13 +8,15 @@ define([
 ], function(_, $, arches, ko, koMapping, NewTileStep) {
     function viewModel(params) {
         NewTileStep.apply(this, [params]);
-        if (!params.resourceid() && params.requirements){
-            params.resourceid(params.requirements.resourceid);
-            params.tileid(params.requirements.tileid);
+        if (!params.resourceid()) {
+            params.resourceid(params.workflow.state.resourceid);
+        }
+        if (params.workflow.state.steps[params._index]) {
+            params.tileid(params.workflow.state.steps[params._index].tileid);
         }
 
         this.workflowStepClass = ko.unwrap(params.class());
-        params.stateProperties = function(){
+        params.getStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,

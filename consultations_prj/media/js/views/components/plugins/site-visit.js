@@ -16,7 +16,7 @@ define([
                     title: 'Site Visit Details - Related Consultation',
                     name: 'sitevisitdetailsrelatedconsultation',
                     description: '',
-                    component: 'views/components/workflows/new-tile-step',
+                    component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     // nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d', //Visit Date

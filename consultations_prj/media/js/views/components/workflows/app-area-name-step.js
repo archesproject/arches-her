@@ -11,22 +11,23 @@ define([
         NewTileStep.apply(this, [params]);
 
         params.applyOutputToTarget = ko.observable(true);
-        if (!params.resourceid() && params.requirements){
-            params.resourceid(params.requirements.resourceid);
-            params.tileid(params.requirements.tileid);
+        if (!params.resourceid()) {
+            params.resourceid(params.workflow.state.resourceid);
         }
+        if (params.workflow.state.steps[params._index]) {
+            params.tileid(params.workflow.state.steps[params._index].tileid);
+        }
+
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
-        if(params.config.checkbox) { this.checkBox(true); }
-
         this.workflowStepClass = ko.pureComputed(function() {
             return self.applyOutputToTarget() ? params.class() : '';
         }, viewModel);
 
         params.tile = self.tile;
 
-        params.stateProperties = function(){
+        params.getStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
@@ -37,7 +38,6 @@ define([
 
         self.updateTargetTile = function(tiles){
             var targetresult, targettile, sourcetile, targetvals;
-
             tiles.forEach(function(tile){
                 if (tile.nodegroup_id === ko.unwrap(params.targetnodegroup)) {
                     targettile = tile;
@@ -45,8 +45,14 @@ define([
                     sourcetile = tile;
                 }
             });
-            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v)});
-            targetresult = targetvals[2] + ", " + targetvals[0] + " " + targetvals[1];
+
+            targetvals = _.map(sourcetile.data, function(v, k) {return ko.unwrap(v);});
+            var building = targetvals[2] ? targetvals[2] + ", " : '';
+            var street   = targetvals[1] ? targetvals[1] + ", " : '';
+            var locality = targetvals[3] ? targetvals[3] + ", " : '';
+            var city     = targetvals[4] ? targetvals[4] + ", " : '';
+            var postcode = targetvals[0] ? targetvals[0] : '';
+            targetresult = building + street + locality + city + postcode;
             targettile.data[params.targetnode()](targetresult);
             targettile.save();
         };
@@ -68,10 +74,10 @@ define([
         };
     }
 
-    return ko.components.register('get-tile-value', {
+    return ko.components.register('app-area-name-step', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/get-tile-value.htm'
+            require: 'text!templates/views/components/workflows/app-area-name-step.htm'
         }
     });
 });
