@@ -31,7 +31,8 @@ define([
         this.workflowStepClass = ko.unwrap(params.class());
 
         this.retrieveFile = function(tile) {
-            var templateId = tile["data"][self.letterTypeNodeId]();
+            var templateId = self.getTiles(self.letterTypeNodeId)[0];
+            // var templateId = tile["data"][self.letterTypeNodeId]();
             $.ajax({
                 type: "GET",
                 url: arches.urls.root + 'filetemplate',
@@ -81,7 +82,9 @@ define([
         };
 
         self.tile.subscribe(function(val) {
-            //
+            if(val) {
+                self.retrieveFile(val);
+            }
         });
 
         self.onSaveSuccess = function(tiles) {
