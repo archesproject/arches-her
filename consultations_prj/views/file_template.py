@@ -43,11 +43,11 @@ class FileTemplateView(View):
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
-        consultation_instance_id = None
-        consultation = None
-        for tile in self.resource.tiles: # self.resource is of communication model
-            if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
-                consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
+        # consultation_instance_id = None
+        # consultation = None
+        # for tile in self.resource.tiles: # self.resource is of communication model
+        #     if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
+        #         consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
@@ -55,24 +55,25 @@ class FileTemplateView(View):
         new_file_name = None
         new_file_path = None
 
-        if consultation_instance_id is not None:
-            consultation = Resource.objects.get(resourceinstanceid=consultation_instance_id)
-            consultation.load_tiles()
+        # if resourceinstance_id is not None:
+        #     consultation = Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        #     consultation.load_tiles()
 
-            if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
-                self.edit_letter_A(consultation, datatype_factory)
-            elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
-                self.edit_letter_B2(consultation, datatype_factory)
+        if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
+            self.edit_letter_A(self.resource, datatype_factory)
+        elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
+            self.edit_letter_B2(self.resource, datatype_factory)
 
-            new_file_name = 'gen_'+datetime.today()+'_'+template_name
-            new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
-            self.doc.save(new_file_path)
-            # with open(new_file_path, "rb") as docx_file:
-            #     result = mammoth.convert_to_html(docx_file)
-            #     html = result.value # The generated HTML
-            # with open(html_path, 'wb') as html_file:
-            #     html_file.write(html)
-            #     html_file.close()
+        print(datetime.today())
+        new_file_name = 'gen_'+datetime.today()+'_'+template_name
+        new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
+        self.doc.save(new_file_path)
+        # with open(new_file_path, "rb") as docx_file:
+        #     result = mammoth.convert_to_html(docx_file)
+        #     html = result.value # The generated HTML
+        # with open(html_path, 'wb') as html_file:
+        #     html_file.write(html)
+        #     html_file.close()
 
         if resourceinstance_id is not None:
             return JSONResponse({'resource': self.resource, 'file': self.doc, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
@@ -90,7 +91,6 @@ class FileTemplateView(View):
             "8cc91474-11ce-47d9-b886-f0e3fc49d277":'GLAAS Planning Letter B2 - Predetermination - template.docx', # Letter B2
             "08bb630d-a27b-45bc-a13f-567b428018c5":'GLAAS Planning Letter C - Condition two stage - template.docx' # Letter C
             }
-        print(template_id)
         for key, value in template_dict.items():
             if key == template_id:
                 return value
