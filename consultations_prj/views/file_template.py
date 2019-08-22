@@ -64,19 +64,20 @@ class FileTemplateView(View):
         elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
             self.edit_letter_B2(self.resource, datatype_factory)
 
-        print(datetime.today())
-        new_file_name = 'gen_'+datetime.today()+'_'+template_name
+        date = datetime.today()
+        date = date.strftime("%Y")+'-'+date.strftime("%m")+'-'+date.strftime("%d")
+        new_file_name = date+'_'+template_name
         new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
         self.doc.save(new_file_path)
+        stat = os.stat(new_file_path)
         # with open(new_file_path, "rb") as docx_file:
-        #     result = mammoth.convert_to_html(docx_file)
-        #     html = result.value # The generated HTML
-        # with open(html_path, 'wb') as html_file:
-        #     html_file.write(html)
-        #     html_file.close()
+        #     thing = result.value
+
+        # create django post request
+        # create new file then send it to make a new file
 
         if resourceinstance_id is not None:
-            return JSONResponse({'resource': self.resource, 'file': self.doc, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
+            return JSONResponse({'resource': self.resource, 'size': stat.st_size, 'mod': stat.st_mtime, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
 
         return HttpResponseNotFound()
 

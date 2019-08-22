@@ -60,28 +60,22 @@ define([
         this.saveLetterFileTile = function(tile) {
 
             var tilevalue = {
-                name: file.name,
+                name: file.name, //grab file name
                 accepted: true,
-                height: file.height,
-                lastModified: file.lastModified,
-                size: file.size,
-                status: file.status,
-                type: file.type,
+                height: null,
+                lastModified: file.lastModified, //grab from mod
+                size: file.size, //grab from size
+                status: "uploaded",
+                type: 'document/docx',
                 width: null,
-                url: null,
+                url: null, //grab from response['template']
                 file_id: null,
                 index: 0,
                 content: URL.createObjectURL(file),
-                error: file.error
+                error: null
             };
             tile.data[letterFileNodeId]([tilevalue]);
-
-            var nameCard = self.topCards.find(function(topCard) {
-                return topCard.nodegroupid == self.consultationNameNodeId;
-            });
-            var nameCardTile = nameCard.getNewTile();
-            nameCardTile.data[self.consultationNameNodeId](self.concatName());
-            nameCardTile.save();
+   
         };
 
         self.tile.subscribe(function(val) {
@@ -94,7 +88,7 @@ define([
             var tile;
             if (tiles.length > 0 || typeof tiles == 'object') {
                 tile = tiles[0] || tiles;
-                if (!tile.data[letterFileNodeId]()) { self.saveLetterFileTile(tile); }
+                if (!tile.data[self.letterFileNodeId]()) { self.saveLetterFileTile(tile); }
                 params.resourceid(tile.resourceinstance_id);
                 params.tileid(tile.tileid);
                 self.resourceId(tile.resourceinstance_id);
