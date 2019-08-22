@@ -90,6 +90,7 @@ class FileTemplateView(View):
             "8cc91474-11ce-47d9-b886-f0e3fc49d277":'GLAAS Planning Letter B2 - Predetermination - template.docx', # Letter B2
             "08bb630d-a27b-45bc-a13f-567b428018c5":'GLAAS Planning Letter C - Condition two stage - template.docx' # Letter C
             }
+        print(template_id)
         for key, value in template_dict.items():
             if key == template_id:
                 return value

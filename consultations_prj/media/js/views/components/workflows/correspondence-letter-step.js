@@ -18,6 +18,7 @@ define([
         self.requirements = params.requirements;
         params.tile = self.tile;
         this.letterFileNodeId = "8d41e4d1-a250-11e9-9a12-00224800b26d";
+        this.letterTypeNodegroupId = "8d41e4b4-a250-11e9-993d-00224800b26d";
         this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
 
         params.stateProperties = function(){
@@ -31,7 +32,9 @@ define([
         this.workflowStepClass = ko.unwrap(params.class());
 
         this.retrieveFile = function(tile) {
-            var templateId = self.getTiles(self.letterTypeNodeId)[0];
+            console.log(tile);
+            var templateId = self.getTiles(self.letterTypeNodegroupId)[0].data[self.letterTypeNodeId]();
+            console.log(templateId);
             // var templateId = tile["data"][self.letterTypeNodeId]();
             $.ajax({
                 type: "GET",

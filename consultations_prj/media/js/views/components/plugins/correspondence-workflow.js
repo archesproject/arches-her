@@ -15,7 +15,7 @@ define([
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '',
+                    nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
