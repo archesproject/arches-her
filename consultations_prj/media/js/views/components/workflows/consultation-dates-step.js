@@ -77,7 +77,7 @@ define([
         self.tile.subscribe(function(val) {
             var resourceids, logDateVal, targetDateVal;
             var DefaultTargetDateLeadTime = 22, relatedAppAreaTile = self.getTiles(self.relatedAppAreaNodeId)[0];
-            if(!ko.unwrap(self.displayName)) {
+            if(!ko.unwrap(self.displayName) && !ko.unwrap(val.data[self.targetDateNodeId])) {
                 resourceids = ko.unwrap(relatedAppAreaTile.data[self.appAreaNodeId]);
                 self.getResourceDisplayName(resourceids);
             }
