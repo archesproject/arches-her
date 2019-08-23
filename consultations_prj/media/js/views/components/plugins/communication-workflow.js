@@ -16,7 +16,7 @@ define([
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: "caf5bff9-a3d7-11e9-a2e7-00224800b26d", // Comm Date
+                    nodegroupid: "",
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -26,52 +26,15 @@ define([
                 },
                 {
                     title: 'Communication Details',
-                    description: 'Type of Communication',
+                    description: 'Enter the details for this Communication',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bff4-a3d7-11e9-99c5-00224800b26d',
+                    nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag'
-                },
-                {
-                    title: 'Communication Details',
-                    description: 'Dates of Communication',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bff9-a3d7-11e9-a2e7-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
-                },
-                {
-                    title: 'Communication Details',
-                    description: 'Subject of Communication',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bff6-a3d7-11e9-96e5-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
-                },
-                {
-                    title: 'Attendees',
-                    name: 'setname',
-                    description: 'Attendee List',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bffa-a3d7-11e9-8b1b-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-user-plus'
                 },
                 {
                     title: 'Notes',
@@ -96,20 +59,6 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-clipboard'
-                },
-                {
-                    title: 'Set Type',
-                    description: 'Select Template type',
-                    component: 'views/components/workflows/file-template',
-                    componentname: 'file-template',
-                    // component: 'views/components/workflows/new-tile-step',
-                    // componentname: 'new-tile-step',
-                    graphid: '97b30d4c-6c4a-11e9-853f-dca90488358a',
-                    nodegroupid: '23e1ac91-6c4b-11e9-8641-dca90488358a',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
                 },
                 {
                     title: 'Upload Documents',
