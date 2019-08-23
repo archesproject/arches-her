@@ -73,7 +73,8 @@ class FileTemplateView(View):
         # with open(new_file_path, "rb") as docx_file:
         #     thing = result.value
 
-        # create django post request
+        # create django post request -- clone it from the existing one, change it to "POST", first figure out what it needs to be h
+        # handled by the tile view
         # create new file then send it to make a new file
 
         if resourceinstance_id is not None:
