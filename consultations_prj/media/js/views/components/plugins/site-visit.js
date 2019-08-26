@@ -19,8 +19,7 @@ define([
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    // nodegroupid: '1cff60de-a251-11e9-a296-00224800b26d', //Visit Date
-                    nodegroupid: "8d41e4ab-a250-11e9-87d1-00224800b26d", //Consultation Name -- strictly used for testing component
+                    nodegroupid: '066cb8f0-a251-11e9-85d5-00224800b26d', //Visit Date & desc
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -35,8 +34,7 @@ define([
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    // nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d', // visit attendees
-                    nodegroupid: "8d41e4bd-a250-11e9-89e8-00224800b26d", //Consultation Proposal -- strictly used for testing component
+                    nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
