@@ -29,7 +29,7 @@ from arches.app.models.system_settings import settings
 from arches.app.utils.response import JSONResponse
 from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.search.search_engine_factory import SearchEngineFactory
-from arches.app.search.elasticsearch_dsl_builder import Bool, Match, Query, Terms, MaxAgg, Aggregation
+from arches.app.search.elasticsearch_dsl_builder import Bool, Match, Query, Terms, MaxAgg, Aggregation, Nested
 from arches.app.search.time_wheel import TimeWheel
 from arches.app.search.components.base import SearchFilterFactory
 from arches.app.views.base import MapBaseManagerView
@@ -176,13 +176,12 @@ def search_results(request):
         'query': Query(se)
     }
 
-    # import ipdb
-    # ipdb.set_trace()
-
     include_provisional = get_provisional_type(request)
     permitted_nodegroups = get_permitted_nodegroups(request.user)
 
-    request.GET['resource-type-filter'] = '[{"graphid":"336d34e3-53c3-11e9-ba5f-dca90488358a","name":"GLHER_Application_Area","inverted":false}]'
+    # get a list of resourceIds of type GLHER_Application_Area and GLHER_Heritage_Asset that meet
+    # the search query then use those ids to search for related GLHER_Consultation instances
+    request.GET['resource-type-filter'] = '[{"graphid":"336d34e3-53c3-11e9-ba5f-dca90488358a","name":"GLHER_Application_Area","inverted":false}, {"graphid":"076f9381-7b00-11e9-8d6b-80000b44d1d9","name":"GLHER_Heritage_Asset","inverted":false}]'
     search_filter_factory = SearchFilterFactory(request)
     try:
         for filter_type, querystring in request.GET.items() + [('search-results', '')]:
@@ -194,10 +193,8 @@ def search_results(request):
 
     dsl = search_results_object.pop('query', None)
     dsl.exclude('*')
-    results = dsl.search(index='resources')
-
+    results = dsl.search(index='resources', limit=1000)
     resourceIds = [hit['_id'] for hit in results['hits']['hits']]
-    print resourceIds
 
     search_results_object = {
         'query': Query(se)
@@ -213,23 +210,23 @@ def search_results(request):
     except Exception as err:
         return JSONResponse(err.message, status=500)
 
-
+    # only search for realted instance references when a filter is applied (aside from the paging filter)
     if has_filters:
         resrouce_id_query = Bool()
-        resrouce_id_query.should(Terms(field='ids.id.keyword', terms=resourceIds))
-        #search_results_object['query'].add_query(resrouce_id_query)
-        
+        resrouce_id_query.should(Nested(path='ids', query=Terms(field='ids.id', terms=resourceIds)))
         dsl = search_results_object.pop('query', None)
-        #dsl = resrouce_id_query.should(dsl.dsl.pop('query', None))
         resrouce_id_query.should(dsl.dsl.pop('query', None))
         dsl.dsl['query'] = {}
         search_results_object['query'] = dsl
         search_results_object['query'].add_query(resrouce_id_query)
 
+    # need to reapply the resource type filter at the outermost level to handle for the scenario 
+    # where an GLHER_Application_Area (or GLHER_Heritage_Asset) is related to something other than a GLHER_Consultation
+    search_filter = search_filter_factory.get_filter('resource-type-filter')
+    if search_filter:
+        search_filter.append_dsl(search_results_object, permitted_nodegroups, include_provisional)
 
     dsl = search_results_object.pop('query', None)
-
-    print JSONSerializer().serialize(dsl.dsl)
     dsl.include('graph_id')
     dsl.include('root_ontology_class')
     dsl.include('resourceinstanceid')
@@ -243,6 +240,7 @@ def search_results(request):
         dsl.include('tiles')
 
     results = dsl.search(index='resources')
+    #print JSONSerializer().serialize(dsl.dsl)
 
     if results is not None:
         # allow filters to modify the results
