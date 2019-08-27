@@ -3,12 +3,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from consultations_prj.views.main import ConsultationView
 from consultations_prj.views.file_template import FileTemplateView
+from consultations_prj.views import search
 from django.views.generic import RedirectView
 from consultations_prj.views.active_consultations import ActiveConsultationsView
 
 urlpatterns = [
-    url(r'^', include('arches.urls')),
+    url(r'^consultations/search$', search.SearchView.as_view(), name="search_home"),
+    url(r'^consultations/search/resources$', search.search_results, name="search_results"),
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
+    url(r'^', include('arches.urls')),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
     url(r'^filetemplate', FileTemplateView.as_view(), name='filetemplate'),
     url(r'^consultations/active', RedirectView.as_view(url='/plugins/active-consultations'),
@@ -24,5 +27,5 @@ urlpatterns = [
         name='correspondence-workflow'),
     url(r'^consultations/communication-workflow', RedirectView.as_view(url='/plugins/communication-workflow'),
         name='communication-workflow'),
-    url(r'^consultations/init-workflow', RedirectView.as_view(url='/plugins/init-workflow'), name='init-workflow')
+    url(r'^consultations/init-workflow', RedirectView.as_view(url='/plugins/init-workflow'), name='init-workflow'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
