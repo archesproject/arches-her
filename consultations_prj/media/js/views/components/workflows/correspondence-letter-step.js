@@ -34,7 +34,7 @@ define([
         this.retrieveFile = function(tile) {
             console.log(tile);
             var templateId = self.getTiles(self.letterTypeNodegroupId)[0].data[self.letterTypeNodeId]();
-            console.log(templateId);
+            // console.log(templateId);
             // var templateId = tile["data"][self.letterTypeNodeId]();
             $.ajax({
                 type: "GET",
@@ -42,11 +42,12 @@ define([
                 data: {
                     "resourceinstance_id": tile.resourceinstance_id,
                     "template_id": templateId,
-                    "parenttile_id":tile.tileid
+                    "parenttile_id":tile.parenttile_id
                 },
                 context: self,
                 success: function(responseText, status, response){
                     console.log(response.responseJSON);
+                    // self.tile(JSON.parse(response.responseJSON['tile']));
                 },
                 error: function(response, status, error) {
                     console.log(response);
@@ -58,30 +59,10 @@ define([
             self.loading(false);
         }
 
-        this.saveLetterFileTile = function(tile) {
-
-            var tilevalue = {
-                name: file.name, //grab file name
-                accepted: true,
-                height: null,
-                lastModified: file.lastModified, //grab from mod
-                size: file.size, //grab from size
-                status: "uploaded",
-                type: 'document/docx',
-                width: null,
-                url: null, //grab from response['template']
-                file_id: null,
-                index: 0,
-                content: URL.createObjectURL(file),
-                error: null
-            };
-            tile.data[letterFileNodeId]([tilevalue]);
-   
-        };
-
-        self.tile.subscribe(function(val) {
+        var createDocxTileOnLoad = self.tile.subscribe(function(val) {
             if(val) {
                 self.retrieveFile(val);
+                createDocxTileOnLoad.dispose();
             }
         });
 
@@ -89,7 +70,7 @@ define([
             var tile;
             if (tiles.length > 0 || typeof tiles == 'object') {
                 tile = tiles[0] || tiles;
-                if (!tile.data[self.letterFileNodeId]()) { self.saveLetterFileTile(tile); }
+                // if (!tile.data[self.letterFileNodeId]()) { self.saveLetterFileTile(tile); }
                 params.resourceid(tile.resourceinstance_id);
                 params.tileid(tile.tileid);
                 self.resourceId(tile.resourceinstance_id);
@@ -101,7 +82,7 @@ define([
     return ko.components.register('correspondence-letter-step', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/new-tile-step.htm'
+            require: 'text!templates/views/components/workflows/correspondence-letter-step.htm'
         }
     });
 });

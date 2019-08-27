@@ -22,7 +22,7 @@ import uuid
 from datetime import datetime
 from docx import Document
 from pprint import pprint
-from django.core.files.base import ContentFile
+from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
 from django.views.generic import View
@@ -50,21 +50,10 @@ class FileTemplateView(View):
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
-        # consultation_instance_id = None
-        # consultation = None
-        # for tile in self.resource.tiles: # self.resource is of communication model
-        #     if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
-        #         consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
         self.doc = Document(template_path)
-        new_file_name = None
-        new_file_path = None
-
-        # if resourceinstance_id is not None:
-        #     consultation = Resource.objects.get(resourceinstanceid=resourceinstance_id)
-        #     consultation.load_tiles()
 
         if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
             self.edit_letter_A(self.resource, datatype_factory)
@@ -80,31 +69,11 @@ class FileTemplateView(View):
         new_req.method = 'POST'
         new_req.user = request.user
         new_req.POST['data'] = None
-        
-        # <QueryDict: {u'data': 
-        #                 [u'{"tileid":"","data":
-        #                     {"8d41e4d1-a250-11e9-9a12-00224800b26d":
-        #                         [{"name":"Screen Shot 2019-02-04 at 3.38.26 PM.png","accepted":true,"height":966,"lastModified":1549323512325,"size":270422,"status":"queued","type":"image/png","width":1604,"url":null,"file_id":null,"index":0,"content":"blob:http://localhost:8000/e2638f2e-24f5-40fe-afd8-59d4d6c78fdb"}]
-        #                     },
-        #                     "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d","parenttile_id":"d9409847-629b-4f9e-8eb5-ed1c06ff377a","resourceinstance_id":"763250f1-d311-462e-ae4c-37bd2ae4739c","sortorder":0,"tiles":{}}']}>
-        # new_req.POST['accepted_provisional'] = True
 
-        # pprint(new_req)
-        # pprint(request.GET.get('accepted_provisional', None))
-        pprint(request.user)
         self.doc.save(new_file_path)
-        # saved_file = open(new_file_path, 'rb')
-        # saved_file.read()
+        saved_file = open(new_file_path, 'rt')
         stat = os.stat(new_file_path)
-        file_data = ContentFile(self.doc)
-        # file_data = ContentFile(saved_file.read())
-        # with open(new_file_path, "rb") as docx_file:
-        #     thing = result.value
-
-        # create django post request -- clone it from the existing one, change it to "POST", first figure out what it needs to be h
-        # handled by the tile view
-        # create new file then send it to make a new file
-        file_id = None
+        file_data = UploadedFile(saved_file)
         file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
 
         tile = json.dumps({
@@ -117,12 +86,12 @@ class FileTemplateView(View):
                     "lastModified":stat.st_mtime,
                     "size":stat.st_size,
                     "status":"queued",
-                    "type":"docx",
+                    "type":"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
                     "width":0,
                     "url":None,
                     "file_id":None,
                     "index":0,
-                    "content":"blob:http://localhost:8000/{0}".format(uuid.uuid4())
+                    "content":"blob:http://localhost:8000/{0}".format(uuid.uuid4()) # TODO: change from localhost to settings.host or w/e
                 }]
             },
             "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
@@ -136,13 +105,13 @@ class FileTemplateView(View):
         new_req.method = 'POST'
         new_req.user = request.user
         new_req.POST['data'] = tile
-        new_req.FILES['file-list_' + file_list_node_id] = [file_data]
-        new_tile_data = TileData()
+        new_req.FILES['file-list_' + file_list_node_id] = file_data
+        new_tile_data_instance = TileData()
 
-        TileData.post(new_tile_data, new_req)
+        TileData.post(new_tile_data_instance, new_req)
 
-        if resourceinstance_id is not None: # figure out response to frontend
-            return JSONResponse({'resource': self.resource, 'size': stat.st_size, 'mod': stat.st_mtime, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
+        if resourceinstance_id is not None: # TODO: response to frontend
+            return JSONResponse({'tile':tile, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
 
         return HttpResponseNotFound()
 
