@@ -35,7 +35,7 @@ define([
             // console.log(templateId);
             // var templateId = tile["data"][self.letterTypeNodeId]();
             $.ajax({
-                type: "GET",
+                type: "POST",
                 url: arches.urls.root + 'filetemplate',
                 data: {
                     "resourceinstance_id": tile.resourceinstance_id,
@@ -55,6 +55,10 @@ define([
                 }
             });
             self.loading(false);
+        }
+
+        this.downloadFile = function() {
+            //
         }
 
         var createDocxTileOnLoad = self.tile.subscribe(function(val) {

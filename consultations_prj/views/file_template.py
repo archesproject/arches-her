@@ -42,12 +42,12 @@ class FileTemplateView(View):
     resource = None
 
 
-    def get(self, request): 
+    def post(self, request): 
         # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
-        template_id = request.GET.get('template_id')
-        parenttile_id = request.GET.get('parenttile_id')
-        resourceinstance_id = request.GET.get('resourceinstance_id', None)
+        template_id = request.POST.get('template_id')
+        parenttile_id = request.POST.get('parenttile_id')
+        resourceinstance_id = request.POST.get('resourceinstance_id', None)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
 
