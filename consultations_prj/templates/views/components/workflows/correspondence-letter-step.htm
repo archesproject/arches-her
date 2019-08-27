@@ -1,9 +1,9 @@
 <!-- ko if: tile() && card() -->
 <div class="padded-workflow-step">
-    <div data-bind="class: workflowStepClass">
+    <div>
         <div>
-            <button data-bind="click: function(){console.log('clicked')}">Download Letter</button>
-            <button data-bind="click: function(){complete(true)}">Continue</button>
+            <button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-download" data-bind="click: function(){console.log('clicked')}">Download Letter</button>
+            <button class="btn btn-shim btn-labeled btn-lg fa fa-caret-right btn-mint" data-bind="click: function(){complete(true)}">Continue</button>
         </div>
     </div>
 </div>
