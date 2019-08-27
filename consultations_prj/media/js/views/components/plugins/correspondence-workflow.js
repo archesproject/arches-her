@@ -32,8 +32,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-file-text-o',
-                    class: 'hide-file-list',
+                    icon: 'fa-file-text-o'
                 },
                 {
                     title: 'Correspondence Workflow Complete',

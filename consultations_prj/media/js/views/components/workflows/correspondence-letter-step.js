@@ -29,8 +29,6 @@ define([
             }
         };
 
-        this.workflowStepClass = ko.unwrap(params.class());
-
         this.retrieveFile = function(tile) {
             console.log(tile);
             var templateId = self.getTiles(self.letterTypeNodegroupId)[0].data[self.letterTypeNodeId]();
