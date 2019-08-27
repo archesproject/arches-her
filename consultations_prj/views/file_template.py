@@ -16,18 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
+import json
+import os
+import uuid
 from datetime import datetime
+from docx import Document
+from pprint import pprint
+from django.core.files.base import ContentFile
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
 from django.views.generic import View
-from docx import Document
-from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
-from arches.app.utils.response import JSONResponse
+from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.system_settings import settings
-from arches.app.datatypes.datatypes import DataTypeFactory
-import os
+from arches.app.models.tile import Tile
+from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
+from arches.app.utils.response import JSONResponse
+from arches.app.views.tile import TileData
 
 
 class FileTemplateView(View):
@@ -40,6 +46,7 @@ class FileTemplateView(View):
         # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
         template_id = request.GET.get('template_id')
+        parenttile_id = request.GET.get('parenttile_id')
         resourceinstance_id = request.GET.get('resourceinstance_id', None)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
@@ -68,16 +75,73 @@ class FileTemplateView(View):
         date = date.strftime("%Y")+'-'+date.strftime("%m")+'-'+date.strftime("%d")
         new_file_name = date+'_'+template_name
         new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
+
+        new_req = HttpRequest()
+        new_req.method = 'POST'
+        new_req.user = request.user
+        new_req.POST['data'] = None
+        
+        # <QueryDict: {u'data': 
+        #                 [u'{"tileid":"","data":
+        #                     {"8d41e4d1-a250-11e9-9a12-00224800b26d":
+        #                         [{"name":"Screen Shot 2019-02-04 at 3.38.26 PM.png","accepted":true,"height":966,"lastModified":1549323512325,"size":270422,"status":"queued","type":"image/png","width":1604,"url":null,"file_id":null,"index":0,"content":"blob:http://localhost:8000/e2638f2e-24f5-40fe-afd8-59d4d6c78fdb"}]
+        #                     },
+        #                     "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d","parenttile_id":"d9409847-629b-4f9e-8eb5-ed1c06ff377a","resourceinstance_id":"763250f1-d311-462e-ae4c-37bd2ae4739c","sortorder":0,"tiles":{}}']}>
+        # new_req.POST['accepted_provisional'] = True
+
+        # pprint(new_req)
+        # pprint(request.GET.get('accepted_provisional', None))
+        pprint(request.user)
         self.doc.save(new_file_path)
+        # saved_file = open(new_file_path, 'rb')
+        # saved_file.read()
         stat = os.stat(new_file_path)
+        file_data = ContentFile(self.doc)
+        # file_data = ContentFile(saved_file.read())
         # with open(new_file_path, "rb") as docx_file:
         #     thing = result.value
 
         # create django post request -- clone it from the existing one, change it to "POST", first figure out what it needs to be h
         # handled by the tile view
         # create new file then send it to make a new file
+        file_id = None
+        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
 
-        if resourceinstance_id is not None:
+        tile = json.dumps({
+            "tileid":None,
+            "data": {
+                file_list_node_id: [{
+                    "name":new_file_name,
+                    "accepted":True,
+                    "height":0,
+                    "lastModified":stat.st_mtime,
+                    "size":stat.st_size,
+                    "status":"queued",
+                    "type":"docx",
+                    "width":0,
+                    "url":None,
+                    "file_id":None,
+                    "index":0,
+                    "content":"blob:http://localhost:8000/{0}".format(uuid.uuid4())
+                }]
+            },
+            "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
+            "parenttile_id":parenttile_id,
+            "resourceinstance_id":resourceinstance_id,
+            "sortorder":0,
+            "tiles":{}
+        })
+
+        new_req = HttpRequest()
+        new_req.method = 'POST'
+        new_req.user = request.user
+        new_req.POST['data'] = tile
+        new_req.FILES['file-list_' + file_list_node_id] = [file_data]
+        new_tile_data = TileData()
+
+        TileData.post(new_tile_data, new_req)
+
+        if resourceinstance_id is not None: # figure out response to frontend
             return JSONResponse({'resource': self.resource, 'size': stat.st_size, 'mod': stat.st_mtime, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
 
         return HttpResponseNotFound()

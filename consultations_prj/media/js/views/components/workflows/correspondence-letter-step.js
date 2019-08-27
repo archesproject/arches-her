@@ -41,7 +41,8 @@ define([
                 url: arches.urls.root + 'filetemplate',
                 data: {
                     "resourceinstance_id": tile.resourceinstance_id,
-                    "template_id": templateId
+                    "template_id": templateId,
+                    "parenttile_id":tile.tileid
                 },
                 context: self,
                 success: function(responseText, status, response){
