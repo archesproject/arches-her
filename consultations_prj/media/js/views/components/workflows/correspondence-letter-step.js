@@ -58,7 +58,28 @@ define([
         }
 
         this.downloadFile = function() {
-            //
+            //make the correct request here
+            console.log(self.tile());
+            var tile = ko.unwrap(self.tile);
+            $.ajax({
+                type: "GET",
+                url: arches.urls.root + 'filetemplate',
+                data: {
+                    "resourceinstance_id": tile.resourceinstance_id,
+                    "parenttile_id": tile.parenttile_id
+                },
+                context: self,
+                success: function(responseText, status, response){
+                    console.log('localhost:8000'+response.responseJSON['download']);
+                    // self.tile(JSON.parse(response.responseJSON['tile']));
+                },
+                error: function(response, status, error) {
+                    console.log(response);
+                    if(response.statusText !== 'abort'){
+                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                    }
+                }
+            });
         }
 
         var createDocxTileOnLoad = self.tile.subscribe(function(val) {

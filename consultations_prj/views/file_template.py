@@ -42,6 +42,21 @@ class FileTemplateView(View):
     resource = None
 
 
+    def get(self, request):
+        print("hello") # 8d41e4d1-a250-11e9-9a12-00224800b26d
+        parenttile_id = request.GET.get('parenttile_id')
+        parent_tile = Tile.objects.get(tileid=parenttile_id)
+        letter_tiles = Tile.objects.filter(parenttile=parent_tile)
+        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
+        for tile in letter_tiles:
+            for data_obj in tile.data[file_list_node_id]:
+                if data_obj['status'] == 'uploaded':
+                    url = data_obj['url']
+            pprint(tile.data[file_list_node_id])
+        # pprint(letter_tiles)
+        return JSONResponse({'msg':'success','download':url })
+    
+    
     def post(self, request): 
         # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
@@ -108,7 +123,9 @@ class FileTemplateView(View):
         new_req.FILES['file-list_' + file_list_node_id] = file_data
         new_tile_data_instance = TileData()
 
-        TileData.post(new_tile_data_instance, new_req)
+        post_resp = TileData.post(new_tile_data_instance, new_req)
+        print("resp:")
+        pprint(post_resp)
 
         if resourceinstance_id is not None: # TODO: response to frontend
             return JSONResponse({'tile':tile, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
