@@ -93,7 +93,7 @@ define([
             }
             if (self.completeOnSave === true) { self.complete(true); }
         };
-    };
+    }
 
     return ko.components.register('correspondence-letter-step', {
         viewModel: viewModel,
