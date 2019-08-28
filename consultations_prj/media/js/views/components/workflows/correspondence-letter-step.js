@@ -3,8 +3,9 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/new-tile-step'
-], function($, arches, ko, koMapping, NewTileStep) {
+    'views/components/workflows/new-tile-step',
+    'viewmodels/alert'
+], function($, arches, ko, koMapping, NewTileStep, AlertViewModel) {
     function viewModel(params) {
 
         NewTileStep.apply(this, [params]);
@@ -27,7 +28,7 @@ define([
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
                 tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
-            }
+            };
         };
 
         this.retrieveFile = function(tile) {
@@ -41,13 +42,12 @@ define([
                     "parenttile_id":tile.parenttile_id
                 },
                 context: self,
-                success: function(responseText, status, response){
-                    // console.log(responseText);
+                success: function(){
                     self.downloadFile();
                 },
                 error: function(response, status, error) {
                     if(response.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText, status, error));
                     }
                 }
             });
@@ -65,12 +65,13 @@ define([
                 },
                 context: self,
                 success: function(responseText, status, response){
+                    console.log(responseText,status);
                     self.dataURL(response.responseJSON['download']);
                     self.loading(false);
                 },
                 error: function(response, status, error) {
                     if(response.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText, status, error));
                     }
                 }
             });

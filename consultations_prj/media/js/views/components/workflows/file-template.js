@@ -75,7 +75,7 @@ define([
                 });
             }
             self.loading(false);
-        }
+        };
     };
 
     return ko.components.register('file-template', {
