@@ -45,14 +45,14 @@ define([
                 success: function(){
                     self.downloadFile();
                 },
-                error: function(response, status, error) {
+                error: function(response) {
                     if(response.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText, status, error));
+                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
                     }
                 }
             });
             self.loading(false);
-        }
+        };
 
         this.downloadFile = function() {
             var tile = ko.unwrap(self.tile);
@@ -65,17 +65,16 @@ define([
                 },
                 context: self,
                 success: function(responseText, status, response){
-                    console.log(responseText,status);
                     self.dataURL(response.responseJSON['download']);
                     self.loading(false);
                 },
-                error: function(response, status, error) {
+                error: function(response) {
                     if(response.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText, status, error));
+                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
                     }
                 }
             });
-        }
+        };
 
         var createDocxTileOnLoad = self.tile.subscribe(function(val) {
             if(val) {
