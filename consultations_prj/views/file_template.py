@@ -43,18 +43,22 @@ class FileTemplateView(View):
 
 
     def get(self, request):
-        print("hello") # 8d41e4d1-a250-11e9-9a12-00224800b26d
         parenttile_id = request.GET.get('parenttile_id')
         parent_tile = Tile.objects.get(tileid=parenttile_id)
         letter_tiles = Tile.objects.filter(parenttile=parent_tile)
         file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
+        url = None
         for tile in letter_tiles:
+            if url is not None:
+                break
             for data_obj in tile.data[file_list_node_id]:
                 if data_obj['status'] == 'uploaded':
                     url = data_obj['url']
-            pprint(tile.data[file_list_node_id])
-        # pprint(letter_tiles)
-        return JSONResponse({'msg':'success','download':url })
+                    break
+
+        if url is not None:
+            return JSONResponse({'msg':'success','download':url })
+        return HttpResponseNotFound("No letters tile matching query by parent tile")
     
     
     def post(self, request): 
@@ -84,6 +88,7 @@ class FileTemplateView(View):
         new_req.method = 'POST'
         new_req.user = request.user
         new_req.POST['data'] = None
+        host = request.get_host()
 
         self.doc.save(new_file_path)
         saved_file = open(new_file_path, 'rt')
@@ -106,7 +111,7 @@ class FileTemplateView(View):
                     "url":None,
                     "file_id":None,
                     "index":0,
-                    "content":"blob:http://localhost:8000/{0}".format(uuid.uuid4()) # TODO: change from localhost to settings.host or w/e
+                    "content":"blob:"+host+"/{0}".format(uuid.uuid4()) # TODO: change from localhost to settings.host or w/e
                 }]
             },
             "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
@@ -124,13 +129,11 @@ class FileTemplateView(View):
         new_tile_data_instance = TileData()
 
         post_resp = TileData.post(new_tile_data_instance, new_req)
-        print("resp:")
-        pprint(post_resp)
 
-        if resourceinstance_id is not None: # TODO: response to frontend
-            return JSONResponse({'tile':tile, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
+        if post_resp.status_code == 200:
+            return JSONResponse({'tile':tile, 'status':'success' })
 
-        return HttpResponseNotFound()
+        return HttpResponseNotFound("Error: "+post_resp.status_code)
 
 
     def get_template_path(self, template_id):
