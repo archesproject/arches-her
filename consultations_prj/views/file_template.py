@@ -16,17 +16,24 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
+import json
+import os
+import uuid
+from datetime import datetime
+from docx import Document
+from pprint import pprint
+from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
 from django.views.generic import View
-from docx import Document
-from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
-from arches.app.utils.response import JSONResponse
+from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.system_settings import settings
-from arches.app.datatypes.datatypes import DataTypeFactory
-import os
+from arches.app.models.tile import Tile
+from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
+from arches.app.utils.response import JSONResponse
+from arches.app.views.tile import TileData
 
 
 class FileTemplateView(View):
@@ -35,48 +42,98 @@ class FileTemplateView(View):
     resource = None
 
 
-    def get(self, request): 
+    def get(self, request):
+        parenttile_id = request.GET.get('parenttile_id')
+        parent_tile = Tile.objects.get(tileid=parenttile_id)
+        letter_tiles = Tile.objects.filter(parenttile=parent_tile)
+        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
+        url = None
+        for tile in letter_tiles:
+            if url is not None:
+                break
+            for data_obj in tile.data[file_list_node_id]:
+                if data_obj['status'] == 'uploaded':
+                    url = data_obj['url']
+                    break
+
+        if url is not None:
+            return JSONResponse({'msg':'success','download':url })
+        return HttpResponseNotFound("No letters tile matching query by parent tile")
+    
+    
+    def post(self, request): 
         # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
-        template_id = request.GET.get('template_id')
-        resourceinstance_id = request.GET.get('resourceinstance_id', None)
+        template_id = request.POST.get('template_id')
+        parenttile_id = request.POST.get('parenttile_id')
+        resourceinstance_id = request.POST.get('resourceinstance_id', None)
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
-        consultation_instance_id = None
-        consultation = None
-        for tile in self.resource.tiles: # self.resource is of communication model
-            if 'a5901911-6d1e-11e9-8674-dca90488358a' in tile.data.keys(): # related-consultation nodegroup
-                consultation_instance_id = tile.data['a5901911-6d1e-11e9-8674-dca90488358a'][0]
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
         self.doc = Document(template_path)
-        new_file_name = None
-        new_file_path = None
 
-        if consultation_instance_id is not None:
-            consultation = Resource.objects.get(resourceinstanceid=consultation_instance_id)
-            consultation.load_tiles()
+        if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
+            self.edit_letter_A(self.resource, datatype_factory)
+        elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
+            self.edit_letter_B2(self.resource, datatype_factory)
 
-            if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
-                self.edit_letter_A(consultation, datatype_factory)
-            elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
-                self.edit_letter_B2(consultation, datatype_factory)
+        date = datetime.today()
+        date = date.strftime("%Y")+'-'+date.strftime("%m")+'-'+date.strftime("%d")
+        new_file_name = date+'_'+template_name
+        new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
 
-            new_file_name = 'edited_'+template_name
-            new_file_path = os.path.join(settings.APP_ROOT, 'uploadedfiles/docx', new_file_name)
-            self.doc.save(new_file_path)
-            # with open(new_file_path, "rb") as docx_file:
-            #     result = mammoth.convert_to_html(docx_file)
-            #     html = result.value # The generated HTML
-            # with open(html_path, 'wb') as html_file:
-            #     html_file.write(html)
-            #     html_file.close()
+        new_req = HttpRequest()
+        new_req.method = 'POST'
+        new_req.user = request.user
+        new_req.POST['data'] = None
+        host = request.get_host()
 
-        if resourceinstance_id is not None:
-            return JSONResponse({'resource': self.resource, 'template': new_file_path, 'download': 'http://localhost:8000/files/uploadedfiles/docx/'+new_file_name })
+        self.doc.save(new_file_path)
+        saved_file = open(new_file_path, 'rt')
+        stat = os.stat(new_file_path)
+        file_data = UploadedFile(saved_file)
+        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
 
-        return HttpResponseNotFound()
+        tile = json.dumps({
+            "tileid":None,
+            "data": {
+                file_list_node_id: [{
+                    "name":new_file_name,
+                    "accepted":True,
+                    "height":0,
+                    "lastModified":stat.st_mtime,
+                    "size":stat.st_size,
+                    "status":"queued",
+                    "type":"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                    "width":0,
+                    "url":None,
+                    "file_id":None,
+                    "index":0,
+                    "content":"blob:"+host+"/{0}".format(uuid.uuid4()) # TODO: change from localhost to settings.host or w/e
+                }]
+            },
+            "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
+            "parenttile_id":parenttile_id,
+            "resourceinstance_id":resourceinstance_id,
+            "sortorder":0,
+            "tiles":{}
+        })
+
+        new_req = HttpRequest()
+        new_req.method = 'POST'
+        new_req.user = request.user
+        new_req.POST['data'] = tile
+        new_req.FILES['file-list_' + file_list_node_id] = file_data
+        new_tile_data_instance = TileData()
+
+        post_resp = TileData.post(new_tile_data_instance, new_req)
+
+        if post_resp.status_code == 200:
+            return JSONResponse({'tile':tile, 'status':'success' })
+
+        return HttpResponseNotFound("Error: "+post_resp.status_code)
 
 
     def get_template_path(self, template_id):
