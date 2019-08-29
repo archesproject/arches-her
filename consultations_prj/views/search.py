@@ -85,11 +85,11 @@ class SearchView(MapBaseManagerView):
             'template': 'search-help',
         }
 
-        return render(request, 'views/search.htm', context)
+        return render(request, 'views/search_consultations.htm', context)
 
 
 def home_page(request):
-    return render(request, 'views/search.htm', {
+    return render(request, 'views/search_consultations.htm', {
         'main_script': 'views/search',
     })
 
