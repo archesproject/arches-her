@@ -9,7 +9,7 @@ from django.views.generic import RedirectView
 from consultations_prj.views.active_consultations import ActiveConsultationsView
 
 urlpatterns = [
-    url(r'^consultations/search$', search.SearchView.as_view(), name="search_home"),
+    url(r'^consultations/search$', search.SearchView.as_view(), name="search_home_consultations"),
     url(r'^consultations/search/resources$', search.search_results, name="search_results"),
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
     url(r'^', include('arches.urls')),
