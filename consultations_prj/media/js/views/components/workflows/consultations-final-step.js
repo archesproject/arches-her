@@ -4,8 +4,9 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/final-step'
-], function(_, $, arches, ko, koMapping, FinalStep) {
+    'views/components/workflows/final-step',
+    'viewmodels/alert'
+], function(_, $, arches, ko, koMapping, FinalStep, AlertViewModel) {
 
     function viewModel(params) {
         var self = this;
@@ -52,7 +53,7 @@ define([
                 tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
             };
         };
-    };
+    }
 
     ko.components.register('consultations-final-step', {
         viewModel: viewModel,
