@@ -54,7 +54,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 <body id="body" data-spy="scroll" data-target=".splash-nav" class="demo-lightbox-gallery">
 
     <!--=== Header ===-->
-    <nav class="cons-splash-nav navbar navbar-fixed-top" role="navigation">
+    <nav class="cons-splash-nav navbar" role="navigation">
         <div class="nav-container">
             <div class="navbar-brand-disco">
                 <div class="navbar-brand-disco-icon-container" style="">
@@ -103,15 +103,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <!--=== End Header ===-->
 
     <!-- Intro Section -->
-    <div class="" style="">
-      <!-- MAIN IMAGE -->
-      <img src="{% static 'img/landing/the_shard.jpg' %}" alt="slidebg1" style="display: none; background-size: cover; background-position: center center; width: 100%; height: 100%; object-fit: contain; background-repeat: no-repeat;">
-
-    </div>
-    <!-- End Intro Section -->
-
-
-    <!-- Intro Section -->
     <section id="intro" class="intro-section" style="">
         <div class="fullscreenbanner-container">
             <div class="fullscreenbanner">
@@ -123,27 +114,29 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
                         <!-- LAYERS -->
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="0" data-hoffset="0" data-y="450" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#category_1">{% trans "Category 1" %}<a></h2>
-                            <p>{% trans "Description Text for this category goes here. Not more than 2 lines, right?" %}</p>
-                            <a href="#category_1">{% trans "Learn more" %}</a>
-                        </div>
-
-                        <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#category_2">{% trans "Category 2" %}</a></h2>
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="0" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2><a href="#info-block-1">{% trans "Category 1" %}<a></h2>
                             <p>{% trans "Description Text for this category goes here. Not more than 2 lines, right?" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="900" data-hoffset="0" data-y="450" data-speed="800" data-start="1000" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#category_3">{% trans "Category 3" %}</a></h2>
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2><a href="#info-block-2">{% trans "Category 2" %}</a></h2>
                             <p>{% trans "Description Text for this category goes here. Not more than 2 lines, right?" %}</p>
                         </div>
+
+                        <!-- NEW LAYER -->
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="900" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2><a href="#info-block-3">{% trans "Category 3" %}</a></h2>
+                            <p>{% trans "Description Text for this category goes here. Not more than 2 lines, right?" %}</p>
+                        </div>
+
+                        <!-- Gradient -->
+                        <div class="image-gradient"></div>
 
                         <!-- Attribution -->
-                        <div class="" style="position: absolute; top: 95%; left: 15px; color: #fff; padding: 10px; background: rgba(0,0,0,.5);">
-                            <span class="">the shard | https://www.flickr.com/photos/cathedraljack/ | Attribution 2.0 Generic (CC BY 2.0)</span>
+                        <div class="image-attribution" style="">
+                            <span class="">{% trans "The Shard | https://www.flickr.com/photos/cathedraljack/ | Attribution 2.0 Generic (CC BY 2.0)" %}</span>
                         </div>
                     </li>
 
@@ -154,13 +147,40 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     </section>
     <!-- End Intro Section -->
 
+    <!-- Page Custom Content -->
+    <div class="custom-content-container">
+        <!-- Info Block 1 -->
+        <div id="info-block-1" class="app-info-block">
+          <h2 class="">Hi, I'm category 1!</h2>
 
-    <!-- Category 1 -->
-    <div id="category_1" class="">
-      Hi, I'm category 1!
+        </div>
+        <!-- End Info Block 1 -->
+
+        <!-- Info Block 2 -->
+        <div id="info-block-2" class="app-info-block">
+          Hi, I'm category 2!
+
+        </div>
+        <!-- End Info Block 2 -->
+
+        <!-- Info Block 3 -->
+        <div id="info-block-3" class="app-info-block">
+          Hi, I'm category 3!
+
+        </div>
+        <!-- End Info Block 3 -->
 
     </div>
-    <!-- End Category 1 -->
+    <!-- End Page Custome Content -->
+
+    <!-- Footer -->
+    <div class="footer">
+
+
+
+
+    </div>
+    <!-- End Footer -->
 
 
 
