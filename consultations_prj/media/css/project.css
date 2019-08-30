@@ -419,19 +419,15 @@ div.workflow-panel {
 }
 
 div.active-cons-header {
-    position: absolute;
-    width: 270px;
-    border: solid 1px lightgrey;
-    margin: 9px;
-    padding: 15px;
-    background-color: white;
-    opacity: .8;
-    z-index: 1;
+    width: 100%;
+    border-bottom: solid 1px #ddd;
+    padding: 5px 10px;
+    color: #fff;
+    background: #454545;
 }
 
 .active-cons-header-title {
-    color: #25476A;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
 }
 
@@ -473,7 +469,7 @@ div.active-cons-map > div {
     width: inherit;
     padding: 0 1px 0 4px;
     height: auto;
-    top: 182px;
+    top: 175px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -598,22 +594,27 @@ div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3)
 
 div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     visibility: hidden;
+}
+
 .ep-toolbar.cons {
     border-top: 1px solid #ddd;
     background: #f8f8f8;
+    border-bottom: none;
+}
+
+.active-cons-footer {
+  background: #444;
 }
 
 .cons .ep-tools-right {
     background: #f2f2f2;
-    border-top: 1px solid #ddd;
+    position: absolute;
+    right: 0px;
+    height: 49px;
 }
 
 .cons-owner-title-panel {
-    height: 50px;
-    font-size: 13px;
-    color: #25476A;
-    margin-right: auto;
-    overflow: hidden;
+    padding: 0px 0px;
 }
 
 .cons-owner-title {
