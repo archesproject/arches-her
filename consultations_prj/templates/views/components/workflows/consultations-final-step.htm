@@ -1,8 +1,9 @@
+<!-- ko if: loading() === false -->
 <div class="padded-workflow-step">
-        <div style='display:flex; justify-content: space-between;'>
+        <div class="final-cons-step-splash">
             <h4>Workflow Complete</h4>
-            <button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-step-forward">Jump to this project</button>
-            <div>
+            <a data-bind="attr: { href: urls.resource + '/' + resourceid}"><button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-step-forward">Jump to this project</button></a>
+            <!-- <div>
                 <a href="#" target="_self" type="button" class="btn btn-primary"
                     data-bind="attr: { href: urls.plugin(workflowid)}">
                     <i class="fa fa-plus"></i>
@@ -13,7 +14,12 @@
                     <i class="fa fa-pencil"></i>
                     <span>Edit</span>
                 </a>
-            </div>
+            </div> -->
+        </div>
+        <div class="final-cons-step-separator">
+            <hr>
+            <h4>or Start a New Workflow</h4>
+            <hr>
         </div>
         <div>
             <div class="workflow-select-card-container">
@@ -38,4 +44,5 @@
         }'></div>
         <!--/ko -->
     </div>
+<!-- /ko -->
     
