@@ -115,19 +115,19 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <!-- LAYERS -->
                         <!-- NEW LAYER -->
                         <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="-50" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-1">{% trans "Consultations at GLAAS" %}</a></h2>
+                            <h2><a href="#info-block-1">{% trans "Consultations at GLAAS..." %}</a></h2>
                             <p>{% trans "How the Greater London Archaeology Advisory Service manages development" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
                         <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-2">{% trans "Search and Discover" %}</a></h2>
+                            <h2><a href="#info-block-2">{% trans "Search and Discover..." %}</a></h2>
                             <p>{% trans "Find and review information on our current and past consultations" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
                         <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="950" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-3">{% trans "Get Involved!" %}</a></h2>
+                            <h2><a href="#info-block-3">{% trans "Get Involved..." %}</a></h2>
                             <p>{% trans "Want to help?  Here's how you can participate" %}</p>
                         </div>
 
@@ -151,21 +151,21 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <div class="custom-content-container">
         <!-- Info Block 1 -->
         <div id="info-block-1" class="app-info-block">
-          <h2 class="">Consultations at GLAAS</h2>
+          <h2 class="">{% trans "Consultations at GLAAS" %}</h2>
 
         </div>
         <!-- End Info Block 1 -->
 
         <!-- Info Block 2 -->
         <div id="info-block-2" class="app-info-block">
-          <h2 class="">Find and Review Consultations</h2>
+          <h2 class="">{% trans "Find and Review Consultations" %}</h2>
 
         </div>
         <!-- End Info Block 2 -->
 
         <!-- Info Block 3 -->
         <div id="info-block-3" class="app-info-block">
-          <h2 class="">Working with GLAAS</h2>
+          <h2 class="">{% trans "Working with GLAAS" %}</h2>
 
         </div>
         <!-- End Info Block 3 -->
@@ -174,13 +174,45 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <!-- End Page Custome Content -->
 
     <!-- Footer -->
-    <div class="footer">
+    <div class="app-footer">
 
+        <!-- footer content container -->
+        <div class="app-footer-content-container">
 
+            <!-- branding column -->
+            <div class="app-footer-branding">
+                <img class="app-footer-image" src='/media/img/projects/consultations/HE_Logo_White.svg' title="Historic England" alt="Historic England">
 
+                <div class="organization-address">
+                  Greater London Archaeological Advisory Service<br>
+                  Historic England<br>
+                  4th floor, Cannon Bridge House<br>
+                  25 Dowgate Hill<br>
+                  London<br>
+                  EC4R 2YA
+                </div>
+            </div>
 
+            <!-- Info Column -->
+            <div class="app-footer-info">
+                <h2 class="app-footer-heading">{% trans "Guides and Documentation" %}</h2>
+            </div>
+        </div>
     </div>
     <!-- End Footer -->
+
+    <!-- Copyright Panel -->
+    <div class="copyright-container">
+
+
+        <!-- Arches link -->
+        <div class="app-footer-links">
+            <a class="link-spacing" href="">{% trans "Terms & Conditions" %}</a>
+            <a class="link-spacing" href="">{% trans "Privacy Policy" %}</a>
+            <a class="app-footer-arches-link" href="www.archesproject.org">Powered by Arches</a>
+        </div>
+    </div>
+    <!-- End Copyright Container -->
 
 
 
