@@ -26,6 +26,7 @@ define([
         constructor: function (options) {
             options = options ? options : {};
             options.viewModel = (options && options.viewModel) ? options.viewModel : {};
+            options.viewModel.navbarClosed = ko.observable(true);
 
             data.graphs.sort(function (left, right) {
                 return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1);
