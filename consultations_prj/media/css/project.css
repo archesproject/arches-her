@@ -429,19 +429,16 @@ div.workflow-panel {
 }
 
 div.active-cons-header {
-    position: absolute;
-    width: 270px;
-    border: solid 1px lightgrey;
-    margin: 9px;
-    padding: 15px;
-    background-color: white;
-    opacity: .8;
-    z-index: 1;
+    border: solid 1px #454545;
+    padding: 5px 10px;
+    color: #fff;
+    background: #454545;
+    margin: -1px;
+    height: 50px;
 }
 
 .active-cons-header-title {
-    color: #25476A;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 13px;
 }
 
@@ -456,6 +453,7 @@ div.active-cons-map-container {
     text-align: center;
     background-color: #f8fbff;
     position: relative;
+    margin-top: 1px;
 }
 
 .active-cons-map-container span {
@@ -483,7 +481,7 @@ div.active-cons-map > div {
     width: inherit;
     padding: 0 1px 0 4px;
     height: auto;
-    top: 182px;
+    top: 175px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -500,40 +498,37 @@ div.active-cons-stubs {
     padding: 10px;
 }
 
-.active-cons-stubs.status-ok {
-    background: ##7BB800;
-}
-
-.status-ok div.active-cons-stub-val {
+.active-cons-header.status-ok {
+    background: #7BB800;
     color: #fff;
+    border: 1px solid #649600;
 }
 
-.status-ok div.active-cons-stub-label {
-    color: #fff;
+.card-grid-item:hover .active-cons-header.status-ok {
+    border: 1px solid #25476A;
+    border-bottom: 1px solid #649600;
 }
 
-.active-cons-stubs.status-late {
+.active-cons-header.status-late {
     background: #CD0074;
-}
-
-.status-late div.active-cons-stub-val {
     color: #fff;
+    border: 1px solid #7D0047;
 }
 
-.status-late div.active-cons-stub-label {
-    color: #fff;
+.card-grid-item:hover .active-cons-header.status-late {
+    border: 1px solid #25476A;
+    border-bottom: 1px solid #7D0047;
 }
 
-.active-cons-stubs.status-warning {
+.active-cons-header.status-warning {
     background: yellow;
+    color: #9B9B00;
+    border: 1px solid #bbb;
 }
 
-.status-warning div.active-cons-stub-val {
-    color: #9B9B00;
-}
-
-.status-warning div.active-cons-stub-label {
-    color: #9B9B00;
+.card-grid-item:hover .active-cons-header.status-warning {
+    border: 1px solid #25476A;
+    border-bottom: 1px solid #bbb;
 }
 
 div.active-cons-stub-left {
@@ -547,6 +542,7 @@ div.active-cons-stub-right {
     flex-grow: 1;
     text-align: center;
     width: 150px;
+    padding-left: 3px;
 }
 
 div.ep-tools-title > div {
@@ -608,22 +604,27 @@ div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3)
 
 div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     visibility: hidden;
+}
+
 .ep-toolbar.cons {
     border-top: 1px solid #ddd;
     background: #f8f8f8;
+    border-bottom: none;
+}
+
+.active-cons-footer {
+  background: #444;
 }
 
 .cons .ep-tools-right {
     background: #f2f2f2;
-    border-top: 1px solid #ddd;
+    position: absolute;
+    right: 0px;
+    height: 49px;
 }
 
 .cons-owner-title-panel {
-    height: 50px;
-    font-size: 13px;
-    color: #25476A;
-    margin-right: auto;
-    overflow: hidden;
+    padding: 0px 0px;
 }
 
 .cons-owner-title {
