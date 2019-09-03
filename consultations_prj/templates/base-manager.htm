@@ -38,9 +38,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             {% if 'consultations' in request.path %}
                 <div id="workflow-container">
                     <div class="workflow-panel" data-bind="css: {'navbarclosed': navbarClosed}">
-                    <!--div class="workflow-panel"-->
-                        <div class="workflow-panel-header">
-                            <a><span><i class="fa fa-chevron-circle-left" data-bind="click: function(){navbarClosed(!navbarClosed())}, css: {'navebarclosed': navbarClosed}"></i>{% trans "Project Tasks" %}</span></a>
+                        <div class="workflow-panel-header" data-bind='click: function(){navbarClosed(!navbarClosed())}'>
+                            <a><span><i class="fa fa-lg" data-bind="css: {'fa-chevron-circle-right': navbarClosed, 'fa-chevron-circle-left': !navbarClosed()}"></i>{% trans "Project Tasks" %}</span></a>
                             <hr>
                         </div>
                         <ul>
