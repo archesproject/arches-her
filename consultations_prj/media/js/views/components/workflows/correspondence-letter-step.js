@@ -32,8 +32,8 @@ define([
         };
 
         this.retrieveFile = function(tile) {
-            var tiles = self.getTiles(self.letterTypeNodegroupId);
-            var templateId = tiles[tiles.length - 1].data[self.letterTypeNodeId]();
+            var letterTypeTiles = self.getTiles(self.letterTypeNodegroupId);
+            var templateId = letterTypeTiles[letterTypeTiles.length - 1].data[self.letterTypeNodeId]();
             $.ajax({
                 type: "POST",
                 url: arches.urls.root + 'filetemplate',
