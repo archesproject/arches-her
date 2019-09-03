@@ -72,6 +72,10 @@ class FileTemplateView(View):
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
+
+        if os.path.exists(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx')) is False:
+            os.mkdir(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx'))
+
         self.doc = Document(template_path)
 
         if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
@@ -111,7 +115,7 @@ class FileTemplateView(View):
                     "url":None,
                     "file_id":None,
                     "index":0,
-                    "content":"blob:"+host+"/{0}".format(uuid.uuid4()) # TODO: change from localhost to settings.host or w/e
+                    "content":"blob:"+host+"/{0}".format(uuid.uuid4())
                 }]
             },
             "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
