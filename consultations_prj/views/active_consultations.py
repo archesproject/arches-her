@@ -101,7 +101,7 @@ class ActiveConsultationsView(View):
             "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
             "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
             "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
-            "Owner":"8d41e4e1-a250-11e9-8d14-00224800b26d"
+            "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
         }
         active_cons_list_vals = active_cons_node_list.values()
         for consultation in consultations:
