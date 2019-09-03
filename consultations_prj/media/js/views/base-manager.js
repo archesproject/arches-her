@@ -23,17 +23,17 @@ define([
         *                 bound to the page
         * @return {object} an instance of BaseManager
         */
-        constructor: function (options) {
+        constructor: function(options) {
             options = options ? options : {};
             options.viewModel = (options && options.viewModel) ? options.viewModel : {};
             options.viewModel.navbarClosed = ko.observable(true);
 
-            data.graphs.sort(function (left, right) {
+            data.graphs.sort(function(left, right) {
                 return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1);
             });
             data.graphs.forEach(function(graph){
-              graph.name = ko.observable(graph.name);
-              graph.iconclass = ko.observable(graph.iconclass);
+                graph.name = ko.observable(graph.name);
+                graph.iconclass = ko.observable(graph.iconclass);
             });
             options.viewModel.allGraphs = ko.observableArray(data.graphs);
             options.viewModel.graphs = ko.computed(function() {
@@ -49,13 +49,13 @@ define([
             options.viewModel.createableResources = ko.observableArray(data.createableResources);
 
             options.viewModel.setResourceOptionDisable = function(option, item) {
-              if (item) {
-                ko.applyBindingsToNode(option, {disable: item.disable_instance_creation}, item);
-              }
+                if (item) {
+                    ko.applyBindingsToNode(option, {disable: item.disable_instance_creation}, item);
+                }
             };
 
             options.viewModel.navExpanded = ko.observable(false);
-            options.viewModel.navExpanded.subscribe(function () {
+            options.viewModel.navExpanded.subscribe(function() {
                 window.nifty.window.trigger('resize');
             });
 
