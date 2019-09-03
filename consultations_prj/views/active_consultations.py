@@ -36,7 +36,12 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id='8d41e49e-a250-11e9-9eab-00224800b26d').exclude(resourceinstanceid__in=exclude_list)
         tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
-        page_ct = 8 # should probably be set somewhere else, either sent from VM via request or in settings file?
+
+        search_results_setting_nodeid = "d0987de3-fad8-11e6-a434-6c4008b05c4c"
+        search_results_setting_nodegroupid = "d0987880-fad8-11e6-8cce-6c4008b05c4c"
+        page_ct_tile = Tile.objects.get(nodegroup_id=search_results_setting_nodegroupid)
+        page_ct = page_ct_tile.data[search_results_setting_nodeid]
+
         paginator = Paginator(tiles, page_ct)
         page_results = paginator.page(page_num)
         if page_results.has_next() is True:
@@ -101,7 +106,7 @@ class ActiveConsultationsView(View):
             "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
             "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
             "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
-            "Owner":"8d41e4e1-a250-11e9-8d14-00224800b26d"
+            "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
         }
         active_cons_list_vals = active_cons_node_list.values()
         for consultation in consultations:
