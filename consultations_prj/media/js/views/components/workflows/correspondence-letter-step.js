@@ -32,7 +32,8 @@ define([
         };
 
         this.retrieveFile = function(tile) {
-            var templateId = self.getTiles(self.letterTypeNodegroupId)[0].data[self.letterTypeNodeId]();
+            var tiles = self.getTiles(self.letterTypeNodegroupId);
+            var templateId = tiles[tiles.length - 1].data[self.letterTypeNodeId]();
             $.ajax({
                 type: "POST",
                 url: arches.urls.root + 'filetemplate',
@@ -43,19 +44,18 @@ define([
                 },
                 context: self,
                 success: function(){
-                    self.downloadFile();
+                    self.downloadFile(tile);
                 },
                 error: function(response) {
                     if(response.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                        self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
                     }
                 }
             });
             self.loading(false);
         };
 
-        this.downloadFile = function() {
-            var tile = ko.unwrap(self.tile);
+        this.downloadFile = function(tile) {
             $.ajax({
                 type: "GET",
                 url: arches.urls.root + 'filetemplate',
@@ -70,7 +70,7 @@ define([
                 },
                 error: function(response) {
                     if(response.statusText !== 'abort'){
-                        this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                        self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
                     }
                 }
             });

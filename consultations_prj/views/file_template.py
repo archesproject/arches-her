@@ -206,6 +206,19 @@ class FileTemplateView(View):
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
         # advantage of the former is that replacing run.text preserves styling, replacing p.text does not
         
+        def replace_in_runs(p_list, k, v):
+            for paragraph in p_list:
+                for run in paragraph.runs:
+                    if k in run.text:
+                        run_style = run.style
+                        run.text = run.text.replace(k, v)
+
+        def iterate_tables(t_list, k, v):
+            for table in t_list:
+                for row in table.rows:
+                    for cell in row.cells:
+                        replace_in_runs(cell.paragraphs, k, v)
+        
         if v is not None and key is not None:
             k = "{{"+key+"}}"
             doc = document
@@ -228,19 +241,6 @@ class FileTemplateView(View):
                     iterate_tables(section.footer.tables, k, v)
                     replace_in_runs(section.header.paragraphs, k, v)
                     iterate_tables(section.header.tables, k, v)
-
-        def replace_in_runs(p_list, k, v):
-            for paragraph in p_list:
-                for run in paragraph.runs:
-                    if k in run.text:
-                        run_style = run.style
-                        run.text = run.text.replace(k, v)
-
-        def iterate_tables(t_list, k, v):
-            for table in t_list:
-                for row in table.rows:
-                    for cell in row.cells:
-                        replace_in_runs(cell.paragraphs, k, v)
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):
