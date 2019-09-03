@@ -39,8 +39,8 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 <div id="workflow-container">
                     <div class="workflow-panel" data-bind="css: {'navbarclosed': navbarClosed}">
                         <div class="workflow-panel-header" data-bind='click: function(){navbarClosed(!navbarClosed())}'>
-                            <a><span><i class="fa fa-lg" data-bind="css: {'fa-chevron-circle-right': navbarClosed, 'fa-chevron-circle-left': !navbarClosed()}"></i>{% trans "Project Tasks" %}</span></a>
-                            <hr>
+                            <a><span><i class="fa fa-lg" data-bind="css: {'fa-chevron-circle-right': navbarClosed, 'fa-chevron-circle-left': !navbarClosed()}"></i><span data-bind="visible: !navbarClosed()">{% trans "Project Tasks" %}</span></span></a>
+                            <hr></hr>
                         </div>
                         <ul>
                             <li class="workflow-main-nav-item">
@@ -56,7 +56,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                 <a href="#"><span>{% trans "Reports" %}</span></a>
                             </li>
                         </ul>
-                        <hr>
+                        <hr></hr>
                         <ul>
                             <li class="workflow-main-nav-item">
                                 <a href="#"><span>{% trans "Help" %}</span></a>
