@@ -33,6 +33,8 @@ define([
 
         this.retrieveFile = function(tile) {
             var letterTypeTiles = self.getTiles(self.letterTypeNodegroupId);
+            //note that the statement below assumes the last index of this array is the tile associated with the 
+            //preceding step in the workflow
             var templateId = letterTypeTiles[letterTypeTiles.length - 1].data[self.letterTypeNodeId]();
             $.ajax({
                 type: "POST",
