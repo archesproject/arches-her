@@ -2,12 +2,14 @@ define([
     'knockout',
     'arches',
     'jquery',
+    'moment',
     'bindings/chosen',
     'bindings/mapbox-gl'
-], function(ko, arches, $) {
+], function(ko, arches, $, moment) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
+            this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
             this.loading = ko.observable(true);
@@ -26,7 +28,10 @@ define([
                 start_index: ko.observable(),
                 pages: ko.observable()
             };
-            
+            this.getTargetDays = function(targetdate){
+                return moment(targetdate).diff(moment().startOf('day'), 'days')
+            }
+
             this.setupMap = function(map, data) {
                 map.on('load', function() {
                     data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));

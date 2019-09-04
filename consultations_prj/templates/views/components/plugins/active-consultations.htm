@@ -63,8 +63,11 @@
                             <!-- /ko -->
                         </div>
 
-                        <div class="active-cons-stubs">
-                            <div class="active-cons-stub-left">
+                        <div class="active-cons-stubs" data-bind="css: {
+                                                      'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
+                                                      'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
+                                                                         $parent.getTargetDays($data['Target Date']) >= 1),
+                                                      'status-late': ($parent.getTargetDays($data['Target Date']) < 1)}">                            <div class="active-cons-stub-left">
                                 <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'Date not entered'"></div>
                                 <div class="active-cons-stub-label" data-bind="">Target Date</div>
                             </div>
