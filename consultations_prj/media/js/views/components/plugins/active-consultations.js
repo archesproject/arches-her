@@ -29,8 +29,8 @@ define([
                 pages: ko.observable()
             };
             this.getTargetDays = function(targetdate){
-                return moment(targetdate).diff(moment().startOf('day'), 'days')
-            }
+                return moment(targetdate).diff(moment().startOf('day'), 'days');
+            };
 
             this.setupMap = function(map, data) {
                 map.on('load', function() {
