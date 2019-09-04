@@ -170,22 +170,22 @@ class FileTemplateView(View):
 
     def edit_letter_A(self, consultation, datatype_factory):
         template_dict = {
-            'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
-            'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
-            'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
-            'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
-            'Action': '8b171540-6d1e-11e9-ac56-dca90488358a'
+            'Case Officer':'8d41e4d4-a250-11e9-a3ff-00224800b26d',
+            'Completion Date': '8d41e4cd-a250-11e9-a25b-00224800b26d',
+            'Proposal': '8d41e4bd-a250-11e9-89e8-00224800b26d',
+            'Log Date': '8d41e4cf-a250-11e9-a86d-00224800b26d',
+            'Action': 'caf5bff8-a3d7-11e9-a37c-00224800b26d'
         }
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
 
     
     def edit_letter_B2(self, consultation, datatype_factory):
         template_dict = {
-            'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
-            'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
-            'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
-            'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
-            'Action': '8b171540-6d1e-11e9-ac56-dca90488358a',
+            'Case Officer':'8d41e4d4-a250-11e9-a3ff-00224800b26d',
+            'Completion Date': '8d41e4cd-a250-11e9-a25b-00224800b26d',
+            'Proposal': '8d41e4bd-a250-11e9-89e8-00224800b26d',
+            'Log Date': '8d41e4cf-a250-11e9-a86d-00224800b26d',
+            'Action': 'caf5bff8-a3d7-11e9-a37c-00224800b26d',
             'Site Name': '???'
         }
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
