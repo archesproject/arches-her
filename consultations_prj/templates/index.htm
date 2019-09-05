@@ -70,9 +70,11 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav cons-splash-list">
+                        {% if user|can_create_resource_instance %}
                         <li class="page-scroll">
                             <a href="{% url 'init-workflow' %}">{% trans "New" %}</a>
                         </li>
+                        {% endif %}
                         <li class="page-scroll">
                             <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
