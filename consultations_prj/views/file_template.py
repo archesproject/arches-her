@@ -208,10 +208,12 @@ class FileTemplateView(View):
         
         def replace_in_runs(p_list, k, v):
             for paragraph in p_list:
-                for run in paragraph.runs:
+                for i, run in enumerate(paragraph.runs):
                     if k in run.text:
                         run_style = run.style
                         run.text = run.text.replace(k, v)
+                    elif i == (len(paragraph.runs) - 1) and k in paragraph.text: # case: rogue text outside of run obj
+                        paragraph.text = paragraph.text.replace(k, v)
 
         def iterate_tables(t_list, k, v):
             for table in t_list:
