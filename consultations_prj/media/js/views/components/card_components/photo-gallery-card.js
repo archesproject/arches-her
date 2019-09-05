@@ -20,11 +20,6 @@ define([
             this.photoGallery = new PhotoGallery();
             this.lastSelected = 0;
             this.selected = ko.observable();
-            this.selected.subscribe(function(val){
-                if (val && val.data) {
-                    console.log('val', koMapping.toJS(val.data));
-                }
-            })
 
             this.getUrl = function(tile){
                 var url = '';
@@ -40,9 +35,9 @@ define([
                 return url;
             };
 
-            this.unique_id = uuid.generate();
+            this.uniqueId = uuid.generate();
             this.uniqueidClass = ko.computed(function() {
-                return "unique_id_" + self.unique_id;
+                return "unique_id_" + self.uniqueId;
             });
 
             this.showThumbnails = ko.observable(false);
@@ -50,13 +45,13 @@ define([
             this.selectDefault = function(){
                 var self = this;
                 return function() {
-                    var selectedIndex = self.card.tiles.indexOf(self.selected())
+                    var selectedIndex = self.card.tiles.indexOf(self.selected());
                     if(self.card.tiles().length > 0 && selectedIndex === -1) {
                         selectedIndex = 0;
                     }
-                    self.card.tiles()[selectedIndex]
-                    self.photoGallery.selectItem(self.card.tiles()[selectedIndex])
-                }
+                    self.card.tiles()[selectedIndex];
+                    self.photoGallery.selectItem(self.card.tiles()[selectedIndex]);
+                };
             };
             this.defaultSelector = this.selectDefault();
 
@@ -65,8 +60,7 @@ define([
                 var selectedIndex = 0;
                 var selected = this.card.tiles().find(
                     function(tile){
-                        console.log(tile);
-                        return tile.selected() === true
+                        return tile.selected() === true;
                     });
                 if (selected) {
                     this.selected(selected);
@@ -80,7 +74,6 @@ define([
 
             if (!this.displayContent()) {
                 var selectedIndex = 0;
-                console.log(this.card.tiles())
                 // if (this.card.tiles().length > 0) {
                 //     this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
                 // }
@@ -91,7 +84,7 @@ define([
                 var index = this.parent.tiles.indexOf(val);
                 val.deleteTile();
                 setTimeout(self.defaultSelector, 150);
-            }
+            };
 
             this.dropzoneOptions = {
                 url: "arches.urls.root",
@@ -101,6 +94,7 @@ define([
                 clickable: ".fileinput-button." + this.uniqueidClass(),
                 previewsContainer: '#hidden-dz-previews',
                 init: function() {
+                    var targetNode;
                     self.dropzone = this;
                     this.on("addedfile", function(file) {
                         var newtile;
@@ -132,7 +126,6 @@ define([
 
                     this.on("error", function(file, error) {
                         file.error = error;
-                        console.log(error);
                     });
                 }
             };
