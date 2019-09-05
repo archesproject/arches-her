@@ -1,36 +1,45 @@
 define([
     'knockout',
+    'knockout-mapping',
     'underscore',
     'dropzone',
     'uuid',
     'viewmodels/card-component',
+    'views/components/workbench',
     'viewmodels/photo-gallery',
     'bindings/slide',
     'bindings/fadeVisible',
     'bindings/dropzone'
-], function(ko, _, Dropzone, uuid, CardComponentViewModel, PhotoGallery) {
+], function(ko, koMapping, _, Dropzone, uuid, CardComponentViewModel, WorkbenchComponentViewModel, PhotoGallery) {
     return ko.components.register('photo-gallery-card', {
         viewModel: function(params) {
             params.configKeys = ['acceptedFiles', 'maxFilesize'];
             var self = this;
             CardComponentViewModel.apply(this, [params]);
+            WorkbenchComponentViewModel.apply(this, [params]);
             this.photoGallery = new PhotoGallery();
             this.lastSelected = 0;
             this.selected = ko.observable();
+            this.selected.subscribe(function(val){
+                if (val && val.data) {
+                    console.log('val', koMapping.toJS(val.data));
+                }
+            })
 
             this.getUrl = function(tile){
                 var url = '';
                 _.each(tile.data,
                     function(v, k) {
-                        val = ko.unwrap(v);
+                        var val = ko.unwrap(v);
                         if (Array.isArray(val)
                             && val.length == 1
                             && (ko.unwrap(val[0].url) || ko.unwrap(val[0].content))) {
-                                url = ko.unwrap(val[0].url) || ko.unwrap(val[0].content);
-                            }
-                        });
-                    return url
-                };
+                            url = ko.unwrap(val[0].url) || ko.unwrap(val[0].content);
+                        }
+                    });
+                console.log('returning url', url);
+                return url;
+            };
 
             this.unique_id = uuid.generate();
             this.uniqueidClass = ko.computed(function() {
@@ -57,12 +66,13 @@ define([
                 var selectedIndex = 0;
                 var selected = this.card.tiles().find(
                     function(tile){
+                        console.log(tile);
                         return tile.selected() === true
                     });
                 if (selected) {
-                        this.selected(selected);
-                        photo = this.getUrl(selected);
-                    }
+                    this.selected(selected);
+                    photo = this.getUrl(selected);
+                }
                 else {
                     this.selected(undefined);
                 }
@@ -71,9 +81,10 @@ define([
 
             if (!this.displayContent()) {
                 var selectedIndex = 0;
-                if (this.card.tiles().length > 0) {
-                    this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
-                }
+                console.log(this.card.tiles())
+                // if (this.card.tiles().length > 0) {
+                //     this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
+                // }
             }
 
             this.removeTile = function(val){
@@ -117,7 +128,7 @@ define([
                         });
                         newtile.data[targetNode]([tilevalue]);
                         newtile.formData.append('file-list_' + targetNode, file, file.name);
-                        self.form.saveTile(newtile);
+                        self.saveTile(newtile);
                     }, self);
 
                     this.on("error", function(file, error) {
@@ -126,17 +137,6 @@ define([
                     });
                 }
             };
-
-            this.tabItems = [
-                {'name': 'edit', 'icon': 'fa fa-pencil'}
-            ];
-
-            this.activeTab = ko.observable('edit');
-            this.setActiveTab = function(tabname){
-                var name = this.activeTab() === tabname ? '' : tabname;
-                this.activeTab(name);
-            };
-
         },
         template: {
             require: 'text!templates/views/components/card_components/photo-gallery-card.htm'
