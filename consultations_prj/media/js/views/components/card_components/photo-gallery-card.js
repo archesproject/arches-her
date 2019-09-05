@@ -37,7 +37,6 @@ define([
                             url = ko.unwrap(val[0].url) || ko.unwrap(val[0].content);
                         }
                     });
-                console.log('returning url', url);
                 return url;
             };
 
