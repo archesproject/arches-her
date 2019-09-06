@@ -124,7 +124,8 @@ class ActiveConsultationsView(View):
         for consultation in consultations:
             res = {}
             consultation.load_tiles()
-            for tile in consultation.tiles:
+            filtered = [tile for tile in consultation.tiles if tile.nodegroup_id in self.active_cons_nodegroupid_list.values()]
+            for tile in filtered:
                 for k, v in tile.data.items():
                     if k in active_cons_list_vals:
                         node = models.Node.objects.get(nodeid=k)
