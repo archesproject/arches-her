@@ -90,7 +90,7 @@ define([
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
                     data: {"page": -1},
-                    dataSrc: function (data){
+                    dataSrc: function(data) {
                         var results = [], consultations = data["results"];
                         consultations.forEach( function(consultation) {
                             results.push([
