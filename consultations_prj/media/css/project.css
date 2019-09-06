@@ -190,7 +190,6 @@ div.workflow-panel {
 }
 
 .card-display-panel {
-    border: 1px solid #999;
     position: relative;
     width: calc(100% - 75px);
     min-height: 400px;
@@ -330,6 +329,13 @@ div.workflow-panel {
 .thumbnail-container {
     display: flex;
     justify-content: space-between;
+    width: calc(100% - 75px);
+}
+
+.workbench-card-container-sidepanel-active .thumbnail-container {
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 475px);
 }
 
 .show-thumbnails-btn {

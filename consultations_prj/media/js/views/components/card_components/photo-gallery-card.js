@@ -57,7 +57,6 @@ define([
 
             this.displayContent = ko.pureComputed(function(){
                 var photo;
-                var selectedIndex = 0;
                 var selected = this.card.tiles().find(
                     function(tile){
                         return tile.selected() === true;
@@ -72,16 +71,18 @@ define([
                 return photo;
             }, this);
 
-            if (!this.displayContent()) {
+            if (this.displayContent() === undefined) {
                 var selectedIndex = 0;
-                // if (this.card.tiles().length > 0) {
-                //     this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
-                // }
+                if (this.card.tiles().length > 0) {
+                    this.photoGallery.selectItem(this.card.tiles()[selectedIndex]);
+                }
             }
 
             this.removeTile = function(val){
-                var tileCount = this.parent.tiles().length;
-                var index = this.parent.tiles.indexOf(val);
+                //TODO: Upon deletion select the tile to the left of the deleted tile
+                //If the deleted tile is the first tile, then select the tile to the right
+                // var tileCount = this.parent.tiles().length;
+                // var index = this.parent.tiles.indexOf(val);
                 val.deleteTile();
                 setTimeout(self.defaultSelector, 150);
             };
@@ -121,7 +122,7 @@ define([
                         });
                         newtile.data[targetNode]([tilevalue]);
                         newtile.formData.append('file-list_' + targetNode, file, file.name);
-                        self.saveTile(newtile);
+                        newtile.save();
                     }, self);
 
                     this.on("error", function(file, error) {
