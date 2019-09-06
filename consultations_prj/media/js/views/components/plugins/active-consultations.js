@@ -3,9 +3,10 @@ define([
     'arches',
     'jquery',
     'moment',
+    'viewmodels/alert',
     'bindings/chosen',
     'bindings/mapbox-gl'
-], function(ko, arches, $, moment) {
+], function(ko, arches, $, moment, AlertViewModel) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
@@ -28,6 +29,31 @@ define([
                 start_index: ko.observable(),
                 pages: ko.observable()
             };
+            this.tablePageCt = ko.observable(25);
+            this.tableData = ko.observable();
+            this.tableReady = ko.observable(false);
+            // this.getTableData = function() {
+            //     $.ajax({
+            //         type: "GET",
+            //         url: arches.urls.root + 'activeconsultations',
+            //         data: {"page": -1},
+            //         context: self,
+            //         success: function(responseText, status, response){
+            //             var results = response.responseJSON['results'];
+            //             results.forEach(function(consultation){
+            //                 delete consultation["Geospatial Location"];
+            //             });
+            //             // console.log(results);
+            //             return results;
+            //         },
+            //         error: function(response, status, error) {
+            //             if(response.statusText !== 'abort'){
+            //                 this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+            //             }
+            //             return [];
+            //         }
+            //     });
+            // }
             this.getTargetDays = function(targetdate){
                 return moment(targetdate).diff(moment().startOf('day'), 'days');
             };
@@ -84,6 +110,68 @@ define([
             if(self.loading()) {
                 self.getConsultations();
             }
+
+            // this.columnVis = [
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true),
+            //     ko.observable(true)
+            // ];
+            // this.toggle = function(col) {
+            //     console.log(self.columnVis[col]);
+            //     var visible = self.columnVis[col]();
+            //     self.columnVis[col](!visible);  
+            // }
+
+            // success: function(responseText, status, response){
+            //     var results = response.responseJSON['results'];
+            //     results.forEach(function(consultation){
+            //         delete consultation["Geospatial Location"];
+            //     });
+            //     console.log(results);
+            //     return results;
+            // },
+            // error: function(response, status, error) {
+            //     if(response.statusText !== 'abort'){
+            //         this.viewModel.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+            //     }
+            //     self.tableData([]);
+            // },
+
+
+            this.tableConfig = {
+                ajax: {
+                    type: "GET",
+                    url: arches.urls.root + 'activeconsultations',
+                    data: {"page": -1},
+                    dataSrc: function (data) {
+                        var results = [], consultations = data["results"];
+                        consultations.forEach( function(consultation) {
+                            results.push([
+                                $('<h4></h4>').text(consultation['Name'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Consultation Type'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Target Date'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Casework Officer'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Proposal'])[0].outerHTML
+                            ]);
+                        });
+                        return results;
+                    }
+                },
+                dom: "<'row'<'col-sm-6'B><'col-sm-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                pageLength: self.tablePageCt()
+                
+            };
         },
         template: { require: 'text!templates/views/components/plugins/active-consultations.htm' }
     });
