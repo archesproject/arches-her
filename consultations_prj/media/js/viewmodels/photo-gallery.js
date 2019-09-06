@@ -8,7 +8,9 @@ define([
         this.selectItem = function(val){
             if (val && val.selected) {
                 this.selectedItem = val;
-                val.selected(true);
+                if (ko.unwrap(val) !== true) {
+                    val.selected(true);
+                }
             }
         }
 

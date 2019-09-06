@@ -72,11 +72,11 @@ define([
                 return photo;
             }, this);
 
-            if (!this.displayContent()) {
+            if (this.displayContent() === undefined) {
                 var selectedIndex = 0;
-                // if (this.card.tiles().length > 0) {
-                //     this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
-                // }
+                if (this.card.tiles().length > 0) {
+                    this.photoGallery.selectItem(this.card.tiles()[selectedIndex])
+                }
             }
 
             this.removeTile = function(val){
@@ -121,7 +121,7 @@ define([
                         });
                         newtile.data[targetNode]([tilevalue]);
                         newtile.formData.append('file-list_' + targetNode, file, file.name);
-                        self.saveTile(newtile);
+                        newtile.save();
                     }, self);
 
                     this.on("error", function(file, error) {
