@@ -119,15 +119,8 @@ class ActiveConsultationsView(View):
 
     def get_tile_dict(self, consultations, datatype_factory):
         tiles = []
-        active_cons_node_list = {
-            "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
-            "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
-            "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
-            "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
-            "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
-            "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
-        }
-        active_cons_list_vals = active_cons_node_list.values()
+        start1 = time()
+        active_cons_list_vals = self.active_cons_node_list.values()
         for consultation in consultations:
             res = {}
             consultation.load_tiles()
@@ -146,4 +139,5 @@ class ActiveConsultationsView(View):
                         res[node.name] = val
             tiles.append(res)
 
+        print('res_tile_dict: %s s' % (time() - start1))
         return tiles
