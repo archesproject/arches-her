@@ -41,6 +41,14 @@ class ActiveConsultationsView(View):
             "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
             "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
         }
+        self.active_cons_nodegroupid_list = {
+            "Target Date":"8d41e4a5-a250-11e9-840c-00224800b26d",
+            "Casework Officer":"8d41e4a8-a250-11e9-aff0-00224800b26d",
+            "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
+            "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
+            "Consultation Type":"8d41e4c0-a250-11e9-a7e3-00224800b26d",
+            "Geospatial Location":"8d41e4c6-a250-11e9-a54d-00224800b26d"
+        }
         self.layout = 'grid'
         self.exclude_statuses = ["Aborted","Completed"]
         self.cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
@@ -124,8 +132,7 @@ class ActiveConsultationsView(View):
         for consultation in consultations:
             res = {}
             consultation.load_tiles()
-            filtered = [tile for tile in consultation.tiles if tile.nodegroup_id in self.active_cons_nodegroupid_list.values()]
-            for tile in filtered:
+            for tile in consultation.tiles:
                 for k, v in tile.data.items():
                     if k in active_cons_list_vals:
                         node = models.Node.objects.get(nodeid=k)
