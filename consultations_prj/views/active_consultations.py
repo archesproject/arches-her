@@ -16,7 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from time import time
 from django.http import HttpRequest, HttpResponseNotFound
 from django.views.generic import View
 from django.core.paginator import Paginator
@@ -127,7 +126,6 @@ class ActiveConsultationsView(View):
 
     def get_tile_dict(self, consultations, datatype_factory):
         tiles = []
-        start1 = time()
         active_cons_list_vals = self.active_cons_node_list.values()
         for consultation in consultations:
             res = {}
@@ -147,5 +145,4 @@ class ActiveConsultationsView(View):
                         res[node.name] = val
             tiles.append(res)
 
-        print('res_tile_dict: %s s' % (time() - start1))
         return tiles
