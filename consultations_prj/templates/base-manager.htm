@@ -54,13 +54,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
                         <!-- Primary Menu Items -->
                         <ul id="">
-                            <li class="workflow-main-nav-item">
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inActiveCons() == true}">
                                 <a href="{% url 'active-consultations' %}"><i class="fa fa-exclamation"></i><span>{% trans "Active Consultations" %}</span></a>
                             </li>
-                            <li class="workflow-main-nav-item">
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inInitWorkflow() == true}">
                                 <a href="{% url 'init-workflow' %}"><i class="fa fa-plus"></i><span>{% trans "New" %}</span></a>
                             </li>
-                            <li class="workflow-main-nav-item">
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inSearch() == true}">
                                 <a href="{% url 'search_home_consultations' %}"><i class="fa fa-search"></i><span>{% trans "Find" %}</span></a>
                             </li>
                             <li class="workflow-main-nav-item">
