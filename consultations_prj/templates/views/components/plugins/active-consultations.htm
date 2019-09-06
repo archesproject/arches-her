@@ -1,16 +1,20 @@
 <!-- ko if: loading() === false -->
 <div class="container" style="margin: 30px; overflow: scroll; width: 100%">
     <div class="row">
+        <!-- ko if: layout() == 'grid' -->
         <div class="col-sm-6">
             <select data-bind="chosen: {width: '50%'}, value: ''" data-placeholder="filter consultations..."></select>
         </div>
+        <!-- /ko -->
         <div class="col-sm-6">
+            <!-- ko if: layout() == 'grid' -->
             <span>sort by:</span>
             <select data-bind="chosen: {width: '50%'}, value: ''">
                 <option value="1" selected>most recent</option>
                 <option value="2" >something else</option>
                 <option value="3">option 3</option>
             </select>
+            <!-- /ko -->
             <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 24px;"></i></button>
             <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 24px;"></i></button>
 
