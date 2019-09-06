@@ -63,7 +63,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inSearch() == true}">
                                 <a href="{% url 'search_home_consultations' %}"><i class="fa fa-search"></i><span>{% trans "Find" %}</span></a>
                             </li>
-                            <li class="workflow-main-nav-item">
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inDashboard() == true}">
                                 <a href="#"><i class="fa fa-television"></i><span>{% trans "Dashboards" %}</span></a>
                             </li>
                         </ul>
