@@ -100,6 +100,16 @@
     <h4 class="workbench-card-sidepanel-header" data-bind="click: hideSidePanel, text: card.model.name"></h4>
 </div>
 
+<div class='photo-workbench-photos'>
+<!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
+<div style='position: relative'>
+    <!--ko if: $parent.getUrl(tile) -->
+    <div class="dz-img" data-bind="text: $index() + 1 + ')', click: $parent.photoGallery.selectItem, css: {'photo-workbench-selected-photo': ko.unwrap(selected)}"></div>
+    <!--/ko-->
+</div>
+<!-- /ko -->
+</div>
+
 <div data-bind="css: card.model.cssclass">
 
     <!-- ko if: reviewer && provisionalTileViewModel.selectedProvisionalEdit() -->
