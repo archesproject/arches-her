@@ -1,13 +1,13 @@
 .workflow-panel.navbarclosed {
-    min-width: 60px;
-    width: 60px;
+    min-width: 50px;
+    width: 50px;
 }
 
 .navbarclosed li.workflow-main-nav-item {
     text-align: center;
     padding-left: 0;
     height: 45px;
-    border-left: 3px solid transparent;
+    border-left: 4px solid transparent;
 }
 
 .navbarclosed .workflow-main-nav-item > a span {
@@ -20,11 +20,11 @@
 
 .navbarclosed .workflow-main-nav-item:hover .nav-tooltip {
     display: table-cell;
-    background: #7C78AD;
+    background: #26476a;
     padding: 12px 20px;
     position: relative;
     top: -30px;
-    left: 57px;
+    left: 46px;
     width: auto;
     height: 45px;
     white-space: nowrap;
@@ -118,6 +118,10 @@ div.workflow-content {
     padding-left: 10px;
 }
 
+.navbarclosed .workflow-panel-nav-header a span i {
+    padding-left: 5px;
+}
+
 .workflow-panel-nav-header a span {
     font-size: 17px;
     font-weight: 600;
@@ -167,7 +171,7 @@ div.workflow-panel {
 .workflow-panel i {
     margin-right: 5px;
     font-size: 15px;
-    color: #f2f2f2;
+    color: #ddd;
     width: 20px;
     text-align: center;
 }
@@ -179,8 +183,22 @@ div.workflow-panel {
 }
 
 .workflow-panel li:hover {
-    background-color: #456586;
-    /* border-left: 3px solid #041B33; */
+    background: rgba(70, 130, 180, 0.4);
+    border-left: 4px solid steelblue;
+}
+
+.workflow-panel:not(.navbarclosed) li:hover a {
+    margin-left: -4px;
+}
+
+.workflow-panel:not(.navbarclosed) .active-sub:hover li {
+    cursor: default;
+    background: steelblue;
+}
+
+.workflow-panel .active-sub:hover a {
+    cursor: default;
+    background: steelblue;
 }
 
 .workflow-panel > hr {
@@ -626,7 +644,12 @@ div.active-cons-stub-label {
 }
 
 .workflow-main-nav-item.active-sub {
-    background-color: #6C87A2;
+    background-color: steelblue;
+}
+
+.workflow-main-nav-item.active-sub:hover {
+    cursor: default;
+    background: steelblue
 }
 
 li.workflow-main-nav-item a {
