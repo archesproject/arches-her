@@ -94,7 +94,7 @@ define([
                         var results = [], consultations = data["results"];
                         consultations.forEach( function(consultation) {
                             results.push([
-                                $('<h4></h4>').text(consultation['Name'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Name'])[0].outerHTML,
                                 $('<p></p>').text(consultation['Consultation Type'])[0].outerHTML,
                                 $('<p></p>').text(consultation['Target Date'])[0].outerHTML,
                                 $('<p></p>').text(consultation['Casework Officer'])[0].outerHTML,
@@ -108,7 +108,7 @@ define([
                 "<'row'<'col-sm-12'tr>>" +
                 "<'row'<'col-sm-5'i><'col-sm-7'p>>",
                 pageLength: self.tablePageCt()
-                
+
             };
         },
         template: { require: 'text!templates/views/components/plugins/active-consultations.htm' }

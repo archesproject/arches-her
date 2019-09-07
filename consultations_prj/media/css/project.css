@@ -735,6 +735,10 @@ div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     margin: -5px 0 -3px 3px;
 }
 
+a.mapboxgl-ctrl-logo {
+    height: 17px;
+}
+
 .active-cons-table-container {
     padding: 20px 0px;
 }
@@ -744,4 +748,50 @@ div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.active-consultations-table-header {
+    background: steelblue;
+    color: #ddd;
+}
+
+table.dataTable thead .sorting_asc:after {
+    color: #eee;
+    opacity: 1;
+}
+
+table.dataTable thead .sorting:after {
+    color: #eee;
+    opacity: 1;
+}
+
+.active-consultations-table-header tr:first-child:hover {
+    background-color: steelblue !important;
+}
+
+.active-consultations-sort {
+    position: absolute;
+    right: 100px;
+    top: -4px;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    text-justify: inherit;
+    float: right;
+    margin-right: 140px;
+}
+
+.active-consultations-display {
+    position: absolute;
+    right: 20px;
+    top: -3px;
+    z-index: 300;
+}
+
+.active-consultations-display .btn {
+    margin-right: -20px;
+}
+
+.dataTables_wrapper .row {
+    margin-top: -3px;
 }
