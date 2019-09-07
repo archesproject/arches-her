@@ -6,10 +6,29 @@
 .navbarclosed li.workflow-main-nav-item {
     text-align: center;
     padding-left: 0;
+    height: 45px;
+    border-left: 3px solid transparent;
 }
 
 .navbarclosed .workflow-main-nav-item > a span {
     display: none;
+}
+
+.nav-tooltip {
+    display: none;
+}
+
+.navbarclosed .workflow-main-nav-item:hover .nav-tooltip {
+    display: table-cell;
+    background: #7C78AD;
+    padding: 12px 20px;
+    position: relative;
+    top: -30px;
+    left: 57px;
+    width: auto;
+    height: 45px;
+    white-space: nowrap;
+    z-index: 100;
 }
 
 .file-upload-filter {
@@ -123,7 +142,6 @@ div.workflow-content {
     font-weight: 600;
 }
 
-
 .workflow-panel {
     background: #26476a;
     /* width: 12%; */
@@ -138,7 +156,8 @@ div.workflow-panel {
     /* text-decoration: none; */
     list-style-type: none;
     /* padding-left: 12px; */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    margin-top: 10px;
     min-height: 200px;
     padding-left: 0;
     /* border-bottom: #fff; */
@@ -160,13 +179,15 @@ div.workflow-panel {
 }
 
 .workflow-panel li:hover {
-    background-color: #5f7892;
+    background-color: #456586;
+    /* border-left: 3px solid #041B33; */
 }
 
 .workflow-panel > hr {
     border-color: white;
     margin-left: 30px;
     margin-right: 30px;
+    margin-bottom: 30px;
 }
 
 .workflow-panel li a span {
@@ -605,7 +626,7 @@ div.active-cons-stub-label {
 }
 
 .workflow-main-nav-item.active-sub {
-    background-color: #406285;
+    background-color: #6C87A2;
 }
 
 li.workflow-main-nav-item a {
