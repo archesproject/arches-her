@@ -115,7 +115,7 @@ div.workflow-content {
 }
 
 .workflow-panel-nav-header a span i {
-    padding-left: 10px;
+    padding-left: 5px;
 }
 
 .navbarclosed .workflow-panel-nav-header a span i {
@@ -135,6 +135,10 @@ div.workflow-content {
     padding-top: 12px;
     height: 50px;
     border-bottom: 1px solid #041B33;
+}
+
+.workflow-panel-nav-header:hover {
+    cursor: pointer;
 }
 
 .workflow-panel-nav-header > hr {
@@ -162,15 +166,16 @@ div.workflow-panel {
     /* padding-left: 12px; */
     margin-bottom: 10px;
     margin-top: 10px;
-    min-height: 200px;
+    margin-bottom: 10px;
+    /* min-height: 200px; */
     padding-left: 0;
     /* border-bottom: #fff; */
     border-width: 2px;
 }
 
 .workflow-panel i {
-    margin-right: 5px;
-    font-size: 15px;
+    margin-right: 0px;
+    font-size: 13px;
     color: #ddd;
     width: 20px;
     text-align: center;
@@ -205,7 +210,7 @@ div.workflow-panel {
     border-color: white;
     margin-left: 30px;
     margin-right: 30px;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
 }
 
 .workflow-panel.navbarclosed > hr {
@@ -213,6 +218,7 @@ div.workflow-panel {
     margin-left: 0px;
     margin-right: 0px;
     margin-top: 0px;
+    margin-bottom: 0px;
 }
 
 .workflow-panel .navbarclosed > hr {
@@ -523,6 +529,7 @@ div.active-cons-header {
 .active-cons-header-title {
     font-weight: 500;
     font-size: 13px;
+    text-align: center;
 }
 
 /* div.active-cons-header ~ div div, div.active-cons-header ~ div p {
@@ -728,6 +735,10 @@ div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     margin: -5px 0 -3px 3px;
 }
 
+a.mapboxgl-ctrl-logo {
+    height: 17px;
+}
+
 .active-cons-table-container {
     padding: 20px 0px;
 }
@@ -737,4 +748,50 @@ div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.active-consultations-table-header {
+    background: steelblue;
+    color: #ddd;
+}
+
+table.dataTable thead .sorting_asc:after {
+    color: #eee;
+    opacity: 1;
+}
+
+table.dataTable thead .sorting:after {
+    color: #eee;
+    opacity: 1;
+}
+
+.active-consultations-table-header tr:first-child:hover {
+    background-color: steelblue !important;
+}
+
+.active-consultations-sort {
+    position: absolute;
+    right: 100px;
+    top: -4px;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    text-justify: inherit;
+    float: right;
+    margin-right: 140px;
+}
+
+.active-consultations-display {
+    position: absolute;
+    right: 20px;
+    top: -3px;
+    z-index: 300;
+}
+
+.active-consultations-display .btn {
+    margin-right: -20px;
+}
+
+.dataTables_wrapper .row {
+    margin-top: -3px;
 }
