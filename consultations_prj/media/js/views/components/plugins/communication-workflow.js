@@ -71,6 +71,17 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-file-o'
+                },
+                {
+                    title: 'Add Communication Complete',
+                    description: 'Choose an option below',
+                    component: 'views/components/workflows/consultations-final-step',
+                    componentname: 'consultations-final-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    icon: 'fa-check',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null
                 }
             ];
 

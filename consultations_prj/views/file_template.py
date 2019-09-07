@@ -72,6 +72,10 @@ class FileTemplateView(View):
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
+
+        if os.path.exists(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx')) is False:
+            os.mkdir(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx'))
+
         self.doc = Document(template_path)
 
         if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
@@ -111,7 +115,7 @@ class FileTemplateView(View):
                     "url":None,
                     "file_id":None,
                     "index":0,
-                    "content":"blob:"+host+"/{0}".format(uuid.uuid4()) # TODO: change from localhost to settings.host or w/e
+                    "content":"blob:"+host+"/{0}".format(uuid.uuid4())
                 }]
             },
             "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
@@ -166,22 +170,22 @@ class FileTemplateView(View):
 
     def edit_letter_A(self, consultation, datatype_factory):
         template_dict = {
-            'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
-            'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
-            'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
-            'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
-            'Action': '8b171540-6d1e-11e9-ac56-dca90488358a'
+            'Case Officer':'8d41e4d4-a250-11e9-a3ff-00224800b26d',
+            'Completion Date': '8d41e4cd-a250-11e9-a25b-00224800b26d',
+            'Proposal': '8d41e4bd-a250-11e9-89e8-00224800b26d',
+            'Log Date': '8d41e4cf-a250-11e9-a86d-00224800b26d',
+            'Action': 'caf5bff8-a3d7-11e9-a37c-00224800b26d'
         }
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
 
     
     def edit_letter_B2(self, consultation, datatype_factory):
         template_dict = {
-            'Case Officer':'36a6c511-6c49-11e9-b450-dca90488358a',
-            'Completion Date': '0316def5-5675-11e9-8804-dca90488358a',
-            'Proposal': 'f34ebbd4-53f3-11e9-b649-dca90488358a',
-            'Log Date': '49f806e6-5674-11e9-a5b2-dca90488358a',
-            'Action': '8b171540-6d1e-11e9-ac56-dca90488358a',
+            'Case Officer':'8d41e4d4-a250-11e9-a3ff-00224800b26d',
+            'Completion Date': '8d41e4cd-a250-11e9-a25b-00224800b26d',
+            'Proposal': '8d41e4bd-a250-11e9-89e8-00224800b26d',
+            'Log Date': '8d41e4cf-a250-11e9-a86d-00224800b26d',
+            'Action': 'caf5bff8-a3d7-11e9-a37c-00224800b26d',
             'Site Name': '???'
         }
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
@@ -201,6 +205,21 @@ class FileTemplateView(View):
         # Note that the intent here is to preserve how things are styled in the docx
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
         # advantage of the former is that replacing run.text preserves styling, replacing p.text does not
+        
+        def replace_in_runs(p_list, k, v):
+            for paragraph in p_list:
+                for i, run in enumerate(paragraph.runs):
+                    if k in run.text:
+                        run_style = run.style
+                        run.text = run.text.replace(k, v)
+                    elif i == (len(paragraph.runs) - 1) and k in paragraph.text: # case: rogue text outside of run obj
+                        paragraph.text = paragraph.text.replace(k, v)
+
+        def iterate_tables(t_list, k, v):
+            for table in t_list:
+                for row in table.rows:
+                    for cell in row.cells:
+                        replace_in_runs(cell.paragraphs, k, v)
         
         if v is not None and key is not None:
             k = "{{"+key+"}}"
@@ -224,19 +243,6 @@ class FileTemplateView(View):
                     iterate_tables(section.footer.tables, k, v)
                     replace_in_runs(section.header.paragraphs, k, v)
                     iterate_tables(section.header.tables, k, v)
-
-        def replace_in_runs(p_list, k, v):
-            for paragraph in p_list:
-                for run in paragraph.runs:
-                    if k in run.text:
-                        run_style = run.style
-                        run.text = run.text.replace(k, v)
-
-        def iterate_tables(t_list, k, v):
-            for table in t_list:
-                for row in table.rows:
-                    for cell in row.cells:
-                        replace_in_runs(cell.paragraphs, k, v)
 
     
     def insert_image(self, document, k, v, image_path=None, config=None):

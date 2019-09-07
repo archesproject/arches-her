@@ -37,35 +37,57 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             {% block mainnav %}
             {% if '/consultations/' in request.path %}
                 <div id="workflow-container">
-                    <div class="workflow-panel">
-                        <div class="workflow-panel-header">
-                            <a><span><i class="fa fa-chevron-circle-left"></i>{% trans "Project Tasks" %}</span></a>
-                            <hr>
+
+                    <!-- Vertical Nav Panel -->
+                    <div class="workflow-panel" data-bind="css: {'navbarclosed': navbarClosed}">
+
+                        <!-- Menu Header -->
+                        <div class="workflow-panel-nav-header" data-bind='click: function(){navbarClosed(!navbarClosed())}'>
+                            <a>
+                              <span>
+                                <i class="fa fa-lg" style="font-size: 23px;" data-bind="css: {'fa-chevron-circle-right': navbarClosed, 'fa-chevron-circle-left': !navbarClosed()}"></i>
+                                <span class="" data-bind="visible: !navbarClosed()">{% trans "Consultations" %}</span>
+                              </span>
+                            </a>
                         </div>
-                        <ul>
-                            <li class="workflow-main-nav-item">
-                                <a href="{% url 'active-consultations' %}"><span>{% trans "Active Projects" %}</span></a>
+                        <!-- End Menu Header -->
+
+                        <!-- Primary Menu Items -->
+                        <ul id="">
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inActiveCons() == true}">
+                                <a href="{% url 'active-consultations' %}"><i class="fa fa-exclamation"></i><span>{% trans "Active Consultations" %}</span></a>
                             </li>
-                            <li class="workflow-main-nav-item">
-                                <a href="{% url 'init-workflow' %}"><span>{% trans "New" %}</span></a>
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inInitWorkflow() == true}">
+                                <a href="{% url 'init-workflow' %}"><i class="fa fa-plus"></i><span>{% trans "New" %}</span></a>
                             </li>
-                            <li class="workflow-main-nav-item">
-                                <a href="{% url 'search_home_consultations' %}"><span>{% trans "Find" %}</span></a>
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inSearch() == true}">
+                                <a href="{% url 'search_home_consultations' %}"><i class="fa fa-search"></i><span>{% trans "Find" %}</span></a>
                             </li>
-                            <li class="workflow-main-nav-item">
-                                <a href="#"><span>{% trans "Reports" %}</span></a>
-                            </li>
-                        </ul>
-                        <hr>
-                        <ul>
-                            <li class="workflow-main-nav-item">
-                                <a href="#"><span>{% trans "Help" %}</span></a>
-                            </li>
-                            <li class="workflow-main-nav-item">
-                                <a href="#"><span>{% trans "About" %}</span></a>
+                            <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inDashboard() == true}">
+                                <a href="#"><i class="fa fa-television"></i><span>{% trans "Dashboards" %}</span></a>
                             </li>
                         </ul>
+                        <!-- End Primary Menu Items -->
+
+                        <hr></hr>
+
+                        <!-- Secondary Nav -->
+                        <ul>
+                            <li class="workflow-main-nav-item">
+                                <a href="#"><i class="fa fa-info"></i><span>{% trans "Help" %}</span></a>
+                            </li>
+                            <li class="workflow-main-nav-item">
+                                <a href="#"><i class="fa fa-newspaper-o"></i><span>{% trans "About" %}</span></a>
+                            </li>
+                        </ul>
+                        <!-- End Secondary Nav -->
+
+
+
                     </div>
+                    <!-- End Vertical Nav Panel -->
+
+                    <!-- Panel for Content -->
                     <div class="workflow-content">
                         {% block header %}
                             {{ block.super }}
@@ -79,6 +101,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         </div>
                         {% endblock main_content %}
                     </div>
+                    <!-- End Panel for Content -->
 
                 </div>
             {% else %}
