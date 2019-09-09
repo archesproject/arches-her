@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% block css %}
     {{ block.super }}
-    {% if 'plugins' in request.path %}
+    {% if '/consultations/' in request.path %}
     <link href="{% static 'css/consultations.css' %}" rel="stylesheet">
     {% endif %}
 {% endblock css%}
@@ -32,10 +32,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% block body %}
 
-    {% if '/consultations' in request.path %}
+    {% if '/consultations/' in request.path %}
         {% block navheader %}
             {% block mainnav %}
-            {% if '/consultations' in request.path %}
+            {% if '/consultations/' in request.path %}
                 <div id="workflow-container">
 
                     <!-- Vertical Nav Panel -->
@@ -53,18 +53,22 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         <!-- End Menu Header -->
 
                         <!-- Primary Menu Items -->
-                        <ul id="">
+                        <ul id="" class="">
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inActiveCons() == true}">
                                 <a href="{% url 'active-consultations' %}"><i class="fa fa-exclamation"></i><span>{% trans "Active Consultations" %}</span></a>
+                                <span class="nav-tooltip">{% trans "Active Consultations" %}</span>
                             </li>
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inInitWorkflow() == true}">
                                 <a href="{% url 'init-workflow' %}"><i class="fa fa-plus"></i><span>{% trans "New" %}</span></a>
+                                <div class="nav-tooltip">{% trans "New" %}</div>
                             </li>
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inSearch() == true}">
                                 <a href="{% url 'search_home_consultations' %}"><i class="fa fa-search"></i><span>{% trans "Find" %}</span></a>
+                                <div class="nav-tooltip">{% trans "Find" %}</div>
                             </li>
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inDashboard() == true}">
                                 <a href="#"><i class="fa fa-television"></i><span>{% trans "Dashboards" %}</span></a>
+                                <div class="nav-tooltip">{% trans "Dashboards" %}</div>
                             </li>
                         </ul>
                         <!-- End Primary Menu Items -->
@@ -75,9 +79,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         <ul>
                             <li class="workflow-main-nav-item">
                                 <a href="#"><i class="fa fa-info"></i><span>{% trans "Help" %}</span></a>
+                                <div class="nav-tooltip">{% trans "Help" %}</div>
                             </li>
                             <li class="workflow-main-nav-item">
                                 <a href="#"><i class="fa fa-newspaper-o"></i><span>{% trans "About" %}</span></a>
+                                <div class="nav-tooltip">{% trans "About" %}</div>
                             </li>
                         </ul>
                         <!-- End Secondary Nav -->

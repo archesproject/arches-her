@@ -10,32 +10,32 @@
 
 <!-- ko if: loading() === false -->
 <div class="container" style="margin: 30px; overflow: scroll; width: 100%">
-    <div class="row">
+    <div class="row relative">
         <!-- ko if: layout() == 'grid' -->
-        <div class="col-sm-6">
-            <select data-bind="chosen: {width: '50%'}, value: ''" data-placeholder="filter consultations..."></select>
+        <div class="active-consultations-filter">
+            <select data-bind="chosen: {width: '300px'}, value: ''" data-placeholder="filter consultations..."></select>
         </div>
         <!-- /ko -->
-        <div class="col-sm-6">
+        <div class="active-consultations-sort">
             <!-- ko if: layout() == 'grid' -->
             <span>sort by:</span>
-            <select data-bind="chosen: {width: '50%'}, value: ''">
+            <select data-bind="chosen: {width: '300px'}, value: ''" data-placeholder="sort...">
                 <option value="1" selected>most recent</option>
                 <option value="2" >something else</option>
                 <option value="3">option 3</option>
             </select>
             <!-- /ko -->
-            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 24px;"></i></button>
-            <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 24px;"></i></button>
+        </div>
 
-
+        <div class="active-consultations-display">
+            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 21px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 21px;"></i></button>
         </div>
     </div>
 
     <div class="row">
         <div class="col-sm-12">
             <!-- ko  -->
-
             <div class="projects-grid" data-bind="visible: layout() === 'grid'">
                 <!-- ko foreach: active_items -->
                 <div class="card-grid-item">
@@ -116,19 +116,18 @@
 
 
             <div data-bind="visible: layout() !== 'grid'">
-
                 <table data-bind="datatable: tableConfig" class="table table-striped table-bordered" cellspacing="0" width="100%">
-                    <thead>
+                    <thead class="active-consultations-table-header">
                         <tr>
-                            <th>"Name"</th>
-                            <th>"Type"</th>
-                            <th>"Target Date"</th>
-                            <th>"Casework Officer"</th>
-                            <th>"Proposal"</th>
+                            <th>Name</th>
+                            <th>Type</th>
+                            <th>Target Date</th>
+                            <th>Casework Officer</th>
+                            <th>Proposal</th>
                         </tr>
                     </thead>
                 </table>
-                
+
                 <!-- <div class="active-cons-table-container">
                 </div> -->
 
@@ -170,7 +169,7 @@
 
 
             </div>
-          
+
         </div>
     </div>
     <!-- ko if: layout() == 'grid' -->
