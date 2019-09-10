@@ -212,19 +212,24 @@ def search_results(request):
 
     # only search for realted instance references when a filter is applied (aside from the paging filter)
     if has_filters:
-        resrouce_id_query = Bool()
-        resrouce_id_query.should(Nested(path='ids', query=Terms(field='ids.id', terms=resourceIds)))
+        # the resource id query can only return resources of type GLHER_Consultation this is to handle for the scenario 
+        # where an GLHER_Application_Area (or GLHER_Heritage_Asset) is related to something other than a GLHER_Consultation
+        resource_id_query = Bool()
+        resource_id_query.must(Nested(path='ids', query=Terms(field='ids.id', terms=resourceIds)))
+        resource_id_query.must(Terms(field='graph_id', terms="8d41e49e-a250-11e9-9eab-00224800b26d"))
+
+        # we need to wrap the existing query (search_results_object['query']) in a Bool query along with
+        # the resource id query above
+        outer_query = Bool()
+        outer_query.should(resource_id_query)
+
         dsl = search_results_object.pop('query', None)
-        resrouce_id_query.should(dsl.dsl.pop('query', None))
+        outer_query.should(dsl.dsl.pop('query', None))
         dsl.dsl['query'] = {}
         search_results_object['query'] = dsl
-        search_results_object['query'].add_query(resrouce_id_query)
 
-    # need to reapply the resource type filter at the outermost level to handle for the scenario 
-    # where an GLHER_Application_Area (or GLHER_Heritage_Asset) is related to something other than a GLHER_Consultation
-    search_filter = search_filter_factory.get_filter('resource-type-filter')
-    if search_filter:
-        search_filter.append_dsl(search_results_object, permitted_nodegroups, include_provisional)
+        search_results_object['query'].add_query(outer_query)
+
 
     dsl = search_results_object.pop('query', None)
     dsl.include('graph_id')
