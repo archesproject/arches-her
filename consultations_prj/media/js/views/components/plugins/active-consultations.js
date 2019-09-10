@@ -62,6 +62,7 @@ define([
                         response.responseJSON['page_results'].forEach( function(consultation) {
                             consultation["mapImageUrl"] = ko.observable(false);
                             consultation["zoom"] = 15;
+                            if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
                             if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
                             if(!consultation["Geospatial Location"]) {
                                 consultation["Geospatial Location"] = {"features": [{"geometry":{"coordinates":[0,0]}}]};
@@ -99,7 +100,7 @@ define([
                                 $('<p></p>').text(consultation['Consultation Type'])[0].outerHTML,
                                 $('<p></p>').text(consultation['Target Date'])[0].outerHTML,
                                 $('<p></p>').text(consultation['Casework Officer'])[0].outerHTML,
-                                $('<p></p>').text(consultation['Proposal'])[0].outerHTML
+                                $('<p></p>').html(consultation['Proposal'])[0].outerHTML
                             ]);
                         });
                         return results;
