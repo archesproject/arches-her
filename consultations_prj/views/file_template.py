@@ -21,6 +21,7 @@ import json
 import os
 import uuid
 from datetime import datetime
+import docx
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
@@ -215,18 +216,6 @@ class FileTemplateView(View):
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
         # advantage of the former is that replacing run.text preserves styling, replacing p.text does not
         
-        def insert_paragraph_after(paragraph, text=None, style=None):
-            """Insert a new paragraph after the given paragraph."""
-            new_p = OxmlElement("w:p")
-            paragraph._p.addnext(new_p)
-            new_para = Paragraph(new_p, paragraph._parent)
-            if text:
-                new_para.add_run(text)
-            if style is not None:
-                new_para.style = style
-            return new_para
-
-        
         def parse_html_to_docx(p, k, v):
             style = p.style
             if k in p.text:
@@ -293,6 +282,11 @@ class DocumentHTMLParser(HTMLParser):
         HTMLParser.__init__(self)
         self.document = document
         self.paragraph = paragraph
+        self.table = None
+        self.table_cols = 0
+        self.table_rows = 0
+        self.max_cols_reached = False
+        self.td_cursor = False
         self.hyperlink = False
         self.list_style = "ul"
         self.ol_counter = 1
@@ -309,26 +303,32 @@ class DocumentHTMLParser(HTMLParser):
                 new_para.style = style
             return new_para
 
-    def add_hyperlink(self, paragraph, url, text):
+    def add_hyperlink(self, paragraph, url, text, color=None, underline=None):
             # This gets access to the document.xml.rels file and gets a new relation id value
             part = self.paragraph.part
-            r_id = part.relate_to(url, self.document.opc.constants.RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
+            r_id = part.relate_to(url, docx.opc.constants.RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
 
             # Create the w:hyperlink tag and add needed values
-            hyperlink = self.document.oxml.shared.OxmlElement('w:hyperlink')
-            hyperlink.set(self.document.oxml.shared.qn('r:id'), r_id, )
+            hyperlink = docx.oxml.shared.OxmlElement('w:hyperlink')
+            hyperlink.set(docx.oxml.shared.qn('r:id'), r_id, )
 
             # Create a w:r element
-            new_run = self.document.oxml.shared.OxmlElement('w:r')
+            new_run = docx.oxml.shared.OxmlElement('w:r')
 
             # Create a new w:rPr element
-            rPr = self.document.oxml.shared.OxmlElement('w:rPr')
+            rPr = docx.oxml.shared.OxmlElement('w:rPr')
 
             # Add color if it is given
             if not color is None:
-                c = self.document.oxml.shared.OxmlElement('w:color')
-                c.set(self.document.oxml.shared.qn('w:val'), color)
-                rPr.append(c)
+                c = docx.oxml.shared.OxmlElement('w:color')
+                c.set(docx.oxml.shared.qn('w:val'), color)
+                rPr.append(c) # #5384da ; rgb(83,132,218)
+            
+            # Remove underlining if it is requested
+            if not underline:
+                u = docx.oxml.shared.OxmlElement('w:u')
+                u.set(docx.oxml.shared.qn('w:val'), 'none')
+                rPr.append(u)
 
             # Join all the xml elements together add add the required text to the w:r element
             new_run.append(rPr)
@@ -343,7 +343,7 @@ class DocumentHTMLParser(HTMLParser):
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
-        print(tag,attrs)
+        # print(tag,attrs)
         self.run = self.paragraph.add_run()
         if tag == "i" or tag == "em":
             self.run.italic = True
@@ -371,11 +371,17 @@ class DocumentHTMLParser(HTMLParser):
             # self.run.add_tab()
         if tag == "a":
             self.hyperlink = attrs[0][1]
-            print(self.hyperlink)
         if tag == "table":
-            table = attrs[0]
-            # [(u'border', u'1'), (u'cellpadding', u'1'), (u'cellspacing', u'1'), (u'style', u'width:500px')]
-        # if tag == "tr":
+            self.table = self.document.add_table(self.table_rows, self.table_cols)
+            self.table.autofit = True
+        if tag == "tr":
+            self.table_rows+= 1
+            self.table.add_row()
+        if tag == "td":
+            self.table_cols+= 1
+            if self.max_cols_reached is False:
+                self.table.add_column(1)
+            self.td_cursor = True
 
     def handle_endtag(self, tag):
         if tag in ["br", "li", "ul", "ol"]:
@@ -383,11 +389,30 @@ class DocumentHTMLParser(HTMLParser):
         self.run = self.paragraph.add_run()
         if tag == "ol":
             self.ol_counter = 1
+        if tag == "table":
+            tbl = self.table._tbl
+            p = self.paragraph._p
+            p.addnext(tbl)
+            self.table = None
+            self.table_cols = 0
+            self.table_rows = 0
+        if tag == "tr":
+            self.table_cols = 0
+            self.max_cols_reached = True
+        if tag == "td":
+            self.td_cursor = False
 
     def handle_data(self, data):
+        if "&#39;" in data:
+            data = data.replace("&#39;","\'")
+
         if self.hyperlink is not False:
-            self.add_hyperlink(self.paragraph, self.hyperlink, data)
+            blue = docx.shared.RGBColor(83,132,218)
+            color = blue.__str__()
+            self.add_hyperlink(self.paragraph, self.hyperlink, data, color)
             self.hyperlink = False
+        elif self.td_cursor is True:
+            self.table.cell(self.table_rows-1, self.table_cols-1).add_paragraph(data) #formatting?
         else:
             self.run.add_text(data)
 
@@ -402,35 +427,3 @@ class DocumentHTMLParser(HTMLParser):
             c = unichr(int(name))
         self.run.add_text(c)
 
-
-# <p><strong>Here is a title of a proposal</strong></p>
-# \n\n<ol>
-#     \n\t<li>&nbsp;An item here</li>
-#     \n\t<li>Another item here</li>
-#     \n\t<li>A third again</li>
-# \n</ol>
-# \n\n<p>And some text...</p>
-# \n\n<ul>
-#     \n\t<li>a list item</li>
-#     \n\t<li>a second list item</li>
-# \n</ul>
-# \n\n<p>ALso checkout this website:&nbsp;<a href=\"http://www.google.com\">google</a></p>
-# \n\n<p>And here&#39;s a table:</p>
-# \n\n<table border=\"1\" cellpadding=\"1\" cellspacing=\"1\" style=\"width:500px\">
-#     \n\t<tbody>
-#         \n\t\t<tr>
-#             \n\t\t\t<td>Column label</td>
-#             \n\t\t\t<td>\n\t\t\t<h2>2nd column label&nbsp;</h2>
-#             \n\t\t\t</td>
-#         \n\t\t</tr>
-#         \n\t\t<tr>
-#             \n\t\t\t<td><em>Italic</em></td>
-#             \n\t\t\t<td><s>Strikethrough</s></td>
-#         \n\t\t</tr>
-#         \n\t\t<tr>
-#             \n\t\t\t<td>&nbsp;</td>
-#             \n\t\t\t<td>&nbsp;</td>
-#         \n\t\t</tr>
-#     \n\t</tbody>
-# \n</table>
-# \n\n<blockquote>\n<p>A block quote here</p>\n</blockquote>\n\n<hr />\n<p>an hr above</p>\n
