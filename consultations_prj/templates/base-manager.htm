@@ -70,6 +70,12 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                 <a href="#"><i class="fa fa-television"></i><span>{% trans "Dashboards" %}</span></a>
                                 <div class="nav-tooltip">{% trans "Dashboards" %}</div>
                             </li>
+                            {% if user|can_create_resource_instance %}
+                            <li class="workflow-main-nav-item">
+                                <a href="{% url 'resource' %}"><i class="fa fa-bookmark"></i><span>{% trans "Manage" %}</span></a>
+                                <div class="nav-tooltip">{% trans "Manage Resources" %}</div>
+                            </li>
+                            {% endif %}
                         </ul>
                         <!-- End Primary Menu Items -->
 
