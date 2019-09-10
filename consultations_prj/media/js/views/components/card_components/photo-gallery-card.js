@@ -73,7 +73,7 @@ define([
 
             if (this.displayContent() === undefined) {
                 var selectedIndex = 0;
-                if (this.card.tiles().length > 0) {
+                if (this.card.tiles().length > 0 && this.form && this.form.selection() !== 'root') {
                     this.photoGallery.selectItem(this.card.tiles()[selectedIndex]);
                 }
             }
