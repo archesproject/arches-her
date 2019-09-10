@@ -26,6 +26,11 @@ define([
             this.selected = ko.observable();
 
             self.activeTab.subscribe(function(val){self.card.activeTab = val;});
+            self.card.tiles.subscribe(function(val){
+                if (val.length === 0) {
+                    self.activeTab(null);
+                }
+            })
 
             this.getUrl = function(tile){
                 var url = '';
