@@ -18,6 +18,7 @@ define([
             this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
+            this.sortOptions = ["Log Date: Newest to Oldest","Log Date: Oldest to Newest","Casework Officer: A to Z","Casework Officer: Z to A"]
             this.userRequestedNewPage = false;
             this.paginator = {
                 current_page: ko.observable(),
