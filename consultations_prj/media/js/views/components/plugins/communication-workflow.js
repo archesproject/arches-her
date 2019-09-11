@@ -74,6 +74,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('communication-workflow');
 
             self.activeStep.subscribe(this.updateState);
 

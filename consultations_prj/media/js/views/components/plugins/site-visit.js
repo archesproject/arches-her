@@ -106,6 +106,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('site-visit');
 
             self.activeStep.subscribe(this.updateState);
 

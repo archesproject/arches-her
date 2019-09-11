@@ -115,6 +115,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('consultation-workflow');
 
             self.activeStep.subscribe(this.updateState);
 
