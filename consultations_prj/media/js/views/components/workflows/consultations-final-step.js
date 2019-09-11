@@ -40,12 +40,12 @@ define([
         this.workflowJSON.subscribe(function(val){
             if(val) {
                 self.workflows(val['config']['workflows'].map(function(wf){
-                    wf.url = arches.urls.plugin(wf.slug);
+                    wf.url = '/consultations'+arches.urls.plugin(wf.slug);
                     return wf;
                 }, this));
             }
         });
-        
+
         params.getStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
