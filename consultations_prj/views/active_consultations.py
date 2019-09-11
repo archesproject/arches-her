@@ -143,6 +143,7 @@ class ActiveConsultationsView(View):
                             val = v
 
                         res[node.name] = val
+            res['resourceinstanceid'] = consultation.resourceinstanceid
             tiles.append(res)
 
         return tiles

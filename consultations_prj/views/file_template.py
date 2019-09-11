@@ -1,3 +1,4 @@
+# coding: utf-8
 '''
 ARCHES - a program developed to inventory and manage immovable cultural heritage.
 Copyright (C) 2013 J. Paul Getty Trust and World Monuments Fund
@@ -20,7 +21,12 @@ import json
 import os
 import uuid
 from datetime import datetime
+import docx
 from docx import Document
+from docx.text.paragraph import Paragraph
+from docx.oxml.xmlchemy import OxmlElement
+from HTMLParser import HTMLParser
+from htmlentitydefs import name2codepoint
 from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
@@ -38,8 +44,9 @@ from arches.app.views.tile import TileData
 
 class FileTemplateView(View):
 
-    doc = None
-    resource = None
+    def __init__(self):
+        self.doc = None
+        self.resource = None
 
 
     def get(self, request):
@@ -194,25 +201,38 @@ class FileTemplateView(View):
     def replace_in_letter(self, tiles, template_dict, datatype_factory):
         for tile in tiles:
             for key, value in template_dict.items():
+                html = False
                 if value in tile.data:
                     my_node = models.Node.objects.get(nodeid=value)
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
-                    self.replace_string(self.doc, key, lookup_val)
+                    if '<' in lookup_val: # not ideal
+                        html = True
+                    self.replace_string(self.doc, key, lookup_val, html)
 
     
-    def replace_string(self, document, key, v):
+    def replace_string(self, document, key, v, html=False):
         # Note that the intent here is to preserve how things are styled in the docx
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
         # advantage of the former is that replacing run.text preserves styling, replacing p.text does not
         
+        def parse_html_to_docx(p, k, v):
+            style = p.style
+            if k in p.text:
+                p.clear()
+                document_html_parser = DocumentHTMLParser(p, document)
+                document_html_parser.insert_into_paragraph_and_feed(v)
+
+        
         def replace_in_runs(p_list, k, v):
             for paragraph in p_list:
+                if html is True:
+                    parse_html_to_docx(paragraph, k, v)
                 for i, run in enumerate(paragraph.runs):
-                    if k in run.text:
+                    if k in run.text: # now check if html
                         run_style = run.style
                         run.text = run.text.replace(k, v)
-                    elif i == (len(paragraph.runs) - 1) and k in paragraph.text: # case: rogue text outside of run obj
+                    elif i == (len(paragraph.runs) - 1) and k in paragraph.text: # backstop case: rogue text outside of run obj - must fix template
                         paragraph.text = paragraph.text.replace(k, v)
 
         def iterate_tables(t_list, k, v):
@@ -255,4 +275,155 @@ class FileTemplateView(View):
         # perhaps replaces {{custom_object}} with pre-determined text structure with custom style/format
 
         return True
+
+        
+class DocumentHTMLParser(HTMLParser):
+    def __init__(self, paragraph, document):
+        HTMLParser.__init__(self)
+        self.document = document
+        self.paragraph = paragraph
+        self.table = None
+        self.table_cols = 0
+        self.table_rows = 0
+        self.max_cols_reached = False
+        self.td_cursor = False
+        self.hyperlink = False
+        self.list_style = "ul"
+        self.ol_counter = 1
+        self.run = self.paragraph.add_run()
+
+    def insert_paragraph_after(self, paragraph, text=None, style=None):
+            """Insert a new paragraph after the given paragraph."""
+            new_p = OxmlElement("w:p")
+            paragraph._p.addnext(new_p)
+            new_para = Paragraph(new_p, paragraph._parent)
+            if text:
+                new_para.add_run(text)
+            if style is not None:
+                new_para.style = style
+            return new_para
+
+    def add_hyperlink(self, paragraph, url, text, color=None, underline=None):
+            # This gets access to the document.xml.rels file and gets a new relation id value
+            part = self.paragraph.part
+            r_id = part.relate_to(url, docx.opc.constants.RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
+
+            # Create the w:hyperlink tag and add needed values
+            hyperlink = docx.oxml.shared.OxmlElement('w:hyperlink')
+            hyperlink.set(docx.oxml.shared.qn('r:id'), r_id, )
+
+            # Create a w:r element
+            new_run = docx.oxml.shared.OxmlElement('w:r')
+
+            # Create a new w:rPr element
+            rPr = docx.oxml.shared.OxmlElement('w:rPr')
+
+            # Add color if it is given
+            if not color is None:
+                c = docx.oxml.shared.OxmlElement('w:color')
+                c.set(docx.oxml.shared.qn('w:val'), color)
+                rPr.append(c) # #5384da ; rgb(83,132,218)
+            
+            # Remove underlining if it is requested
+            if not underline:
+                u = docx.oxml.shared.OxmlElement('w:u')
+                u.set(docx.oxml.shared.qn('w:val'), 'none')
+                rPr.append(u)
+
+            # Join all the xml elements together add add the required text to the w:r element
+            new_run.append(rPr)
+            new_run.text = text
+            hyperlink.append(new_run)
+            paragraph._p.append(hyperlink)
+
+            return hyperlink
+
+    def insert_into_paragraph_and_feed(self, html):
+        self.run = self.paragraph.add_run()
+        self.feed(html)
+
+    def handle_starttag(self, tag, attrs):
+        # print(tag,attrs)
+        self.run = self.paragraph.add_run()
+        if tag == "i" or tag == "em":
+            self.run.italic = True
+        if tag == "b" or tag == "strong":
+            self.run.bold = True
+        if tag == "s":
+            self.run.strike = True
+        if tag == "u":
+            self.run.underline = True
+        if tag == "ol":
+            self.list_style = "ol"
+        if tag == "ul":
+            self.list_style = "ul"
+        if tag in ["br", "ul", "ol"]:
+            self.run.add_break()
+        if tag == "li":
+            if self.list_style == 'ul':
+                self.run.add_text(u'● ')
+            else:
+                self.run.add_text(str(self.ol_counter)+'. ')
+                self.ol_counter += 1
+        if tag == "p":
+            self.run.add_break()
+            # self.run.add_break()
+            # self.run.add_tab()
+        if tag == "a":
+            self.hyperlink = attrs[0][1]
+        if tag == "table":
+            self.table = self.document.add_table(self.table_rows, self.table_cols)
+            self.table.autofit = True
+        if tag == "tr":
+            self.table_rows+= 1
+            self.table.add_row()
+        if tag == "td":
+            self.table_cols+= 1
+            if self.max_cols_reached is False:
+                self.table.add_column(1)
+            self.td_cursor = True
+
+    def handle_endtag(self, tag):
+        if tag in ["br", "li", "ul", "ol"]:
+            self.run.add_break()
+        self.run = self.paragraph.add_run()
+        if tag == "ol":
+            self.ol_counter = 1
+        if tag == "table":
+            tbl = self.table._tbl
+            p = self.paragraph._p
+            p.addnext(tbl)
+            self.table = None
+            self.table_cols = 0
+            self.table_rows = 0
+        if tag == "tr":
+            self.table_cols = 0
+            self.max_cols_reached = True
+        if tag == "td":
+            self.td_cursor = False
+
+    def handle_data(self, data):
+        if "&#39;" in data:
+            data = data.replace("&#39;","\'")
+
+        if self.hyperlink is not False:
+            blue = docx.shared.RGBColor(83,132,218)
+            color = blue.__str__()
+            self.add_hyperlink(self.paragraph, self.hyperlink, data, color)
+            self.hyperlink = False
+        elif self.td_cursor is True:
+            self.table.cell(self.table_rows-1, self.table_cols-1).add_paragraph(data) #formatting?
+        else:
+            self.run.add_text(data)
+
+    def handle_entityref(self, name):
+        c = unichr(name2codepoint[name])
+        self.run.add_text(c)
+
+    def handle_charref(self, name):
+        if name.startswith('x'):
+            c = unichr(int(name[1:], 16))
+        else:
+            c = unichr(int(name))
+        self.run.add_text(c)
 

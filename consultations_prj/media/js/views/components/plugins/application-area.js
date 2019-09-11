@@ -89,6 +89,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('application-area');
 
             self.activeStep.subscribe(this.updateState);
 

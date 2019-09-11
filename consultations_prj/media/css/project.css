@@ -1,15 +1,35 @@
 .workflow-panel.navbarclosed {
-    min-width: 60px;
-    width: 60px;
+    min-width: 50px;
+    width: 50px;
 }
 
 .navbarclosed li.workflow-main-nav-item {
     text-align: center;
     padding-left: 0;
+    margin-left: 0px;
+    height: 45px;
+    border-left: 4px solid transparent;
 }
 
 .navbarclosed .workflow-main-nav-item > a span {
     display: none;
+}
+
+.nav-tooltip {
+    display: none;
+}
+
+.navbarclosed .workflow-main-nav-item:hover .nav-tooltip {
+    display: table-cell;
+    background: #26476a;
+    padding: 12px 20px;
+    position: relative;
+    top: -30px;
+    left: 46px;
+    width: auto;
+    height: 45px;
+    white-space: nowrap;
+    z-index: 100;
 }
 
 .file-upload-filter {
@@ -99,6 +119,10 @@ div.workflow-content {
     padding-left: 10px;
 }
 
+.navbarclosed .workflow-panel-nav-header a span i {
+    padding-left: 10px;
+}
+
 .workflow-panel-nav-header a span {
     font-size: 17px;
     font-weight: 600;
@@ -114,6 +138,10 @@ div.workflow-content {
     border-bottom: 1px solid #041B33;
 }
 
+.workflow-panel-nav-header:hover {
+    cursor: pointer;
+}
+
 .workflow-panel-nav-header > hr {
     border-color: #142638;
     width: 100%;
@@ -122,7 +150,6 @@ div.workflow-content {
 .sub-title {
     font-weight: 600;
 }
-
 
 .workflow-panel {
     background: #26476a;
@@ -138,41 +165,74 @@ div.workflow-panel {
     /* text-decoration: none; */
     list-style-type: none;
     /* padding-left: 12px; */
-    margin-bottom: 20px;
-    min-height: 200px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    /* min-height: 200px; */
     padding-left: 0;
     /* border-bottom: #fff; */
     border-width: 2px;
 }
 
 .workflow-panel i {
-    margin-right: 5px;
-    font-size: 15px;
-    color: #f2f2f2;
+    margin-right: 0px;
+    font-size: 13px;
+    color: #ddd;
     width: 20px;
     text-align: center;
+    margin-left: -5px;
 }
 
 .workflow-panel li {
     padding-top: 12px;
-    padding-left: 30px;
+    padding-left: 20px;
     padding-bottom: 12px;
 }
 
 .workflow-panel li:hover {
-    background-color: #5f7892;
+    background: rgba(70, 130, 180, 0.4);
+    border-left: 4px solid steelblue;
+}
+
+.workflow-panel:not(.navbarclosed) li:hover a {
+    margin-left: -4px;
+}
+
+.workflow-panel:not(.navbarclosed) .active-sub:hover li {
+    cursor: default;
+    background: steelblue;
+}
+
+.workflow-panel .active-sub:hover a {
+    cursor: default;
+    background: steelblue;
 }
 
 .workflow-panel > hr {
     border-color: white;
     margin-left: 30px;
     margin-right: 30px;
+    margin-bottom: 20px;
+}
+
+.workflow-panel.navbarclosed > hr {
+    border-color: #0B0737;
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.workflow-panel .navbarclosed > hr {
+    border-color: white;
+    margin-bottom: 0px;
 }
 
 .workflow-panel li a span {
     color: white;
     font-size: 15px;
     margin-top: 15px;
+    margin-left: 5px;
 }
 
 .workflow-select-wf-icon {
@@ -472,6 +532,7 @@ div.active-cons-header {
 .active-cons-header-title {
     font-weight: 500;
     font-size: 13px;
+    text-align: center;
 }
 
 /* div.active-cons-header ~ div div, div.active-cons-header ~ div p {
@@ -611,13 +672,26 @@ div.active-cons-stub-label {
     text-overflow: ellipsis; */
 }
 
+div.active-cons-hover-loading {
+    font-size: 36px;
+    /* align-self: center; */
+    /* flex: 'flex-grow'; */
+    /* display: block; */
+    text-align: center;
+}
+
 .workflow-main-nav-item {
     cursor: pointer;
     display: block;
 }
 
 .workflow-main-nav-item.active-sub {
-    background-color: #406285;
+    background-color: steelblue;
+}
+
+.workflow-main-nav-item.active-sub:hover {
+    cursor: default;
+    background: steelblue
 }
 
 li.workflow-main-nav-item a {
@@ -672,6 +746,10 @@ div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     margin: -5px 0 -3px 3px;
 }
 
+a.mapboxgl-ctrl-logo {
+    height: 17px;
+}
+
 .active-cons-table-container {
     padding: 20px 0px;
 }
@@ -681,4 +759,50 @@ div.hide-file-list > div > div > div > div > form > div > div:nth-child(3) {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+.active-consultations-table-header {
+    background: steelblue;
+    color: #ddd;
+}
+
+table.dataTable thead .sorting_asc:after {
+    color: #eee;
+    opacity: 1;
+}
+
+table.dataTable thead .sorting:after {
+    color: #eee;
+    opacity: 1;
+}
+
+.active-consultations-table-header tr:first-child:hover {
+    background-color: steelblue !important;
+}
+
+.active-consultations-sort {
+    position: absolute;
+    right: 100px;
+    top: -4px;
+}
+
+div.dataTables_wrapper div.dataTables_filter {
+    text-justify: inherit;
+    float: right;
+    margin-right: 140px;
+}
+
+.active-consultations-display {
+    position: absolute;
+    right: 20px;
+    top: -3px;
+    z-index: 300;
+}
+
+.active-consultations-display .btn {
+    margin-right: -20px;
+}
+
+.dataTables_wrapper .row {
+    margin-top: -3px;
 }
