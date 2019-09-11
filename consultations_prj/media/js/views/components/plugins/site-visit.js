@@ -31,8 +31,8 @@ define([
                     title: 'Site Visit Attendees',
                     name: 'siteattendees',
                     description: '',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
+                    component: 'views/components/workflows/new-multi-tile-step',
+                    componentname: 'new-multi-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
                     resourceid: null,
@@ -106,6 +106,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('site-visit');
 
             self.activeStep.subscribe(this.updateState);
 

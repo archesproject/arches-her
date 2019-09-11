@@ -10,31 +10,19 @@ define([
             var self = this;
             params.steps = [
                 {
-                    title: 'Related Consultation / Date',
+                    title: 'Related Consultation / Details',
                     name: 'relatedconsultation',
-                    description: '',
+                    description: 'Select the related consultation and Enter the details for this Communication',
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: "",
+                    nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag',
                     nameheading: 'Communication',
                     namelabel: '[no label]'
-                },
-                {
-                    title: 'Communication Details',
-                    description: 'Enter the details for this Communication',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-tag'
                 },
                 {
                     title: 'Notes',
@@ -86,6 +74,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('communication-workflow');
 
             self.activeStep.subscribe(this.updateState);
 

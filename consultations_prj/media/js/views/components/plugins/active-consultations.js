@@ -3,12 +3,14 @@ define([
     'arches',
     'jquery',
     'moment',
+    'viewmodels/alert',
     'bindings/chosen',
     'bindings/mapbox-gl'
-], function(ko, arches, $, moment) {
+], function(ko, arches, $, moment, AlertViewModel) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
+            this.resourceEditorURL = arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
@@ -28,6 +30,7 @@ define([
                 start_index: ko.observable(),
                 pages: ko.observable()
             };
+            this.tablePageCt = ko.observable(25);
             this.getTargetDays = function(targetdate){
                 return moment(targetdate).diff(moment().startOf('day'), 'days');
             };
@@ -59,6 +62,7 @@ define([
                         response.responseJSON['page_results'].forEach( function(consultation) {
                             consultation["mapImageUrl"] = ko.observable(false);
                             consultation["zoom"] = 15;
+                            if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
                             if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
                             if(!consultation["Geospatial Location"]) {
                                 consultation["Geospatial Location"] = {"features": [{"geometry":{"coordinates":[0,0]}}]};
@@ -81,9 +85,33 @@ define([
                 });
             }
 
-            if(self.loading()) {
-                self.getConsultations();
-            }
+            if(self.loading()) { self.getConsultations(); }
+
+            this.tableConfig = {
+                ajax: {
+                    type: "GET",
+                    url: arches.urls.root + 'activeconsultations',
+                    data: {"page": -1},
+                    dataSrc: function(data) {
+                        var results = [], consultations = data["results"];
+                        consultations.forEach( function(consultation) {
+                            results.push([
+                                $('<p></p>').text(consultation['Name'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Consultation Type'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Target Date'])[0].outerHTML,
+                                $('<p></p>').text(consultation['Casework Officer'])[0].outerHTML,
+                                $('<p></p>').html(consultation['Proposal'])[0].outerHTML
+                            ]);
+                        });
+                        return results;
+                    }
+                },
+                dom: "<'row'<'col-sm-6'B><'col-sm-6'f>>" +
+                "<'row'<'col-sm-12'tr>>" +
+                "<'row'<'col-sm-5'i><'col-sm-7'p>>",
+                pageLength: self.tablePageCt()
+
+            };
         },
         template: { require: 'text!templates/views/components/plugins/active-consultations.htm' }
     });
