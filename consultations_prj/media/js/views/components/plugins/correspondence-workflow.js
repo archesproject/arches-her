@@ -52,6 +52,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            self.getJSON('correspondence-workflow');
 
             self.activeStep.subscribe(this.updateState);
 
