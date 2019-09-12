@@ -143,11 +143,9 @@
 
 <div class='photo-workbench-photos'>
 <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
-<div style='position: relative'>
     <!--ko if: $parent.getUrl(tile) -->
-    <div class="dz-img" data-bind="text: $index() + 1 + ') ' + (tile.data['77d5e72e-d0d6-11e9-bdab-a683e74f6c3a']()), click: $parent.photoGallery.selectItem, css: {'photo-workbench-selected-photo': ko.unwrap(selected)}"></div>
+    <div class='photo-workbench-photo' data-bind="text: $index() + 1 + ') ' + (tile.data['77d5e72e-d0d6-11e9-bdab-a683e74f6c3a']()), click: $parent.photoGallery.selectItem, css: {'selected-photo': ko.unwrap(selected)}"></div>
     <!--/ko-->
-</div>
 <!-- /ko -->
 </div>
 
@@ -224,7 +222,7 @@
             {% block form_widgets %}
             <!--ko if: self.selected() -->
             <form class="widgets" style="margin-bottom: 20px;">
-                <div data-bind="text: ko.unwrap(self.selected).tileid"></div>
+                <div style="margin: 15px" data-bind="text: ko.unwrap(self.selected).tileid"></div>
                 <div data-bind="foreach: {
                         data:card.widgets, as: 'widget'
                     }">
