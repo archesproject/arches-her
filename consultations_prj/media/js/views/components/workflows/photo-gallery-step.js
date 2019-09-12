@@ -16,7 +16,7 @@ define([
                     if (tiles.length) {
                         self.complete(true);
                     }
-                })
+                });
             } else {
                 self.complete(true);
             }
