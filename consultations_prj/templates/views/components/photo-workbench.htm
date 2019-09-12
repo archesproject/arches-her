@@ -222,19 +222,21 @@
             {% endblock form_header %}
             <!-- ko if: card.widgets().length > 0 -->
             {% block form_widgets %}
+            <!--ko if: self.selected() -->
             <form class="widgets" style="margin-bottom: 20px;">
+                <div data-bind="text: ko.unwrap(self.selected).tileid"></div>
                 <div data-bind="foreach: {
                         data:card.widgets, as: 'widget'
                     }">
                     <div data-bind='component: {
                         name: self.form.widgetLookup[widget.widget_id()].name,
                         params: {
-                            formData: self.tile.formData,
-                            tile: self.tile,
+                            formData: self.selected().formData,
+                            tile: self.selected(),
                             form: self.form,
                             config: widget.configJSON,
                             label: widget.label(),
-                            value: self.tile.data[widget.node_id()],
+                            value: self.selected().data[widget.node_id()],
                             node: self.form.nodeLookup[widget.node_id()],
                             expanded: self.expanded,
                             graph: self.form.graph,
@@ -257,34 +259,39 @@
                     }, visible: widget.visible'></div>
                 </div>
             </form>
+            <!--/ko-->
+
             {% endblock form_widgets %}
             <!-- /ko -->
             {% block form_buttons %}
+            <!--ko if: self.selected() -->
             <div class="install-buttons">
-                <!-- ko if: tile.tileid && self.deleteTile -->
+                <!-- ko if: self.selected() && self.deleteTile -->
                 <button class="btn btn-shim btn-labeled btn-lg fa fa-trash" data-bind="click: self.deleteTile, css: {
                     disabled: (!card.isWritable && !self.preview),
                     'btn-warning': card.isWritable
                 }">{% trans 'Delete' %}</button>
                 <!-- /ko -->
-                <!-- ko if: tile.dirty() -->
+                <!-- ko if: self.selected().dirty() -->
                     <!-- ko if: provisionalTileViewModel && !provisionalTileViewModel.tileIsFullyProvisional() && card.isWritable -->
                     <button class="btn btn-shim btn-danger btn-labeled btn-lg fa fa-times" data-bind="click: selected().reset">{% trans 'Cancel' %}</button>
                     <!-- /ko -->
-                    <!-- ko if: tile.tileid -->
-                    <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: self.saveTile, css: {
+                    <!-- ko if: self.selected().tileid -->
+                    <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: self.selected().save, css: {
                         disabled: (!card.isWritable && !self.preview),
                         'btn-mint': card.isWritable
                     }">{% trans 'Save' %}</button>
                     <!-- /ko -->
                 <!-- /ko -->
-                <!-- ko if: !tile.tileid -->
+                <!-- ko if: !self.selected().tileid -->
                 <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: self.saveTile, css: {
                     disabled: (!card.isWritable && !self.preview),
                     'btn-mint': card.isWritable
                 }">{% trans 'Add'  %}</button>
                 <!-- /ko -->
             </div>
+            <!-- /ko -->
+
             {% endblock form_buttons %}
 
             <aside id="card-help-panel" class="card-help-panel" style="display: none;" data-bind="visible: card.model.get('helpactive')">
