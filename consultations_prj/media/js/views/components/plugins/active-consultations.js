@@ -10,12 +10,13 @@ define([
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
+            console.log(arches.mapLayers, arches.mapSources);
             this.resourceEditorURL = arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
             this.loading = ko.observable(true);
-            this.mapImageURL = ko.observable('');
+            // this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
             this.userRequestedNewPage = false;
@@ -35,7 +36,32 @@ define([
                 return moment(targetdate).diff(moment().startOf('day'), 'days');
             };
 
+            this.mapLayer = arches.mapLayers.find(function(layerObj){
+                return layerObj["maplayerid"] == "f573f1f2-d406-11e9-8594-0b4fc47c70d9";
+            });
+            this.layers = ko.observable(
+                [
+                    {
+                        "id":"mapbox-streets-layer",
+                        "source":"mapbox-streets",
+                        "type":"background"
+                    },
+                    // {
+                    //     "id": "app-area-geom",
+                    //     "source": "app-area-geom-src",
+                    //     "type": "line",
+                    //     "paint": {
+                    //         "line-color": "#40a9ff"
+                    //     }
+                    // }
+                ]
+            );
+            
+            this.sprite = arches.mapboxSprites;
+            this.glyphs = arches.mapboxGlyphs;
+
             this.setupMap = function(map, data) {
+                console.log(data["Geospatial Location"]);
                 map.on('load', function() {
                     data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
                 });
@@ -59,15 +85,50 @@ define([
                         Object.entries(response.responseJSON['paginator']).forEach( function(keyPair){
                             self.paginator[keyPair[0]](keyPair[1]);
                         });
-                        response.responseJSON['page_results'].forEach( function(consultation) {
+                        response.responseJSON['page_results'].forEach( function(consultation, i) {
                             consultation["mapImageUrl"] = ko.observable(false);
-                            consultation["zoom"] = 15;
+                            consultation["zoom"] = 5;
                             if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
                             if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
                             if(!consultation["Geospatial Location"]) {
-                                consultation["Geospatial Location"] = {"features": [{"geometry":{"coordinates":[0,0]}}]};
+                                consultation["Geospatial Location"] = {
+                                    "features": [{"geometry":{"coordinates":[0,0]}}],
+                                    "type":"FeatureCollection"
+                                };
                                 consultation["zoom"] = 0;
+                                consultation["sources"] = {
+                                    "app-area-geom-src": {
+                                        "type": "geojson",
+                                        "data": {}
+                                    },
+                                    "mapbox-streets": arches.mapSources["mapbox-streets"]
+                                }
+                            } else {
+                                consultation["sources"] = {
+                                    "app-area-geom-src": {
+                                        "type": "geojson",
+                                        "data": consultation["Geospatial Location"]
+                                    },
+                                    "mapbox-streets": arches.mapSources["mapbox-streets"]
+                                }
                             }
+                            consultation["layers"] = [
+                                {
+                                    "id":"mapbox-streets-layer"+i,
+                                    "source":"mapbox-streets",
+                                    "source-layer":"mapbox-streets",
+                                    "type":"background"
+                                },
+                                {
+                                    "id": "app-area-geom"+i,
+                                    "source": "app-area-geom-src",
+                                    "source-layer":"app-area-geom-src",
+                                    "type": "line",
+                                    "paint": {
+                                        "line-color": "#40a9ff"
+                                    }
+                                }
+                            ]
                             if(typeof consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0] != "number") {
                                 consultation["center"] = consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0][0];
                             } else {
