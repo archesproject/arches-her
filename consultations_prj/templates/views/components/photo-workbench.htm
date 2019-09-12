@@ -223,7 +223,6 @@
             <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
                 <!--ko if: $parent.getUrl(tile) && tile.selected()-->
             <form class="widgets" style="margin-bottom: 20px;">
-                <div style="margin: 15px" data-bind="text: tile.tileid"></div>
                 <div data-bind="foreach: {
                         data: $parent.card.widgets, as: 'widget'
                     }">
