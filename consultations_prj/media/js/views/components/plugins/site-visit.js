@@ -85,7 +85,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-camera',
                     nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    createTile: false
                 },
                 {
                     title: 'Site Visit Workflow Complete',
