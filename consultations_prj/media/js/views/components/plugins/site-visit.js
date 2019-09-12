@@ -86,7 +86,8 @@ define([
                     icon: 'fa-camera',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
-                    createTile: false
+                    createTile: false,
+                    autoAdvance: false
                 },
                 {
                     title: 'Site Visit Workflow Complete',
