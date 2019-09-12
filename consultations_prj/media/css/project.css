@@ -258,20 +258,22 @@ div.workflow-panel {
     margin-top: 40px;
 }
 
-.photo-gallery-step {
-    height: 100%;
-}
-
-.photo-workbench-selected-photo {
-    background-color: #ccc;
-}
-
 .photo-workbench-photos {
     height: fit-content;
-    border: solid 1px #444;
-    padding: 5px;
+    border: solid 1px #999;
     display: flex;
     flex-direction: column;
+    margin: 10px 20px;
+}
+
+.photo-workbench-photo {
+    position: relative;
+    padding: 4px;
+}
+
+.photo-workbench-photo.selected-photo {
+    background-color: #ccc;
+    padding: 4px;
 }
 
 .card-display-panel {
@@ -389,6 +391,12 @@ div.workflow-panel {
     background: #ededed;
     justify-content: center;
     width: 100%
+}
+
+.gallery-controls.new-tile .dropzone-photo-upload {
+    margin-top: 0;
+    padding: 15px;
+    background-color: #ffffff;
 }
 
 .thumbnail-gallery-controls {
