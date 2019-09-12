@@ -18,19 +18,18 @@ define([
             CardComponentViewModel.apply(this, [params]);
             WorkbenchComponentViewModel.apply(this, [params]);
             if (this.card && this.card.activeTab) {
-                self.activeTab(this.card.activeTab)
+                self.activeTab(this.card.activeTab);
             }
 
             this.photoGallery = new PhotoGallery();
             this.lastSelected = 0;
             this.selected = ko.observable();
-
             self.activeTab.subscribe(function(val){self.card.activeTab = val;});
             self.card.tiles.subscribe(function(val){
                 if (val.length === 0) {
                     self.activeTab(null);
                 }
-            })
+            });
 
             this.getUrl = function(tile){
                 var url = '';
