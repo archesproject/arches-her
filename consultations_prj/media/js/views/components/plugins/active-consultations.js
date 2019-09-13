@@ -18,6 +18,17 @@ define([
             this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
+            this.sortOptions = [
+                "Log Date: Newest to Oldest",
+                "Log Date: Oldest to Newest",
+                "Casework Officer: A to Z",
+                "Casework Officer: Z to A",
+                "Consultation Type: A to Z",
+                "Consultation Type: Z to A",
+                "Consultation Name: A to Z",
+                "Consultation Name: Z to A"
+            ];
+            this.orderByOption = ko.observable("Consultation Name: Z to A"); //#TODO: wire up to select 
             this.userRequestedNewPage = false;
             this.paginator = {
                 current_page: ko.observable(),
@@ -53,7 +64,10 @@ define([
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
-                    data: {"page": self.page()},
+                    data: {
+                        "page": self.page(),
+                        "order": self.orderByOption()
+                    },
                     context: self,
                     success: function(responseText, status, response){
                         Object.entries(response.responseJSON['paginator']).forEach( function(keyPair){

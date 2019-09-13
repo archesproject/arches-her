@@ -40,14 +40,6 @@ class ActiveConsultationsView(View):
             "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
             "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
         }
-        self.active_cons_nodegroupid_list = {
-            "Target Date":"8d41e4a5-a250-11e9-840c-00224800b26d",
-            "Casework Officer":"8d41e4a8-a250-11e9-aff0-00224800b26d",
-            "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
-            "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
-            "Consultation Type":"8d41e4c0-a250-11e9-a7e3-00224800b26d",
-            "Geospatial Location":"8d41e4c6-a250-11e9-a54d-00224800b26d"
-        }
         self.layout = 'grid'
         self.exclude_statuses = ["Aborted","Completed"]
         self.cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
@@ -59,6 +51,18 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
 
+        order_param = request.GET.get('order')
+        order_config = {
+            "Log Date: Newest to Oldest":("Log Date",False),
+            "Log Date: Oldest to Newest":("Log Date",True),
+            "Casework Officer: A to Z":("Casework Officer",False),
+            "Casework Officer: Z to A":("Casework Officer",True),
+            "Consultation Type: A to Z":("Consultation Type",False),
+            "Consultation Type: Z to A":("Consultation Type",True),
+            "Consultation Name: A to Z":("Name",False),
+            "Consultation Name: Z to A":("Name",True)
+        }
+
         search_results_setting_nodeid = "d0987de3-fad8-11e6-a434-6c4008b05c4c"
         search_results_setting_nodegroupid = "d0987880-fad8-11e6-8cce-6c4008b05c4c"
         page_ct_tile = Tile.objects.get(nodegroup_id=search_results_setting_nodegroupid)
@@ -67,46 +71,19 @@ class ActiveConsultationsView(View):
         if filtered_consultations is not None:
             if page_num == -1:
                 self.layout = 'table'
-                tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
-                return JSONResponse({'results': tiles})
+                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
+                return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
-                tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
-                paginator = Paginator(tiles, page_ct)
-                page_results = paginator.page(page_num)
-                if page_results.has_next() is True:
-                    next_page_number = page_results.next_page_number()
-                else:
-                    next_page_number = False
-                if page_results.has_previous() is True:
-                    prev_page_number = page_results.previous_page_number()
-                else:
-                    prev_page_number = False
-                page_ct = paginator.num_pages
-                pages = [page_num]
-                if paginator.num_pages > 1: # all below creates abridged page list UI
-                    before = range(1, page_num)
-                    after = range(page_num+1, paginator.num_pages+1)
-                    default_ct = 2
-                    ct_before = default_ct if len(after) > default_ct else default_ct*2-len(after)
-                    ct_after = default_ct if len(before) > default_ct else default_ct*2-len(before)
-                    if len(before) > ct_before:
-                        before = [1,None]+before[-1*(ct_before-1):]
-                    if len(after) > ct_after:
-                        after = after[0:ct_after-1]+[None,paginator.num_pages]
-                    pages = before+pages+after
-
-                page_config = {
-                    'current_page':page_num,
-                    'end_index':page_results.end_index(),
-                    'has_next':page_results.has_next(),
-                    'has_other_pages':page_results.has_other_pages(),
-                    'has_previous':page_results.has_previous(),
-                    'next_page_number':next_page_number,
-                    'pages':pages,
-                    'previous_page_number':prev_page_number,
-                    'start_index':page_results.start_index()
-                }
-                return JSONResponse({'page_results': page_results.object_list, 'paginator': page_config})
+                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
+                if order_param in order_config.keys():
+                    try:
+                        grouped_tile_list = sorted(
+                                                grouped_tile_list, 
+                                                key=lambda resource: resource[order_config[order_param][0]], 
+                                                reverse=order_config[order_param][1])
+                    except KeyError as e:
+                        print('Error: ',e)
+                return self.get_paginated_data(grouped_tile_list, page_ct, page_num)
 
         return HttpResponseNotFound()
 
@@ -124,11 +101,29 @@ class ActiveConsultationsView(View):
         return exclude_list
 
 
-    def get_tile_dict(self, consultations, datatype_factory):
-        tiles = []
+    def build_resource_dict(self, consultations, datatype_factory):
+        """
+        builds a list that looks like this:
+        [
+            "resource_instance_id_1": {
+                "node_name_a":"display_val_a",
+                "node_name_b":"display_val_b",
+                ...
+            },
+            "resource_instance_id_2": {
+                "node_name_a":"display_val_a",
+                "node_name_b":"display_val_b",
+                ...
+            },
+            ...
+        ]
+        """
+        
+        resources = []
+        # should an insertion sort be implemented here?
         active_cons_list_vals = self.active_cons_node_list.values()
         for consultation in consultations:
-            res = {}
+            resource = {}
             consultation.load_tiles()
             for tile in consultation.tiles:
                 for k, v in tile.data.items():
@@ -142,8 +137,48 @@ class ActiveConsultationsView(View):
                         except Exception as e:
                             val = v
 
-                        res[node.name] = val
-            res['resourceinstanceid'] = consultation.resourceinstanceid
-            tiles.append(res)
+                        resource[node.name] = val
+            resource['resourceinstanceid'] = consultation.resourceinstanceid
+            resources.append(resource)
 
-        return tiles
+        return resources
+
+
+    def get_paginated_data(self, grouped_tile_list, page_ct, page_num):
+
+        paginator = Paginator(grouped_tile_list, page_ct)
+        page_results = paginator.page(page_num)
+        if page_results.has_next() is True:
+            next_page_number = page_results.next_page_number()
+        else:
+            next_page_number = False
+        if page_results.has_previous() is True:
+            prev_page_number = page_results.previous_page_number()
+        else:
+            prev_page_number = False
+        page_ct = paginator.num_pages
+        pages = [page_num]
+        if paginator.num_pages > 1: # all below creates abridged page list UI
+            before = range(1, page_num)
+            after = range(page_num+1, paginator.num_pages+1)
+            default_ct = 2
+            ct_before = default_ct if len(after) > default_ct else default_ct*2-len(after)
+            ct_after = default_ct if len(before) > default_ct else default_ct*2-len(before)
+            if len(before) > ct_before:
+                before = [1,None]+before[-1*(ct_before-1):]
+            if len(after) > ct_after:
+                after = after[0:ct_after-1]+[None,paginator.num_pages]
+            pages = before+pages+after
+
+        page_config = {
+            'current_page':page_num,
+            'end_index':page_results.end_index(),
+            'has_next':page_results.has_next(),
+            'has_other_pages':page_results.has_other_pages(),
+            'has_previous':page_results.has_previous(),
+            'next_page_number':next_page_number,
+            'pages':pages,
+            'previous_page_number':prev_page_number,
+            'start_index':page_results.start_index()
+        }
+        return JSONResponse({'page_results': page_results.object_list, 'paginator': page_config})
