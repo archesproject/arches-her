@@ -71,17 +71,17 @@
                <div class="bord-top pad-ver file-select">
                    <div class="" style="padding: 5px">
                        <h2>{% trans 'Upload Photographs' %}</h2>
-                       <h4>{% trans 'Import document files related to your communication' %}</h4>
+                       <h4>{% trans 'Drag & Dop your photos onto this panel to upload' %}</h4>
                    </div>
-                   <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
+                   <button type="button" class="btn btn-lg btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
                        <i class="fa fa-file"></i>
-                       <span>{% trans "Select Documents" %}</span>
+                       <span>{% trans "Select Photographs" %}</span>
                    </button>
                    <br>
-                   <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
+                   <div style="padding: 10px">{% trans "Adding photos to this record is " %}
                        <span><strong>{% trans "optional." %}</strong></span>
                        <br>
-                       {% trans "You may upload as many documents as you wish, but the maximum size of any single file is " %}
+                       {% trans "You may upload as many photos as you wish, but the maximum size of any single file is " %}
                        <span>8MB</span>
                    </div>
 
@@ -111,14 +111,14 @@
            <div class="bord-top pad-ver file-select">
                <div class="" style="padding: 5px">
                    <h2>{% trans 'Upload Photographs' %}</h2>
-                   <h4>{% trans 'Import document files related to your communication' %}</h4>
+                   <h4>{% trans 'Drag & Dop your photos onto this panel' %}</h4>
                </div>
-               <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
+               <button type="button" class="btn btn-lg btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
                    <i class="fa fa-file"></i>
                    <span>{% trans "Select Documents" %}</span>
                </button>
                <br>
-               <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
+               <div style="padding: 10px">{% trans "Adding documents to this record is " %}
                    <span><strong>{% trans "optional." %}</strong></span>
                    <br>
                    {% trans "You may upload as many documents as you wish, but the maximum size of any single file is " %}
@@ -127,7 +127,7 @@
 
            </div>
            <div class="file-upload-footer">
-               <span>{% trans 'Images formatted as .jpg, .png, .tiff files may be uploaded. Other formats will be ignored.' %}</span>
+               <span>{% trans 'Accepted formats: .jpg, .png, .tiff' %}</span>
            </div>
        </div>
 
@@ -141,6 +141,9 @@
     <h4 class="workbench-card-sidepanel-header" data-bind="click: hideSidePanel, text: card.model.name"></h4>
 </div>
 
+<div>
+  <h5 class="workbench-tile-picker-label">{% trans 'Image List' %}</h5>
+</div>
 <div class='photo-workbench-photos'>
 <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
     <!--ko if: $parent.getUrl(tile) -->
