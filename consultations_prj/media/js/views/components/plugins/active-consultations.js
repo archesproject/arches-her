@@ -24,9 +24,11 @@ define([
                 "Casework Officer: A to Z",
                 "Casework Officer: Z to A",
                 "Consultation Type: A to Z",
-                "Consultation Type: Z to A"
+                "Consultation Type: Z to A",
+                "Consultation Name: A to Z",
+                "Consultation Name: Z to A"
             ];
-            this.orderByOption = ko.observable('something');
+            this.orderByOption = ko.observable("Consultation Name: Z to A"); //#TODO: wire up to select 
             this.userRequestedNewPage = false;
             this.paginator = {
                 current_page: ko.observable(),
