@@ -16,8 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from django.http import HttpRequest, HttpResponseNotFound
-from django.views.generic import View
 from django.core.paginator import Paginator
 from arches.app.utils.response import JSONResponse
 from arches.app.models import models
@@ -59,6 +57,14 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
 
+        cons_filtered_tiles = Tile.objects.filter(resourceinstance__in=filtered_consultations)
+
+        nodegroup_filtered_tiles = cons_filtered_tiles.filter(nodegroup_id__in=self.active_cons_nodegroupid_list.values()).order_by('nodegroup')
+
+        query_obj_type = 'resource'
+        if request.GET.get('order') is not None:
+            query_obj_type = 'tile'
+
         search_results_setting_nodeid = "d0987de3-fad8-11e6-a434-6c4008b05c4c"
         search_results_setting_nodegroupid = "d0987880-fad8-11e6-8cce-6c4008b05c4c"
         page_ct_tile = Tile.objects.get(nodegroup_id=search_results_setting_nodegroupid)
@@ -70,7 +76,10 @@ class ActiveConsultationsView(View):
                 tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
                 return JSONResponse({'results': tiles})
             elif page_num >= 1:
-                tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
+                if query_obj_type == 'tile':
+                    tiles = self.format_tiles(nodegroup_filtered_tiles, datatype_factory)
+                else:
+                    tiles = self.get_tile_dict(filtered_consultations, datatype_factory)
                 paginator = Paginator(tiles, page_ct)
                 page_results = paginator.page(page_num)
                 if page_results.has_next() is True:
@@ -122,6 +131,47 @@ class ActiveConsultationsView(View):
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
 
         return exclude_list
+
+    
+    def format_tiles(self, filtered_tiles, datatype_factory):
+        
+        # start1 = time()
+        res_tile_dict = {}
+        # this is grouping tiles into lists by resourceinstanceid as value, key respectively
+        for tile in filtered_tiles: # O(N)
+            if tile.resourceinstance.resourceinstanceid not in res_tile_dict.keys():
+                res_tile_dict[tile.resourceinstance.resourceinstanceid] = [tile]
+            else:
+                res_tile_dict[tile.resourceinstance.resourceinstanceid].append(tile)
+        
+
+        # print('res_tile_dict: %s s' % (time() - start1))
+        tile_groups = [tile_group for tile_group in res_tile_dict.values()]
+        # print('res_tile_dict: %s s' % (time() - start1))
+
+        formatted_tile_groups = []
+        active_cons_list_vals = self.active_cons_node_list.values()
+        # start2 = time()
+        for tile_group in tile_groups:
+            resource_tile_dict = {}
+            for tile in tile_group:
+                for k, v in tile.data.items():
+                    if k in active_cons_list_vals:
+                        node = models.Node.objects.get(nodeid=k)
+                        try:
+                            datatype = datatype_factory.get_instance(node.datatype)
+                            val = datatype.get_display_value(tile, node)
+                            if self.layout == 'grid' and k == self.active_cons_node_list["Map"]:
+                                val = json.loads(val)
+                        except Exception as e:
+                            val = v
+
+                        resource_tile_dict[node.name] = val
+            formatted_tile_groups.append(resource_tile_dict)
+
+        # print('get_tile_dict: %s s' % (time() - start1))
+        # print('formatted_tile_groups: %s s' % (time() - start1))
+        return formatted_tile_groups
 
 
     def get_tile_dict(self, consultations, datatype_factory):
