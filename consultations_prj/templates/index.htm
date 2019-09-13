@@ -74,6 +74,9 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <li class="page-scroll">
                             <a href="{% url 'init-workflow' %}">{% trans "New" %}</a>
                         </li>
+                        <li class="page-scroll">
+                            <a href="{% url 'active-consultations' %}">{% trans "Active" %}</a>
+                        </li>
                         {% endif %}
                         <li class="page-scroll">
                             <a href="{% url 'search_home_consultations' %}">{% trans "Find" %}</a>
