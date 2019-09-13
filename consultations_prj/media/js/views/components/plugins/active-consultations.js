@@ -36,26 +36,77 @@ define([
                 return moment(targetdate).diff(moment().startOf('day'), 'days');
             };
 
-            this.mapLayer = arches.mapLayers.find(function(layerObj){
-                return layerObj["maplayerid"] == "f573f1f2-d406-11e9-8594-0b4fc47c70d9";
-            });
-            this.layers = ko.observable(
-                [
-                    {
-                        "id":"mapbox-streets-layer",
-                        "source":"mapbox-streets",
-                        "type":"background"
+            var color = "#f0c200";
+            this.layers = arches.mapLayers.find(function(layer){
+                return layer.addtomap && !layer.isoverlay;
+            })['layer_definitions'].concat([
+                {
+                    "id": "app-area-geom-polygon-fill",
+                    "source": "app-area-geom",
+                    "type": "fill",
+                    "filter": ['all',[
+                        "==", "$type", "Polygon"
+                    ]],
+                    "paint": {
+                        "fill-color": color,
+                        "fill-outline-color": color,
+                        "fill-opacity": 0.1
+                    }
+                }, {
+                    "id": "app-area-geom-polygon-stroke",
+                    "source": "app-area-geom",
+                    "type": "line",
+                    "filter": ['all',[
+                        "==", "$type", "Polygon"
+                    ]],
+                    "layout": {
+                        "line-cap": "round",
+                        "line-join": "round"
                     },
-                    // {
-                    //     "id": "app-area-geom",
-                    //     "source": "app-area-geom-src",
-                    //     "type": "line",
-                    //     "paint": {
-                    //         "line-color": "#40a9ff"
-                    //     }
-                    // }
-                ]
-            );
+                    "paint": {
+                        "line-color": color,
+                        "line-width": 2
+                    }
+                }, {
+                    "id": "app-area-geom-line",
+                    "source": "app-area-geom",
+                    "type": "line",
+                    "filter": ['all',[
+                        "==", "$type", "LineString"
+                    ]],
+                    "layout": {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+                    "paint": {
+                        "line-color": color,
+                        "line-width": 2
+                    }
+                }, {
+                    "id": "app-area-geom-point-stroke",
+                    "source": "app-area-geom",
+                    "type": "circle",
+                    "filter": ['all',[
+                        "==", "$type", "Point"
+                    ]],
+                    "paint": {
+                        "circle-radius": 6,
+                        "circle-opacity": 1,
+                        "circle-color": "#fff"
+                    }
+                }, {
+                    "id": "app-area-geom-point",
+                    "source": "app-area-geom",
+                    "type": "circle",
+                    "filter": ['all',[
+                        "==", "$type", "Point"
+                    ]],
+                    "paint": {
+                        "circle-radius": 3,
+                        "circle-color": color
+                    }
+                }
+            ]);
             
             this.sprite = arches.mapboxSprites;
             this.glyphs = arches.mapboxGlyphs;
@@ -90,45 +141,17 @@ define([
                             consultation["zoom"] = 5;
                             if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
                             if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
-                            if(!consultation["Geospatial Location"]) {
-                                consultation["Geospatial Location"] = {
-                                    "features": [{"geometry":{"coordinates":[0,0]}}],
-                                    "type":"FeatureCollection"
-                                };
-                                consultation["zoom"] = 0;
-                                consultation["sources"] = {
-                                    "app-area-geom-src": {
-                                        "type": "geojson",
-                                        "data": {}
-                                    },
-                                    "mapbox-streets": arches.mapSources["mapbox-streets"]
-                                }
-                            } else {
-                                consultation["sources"] = {
-                                    "app-area-geom-src": {
-                                        "type": "geojson",
-                                        "data": consultation["Geospatial Location"]
-                                    },
-                                    "mapbox-streets": arches.mapSources["mapbox-streets"]
-                                }
-                            }
-                            consultation["layers"] = [
-                                {
-                                    "id":"mapbox-streets-layer"+i,
-                                    "source":"mapbox-streets",
-                                    "source-layer":"mapbox-streets",
-                                    "type":"background"
-                                },
-                                {
-                                    "id": "app-area-geom"+i,
-                                    "source": "app-area-geom-src",
-                                    "source-layer":"app-area-geom-src",
-                                    "type": "line",
-                                    "paint": {
-                                        "line-color": "#40a9ff"
+                            consultation.sources = arches.mapSources;
+                            consultation.sources['app-area-geom'] = {
+                                "type": "geojson",
+                                "data": consultation["Geospatial Location"] ?
+                                    consultation["Geospatial Location"] :
+                                    {
+                                        "features": [],
+                                        "type":"FeatureCollection"
                                     }
-                                }
-                            ]
+                            };
+                            consultation.layers = self.layers;
                             if(typeof consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0] != "number") {
                                 consultation["center"] = consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0][0];
                             } else {
@@ -144,7 +167,7 @@ define([
                         }
                     }
                 });
-            }
+            };
 
             if(self.loading()) { self.getConsultations(); }
 
