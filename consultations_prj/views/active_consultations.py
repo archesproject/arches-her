@@ -40,14 +40,6 @@ class ActiveConsultationsView(View):
             "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
             "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
         }
-        self.active_cons_nodegroupid_list = {
-            "Target Date":"8d41e4a5-a250-11e9-840c-00224800b26d",
-            "Casework Officer":"8d41e4a8-a250-11e9-aff0-00224800b26d",
-            "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
-            "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
-            "Consultation Type":"8d41e4c0-a250-11e9-a7e3-00224800b26d",
-            "Geospatial Location":"8d41e4c6-a250-11e9-a54d-00224800b26d"
-        }
         self.layout = 'grid'
         self.exclude_statuses = ["Aborted","Completed"]
         self.cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
@@ -59,24 +51,17 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
 
-        # not executed unless query_obj_type = 'tile'
-        cons_filtered_tiles = Tile.objects.filter(resourceinstance__in=filtered_consultations)
-        nodegroup_filtered_tiles = cons_filtered_tiles.filter(nodegroup_id__in=self.active_cons_nodegroupid_list.values())
-
         order_param = request.GET.get('order')
         order_config = {
-                "Log Date: Newest to Oldest":("Log Date",False),
-                "Log Date: Oldest to Newest":("Log Date",True),
-                "Casework Officer: A to Z":("Casework Officer",False),
-                "Casework Officer: Z to A":("Casework Officer",True),
-                "Consultation Type: A to Z":("Consultation Type",False),
-                "Consultation Type: Z to A":("Consultation Type",True),
-                "Consultation Name: A to Z":("Name",False),
-                "Consultation Name: Z to A":("Name",True)
+            "Log Date: Newest to Oldest":("Log Date",False),
+            "Log Date: Oldest to Newest":("Log Date",True),
+            "Casework Officer: A to Z":("Casework Officer",False),
+            "Casework Officer: Z to A":("Casework Officer",True),
+            "Consultation Type: A to Z":("Consultation Type",False),
+            "Consultation Type: Z to A":("Consultation Type",True),
+            "Consultation Name: A to Z":("Name",False),
+            "Consultation Name: Z to A":("Name",True)
         }
-
-        # set as default, could be changed to tile if there's a good reason to query tileset instead of resource instances
-        query_obj_type = 'resource'
 
         search_results_setting_nodeid = "d0987de3-fad8-11e6-a434-6c4008b05c4c"
         search_results_setting_nodegroupid = "d0987880-fad8-11e6-8cce-6c4008b05c4c"
@@ -89,18 +74,15 @@ class ActiveConsultationsView(View):
                 grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
                 return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
-                if query_obj_type == 'tile':
-                    grouped_tile_list = self.format_tiles(nodegroup_filtered_tiles, datatype_factory)
-                else:
-                    grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
-                    if order_param in order_config.keys():
-                        try:
-                            grouped_tile_list = sorted(
-                                                    grouped_tile_list, 
-                                                    key=lambda resource: resource[order_config[order_param][0]], 
-                                                    reverse=order_config[order_param][1])
-                        except KeyError as e:
-                            print('Error: ',e)
+                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
+                if order_param in order_config.keys():
+                    try:
+                        grouped_tile_list = sorted(
+                                                grouped_tile_list, 
+                                                key=lambda resource: resource[order_config[order_param][0]], 
+                                                reverse=order_config[order_param][1])
+                    except KeyError as e:
+                        print('Error: ',e)
                 return self.get_paginated_data(grouped_tile_list, page_ct, page_num)
 
         return HttpResponseNotFound()
@@ -117,47 +99,6 @@ class ActiveConsultationsView(View):
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
 
         return exclude_list
-
-    
-    def format_tiles(self, filtered_tiles, datatype_factory):
-        
-        # start1 = time()
-        res_tile_dict = {}
-        # this is grouping tiles into lists by resourceinstanceid as value, key respectively
-        for tile in filtered_tiles: # O(N)
-            if tile.resourceinstance.resourceinstanceid not in res_tile_dict.keys():
-                res_tile_dict[tile.resourceinstance.resourceinstanceid] = [tile]
-            else:
-                res_tile_dict[tile.resourceinstance.resourceinstanceid].append(tile)
-        
-
-        # print('res_tile_dict: %s s' % (time() - start1))
-        tile_groups = [tile_group for tile_group in res_tile_dict.values()]
-        # print('res_tile_dict: %s s' % (time() - start1))
-
-        formatted_tile_groups = []
-        active_cons_list_vals = self.active_cons_node_list.values()
-        # start2 = time()
-        for tile_group in tile_groups:
-            resource_tile_dict = {}
-            for tile in tile_group:
-                for k, v in tile.data.items():
-                    if k in active_cons_list_vals:
-                        node = models.Node.objects.get(nodeid=k)
-                        try:
-                            datatype = datatype_factory.get_instance(node.datatype)
-                            val = datatype.get_display_value(tile, node)
-                            if self.layout == 'grid' and k == self.active_cons_node_list["Map"]:
-                                val = json.loads(val)
-                        except Exception as e:
-                            val = v
-
-                        resource_tile_dict[node.name] = val
-            formatted_tile_groups.append(resource_tile_dict)
-
-        # printbuild: %s s' % (time() - start1))
-        # print('formatted_tile_groups: %s s' % (time() - start1))
-        return formatted_tile_groups
 
 
     def build_resource_dict(self, consultations, datatype_factory):
