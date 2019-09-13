@@ -258,12 +258,20 @@ div.workflow-panel {
     margin-top: 40px;
 }
 
+
+.card-component-panel .workbench-tile-picker-label {
+    font-weight: 600;
+    color: #666;
+    margin-left: 15px;
+}
+
 .photo-workbench-photos {
-    height: fit-content;
-    border: solid 1px #999;
+    height: 130px;
+    overflow-y: scroll;
+    border: solid 1px #ddd;
     display: flex;
     flex-direction: column;
-    margin: 10px 20px;
+    margin: 5px 20px 10px 20px;
 }
 
 .photo-workbench-photo {
@@ -271,9 +279,24 @@ div.workflow-panel {
     padding: 4px;
 }
 
+.photo-workbench-photo:nth-child(even) {
+    background: #fff;
+}
+
+.photo-workbench-photo:nth-child(odd) {
+    background: #f5f5f5;
+}
+
 .photo-workbench-photo.selected-photo {
-    background-color: #ccc;
+    background-color: #9CC3E4;
+    color: #25476a;
+    font-weight: 600;
     padding: 4px;
+}
+
+.photo-workbench-photo:not(.selected-photo):hover {
+    background: #CAE2F5;
+    cursor: pointer;
 }
 
 .card-display-panel {
@@ -334,12 +357,12 @@ div.workflow-panel {
     display: inline-flex;
     align-items: center;
     text-align: center;
-    background-color: #887f7fcc;
+    background-color: rgba(0,0,0, 0.5);
     height: 105px;
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
-    border-bottom: solid 1px #333;
+    border-top: solid 1px #000;
 }
 
 .gallery-thumbnails img {
@@ -395,15 +418,23 @@ div.workflow-panel {
 
 .gallery-controls.new-tile .dropzone-photo-upload {
     margin-top: 0;
+    padding: 45px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.workbench-card-sidepanel .gallery-controls.new-tile .dropzone-photo-upload {
+    margin-top: 0;
     padding: 15px;
     background-color: #ffffff;
+    width: 100%;
 }
 
 .thumbnail-gallery-controls {
-    width: 30px;
+    width: 35px;
     height: 105px;
     display: flex;
-    background-color: #887f7fcc;
+    background-color: rgba(0,0,0, 0.75);
     align-items: center;
     font-size: 41px;
     justify-content: center;
@@ -433,10 +464,16 @@ div.workflow-panel {
 
 .show-thumbnails-btn {
     padding: 4px;
-    margin-left: 10px;
+    margin-left: 35px;
     width: 100px;
-    background-color: #fff;
-    opacity: 0.6;
+    color: #fff;
+    font-weight: 500;
+    background-color: rgba(0,0,0, 0.7);
+    text-align: center;
+}
+
+.show-thumbnails-btn:hover {
+    cursor: pointer;
 }
 
 .show-thumbnails-btn.open {
@@ -486,12 +523,14 @@ div.workflow-panel {
 /* In core core arches */
 
 .file-upload-footer {
-    background: #e6e6e6;
+    background: #f1f1f1;
     color: rgb(89, 56, 255);;
     display: flex;
     justify-content: left;
     align-items: center;
+    border-top: 1px solid #ddd;
     padding-left: 10px;
+    padding: 12px 15px;
 }
 
 .file-select {
@@ -512,7 +551,14 @@ div.workflow-panel {
     border-radius: 2px;
     width: 240px;
     margin: 30px 0;
+}
 
+.btn-file-select:hover {
+    color: #fff;
+}
+
+.btn-file-select:focus {
+    color: #fff;
 }
 
 .projects-grid {
