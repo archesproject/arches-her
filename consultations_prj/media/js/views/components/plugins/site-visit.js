@@ -25,7 +25,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-tag',
                     nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    wastebin: {tile: null, description: 'A Site Visit Instance'}
                 },
                 {
                     title: 'Site Visit Attendees',
