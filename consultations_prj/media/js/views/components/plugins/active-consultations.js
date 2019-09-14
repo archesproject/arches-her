@@ -10,7 +10,7 @@ define([
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
-            this.resourceEditorURL = arches.urls.resource_editor;
+            this.resourceEditorURL = '/consultations' + arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
