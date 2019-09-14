@@ -93,6 +93,24 @@ LOGGING = {
     }
 }
 
+MIDDLEWARE = [
+    'consultations_prj.utils.consultations_middleware.RedirectToConsultations',
+    #'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    #'arches.app.utils.middleware.TokenMiddleware',
+    #'django.middleware.locale.LocaleMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'arches.app.utils.middleware.ModifyAuthorizationHeader',
+    'oauth2_provider.middleware.OAuth2TokenMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'arches.app.utils.middleware.SetAnonymousUser',
+]
+
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 
