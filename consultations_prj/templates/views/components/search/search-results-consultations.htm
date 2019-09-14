@@ -2,10 +2,20 @@
 {% load template_tags %}
 {% load i18n %}
 
-<div id="search-results-list" data-bind="foreach: results, visible: true" style="display: none;">
+{% if user.username == 'anonymous' %}
+    <div id="search-results-list" data-bind="foreach: results, visible: true" style="display: none;">
 
-    <div class="search-result" data-bind="event: { mouseover: mouseoverInstance, mouseout: mouseoverInstance('')}, css: {'selected': selected()}">
-        <a class="" href="" data-bind="click: $parent.viewReport.bind($parent)"><span data-bind="text: displayname"></span></a>
+        <div class="search-result" data-bind="event: { mouseover: mouseoverInstance, mouseout: mouseoverInstance('')}, css: {'selected': selected()}">
+            <a class="" href="" data-bind="click: $parent.viewReport.bind($parent)"><span data-bind="text: displayname"></span></a>
+        </div>
+
     </div>
+{% else %}
+    <div id="search-results-list" data-bind="foreach: results, visible: true" style="display: none;">
 
-</div>
+        <div class="search-result" data-bind="event: { mouseover: mouseoverInstance, mouseout: mouseoverInstance('')}, css: {'selected': selected()}">
+            <a class="" href="" data-bind="click: $parent.editResource.bind($parent)"><span data-bind="text: displayname"></span></a>
+        </div>
+
+    </div>
+{% endif %}
