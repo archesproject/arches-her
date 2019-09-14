@@ -19,7 +19,8 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-tag'
+                    icon: 'fa-tag',
+                    wastebin: {tile: null, description: 'A Communication Instance'}
                 },
                 {
                     title: 'Review Letter',

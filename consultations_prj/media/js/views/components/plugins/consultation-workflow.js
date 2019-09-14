@@ -22,7 +22,8 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-code-fork'
+                    icon: 'fa-code-fork',
+                    wastebin: {resourceid: null, description: 'A Consulation Instance'}
                 },
                 {
                     title: 'Consultation Dates',

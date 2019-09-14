@@ -22,7 +22,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-tag',
                     nameheading: 'Communication',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    wastebin: {tile: null, description: 'A Communication Instance'}
                 },
                 {
                     title: 'Notes',
