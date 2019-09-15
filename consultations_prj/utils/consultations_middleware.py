@@ -19,7 +19,7 @@ class RedirectToConsultations(MiddlewareMixin):
         destination_paths = (
             r'^/resource',
             r'^/add-resource',
-            r'^/search',
+            r'^/search$',
             r'^/report',
         )
         if source is not None and project_name in source and 'consultations' not in path:
