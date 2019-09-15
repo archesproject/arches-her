@@ -1,10 +1,11 @@
 define([
     'knockout',
+    'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
     'views/components/workflows/select-resource-step'
-], function(ko, Workflow, Step) {
+], function(ko, arches, Workflow, Step) {
     return ko.components.register('communication-workflow', {
         viewModel: function(params) {
             var self = this;
@@ -75,6 +76,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            this.quitUrl = "/consultations" + arches.urls.plugin('init-workflow');
             self.getJSON('communication-workflow');
 
             self.activeStep.subscribe(this.updateState);
