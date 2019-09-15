@@ -32,6 +32,59 @@
     z-index: 100;
 }
 
+.cons-search-results-container .search-result {
+    margin-left: 10px;
+    height: 55px;
+    padding: 8px 10px;
+    position: relative;
+}
+
+.search-result-info {
+    width: 328px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-result-resource-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #416284;
+    line-height: .79;
+}
+
+.search-result-resource-name:hover {
+    color: #25476A;
+}
+
+.cons-type {
+    font-size: 12px;
+    font-weight: 400;
+    color: #416284;
+    margin-top: -2px;
+}
+
+.cons-search-results-container .search-result:hover .cons-search-popup-link {
+    display: block;
+}
+
+.cons-search-popup-link {
+  position: absolute;
+  left: 335px;
+  top: 0px;
+  width: 55px;
+  height: 53px;
+  background: #f8f8f8;
+  border-left: 1px solid #ddd;
+  padding: 15px 20px;
+  font-size: 17px;
+  display: none;
+}
+
+.cons-search-popup-link:hover {
+    cursor: pointer;
+}
+
 .file-upload-filter {
     margin-right: 5px;
 }
@@ -495,6 +548,24 @@ div.workflow-panel {
     bottom: 0px;
     width: 100%;
 }
+
+
+
+/* .workflow-step-container .workbench-card-sidebar {
+    position: fixed;
+}
+
+.workflow-step-container .thumbnail-gallery-container {
+    position: fixed;
+    bottom: 0px;
+    left: 50px;
+}
+
+.workflow-step-container .thumbnail-gallery-container .thumbnail-container {
+        width: calc(100% - 125px);
+} */
+
+
 
 /* workflows */
 .workflows-get-tile-value {

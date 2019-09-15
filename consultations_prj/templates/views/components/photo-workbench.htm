@@ -141,13 +141,11 @@
     <h4 class="workbench-card-sidepanel-header" data-bind="click: hideSidePanel, text: card.model.name"></h4>
 </div>
 
-<div>
-  <h5 class="workbench-tile-picker-label">{% trans 'Image List' %}</h5>
-</div>
+<h5 class="workbench-tile-picker-label">{% trans 'Image List' %}</h5>
 <div class='photo-workbench-photos'>
 <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
     <!--ko if: $parent.getUrl(tile) -->
-    <div class='photo-workbench-photo' data-bind="text: $index() + 1 + ') ' + (tile.data['77d5e72e-d0d6-11e9-bdab-a683e74f6c3a']()), click: $parent.photoGallery.selectItem, css: {'selected-photo': ko.unwrap(selected)}"></div>
+    <div class='photo-workbench-photo' data-bind="text: $index() + 1 + ' | ' + (tile.data['77d5e72e-d0d6-11e9-bdab-a683e74f6c3a']()), click: $parent.photoGallery.selectItem, css: {'selected-photo': ko.unwrap(selected)}"></div>
     <!--/ko-->
 <!-- /ko -->
 </div>
