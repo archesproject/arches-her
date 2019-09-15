@@ -116,6 +116,8 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            this.quitUrl = "/consultations" + arches.urls.plugin('init-workflow');
+            console.log(this.quitUrl);
             self.getJSON('consultation-workflow');
 
             self.activeStep.subscribe(this.updateState);
