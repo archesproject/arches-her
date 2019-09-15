@@ -74,14 +74,13 @@
                                     <!-- ko if: $data.error -->
                                     <span class="dz-error text-danger text-sm" data-bind="text: '{% trans "error" %}'"></span>
                                     <!-- /ko -->
-                                    <span class="text-sm">{% trans "Annotate" %}</span>
-                                    <span class="text-sm">{% trans "View" %}</span>
+                                    <span class="text-sm"><a class="">{% trans "View" %}</a></span>
                                 </div>
                                 <div class="file-upload-card-detail-right">
                                     <div class="media-right" data-bind="click: $parent.removeFile">
                                         <button class="btn btn-xs btn-danger btn-file-cancel"><i class="ion ion-close"></i></button>
                                     </div>
-                                    <div class="">
+                                    <div class="file-size-label">
                                         <span class="text-sm" data-bind="html: $parent.formatSize($data)"></span>
                                     </div>
                                 </div>
