@@ -85,7 +85,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         </li>
                         {% if user|can_create_resource_instance %}
                         <li class="page-scroll">
-                            <a href="{% url 'standard' %}">{% trans "Manage" %}</a>
+                            <a href="{% url 'standard' %}" target="_blank">{% trans "Manage" %}</a>
                         </li>
                         {% endif %}
                         <li class="page-scroll">
