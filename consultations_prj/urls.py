@@ -16,6 +16,7 @@ urlpatterns = [
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
     url(r'^', include('arches.urls')),
+    url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
     url(r'^consultations/index.htm', main.index, name='home'),
     url(r'^consultations/user$', UserManagerView.as_view(), name="user_profile_manager"),
