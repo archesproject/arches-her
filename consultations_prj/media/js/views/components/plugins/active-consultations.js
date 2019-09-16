@@ -151,7 +151,7 @@ define([
                         Object.entries(response.responseJSON['paginator']).forEach( function(keyPair){
                             self.paginator[keyPair[0]](keyPair[1]);
                         });
-                        response.responseJSON['page_results'].forEach( function(consultation, i) {
+                        response.responseJSON['page_results'].forEach( function(consultation) {
                             consultation["mapImageUrl"] = ko.observable(false);
                             consultation["zoom"] = 1, consultation["center"] = [0,0]; //defaults
                             if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
