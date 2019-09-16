@@ -71,17 +71,17 @@
                <div class="bord-top pad-ver file-select">
                    <div class="" style="padding: 5px">
                        <h2>{% trans 'Upload Photographs' %}</h2>
-                       <h4>{% trans 'Import document files related to your communication' %}</h4>
+                       <h4>{% trans 'Drag & Dop your photos onto this panel to upload' %}</h4>
                    </div>
-                   <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
+                   <button type="button" class="btn btn-lg btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
                        <i class="fa fa-file"></i>
-                       <span>{% trans "Select Documents" %}</span>
+                       <span>{% trans "Select Photographs" %}</span>
                    </button>
                    <br>
-                   <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
+                   <div style="padding: 10px">{% trans "Adding photos to this record is " %}
                        <span><strong>{% trans "optional." %}</strong></span>
                        <br>
-                       {% trans "You may upload as many documents as you wish, but the maximum size of any single file is " %}
+                       {% trans "You may upload as many photos as you wish, but the maximum size of any single file is " %}
                        <span>8MB</span>
                    </div>
 
@@ -111,14 +111,14 @@
            <div class="bord-top pad-ver file-select">
                <div class="" style="padding: 5px">
                    <h2>{% trans 'Upload Photographs' %}</h2>
-                   <h4>{% trans 'Import document files related to your communication' %}</h4>
+                   <h4>{% trans 'Drag & Dop your photos onto this panel' %}</h4>
                </div>
-               <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
+               <button type="button" class="btn btn-lg btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass">
                    <i class="fa fa-file"></i>
                    <span>{% trans "Select Documents" %}</span>
                </button>
                <br>
-               <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
+               <div style="padding: 10px">{% trans "Adding documents to this record is " %}
                    <span><strong>{% trans "optional." %}</strong></span>
                    <br>
                    {% trans "You may upload as many documents as you wish, but the maximum size of any single file is " %}
@@ -127,7 +127,7 @@
 
            </div>
            <div class="file-upload-footer">
-               <span>{% trans 'Images formatted as .jpg, .png, .tiff files may be uploaded. Other formats will be ignored.' %}</span>
+               <span>{% trans 'Accepted formats: .jpg, .png, .tiff' %}</span>
            </div>
        </div>
 
@@ -141,13 +141,12 @@
     <h4 class="workbench-card-sidepanel-header" data-bind="click: hideSidePanel, text: card.model.name"></h4>
 </div>
 
+<h5 class="workbench-tile-picker-label">{% trans 'Image List' %}</h5>
 <div class='photo-workbench-photos'>
 <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
-<div style='position: relative'>
     <!--ko if: $parent.getUrl(tile) -->
-    <div class="dz-img" data-bind="text: $index() + 1 + ') ' + (tile.data['77d5e72e-d0d6-11e9-bdab-a683e74f6c3a']()), click: $parent.photoGallery.selectItem, css: {'photo-workbench-selected-photo': ko.unwrap(selected)}"></div>
+    <div class='photo-workbench-photo' data-bind="text: $index() + 1 + ' | ' + (tile.data['77d5e72e-d0d6-11e9-bdab-a683e74f6c3a']()), click: $parent.photoGallery.selectItem, css: {'selected-photo': ko.unwrap(selected)}"></div>
     <!--/ko-->
-</div>
 <!-- /ko -->
 </div>
 
@@ -222,19 +221,21 @@
             {% endblock form_header %}
             <!-- ko if: card.widgets().length > 0 -->
             {% block form_widgets %}
+            <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
+                <!--ko if: $parent.getUrl(tile) && tile.selected()-->
             <form class="widgets" style="margin-bottom: 20px;">
                 <div data-bind="foreach: {
-                        data:card.widgets, as: 'widget'
+                        data: $parent.card.widgets, as: 'widget'
                     }">
                     <div data-bind='component: {
                         name: self.form.widgetLookup[widget.widget_id()].name,
                         params: {
-                            formData: self.tile.formData,
-                            tile: self.tile,
+                            formData: tile.formData,
+                            tile: tile,
                             form: self.form,
                             config: widget.configJSON,
                             label: widget.label(),
-                            value: self.tile.data[widget.node_id()],
+                            value: tile.data[widget.node_id()],
                             node: self.form.nodeLookup[widget.node_id()],
                             expanded: self.expanded,
                             graph: self.form.graph,
@@ -257,34 +258,42 @@
                     }, visible: widget.visible'></div>
                 </div>
             </form>
+            <!--/ko-->
+        <!-- /ko -->
+
             {% endblock form_widgets %}
             <!-- /ko -->
             {% block form_buttons %}
+            <!-- ko foreach: { data: card.tiles(), as: 'tile'} -->
+                <!--ko if: $parent.getUrl(tile) && tile.selected()-->
             <div class="install-buttons">
-                <!-- ko if: tile.tileid && self.deleteTile -->
+                <!-- ko if: tile && self.deleteTile -->
                 <button class="btn btn-shim btn-labeled btn-lg fa fa-trash" data-bind="click: self.deleteTile, css: {
-                    disabled: (!card.isWritable && !self.preview),
-                    'btn-warning': card.isWritable
+                    disabled: (!$parent.card.isWritable && !self.preview),
+                    'btn-warning': $parent.card.isWritable
                 }">{% trans 'Delete' %}</button>
                 <!-- /ko -->
                 <!-- ko if: tile.dirty() -->
-                    <!-- ko if: provisionalTileViewModel && !provisionalTileViewModel.tileIsFullyProvisional() && card.isWritable -->
+                    <!-- ko if: $parent.provisionalTileViewModel && !$parent.provisionalTileViewModel.tileIsFullyProvisional() && $parent.card.isWritable -->
                     <button class="btn btn-shim btn-danger btn-labeled btn-lg fa fa-times" data-bind="click: selected().reset">{% trans 'Cancel' %}</button>
                     <!-- /ko -->
                     <!-- ko if: tile.tileid -->
-                    <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: self.saveTile, css: {
-                        disabled: (!card.isWritable && !self.preview),
-                        'btn-mint': card.isWritable
+                    <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: tile.save, css: {
+                        disabled: (!$parent.card.isWritable && !self.preview),
+                        'btn-mint': $parent.card.isWritable
                     }">{% trans 'Save' %}</button>
                     <!-- /ko -->
                 <!-- /ko -->
                 <!-- ko if: !tile.tileid -->
                 <button class="btn btn-shim btn-labeled btn-lg fa fa-plus" data-bind="click: self.saveTile, css: {
-                    disabled: (!card.isWritable && !self.preview),
-                    'btn-mint': card.isWritable
+                    disabled: (!$parent.card.isWritable && !self.preview),
+                    'btn-mint': $parent.card.isWritable
                 }">{% trans 'Add'  %}</button>
                 <!-- /ko -->
             </div>
+                <!--/ko-->
+            <!-- /ko -->
+
             {% endblock form_buttons %}
 
             <aside id="card-help-panel" class="card-help-panel" style="display: none;" data-bind="visible: card.model.get('helpactive')">

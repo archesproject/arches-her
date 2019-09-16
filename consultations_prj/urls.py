@@ -7,13 +7,19 @@ from consultations_prj.views.file_template import FileTemplateView
 from consultations_prj.views import search
 from django.views.generic import RedirectView
 from consultations_prj.views.active_consultations import ActiveConsultationsView
+from arches.app.views import main
+from arches.app.views.user import UserManagerView
 
 urlpatterns = [
     url(r'^consultations/search$', search.SearchView.as_view(), name="search_home_consultations"),
     url(r'^consultations/search/resources$', search.search_results, name="search_results"),
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
+    url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
+    url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^', include('arches.urls')),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
+    url(r'^consultations/index.htm', main.index, name='home'),
+    url(r'^consultations/user$', UserManagerView.as_view(), name="user_profile_manager"),
     url(r'^filetemplate', FileTemplateView.as_view(), name='filetemplate'),
     url(r'^consultations/plugins/active-consultations', PluginView.as_view(), name='active-consultations'),
     url(r'^activeconsultations', ActiveConsultationsView.as_view(),

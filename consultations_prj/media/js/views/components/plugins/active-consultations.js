@@ -4,14 +4,14 @@ define([
     'jquery',
     'moment',
     'viewmodels/alert',
+    'geojson-extent',
     'bindings/chosen',
     'bindings/mapbox-gl'
-], function(ko, arches, $, moment, AlertViewModel) {
+], function(ko, arches, $, moment, AlertViewModel, geojsonExtent) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
-            console.log(arches.mapLayers, arches.mapSources);
-            this.resourceEditorURL = arches.urls.resource_editor;
+            this.resourceEditorURL = '/consultations' + arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
@@ -19,6 +19,10 @@ define([
             // this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
+            this.orderByOption = ko.observable();
+            this.orderByOption.subscribe(function(val) {
+                if(val) { self.getConsultations(); }
+            });
             this.userRequestedNewPage = false;
             this.paginator = {
                 current_page: ko.observable(),
@@ -36,32 +40,90 @@ define([
                 return moment(targetdate).diff(moment().startOf('day'), 'days');
             };
 
-            this.mapLayer = arches.mapLayers.find(function(layerObj){
-                return layerObj["maplayerid"] == "f573f1f2-d406-11e9-8594-0b4fc47c70d9";
-            });
-            this.layers = ko.observable(
-                [
-                    {
-                        "id":"mapbox-streets-layer",
-                        "source":"mapbox-streets",
-                        "type":"background"
+            var color = "#f0c200";
+            this.layers = arches.mapLayers.find(function(layer){
+                return layer.addtomap && !layer.isoverlay;
+            })['layer_definitions'].concat([
+                {
+                    "id": "app-area-geom-polygon-fill",
+                    "source": "app-area-geom",
+                    "type": "fill",
+                    "filter": ['all',[
+                        "==", "$type", "Polygon"
+                    ]],
+                    "paint": {
+                        "fill-color": color,
+                        "fill-outline-color": color,
+                        "fill-opacity": 0.1
+                    }
+                }, {
+                    "id": "app-area-geom-polygon-stroke",
+                    "source": "app-area-geom",
+                    "type": "line",
+                    "filter": ['all',[
+                        "==", "$type", "Polygon"
+                    ]],
+                    "layout": {
+                        "line-cap": "round",
+                        "line-join": "round"
                     },
-                    // {
-                    //     "id": "app-area-geom",
-                    //     "source": "app-area-geom-src",
-                    //     "type": "line",
-                    //     "paint": {
-                    //         "line-color": "#40a9ff"
-                    //     }
-                    // }
-                ]
-            );
+                    "paint": {
+                        "line-color": color,
+                        "line-width": 2
+                    }
+                }, {
+                    "id": "app-area-geom-line",
+                    "source": "app-area-geom",
+                    "type": "line",
+                    "filter": ['all',[
+                        "==", "$type", "LineString"
+                    ]],
+                    "layout": {
+                        "line-cap": "round",
+                        "line-join": "round"
+                    },
+                    "paint": {
+                        "line-color": color,
+                        "line-width": 2
+                    }
+                }, {
+                    "id": "app-area-geom-point-stroke",
+                    "source": "app-area-geom",
+                    "type": "circle",
+                    "filter": ['all',[
+                        "==", "$type", "Point"
+                    ]],
+                    "paint": {
+                        "circle-radius": 6,
+                        "circle-opacity": 1,
+                        "circle-color": "#fff"
+                    }
+                }, {
+                    "id": "app-area-geom-point",
+                    "source": "app-area-geom",
+                    "type": "circle",
+                    "filter": ['all',[
+                        "==", "$type", "Point"
+                    ]],
+                    "paint": {
+                        "circle-radius": 3,
+                        "circle-color": color
+                    }
+                }
+            ]);
+            this.layers.unshift({
+                "id": "background-fill",
+                "type": "background",
+                "paint": {
+                    "background-color": "#f2f2f2"
+                }
+            });
             
             this.sprite = arches.mapboxSprites;
             this.glyphs = arches.mapboxGlyphs;
 
             this.setupMap = function(map, data) {
-                console.log(data["Geospatial Location"]);
+                // console.log(data["Geospatial Location"]);
                 map.on('load', function() {
                     data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
                 });
@@ -75,11 +137,15 @@ define([
             }, this);
 
             this.getConsultations = function() {
+                self.loading(true);
                 self.active_items.removeAll();
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
-                    data: {"page": self.page()},
+                    data: {
+                        "page": self.page(),
+                        "order": self.orderByOption()
+                    },
                     context: self,
                     success: function(responseText, status, response){
                         Object.entries(response.responseJSON['paginator']).forEach( function(keyPair){
@@ -87,53 +153,29 @@ define([
                         });
                         response.responseJSON['page_results'].forEach( function(consultation, i) {
                             consultation["mapImageUrl"] = ko.observable(false);
-                            consultation["zoom"] = 5;
+                            consultation["zoom"] = 1, consultation["center"] = [0,0]; //defaults
                             if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
                             if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
-                            if(!consultation["Geospatial Location"]) {
-                                consultation["Geospatial Location"] = {
-                                    "features": [{"geometry":{"coordinates":[0,0]}}],
-                                    "type":"FeatureCollection"
-                                };
-                                consultation["zoom"] = 0;
-                                consultation["sources"] = {
-                                    "app-area-geom-src": {
-                                        "type": "geojson",
-                                        "data": {}
-                                    },
-                                    "mapbox-streets": arches.mapSources["mapbox-streets"]
-                                }
-                            } else {
-                                consultation["sources"] = {
-                                    "app-area-geom-src": {
-                                        "type": "geojson",
-                                        "data": consultation["Geospatial Location"]
-                                    },
-                                    "mapbox-streets": arches.mapSources["mapbox-streets"]
-                                }
-                            }
-                            consultation["layers"] = [
-                                {
-                                    "id":"mapbox-streets-layer"+i,
-                                    "source":"mapbox-streets",
-                                    "source-layer":"mapbox-streets",
-                                    "type":"background"
-                                },
-                                {
-                                    "id": "app-area-geom"+i,
-                                    "source": "app-area-geom-src",
-                                    "source-layer":"app-area-geom-src",
-                                    "type": "line",
-                                    "paint": {
-                                        "line-color": "#40a9ff"
+
+                            consultation.sources = arches.mapSources;
+                            consultation.sources['app-area-geom'] = {
+                                "type": "geojson",
+                                "data": consultation["Geospatial Location"] ?
+                                    consultation["Geospatial Location"] :
+                                    {
+                                        "features": [],
+                                        "type":"FeatureCollection"
                                     }
-                                }
-                            ]
-                            if(typeof consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0] != "number") {
-                                consultation["center"] = consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0][0];
-                            } else {
-                                consultation["center"] = consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"];
+                            };
+                            if (consultation["Geospatial Location"]["features"].length > 0) {
+                                consultation.bounds = geojsonExtent({
+                                    type: 'FeatureCollection',
+                                    features: consultation["Geospatial Location"]["features"]
+                                });
+                                consultation.fitBoundsOptions = { padding: 40 };
                             }
+                    
+                            consultation.layers = self.layers;
                             self.active_items.push(consultation);
                         });
                         self.loading(false);

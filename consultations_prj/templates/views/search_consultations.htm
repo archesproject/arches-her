@@ -39,7 +39,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                     <h3 class="search-title" data-bind="text: '{% trans 'Results: ' %}' + total()"></h3>
                 </div>
 
-                <div class="search-results-container">
+                <div class="cons-search-results-container">
 
                     <div data-bind="component: {
                         name: 'search-results-consultations',
@@ -71,7 +71,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                     {% endif %}
                     <!-- /ko -->
                 </div>
-                
+
                 <div class="search-type-btn-popup-panel">
                     <div class="" data-bind="foreach: {data: sharedStateObject.filtersList, as: 'filter'}">
                         <!-- ko if: filter.type === 'popup' && filter.enabled -->

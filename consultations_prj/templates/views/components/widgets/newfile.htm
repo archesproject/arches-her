@@ -13,14 +13,14 @@
                 <div class="bord-top pad-ver file-select">
                     <div style="padding: 5px">
                         <h2>{% trans "Upload Documents" %}</h2>
-                        <h4>{% trans "Import document files related to your communication" %}</h4>
+                        <h4>{% trans "Drag & Dop your files onto this panel" %}</h4>
                     </div>
-                    <button type="button" class="btn btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass, disable: disabled">
+                    <button type="button" class="btn btn-lg btn-file-select fileinput-button dz-clickable" data-bind="css: uniqueidClass, disable: disabled">
                         <i class="fa fa-file"></i>
-                        <span>{% trans "Select Documents" %}</span>
+                        <span>{% trans "Select Files" %}</span>
                     </button>
                     <br>
-                    <div style="padding: 10px">{% trans "Adding documents to this Communication record is " %}
+                    <div style="padding: 10px">{% trans "Adding documents to this record is " %}
                         <span><strong>{% trans "optional." %}</strong></span>
                         <br>
                         {% trans "You may upload as many documents as you wish, but the maximum size of any single file is " %}
@@ -74,14 +74,13 @@
                                     <!-- ko if: $data.error -->
                                     <span class="dz-error text-danger text-sm" data-bind="text: '{% trans "error" %}'"></span>
                                     <!-- /ko -->
-                                    <span class="text-sm">{% trans "Annotate" %}</span>
-                                    <span class="text-sm">{% trans "View" %}</span>
+                                    <span class="text-sm"><a class="">{% trans "View" %}</a></span>
                                 </div>
                                 <div class="file-upload-card-detail-right">
                                     <div class="media-right" data-bind="click: $parent.removeFile">
                                         <button class="btn btn-xs btn-danger btn-file-cancel"><i class="ion ion-close"></i></button>
                                     </div>
-                                    <div class="">
+                                    <div class="file-size-label">
                                         <span class="text-sm" data-bind="html: $parent.formatSize($data)"></span>
                                     </div>
                                 </div>
