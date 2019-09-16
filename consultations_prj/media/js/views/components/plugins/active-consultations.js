@@ -18,17 +18,10 @@ define([
             this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
-            this.sortOptions = [
-                "Log Date: Newest to Oldest",
-                "Log Date: Oldest to Newest",
-                "Casework Officer: A to Z",
-                "Casework Officer: Z to A",
-                "Consultation Type: A to Z",
-                "Consultation Type: Z to A",
-                "Consultation Name: A to Z",
-                "Consultation Name: Z to A"
-            ];
-            this.orderByOption = ko.observable("Consultation Name: Z to A"); //#TODO: wire up to select 
+            this.orderByOption = ko.observable();
+            this.orderByOption.subscribe(function(val) {
+                if(val) { self.getConsultations(); }
+            });
             this.userRequestedNewPage = false;
             this.paginator = {
                 current_page: ko.observable(),
@@ -60,6 +53,7 @@ define([
             }, this);
 
             this.getConsultations = function() {
+                self.loading(true);
                 self.active_items.removeAll();
                 $.ajax({
                     type: "GET",
