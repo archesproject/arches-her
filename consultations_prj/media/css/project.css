@@ -32,20 +32,96 @@
     z-index: 100;
 }
 
-.file-upload-filter {
-    margin-right: 5px;
+.cons-search-results-container .search-result {
+    margin-left: 10px;
+    height: 55px;
+    padding: 8px 10px;
+    position: relative;
 }
 
-.file-upload-card {
-    border: 1px solid #c4c4c4;
+.cons-search-results-container .search-result:hover .search-result-info {
+    width: 325px;
+}
+
+.search-result-info {
+    width: 365px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-result-resource-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #416284;
+    line-height: .79;
+}
+
+.search-result-resource-name:hover {
+    color: #2e29da;
+}
+
+.cons-type {
+    font-size: 12px;
+    font-weight: 400;
+    color: #416284;
+    margin-top: -2px;
+}
+
+.cons-search-results-container .search-result:hover .cons-search-popup-link {
+    display: block;
+}
+
+.cons-search-popup-link {
+  position: absolute;
+  left: 338px;
+  top: 0px;
+  width: 55px;
+  height: 53px;
+  background: #f2f2f2;
+  border-left: 1px solid #ddd;
+  padding: 15px 16px;
+  font-size: 19px;
+  font-weight: 400;
+  display: none;
+}
+
+.cons-search-popup-link:hover {
+    cursor: pointer;
+}
+
+.dz-previews {
+    border: 1px solid #ddd;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.file-upload-filter {
+    margin-right: 5px;
+    padding: 5px 10px;
+    width: 250px;
+}
+
+.dz-previews .file-upload-card {
+    border-bottom: 1px solid #D3E5F4;
     border-radius: 2px;
-    padding: 6px 8px 3px 15px;
-    background: #f6f6f6;
-    color: #01113c;
+    padding: 7px 8px 5px 15px;
+    background: #fff;
+    color: #666;
+    height: 50px;
+}
+
+.dz-previews .file-upload-card:nth-child(odd) {
+    background: #F5FAFE;
 }
 
 .file-upload-options {
     padding-bottom: 8px;
+}
+
+.file-size-label {
+    float: right;
+    margin-top: 2px;
 }
 
 .btn-file-upload-reset {
@@ -61,8 +137,13 @@
     margin-top: 6px;
 }
 
+.file-upload-card-detail a:hover {
+    cursor: pointer;
+}
+
 div.workflow-content {
     flex-grow: 2;
+    background: #fafafa;
 }
 
 .workflow-select-desc {
@@ -258,20 +339,47 @@ div.workflow-panel {
     margin-top: 40px;
 }
 
-.photo-gallery-step {
-    height: 100%;
-}
 
-.photo-workbench-selected-photo {
-    background-color: #ccc;
+.card-component-panel .workbench-tile-picker-label {
+    font-weight: 600;
+    color: #666;
+    margin-left: 15px;
 }
 
 .photo-workbench-photos {
-    height: fit-content;
-    border: solid 1px #444;
-    padding: 5px;
+    height: 136px;
+    overflow-y: scroll;
+    border: solid 1px #ddd;
     display: flex;
     flex-direction: column;
+    margin: 5px 20px 10px 20px;
+}
+
+.photo-workbench-photo {
+    position: relative;
+    padding: 4px;
+}
+
+.photo-workbench-photo:nth-child(even) {
+    background: #fff;
+    border-bottom: 1px solid #D3E5F4;
+}
+
+.photo-workbench-photo:nth-child(odd) {
+  background: #F5FAFE;
+  border-bottom: 1px solid #D3E5F4;
+}
+
+.photo-workbench-photo.selected-photo {
+    background-color: #9CC3E4;
+    color: #fff;
+    font-weight: 600;
+    padding: 4px;
+}
+
+.photo-workbench-photo:not(.selected-photo):hover {
+    background: #CAE2F5;
+    cursor: pointer;
 }
 
 .card-display-panel {
@@ -332,12 +440,12 @@ div.workflow-panel {
     display: inline-flex;
     align-items: center;
     text-align: center;
-    background-color: #887f7fcc;
+    background-color: rgba(0,0,0, 0.65);
     height: 105px;
     overflow-x: auto;
     overflow-y: hidden;
     width: 100%;
-    border-bottom: solid 1px #333;
+    border-top: solid 1px #000;
 }
 
 .gallery-thumbnails img {
@@ -391,11 +499,25 @@ div.workflow-panel {
     width: 100%
 }
 
+.gallery-controls.new-tile .dropzone-photo-upload {
+    margin-top: 0;
+    padding: 45px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
+.workbench-card-sidepanel .gallery-controls.new-tile .dropzone-photo-upload {
+    margin-top: 0;
+    padding: 15px;
+    background-color: #ffffff;
+    width: 100%;
+}
+
 .thumbnail-gallery-controls {
-    width: 30px;
+    width: 35px;
     height: 105px;
     display: flex;
-    background-color: #887f7fcc;
+    background-color: rgba(0,0,0, 0.75);
     align-items: center;
     font-size: 41px;
     justify-content: center;
@@ -424,11 +546,18 @@ div.workflow-panel {
 }
 
 .show-thumbnails-btn {
-    padding: 4px;
-    margin-left: 10px;
-    width: 100px;
-    background-color: #fff;
-    opacity: 0.6;
+    padding: 4px 10px;
+    font-size: 14px;
+    margin-left: 35px;
+    width: 130px;
+    color: #fff;
+    font-weight: 500;
+    background-color: rgba(0,0,0, 0.7);
+    text-align: center;
+}
+
+.show-thumbnails-btn:hover {
+    cursor: pointer;
 }
 
 .show-thumbnails-btn.open {
@@ -449,13 +578,31 @@ div.workflow-panel {
     width: 100%;
 }
 
+
+
+/* .workflow-step-container .workbench-card-sidebar {
+    position: fixed;
+}
+
+.workflow-step-container .thumbnail-gallery-container {
+    position: fixed;
+    bottom: 0px;
+    left: 50px;
+}
+
+.workflow-step-container .thumbnail-gallery-container .thumbnail-container {
+        width: calc(100% - 125px);
+} */
+
+
+
 /* workflows */
 .workflows-get-tile-value {
     margin: 10px -10px 25px 25px;
     border: solid 1px #acf;
     padding: 20px 30px 30px 30px;
     max-width: 615px;
-    background-color: #fff;
+    background-color: #f3f3f3;
 }
 
 .workflows-get-tile-value h4 {
@@ -478,12 +625,14 @@ div.workflow-panel {
 /* In core core arches */
 
 .file-upload-footer {
-    background: #e6e6e6;
+    background: #f1f1f1;
     color: rgb(89, 56, 255);;
     display: flex;
     justify-content: left;
     align-items: center;
+    border-top: 1px solid #ddd;
     padding-left: 10px;
+    padding: 12px 15px;
 }
 
 .file-select {
@@ -504,7 +653,14 @@ div.workflow-panel {
     border-radius: 2px;
     width: 240px;
     margin: 30px 0;
+}
 
+.btn-file-select:hover {
+    color: #fff;
+}
+
+.btn-file-select:focus {
+    color: #fff;
 }
 
 .projects-grid {
@@ -678,6 +834,11 @@ div.active-cons-hover-loading {
     /* flex: 'flex-grow'; */
     /* display: block; */
     text-align: center;
+    height: 45%;
+}
+
+.active-cons-hover-loading i {
+    display: inline-block;
 }
 
 .workflow-main-nav-item {
@@ -696,16 +857,6 @@ div.active-cons-hover-loading {
 
 li.workflow-main-nav-item a {
     display: block;
-}
-
-div.hide-address-name div:nth-child(3) > form:nth-child(1).widgets,
-div.hide-address-name div:nth-child(3) > form:nth-child(2).widgets
- {
-    visibility: hidden;
-    height: 0;
-    padding: 0;
-    width: 0;
-    margin: -20px;
 }
 
 div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3) {

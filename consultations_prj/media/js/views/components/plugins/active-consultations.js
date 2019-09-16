@@ -4,14 +4,14 @@ define([
     'jquery',
     'moment',
     'viewmodels/alert',
+    'geojson-extent',
     'bindings/chosen',
     'bindings/mapbox-gl'
-], function(ko, arches, $, moment, AlertViewModel) {
+], function(ko, arches, $, moment, AlertViewModel, geojsonExtent) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
-            console.log(arches.mapLayers, arches.mapSources);
-            this.resourceEditorURL = arches.urls.resource_editor;
+            this.resourceEditorURL = '/consultations' + arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
@@ -19,6 +19,10 @@ define([
             // this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
+            this.orderByOption = ko.observable();
+            this.orderByOption.subscribe(function(val) {
+                if(val) { self.getConsultations(); }
+            });
             this.userRequestedNewPage = false;
             this.paginator = {
                 current_page: ko.observable(),
@@ -107,12 +111,19 @@ define([
                     }
                 }
             ]);
+            this.layers.unshift({
+                "id": "background-fill",
+                "type": "background",
+                "paint": {
+                    "background-color": "#f2f2f2"
+                }
+            });
             
             this.sprite = arches.mapboxSprites;
             this.glyphs = arches.mapboxGlyphs;
 
             this.setupMap = function(map, data) {
-                console.log(data["Geospatial Location"]);
+                // console.log(data["Geospatial Location"]);
                 map.on('load', function() {
                     data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
                 });
@@ -126,21 +137,26 @@ define([
             }, this);
 
             this.getConsultations = function() {
+                self.loading(true);
                 self.active_items.removeAll();
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
-                    data: {"page": self.page()},
+                    data: {
+                        "page": self.page(),
+                        "order": self.orderByOption()
+                    },
                     context: self,
                     success: function(responseText, status, response){
                         Object.entries(response.responseJSON['paginator']).forEach( function(keyPair){
                             self.paginator[keyPair[0]](keyPair[1]);
                         });
-                        response.responseJSON['page_results'].forEach( function(consultation, i) {
+                        response.responseJSON['page_results'].forEach( function(consultation) {
                             consultation["mapImageUrl"] = ko.observable(false);
-                            consultation["zoom"] = 5;
+                            consultation["zoom"] = 1, consultation["center"] = [0,0]; //defaults
                             if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
                             if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
+
                             consultation.sources = arches.mapSources;
                             consultation.sources['app-area-geom'] = {
                                 "type": "geojson",
@@ -151,12 +167,15 @@ define([
                                         "type":"FeatureCollection"
                                     }
                             };
-                            consultation.layers = self.layers;
-                            if(typeof consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0] != "number") {
-                                consultation["center"] = consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0][0];
-                            } else {
-                                consultation["center"] = consultation["Geospatial Location"]["features"][0]["geometry"]["coordinates"];
+                            if (consultation["Geospatial Location"]["features"].length > 0) {
+                                consultation.bounds = geojsonExtent({
+                                    type: 'FeatureCollection',
+                                    features: consultation["Geospatial Location"]["features"]
+                                });
+                                consultation.fitBoundsOptions = { padding: 40 };
                             }
+                    
+                            consultation.layers = self.layers;
                             self.active_items.push(consultation);
                         });
                         self.loading(false);

@@ -1,11 +1,14 @@
 {% load i18n %}
 {% load template_tags %}
+{% load staticfiles %}
 
 <!-- ko if: loading() === true -->
+
 <div class="active-cons-hover-loading">
     <i class="fa fa-spin fa-spinner"></i>
     {% trans "Loading Active Consultations..." %}
 </div>
+
 <!--/ko-->
 
 <!-- ko if: loading() === false -->
@@ -19,10 +22,15 @@
         <div class="active-consultations-sort">
             <!-- ko if: layout() == 'grid' -->
             <span>sort by:</span>
-            <select data-bind="chosen: {width: '300px'}, value: ''" data-placeholder="sort...">
-                <option value="1" selected>most recent</option>
-                <option value="2" >something else</option>
-                <option value="3">option 3</option>
+            <select data-bind="chosen: {width: '300px'}, value: orderByOption" data-placeholder="sort...">
+                <option value="Log Date: Newest to Oldest">Most recent Log Date</option>
+                <option value="Log Date: Oldest to Newest">Oldest log date</option>
+                <option value="Casework Officer: A to Z">Casework Officer: A to Z</option>
+                <option value="Casework Officer: Z to A">Casework Officer: Z to A</option>
+                <option value="Consultation Type: A to Z" selected>Consultation Type: A to Z</option>
+                <option value="Consultation Type: Z to A">Consultation Type: Z to A</option>
+                <option value="Consultation Name: A to Z">Consultation Name: A to Z</option>
+                <option value="Consultation Name: Z to A">Consultation Name: Z to A</option>
             </select>
             <!-- /ko -->
         </div>
@@ -35,34 +43,32 @@
 
     <div class="row">
         <div class="col-sm-12">
-            <!-- ko  -->
+            <!-- ko if: active_items().length > 0 -->
             <div class="projects-grid" data-bind="visible: layout() === 'grid'">
                 <!-- ko foreach: active_items -->
                 <div class="card-grid-item">
                     <div class="panel mar-no">
-                        <!-- Function Name -->
                         <div class="active-cons-header" data-bind="css: {
                                                       'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
                                                       'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
                                                                          $parent.getTargetDays($data['Target Date']) >= 1),
                                                       'status-late': ($parent.getTargetDays($data['Target Date']) < 1)}">
                             <div class="active-cons-header-title" data-bind="text: Name"></div>
-                            <!-- <div data-bind="text: $data['Consultation Type']"></div> -->
                         </div>
 
                         <div class="active-cons-map-container">
 
-                          <div class="active-cons-map">
-                              <!-- ko if: !$data.zoom -->
-                              <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >No Geometry Defined in Consultation</span>
-                              <!-- /ko -->
-                            <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data.zoom}"></img>
-                            <div class="map-credit">
-                                <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
-                                <span>© Mapbox © OpenStreetMap</span>
-                            </div>
+                            <div class="active-cons-map">
+                                <!-- ko if: !$data.zoom -->
+                                <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >No Geometry Defined in Consultation</span>
+                                <!-- /ko -->
+                                <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data.zoom}"></img>
+                                <div class="map-credit">
+                                    <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
+                                    <span>© Mapbox © OpenStreetMap</span>
+                                </div>
 
-                          </div>
+                            </div>
 
                             <!-- ko if: $data.mapImageUrl() == false -->
                             <div id="map" class="relative" style="height: 200px; opacity: 1;" data-bind="mapboxgl: {
@@ -76,12 +82,14 @@
                                         center: $data.center,
                                         zoom: $data.zoom
                                     },
-                                    preserveDrawingBuffer: true
+                                    preserveDrawingBuffer: true,
+                                    bounds: $data.bounds,
+                                    fitBoundsOptions: $data.fitBoundsOptions,
                                 },
                                 afterRender: function(map) {
                                     $parent.setupMap(map, $data);
                                 }
-                              }">
+                                }">
                             </div>
                             <!-- /ko -->
                         </div>
@@ -118,6 +126,23 @@
                 <!-- /ko -->
             </div>
             <!-- /ko -->
+            <!-- ko if: active_items().length === 0 && loading() === false -->
+            <div id="rr-splash" class="rr-splash">
+
+                <!-- Image -->
+                <div class="img-lg img-circle rr-splash-img-container">
+                    <img class="rr-splash-img" src="{% static "/img/inspection.png" %}" alt="Active Consultations">
+                </div>
+
+                <!-- Splash Title -->
+                <div class="rr-splash-title">{% trans "Welcome to Arches' Active Consultations" %}</div>
+
+                <!-- Splash Instructions -->
+                <div class="rr-splash-description">{% trans "There are currently no Active Consultations." %}</div>
+                <div class="rr-splash-description">{% trans "As soon as any Consultations move to Active status they will show up here." %}</div>
+            </div>
+            <!-- /ko -->
+            
 
 
             <div data-bind="visible: layout() !== 'grid'">
@@ -132,47 +157,6 @@
                         </tr>
                     </thead>
                 </table>
-
-                <!-- <div class="active-cons-table-container">
-                </div> -->
-
-
-                <!-- <div data-bind="foreach: active_items">
-                    <div style="width: 100%; height: 100px; display: flex; border: solid 1px lightgrey; margin-bottom: 10px;">
-                        <div style="width: 200px; text-align: center; background-color: #f8fbff; border-right: solid 1px lightgrey;">
-                            map
-                        </div>
-
-                        <div style="width: 270px; border-right: solid 1px lightgrey; padding: 15px; background-color: white; flex: 0 1 auto;">
-                            <div data-bind="text: title"></div>
-                            <div data-bind="text: consultation_type"></div>
-                        </div>
-
-                        <div style="width: 200px; display: flex; padding: 10px; border-right: solid 1px lightgrey; background-color: #f9f9bd;">
-                            <div style="flex-grow: 1; border-right: solid 1px #eaeaea; text-align: center;">
-                                <div>Jan, 30 2019</div>
-                                <div>Due date</div>
-                            </div>
-                            <div style="flex-grow: 1; text-align: center;">
-                                <div>Jan, 30 2019</div>
-                                <div>Due date</div>
-                            </div>
-                        </div>
-
-                        <div class="panel-body" style="width: 100%; border-right: solid 1px lightgrey;">
-                            <p data-bind="text: proposal">no description</p>
-                        </div>
-
-                        <div style="padding: 0px; display: flex; flex-direction: column; flex: 0 1 auto; width: 200px; background-color: white;">
-                            <div data-bind="text: author" style="font-size: 15px; padding: 5px 0px 0px 5px; background-color: #e6e6e6;">no author</div>
-                            <div style="margin: auto" data-toggle="tooltip" data-original-title="settings">
-                                <i class="fa fa-cog"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div> -->
-
-
             </div>
 
         </div>
