@@ -19,10 +19,15 @@
         <div class="active-consultations-sort">
             <!-- ko if: layout() == 'grid' -->
             <span>sort by:</span>
-            <select data-bind="chosen: {width: '300px'}, value: ''" data-placeholder="sort...">
-                <option value="1" selected>most recent</option>
-                <option value="2" >something else</option>
-                <option value="3">option 3</option>
+            <select data-bind="chosen: {width: '300px'}, value: orderByOption" data-placeholder="sort...">
+                <option value="Log Date: Newest to Oldest">Most recent Log Date</option>
+                <option value="Log Date: Oldest to Newest">Oldest log date</option>
+                <option value="Casework Officer: A to Z">Casework Officer: A to Z</option>
+                <option value="Casework Officer: Z to A">Casework Officer: Z to A</option>
+                <option value="Consultation Type: A to Z" selected>Consultation Type: A to Z</option>
+                <option value="Consultation Type: Z to A">Consultation Type: Z to A</option>
+                <option value="Consultation Name: A to Z">Consultation Name: A to Z</option>
+                <option value="Consultation Name: Z to A">Consultation Name: Z to A</option>
             </select>
             <!-- /ko -->
         </div>
