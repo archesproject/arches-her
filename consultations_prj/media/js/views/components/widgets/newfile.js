@@ -23,14 +23,10 @@ define([
             var self = this;
             FileWidgetViewModel.apply(this, [params]);
             self.dropzoneOptions.uploadMultiple = true;
-            this.selectedFile = ko.observable();
             this.filter = ko.observable("");
             this.filteredList = ko.computed(function() {
-                var filter = self.filter();
-                filter = filter.toLowerCase();
-                var arr = [];
-                var lowerName = "";
-                if(filter) {
+                var arr = [], lowerName = "";
+                if(self.filter().toLowerCase()) {
                     self.filesJSON().forEach(function(f, i) {
                         lowerName = f.name.toLowerCase();
                         if(lowerName.includes(filter)) {
@@ -40,34 +36,23 @@ define([
                 }
                 return arr;
             });
-
-            this.selectedFile(this.filesJSON()[0]);
-
-            this.selectFile = function(sFile) {
-                self.selectedFile(sFile);
-            };
-
+            this.selectedFile = ko.observable(self.filesJSON()[0]);
+            this.selectFile = function(sFile) { self.selectedFile(sFile); }
             this.filesJSON.subscribe(function(val){
-                console.log(val);
-                if (val.length > 1 && self.selectedFile() === undefined) {
-                    self.selectedFile(val[0]);
-                }
+                if (val.length > 1 && self.selectedFile() === undefined) { self.selectedFile(val[0]); }
             });
 
-            this.showQty = ko.observable();
-            this.minQty = ko.computed(function() {
-                if(self.filesJSON().length > 5) {
-                    return 'visible';
-                } else {
-                    return 'hidden';
-                }
+            this.pageCt = ko.observable(5);
+            this.pageCtReached = ko.computed(function() {
+                console.log(self.pageCt());
+                return (self.filesJSON().length > self.pageCt() ? 'visible' : 'hidden');
             });
 
             this.pagedList = function(list) {
-                var arr = [];
-                var i = 0;
-                if(list.length > self.showQty()) {
-                    while(arr.length < self.showQty()) {
+                console.log("in pagedList fn");
+                var arr = [], i = 0;
+                if(list.length > self.pageCt()) {
+                    while(arr.length < self.pageCt()) {
                         arr.push(list[i++]);
                     }
                     return arr;
@@ -99,8 +84,6 @@ define([
                 }
             };
         },
-        template: {
-            require: 'text!widget-templates/newfile'
-        }
+        template: { require: 'text!widget-templates/newfile' }
     });
 });

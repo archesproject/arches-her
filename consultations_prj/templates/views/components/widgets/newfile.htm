@@ -127,8 +127,8 @@
                 <!-- /ko -->
             <!-- /ko -->
             </div>
-            <div data-bind="style: {visibility: minQty()}">
-                <select type="button" class="btn btn-file-upload-limit" data-bind="value: showQty">
+            <div data-bind="style: {visibility: pageCtReached()}">
+                <select type="button" class="btn btn-file-upload-limit" data-bind="value: pageCt">
                     <option value="5"><span>{% trans "Show first 5 files" %} <i class="fa fa-caret-down"></i></span></option>
                     <option value="10"><span>{% trans "Show first 10 files" %} <i class="fa fa-caret-down"></i></span></option>
                     <option value="25"><span>{% trans "Show first 25 files" %} <i class="fa fa-caret-down"></i></span></option>
