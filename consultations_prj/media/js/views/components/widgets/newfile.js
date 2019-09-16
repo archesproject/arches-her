@@ -22,6 +22,7 @@ define([
             params.configKeys = ['acceptedFiles', 'maxFilesize', 'maxFiles'];
             var self = this;
             FileWidgetViewModel.apply(this, [params]);
+            self.dropzoneOptions.uploadMultiple = true;
             this.selectedFile = ko.observable();
             this.filter = ko.observable("");
             this.filteredList = ko.computed(function() {
@@ -47,6 +48,7 @@ define([
             };
 
             this.filesJSON.subscribe(function(val){
+                console.log(val);
                 if (val.length > 1 && self.selectedFile() === undefined) {
                     self.selectedFile(val[0]);
                 }

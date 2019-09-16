@@ -34,27 +34,30 @@
                     </div> -->
                 </div>
                 <div class="file-upload-footer">
-                    <span>{% trans "Allowed document formats:" %} <span data-bind="text: acceptedFiles() + '. '"></span><span>{% trans "Other formats will be ignored." %}</span>
+                    <span>{% trans "Allowed document formats:" %} <span data-bind="text: (acceptedFiles() || 'Any') + '. '"></span><span>{% trans "Other formats will be ignored." %}</span>
                 </div>
             </div>
-            <div>
-                <!--ko if: filesJSON().length > 0-->
+            <div data-bind="visible: filesJSON().length > 0">
+                <!-- note that data-bind=visible must be in place (instead of ko if:) as DZ instantiates only once;
+                    elements with its class name must exist at time of init -->
                 <h4>{% trans "Uploaded Files" %}</h4>
                 <div class="file-upload-options">
                     <!--ko if: filesJSON().length > 1-->
                     <input data-bind="textInput: filter" type="text" placeholder="{% trans "find a file..." %}" class="file-upload-filter">
+                    <!-- /ko -->
                     <!-- ko if: filter() -->
                     <span data-bind="text: filteredList().length+' out of '+filesJSON().length+' files match filter'"></span>
                     <!-- /ko -->
-                    <!--/ko-->
                     <!-- ko if: (!filter() || filter() == "") -->
                     <span data-bind="text: filesJSON().length + '{% trans " file(s) uploaded" %}'"></span>
                     <!-- /ko -->
                     <button type="button" class="btn btn-file-upload-reset" data-bind="click: reset">
                         <span>{% trans "delete all files" %}</span>
                     </button>
+                    <button type="button" class="btn btn-file-upload-reset dropzone fileinput-button dz-clickable" data-bind="css: uniqueidClass">
+                        <span>{% trans "add more files" %}</span>
+                    </button>
                 </div>
-                <!--/ko-->
             </div>
             <div class="dz-previews" data-bind="css: uniqueidClass">
             <!-- ko if: !filter() -->
