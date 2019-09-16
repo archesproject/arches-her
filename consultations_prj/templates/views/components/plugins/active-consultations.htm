@@ -73,14 +73,21 @@
                             <!-- ko if: $data.mapImageUrl() == false -->
                             <div id="map" class="relative" style="height: 200px; opacity: 1;" data-bind="mapboxgl: {
                                 mapOptions: {
-                                  style: 'mapbox://styles/mapbox/streets-v11',
-                                  center: $data.center,
-                                  zoom: $data.zoom,
-                                  preserveDrawingBuffer: true
+                                    style: {
+                                        version: 8,
+                                        sources: $data.sources,
+                                        sprite: $parent.sprite,
+                                        glyphs: $parent.glyphs,
+                                        layers: $data.layers,
+                                        center: $data.center,
+                                        zoom: $data.zoom
+                                    },
+                                    preserveDrawingBuffer: true,
+                                    bounds: $data.bounds,
+                                    fitBoundsOptions: $data.fitBoundsOptions,
                                 },
-                                data: $data['Geospatial Location'],
                                 afterRender: function(map) {
-                                  $parent.setupMap(map, $data);
+                                    $parent.setupMap(map, $data);
                                 }
                               }">
                             </div>
