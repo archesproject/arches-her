@@ -186,7 +186,7 @@ define([
                         }
                     }
                 });
-            }
+            };
 
             if(self.loading()) { self.getConsultations(); }
 
