@@ -40,6 +40,22 @@ define([
             params.workflow.state.steps[params._index] = params.getStateProperties();
             this.disableResourceSelection(true);
         };
+
+        params.getStateProperties = function(){
+            var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
+            var tileid = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined;
+            var tile = !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined;
+            var completeTile = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile).getData() : undefined;
+            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('tile'))) {
+                wastebin.tile = completeTile;
+            }
+            return {
+                resourceid: ko.unwrap(params.resourceid),
+                tile: tile,
+                tileid: tileid,
+                wastebin: wastebin
+            };
+        };
     }
 
     ko.components.register('select-resource-step', {

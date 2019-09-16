@@ -15,6 +15,7 @@ urlpatterns = [
     url(r'^consultations/search/resources$', search.search_results, name="search_results"),
     url(r'^consultations/', include('arches.urls', namespace='consultations')),
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
+    url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^', include('arches.urls')),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
     url(r'^consultations/index.htm', main.index, name='home'),

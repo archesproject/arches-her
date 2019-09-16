@@ -1,10 +1,11 @@
 define([
     'knockout',
+    'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
     'views/components/workflows/app-area-name-step'
-], function(ko, Workflow, Step) {
+], function(ko, arches, Workflow, Step) {
     return ko.components.register('application-area', {
         viewModel: function(params) {
             var self = this;
@@ -24,7 +25,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
-                    namelabel: 'Make the Area Name the same as the Area Address'
+                    namelabel: 'Make the Area Name the same as the Area Address',
+                    wastebin: {resourceid: null, description: 'An Application Area Instance'}
                 },
                 {
                     title: 'Assign Address',
@@ -101,6 +103,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            this.quitUrl = "/consultations" + arches.urls.plugin('init-workflow');
             self.getJSON('application-area');
 
             self.activeStep.subscribe(this.updateState);

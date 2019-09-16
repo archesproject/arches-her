@@ -24,13 +24,24 @@ define([
         params.tile = self.tile;
 
         params.getStateProperties = function(){
+            var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
+            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('resourceid'))) {
+                wastebin.resourceid = ko.unwrap(params.resourceid);
+            }
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
                 tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-                applyOutputToTarget: ko.unwrap(this.applyOutputToTarget)
+                applyOutputToTarget: ko.unwrap(this.applyOutputToTarget),
+                wastebin: wastebin
             };
         };
+
+        self.applyOutputToTarget.subscribe(function(val){
+            if (val && self.tile) {
+                self.address = self.getAddressString();
+            }
+        });
     }
 
     return ko.components.register('app-area-address-step', {

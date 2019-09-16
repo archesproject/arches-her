@@ -32,20 +32,96 @@
     z-index: 100;
 }
 
-.file-upload-filter {
-    margin-right: 5px;
+.cons-search-results-container .search-result {
+    margin-left: 10px;
+    height: 55px;
+    padding: 8px 10px;
+    position: relative;
 }
 
-.file-upload-card {
-    border: 1px solid #c4c4c4;
+.cons-search-results-container .search-result:hover .search-result-info {
+    width: 325px;
+}
+
+.search-result-info {
+    width: 365px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.search-result-resource-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #416284;
+    line-height: .79;
+}
+
+.search-result-resource-name:hover {
+    color: #2e29da;
+}
+
+.cons-type {
+    font-size: 12px;
+    font-weight: 400;
+    color: #416284;
+    margin-top: -2px;
+}
+
+.cons-search-results-container .search-result:hover .cons-search-popup-link {
+    display: block;
+}
+
+.cons-search-popup-link {
+  position: absolute;
+  left: 338px;
+  top: 0px;
+  width: 55px;
+  height: 53px;
+  background: #f2f2f2;
+  border-left: 1px solid #ddd;
+  padding: 15px 16px;
+  font-size: 19px;
+  font-weight: 400;
+  display: none;
+}
+
+.cons-search-popup-link:hover {
+    cursor: pointer;
+}
+
+.dz-previews {
+    border: 1px solid #ddd;
+    height: 300px;
+    overflow-y: scroll;
+}
+
+.file-upload-filter {
+    margin-right: 5px;
+    padding: 5px 10px;
+    width: 250px;
+}
+
+.dz-previews .file-upload-card {
+    border-bottom: 1px solid #D3E5F4;
     border-radius: 2px;
-    padding: 6px 8px 3px 15px;
-    background: #f6f6f6;
-    color: #01113c;
+    padding: 7px 8px 5px 15px;
+    background: #fff;
+    color: #666;
+    height: 50px;
+}
+
+.dz-previews .file-upload-card:nth-child(odd) {
+    background: #F5FAFE;
 }
 
 .file-upload-options {
     padding-bottom: 8px;
+}
+
+.file-size-label {
+    float: right;
+    margin-top: 2px;
 }
 
 .btn-file-upload-reset {
@@ -61,8 +137,13 @@
     margin-top: 6px;
 }
 
+.file-upload-card-detail a:hover {
+    cursor: pointer;
+}
+
 div.workflow-content {
     flex-grow: 2;
+    background: #fafafa;
 }
 
 .workflow-select-desc {
@@ -359,7 +440,7 @@ div.workflow-panel {
     display: inline-flex;
     align-items: center;
     text-align: center;
-    background-color: rgba(0,0,0, 0.5);
+    background-color: rgba(0,0,0, 0.65);
     height: 105px;
     overflow-x: auto;
     overflow-y: hidden;
@@ -465,9 +546,10 @@ div.workflow-panel {
 }
 
 .show-thumbnails-btn {
-    padding: 4px;
+    padding: 4px 10px;
+    font-size: 14px;
     margin-left: 35px;
-    width: 100px;
+    width: 130px;
     color: #fff;
     font-weight: 500;
     background-color: rgba(0,0,0, 0.7);
@@ -496,13 +578,31 @@ div.workflow-panel {
     width: 100%;
 }
 
+
+
+/* .workflow-step-container .workbench-card-sidebar {
+    position: fixed;
+}
+
+.workflow-step-container .thumbnail-gallery-container {
+    position: fixed;
+    bottom: 0px;
+    left: 50px;
+}
+
+.workflow-step-container .thumbnail-gallery-container .thumbnail-container {
+        width: calc(100% - 125px);
+} */
+
+
+
 /* workflows */
 .workflows-get-tile-value {
     margin: 10px -10px 25px 25px;
     border: solid 1px #acf;
     padding: 20px 30px 30px 30px;
     max-width: 615px;
-    background-color: #fff;
+    background-color: #f3f3f3;
 }
 
 .workflows-get-tile-value h4 {
@@ -734,6 +834,11 @@ div.active-cons-hover-loading {
     /* flex: 'flex-grow'; */
     /* display: block; */
     text-align: center;
+    height: 45%;
+}
+
+.active-cons-hover-loading i {
+    display: inline-block;
 }
 
 .workflow-main-nav-item {

@@ -1,10 +1,11 @@
 define([
     'knockout',
+    'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
     'views/components/workflows/select-resource-step'
-], function(ko, Workflow, Step) {
+], function(ko, arches, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
             if (!params.resourceid) {
@@ -25,7 +26,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-tag',
                     nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    wastebin: {tile: null, description: 'A Site Visit Instance'}
                 },
                 {
                     title: 'Site Visit Attendees',
@@ -108,6 +110,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            this.quitUrl = "/consultations" + arches.urls.plugin('init-workflow');
             self.getJSON('site-visit');
 
             self.activeStep.subscribe(this.updateState);
