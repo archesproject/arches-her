@@ -16,8 +16,8 @@ define([
             self.dropzoneOptions.uploadMultiple = true;
             this.filter = ko.observable("");
             this.filteredList = ko.computed(function() {
-                var arr = [], lowerName = "";
-                if(self.filter().toLowerCase()) {
+                var arr = [], lowerName = "", filter = self.filter().toLowerCase();
+                if(filter) {
                     self.filesJSON().forEach(function(f, i) {
                         lowerName = f.name.toLowerCase();
                         if(lowerName.includes(filter)) { arr.push(self.filesJSON()[i]); }
@@ -26,7 +26,7 @@ define([
                 return arr;
             });
             this.selectedFile = ko.observable(self.filesJSON()[0]);
-            this.selectFile = function(sFile) { self.selectedFile(sFile); }
+            this.selectFile = function(sFile) { self.selectedFile(sFile); };
             this.filesJSON.subscribe(function(val){
                 if (val.length > 1 && self.selectedFile() === undefined) { self.selectedFile(val[0]); }
             });
