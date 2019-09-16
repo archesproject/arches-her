@@ -4,7 +4,7 @@ define([
     'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step'
-], function(ko, $, arches, Workflow, Step) {
+], function(ko, $, arches, Workflow) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
 
@@ -26,6 +26,19 @@ define([
                     wastebin: {resourceid: null, description: 'A Consulation Instance'}
                 },
                 {
+                    title: 'Consultation GeoJSON',
+                    name: 'consultationlocation',
+                    description: 'Set geospatial data for this consultation',
+                    component: 'views/components/workflows/consultation-map-step',
+                    componentname: 'consultation-map-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '8d41e4c6-a250-11e9-a54d-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    icon: 'fa-map-marker'
+                },
+                {
                     title: 'Consultation Dates',
                     name: 'setdatedetails',
                     description: 'Consultation Dates',
@@ -38,19 +51,6 @@ define([
                     parenttileid: null,
                     class: 'hide-completion-date',
                     icon: 'fa-calendar-o'
-                },
-                {
-                    title: 'Consultation GeoJSON',
-                    name: 'consultationlocation',
-                    description: 'Set geospatial data for this consultation',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4c6-a250-11e9-a54d-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-map-marker'
                 },
                 {
                     title: 'Consultation Details',
