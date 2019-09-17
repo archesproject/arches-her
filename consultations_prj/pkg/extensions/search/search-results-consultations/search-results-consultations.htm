@@ -4,31 +4,30 @@
 
 {% if user.username == 'anonymous' %}
     <div id="search-results-list" data-bind="foreach: results, visible: true" style="display: none;">
-
       <div class="search-result" data-bind="event: { mouseover: mouseoverInstance, mouseout: mouseoverInstance('')}, css: {'selected': selected()}">
         <div class="search-result-info">
             <a class="" href="" data-bind="click: $parent.viewReport.bind($parent)"><span data-bind="text: displayname"></span></a>
             <div class="">
-                <span class="cons-type">{% trans "Application Type goes here: " %}</span>
+                <span class="cons-type">{% trans "Application Type goes here" %}</span>
             </div>
         </div>
-      </div>
 
+        <!-- show popup link -->
+        <a class="cons-search-popup-link"><i class="fa fa-info-circle"></i>
+      </div>
     </div>
 {% else %}
     <div id="search-results-list" data-bind="foreach: results, visible: true" style="display: none;">
-
       <div class="search-result" data-bind="event: { mouseover: mouseoverInstance, mouseout: mouseoverInstance('')}, css: {'selected': selected()}">
           <div class="search-result-info">
               <a class="search-result-resource-name" href="" data-bind="click: $parent.editResource.bind($parent)"><span data-bind="text: displayname"></span></a>
               <div class="">
-                  <span class="cons-type">{% trans "Application Type goes here: " %}</span>
+                  <span class="cons-type">{% trans "Application Type goes here" %}</span>
               </div>
           </div>
 
           <!-- show popup link -->
-          <a class="cons-search-popup-link"><i class="fa fa-ellipsis-h"></i>
+          <a class="cons-search-popup-link"><i class="fa fa-info-circle"></i>
       </div>
-
     </div>
 {% endif %}
