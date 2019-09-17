@@ -198,12 +198,13 @@ define([
                     dataSrc: function(data) {
                         var results = [], consultations = data["results"];
                         consultations.forEach( function(consultation) {
+                            var link= arches.urls.resource+'/'+consultation["resourceinstanceid"];
                             results.push([
-                                $('<p></p>').text(consultation['Name'])[0].outerHTML,
-                                $('<p></p>').text(consultation['Consultation Type'])[0].outerHTML,
-                                $('<p></p>').text(consultation['Target Date'])[0].outerHTML,
-                                $('<p></p>').text(consultation['Casework Officer'])[0].outerHTML,
-                                $('<p></p>').html(consultation['Proposal'])[0].outerHTML
+                                $('<a></a>').attr("href",link).text(consultation['Name'])[0].outerHTML,
+                                $('<a></a>').attr("href",link).text(consultation['Consultation Type'])[0].outerHTML,
+                                $('<a></a>').attr("href",link).text(consultation['Target Date'])[0].outerHTML,
+                                $('<a></a>').attr("href",link).text(consultation['Casework Officer'])[0].outerHTML,
+                                $('<a></a>').attr("href",link).html(consultation['Proposal'])[0].outerHTML
                             ]);
                         });
                         return results;

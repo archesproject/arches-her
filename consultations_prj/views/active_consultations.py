@@ -105,12 +105,14 @@ class ActiveConsultationsView(View):
         """
         builds a list that looks like this:
         [
-            "resource_instance_id_1": {
+            {
+                "resourceinstanceid":"[uuid],
                 "node_name_a":"display_val_a",
                 "node_name_b":"display_val_b",
                 ...
             },
-            "resource_instance_id_2": {
+            {
+                "resourceinstanceid":"[uuid],
                 "node_name_a":"display_val_a",
                 "node_name_b":"display_val_b",
                 ...
@@ -124,6 +126,7 @@ class ActiveConsultationsView(View):
         active_cons_list_vals = self.active_cons_node_list.values()
         for consultation in consultations:
             resource = {}
+            resource['resourceinstanceid'] = consultation.resourceinstanceid
             consultation.load_tiles()
             for tile in consultation.tiles:
                 for k, v in tile.data.items():
@@ -138,7 +141,6 @@ class ActiveConsultationsView(View):
                             val = v
 
                         resource[node.name] = val
-            resource['resourceinstanceid'] = consultation.resourceinstanceid
             resources.append(resource)
 
         return resources
