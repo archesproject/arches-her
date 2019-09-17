@@ -578,6 +578,15 @@ div.workflow-panel {
     width: 100%;
 }
 
+/* .workflow-step-body .thumbnail-gallery-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: fixed;
+    bottom: 0px;
+    width: calc(100% - 50px);
+    left: 50px;
+} */
 
 
 /* .workflow-step-container .workbench-card-sidebar {
@@ -686,7 +695,7 @@ div.active-cons-header {
 }
 
 .active-cons-header-title {
-    font-weight: 500;
+    font-weight: 600;
     font-size: 13px;
     text-align: center;
 }
@@ -829,12 +838,14 @@ div.active-cons-stub-label {
 }
 
 div.active-cons-hover-loading {
+    position: absolute;
     font-size: 36px;
-    /* align-self: center; */
-    /* flex: 'flex-grow'; */
-    /* display: block; */
+    align-self: center;
+    /* display: inline-block; */
+    /* text-align: center; */
+    height: 55%;
+    margin-left: 30%;
     text-align: center;
-    height: 45%;
 }
 
 .active-cons-hover-loading i {

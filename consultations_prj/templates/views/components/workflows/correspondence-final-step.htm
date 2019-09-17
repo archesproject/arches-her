@@ -1,11 +1,13 @@
 <!-- ko if: loading() === false -->
 <div class="padded-workflow-step">
         <div class="final-cons-step-splash">
-            <h4 data-bind="text:'Template successfully saved to Consultation'"></h4>
-            <a data-bind="attr: {href: dataURL}" download><button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-download">Download Letter</button></a>
-            
-            <h4>Workflow Complete</h4>
-            <a data-bind="attr: { href: urls.resource + '/' + resourceid}"><button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-step-forward">Jump to this resource</button></a>
+
+            <h4 data-bind="text:'Letter successfully saved to Consultation'"></h4>
+            <span>
+              <a data-bind="attr: {href: dataURL}" download><button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-download">Download Letter</button></a>
+                <a data-bind="attr: { href: urls.resource + '/' + resourceid}"><button class="btn btn-success btn-shim btn-labeled btn-lg fa fa-step-forward">Jump to this resource</button></a>
+            </span>
+
             <!-- <div>
                 <a href="#" target="_self" type="button" class="btn btn-primary"
                     data-bind="attr: { href: urls.plugin(workflowid)}">
@@ -18,6 +20,8 @@
                     <span>Edit</span>
                 </a>
             </div> -->
+
+
         </div>
         <div class="final-cons-step-separator">
             <hr>
