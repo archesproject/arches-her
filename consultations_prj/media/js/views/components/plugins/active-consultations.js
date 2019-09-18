@@ -20,6 +20,16 @@ define([
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
             this.orderByOption = ko.observable("");
+            this.keyword = ko.observable("");
+            this.keyword.subscribe(function(val) {
+                console.log(val);
+            })
+            this.keywordSearch = function() {
+                if(self.keyword() && self.keyword() != "") {
+                    self.orderByOption("");
+                    self.getConsultations();
+                }
+            }
             this.activeConsulationConfig = { // could pass this into GET req
                 "nodes":{
                     "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
@@ -167,6 +177,7 @@ define([
                     data: {
                         "page": self.page(),
                         "order": self.orderByOption(),
+                        "keyword": self.keyword()
                         // "config": self.activeConsulationConfig
                     },
                     context: self,
