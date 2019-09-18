@@ -25,7 +25,6 @@ from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
 from arches.app.datatypes.datatypes import DataTypeFactory
 import json
-from pprint import pprint
 
 
 class ActiveConsultationsView(View):
@@ -50,7 +49,6 @@ class ActiveConsultationsView(View):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
         order_param = request.GET.get('order')
         keyword = None if request.GET.get('keyword') == '' or request.GET.get('keyword') == None else (request.GET.get('keyword'))
-        print('keyword:',keyword)
 
         # active_cons_config = request.GET.get('config')
         # self.active_cons_node_list = active_cons_config['nodes']
@@ -128,7 +126,6 @@ class ActiveConsultationsView(View):
             ...
         ]
         """
-        print('keyword in method:',keyword)
         resources = []
         active_cons_list_vals = self.active_cons_node_list.values()
         active_cons_list_keys = self.active_cons_node_list.keys()

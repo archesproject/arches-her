@@ -21,9 +21,6 @@ define([
             this.page = ko.observable(1); // pages indexed at 1
             this.orderByOption = ko.observable("");
             this.keyword = ko.observable("");
-            this.keyword.subscribe(function(val) {
-                console.log(val);
-            })
             this.keywordSearch = function() {
                 if(self.keyword() && self.keyword() != "") {
                     self.orderByOption("");
