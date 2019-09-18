@@ -24,7 +24,6 @@ from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
 from arches.app.datatypes.datatypes import DataTypeFactory
-from pprint import pprint
 import json
 
 
@@ -82,8 +81,6 @@ class ActiveConsultationsView(View):
             elif page_num >= 1:
                 grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
                 if order_param in order_config.keys() and order_param is not None:
-                    print("success!")
-                    pprint(grouped_tile_list[0])
                     try:
                         grouped_tile_list = sorted(
                                                 grouped_tile_list, 
