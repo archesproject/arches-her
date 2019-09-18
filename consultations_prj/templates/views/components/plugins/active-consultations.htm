@@ -15,7 +15,9 @@
 <div class="container" style="margin: 30px; overflow: scroll; width: 100%">
     <div class="row relative">
         <div class="active-consultations-filter" data-bind="visible: layout() === 'grid'">
-            <input data-bind="value: keyword" data-placeholder="filter by keyword"></input><button class="btn btn-sm btn-primary" data-bind="click: keywordSearch">Search</button>
+            <input data-bind="value: keyword" data-placeholder="filter by keyword"></input>
+            <button class="btn btn-sm btn-primary" data-bind="click: keywordSearch">Search</button>
+            <button class="btn btn-sm btn-mint" data-bind="click: resetKeywordSearch">Reset</button>
         </div>
         <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
             <span>sort by:</span>
