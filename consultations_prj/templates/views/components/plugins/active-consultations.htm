@@ -14,25 +14,14 @@
 <!-- ko if: loading() === false -->
 <div class="container" style="margin: 30px; overflow: scroll; width: 100%">
     <div class="row relative">
-        <!-- ko if: layout() == 'grid' -->
-        <div class="active-consultations-filter">
+        <div class="active-consultations-filter" data-bind="visible: layout() === 'grid'">
             <select data-bind="chosen: {width: '300px'}, value: ''" data-placeholder="filter consultations..."></select>
         </div>
-        <!-- /ko -->
-        <div class="active-consultations-sort">
-            <!-- ko if: layout() == 'grid' -->
+        <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
             <span>sort by:</span>
-            <select data-bind="chosen: {width: '300px'}, value: orderByOption" data-placeholder="sort...">
-                <option value="Log Date: Newest to Oldest">Most recent Log Date</option>
-                <option value="Log Date: Oldest to Newest">Oldest log date</option>
-                <option value="Casework Officer: A to Z">Casework Officer: A to Z</option>
-                <option value="Casework Officer: Z to A">Casework Officer: Z to A</option>
-                <option value="Consultation Type: A to Z" selected>Consultation Type: A to Z</option>
-                <option value="Consultation Type: Z to A">Consultation Type: Z to A</option>
-                <option value="Consultation Name: A to Z">Consultation Name: A to Z</option>
-                <option value="Consultation Name: Z to A">Consultation Name: Z to A</option>
-            </select>
-            <!-- /ko -->
+            <select data-bind="value: orderByOption,
+                                options: sortOptions,
+                                optionsCaption: 'Pick an option'"></select>
         </div>
 
         <div class="active-consultations-display">
@@ -48,21 +37,24 @@
                 <!-- ko foreach: active_items -->
                 <div class="card-grid-item">
                     <div class="panel mar-no">
-                        <div class="active-cons-header" data-bind="css: {
-                                                      'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
-                                                      'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
-                                                                         $parent.getTargetDays($data['Target Date']) >= 1),
-                                                      'status-late': ($parent.getTargetDays($data['Target Date']) < 1)}">
-                            <div class="active-cons-header-title" data-bind="text: Name"></div>
+                        <div class="active-cons-header" 
+                            data-bind="css: {'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
+                                            'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
+                                                $parent.getTargetDays($data['Target Date']) >= 1),
+                                            'status-late': ($parent.getTargetDays($data['Target Date']) < 1)}">
+                            <div class="active-cons-header-title" data-bind="text: $data['Name'] || 'Unnamed Consultation'"></div>
                         </div>
 
                         <div class="active-cons-map-container">
 
                             <div class="active-cons-map">
-                                <!-- ko if: !$data.zoom -->
-                                <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >No Geometry Defined in Consultation</span>
+                                <!-- ko if: !$data["Geospatial Location"] -->
+                                <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >{% trans "No Geometry Defined in Consultation" %}</span>
                                 <!-- /ko -->
-                                <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data.zoom}"></img>
+                                <!-- ko if: $data["Geospatial Location"] && $data.mapImageUrl() == false -->
+                                <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; left: 90px;" ><i class="fa fa-spin fa-spinner"></i>{% trans " Loading Map" %}</span>
+                                <!-- /ko -->
+                                <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data['Geospatial Location']}"></img>
                                 <div class="map-credit">
                                     <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
                                     <span>© Mapbox © OpenStreetMap</span>
@@ -71,7 +63,7 @@
                             </div>
 
                             <!-- ko if: $data.mapImageUrl() == false -->
-                            <div id="map" class="relative" style="height: 200px; opacity: 1;" data-bind="mapboxgl: {
+                            <div id="map" class="relative" style="height: 200px; opacity: 0;" data-bind="mapboxgl: {
                                 mapOptions: {
                                     style: {
                                         version: 8,

@@ -19,7 +19,32 @@ define([
             // this.mapImageURL = ko.observable('');
             this.active_items = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
-            this.orderByOption = ko.observable();
+            this.orderByOption = ko.observable("");
+            this.activeConsulationConfig = { // could pass this into GET req
+                "nodes":{
+                    "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
+                    "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
+                    "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
+                    "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
+                    "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
+                    "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d",
+                    "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
+                },
+                "sort config":{
+                    "Log Date: Newest to Oldest":["Consultation Log Date",false],
+                    "Log Date: Oldest to Newest":["Consultation Log Date",true],
+                    "Casework Officer: A to Z":["Casework Officer",false],
+                    "Casework Officer: Z to A":["Casework Officer",true],
+                    "Consultation Type: A to Z":["Consultation Type",false],
+                    "Consultation Type: Z to A":["Consultation Type",true],
+                    "Consultation Name: A to Z":["Name",false],
+                    "Consultation Name: Z to A":["Name",true]
+                }
+            };
+            this.sortOptions = ko.observableArray([]);
+            Object.keys(this.activeConsulationConfig["sort config"]).forEach(function(key) {
+                self.sortOptions.push(key);
+            });
             this.orderByOption.subscribe(function(val) {
                 if(val) { self.getConsultations(); }
             });
@@ -118,16 +143,13 @@ define([
                     "background-color": "#f2f2f2"
                 }
             });
-            
             this.sprite = arches.mapboxSprites;
             this.glyphs = arches.mapboxGlyphs;
 
             this.setupMap = function(map, data) {
-                // console.log(data["Geospatial Location"]);
                 map.on('load', function() {
                     data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
                 });
-                $("#map").remove();
             };
 
             this.newPage = function(page){ if(page){ this.page(page); }};
@@ -144,7 +166,8 @@ define([
                     url: arches.urls.root + 'activeconsultations',
                     data: {
                         "page": self.page(),
-                        "order": self.orderByOption()
+                        "order": self.orderByOption(),
+                        // "config": self.activeConsulationConfig
                     },
                     context: self,
                     success: function(responseText, status, response){
@@ -153,9 +176,7 @@ define([
                         });
                         response.responseJSON['page_results'].forEach( function(consultation) {
                             consultation["mapImageUrl"] = ko.observable(false);
-                            consultation["zoom"] = 1, consultation["center"] = [0,0]; //defaults
-                            if(consultation['Name'] == undefined) { consultation['Name'] = 'Unnamed Consultation'; }
-                            if(consultation['Consultation Type'] == undefined) { consultation['Consultation Type'] = ''; }
+                            consultation["zoom"] = 0, consultation["center"] = [0,0]; //defaults
 
                             consultation.sources = arches.mapSources;
                             consultation.sources['app-area-geom'] = {
@@ -167,12 +188,14 @@ define([
                                         "type":"FeatureCollection"
                                     }
                             };
-                            if (consultation["Geospatial Location"]["features"].length > 0) {
-                                consultation.bounds = geojsonExtent({
-                                    type: 'FeatureCollection',
-                                    features: consultation["Geospatial Location"]["features"]
-                                });
-                                consultation.fitBoundsOptions = { padding: 40 };
+                            if (consultation["Geospatial Location"]) {
+                                if (consultation["Geospatial Location"]["features"].length > 0) {
+                                    consultation.bounds = geojsonExtent({
+                                        type: 'FeatureCollection',
+                                        features: consultation["Geospatial Location"]["features"]
+                                    });
+                                    consultation.fitBoundsOptions = { padding: 40 };
+                                }
                             }
                     
                             consultation.layers = self.layers;

@@ -24,6 +24,7 @@ from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
 from arches.app.datatypes.datatypes import DataTypeFactory
+from pprint import pprint
 import json
 
 
@@ -32,13 +33,14 @@ class ActiveConsultationsView(View):
     def __init__(self):
         self.cons_details_nodegroupid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
         self.consultation_graphid = '8d41e49e-a250-11e9-9eab-00224800b26d'
-        self.active_cons_node_list = {
+        self.active_cons_node_list = { # if this is not up-to-date sorting will break
             "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
             "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
             "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
             "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
             "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
-            "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d"
+            "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d",
+            "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
         }
         self.layout = 'grid'
         self.exclude_statuses = ["Aborted","Completed"]
@@ -46,15 +48,19 @@ class ActiveConsultationsView(View):
     
     def get(self, request):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
+
+        # active_cons_config = request.GET.get('config')
+        # self.active_cons_node_list = active_cons_config['nodes']
+        # order_config = active_cons_config['sort config']
         datatype_factory = DataTypeFactory()
         cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_details_nodegroupid)
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
 
         order_param = request.GET.get('order')
-        order_config = {
-            "Log Date: Newest to Oldest":("Log Date",False),
-            "Log Date: Oldest to Newest":("Log Date",True),
+        order_config = { # if this is not up-to-date sorting will break
+            "Log Date: Newest to Oldest":("Consultation Log Date",False),
+            "Log Date: Oldest to Newest":("Consultation Log Date",True),
             "Casework Officer: A to Z":("Casework Officer",False),
             "Casework Officer: Z to A":("Casework Officer",True),
             "Consultation Type: A to Z":("Consultation Type",False),
@@ -75,7 +81,9 @@ class ActiveConsultationsView(View):
                 return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
                 grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
-                if order_param in order_config.keys():
+                if order_param in order_config.keys() and order_param is not None:
+                    print("success!")
+                    pprint(grouped_tile_list[0])
                     try:
                         grouped_tile_list = sorted(
                                                 grouped_tile_list, 
@@ -124,6 +132,7 @@ class ActiveConsultationsView(View):
         resources = []
         # should an insertion sort be implemented here?
         active_cons_list_vals = self.active_cons_node_list.values()
+        active_cons_list_keys = self.active_cons_node_list.keys()
         for consultation in consultations:
             resource = {}
             resource['resourceinstanceid'] = consultation.resourceinstanceid
@@ -140,7 +149,10 @@ class ActiveConsultationsView(View):
                         except Exception as e:
                             val = v
 
-                        resource[node.name] = val
+                        resource[str(node.name)] = val
+            for key in active_cons_list_keys:
+                if key not in resource.keys():
+                    resource[key] = ''
             resources.append(resource)
 
         return resources
