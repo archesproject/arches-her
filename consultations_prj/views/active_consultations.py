@@ -33,7 +33,7 @@ class ActiveConsultationsView(View):
         self.cons_details_nodegroupid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
         self.consultation_graphid = '8d41e49e-a250-11e9-9eab-00224800b26d'
         self.active_cons_node_list = { # if this is not up-to-date sorting will break
-            "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
+            "Geospatial Location":"8d41e4d6-a250-11e9-accd-00224800b26d",
             "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
             "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
             "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
@@ -141,7 +141,7 @@ class ActiveConsultationsView(View):
                         try:
                             datatype = datatype_factory.get_instance(node.datatype)
                             val = datatype.get_display_value(tile, node)
-                            if self.layout == 'grid' and k == self.active_cons_node_list["Map"]:
+                            if self.layout == 'grid' and k == self.active_cons_node_list["Geospatial Location"]:
                                 val = json.loads(val)
                         except Exception as e:
                             val = v

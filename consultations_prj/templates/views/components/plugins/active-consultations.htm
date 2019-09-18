@@ -15,13 +15,14 @@
 <div class="container" style="margin: 30px; overflow: scroll; width: 100%">
     <div class="row relative">
         <div class="active-consultations-filter" data-bind="visible: layout() === 'grid'">
-            <select data-bind="chosen: {width: '300px'}, value: ''" data-placeholder="filter consultations..."></select>
+            <select data-bind="value: '', chosen: {width: '300px'}" data-placeholder="filter consultations..."></select>
         </div>
         <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
             <span>sort by:</span>
             <select data-bind="value: orderByOption,
                                 options: sortOptions,
-                                optionsCaption: 'Pick an option'"></select>
+                                optionsCaption: 'Pick an option',
+                                chosen: {width: '300px'}"></select>
         </div>
 
         <div class="active-consultations-display">
