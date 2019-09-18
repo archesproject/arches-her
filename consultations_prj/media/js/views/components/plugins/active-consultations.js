@@ -33,7 +33,7 @@ define([
             this.resetKeywordSearch = function() {
                 self.keyword("");
                 self.orderByOption("");
-                self.getConsultations("");
+                self.getConsultations();
             }
             this.activeConsulationConfig = { // could pass this into GET req
                 "nodes":{
