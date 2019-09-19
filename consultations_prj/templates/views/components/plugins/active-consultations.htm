@@ -12,9 +12,9 @@
 <!--/ko-->
 
 <!-- ko if: loading() === false -->
-<div class="container" style="margin: 30px; overflow: scroll; width: 100%">
-    <div class="row relative">
-        <div class="active-consultations-filter" data-bind="visible: layout() === 'grid'">
+<div class="active-cons-container" style="">
+    <div class="relative">
+        <div class="active-cons-filters" data-bind="visible: layout() === 'grid'">
             <input data-bind="value: keyword" data-placeholder="filter by keyword"></input>
             <button class="btn btn-sm btn-primary" data-bind="click: keywordSearch">Search</button>
             <button class="btn btn-sm btn-mint" data-bind="click: resetKeywordSearch">Reset</button>
@@ -40,7 +40,7 @@
                 <!-- ko foreach: active_items -->
                 <div class="card-grid-item">
                     <div class="panel mar-no">
-                        <div class="active-cons-header" 
+                        <div class="active-cons-header"
                             data-bind="css: {'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
                                             'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
                                                 $parent.getTargetDays($data['Target Date']) >= 1),
@@ -137,7 +137,7 @@
                 <div class="rr-splash-description">{% trans "As soon as any Consultations move to Active status they will show up here." %}</div>
             </div>
             <!-- /ko -->
-            
+
 
 
             <div data-bind="visible: layout() !== 'grid'">
