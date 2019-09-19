@@ -26,12 +26,12 @@ define([
                     self.orderByOption("");
                     self.getConsultations();
                 }
-            }
+            };
             this.resetKeywordSearch = function() {
                 self.keyword("");
                 self.orderByOption("");
                 self.getConsultations();
-            }
+            };
             this.activeConsulationConfig = { // could pass this into GET req
                 "nodes":{
                     "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
