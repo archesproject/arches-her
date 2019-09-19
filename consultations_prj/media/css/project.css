@@ -33,9 +33,9 @@
 }
 
 .cons-search-results-container .search-result {
-    margin-left: 10px;
-    height: 55px;
-    padding: 8px 10px;
+    margin-left: 0px;
+    height: 60px;
+    padding: 11px 10px 11px 15px;
     position: relative;
 }
 
@@ -74,13 +74,13 @@
 
 .cons-search-popup-link {
   position: absolute;
-  left: 338px;
+  left: 342px;
   top: 0px;
-  width: 55px;
-  height: 53px;
+  width: 56px;
+  height: 58px;
   background: #f2f2f2;
   border-left: 1px solid #ddd;
-  padding: 15px 16px;
+  padding: 15px 19px;
   font-size: 19px;
   font-weight: 400;
   display: none;
@@ -685,6 +685,55 @@ div.workflow-panel {
     border: 1px solid steelblue;
 }
 
+.active-cons-container {
+    margin: 30px;
+    overflow-y: scroll;
+    width: 100%
+}
+
+.active-cons-container .sticky {
+    position: sticky;
+    top: 0px;
+    z-index: 20;
+    background: #fafafa;
+}
+
+.active-cons-filters {
+    padding: 0px 10px 10px 8px;
+}
+
+.active-cons-filters input {
+    height: 32px;
+    width: 291px;
+    margin-right: 5px;
+    padding-left: 5px;
+}
+
+.active-cons-filters input:focus {
+    border: 1px solid steelblue;
+    outline: unset;
+    padding-left: 6px;
+}
+
+.active-cons-filters .filter {
+    margin-top: -3px;
+    height: 30px;
+    padding-top: 3px;
+    font-weight: 600;
+    border-radius: 2px;
+}
+
+.active-cons-filters .reset {
+    border-radius: 50%;
+    padding: 0px 1px;
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    top: 8px;
+    left: 278px;
+    font-size: 9px;
+}
+
 div.active-cons-header {
     border: solid 1px #454545;
     padding: 5px 10px;
@@ -945,7 +994,7 @@ table.dataTable thead .sorting:after {
 .active-consultations-sort {
     position: absolute;
     right: 100px;
-    top: -4px;
+    top: 0px;
 }
 
 div.dataTables_wrapper div.dataTables_filter {
@@ -966,5 +1015,5 @@ div.dataTables_wrapper div.dataTables_filter {
 }
 
 .dataTables_wrapper .row {
-    margin-top: -3px;
+    margin-top: 3px;
 }
