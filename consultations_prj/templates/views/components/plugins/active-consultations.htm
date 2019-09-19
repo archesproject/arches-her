@@ -16,15 +16,15 @@
     <div class="relative">
         <div class="active-cons-filters" data-bind="visible: layout() === 'grid'">
             <input data-bind="value: keyword" data-placeholder="filter by keyword"></input>
-            <button class="btn btn-sm btn-primary" data-bind="click: keywordSearch">Search</button>
-            <button class="btn btn-sm btn-mint" data-bind="click: resetKeywordSearch">Reset</button>
+            <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">Filter</button>
+            <button class="btn btn-sm btn-mint reset" data-bind="click: resetKeywordSearch"><i class="fa fa-remove"></i></button>
         </div>
         <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
-            <span>sort by:</span>
             <select data-bind="value: orderByOption,
-                                options: sortOptions,
-                                optionsCaption: 'Pick an option',
-                                chosen: {width: '300px'}"></select>
+                              options: sortOptions,
+                              optionsCaption: 'Sort by...',
+                              chosen: {width: '300px'}">
+            </select>
         </div>
 
         <div class="active-consultations-display">
@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <div class="row">
+    <div class="active-cons-listing-container">
         <div class="col-sm-12">
             <!-- ko if: active_items().length > 0 -->
             <div class="projects-grid" data-bind="visible: layout() === 'grid'">
