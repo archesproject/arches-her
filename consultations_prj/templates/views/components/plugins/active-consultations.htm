@@ -15,8 +15,8 @@
 <div class="active-cons-container" style="">
     <div class="sticky">
         <div class="active-cons-filters" data-bind="visible: layout() === 'grid'">
-            <input data-bind="value: keyword" data-placeholder="filter by keyword"></input>
-            <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">Filter</button>
+            <input data-bind="value: keyword" placeholder="find..."></input>
+            <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">{% trans "filter" %}</button>
             <button class="btn btn-sm btn-dark reset" data-bind="click: resetKeywordSearch"><i class="fa fa-remove"></i></button>
         </div>
         <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
