@@ -47,6 +47,8 @@ class ActiveConsultationsView(View):
     
     def get(self, request):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
+        order_param = request.GET.get('order')
+        keyword = None if request.GET.get('keyword') == '' or request.GET.get('keyword') == None else (request.GET.get('keyword'))
 
         # active_cons_config = request.GET.get('config')
         # self.active_cons_node_list = active_cons_config['nodes']
@@ -56,7 +58,6 @@ class ActiveConsultationsView(View):
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
 
-        order_param = request.GET.get('order')
         order_config = { # if this is not up-to-date sorting will break
             "Log Date: Newest to Oldest":("Consultation Log Date",False),
             "Log Date: Oldest to Newest":("Consultation Log Date",True),
@@ -79,8 +80,8 @@ class ActiveConsultationsView(View):
                 grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
                 return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
-                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
-                if order_param in order_config.keys() and order_param is not None:
+                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory, keyword)
+                if order_param in order_config.keys() and order_param is not None and keyword is None:
                     try:
                         grouped_tile_list = sorted(
                                                 grouped_tile_list, 
@@ -106,7 +107,7 @@ class ActiveConsultationsView(View):
         return exclude_list
 
 
-    def build_resource_dict(self, consultations, datatype_factory):
+    def build_resource_dict(self, consultations, datatype_factory, keyword=None):
         """
         builds a list that looks like this:
         [
@@ -125,9 +126,7 @@ class ActiveConsultationsView(View):
             ...
         ]
         """
-        
         resources = []
-        # should an insertion sort be implemented here?
         active_cons_list_vals = self.active_cons_node_list.values()
         active_cons_list_keys = self.active_cons_node_list.keys()
         for consultation in consultations:
@@ -144,13 +143,24 @@ class ActiveConsultationsView(View):
                             if self.layout == 'grid' and k == self.active_cons_node_list["Geospatial Location"]:
                                 val = json.loads(val)
                         except Exception as e:
+                            # print('Error:',e)
                             val = v
 
                         resource[str(node.name)] = val
-            for key in active_cons_list_keys:
-                if key not in resource.keys():
-                    resource[key] = ''
-            resources.append(resource)
+
+            if keyword is not None:
+                for v in resource.values():
+                    try:
+                        if keyword.lower() in v.lower():
+                            resources.append(resource)
+                            break
+                    except Exception as e:
+                        continue
+            else:
+                for key in active_cons_list_keys:
+                    if key not in resource.keys():
+                        resource[key] = ''
+                resources.append(resource)
 
         return resources
 
