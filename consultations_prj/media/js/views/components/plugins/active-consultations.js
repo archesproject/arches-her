@@ -191,23 +191,27 @@ define([
                             consultation["mapImageUrl"] = ko.observable(false);
                             consultation["zoom"] = 0, consultation["center"] = [0,0]; //defaults
 
-                            consultation.sources = arches.mapSources;
-                            consultation.sources['app-area-geom'] = {
-                                "type": "geojson",
-                                "data": consultation["Geospatial Location"] ?
-                                    consultation["Geospatial Location"] :
+                            consultation.sources = Object.assign({
+                                'app-area-geom': {
+                                    "type": "geojson",
+                                    "data": consultation["Geospatial Location"] ?
+                                        consultation["Geospatial Location"] :
                                     {
                                         "features": [],
                                         "type":"FeatureCollection"
                                     }
-                            };
+                                }
+                            }, arches.mapSources);
                             if (consultation["Geospatial Location"]) {
                                 if (consultation["Geospatial Location"]["features"].length > 0) {
                                     consultation.bounds = geojsonExtent({
                                         type: 'FeatureCollection',
                                         features: consultation["Geospatial Location"]["features"]
                                     });
-                                    consultation.fitBoundsOptions = { padding: 40 };
+                                    consultation.fitBoundsOptions = { 
+                                        padding: 40,
+                                        maxZoom: 15
+                                    };
                                 }
                             }
                     
