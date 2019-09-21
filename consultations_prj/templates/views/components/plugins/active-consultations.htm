@@ -138,15 +138,15 @@
             </div>
             <!-- /ko -->
 
-            <div data-bind="visible: layout() !== 'grid'">
+            <div class="active-cons-table" data-bind="visible: layout() !== 'grid'">
                 <table data-bind="datatable: tableConfig" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead class="active-consultations-table-header">
                         <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Target Date</th>
-                            <th>Casework Officer</th>
-                            <th>Proposal</th>
+                            <th>{% trans "Name" %}</th>
+                            <th>{% trans "Type" %}</th>
+                            <th>{% trans "Target Date" %}</th>
+                            <th>{% trans "Casework Officer" %}</th>
+                            <th>{% trans "Proposal" %}</th>
                         </tr>
                     </thead>
                 </table>
