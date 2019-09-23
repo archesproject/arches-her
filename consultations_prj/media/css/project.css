@@ -699,7 +699,9 @@ div.workflow-panel {
 }
 
 .active-cons-filters {
-    padding: 0px 10px 10px 8px;
+    padding: 0px 10px 13px 8px;
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 5px;
 }
 
 .active-cons-filters input {
@@ -800,14 +802,14 @@ div.active-cons-map > div > span {
 }
 
 div.active-cons-stubs {
-    border: solid 1px #eaeaea;
+    border-bottom: solid 1px #ddd;
     display: flex;
     padding: 10px;
 }
 
 .active-cons-header.status-ok {
-    background: #7BB800;
-    color: #fff;
+    background: #9EE50F;
+    color: #4A6F00;
     border: 1px solid #649600;
 }
 
@@ -840,7 +842,7 @@ div.active-cons-stubs {
 
 div.active-cons-stub-left {
     flex-grow: 1;
-    border-right: solid 1px #eaeaea;
+    border-right: solid 1px #ddd;
     text-align: center;
     width: 120px;
 }
@@ -899,6 +901,49 @@ div.active-cons-hover-loading {
 
 .active-cons-hover-loading i {
     display: inline-block;
+}
+
+.active-cons-table {
+    padding-top: 5px;
+}
+
+.active-cons-table input {
+    margin-top: -8px;
+}
+
+.active-cons-table label {
+    margin-top: -3px;
+}
+
+.active-cons-table p {
+    max-width: 600px;
+    margin-bottom: 0px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.active-cons-table tbody tr {
+    background: #fff;
+}
+
+.active-cons-table tbody tr:nth-child(odd) {
+    background: #F5FAFE;
+    border-bottom: 1px solid #D3E5F4;
+}
+
+.active-cons-table .btn-group {
+    margin-top: -5px;
+}
+
+.active-cons-table .row:first-child {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.active-cons-table td {
+    margin-top: 3px;
 }
 
 .workflow-main-nav-item {
