@@ -28,8 +28,8 @@
         </div>
 
         <div class="active-consultations-display">
-            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 21px;"></i></button>
-            <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 21px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 21px; margin-top: 3px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 21px; margin-top: -2px;"></i></button>
         </div>
     </div>
 
@@ -138,15 +138,15 @@
             </div>
             <!-- /ko -->
 
-            <div data-bind="visible: layout() !== 'grid'">
+            <div class="active-cons-table" data-bind="visible: layout() !== 'grid'">
                 <table data-bind="datatable: tableConfig" class="table table-striped table-bordered" cellspacing="0" width="100%">
                     <thead class="active-consultations-table-header">
                         <tr>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Target Date</th>
-                            <th>Casework Officer</th>
-                            <th>Proposal</th>
+                            <th>{% trans "Name" %}</th>
+                            <th>{% trans "Type" %}</th>
+                            <th>{% trans "Target Date" %}</th>
+                            <th>{% trans "Casework Officer" %}</th>
+                            <th>{% trans "Proposal" %}</th>
                         </tr>
                     </thead>
                 </table>
