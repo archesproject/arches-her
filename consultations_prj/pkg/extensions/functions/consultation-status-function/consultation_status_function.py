@@ -1,4 +1,5 @@
 import uuid
+import json
 from arches.app.functions.base import BaseFunction
 from arches.app.models import models
 from arches.app.models.tile import Tile
@@ -33,11 +34,12 @@ class ConsultationStatusFunction(BaseFunction):
             "Dormant",
             "Publication & archiving"
         ]
-        datatype_factory = DataTypeFactory()
-        cons_status_list_node = models.Node.objects.get(nodeid=cons_status_list_nodeid)
-        datatype = datatype_factory.get_instance(cons_status_list_node.datatype)
         if cons_status_list_nodeid in tile.data.keys():
+            datatype_factory = DataTypeFactory()
+            cons_status_list_node = models.Node.objects.get(nodeid=cons_status_list_nodeid)
+            datatype = datatype_factory.get_instance(cons_status_list_node.datatype)
             tile_status = datatype.get_display_value(tile, cons_status_list_node)
+
             status = True if tile_status in active_statuses else False
             resourceinstance_id = str(tile.resourceinstance.resourceinstanceid)
             cons_status_tile, created = Tile.objects.get_or_create(
@@ -46,8 +48,8 @@ class ConsultationStatusFunction(BaseFunction):
             )
 
             try:
-                # cons_status_tile.data = json.dumps({ "6a773228-db20-11e9-b6dd-784f435179ea":status })
-                cons_status_tile.data = { "6a773228-db20-11e9-b6dd-784f435179ea":status }
+                cons_status_tile.data = json.dumps({ "6a773228-db20-11e9-b6dd-784f435179ea":status })
+                # cons_status_tile.data = { "6a773228-db20-11e9-b6dd-784f435179ea":status }
             except Exception as e:
                 print('tile.data assignment error: ',e)
             try:
@@ -78,7 +80,8 @@ class ConsultationStatusFunction(BaseFunction):
             )
 
             try:
-                cons_status_tile.data = { "6a773228-db20-11e9-b6dd-784f435179ea":status }
+                cons_status_tile.data = json.dumps({ "6a773228-db20-11e9-b6dd-784f435179ea":status })
+                # cons_status_tile.data = { "6a773228-db20-11e9-b6dd-784f435179ea":status }
             except Exception as e:
                 print('tile.data assignment error: ',e)
             try:
