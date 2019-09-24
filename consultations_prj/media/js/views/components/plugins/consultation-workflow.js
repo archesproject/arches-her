@@ -23,7 +23,7 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-code-fork',
-                    wastebin: {resourceid: null, description: 'A Consulation Instance'}
+                    wastebin: {resourceid: null, description: 'a consulation instance'}
                 },
                 {
                     title: 'Consultation GeoJSON',
