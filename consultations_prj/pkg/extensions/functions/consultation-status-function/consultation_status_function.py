@@ -62,10 +62,6 @@ class ConsultationStatusFunction(BaseFunction):
         return
 
     
-    def get(self):
-        raise NotImplementedError
-
-    
     def delete(self,tile,request):
         cons_status_list_nodeid = "8d41e4d3-a250-11e9-8977-00224800b26d"
         cons_status_bool_nodeid = "6a773228-db20-11e9-b6dd-784f435179ea"
@@ -96,9 +92,39 @@ class ConsultationStatusFunction(BaseFunction):
 
     
     def on_import(self,tile):
-        raise NotImplementedError
+        print("========= on_import ===========")
+        cons_status_list_nodeid = "8d41e4d3-a250-11e9-8977-00224800b26d"
+        cons_status_bool_nodeid = "6a773228-db20-11e9-b6dd-784f435179ea"
+
+        active_statuses = [
+            "Mitigation",
+            "Post-excavation assessment",
+            "Pre-decision assessment/evaluation",
+            "Project Initiation",
+            "Dormant",
+            "Publication & archiving"
+        ]
+        if tile.data is not None:
+            if cons_status_list_nodeid in tile.data.keys():
+                datatype_factory = DataTypeFactory()
+                cons_status_list_node = models.Node.objects.get(nodeid=cons_status_list_nodeid)
+                datatype = datatype_factory.get_instance(cons_status_list_node.datatype)
+                tile_status = datatype.get_display_value(tile, cons_status_list_node)
+
+                status = True if tile_status in active_statuses else False
+                resourceinstance_id = str(tile.resourceinstance.resourceinstanceid)
+                cons_status_tile, created = Tile.objects.get_or_create(
+                    resourceinstance_id=resourceinstance_id,
+                    nodegroup_id=cons_status_bool_nodeid,
+                    defaults = {'data':{"6a773228-db20-11e9-b6dd-784f435179ea":status}}
+                )
+
+        return
 
     
     def after_function_save(self,tile,request):
         raise NotImplementedError
     
+    
+    def get(self):
+        raise NotImplementedError

@@ -32,6 +32,7 @@ class ActiveConsultationsView(View):
     def __init__(self):
         self.cons_details_nodegroupid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
         self.consultation_graphid = '8d41e49e-a250-11e9-9eab-00224800b26d'
+        self.cons_status_bool_nodeid = "6a773228-db20-11e9-b6dd-784f435179ea"
         self.active_cons_node_list = { # if this is not up-to-date sorting will break
             "Geospatial Location":"8d41e4d6-a250-11e9-accd-00224800b26d",
             "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
@@ -42,7 +43,6 @@ class ActiveConsultationsView(View):
             "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
         }
         self.layout = 'grid'
-        self.exclude_statuses = ["Aborted","Completed"]
         self.cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
     
     def get(self, request):
@@ -54,9 +54,12 @@ class ActiveConsultationsView(View):
         # self.active_cons_node_list = active_cons_config['nodes']
         # order_config = active_cons_config['sort config']
         datatype_factory = DataTypeFactory()
-        cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_details_nodegroupid)
+        # cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_details_nodegroupid)
+        cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_status_bool_nodeid)
+        include_list = self.build_include_list(cons_details_tiles, datatype_factory)
         exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
-        filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
+        # filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
+        filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid, resourceinstanceid__in=include_list)
 
         order_config = { # if this is not up-to-date sorting will break
             "Log Date: Newest to Oldest":("Consultation Log Date",False),
@@ -94,14 +97,27 @@ class ActiveConsultationsView(View):
         return HttpResponseNotFound()
 
 
+    def build_include_list(self, tiles, datatype_factory):
+        include_list = []
+        cons_status_node = models.Node.objects.get(nodeid=self.cons_status_bool_nodeid)
+        datatype = datatype_factory.get_instance(cons_status_node.datatype)
+        for tile in tiles:
+            tile_status = datatype.get_display_value(tile, cons_status_node)
+            if tile_status is True:
+                include_list.append(str(tile.resourceinstance.resourceinstanceid))
+
+        return include_list
+
+    
     def build_exclude_list(self, tiles, datatype_factory):
+        exclude_statuses = ["Aborted","Completed"]
         exclude_list = []
         cons_status_node = models.Node.objects.get(nodeid=self.cons_status_node_id)
         datatype = datatype_factory.get_instance(cons_status_node.datatype)
         for tile in tiles:
             if self.cons_status_node_id in tile.data.keys():
                 tile_status = datatype.get_display_value(tile, cons_status_node)
-                if tile_status in self.exclude_statuses:
+                if tile_status in exclude_statuses:
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
 
         return exclude_list
