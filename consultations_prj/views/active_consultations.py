@@ -103,7 +103,7 @@ class ActiveConsultationsView(View):
         datatype = datatype_factory.get_instance(cons_status_node.datatype)
         for tile in tiles:
             tile_status = datatype.get_display_value(tile, cons_status_node)
-            if tile_status is True:
+            if tile_status is not False:
                 include_list.append(str(tile.resourceinstance.resourceinstanceid))
 
         return include_list
