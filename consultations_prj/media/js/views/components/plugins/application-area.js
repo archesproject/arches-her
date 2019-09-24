@@ -26,7 +26,7 @@ define([
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
-                    wastebin: {resourceid: null, description: 'An Application Area Instance'}
+                    wastebin: {resourceid: null, description: 'an application area instance'}
                 },
                 {
                     title: 'Assign Address',

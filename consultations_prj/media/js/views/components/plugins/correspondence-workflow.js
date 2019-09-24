@@ -21,7 +21,7 @@ define([
                     tileid: null,
                     parenttileid: null,
                     icon: 'fa-tag',
-                    wastebin: {tile: null, description: 'A Communication Instance'}
+                    wastebin: {tile: null, description: 'a communication instance'}
                 },
                 {
                     title: 'Correspondence Workflow Complete',
