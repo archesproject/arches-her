@@ -36,6 +36,7 @@
             <!--/ko-->
         </div>
     </div>
+    <div data-bind="style: {display: !!self.displayContent() ? 'inherit' : 'none'}">
     <div class="thumbnail-gallery-container" data-bind="slide: showThumbnails, duration: 100, direction: {direction: 'down'}, easing: 'slide'">
         <div class='show-thumbnails-btn open' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: '{% trans "close" %}'"></div>
         <div class="thumbnail-container" data-bind="gallery: photoGallery.pan, duration: 400, scrolldistance: 100, thumbnailclass: 'gallery-thumbnails'">
@@ -61,8 +62,9 @@
             <div class="thumbnail-gallery-controls right" data-bind="click: function(){photoGallery.updatePan('right')}"><i class="fa fa-angle-right"></i></div>
         </div>
     </div>
-    <div class='show-thumbnails-btn closed' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: '{% trans "View Gallery" %}', fadeVisible: showThumbnails, delay:400, fade: 200"></div>
 
+    <div class='show-thumbnails-btn closed' data-bind="click: function(){showThumbnails(!showThumbnails())}, text: '{% trans "View Gallery" %}', fadeVisible: showThumbnails, delay:400, fade: 200"></div>
+    </div>
 
     <!--ko if: self.displayContent() === undefined -->
     <div class="gallery-controls new-tile">
@@ -255,7 +257,8 @@
                         mouseout: function(){
                             if (self.preview) widget.hovered(null);
                         }
-                    }, visible: widget.visible'></div>
+                    }, visible: widget.visible && self.form.widgetLookup[widget.widget_id()].name !== "newfile-widget" && self.form.widgetLookup[widget.widget_id()].name !== "file-widget"'>
+                </div>
                 </div>
             </form>
             <!--/ko-->
@@ -268,7 +271,7 @@
                 <!--ko if: $parent.getUrl(tile) && tile.selected()-->
             <div class="install-buttons">
                 <!-- ko if: tile && self.deleteTile -->
-                <button class="btn btn-shim btn-labeled btn-lg fa fa-trash" data-bind="click: self.deleteTile, css: {
+                <button class="btn btn-shim btn-labeled btn-lg fa fa-trash" data-bind="click: $parent.removeTile, css: {
                     disabled: (!$parent.card.isWritable && !self.preview),
                     'btn-warning': $parent.card.isWritable
                 }">{% trans 'Delete' %}</button>
