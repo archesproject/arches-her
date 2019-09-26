@@ -42,7 +42,7 @@ class ActiveConsultationsView(View):
             "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d",
             "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
         }
-        self.layout = 'grid'
+        self.exclude_statuses = ["Aborted","Completed"]
         self.cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
     
     def get(self, request):
@@ -79,11 +79,10 @@ class ActiveConsultationsView(View):
 
         if filtered_consultations is not None:
             if page_num == -1:
-                self.layout = 'table'
-                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory)
+                grouped_tile_list = build_resource_dict(filtered_consultations, self.active_cons_node_list, datatype_factory, layout='table')
                 return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
-                grouped_tile_list = self.build_resource_dict(filtered_consultations, datatype_factory, keyword)
+                grouped_tile_list = build_resource_dict(filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword)
                 if order_param in order_config.keys() and order_param is not None and keyword is None:
                     try:
                         grouped_tile_list = sorted(
@@ -108,7 +107,7 @@ class ActiveConsultationsView(View):
 
         return include_list
 
-    
+
     def build_exclude_list(self, tiles, datatype_factory):
         exclude_statuses = ["Aborted","Completed"]
         exclude_list = []
@@ -121,65 +120,6 @@ class ActiveConsultationsView(View):
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
 
         return exclude_list
-
-
-    def build_resource_dict(self, consultations, datatype_factory, keyword=None):
-        """
-        builds a list that looks like this:
-        [
-            {
-                "resourceinstanceid":"[uuid],
-                "node_name_a":"display_val_a",
-                "node_name_b":"display_val_b",
-                ...
-            },
-            {
-                "resourceinstanceid":"[uuid],
-                "node_name_a":"display_val_a",
-                "node_name_b":"display_val_b",
-                ...
-            },
-            ...
-        ]
-        """
-        resources = []
-        active_cons_list_vals = self.active_cons_node_list.values()
-        active_cons_list_keys = self.active_cons_node_list.keys()
-        for consultation in consultations:
-            resource = {}
-            resource['resourceinstanceid'] = consultation.resourceinstanceid
-            consultation.load_tiles()
-            for tile in consultation.tiles:
-                for k, v in tile.data.items():
-                    if k in active_cons_list_vals:
-                        node = models.Node.objects.get(nodeid=k)
-                        try:
-                            datatype = datatype_factory.get_instance(node.datatype)
-                            val = datatype.get_display_value(tile, node)
-                            if self.layout == 'grid' and k == self.active_cons_node_list["Geospatial Location"]:
-                                val = json.loads(val)
-                        except Exception as e:
-                            # print('Error:',e)
-                            val = v
-
-                        resource[str(node.name)] = val
-
-            if keyword is not None:
-                for v in resource.values():
-                    try:
-                        if keyword.lower() in v.lower():
-                            resources.append(resource)
-                            break
-                    except Exception as e:
-                        continue
-            else:
-                for key in active_cons_list_keys:
-                    if key not in resource.keys():
-                        resource[key] = ''
-                resources.append(resource)
-
-        return resources
-
 
     def get_paginated_data(self, grouped_tile_list, page_ct, page_num):
 
@@ -219,3 +159,69 @@ class ActiveConsultationsView(View):
             'start_index':page_results.start_index()
         }
         return JSONResponse({'page_results': page_results.object_list, 'paginator': page_config})
+
+
+def build_resource_dict(consultations, active_cons_node_list, datatype_factory, layout='grid', keyword=None):
+    """
+    builds a list that looks like this:
+    [
+        {
+            "resourceinstanceid":"[uuid],
+            "node_name_a":"display_val_a",
+            "node_name_b":"display_val_b",
+            ...
+        },
+        {
+            "resourceinstanceid":"[uuid],
+            "node_name_a":"display_val_a",
+            "node_name_b":"display_val_b",
+            ...
+        },
+        ...
+    ]
+    """
+    resources = []
+    active_cons_list_vals = active_cons_node_list.values()
+    active_cons_list_keys = active_cons_node_list.keys()
+    for consultation in consultations:
+        resource = {}
+        resource['resourceinstanceid'] = consultation.resourceinstanceid
+        consultation.load_tiles()
+        for tile in consultation.tiles:
+            for nodeid, nodevalue in tile.data.items():
+                if nodeid in active_cons_list_vals:
+                    node = models.Node.objects.get(nodeid=nodeid)
+                    try:
+                        datatype = datatype_factory.get_instance(node.datatype)
+                        val = datatype.get_display_value(tile, node)
+                        if layout == 'grid' and nodeid == active_cons_node_list["Geospatial Location"]:
+                            val = json.loads(val)
+                        if nodeid == active_cons_node_list["Application Area"]:
+                            nodevalue = tile.data[str(node.nodeid)]
+                            id_list = datatype.get_id_list(nodevalue)
+                            value_list = [list(datatype.get_resource_names(resourceId))[0] for resourceId in id_list]
+                            val = {
+                                'displayValue': ','.join(value_list),
+                                'originalValue': ','.join(id_list)
+                            }
+                    except Exception as e:
+                        # print('Error:',e)
+                        val = nodevalue
+
+                    resource[str(node.name)] = val
+
+        if keyword is not None:
+            for v in resource.values():
+                try:
+                    if keyword.lower() in v.lower():
+                        resources.append(resource)
+                        break
+                except Exception as e:
+                    continue
+        else:
+            for key in active_cons_list_keys:
+                if key not in resource.keys():
+                    resource[key] = ''
+            resources.append(resource)
+
+    return resources
