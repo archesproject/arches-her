@@ -11,7 +11,11 @@
 <!-- ko if: !loading() -->
 <div class="hover-feature-title-bar">
     {% block title %}
-    <div class="hover-feature-title">
+    <div class="hover-feature-title" data-bind="css: {
+              'status-ok': (getTargetDays($data['Target Date']) > 7),
+              'status-warning': (getTargetDays($data['Target Date']) <=7 &&
+                                 getTargetDays($data['Target Date']) >= 1),
+              'status-late': (getTargetDays($data['Target Date']) < 1)}">
         <span class="" data-bind="text: displayname"></span>
     </div>
     {% endblock title %}
@@ -20,18 +24,7 @@
     {% block body %}
     <div class="map-popup-content">
         <div class="panel mar-no">
-            <!-- Function Name -->
-            <div class="active-cons-header" data-bind="css: {
-                                          'status-ok': (getTargetDays($data['Target Date']) > 7),
-                                          'status-warning': (getTargetDays($data['Target Date']) <=7 &&
-                                                             getTargetDays($data['Target Date']) >= 1),
-                                          'status-late': (getTargetDays($data['Target Date']) < 1)}">
-                <div class="active-cons-header-title" data-bind="text: Name"></div>
-                <!-- <div data-bind="text: $data['Consultation Type']"></div> -->
-            </div>
-
             <div class="map">
-
                 <div class="active-cons-map">
                     <!-- ko if: !$data["Geospatial Location"] -->
                     <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >{% trans "No Geometry Defined in Consultation" %}</span>
@@ -64,7 +57,7 @@
                     },
                     data: $data['Geospatial Location'],
                     afterRender: function(map) {
-                        setupMapPopup(map);
+                        setupMapPopup(map, bounds);
                     }
                   }">
                 </div>
@@ -114,19 +107,6 @@
                 </div>
             </section>
 
-
-            <div class="panel-footer" style="padding: 0px">
-                <div class="ep-toolbar cons">
-                    <div class="cons-owner-title-panel">
-                        <div class="cons-owner-title" data-bind="text: $data['Casework Officer'] || 'No Casework Officer'"></div>
-                    </div>
-                    <a class="ep-tools ep-tools-right" data-bind="attr: { href: resourceEditorURL + $data['resourceinstanceid'] }">
-                        <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="settings">
-                          <i class="fa fa-cog"></i>
-                        </div>
-                    </a>
-                </div>
-            </div>
         </div>
     </div>
     {% endblock body %}

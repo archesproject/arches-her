@@ -39,7 +39,7 @@ define([
                     data.getTargetDays = function(targetdate){
                         return moment(targetdate).diff(moment().startOf('day'), 'days');
                     };
-                    data.setupMapPopup = function(map) {
+                    data.setupMapPopup = function(map, bounds) {
                         map.on('load', function() {
                             data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
                         });
@@ -132,13 +132,15 @@ define([
                         self.resourceLookup[id].loading(false);
                         self.resourceLookup[id]['Geospatial Location'] = ko.toJS(self.resourceLookup[id]['Geospatial Location']);
                         self.resourceLookup[id]["mapImageUrl"](false);
-                        self.resourceLookup[id]["zoom"] = 0;
+                        self.resourceLookup[id]["zoom"] = 17;
                         self.resourceLookup[id]["center"] = [0,0]; //defaults
-                        var areas = ko.observableArray();
-                        self.resourceLookup[id]['Application Area'].displayValue().split(',').forEach(function(area, index){
-                            areas.push({'display_value': area, 'original_value': self.resourceLookup[id]['Application Area'].originalValue().split(',')[index]})
-                        })
-                        self.resourceLookup[id]['Application Area'] = areas;
+                        if (!!self.resourceLookup[id]['Application Area'].displayValue){
+                            var areas = ko.observableArray();
+                            self.resourceLookup[id]['Application Area'].displayValue().split(',').forEach(function(area, index){
+                                areas.push({'display_value': area, 'original_value': self.resourceLookup[id]['Application Area'].originalValue().split(',')[index]})
+                            })
+                            self.resourceLookup[id]['Application Area'] = areas; 
+                        }
 
                         self.resourceLookup[id].sources = Object.assign({
                             'app-area-geom': {
@@ -152,12 +154,17 @@ define([
                             }
                         }, arches.mapSources);
 
+
                         if (self.resourceLookup[id]["Geospatial Location"]) {
                             if (self.resourceLookup[id]["Geospatial Location"]["features"].length > 0) {
                                 self.resourceLookup[id].bounds = geojsonExtent({
                                     type: 'FeatureCollection',
                                     features: self.resourceLookup[id]["Geospatial Location"]["features"]
                                 });
+                                self.resourceLookup[id]["center"] = [
+                                    (self.resourceLookup[id].bounds[0] + self.resourceLookup[id].bounds[2]) / 2,
+                                    (self.resourceLookup[id].bounds[1] + self.resourceLookup[id].bounds[3]) / 2
+                                ];
                                 self.resourceLookup[id].fitBoundsOptions = {
                                     padding: 40,
                                     maxZoom: 15
@@ -180,31 +187,18 @@ define([
         
         this.onFeatureClick = function(feature, lngLat) {
             var map = self.map();
+            if(!!map.popup){
+                map.popup.remove();
+            }
             self.popup = new mapboxgl.Popup()
                 .setLngLat(lngLat)
                 .setHTML(self.popupTemplate)
                 .addTo(map);
+            map.popup = self.popup;
             self.getPopupData(feature);
-            // _.extend(this.data, popupData);
-            // this.data.getTargetDays = this.getTargetDays;
-            // this.data.Name = 'Test Name';
-            // if(!this.data["Geospatial Location"]) {
-            //     this.data["Geospatial Location"] = {"features": [{"geometry":{"coordinates":[0,0]}}]};
-            //     this.data["zoom"] = 0;
-            // }
-            // if(typeof this.data["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0] != "number") {
-            //     this.data["center"] = this.data["Geospatial Location"]["features"][0]["geometry"]["coordinates"][0][0];
-            // } else {
-            //     this.data["center"] = this.data["Geospatial Location"]["features"][0]["geometry"]["coordinates"];
-            // }
-            // ko.applyBindingsToDescendants(
-            //     this.data,
-            //     self.popup._content
-            // );
             if (map.getStyle()) map.setFeatureState(feature, { selected: true });
             self.popup.on('close', function() {
                 if (map.getStyle()) map.setFeatureState(feature, { selected: false });
-                self.popup = undefined;
             });
         };
     };
