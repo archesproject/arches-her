@@ -1383,39 +1383,22 @@
             ], 
             "color": "rgba(224,47,47,0.67)", 
             "config": {
-                "basemap": "streets", 
-                "bearing": 0, 
-                "centerX": -0.12184067774842333, 
-                "centerY": 51.48877534050908, 
-                "featureColor": "rgba(255,0,0,0.66)", 
-                "featureEditingDisabled": true, 
-                "featureLineWidth": 1, 
-                "featurePointSize": 3, 
-                "geocodePlaceholder": "Search", 
-                "geocodeProvider": "10000000-0000-0000-0000-010000000000", 
-                "geocoderVisible": true, 
-                "geometryTypes": [
-                    {
-                        "id": "Point", 
-                        "text": "Point"
-                    }, 
-                    {
-                        "id": "Line", 
-                        "text": "Line"
-                    }, 
-                    {
-                        "id": "Polygon", 
-                        "text": "Polygon"
-                    }
-                ], 
-                "mapControlsHidden": false, 
-                "maxZoom": 20, 
-                "minZoom": 0, 
-                "overlayConfigs": [], 
-                "overlayOpacity": 0, 
-                "pitch": 0, 
-                "zoom": 11.238790836190386
-            }, 
+                "tabs": [{
+                    "icon":"fa fa-tags",
+                    "name":"Summary Report",
+                    "nodegroup_ids":[
+                        "8d41e4ba-a250-11e9-9b20-00224800b26d",
+                        "8d41e4c0-a250-11e9-a7e3-00224800b26d",
+                        "8d41e4a8-a250-11e9-aff0-00224800b26d",
+                        "58a2b98f-a255-11e9-9a30-00224800b26d",
+                        "8d41e4b7-a250-11e9-9b6c-00224800b26d",
+                        "8d41e4b1-a250-11e9-96d3-00224800b26d"
+                    ],
+                    "side_component": "consultations-status",
+                    "header_component": "report-header-map"
+                }],
+                "activeTabIndex":0
+            },
             "deploymentdate": null, 
             "deploymentfile": null, 
             "description": "Version 0.1; A model to represent activities and information related to the review and evaluation of proposed developments or alterations to a structure.  This model supposes that an official of a government agency must review proposed construction activities and determine whether the activities require conditions/mitigations to conform with local requirements.  This model allows for formal application review and informal (e.g.: pre-application) consultations.", 
@@ -3468,7 +3451,7 @@
             }, 
             "slug": null, 
             "subtitle": "", 
-            "template_id": "50000000-0000-0000-0000-000000000002", 
+            "template_id": "50000000-0000-0000-0000-000000000004", 
             "version": ""
         }
     ]
