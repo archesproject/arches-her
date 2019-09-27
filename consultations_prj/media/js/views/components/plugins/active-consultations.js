@@ -21,19 +21,19 @@ define([
             this.page = ko.observable(1); // pages indexed at 1
             this.orderByOption = ko.observable("");
             this.keyword = ko.observable("");
-            this.searched = ko.observable(false);
+            this.searched = false;
             this.keywordSearch = function() {
                 if(self.keyword() && self.keyword() != "") {
                     self.orderByOption("");
                     self.getConsultations();
-                    self.searched(true);
+                    self.searched = true;
                 }
             };
             this.resetKeywordSearch = function() {
                 self.keyword("");
                 self.orderByOption("");
                 self.getConsultations();
-                self.searched(false);
+                self.searched = false;
             };
             this.activeConsulationConfig = { // could pass this into GET req
                 "nodes":{
