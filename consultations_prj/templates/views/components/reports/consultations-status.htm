@@ -1,0 +1,88 @@
+{% load i18n %}
+
+<div class="tabbed-report-sidepanel-content">
+    <div class="tabbed-report-sidepanel-title">
+        <div class="consultation-status">
+            {% trans "Pre-decision Assessment/Evaluation Only" %}
+        </div>
+        <div class="tabbed-report-sidepanel-subtitle">
+            {% trans "Consultation Status" %}
+        </div>
+    </div>
+    <div class="tabbed-report-sidepanel-main">
+        <h4>{% trans "Key Dates" %}</h4>
+        <div>
+            <dt>{% trans "Logged Date" %}:</dt>
+            <!-- ko component: {
+                name: 'datepicker-widget',
+                params: {
+                    value: logDate,
+                    state: 'display_value'
+                }
+            } -->
+            <!-- /ko -->
+        </div>
+        <div>
+            <dt>{% trans "Due Date" %}:</dt>
+            <!-- ko component: {
+                name: 'datepicker-widget',
+                params: {
+                    value: dueDate,
+                    state: 'display_value'
+                }
+            } -->
+            <!-- /ko -->
+        </div>
+        <div>
+            <dt>{% trans "Completion Date" %}:</dt>
+            <!-- ko component: {
+                name: 'datepicker-widget',
+                params: {
+                    value: completionDate,
+                    state: 'display_value'
+                }
+            } -->
+            <!-- /ko -->
+        </div>
+        <hr>
+        <h4>{% trans "Outcomes" %}</h4>
+        <div>
+            <dt>{% trans "Planning Outcome" %}:</dt>
+            <!-- ko component: {
+                name: 'concept-select-widget',
+                params: {
+                    value: planningOutcome,
+                    state: 'display_value'
+                }
+            } -->
+            <!-- /ko -->
+        </div>
+        <div>
+            <dt>{% trans "Audit Outcome" %}:</dt>
+            <!-- ko component: {
+                name: 'concept-select-widget',
+                params: {
+                    value: auditOutcome,
+                    state: 'display_value'
+                }
+            } -->
+            <!-- /ko -->
+        </div>
+        <hr>
+        <h4>{% trans "References" %}</h4>
+        <!-- ko foreach: references -->
+        <div>
+            <dt>
+                <span data-bind="text: data['8d41e4c9-a250-11e9-b2d4-00224800b26d']"></span>:
+            </dt>
+            <!-- ko component: {
+                name: 'resource-instance-select-widget',
+                params: {
+                    value: data['8d41e4dc-a250-11e9-8e44-00224800b26d'],
+                    state: 'display_value'
+                }
+            } --><!-- /ko -->
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
