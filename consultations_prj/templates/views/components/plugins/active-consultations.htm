@@ -130,8 +130,12 @@
                 </div>
 
                 <!-- Splash Title -->
-                <div class="rr-splash-title">{% trans "Welcome to Arches' Active Consultations" %}</div>
-
+                    <!-- ko ifnot: searched -->
+                    <div class="rr-splash-title">{% trans "Welcome to Arches' Active Consultations" %}</div>
+                    <!-- /ko -->
+                    <!-- ko if: searched -->
+                    <div class="rr-splash-title">{% trans "No Active Consultation Found" %}</div>
+                    <!-- /ko -->
                 <!-- Splash Instructions -->
                 <div class="rr-splash-description">{% trans "There are currently no Active Consultations." %}</div>
                 <div class="rr-splash-description">{% trans "As soon as any Consultations move to Active status they will show up here." %}</div>
