@@ -1,9 +1,14 @@
 {% load i18n %}
 
 <div class="tabbed-report-sidepanel-content">
-    <div class="tabbed-report-sidepanel-title">
+    <div class="tabbed-report-sidepanel-title consultation-status-title" data-bind="css: {
+        'completed': consultationStatus() === '7b3c5855-10f4-4b7f-807b-b68397535613'
+    }">
         <div class="consultation-status">
-            {% trans "Pre-decision Assessment/Evaluation Only" %}
+            <!-- ko component: {
+                name: 'concept-select-widget',
+                params: { value: consultationStatus, state: 'display_value' }
+            } --><!-- /ko -->
         </div>
         <div class="tabbed-report-sidepanel-subtitle">
             {% trans "Consultation Status" %}
