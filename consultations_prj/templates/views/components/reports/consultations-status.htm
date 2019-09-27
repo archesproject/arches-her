@@ -53,18 +53,20 @@
                 params: { value: auditOutcome, state: 'display_value' }
             } --><!-- /ko -->
         </div>
-        <hr>
-        <h4>{% trans "References" %}</h4>
-        <!-- ko foreach: references -->
-            <div>
-                <dt>
-                    <span data-bind="text: identifier"></span>:
-                </dt>
-                <!-- ko component: {
-                    name: 'resource-instance-select-widget',
-                    params: { value: agency, state: 'display_value' }
-                } --><!-- /ko -->
-            </div>
+        <!-- ko if: references().length > 0 -->
+            <hr>
+            <h4>{% trans "References" %}</h4>
+            <!-- ko foreach: references -->
+                <div>
+                    <dt>
+                        <span data-bind="text: identifier"></span>:
+                    </dt>
+                    <!-- ko component: {
+                        name: 'resource-instance-select-widget',
+                        params: { value: agency, state: 'display_value' }
+                    } --><!-- /ko -->
+                </div>
+            <!-- /ko -->
         <!-- /ko -->
     </div>
 </div>
