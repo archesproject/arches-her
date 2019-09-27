@@ -16,6 +16,10 @@ define([
                 return values;
             };
             
+            this.consultationStatus = ko.computed(function() {
+                return getNodeValues('8d41e4d3-a250-11e9-8977-00224800b26d')[0];
+            });
+            
             this.logDate = ko.computed(function() {
                 return getNodeValues('8d41e4cf-a250-11e9-a86d-00224800b26d')[0];
             });
