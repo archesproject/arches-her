@@ -1,7 +1,7 @@
 define([
     'knockout',
     'viewmodels/tabbed-report',
-    'reports/consultations-map',
+    'reports/map-header',
     'reports/consultations-status'
 ], function(ko, TabbedReportViewModel) {
     return ko.components.register('tabbed-report', {
