@@ -41,7 +41,12 @@ define([
                     return ko.unwrap(tile.nodegroup_id) === '8d41e4a2-a250-11e9-82f1-00224800b26d';
                 });
                 
-                return tiles;
+                return tiles.map(function(tile) {
+                    return {
+                        identifier: tile.data['8d41e4c9-a250-11e9-b2d4-00224800b26d'],
+                        agency: tile.data['8d41e4dc-a250-11e9-8e44-00224800b26d']
+                    };
+                });
             });
         },
         template: { require: 'text!templates/views/components/reports/consultations-status.htm' }
