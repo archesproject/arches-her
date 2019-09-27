@@ -1,10 +1,49 @@
 define([
-    'knockout'
-], function(ko) {
+    'knockout',
+    'underscore'
+], function(ko, _) {
     ko.components.register('consultations-status', {
-        viewModel: function() {
-            this.text = 'Consultations status....';
+        viewModel: function(params) {
+            var getNodeValues = function(nodeId) {
+                var values = [];
+                ko.unwrap(params.tiles).forEach(function(tile) {
+                    _.each(tile.data, function(val, key) {
+                        if (key === nodeId) {
+                            values.push(ko.unwrap(val));
+                        }
+                    }, this);
+                }, this);
+                return values;
+            };
+            
+            this.logDate = ko.computed(function() {
+                return getNodeValues('8d41e4cf-a250-11e9-a86d-00224800b26d')[0];
+            });
+            
+            this.dueDate = ko.computed(function() {
+                return getNodeValues('8d41e4cb-a250-11e9-9cf2-00224800b26d')[0];
+            });
+            
+            this.completionDate = ko.computed(function() {
+                return getNodeValues('8d41e4cd-a250-11e9-a25b-00224800b26d')[0];
+            });
+            
+            this.planningOutcome = ko.computed(function() {
+                return getNodeValues('8d41e4e3-a250-11e9-89d8-00224800b26d')[0];
+            });
+            
+            this.auditOutcome = ko.computed(function() {
+                return getNodeValues('8d41e4e4-a250-11e9-9907-00224800b26d')[0];
+            });
+            
+            this.references = ko.computed(function() {
+                var tiles = ko.unwrap(params.tiles).filter(function(tile) {
+                    return ko.unwrap(tile.nodegroup_id) === '8d41e4a2-a250-11e9-82f1-00224800b26d';
+                });
+                
+                return tiles;
+            });
         },
-        template: '<div data-bind="text: text"></div>'
+        template: { require: 'text!templates/views/components/reports/consultations-status.htm' }
     });
 });

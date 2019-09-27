@@ -29,7 +29,6 @@ define([
                 params.fitBoundsOptions = { padding: 40 };
             }
             
-            params.activeTab = false;
             params.sources = Object.assign({
                 "consultations-map-data": {
                     "type": "geojson",
@@ -43,10 +42,14 @@ define([
                 [],
                 true
             );
-            MapComponentViewModel.apply(this, [params]);
+            MapComponentViewModel.apply(this, [Object.assign({},  params,
+                { "activeTab": ko.observable(false) }
+            )]);
             
             featureCollection.subscribe(function(featureCollection) {
-                self.map().getSource('consultations-map').setData(featureCollection);
+                var map = self.map();
+                if (map && map.getStyle()) map.getSource('consultations-map')
+                    .setData(featureCollection);
             });
         },
         template: { require: 'text!templates/views/components/map.htm' }
