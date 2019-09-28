@@ -7,20 +7,38 @@ define([
     'moment',
     'viewmodels/map',
     'geojson-extent',
+    'text!templates/views/components/map-popup.htm',
+    'text!templates/views/components/map-popup-consultations.htm',
     'bindings/mapbox-gl',
     'bindings/sortable'
-], function($, _, arches, ko, mapboxgl, moment, MapViewModel, geojsonExtent) {
+], function($, _, arches, ko, mapboxgl, moment, MapViewModel, geojsonExtent, popupTemplate, popupConsultationsTemplate) {
     var viewModel = function(params){
         var self = this;
         this.data = {};
         this.resourceEditorURL = arches.urls.resource_editor;
         MapViewModel.apply(this, [params]);
 
+        if(window.location.pathname.includes('/consultations/')) {
+            this.popupTemplate = popupConsultationsTemplate;
+        } else {
+            this.popupTemplate = popupTemplate;
+        }
+
+        // this will show the popup
+        this.mapLinkData.subscribe(function(data) {
+            var point = null;
+            if (data.properties.points.length > 0) {
+                point = data.properties.points[0].point;
+                point.lng = point.lon;
+            }
+            this.onFeatureClick(data, point);
+        },this);
+
         this.getPopupData = function(feature) {
             var data = feature.properties;
             var id = data.resourceinstanceid;
             if (id) {
-                if (true || !self.resourceLookup[id]){
+                if (!self.resourceLookup[id]){
                     data = _.defaults(data, {
                         'loading': true,
                         'displayname': '',
@@ -134,7 +152,7 @@ define([
                         self.resourceLookup[id]["mapImageUrl"](false);
                         self.resourceLookup[id]["zoom"] = 17;
                         self.resourceLookup[id]["center"] = [0,0]; //defaults
-                        if (!!self.resourceLookup[id]['Application Area'].displayValue){
+                        if (!!self.resourceLookup[id]['Application Area'] && !!self.resourceLookup[id]['Application Area'].displayValue){
                             var areas = ko.observableArray();
                             self.resourceLookup[id]['Application Area'].displayValue().split(',').forEach(function(area, index){
                                 areas.push({'display_value': area, 'original_value': self.resourceLookup[id]['Application Area'].originalValue().split(',')[index]})
@@ -155,7 +173,7 @@ define([
                         }, arches.mapSources);
 
 
-                        if (self.resourceLookup[id]["Geospatial Location"]) {
+                        if (!!self.resourceLookup[id]["Geospatial Location"]) {
                             if (self.resourceLookup[id]["Geospatial Location"]["features"].length > 0) {
                                 self.resourceLookup[id].bounds = geojsonExtent({
                                     type: 'FeatureCollection',
@@ -196,10 +214,12 @@ define([
                 .addTo(map);
             map.popup = self.popup;
             self.getPopupData(feature);
-            if (map.getStyle()) map.setFeatureState(feature, { selected: true });
-            self.popup.on('close', function() {
-                if (map.getStyle()) map.setFeatureState(feature, { selected: false });
-            });
+            if(feature.source){
+                if (map.getStyle()) map.setFeatureState(feature, { selected: true });
+                self.popup.on('close', function() {
+                    if (map.getStyle()) map.setFeatureState(feature, { selected: false });
+                });
+            }
         };
     };
 
