@@ -1,0 +1,132 @@
+{% load i18n %}
+{% load template_tags %}
+
+<!-- ko if: loading() -->
+<div class="hover-feature-body hover-feature-loading">
+    <i class="fa fa-spin fa-spinner"></i>
+    {% trans "Loading..." %}
+</div>
+<!--/ko-->
+
+<!-- ko if: !loading() -->
+<div class="hover-feature-title-bar">
+    {% block title %}
+    <div class="hover-feature-title" data-bind="css: {
+              'status-ok': (getTargetDays($data['Target Date']) > 7),
+              'status-warning': (getTargetDays($data['Target Date']) <=7 &&
+                                 getTargetDays($data['Target Date']) >= 1),
+              'status-late': (getTargetDays($data['Target Date']) < 1)}">
+        <span class="" data-bind="text: displayname"></span>
+    </div>
+    {% endblock title %}
+</div>
+<div class="hover-feature-body">
+    {% block body %}
+    <div class="map-popup-content">
+        <div class="panel mar-no">
+            <div class="map">
+                <div class="active-cons-map">
+                    <!-- ko if: !$data["Geospatial Location"] -->
+                    <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >{% trans "No Geometry Defined in Consultation" %}</span>
+                    <!-- /ko -->
+                    <!-- ko if: $data["Geospatial Location"] && mapImageUrl() == false -->
+                    <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; left: 90px;" ><i class="fa fa-spin fa-spinner"></i>{% trans " Loading Map" %}</span>
+                    <!-- /ko -->
+                    <img data-bind="attr: {src: mapImageUrl()}, css: {'active-cons-map-disabled': !$data['Geospatial Location']}"></img>
+                    <div class="map-credit">
+                        <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
+                        <span>© Mapbox © OpenStreetMap</span>
+                    </div>
+
+                </div>
+
+                <div id="map" class="relative" style="display:none; height: 200px; opacity: 1;" data-bind="mapboxgl: {
+                    mapOptions: {
+                        style: {
+                            version: 8,
+                            sources: sources,
+                            sprite: sprite,
+                            glyphs: glyphs,
+                            layers: layers,
+                            center: center,
+                            zoom: zoom
+                        },
+                        preserveDrawingBuffer: true,
+                        bounds: bounds,
+                        fitBoundsOptions: fitBoundsOptions,
+                    },
+                    data: $data['Geospatial Location'],
+                    afterRender: function(map) {
+                        setupMapPopup(map, bounds);
+                    }
+                  }">
+                </div>
+            </div>
+
+            <div class="active-cons-stubs" style="padding: 0px;">
+                <div class="active-cons-stub-left">
+                    <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'Date not entered'"></div>
+                    <div class="active-cons-stub-label" data-bind="">Due Date</div>
+                </div>
+                <div class="active-cons-stub-right">
+                    <div class="active-cons-stub-val" data-bind="text: $data['Consultation Type'] || 'Type not entered'"></div>
+                    <div class="active-cons-stub-label" data-bind="">Type</div>
+                </div>
+            </div>
+
+            <section>
+                <div class="title">References</div>
+                <div><span class="popup-label">Application Type: </span><span data-bind="text: $data['Application Type']"></span></div>
+                <div><span class="popup-label">Development Type: </span><span data-bind="text: $data['Development Type']"></span></div>
+                <div><span class="popup-label">Application Area: </span>
+                    <!-- ko foreach: {data: $data['Application Area'], as: 'area'} -->
+                    <span style="text-decoration-line: underline; color: blue; cursor: pointer" data-bind="text: area.display_value, click: function(){window.open( 'report/' + area.original_value)}"></span>
+                    <!-- /ko -->
+                </div>
+            </section>
+
+            <section>
+                <div class="title">Dates</div>
+                <div><span class="popup-label">Log Date: </span><span data-bind="text: $data['Consultation Log Date']"></span></div>
+                <div><span class="popup-label">Due Date: </span><span data-bind="text: $data['Target Date']"></span></div>
+                <div><span class="popup-label">Completion Data: </span><span data-bind="text: $data['Completion Date']"></span></div>
+            </section>
+
+            <section>
+                <div class="title">Contacts</div>
+                <div><span class="popup-label">Casework Officer: </span><span data-bind="text: $data['Casework Officer']"></span></div>
+                <div><span class="popup-label">Planning Officer: </span><span data-bind="text: $data['Planning Officer']"></span></div>
+                <div><span class="popup-label">Owner: </span><span data-bind="text: $data['Owner']"></span></div>
+                <div><span class="popup-label">Applicant: </span><span data-bind="text: $data['Applicant']"></span></div>
+                <div><span class="popup-label">Agent: </span><span data-bind="text: $data['Agent']"></span></div>
+            </section>
+
+            <section>
+                <div class="title">Proposal</div>
+                <div data-bind="html: $data['Proposal'] || 'Proposal not entered'">
+                </div>
+            </section>
+
+        </div>
+    </div>
+    {% endblock body %}
+</div>
+<div class="hover-feature-footer">
+    {% block footer %}
+    <a data-bind="click: function () {
+        window.open(reportURL + resourceinstanceid());
+    }" href="javascript:void(0)">
+        <i class="ion-document-text"></i>
+        {% trans "Report" %}
+    </a>
+    {% if request.user|can_edit_resource_instance %}
+    <a data-bind="click: function () {
+        window.open(editURL + resourceinstanceid());
+    }" href="javascript:void(0)">
+        <i class="ion-ios-refresh-empty"></i>
+        {% trans "Edit" %}
+    </a>
+    {% endif %}
+    {% endblock footer %}
+</div>
+<!--/ko-->
