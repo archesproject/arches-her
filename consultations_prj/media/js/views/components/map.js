@@ -145,8 +145,6 @@ define([
                     self.resourceLookup[id] = data;
                     $.get(arches.urls.resource_descriptors + id, function(data) {
                         ko.mapping.fromJS(data, self.resourceLookup[id]);
-                        //_.extend(data, self.resourceLookup[id]);
-                        console.log(self.resourceLookup[id]);
                         self.resourceLookup[id].loading(false);
                         self.resourceLookup[id]['Geospatial Location'] = ko.toJS(self.resourceLookup[id]['Geospatial Location']);
                         self.resourceLookup[id]["mapImageUrl"](false);
@@ -155,9 +153,9 @@ define([
                         if (!!self.resourceLookup[id]['Application Area'] && !!self.resourceLookup[id]['Application Area'].displayValue){
                             var areas = ko.observableArray();
                             self.resourceLookup[id]['Application Area'].displayValue().split(',').forEach(function(area, index){
-                                areas.push({'display_value': area, 'original_value': self.resourceLookup[id]['Application Area'].originalValue().split(',')[index]})
-                            })
-                            self.resourceLookup[id]['Application Area'] = areas; 
+                                areas.push({'display_value': area, 'original_value': self.resourceLookup[id]['Application Area'].originalValue().split(',')[index]});
+                            });
+                            self.resourceLookup[id]['Application Area'] = areas;
                         }
 
                         self.resourceLookup[id].sources = Object.assign({
