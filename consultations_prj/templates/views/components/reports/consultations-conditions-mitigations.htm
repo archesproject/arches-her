@@ -1,0 +1,44 @@
+{% load i18n %}
+
+<div class="tabbed-report-sidepanel-content">
+    <div class="tabbed-report-sidepanel-title">
+        <h4>Condtions/Mitigations</h4>
+    </div>
+    <div class="tabbed-report-sidepanel-main">
+        <h4>{% trans "Conditions" %}</h4>
+        <!-- ko foreach: conditions -->
+            <div>
+                <a data-bind="attr: {href: '#' + tileid}">
+                    <!-- ko component: {
+                        name: 'concept-select-widget',
+                        params: { value: type, state: 'display_value' }
+                    } --><!-- /ko -->
+                </a>
+            </div>
+        <!-- /ko -->
+        <!-- ko if: conditions().length === 0 -->
+            <div>
+                {% trans "No conditions added" %}
+            </div>
+        <!-- /ko -->
+        <hr>
+        <h4>{% trans "Mitigations" %}</h4>
+        <div>
+            <!-- ko foreach: mitigations -->
+                <div>
+                    <a data-bind="attr: {href: '#' + tileid}">
+                        <!-- ko component: {
+                            name: 'concept-select-widget',
+                            params: { value: type, state: 'display_value' }
+                        } --><!-- /ko -->
+                    </a>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: mitigations().length === 0 -->
+                <div>
+                    {% trans "No mitigations added" %}
+                </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
