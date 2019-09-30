@@ -163,10 +163,10 @@ define([
                                 "type": "geojson",
                                 "data": self.resourceLookup[id]["Geospatial Location"] ?
                                     self.resourceLookup[id]["Geospatial Location"] :
-                                {
-                                    "features": [],
-                                    "type":"FeatureCollection"
-                                }
+                                    {
+                                        "features": [],
+                                        "type":"FeatureCollection"
+                                    }
                             }
                         }, arches.mapSources);
 
