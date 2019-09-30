@@ -8,8 +8,7 @@ define(['jquery',
     'knockout-mapping',
     'view-data',
     'bootstrap-datetimepicker',
-    'plugins/knockout-select2',
-    'views/components/search/search-results-consultations'],
+    'plugins/knockout-select2'],
 function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) {
     var componentName = 'search-results-consultations';
     return ko.components.register(componentName, {
@@ -28,7 +27,6 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
 
                 this.results = ko.observableArray();
                 this.showRelationships = ko.observable();
-                this.mouseoverInstanceId = ko.observable();
                 this.relationshipCandidates = ko.observableArray();
                 this.selectedResourceId = ko.observable(null);
 
