@@ -8,8 +8,7 @@ define(['jquery',
     'knockout-mapping',
     'view-data',
     'bootstrap-datetimepicker',
-    'plugins/knockout-select2',
-    'views/components/search/search-results-consultations'],
+    'plugins/knockout-select2'],
 function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) {
     var componentName = 'search-results-consultations';
     return ko.components.register(componentName, {
@@ -28,7 +27,6 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
 
                 this.results = ko.observableArray();
                 this.showRelationships = ko.observable();
-                this.mouseoverInstanceId = ko.observable();
                 this.relationshipCandidates = ko.observableArray();
                 this.selectedResourceId = ko.observable(null);
 
@@ -86,15 +84,6 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
                         if (result._source.points.length > 0) {
                             point = result._source.points[0].point;
                         }
-                        var mapData = result._source.geometries.reduce(function(fc1, fc2) {
-                            fc1.geom.features = fc1.geom.features.concat(fc2.geom.features);
-                            return fc1;
-                        }, {
-                            "geom": {
-                                "type": "FeatureCollection",
-                                "features": []
-                            }
-                        });
                         this.results.push({
                             displayname: result._source.displayname,
                             resourceinstanceid: result._source.resourceinstanceid,
@@ -114,7 +103,7 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
                                 if (self.selectedTab() !== 'map-filter') {
                                     self.selectedTab('map-filter');
                                 }
-                                self.mapLinkData(mapData.geom);
+                                self.mapLinkData({'properties':result._source});
                             },
                             selected: ko.computed(function() {
                                 return result._source.resourceinstanceid === ko.unwrap(self.selectedResourceId);
