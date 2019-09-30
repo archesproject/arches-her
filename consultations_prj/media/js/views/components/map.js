@@ -43,9 +43,11 @@ define([
                     data.sprite = arches.mapboxSprites;
                     data.glyphs = arches.mapboxGlyphs;
                     data.feature = feature;
-                    data.mapCard = self;
+                    data.closePopup = function(){
+                        self.popup._content.empty();
+                    };
                     data.getTargetDays = function(targetdate){
-                        return moment(targetdate).diff(moment().startOf('day'), 'days');
+                        return moment(targetdate()).diff(moment().startOf('day'), 'days');
                     };
                     data.setupMapPopup = function(map, bounds) {
                         map.on('load', function() {
@@ -179,13 +181,13 @@ define([
                         }
                         ko.applyBindingsToDescendants(
                             self.resourceLookup[id],
-                            self.popup._content
+                            self.popup._content[0]
                         );
                     });
                 } else {
                     ko.applyBindingsToDescendants(
                         self.resourceLookup[id],
-                        self.popup._content
+                        self.popup._content[0]
                     );
                 }
             }
@@ -193,20 +195,12 @@ define([
         
         this.onFeatureClick = function(feature, lngLat) {
             var map = self.map();
-            if(!!map.popup){
-                map.popup.remove();
-            }
-            self.popup = new mapboxgl.Popup()
-                .setLngLat(lngLat)
-                .setHTML(self.popupTemplate)
-                .addTo(map);
-            map.popup = self.popup;
+            self.popup = {};
+            self.popup._content = $('#map-popup');
+            self.popup._content.html(self.popupTemplate);
             self.getPopupData(feature);
             if(feature.source){
                 if (map.getStyle()) map.setFeatureState(feature, { selected: true });
-                self.popup.on('close', function() {
-                    if (map.getStyle()) map.setFeatureState(feature, { selected: false });
-                });
             }
         };
     };

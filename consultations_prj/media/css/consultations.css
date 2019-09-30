@@ -93,3 +93,22 @@ div.final-cons-step-splash > button {
 .map-popup-content .popup-label {
     font-weight: bold;
 }
+
+#map-popup {
+    position: relative;
+    /*top: 58px;*/
+    z-index: 10;
+    /*left: 408px;*/
+    background: white;
+    height: calc(100vh - 96px);
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+    border-right: solid 1px #d6d6d6;
+    border-top: solid 1px #d6d6d6;
+}
+
+#map-popup .hover-feature-body {
+    flex: 1 1 auto;
+    overflow: scroll;
+}
