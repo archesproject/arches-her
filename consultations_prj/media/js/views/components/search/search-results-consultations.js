@@ -43,6 +43,19 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
 
                 this.mapFilter = this.getFilter('map-filter');
                 this.relatedResourcesManager = this.getFilter('related-resources-filter');
+
+                // this will show the popup
+                this.mapLinkData.subscribe(function(data) {
+                    var point = null;
+                    if (data.properties.points.length > 0) {
+                        point = data.properties.points[0].point;
+                        point.lng = point.lon;
+                    }
+                    if(!this.mapFilter){
+                        this.mapFilter = this.getFilter('map-filter');
+                    }
+                    this.mapFilter.onFeatureClick(data, point);
+                },this);
             },
 
             mouseoverInstance: function() {

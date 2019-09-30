@@ -24,16 +24,6 @@ define([
             this.popupTemplate = popupTemplate;
         }
 
-        // this will show the popup
-        this.mapLinkData.subscribe(function(data) {
-            var point = null;
-            if (data.properties.points.length > 0) {
-                point = data.properties.points[0].point;
-                point.lng = point.lon;
-            }
-            this.onFeatureClick(data, point);
-        },this);
-
         this.getPopupData = function(feature) {
             var data = feature.properties;
             var id = data.resourceinstanceid;
