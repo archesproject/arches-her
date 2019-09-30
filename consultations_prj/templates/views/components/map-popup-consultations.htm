@@ -9,16 +9,17 @@
 <!--/ko-->
 
 <!-- ko if: !loading() -->
-<div class="hover-feature-title-bar">
-    {% block title %}
-    <div class="hover-feature-title" data-bind="css: {
+<div class="hover-feature-title-bar" style="border: none;" data-bind="css: {
               'status-ok': (getTargetDays($data['Target Date']) > 7),
               'status-warning': (getTargetDays($data['Target Date']) <=7 &&
                                  getTargetDays($data['Target Date']) >= 1),
               'status-late': (getTargetDays($data['Target Date']) < 1)}">
+    {% block title %}
+    <div class="hover-feature-title">
         <span class="" data-bind="text: displayname"></span>
     </div>
     {% endblock title %}
+    <button class="mapboxgl-popup-close-button" style="height: 25px;" data-bind="click: closePopup" type="button" aria-label="Close popup">×</button>
 </div>
 <div class="hover-feature-body">
     {% block body %}
