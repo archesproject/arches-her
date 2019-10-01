@@ -23,16 +23,16 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <!-- ko if: true == true -->
-                                    <th style="border:1px solid black;">Type</th>
-                                    <th style="border:1px solid black;">Value</th>
+                                    <!-- ko if: card.nodegroupid == "8d41e4c0-a250-11e9-a7e3-00224800b26d" -->
+                                    <th>Type</th>
+                                    <th>Value</th>
                                     <!-- /ko -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- ko foreach: card.widgets -->
                                 <tr style="border:1px solid black;">
-                                    <td style="border:1px solid black;" data-bind="click: function(){console.log(ko.unwrap($data))}, text:$data.label()"></td>
+                                    <td style="border:1px solid black;" data-bind="text:$data.label()"></td>
                                     <td style="border:1px solid black;" data-bind="component: {
                                         name: $data.widgetLookup[$data.widget_id()].name,
                                         params: {
@@ -58,7 +58,7 @@
                         <thead>
                             <tr>
                                 <!-- ko foreach: card.widgets -->
-                                <th style="border:1px solid black;" data-bind="text:$data.label()"></th>
+                                <th data-bind="text:$data.label()"></th>
                                 <!-- /ko -->
                             </tr>
                         </thead>

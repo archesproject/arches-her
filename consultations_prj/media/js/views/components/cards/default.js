@@ -31,7 +31,6 @@ define([
                     i++;
                 }
             }
-            // console.log(ko.unwrap(tileObjArr));
             return tileObjArr;
         };
 
