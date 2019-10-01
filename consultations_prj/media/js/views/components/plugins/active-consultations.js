@@ -6,7 +6,8 @@ define([
     'viewmodels/alert',
     'geojson-extent',
     'bindings/chosen',
-    'bindings/mapbox-gl'
+    'bindings/mapbox-gl',
+    'widgets'
 ], function(ko, arches, $, moment, AlertViewModel, geojsonExtent) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
@@ -199,10 +200,10 @@ define([
                                     "type": "geojson",
                                     "data": consultation["Geospatial Location"] ?
                                         consultation["Geospatial Location"] :
-                                    {
-                                        "features": [],
-                                        "type":"FeatureCollection"
-                                    }
+                                        {
+                                            "features": [],
+                                            "type":"FeatureCollection"
+                                        }
                                 }
                             }, arches.mapSources);
                             if (consultation["Geospatial Location"]) {
