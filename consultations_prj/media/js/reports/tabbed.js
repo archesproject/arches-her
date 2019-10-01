@@ -4,7 +4,8 @@ define([
     'reports/map-header',
     'reports/consultations-status',
     'reports/consultations-site-visit-empty',
-    'reports/consultations-conditions-mitigations'
+    'reports/consultations-conditions-mitigations',
+    'reports/consultations-site-visits-summary'
 ], function(ko, TabbedReportViewModel) {
     return ko.components.register('tabbed-report', {
         viewModel: TabbedReportViewModel,
