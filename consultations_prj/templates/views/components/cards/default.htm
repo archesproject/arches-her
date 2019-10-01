@@ -20,7 +20,7 @@
                 <!-- ko if: card.cardinality == "1" -->
                     <!-- ko foreach: card.tiles, as: 'tile' -->
                     <div>
-                        <table>
+                        <table class="report-tabular-card">
                             <thead>
                                 <tr>
                                     <!-- ko if: card.nodegroupid == "8d41e4c0-a250-11e9-a7e3-00224800b26d" -->
@@ -31,9 +31,9 @@
                             </thead>
                             <tbody>
                                 <!-- ko foreach: card.widgets -->
-                                <tr style="border:1px solid black;">
-                                    <td style="border:1px solid black;" data-bind="text:$data.label()"></td>
-                                    <td style="border:1px solid black;" data-bind="component: {
+                                <tr>
+                                    <td data-bind="text:$data.label()"></td>
+                                    <td data-bind="component: {
                                         name: $data.widgetLookup[$data.widget_id()].name,
                                         params: {
                                             tile: $parent,
@@ -54,7 +54,7 @@
 
                 <!-- ko if: card.cardinality == "n" -->
                 <div>
-                    <table>
+                    <table class="report-tabular-card">
                         <thead>
                             <tr>
                                 <!-- ko foreach: card.widgets -->
@@ -66,7 +66,7 @@
                             <!-- ko foreach: {data: self.getTableData(card.widgets, card.tiles), as: 'rowCells' } -->
                             <tr>
                                 <!-- ko foreach: rowCells -->
-                                <td style="border:1px solid black;" data-bind="component: {
+                                <td data-bind="component: {
                                     name: $data.name,
                                     params: {
                                         node: $data.node,
