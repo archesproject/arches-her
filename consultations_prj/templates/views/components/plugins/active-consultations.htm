@@ -95,12 +95,7 @@
                                 <div class="active-cons-stub-label" data-bind="">Target Date</div>
                             </div>
                             <div class="active-cons-stub-right">
-                                <div class="active-cons-stub-val">
-                                    <!-- ko component: {
-                                        name: 'concept-select-widget',
-                                        params: { value: ko.observable($data['Consultation Type']), state: 'display_value' }
-                                    } --><!-- /ko -->
-                                </div>
+                                <div class="active-cons-stub-val" data-bind="text: $data['Consultation Type'] || 'Type not entered'"></div>
                                 <div class="active-cons-stub-label" data-bind="">Type</div>
                             </div>
                         </div>
@@ -112,12 +107,7 @@
                         <div class="panel-footer" style="padding: 0px">
                             <div class="ep-toolbar cons">
                                 <div class="cons-owner-title-panel">
-                                    <div class="cons-owner-title">
-                                        <!-- ko component: {
-                                            name: 'resource-instance-select-widget',
-                                            params: { value: ko.observable($data['Casework Officer']), state: 'display_value' }
-                                        } --><!-- /ko -->
-                                    </div>
+                                    <div class="cons-owner-title" data-bind="text: $data['Casework Officer'] || 'No Casework Officer'"></div>
                                 </div>
                                 <a class="ep-tools ep-tools-right" data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
                                     <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="settings">
