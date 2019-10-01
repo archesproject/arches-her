@@ -40,6 +40,7 @@
                 <!-- ko foreach: active_items -->
                 <div class="card-grid-item">
                     <div class="panel mar-no">
+                      <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
                         <div class="active-cons-header"
                             data-bind="css: {'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
                                             'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
@@ -47,7 +48,8 @@
                                             'status-late': ($parent.getTargetDays($data['Target Date']) < 1)}">
                             <div class="active-cons-header-title" data-bind="text: $data['Name'] || 'Unnamed Consultation'"></div>
                         </div>
-
+                      </a>
+                      <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
                         <div class="active-cons-map-container">
 
                             <div class="active-cons-map">
@@ -59,12 +61,13 @@
                                 <!-- /ko -->
                                 <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data['Geospatial Location']}"></img>
                                 <div class="map-credit">
-                                    <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
+                                    <span>
+                                        <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a>
+                                    </span>
                                     <span>© Mapbox © OpenStreetMap</span>
                                 </div>
 
                             </div>
-
                             <!-- ko if: $data.mapImageUrl() == false -->
                             <div id="map" class="relative" style="height: 200px; opacity: 0;" data-bind="mapboxgl: {
                                 mapOptions: {
@@ -88,7 +91,9 @@
                             </div>
                             <!-- /ko -->
                         </div>
-
+                      </a>
+                      <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
+                      <div>
                         <div class="active-cons-stubs">
                             <div class="active-cons-stub-left">
                                 <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'Date not entered'"></div>
@@ -109,13 +114,15 @@
                                 <div class="cons-owner-title-panel">
                                     <div class="cons-owner-title" data-bind="text: $data['Casework Officer'] || 'No Casework Officer'"></div>
                                 </div>
-                                <a class="ep-tools ep-tools-right" data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
+                                <!--a class="ep-tools ep-tools-right" data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
                                     <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="settings">
                                       <i class="fa fa-cog"></i>
                                     </div>
-                                </a>
+                                </a-->
                             </div>
                         </div>
+                        </div>
+                        </a>
                     </div>
                 </div>
                 <!-- /ko -->
