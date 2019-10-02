@@ -196,14 +196,6 @@ def build_resource_dict(consultations, active_cons_node_list, datatype_factory, 
                         val = datatype.get_display_value(tile, node)
                         if layout == 'grid' and nodeid == active_cons_node_list["Geospatial Location"]:
                             val = json.loads(val)
-                        if nodeid == active_cons_node_list["Application Area"]:
-                            nodevalue = tile.data[str(node.nodeid)]
-                            id_list = datatype.get_id_list(nodevalue)
-                            value_list = [list(datatype.get_resource_names(resourceId))[0] for resourceId in id_list]
-                            val = {
-                                'displayValue': ','.join(value_list),
-                                'originalValue': ','.join(id_list)
-                            }
                     except Exception as e:
                         # print('Error:',e)
                         val = nodevalue
