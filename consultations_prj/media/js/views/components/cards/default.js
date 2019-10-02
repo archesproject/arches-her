@@ -5,17 +5,16 @@ define([
 
     function viewmodel(params) {
         CardViewModel.apply(this, [params]);
-        var self = this;
 
         this.getTableData = function(widgets, tiles) {
-            var tileObjArr = [[]]
+            var tileObjArr = [[]];
             var tilesArr = ko.unwrap(tiles);
-            var widgets = ko.unwrap(widgets);
+            var widgetsArr = ko.unwrap(widgets);
             var widget = null, tile = null;
             
             for(var i = 0, j = 0; i < tilesArr.length; j++) {
                 if (!tileObjArr[i]) { tileObjArr[i] = []; }
-                widget = widgets[j], tile = tilesArr[i];
+                widget = widgetsArr[j], tile = tilesArr[i];
                 if (tile) {
                     tileObjArr[i][j] = {
                         name: widget.widgetLookup[widget.widget_id()].name,
