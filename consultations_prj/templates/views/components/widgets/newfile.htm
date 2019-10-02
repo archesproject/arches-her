@@ -77,7 +77,7 @@
                                     <!-- ko if: $data.error -->
                                     <span class="dz-error text-danger text-sm" data-bind="text: '{% trans "error" %}'"></span>
                                     <!-- /ko -->
-                                    <span class="text-sm"><a class="">{% trans "View" %}</a></span>
+                                    <span class="text-sm"><a class="" data-bind="attr: {href: ko.unwrap(url) ? url : content }, clickBubble: false, visible: ko.unwrap(url)">{% trans "Download" %}</a></span>
                                 </div>
                                 <div class="file-upload-card-detail-right">
                                     <div class="media-right" data-bind="click: $parent.removeFile">
