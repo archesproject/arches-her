@@ -26,7 +26,17 @@ define([
         constructor: function(options) {
             options = options ? options : {};
             options.viewModel = (options && options.viewModel) ? options.viewModel : {};
-            options.viewModel.navbarClosed = ko.observable(true);
+            if (localStorage.navbarClosedLocal !== undefined) {
+                options.viewModel.navbarClosed = ko.observable(JSON.parse(localStorage.navbarClosedLocal));
+            } else {
+                localStorage.setItem("navbarClosedLocal", false);
+                options.viewModel.navbarClosed = ko.observable(false);
+            };
+
+            options.viewModel.navbarToggle = function(val) {
+                localStorage.setItem("navbarClosedLocal", val);
+                options.viewModel.navbarClosed(val);
+            };
 
             data.graphs.sort(function(left, right) {
                 return left.name.toLowerCase() == right.name.toLowerCase() ? 0 : (left.name.toLowerCase() < right.name.toLowerCase() ? -1 : 1);
