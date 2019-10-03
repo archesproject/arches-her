@@ -14,194 +14,211 @@ define([
 ], function($, _, arches, ko, mapboxgl, moment, MapViewModel, geojsonExtent, popupTemplate, popupConsultationsTemplate) {
     var viewModel = function(params){
         var self = this;
-        this.data = {};
-        this.resourceEditorURL = arches.urls.resource_editor;
+        this.resourceLookup = {};
+
         MapViewModel.apply(this, [params]);
 
-        if(window.location.pathname.includes('/consultations/')) {
-            this.popupTemplate = popupConsultationsTemplate;
-        } else {
-            this.popupTemplate = popupTemplate;
-        }
-
-        this.getPopupData = function(feature) {
-            var data = feature.properties;
-            var id = data.resourceinstanceid;
+        this.getPopupData = function(feature, callback) {
+            var id = feature.properties.resourceinstanceid;
             if (id) {
                 if (!self.resourceLookup[id]){
-                    data = _.defaults(data, {
-                        'loading': true,
-                        'displayname': '',
-                        'graph_name': '',
-                        'map_popup': '',
-                        'resourceEditorURL': arches.urls.resource_editor,
-                        'mapImageUrl': false
-                    });
-                    data = ko.mapping.fromJS(data);
-                    data.reportURL = arches.urls.resource_report;
-                    data.editURL = arches.urls.resource_editor;
-                    data.sprite = arches.mapboxSprites;
-                    data.glyphs = arches.mapboxGlyphs;
-                    data.feature = feature;
-                    data.closePopup = function(){
-                        self.popup._content.empty();
-                    };
-                    data.getTargetDays = function(targetdate){
-                        return moment(targetdate()).diff(moment().startOf('day'), 'days');
-                    };
-                    data.setupMapPopup = function(map, bounds) {
-                        map.on('load', function() {
-                            data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
+                    $.get(arches.urls.resource_descriptors + id, function(descriptorData) {
+                        var data = ko.mapping.fromJS({
+                            'loading': true,
+                            'displayname': '',
+                            'graph_name': '',
+                            'map_popup': '',
+                            'mapImageUrl': false,
+                            'zoom': 17,
+                            'center': [0,0],
                         });
-                    };
-
-                    var color = "#f0c200";
-                    data.layers = arches.mapLayers.find(function(layer){
-                        return layer.addtomap && !layer.isoverlay;
-                    })['layer_definitions'].concat([
-                        {
-                            "id": "app-area-geom-polygon-fill",
-                            "source": "app-area-geom",
-                            "type": "fill",
-                            "filter": ['all',[
-                                "==", "$type", "Polygon"
-                            ]],
-                            "paint": {
-                                "fill-color": color,
-                                "fill-outline-color": color,
-                                "fill-opacity": 0.1
+                        ko.mapping.fromJS(feature.properties, data);
+                        ko.mapping.fromJS(descriptorData, data);
+                        data.loading(false);
+                        data.sprite = arches.mapboxSprites;
+                        data.glyphs = arches.mapboxGlyphs;
+                        data.reportURL = arches.urls.resource_report;
+                        data.editURL = arches.urls.resource_editor;
+                        data.sources= ko.observable(arches.mapSources);
+                        var color = "#f0c200";
+                        data.layers = arches.mapLayers.find(function(layer){
+                            return layer.addtomap && !layer.isoverlay;
+                        })['layer_definitions'].concat([
+                            {
+                                "id": "app-area-geom-polygon-fill",
+                                "source": "app-area-geom",
+                                "type": "fill",
+                                "filter": ['all',[
+                                    "==", "$type", "Polygon"
+                                ]],
+                                "paint": {
+                                    "fill-color": color,
+                                    "fill-outline-color": color,
+                                    "fill-opacity": 0.1
+                                }
+                            }, {
+                                "id": "app-area-geom-polygon-stroke",
+                                "source": "app-area-geom",
+                                "type": "line",
+                                "filter": ['all',[
+                                    "==", "$type", "Polygon"
+                                ]],
+                                "layout": {
+                                    "line-cap": "round",
+                                    "line-join": "round"
+                                },
+                                "paint": {
+                                    "line-color": color,
+                                    "line-width": 2
+                                }
+                            }, {
+                                "id": "app-area-geom-line",
+                                "source": "app-area-geom",
+                                "type": "line",
+                                "filter": ['all',[
+                                    "==", "$type", "LineString"
+                                ]],
+                                "layout": {
+                                    "line-cap": "round",
+                                    "line-join": "round"
+                                },
+                                "paint": {
+                                    "line-color": color,
+                                    "line-width": 2
+                                }
+                            }, {
+                                "id": "app-area-geom-point-stroke",
+                                "source": "app-area-geom",
+                                "type": "circle",
+                                "filter": ['all',[
+                                    "==", "$type", "Point"
+                                ]],
+                                "paint": {
+                                    "circle-radius": 6,
+                                    "circle-opacity": 1,
+                                    "circle-color": "#fff"
+                                }
+                            }, {
+                                "id": "app-area-geom-point",
+                                "source": "app-area-geom",
+                                "type": "circle",
+                                "filter": ['all',[
+                                    "==", "$type", "Point"
+                                ]],
+                                "paint": {
+                                    "circle-radius": 3,
+                                    "circle-color": color
+                                }
                             }
-                        }, {
-                            "id": "app-area-geom-polygon-stroke",
-                            "source": "app-area-geom",
-                            "type": "line",
-                            "filter": ['all',[
-                                "==", "$type", "Polygon"
-                            ]],
-                            "layout": {
-                                "line-cap": "round",
-                                "line-join": "round"
-                            },
+                        ]);
+                        data.layers.unshift({
+                            "id": "background-fill",
+                            "type": "background",
                             "paint": {
-                                "line-color": color,
-                                "line-width": 2
+                                "background-color": "#f2f2f2"
                             }
-                        }, {
-                            "id": "app-area-geom-line",
-                            "source": "app-area-geom",
-                            "type": "line",
-                            "filter": ['all',[
-                                "==", "$type", "LineString"
-                            ]],
-                            "layout": {
-                                "line-cap": "round",
-                                "line-join": "round"
-                            },
-                            "paint": {
-                                "line-color": color,
-                                "line-width": 2
-                            }
-                        }, {
-                            "id": "app-area-geom-point-stroke",
-                            "source": "app-area-geom",
-                            "type": "circle",
-                            "filter": ['all',[
-                                "==", "$type", "Point"
-                            ]],
-                            "paint": {
-                                "circle-radius": 6,
-                                "circle-opacity": 1,
-                                "circle-color": "#fff"
-                            }
-                        }, {
-                            "id": "app-area-geom-point",
-                            "source": "app-area-geom",
-                            "type": "circle",
-                            "filter": ['all',[
-                                "==", "$type", "Point"
-                            ]],
-                            "paint": {
-                                "circle-radius": 3,
-                                "circle-color": color
-                            }
-                        }
-                    ]);
-                    data.layers.unshift({
-                        "id": "background-fill",
-                        "type": "background",
-                        "paint": {
-                            "background-color": "#f2f2f2"
-                        }
-                    });
-
-                    self.resourceLookup[id] = data;
-                    $.get(arches.urls.resource_descriptors + id, function(data) {
-                        ko.mapping.fromJS(data, self.resourceLookup[id]);
-                        self.resourceLookup[id].loading(false);
-                        self.resourceLookup[id]['Geospatial Location'] = ko.toJS(self.resourceLookup[id]['Geospatial Location']);
-                        self.resourceLookup[id]["mapImageUrl"](false);
-                        self.resourceLookup[id]["zoom"] = 17;
-                        self.resourceLookup[id]["center"] = [0,0]; //defaults
-                        if (!!self.resourceLookup[id]['Application Area'] && !!self.resourceLookup[id]['Application Area'].displayValue){
-                            var areas = ko.observableArray();
-                            self.resourceLookup[id]['Application Area'].displayValue().split(',').forEach(function(area, index){
-                                areas.push({'display_value': area, 'original_value': self.resourceLookup[id]['Application Area'].originalValue().split(',')[index]});
+                        });
+                        data.closePopup = function(){
+                            self.popup._content.hide();
+                            self.popupMap.remove();
+                            self.popup._content.empty();
+                        };
+                        data.getTargetDays = function(targetdate){
+                            return moment(targetdate()).diff(moment().startOf('day'), 'days');
+                        };
+                        data.setupMapPopup = function(map) {
+                            self.popupMap = map;
+                            map.on('load', function() {
+                                data["mapImageUrl"](map.getCanvas().toDataURL("image/jpeg"));
                             });
-                            self.resourceLookup[id]['Application Area'] = areas;
+                        };
+                        data['Geospatial Location'] = ko.toJS(data['Geospatial Location']);
+                        data["mapImageUrl"](false);
+                        if (!!data['Application Area'] && !!data['Application Area'].displayValue){
+                            var areas = ko.observableArray();
+                            data['Application Area'].displayValue().split(',').forEach(function(area, index){
+                                areas.push({'display_value': area, 'original_value': data['Application Area'].originalValue().split(',')[index]});
+                            });
+                            data['Application Area'] = areas;
                         }
 
-                        self.resourceLookup[id].sources = Object.assign({
+                        var dataSources = Object.assign({
                             'app-area-geom': {
                                 "type": "geojson",
-                                "data": self.resourceLookup[id]["Geospatial Location"] ?
-                                    self.resourceLookup[id]["Geospatial Location"] :
+                                "data": data["Geospatial Location"] ?
+                                    data["Geospatial Location"] :
                                     {
                                         "features": [],
                                         "type":"FeatureCollection"
                                     }
                             }
                         }, arches.mapSources);
+                        data.sources(dataSources);
 
-
-                        if (!!self.resourceLookup[id]["Geospatial Location"]) {
-                            if (self.resourceLookup[id]["Geospatial Location"]["features"].length > 0) {
-                                self.resourceLookup[id].bounds = geojsonExtent({
+                        if (!!data["Geospatial Location"]) {
+                            if (data["Geospatial Location"]["features"].length > 0) {
+                                var bounds = self.getBounds({
                                     type: 'FeatureCollection',
-                                    features: self.resourceLookup[id]["Geospatial Location"]["features"]
+                                    features: data["Geospatial Location"]["features"]
                                 });
-                                self.resourceLookup[id]["center"] = [
-                                    (self.resourceLookup[id].bounds[0] + self.resourceLookup[id].bounds[2]) / 2,
-                                    (self.resourceLookup[id].bounds[1] + self.resourceLookup[id].bounds[3]) / 2
-                                ];
-                                self.resourceLookup[id].fitBoundsOptions = {
-                                    padding: 40,
-                                    maxZoom: 15
-                                };
+                                data["center"]([
+                                    (bounds[0][0] + bounds[1][0]) / 2,
+                                    (bounds[0][1] + bounds[1][1]) / 2
+                                ]);
                             }
                         }
-                        ko.applyBindingsToDescendants(
-                            self.resourceLookup[id],
-                            self.popup._content[0]
-                        );
+                        self.resourceLookup[id] = data;
+                        callback(self.resourceLookup[id]);
                     });
-                } else {
-                    ko.applyBindingsToDescendants(
-                        self.resourceLookup[id],
-                        self.popup._content[0]
-                    );
+                }else{
+                    callback(self.resourceLookup[id]);
                 }
+
             }
         };
         
         this.onFeatureClick = function(feature, lngLat) {
-            var map = self.map();
-            self.popup = {};
-            self.popup._content = $('#map-popup');
-            self.popup._content.html(self.popupTemplate);
-            self.getPopupData(feature);
-            if(feature.source){
-                if (map.getStyle()) map.setFeatureState(feature, { selected: true });
+            if(!!document.getElementById('map-popup')) {
+                if(!!self.popup){
+                    self.popupMap.remove();
+                    self.popup._content.empty();
+                }
+                self.popup = {};
+                self.popup._content = $('#map-popup');
+                self.popup._content.html(popupConsultationsTemplate);
+                self.getPopupData(feature, function(data){
+                    ko.applyBindingsToDescendants(
+                        data,
+                        self.popup._content[0]
+                    );
+                    self.popup._content.show();
+                });
+            } else {
+                if(!!self.popup){
+                    self.popup.remove();
+                }
+                self.popup = new mapboxgl.Popup();
+                self.popup.setLngLat(lngLat);
+                self.popup.setHTML(popupTemplate);
+                self.popup.addTo(self.map());
+                self.getPopupData(feature, function(data){
+                    ko.applyBindingsToDescendants(
+                        data,
+                        self.popup._content
+                    );
+                });
             }
+
+            if(feature.source){
+                if (self.map().getStyle()){
+                    self.map().setFeatureState(feature, { selected: true });
+                }
+            }
+        };
+
+        this.getBounds = function(geoJson) {
+            var boundsArray = geojsonExtent(geoJson);
+            return [[boundsArray[0], boundsArray[1]], [boundsArray[2], boundsArray[3]]];
         };
     };
 
