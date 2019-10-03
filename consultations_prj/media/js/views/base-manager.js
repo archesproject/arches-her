@@ -26,7 +26,7 @@ define([
         constructor: function(options) {
             options = options ? options : {};
             options.viewModel = (options && options.viewModel) ? options.viewModel : {};
-            var workflows = ['application-area', 'consultation-workflow', 'communication-workflow', 'site-visit', 'correspondence-workflow']
+            var workflows = ['application-area', 'consultation-workflow', 'communication-workflow', 'site-visit', 'correspondence-workflow'];
 
             if (options.viewModel.plugin !== undefined && workflows.includes(options.viewModel.plugin.componentname)) {
                 options.viewModel.navbarClosed = ko.observable(true);
@@ -35,7 +35,7 @@ define([
             } else {
                 localStorage.setItem("navbarClosedLocal", false);
                 options.viewModel.navbarClosed = ko.observable(false);
-            };
+            }
 
             options.viewModel.navbarToggle = function(val) {
                 localStorage.setItem("navbarClosedLocal", val);
