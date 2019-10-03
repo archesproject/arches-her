@@ -1,14 +1,6 @@
 {% load i18n %}
 {% load template_tags %}
 
-<!-- ko if: loading() -->
-<div class="hover-feature-body hover-feature-loading">
-    <i class="fa fa-spin fa-spinner"></i>
-    {% trans "Loading..." %}
-</div>
-<!--/ko-->
-
-<!-- ko if: !loading() -->
 <div class="hover-feature-title-bar" style="border: none;" data-bind="css: {
               'status-ok': (getTargetDays($data['Target Date']) > 7),
               'status-warning': (getTargetDays($data['Target Date']) <=7 &&
@@ -45,20 +37,17 @@
                     mapOptions: {
                         style: {
                             version: 8,
-                            sources: sources,
+                            sources: sources(),
                             sprite: sprite,
                             glyphs: glyphs,
                             layers: layers,
-                            center: center,
-                            zoom: zoom
                         },
-                        preserveDrawingBuffer: true,
-                        bounds: bounds,
-                        fitBoundsOptions: fitBoundsOptions,
+                        center: center,
+                        zoom: zoom,
                     },
                     data: $data['Geospatial Location'],
                     afterRender: function(map) {
-                        setupMapPopup(map, bounds);
+                        setupMapPopup(map);
                     }
                   }">
                 </div>
@@ -130,4 +119,3 @@
     {% endif %}
     {% endblock footer %}
 </div>
-<!--/ko-->
