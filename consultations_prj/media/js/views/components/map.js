@@ -225,7 +225,7 @@ define([
                     });
                     self.popup.on('close', function(){
                         self.searchResultFilter.selectedResourceId('');
-                    })
+                    });
                 }
             }
 
