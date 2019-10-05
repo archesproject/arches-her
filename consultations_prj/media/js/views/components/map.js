@@ -7,11 +7,10 @@ define([
     'moment',
     'viewmodels/map',
     'geojson-extent',
-    'text!templates/views/components/map-popup.htm',
     'text!templates/views/components/map-popup-consultations.htm',
     'bindings/mapbox-gl',
     'bindings/sortable'
-], function($, _, arches, ko, mapboxgl, moment, MapViewModel, geojsonExtent, popupTemplate, popupConsultationsTemplate) {
+], function($, _, arches, ko, mapboxgl, moment, MapViewModel, geojsonExtent, popupConsultationsTemplate) {
     var viewModel = function(params){
         var self = this;
         this.resourceLookup = {};
@@ -167,6 +166,9 @@ define([
                                 ]);
                             }
                         }
+                        
+                        data.mapCard = self;
+                        data.feature = feature;
                         self.resourceLookup[id] = data;
                         callback(self.resourceLookup[id]);
                     });
@@ -199,7 +201,7 @@ define([
                 }
                 self.popup = new mapboxgl.Popup();
                 self.popup.setLngLat(lngLat);
-                self.popup.setHTML(popupTemplate);
+                self.popup.setHTML(this.popupTemplate);
                 self.popup.addTo(self.map());
                 self.getPopupData(feature, function(data){
                     ko.applyBindingsToDescendants(
