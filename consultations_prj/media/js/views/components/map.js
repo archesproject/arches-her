@@ -121,6 +121,7 @@ define([
                             self.popup._content.hide();
                             self.popupMap.remove();
                             self.popup._content.empty();
+                            self.searchResultFilter.selectedResourceId('');
                         };
                         data.getTargetDays = function(targetdate){
                             return moment(targetdate()).diff(moment().startOf('day'), 'days');
@@ -195,6 +196,14 @@ define([
                     );
                     self.popup._content.show();
                 });
+                if(!!this.getFilter){
+                    self.searchResultFilter = this.getFilter('search-results-consultations');
+                    self.searchResultFilter.selectedResourceId(feature.properties.resourceinstanceid);
+                    $('.search-result.selected')[0].scrollIntoView({
+                        behavior: "smooth", // or "auto" or "instant"
+                        block: "start" // or "end"
+                    });
+                }
             } else {
                 if(!!self.popup){
                     self.popup.remove();
@@ -209,7 +218,19 @@ define([
                         self.popup._content
                     );
                 });
+                if(!!this.getFilter){
+                    self.searchResultFilter = this.getFilter('search-results');
+                    self.searchResultFilter.selectedResourceId(feature.properties.resourceinstanceid);
+                    $('.search-listing.selected')[0].scrollIntoView({
+                        behavior: "smooth", // or "auto" or "instant"
+                        block: "start" // or "end"
+                    });
+                    self.popup.on('close', function(){
+                        self.searchResultFilter.selectedResourceId('');
+                    });
+                }
             }
+
 
             if(feature.source){
                 if (self.map().getStyle()){
