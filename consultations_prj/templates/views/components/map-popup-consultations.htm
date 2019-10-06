@@ -1,7 +1,7 @@
 {% load i18n %}
 {% load template_tags %}
 
-<div class="hover-feature-title-bar" style="border: none;" data-bind="css: {
+<div class="hover-feature-title-bar" data-bind="css: {
               'status-ok': (getTargetDays($data['Target Date']) > 7),
               'status-warning': (getTargetDays($data['Target Date']) <=7 &&
                                  getTargetDays($data['Target Date']) >= 1),

@@ -20,6 +20,10 @@
     color: #2e29da;
 }
 
+.cons-search-results-container .search-result.selected {
+    background: #fff;
+}
+
 div.final-cons-step-separator {
     display: flex;
     flex-direction: row;
@@ -95,17 +99,18 @@ div.final-cons-step-splash > button {
 }
 
 #map-popup {
-    position: relative;
-    /*top: 58px;*/
+    position: fixed;
+    top: 101px;
+    bottom: 0px;
     z-index: 10;
-    /*left: 408px;*/
+    left: 449px;
     background: white;
     height: calc(100vh - 96px);
     overflow: scroll;
     display: flex;
     flex-direction: column;
-    border-right: solid 1px #d6d6d6;
-    border-top: solid 1px #d6d6d6;
+    border: none;
+    border-right: 1px solid #BBD1EA;
     display: none;
 }
 
