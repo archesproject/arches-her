@@ -28,7 +28,7 @@
                     <img data-bind="attr: {src: mapImageUrl()}, css: {'active-cons-map-disabled': !$data['Geospatial Location']}"></img>
                     <div class="map-credit">
                         <span>  <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a></span>
-                        <span>© Mapbox © OpenStreetMap</span>
+                        <span class="osm-credit">OpenStreetMap</span>
                     </div>
 
                 </div>
@@ -53,7 +53,7 @@
                 </div>
             </div>
 
-            <div class="active-cons-stubs" style="padding: 0px;">
+            <div class="active-cons-stubs">
                 <div class="active-cons-stub-left">
                     <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'Date not entered'"></div>
                     <div class="active-cons-stub-label" data-bind="">Due Date</div>
