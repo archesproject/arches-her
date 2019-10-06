@@ -64,38 +64,70 @@
                 </div>
             </div>
 
-            <section>
-                <div class="title">References</div>
-                <div><span class="popup-label">Application Type: </span><span data-bind="text: $data['Application Type']"></span></div>
-                <div><span class="popup-label">Development Type: </span><span data-bind="text: $data['Development Type']"></span></div>
-                <div><span class="popup-label">Application Area: </span>
-                    <!-- ko foreach: {data: $data['Application Area'], as: 'area'} -->
-                    <span style="text-decoration-line: underline; color: blue; cursor: pointer" data-bind="text: area.display_value, click: function(){window.open( 'report/' + area.original_value)}"></span>
-                    <!-- /ko -->
-                </div>
-            </section>
+            <div class="cons-summary">
+                <section>
+                    <div class="title">References</div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Application Type: </div>
+                        <div class="popup-value" data-bind="text: $data['Application Type']"></div>
+                    </div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Development Type: </div>
+                        <div class="popup-value" data-bind="text: $data['Development Type']"></div>
+                    </div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Application Area: </div>
+                        <!-- ko foreach: {data: $data['Application Area'], as: 'area'} -->
+                        <div class="popup-link" style="text-decoration-line: underline; color: blue; cursor: pointer" data-bind="text: area.display_value, click: function(){window.open( 'report/' + area.original_value)}"></div>
+                        <!-- /ko -->
+                    </div>
+                </section>
 
-            <section>
-                <div class="title">Dates</div>
-                <div><span class="popup-label">Log Date: </span><span data-bind="text: $data['Consultation Log Date']"></span></div>
-                <div><span class="popup-label">Due Date: </span><span data-bind="text: $data['Target Date']"></span></div>
-                <div><span class="popup-label">Completion Data: </span><span data-bind="text: $data['Completion Date']"></span></div>
-            </section>
+                <section>
+                    <div class="title">Dates</div>
+                    <div>
+                        <span class="popup-label">Log Date: </span>
+                        <span class="popup-value" data-bind="text: $data['Consultation Log Date']"></span>
+                    </div>
+                    <div>
+                        <span class="popup-label">Due Date: </span>
+                        <span class="popup-value" data-bind="text: $data['Target Date']"></span>
+                    </div>
+                    <div>
+                        <span class="popup-label">Completion Data: </span>
+                        <span class="popup-value" data-bind="text: $data['Completion Date']"></span>
+                    </div>
+                </section>
 
-            <section>
-                <div class="title">Contacts</div>
-                <div><span class="popup-label">Casework Officer: </span><span data-bind="text: $data['Casework Officer']"></span></div>
-                <div><span class="popup-label">Planning Officer: </span><span data-bind="text: $data['Planning Officer']"></span></div>
-                <div><span class="popup-label">Owner: </span><span data-bind="text: $data['Owner']"></span></div>
-                <div><span class="popup-label">Applicant: </span><span data-bind="text: $data['Applicant']"></span></div>
-                <div><span class="popup-label">Agent: </span><span data-bind="text: $data['Agent']"></span></div>
-            </section>
+                <section>
+                    <div class="title">Contacts</div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Casework Officer: </div>
+                        <div class="popup-value" data-bind="text: $data['Casework Officer']"></div>
+                    </div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Planning Officer: </div>
+                        <div class="popup-value" data-bind="text: $data['Planning Officer']"></div>
+                    </div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Owner: </div>
+                        <div class="popup-value" data-bind="text: $data['Owner']"></div>
+                    </div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Applicant: </div>
+                        <div class="popup-value" data-bind="text: $data['Applicant']"></div>
+                    </div>
+                    <div class="cons-attribute">
+                        <div class="popup-label">Agent: </div>
+                        <div class="popup-value" data-bind="text: $data['Agent']"></div>
+                    </div>
+                </section>
 
-            <section>
-                <div class="title">Proposal</div>
-                <div data-bind="html: $data['Proposal'] || 'Proposal not entered'">
-                </div>
-            </section>
+                <section>
+                    <div class="title">Proposal</div>
+                    <div class="popup-value" data-bind="html: $data['Proposal'] || 'Proposal not entered'"></div>
+                </section>
+            </div>
 
         </div>
     </div>
