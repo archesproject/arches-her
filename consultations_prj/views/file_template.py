@@ -157,7 +157,7 @@ class FileTemplateView(View):
             "8cc91474-11ce-47d9-b886-f0e3fc49d277":'GLAAS Planning Letter B2 - Predetermination - template.docx', # Letter B2
             "08bb630d-a27b-45bc-a13f-567b428018c5":'GLAAS Planning Letter C - Condition two stage - template.docx' # Letter C
             }
-        for key, value in template_dict.items():
+        for key, value in list(template_dict.items()):
             if key == template_id:
                 return value
 
@@ -200,7 +200,7 @@ class FileTemplateView(View):
 
     def replace_in_letter(self, tiles, template_dict, datatype_factory):
         for tile in tiles:
-            for key, value in template_dict.items():
+            for key, value in list(template_dict.items()):
                 html = False
                 if value in tile.data:
                     my_node = models.Node.objects.get(nodeid=value)
