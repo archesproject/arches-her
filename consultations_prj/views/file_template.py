@@ -25,8 +25,8 @@ import docx
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
-from HTMLParser import HTMLParser
-from htmlentitydefs import name2codepoint
+from html.parser import HTMLParser
+from html.entities import name2codepoint
 from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
