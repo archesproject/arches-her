@@ -34,7 +34,7 @@ class ConsultationStatusFunction(BaseFunction):
             "Publication & archiving"
         ]
         if tile.data is not None:
-            if cons_status_list_nodeid in tile.data.keys():
+            if cons_status_list_nodeid in list(tile.data.keys()):
                 datatype_factory = DataTypeFactory()
                 cons_status_list_node = models.Node.objects.get(nodeid=cons_status_list_nodeid)
                 datatype = datatype_factory.get_instance(cons_status_list_node.datatype)
@@ -67,7 +67,7 @@ class ConsultationStatusFunction(BaseFunction):
         cons_status_bool_nodeid = "6a773228-db20-11e9-b6dd-784f435179ea"
         
         if tile.data is not None:
-            if cons_status_list_nodeid in tile.data.keys():
+            if cons_status_list_nodeid in list(tile.data.keys()):
                 status = False
 
                 resourceinstance_id = str(tile.resourceinstance.resourceinstanceid)
@@ -105,7 +105,7 @@ class ConsultationStatusFunction(BaseFunction):
             "Publication & archiving"
         ]
         if tile.data is not None:
-            if cons_status_list_nodeid in tile.data.keys():
+            if cons_status_list_nodeid in list(tile.data.keys()):
                 datatype_factory = DataTypeFactory()
                 cons_status_list_node = models.Node.objects.get(nodeid=cons_status_list_nodeid)
                 datatype = datatype_factory.get_instance(cons_status_list_node.datatype)

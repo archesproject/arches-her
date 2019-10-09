@@ -83,7 +83,7 @@ class ActiveConsultationsView(View):
                 return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
                 grouped_tile_list = build_resource_dict(filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword)
-                if order_param in order_config.keys() and order_param is not None and keyword is None:
+                if order_param in list(order_config.keys()) and order_param is not None and keyword is None:
                     try:
                         grouped_tile_list = sorted(
                                                 grouped_tile_list, 
@@ -114,7 +114,7 @@ class ActiveConsultationsView(View):
         cons_status_node = models.Node.objects.get(nodeid=self.cons_status_node_id)
         datatype = datatype_factory.get_instance(cons_status_node.datatype)
         for tile in tiles:
-            if self.cons_status_node_id in tile.data.keys():
+            if self.cons_status_node_id in list(tile.data.keys()):
                 tile_status = datatype.get_display_value(tile, cons_status_node)
                 if tile_status in exclude_statuses:
                     exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
@@ -181,14 +181,14 @@ def build_resource_dict(consultations, active_cons_node_list, datatype_factory, 
     ]
     """
     resources = []
-    active_cons_list_vals = active_cons_node_list.values()
-    active_cons_list_keys = active_cons_node_list.keys()
+    active_cons_list_vals = list(active_cons_node_list.values())
+    active_cons_list_keys = list(active_cons_node_list.keys())
     for consultation in consultations:
         resource = {}
         resource['resourceinstanceid'] = consultation.resourceinstanceid
         consultation.load_tiles()
         for tile in consultation.tiles:
-            for nodeid, nodevalue in tile.data.items():
+            for nodeid, nodevalue in list(tile.data.items()):
                 if nodeid in active_cons_list_vals:
                     node = models.Node.objects.get(nodeid=nodeid)
                     try:
@@ -203,7 +203,7 @@ def build_resource_dict(consultations, active_cons_node_list, datatype_factory, 
                     resource[str(node.name)] = val
 
         if keyword is not None:
-            for v in resource.values():
+            for v in list(resource.values()):
                 try:
                     if keyword.lower() in v.lower():
                         resources.append(resource)
@@ -212,7 +212,7 @@ def build_resource_dict(consultations, active_cons_node_list, datatype_factory, 
                     continue
         else:
             for key in active_cons_list_keys:
-                if key not in resource.keys():
+                if key not in list(resource.keys()):
                     resource[key] = ''
             resources.append(resource)
 

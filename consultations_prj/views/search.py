@@ -168,7 +168,7 @@ def get_resource_model_label(result):
 
 
 def search_results(request):
-    has_filters = True if len(request.GET.items()) > 1 is not None else False
+    has_filters = True if len(list(request.GET.items())) > 1 is not None else False
     request.GET = request.GET.copy()
     
     se = SearchEngineFactory().create()
@@ -184,7 +184,7 @@ def search_results(request):
     request.GET['resource-type-filter'] = '[{"graphid":"336d34e3-53c3-11e9-ba5f-dca90488358a","name":"GLHER_Application_Area","inverted":false}, {"graphid":"076f9381-7b00-11e9-8d6b-80000b44d1d9","name":"GLHER_Heritage_Asset","inverted":false}]'
     search_filter_factory = SearchFilterFactory(request)
     try:
-        for filter_type, querystring in request.GET.items() + [('search-results', '')]:
+        for filter_type, querystring in list(request.GET.items()) + [('search-results', '')]:
             search_filter = search_filter_factory.get_filter(filter_type)
             if search_filter:
                 search_filter.append_dsl(search_results_object, permitted_nodegroups, include_provisional)
@@ -203,7 +203,7 @@ def search_results(request):
     request.GET['resource-type-filter'] = '[{"graphid":"8d41e49e-a250-11e9-9eab-00224800b26d","name":"GLHER_Consultation","inverted":false}]'
     search_filter_factory = SearchFilterFactory(request)
     try:
-        for filter_type, querystring in request.GET.items() + [('search-results', '')]:
+        for filter_type, querystring in list(request.GET.items()) + [('search-results', '')]:
             search_filter = search_filter_factory.get_filter(filter_type)
             if search_filter:
                 search_filter.append_dsl(search_results_object, permitted_nodegroups, include_provisional)
@@ -249,7 +249,7 @@ def search_results(request):
 
     if results is not None:
         # allow filters to modify the results
-        for filter_type, querystring in request.GET.items() + [('search-results', '')]:
+        for filter_type, querystring in list(request.GET.items()) + [('search-results', '')]:
             search_filter = search_filter_factory.get_filter(filter_type)
             if search_filter:
                 search_filter.post_search_hook(search_results_object, results, permitted_nodegroups)
@@ -257,7 +257,7 @@ def search_results(request):
         ret = {}
         ret['results'] = results
 
-        for key, value in search_results_object.items():
+        for key, value in list(search_results_object.items()):
             ret[key] = value
 
         ret['reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
