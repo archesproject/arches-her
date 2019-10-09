@@ -25,8 +25,8 @@ import docx
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
-from HTMLParser import HTMLParser
-from htmlentitydefs import name2codepoint
+from html.parser import HTMLParser
+from html.entities import name2codepoint
 from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
@@ -361,7 +361,7 @@ class DocumentHTMLParser(HTMLParser):
             self.run.add_break()
         if tag == "li":
             if self.list_style == 'ul':
-                self.run.add_text(u'● ')
+                self.run.add_text('● ')
             else:
                 self.run.add_text(str(self.ol_counter)+'. ')
                 self.ol_counter += 1
@@ -417,13 +417,13 @@ class DocumentHTMLParser(HTMLParser):
             self.run.add_text(data)
 
     def handle_entityref(self, name):
-        c = unichr(name2codepoint[name])
+        c = chr(name2codepoint[name])
         self.run.add_text(c)
 
     def handle_charref(self, name):
         if name.startswith('x'):
-            c = unichr(int(name[1:], 16))
+            c = chr(int(name[1:], 16))
         else:
-            c = unichr(int(name))
+            c = chr(int(name))
         self.run.add_text(c)
 
