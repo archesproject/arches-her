@@ -73,8 +73,8 @@ class BNGPointToGeoJSON(BaseFunction):
                     "SZ":[4,0],
                     "TV":[5,0]}
 
-        bngnode = self.config[u"bng_node"]
-        geojsonNode = self.config[u"geojson_node"]
+        bngnode = self.config["bng_node"]
+        geojsonNode = self.config["geojson_node"]
 
         
 
@@ -134,7 +134,7 @@ class BNGPointToGeoJSON(BaseFunction):
             The new tile is saved and then the mv_geojson_geoms materialised view is refreshed so the point geometry will be displayed 
             on the Search map.
             '''
-            previously_saved_tiles = Tile.objects.filter(nodegroup_id=self.config[u"geojson_nodegroup"],resourceinstance_id=tile.resourceinstance_id)
+            previously_saved_tiles = Tile.objects.filter(nodegroup_id=self.config["geojson_nodegroup"],resourceinstance_id=tile.resourceinstance_id)
 
 
             if len(previously_saved_tiles) > 0:
@@ -143,11 +143,11 @@ class BNGPointToGeoJSON(BaseFunction):
                     p.save()
             else:
 
-                geoJSONnodegroup = Tile().get_blank_tile_from_nodegroup_id(self.config[u"geojson_nodegroup"],resourceid=tile.resourceinstance_id,parenttile=tile.parenttile)
-                geoJSONnodegroup.data[self.config[u"geojson_node"]] = geometryValueJson
+                geoJSONnodegroup = Tile().get_blank_tile_from_nodegroup_id(self.config["geojson_nodegroup"],resourceid=tile.resourceinstance_id,parenttile=tile.parenttile)
+                geoJSONnodegroup.data[self.config["geojson_node"]] = geometryValueJson
 
-                if self.config[u"geojson_nodegroup"] in geoJSONnodegroup.data:
-                    del geoJSONnodegroup.data[self.config[u"geojson_nodegroup"]]
+                if self.config["geojson_nodegroup"] in geoJSONnodegroup.data:
+                    del geoJSONnodegroup.data[self.config["geojson_nodegroup"]]
 
                 geoJSONnodegroup.save()
 

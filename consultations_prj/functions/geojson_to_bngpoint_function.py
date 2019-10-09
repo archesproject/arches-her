@@ -51,15 +51,15 @@ class GeoJSONToBNGPoint(BaseFunction):
                     "61":"TR", "00":"SV", "10":"SW", "20":"SX",
                     "30":"SY", "40":"SZ", "50":"TV"}
 
-        geojsonnode = self.config[u"geojson_input_node"]     
-        bngnode = self.config[u"bng_output_node"]   
+        geojsonnode = self.config["geojson_input_node"]     
+        bngnode = self.config["bng_output_node"]   
 
         geojsonValue = tile.data[geojsonnode]
         
         if geojsonValue != None:
 
             #Grab a copy of the Geometry collection.
-            geoJsFeatures = geojsonValue[u'features']
+            geoJsFeatures = geojsonValue['features']
 
             # Get the first feature as a GeosGeometry.
             geosGeom_union = GEOSGeometry(json.dumps(geoJsFeatures[0]['geometry']))
@@ -98,7 +98,7 @@ class GeoJSONToBNGPoint(BaseFunction):
 
       
             # Check for previously saved tiles.
-            previously_saved_tiles = Tile.objects.filter(nodegroup_id=self.config[u"bng_output_nodegroup"],resourceinstance_id=tile.resourceinstance_id)
+            previously_saved_tiles = Tile.objects.filter(nodegroup_id=self.config["bng_output_nodegroup"],resourceinstance_id=tile.resourceinstance_id)
 
             # Update pre-existing tiles, or Create new one.
             if len(previously_saved_tiles) > 0:
@@ -106,7 +106,7 @@ class GeoJSONToBNGPoint(BaseFunction):
                     p.data[bngnode] = gridref
                     p.save()
             else:
-                bngNnodegroup = Tile().get_blank_tile_from_nodegroup_id(self.config[u"bng_output_nodegroup"],resourceid=tile.resourceinstance_id,parenttile=tile.parenttile)
+                bngNnodegroup = Tile().get_blank_tile_from_nodegroup_id(self.config["bng_output_nodegroup"],resourceid=tile.resourceinstance_id,parenttile=tile.parenttile)
                 bngNnodegroup.data[bngnode] = gridref
                 bngNnodegroup.save()
 
