@@ -136,8 +136,8 @@ class ActiveConsultationsView(View):
         page_ct = paginator.num_pages
         pages = [page_num]
         if paginator.num_pages > 1: # all below creates abridged page list UI
-            before = range(1, page_num)
-            after = range(page_num+1, paginator.num_pages+1)
+            before = list(range(1, page_num))
+            after = list(range(page_num+1, paginator.num_pages+1))
             default_ct = 2
             ct_before = default_ct if len(after) > default_ct else default_ct*2-len(after)
             ct_after = default_ct if len(before) > default_ct else default_ct*2-len(before)
