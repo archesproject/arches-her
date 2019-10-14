@@ -144,7 +144,7 @@ class FileTemplateView(View):
         if post_resp.status_code == 200:
             return JSONResponse({'tile':tile, 'status':'success' })
 
-        return HttpResponseNotFound("Error: "+post_resp.status_code)
+        return HttpResponseNotFound(post_resp.status_code)
 
 
     def get_template_path(self, template_id):
