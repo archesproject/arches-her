@@ -27,24 +27,40 @@
                                     <th>Type</th>
                                     <th>Value</th>
                                     <!-- /ko -->
+                                    <!-- ko if: card.nodegroupid == "8d41e4b1-a250-11e9-96d3-00224800b26d" -->
+                                    <th>Document Name</th>
+                                    <th>Size</th>
+                                    <!-- /ko -->
                                 </tr>
                             </thead>
                             <tbody>
                                 <!-- ko foreach: card.widgets -->
-                                <tr>
-                                    <td data-bind="text:$data.label()"></td>
-                                    <td data-bind="component: {
-                                        name: $data.widgetLookup[$data.widget_id()].name,
-                                        params: {
-                                            tile: $parent,
-                                            node: $data.node,
-                                            config: $data.config,
-                                            label: $data.label(),
-                                            value: $parent.data[$data.attributes.node_id()],
-                                            state: 'display_value',
-                                        }
-                                    }"></td>
-                                </tr>
+                                <!-- <tr> -->
+                                    <!-- ko if: card.nodegroup_id() == "8d41e4b1-a250-11e9-96d3-00224800b26d" -->
+                                        <!-- ko foreach: $parent.data[$data.attributes.node_id()]() -->
+                                        <tr>
+                                            <td data-bind="text:$data.name"></td>
+                                            <td data-bind="text:self.formatSize($data.size), click: function(){console.log($parent.data[$data.attributes.node_id()]());}"></td>
+                                        </tr>
+                                        <!-- /ko -->
+                                    <!-- /ko -->
+                                    <!-- ko if: card.nodegroup_id() != "8d41e4b1-a250-11e9-96d3-00224800b26d" -->
+                                    <tr>
+                                        <td data-bind="text:$data.label()"></td>
+                                        <td data-bind="component: {
+                                            name: $data.widgetLookup[$data.widget_id()].name,
+                                            params: {
+                                                tile: $parent,
+                                                node: $data.node,
+                                                config: $data.config,
+                                                label: $data.label(),
+                                                value: $parent.data[$data.attributes.node_id()],
+                                                state: 'display_value',
+                                            }
+                                        }, click: function(){console.log(card);}"></td>
+                                    </tr>
+                                    <!-- /ko -->
+                                <!-- </tr> -->
                                 <!-- /ko -->
                             </tbody>
                         </table>
