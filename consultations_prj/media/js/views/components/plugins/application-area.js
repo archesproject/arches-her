@@ -63,7 +63,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    icon: 'fa-map-marker'
+                    icon: 'fa-bank'
                 },
                 {
                     title: 'Area Description',
