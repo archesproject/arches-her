@@ -102,7 +102,7 @@ class FileTemplateView(View):
         host = request.get_host()
 
         self.doc.save(new_file_path)
-        saved_file = open(new_file_path, 'rt')
+        saved_file = open(new_file_path, 'rb')
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
         file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
