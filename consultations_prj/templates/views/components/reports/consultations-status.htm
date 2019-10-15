@@ -19,9 +19,9 @@
     <div class="tabbed-report-sidepanel-main">
         <section class="sidebar-section">
             <h4>{% trans "Key Dates" %}</h4>
-            <div class="">
-                <div class="">{% trans "Logged Date" %}:
-                    <span class="">
+            <div class="sidebar-single-line-group">
+                <div class="sidebar-single-line-type">{% trans "Logged Date" %}:
+                    <span class="sidebar-single-line-value">
                     <!-- ko component: {
                         name: 'datepicker-widget',
                         params: { value: logDate, state: 'display_value' }
@@ -29,9 +29,9 @@
                     </span>
                 </div>
             </div>
-            <div class="">
-                <div class="">{% trans "Due Date" %}:
-                    <span class="">
+            <div class="sidebar-single-line-group">
+                <div class="sidebar-single-line-type">{% trans "Due Date" %}:
+                    <span class="sidebar-single-line-value">
                     <!-- ko component: {
                         name: 'datepicker-widget',
                         params: { value: dueDate, state: 'display_value' }
@@ -39,9 +39,9 @@
                     </span>
                 </div>
             </div>
-            <div class="">
-                <div class="">{% trans "Completion Date" %}:
-                    </span class="">
+            <div class="sidebar-single-line-group">
+                <div class="sidebar-single-line-type">{% trans "Completion Date" %}:
+                    </span class="sidebar-single-line-value">
                     <!-- ko component: {
                         name: 'datepicker-widget',
                         params: { value: completionDate, state: 'display_value' }
@@ -52,18 +52,18 @@
         </section>
         <section class="sidebar-section">
             <h4>{% trans "Outcomes" %}</h4>
-            <div class="">
-                <div class="">{% trans "Planning Outcome" %}:</div>
-                <div class="">
+            <div class="sidebar-double-line-group">
+                <div class="sidebar-double-line-type">{% trans "Planning Outcome" %}:</div>
+                <div class="sidebar-double-line-value">
                 <!-- ko component: {
                     name: 'concept-select-widget',
                     params: { value: planningOutcome, state: 'display_value' }
                 } --><!-- /ko -->
                 </div>
             </div>
-            <div class="">
-                <div class="">{% trans "Audit Outcome" %}:</div>
-                <div class="">
+            <div class="sidebar-double-line-group">
+                <div class="sidebar-double-line-type">{% trans "Audit Outcome" %}:</div>
+                <div class="sidebar-double-line-value">
                 <!-- ko component: {
                     name: 'concept-select-widget',
                     params: { value: auditOutcome, state: 'display_value' }
@@ -76,15 +76,15 @@
         <section class="sidebar-section">
             <h4>{% trans "References" %}</h4>
             <!-- ko foreach: references -->
-            <div class="">
-                <div class="">
+            <div class="sidebar-double-line-group">
+                <div class="sidebar-double-line-type">
                 <!-- ko component: {
                     name: 'resource-instance-select-widget',
                     params: { value: agency, state: 'display_value' }
                 } --><!-- /ko -->
                 </div>
-                <div class="">
-                    <span data-bind="text: identifier"></span>:
+                <div class="sidebar-double-line-value">
+                    <span data-bind="text: identifier"></span>
                 </div>
             </div>
             <!-- /ko -->
