@@ -6,7 +6,8 @@ define([
     'reports/consultations-site-visit-empty',
     'reports/consultations-conditions-mitigations',
     'reports/consultations-site-visits-summary',
-    'reports/consultations-communications-summary'
+    'reports/consultations-communications-summary',
+    'reports/consultations-site-visit-main'
 ], function(ko, TabbedReportViewModel) {
     return ko.components.register('tabbed-report', {
         viewModel: TabbedReportViewModel,
