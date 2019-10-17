@@ -16,7 +16,7 @@ uuid_regex = settings.UUID_REGEX
 urlpatterns = [
     url(r'^consultations/search$', search.SearchView.as_view(), name="search_home_consultations"),
     url(r'^consultations/search/resources$', search.search_results, name="search_results"),
-    url(r'^consultations/', include('arches.urls', namespace='consultations')),
+    url(r'^consultations/', include('arches.urls')),
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
     url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
