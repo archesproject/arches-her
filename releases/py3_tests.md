@@ -194,10 +194,10 @@ Assigned to:
 Assigned to:
 
 | Test Subject               | Chrome | Firefox | UI  | Notes |
-| -------------------------- | :----: | :----: | :-----: | :--: | --- | ----- |
-| consultation_status_function        |:white_check_mark:|    ?   |    ?    |   ?  | ?   | ?    |
-| bngpoint_to_geojson_function        |  ?  |    ?   |    ?    |   ?  | ?   | ?    |
-| geojson_to_bngpoint_function        |  ?  |    ?   |    ?    |   ?  | ?   | ?    |
+| -------------------------- | :----: | :----: | :-----: | :--: |
+| consultation_status_function        |:white_check_mark:|    ?   |    ?    |   ?  |
+| bngpoint_to_geojson_function        |  ?  |    ?   |    ?    |   ?  |
+| geojson_to_bngpoint_function        |  ?  |    ?   |    ?    |   ?  |
 
 
 * * * 
@@ -210,8 +210,8 @@ Confirm that the user is able to edit the following data types.
 Assigned to: 
 
 | Test Subject           | Chrome | Firefox | UI  | Notes |
-| ---------------------- | :----: | :----: | :-----: | :--: | --- | ----- |
-| bngcentrepoint                 |  ?  |    ?   |    ?    |   ?  | ?   | -     |
+| ---------------------- | :----: | :----: | :-----: | :--: |
+| bngcentrepoint                 |  ?  |    ?   |    ?    |   ?  |
 
 * * *
 
