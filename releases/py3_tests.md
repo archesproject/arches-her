@@ -21,11 +21,11 @@ When doing a test pass, consider using these status indicators:
 
 ## Install
 
-Assigned to: Alexei
+Assigned to:
 
 | Test Subject                                                   | Chrome | Firefox | UI  | Notes |
-| -------------------------------------------------------------- | :----: | :----: | :-----: | :--: | --- | ----- |
-| Confirm that upgrading from the previous release is issue free |:white_check_mark:|:white_check_mark:|:white_check_mark:|   ?   | ?   | -     |
+| -------------------------------------------------------------- | :----: | :----: | :-----: | :--: |
+| Confirm that upgrading from the previous release is issue free |:white_check_mark:|:white_check_mark:|:white_check_mark:|   ?   |
 
 * * *
 
