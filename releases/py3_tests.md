@@ -29,6 +29,23 @@ Assigned to:
 
 * * *
 
+## Menu Items
+
+Assigned to:
+
+| Test Subject                                                   | Chrome | Firefox | UI  | Notes |
+| -------------------------------------------------------------- | :----: | :----: | :-----: | :--: |
+| Active Consultations takes user to Active Consultations        |:white_check_mark:|  ? |  ?  |   ?   |
+| New takes user to Initialize Workflow                          |:white_check_mark:|  ? |  ?  |   ?   |
+| Find takes user to Search                                      |:white_check_mark:|  ? |  ?  |   ?   |
+| Dashboards takes user to ???                                   |  ?  |  ? |  ?  |   ?   |
+| Manage takes user to Core Arches Resource Manager, Core Arches nav-bar (permission level?)  |  ?  |  ? |  ?  |   ?   |
+| Help takes user to ???                                         |  ?  |  ? |  ?  |   ?   |
+| About takes user to ???                                        |  ?  |  ? |  ?  |   ?   |
+| Clicking Consultations in top-left corner collapses nav        |:white_check_mark:|  ? |  ?  |   ?   |
+
+* * *
+
 ## Active Consultations
 
 Assigned to: 
@@ -40,7 +57,7 @@ Assigned to:
 | User sort by Consultation Type (A-Z, Z-A)                                |:white_check_mark:|    ?   |    ?    |   ?  |
 | User sort by Consultation Name (A-Z, Z-A)                                |:white_check_mark:|    ?   |    ?    |   ?  |
 | User can filter by keyword                                               |:white_check_mark:|    ?   |    ?    |   ?  |
-| User (+resource editor privileges) can edit consultation on click        |:white_check_mark:|    ?   |    ?    |   ?  |
+| User (+resource editor privileges) can edit consultation on click        |  ?  |    ?   |    ?    |   ?  |
 
 * * *
 
