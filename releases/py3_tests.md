@@ -154,7 +154,7 @@ Assigned to:
 | Step 4: Recommendations - User can text to Recommendations                                    |:white_check_mark:|    ?   |    ?    |   ?  |
 | Step 5: Photos (Upload) - User can upload only 1 photo                                        |  ?  |    ?   |    ?    |   ?  |
 | Step 5: Photos (Upload) - User can delete photo                                               |:white_check_mark:|    ?   |    ?    |   ?  |
-| Step 6: Photos (Edit) - User can Edit Photo ???                                               |  ?  |    ?   |    ?    |   ?  |
+| Step 6: Photos (Edit) - User can edit name and caption of photo                               |  ?  |    ?   |    ?    |   ?  |
 | Final Step - User can jump to resource                                                        |:white_check_mark:|    ?   |    ?    |   ?  |
 | Final Step - User can start new workflow                                                      |:white_check_mark:|    ?   |    ?    |   ?  |
 | All Steps - User can navigate backward and forward already-completed steps                    |:white_check_mark:|    ?   |    ?    |   ?  |
