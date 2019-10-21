@@ -27,8 +27,8 @@
                                     <th>Type</th>
                                     <th>Value</th>
                                     <!-- /ko -->
-                                    <!-- ko if: card.nodegroupid == "8d41e4b1-a250-11e9-96d3-00224800b26d" -->
-                                    <th>Document Name</th>
+                                    <!-- ko if: card.nodegroupid == "8d41e4b1-a250-11e9-96d3-00224800b26d" --> <!-- file-list nodegroup in consultation -->
+                                    <th data-bind="click: function(){console.log(self);}">Document Name</th>
                                     <th>Size</th>
                                     <!-- /ko -->
                                 </tr>
@@ -36,7 +36,7 @@
                             <tbody>
                                 <!-- ko foreach: card.widgets -->
                                 <!-- <tr> -->
-                                    <!-- ko if: card.nodegroup_id() == "8d41e4b1-a250-11e9-96d3-00224800b26d" -->
+                                    <!-- ko if: card.nodegroup_id() == "8d41e4b1-a250-11e9-96d3-00224800b26d" --> <!-- file-list nodegroup in consultation -->
                                         <!-- ko foreach: $parent.data[$data.attributes.node_id()]() -->
                                         <tr>
                                             <td data-bind="text:$data.name"></td>
