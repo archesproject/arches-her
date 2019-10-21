@@ -34,17 +34,17 @@ define([
             return tileObjArr;
         };
 
+        this.formatSize = function(size) {
+            var bytes = size;
+            if(bytes == 0) return '0 Byte';
+            var k = 1024;
+            var dm = 2;
+            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            var i = Math.floor(Math.log(bytes) / Math.log(k));
+            return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i]);
+        };
+    
     }
-
-    this.formatSize = function(size) {
-        var bytes = size;
-        if(bytes == 0) return '0 Byte';
-        var k = 1024;
-        var dm = 2;
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
-        var i = Math.floor(Math.log(bytes) / Math.log(k));
-        return (parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i]);
-    };
 
     return ko.components.register('default-card', {
         viewModel: viewmodel,
