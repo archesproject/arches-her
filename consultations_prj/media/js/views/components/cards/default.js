@@ -24,6 +24,7 @@ define([
                         value: tile.data[widget.node_id()],
                         tile: tile
                     };
+                    if(i == tilesArr.length - 1) { i++; }
                 }
                 if(j >= 1) { 
                     j = -1;
