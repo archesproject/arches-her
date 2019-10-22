@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-
+from pprint import pprint
 from arches.app.models import models
 from arches.app.models.system_settings import settings
 from arches.app.models.resource import Resource
@@ -31,42 +31,27 @@ class IndexView(TemplateView):
 
     template_name = ''
 
-    def get_context_data(self, **kwargs):
-        context = super(IndexView, self).get_context_data(**kwargs)
+    def get(self, request):
+        context = {}
+        # context = super(IndexView, self).get_context_data(**kwargs)
         context['system_settings_graphid'] = settings.SYSTEM_SETTINGS_RESOURCE_MODEL_ID
         context['graph_models'] = []
         context['graphs'] = '[]'
         context['plugins'] = []
+        context['main_script'] = 'index'
+        my_plugins = ['active-consultations','init-workflow']
         print('hello world')
+        # figure out why plugins isn;t passing the if
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
-            print('iter plugins')
-            if self.request.user.has_perm('view_plugin', plugin):
+        
+            print(plugin.slug)
+            if plugin.slug in my_plugins:
+                pprint(plugin)
                 context['plugins'].append(plugin)
-        # context['createable_resources'] = JSONSerializer().serialize(
-        #     get_createable_resource_types(self.request.user),
-        #     exclude=['functions',
-        #              'ontology',
-        #              'subtitle',
-        #              'color',
-        #              'isactive',
-        #              'isresource',
-        #              'version',
-        #              'deploymentdate',
-        #              'deploymentfile',
-        #              'author'])
-        # context['nav'] = {
-        #     'icon': 'fa fa-chevron-circle-right',
-        #     'title': '',
-        #     'help': {
-        #         # title:'',template:'' (leave this commented out)
-        #     },
-        #     'menu': False,
-        #     'search': True,
-        #     'res_edit': False,
-        #     'login': True,
-        #     'print': False,
-        # }
-        context['user_is_reviewer'] = self.request.user.groups.filter(name='Resource Reviewer').exists()
+
+        context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
         context['app_name'] = settings.APP_NAME
-        return render(self.request,'index.htm',context)
+
+        return render(request, 'index.htm', context)
+
 

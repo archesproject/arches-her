@@ -35,5 +35,5 @@ urlpatterns = [
     url(r'^consultations/plugins/correspondence-workflow', PluginView.as_view(), name='correspondence-workflow'),
     url(r'^consultations/plugins/communication-workflow', PluginView.as_view(), name='communication-workflow'),
     url(r'^consultations/plugins/init-workflow', PluginView.as_view(), name='init-workflow'),
-    # url(r'^consultations/index', IndexView.as_view(), name='index')
+    url(r'^home/', IndexView.as_view(), name='index')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
