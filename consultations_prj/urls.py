@@ -4,6 +4,7 @@ from django.conf import settings
 from django.conf.urls.static import static
 from consultations_prj.views.main import ConsultationView
 from consultations_prj.views.file_template import FileTemplateView
+from consultations_prj.views.index import IndexView
 from consultations_prj.views import search
 from django.views.generic import RedirectView
 from consultations_prj.views.resource import ResourceDescriptors
@@ -34,4 +35,5 @@ urlpatterns = [
     url(r'^consultations/plugins/correspondence-workflow', PluginView.as_view(), name='correspondence-workflow'),
     url(r'^consultations/plugins/communication-workflow', PluginView.as_view(), name='communication-workflow'),
     url(r'^consultations/plugins/init-workflow', PluginView.as_view(), name='init-workflow'),
+    # url(r'^consultations/index', IndexView.as_view(), name='index')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

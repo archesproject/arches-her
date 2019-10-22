@@ -70,24 +70,23 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <div class="menu-container">
                     <ul class="nav navbar-nav cons-splash-list">
-                        {% if user|can_create_resource_instance %}
-                        <li class="page-scroll">
-                            <a href="{% url 'init-workflow' %}">{% trans "New" %}</a>
-                        </li>
-                        {% endif %}
-                        {% if user.is_authenticated and user.username != 'anonymous' %}
-                        <li class="page-scroll">
-                            <a href="{% url 'active-consultations' %}">{% trans "Active" %}</a>
-                        </li>
-                        {% endif %}
                         <li class="page-scroll">
                             <a href="{% url 'search_home_consultations' %}">{% trans "Find" %}</a>
                         </li>
-                        {% if user|can_create_resource_instance %}
+                        {% if user|can_create_resource_instance and user.username != 'anonymous' %}
                         <li class="page-scroll">
                             <a href="{% url 'standard' %}" target="_blank">{% trans "Manage" %}</a>
                         </li>
                         {% endif %}
+
+                        {% for p in plugins %}
+                        {% if user.is_authenticated and user.username != 'anonymous'  %}
+                        <li class="page-scroll">
+                            <a href="{% url p.name %}">{% trans p.name %}</a>
+                        </li>
+                        {% endif %}
+                        {% endfor %}
+                        
                         <li class="page-scroll">
                             {% if user.username == 'anonymous' %}
                                 <a class="application-login" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
