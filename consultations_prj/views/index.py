@@ -16,7 +16,6 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from pprint import pprint
 from arches.app.models import models
 from arches.app.models.system_settings import settings
 from arches.app.models.resource import Resource
@@ -33,20 +32,19 @@ class IndexView(TemplateView):
 
     def get(self, request):
         context = {}
-        # context = super(IndexView, self).get_context_data(**kwargs)
         context['system_settings_graphid'] = settings.SYSTEM_SETTINGS_RESOURCE_MODEL_ID
         context['graph_models'] = []
         context['graphs'] = '[]'
         context['plugins'] = []
+        context['plugin_labels'] = {
+            'active-consultations':'Active',
+            'init-workflow':'New'
+        }
         context['main_script'] = 'index'
-        my_plugins = ['active-consultations','init-workflow']
-        print('hello world')
         # figure out why plugins isn;t passing the if
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
-        
-            print(plugin.slug)
-            if plugin.slug in my_plugins:
-                pprint(plugin)
+            if plugin.slug in context['plugin_labels'].keys() and request.user.has_perm('view_plugin', plugin):
+                plugin.name = context['plugin_labels'][plugin.slug]
                 context['plugins'].append(plugin)
 
         context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
