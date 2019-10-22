@@ -41,9 +41,9 @@ class IndexView(TemplateView):
             'init-workflow':'New'
         }
         context['main_script'] = 'index'
-        # figure out why plugins isn;t passing the if
+        user_check = request.user.is_authenticated and request.user.username != 'anonymous'
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
-            if plugin.slug in context['plugin_labels'].keys() and request.user.has_perm('view_plugin', plugin):
+            if plugin.slug in context['plugin_labels'].keys() and request.user.has_perm('view_plugin', plugin) and user_check:
                 plugin.name = context['plugin_labels'][plugin.slug]
                 context['plugins'].append(plugin)
 

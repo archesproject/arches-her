@@ -21,9 +21,10 @@ urlpatterns = [
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
     url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
+    url(r'^home/', IndexView.as_view(), name='index'),
     url(r'^', include('arches.urls')),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
-    url(r'^consultations/index.htm', main.index, name='home'),
+    # url(r'^consultations/index.htm', main.index, name='home'),
     url(r'^consultations/user$', UserManagerView.as_view(), name="user_profile_manager"),
     url(r'^filetemplate', FileTemplateView.as_view(), name='filetemplate'),
     url(r'^consultations/plugins/active-consultations', PluginView.as_view(), name='active-consultations'),
@@ -35,5 +36,4 @@ urlpatterns = [
     url(r'^consultations/plugins/correspondence-workflow', PluginView.as_view(), name='correspondence-workflow'),
     url(r'^consultations/plugins/communication-workflow', PluginView.as_view(), name='communication-workflow'),
     url(r'^consultations/plugins/init-workflow', PluginView.as_view(), name='init-workflow'),
-    url(r'^home/', IndexView.as_view(), name='index')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
