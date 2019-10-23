@@ -21,7 +21,7 @@ urlpatterns = [
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
     url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
-    url(r'^home/', IndexView.as_view(), name='index'),
+    url(r'^$', IndexView.as_view(), name='index'),
     url(r'^', include('arches.urls')),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
     # url(r'^consultations/index.htm', main.index, name='home'),
