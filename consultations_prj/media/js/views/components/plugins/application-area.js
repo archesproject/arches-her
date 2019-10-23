@@ -23,6 +23,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
@@ -39,6 +40,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-map',
                 },
                 {
@@ -51,6 +53,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-map-marker'
                 },
                 {
@@ -63,6 +66,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-bank'
                 },
                 {
@@ -75,6 +79,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-clipboard'
                 },
                 {
@@ -87,6 +92,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-bookmark'
                 },
                 {

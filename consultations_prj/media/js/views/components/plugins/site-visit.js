@@ -24,6 +24,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-tag',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
@@ -40,6 +41,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-user-plus',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
@@ -55,6 +57,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-lightbulb-o',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
@@ -70,6 +73,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-clipboard',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
@@ -85,6 +89,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-camera',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',

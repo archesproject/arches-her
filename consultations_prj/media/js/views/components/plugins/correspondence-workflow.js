@@ -20,6 +20,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-tag',
                     wastebin: {tile: null, description: 'a communication instance'}
                 },
