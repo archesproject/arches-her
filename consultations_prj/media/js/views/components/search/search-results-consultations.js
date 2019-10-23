@@ -103,9 +103,11 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
                             applicationTypeTile = result._source.tiles.find(function(tile) {
                                 return tile.data[applicationTypeNodeId] != undefined;
                             });
-                            applicationTypeConcept = result._source.domains.find(function(concept) {
-                                return concept['valueid'] == applicationTypeTile.data[applicationTypeNodeId];
-                            });
+                            if (applicationTypeTile) {
+                                applicationTypeConcept = result._source.domains.find(function(concept) {
+                                    return concept['valueid'] == applicationTypeTile.data[applicationTypeNodeId];
+                                });
+                            }
                             applicationType = applicationTypeConcept != undefined ? applicationTypeConcept['label'] : null;
                         }
                         this.results.push({
