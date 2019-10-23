@@ -74,7 +74,7 @@ define([
             });
 
             options.viewModel.inSearch = ko.pureComputed(function() {
-                return window.location.pathname === "/consultations/plugins/search" || window.location.pathname === "/plugins/c8261a41-a409-4e45-b049-c925c28a57da";
+                return window.location.pathname === "/consultations/search";
             });
             options.viewModel.inActiveCons = ko.pureComputed(function() {
                 return window.location.pathname === "/consultations/plugins/active-consultations";
