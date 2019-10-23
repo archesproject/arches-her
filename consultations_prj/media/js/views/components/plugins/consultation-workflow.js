@@ -37,7 +37,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    required: true,
+                    required: false,
                     icon: 'fa-map-marker'
                 },
                 {
