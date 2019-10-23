@@ -15,13 +15,16 @@ from arches.app.views.user import UserManagerView
 uuid_regex = settings.UUID_REGEX
 
 urlpatterns = [
+    url(r'^$', IndexView.as_view(), name='root'),
+    url(r'^index.htm', IndexView.as_view(), name='home'),
+    url(r'^consultations/index.htm', IndexView.as_view(), name='consultations home'),
     url(r'^consultations/search$', search.SearchView.as_view(), name="search_home_consultations"),
     url(r'^consultations/search/resources$', search.search_results, name="search_results"),
     url(r'^consultations/', include('arches.urls')),
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
     url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
-    url(r'^$', IndexView.as_view(), name='index'),
+    url(r'^consultations/index.htm', IndexView.as_view(), name='home'),
     url(r'^', include('arches.urls')),
     # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
     # url(r'^consultations/index.htm', main.index, name='home'),
