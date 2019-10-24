@@ -22,6 +22,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-code-fork',
                     wastebin: {resourceid: null, description: 'a consulation instance'}
                 },
@@ -36,6 +37,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-map-marker'
                 },
                 {
@@ -49,6 +51,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     class: 'hide-completion-date',
                     icon: 'fa-calendar-o'
                 },
@@ -63,6 +66,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-list-alt'
                 },
                 {
@@ -76,6 +80,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-hashtag'
                 },
                 {
@@ -88,6 +93,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-clipboard'
                 },
                 {
@@ -100,6 +106,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-users'
                 },
                 {

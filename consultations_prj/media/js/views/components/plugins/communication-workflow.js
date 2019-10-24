@@ -21,6 +21,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: true,
                     icon: 'fa-tag',
                     nameheading: 'Communication',
                     namelabel: '[no label]',
@@ -36,6 +37,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-lightbulb-o'
                 },
                 {
@@ -48,6 +50,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-clipboard'
                 },
                 {
@@ -60,6 +63,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    required: false,
                     icon: 'fa-file-o'
                 },
                 {
