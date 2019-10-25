@@ -99,10 +99,11 @@ div.final-cons-step-splash > button {
 
 .map-popup-content section:last-child {
     border-bottom: none;
+    padding-bottom: 60px;
 }
 
 .cons-summary {
-    height: 100vh;
+    height: 100%;
     overflow-y: scroll;
 }
 
@@ -133,11 +134,11 @@ div.final-cons-step-splash > button {
 }
 
 #map-popup {
-    position: fixed;
-    top: 101px;
+    position: relative;
+    top: 0px;
     bottom: 0px;
     z-index: 10;
-    left: 450px;
+    left: 0px;
     background: white;
     display: flex;
     flex-direction: column;
@@ -149,5 +150,5 @@ div.final-cons-step-splash > button {
 #map-popup .hover-feature-body {
     flex: 1 1 auto;
     overflow-y: scroll;
-    height: calc(100vh - 96px);
+    height: calc(100% - 96px);
 }

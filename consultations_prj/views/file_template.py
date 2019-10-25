@@ -25,8 +25,8 @@ import docx
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
-from HTMLParser import HTMLParser
-from htmlentitydefs import name2codepoint
+from html.parser import HTMLParser
+from html.entities import name2codepoint
 from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
@@ -102,7 +102,7 @@ class FileTemplateView(View):
         host = request.get_host()
 
         self.doc.save(new_file_path)
-        saved_file = open(new_file_path, 'rt')
+        saved_file = open(new_file_path, 'rb')
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
         file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
@@ -144,7 +144,7 @@ class FileTemplateView(View):
         if post_resp.status_code == 200:
             return JSONResponse({'tile':tile, 'status':'success' })
 
-        return HttpResponseNotFound("Error: "+post_resp.status_code)
+        return HttpResponseNotFound(post_resp.status_code)
 
 
     def get_template_path(self, template_id):
@@ -361,7 +361,7 @@ class DocumentHTMLParser(HTMLParser):
             self.run.add_break()
         if tag == "li":
             if self.list_style == 'ul':
-                self.run.add_text(u'● ')
+                self.run.add_text('● ')
             else:
                 self.run.add_text(str(self.ol_counter)+'. ')
                 self.ol_counter += 1
@@ -417,13 +417,13 @@ class DocumentHTMLParser(HTMLParser):
             self.run.add_text(data)
 
     def handle_entityref(self, name):
-        c = unichr(name2codepoint[name])
+        c = chr(name2codepoint[name])
         self.run.add_text(c)
 
     def handle_charref(self, name):
         if name.startswith('x'):
-            c = unichr(int(name[1:], 16))
+            c = chr(int(name[1:], 16))
         else:
-            c = unichr(int(name))
+            c = chr(int(name))
         self.run.add_text(c)
 

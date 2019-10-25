@@ -63,9 +63,9 @@
 }
 
 .cons-type {
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 400;
-    color: #416284;
+    color: #777;
     margin-top: -2px;
 }
 
@@ -75,7 +75,7 @@
 
 .cons-search-popup-link {
   position: absolute;
-  left: 342px;
+  left: 343px;
   top: 0px;
   width: 56px;
   height: 58px;
@@ -733,7 +733,7 @@ div.active-cons-stubs {
 }
 
 .active-cons-header.status-warning, .hover-feature-title-bar.status-warning {
-    background: yellow;
+    background: #FFFF1A;
     color: #9B9B00;
     border: 1px solid #bbb;
 }
@@ -989,13 +989,15 @@ table.report-tabular-card {
     border-right:1px solid #dfdfdf;
 }
 
+.report-tab-content-left-align {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
 /* .report-tabular-card tr td:nth-child(even) {
     border-right:1px solid black;
 } */
-
-.report-tabular-card tr:first-child {
-    border-top:1px solid #dfdfdf;
-}
 
 .report-tabular-card tr:last-child {
     border-bottom:1px solid #dfdfdf;
@@ -1013,14 +1015,8 @@ table.report-tabular-card {
 
 span.rp-tile-title {
     color:#2c4d70;
-    font-size: 15px;
-    font-weight: 500;
-    padding: 10px 10px;
-    background: #f7f7f7;
-    display: block;
-    margin-right: 30px;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
+    font-weight: 550;
+    padding-right: 5px;
 }
 .communication-type {
     color: rgb(134, 134, 134);

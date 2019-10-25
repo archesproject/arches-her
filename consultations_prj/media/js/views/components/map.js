@@ -233,7 +233,7 @@ define([
 
 
             if(feature.source){
-                if (self.map().getStyle()){
+                if (self.map().getStyle() && feature.id){
                     self.map().setFeatureState(feature, { selected: true });
                 }
             }

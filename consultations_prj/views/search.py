@@ -35,12 +35,13 @@ from arches.app.search.components.base import SearchFilterFactory
 from arches.app.views.base import MapBaseManagerView
 from arches.app.views.concept import get_preflabel_from_conceptid
 from arches.app.utils.permission_backend import get_nodegroups_by_perm
+from pprint import pprint
 
 
 try:
-    from cStringIO import StringIO
+    from io import StringIO
 except ImportError:
-    from StringIO import StringIO
+    from io import StringIO
 
 
 class SearchView(MapBaseManagerView):
@@ -241,9 +242,11 @@ def search_results(request):
     dsl.include('displaydescription')
     dsl.include('map_popup')
     dsl.include('provisional_resource')
-    if request.GET.get('tiles', None) is not None:
-        dsl.include('tiles')
+    dsl.include('domains')
+    # if request.GET.get('tiles', None) is not None:
+    #     dsl.include('tiles')
 
+    dsl.include('tiles')
     results = dsl.search(index='resources')
     #print JSONSerializer().serialize(dsl.dsl)
 

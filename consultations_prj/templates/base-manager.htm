@@ -74,15 +74,21 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         <!-- End Menu Header -->
 
                         <!-- Primary Menu Items -->
+                        <!-- Must whitelist plugins you want to show in Nav as all are available in context -->
                         <ul id="" class="">
+                            {% for p in plugins %}
+                            {%if p.slug == 'active-consultations' %}
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inActiveCons() == true}">
                                 <a href="{% url 'active-consultations' %}"><i class="fa fa-exclamation"></i><span>{% trans "Active Consultations" %}</span></a>
                                 <span class="nav-tooltip">{% trans "Active Consultations" %}</span>
                             </li>
+                            {% elif p.slug == 'init-workflow' %}
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inInitWorkflow() == true}">
                                 <a href="{% url 'init-workflow' %}"><i class="fa fa-plus"></i><span>{% trans "New" %}</span></a>
                                 <div class="nav-tooltip">{% trans "New" %}</div>
                             </li>
+                            {% endif %}
+                            {% endfor %}
                             <li class="workflow-main-nav-item" data-bind="css: {'active-sub':inSearch() == true}">
                                 <a href="{% url 'search_home_consultations' %}"><i class="fa fa-search"></i><span>{% trans "Find" %}</span></a>
                                 <div class="nav-tooltip">{% trans "Find" %}</div>
