@@ -18,6 +18,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 from arches.app.models import models
 from arches.app.models.system_settings import settings
+from consultations_prj.settings import APP_TITLE
 from arches.app.models.resource import Resource
 from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from django.shortcuts import render
@@ -35,6 +36,7 @@ class IndexView(TemplateView):
         context['system_settings_graphid'] = settings.SYSTEM_SETTINGS_RESOURCE_MODEL_ID
         context['graph_models'] = []
         context['graphs'] = '[]'
+        context['app_title'] = APP_TITLE
         context['plugins'] = []
         context['plugin_labels'] = {
             'active-consultations':'Active',
@@ -48,7 +50,6 @@ class IndexView(TemplateView):
                 context['plugins'].append(plugin)
 
         context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
-        context['app_name'] = settings.APP_NAME
 
         return render(request, 'index.htm', context)
 
