@@ -1,11 +1,10 @@
 define([
-    'jquery',
     'knockout',
-    'views/base-manager'
-], function($, ko, BaseManagerView) {
+    // 'views/base-manager'
+], function(ko) {
     function aboutViewModel(params) {
         /** L#74 of arches base.htm requires this file to be in media/js/ **/
-        BaseManagerView.apply(this,[params]);
+        // BaseManagerView.apply(this,[params]);
         var self = this;
         self.loading(false);
         self.visible(true);
