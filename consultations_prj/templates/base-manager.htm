@@ -111,11 +111,11 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                         <!-- Secondary Nav -->
                         <ul>
                             <li class="workflow-main-nav-item">
-                                <a href="#"><i class="fa fa-info"></i><span>{% trans "Help" %}</span></a>
+                                <a href="{% url 'help' %}"><i class="fa fa-info"></i><span>{% trans "Help" %}</span></a>
                                 <div class="nav-tooltip">{% trans "Help" %}</div>
                             </li>
                             <li class="workflow-main-nav-item">
-                                <a href="#"><i class="fa fa-newspaper-o"></i><span>{% trans "About" %}</span></a>
+                                <a href="{% url 'about' %}"><i class="fa fa-newspaper-o"></i><span>{% trans "About" %}</span></a>
                                 <div class="nav-tooltip">{% trans "About" %}</div>
                             </li>
                         </ul>
