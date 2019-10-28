@@ -3,7 +3,6 @@ define([
     'views/base-manager'
 ], function(ko, BaseManagerView) {
     function aboutViewModel(params) {
-        /** L#74 of arches base.htm requires this file to be in media/js/ **/
         BaseManagerView.apply(this,[params]);
         var self = this;
         self.loading(false);
@@ -11,10 +10,10 @@ define([
         console.log(ko.unwrap(self));
 
     }
-    ko.components.register('about', {
+    ko.components.register('consultations-about', {
         viewModel: aboutViewModel,
         template: {
-            require: 'text!templates/about.htm'
+            require: 'text!consultations_prj/templates/views/consultations-about.htm'
         }
     });
 });

@@ -54,7 +54,7 @@ class AboutView(TemplateView):
                      'deploymentdate',
                      'deploymentfile',
                      'author'])
-        context['main_script'] = 'about'
+        # context['main_script'] = 'consultations-about'
         user_check = request.user.is_authenticated and request.user.username != 'anonymous'
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
             if plugin.slug in context['plugin_labels'].keys() and request.user.has_perm('view_plugin', plugin) and user_check:
@@ -63,6 +63,6 @@ class AboutView(TemplateView):
 
         context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
 
-        return render(request, 'about.htm', context)
+        return render(request, 'views/consultations-about.htm', context)
 
 
