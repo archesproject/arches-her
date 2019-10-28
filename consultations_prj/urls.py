@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 from consultations_prj.views.main import ConsultationView
 from consultations_prj.views.file_template import FileTemplateView
 from consultations_prj.views.index import IndexView
-from consultations_prj.views.help import HelpView
+from consultations_prj.views.consultations_help import HelpView
 from consultations_prj.views.consultations_about import AboutView
 from consultations_prj.views import search
 from django.views.generic import RedirectView
@@ -23,7 +23,7 @@ urlpatterns = [
     url(r'^consultations/search$', search.SearchView.as_view(), name="search_home_consultations"),
     url(r'^consultations/search/resources$', search.search_results, name="search_results"),
     url(r'^consultations/', include('arches.urls')),
-    url(r'^consultations/help$', HelpView.as_view(), name="help"),
+    url(r'^consultations/consultations-help$', HelpView.as_view(), name="consultations-help"),
     url(r'^consultations/consultations-about$', AboutView.as_view(), name="consultations-about"),
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/consultations/plugins/active-consultations')),
     url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),

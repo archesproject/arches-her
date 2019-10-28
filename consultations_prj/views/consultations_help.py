@@ -42,6 +42,8 @@ class HelpView(TemplateView):
             'active-consultations':'Active',
             'init-workflow':'New'
         }
+        context['icon'] = 'fa-info'
+        context['title'] = 'Help'
         context['createable_resources'] = JSONSerializer().serialize(
             get_createable_resource_types(self.request.user),
             exclude=['functions',
@@ -54,7 +56,7 @@ class HelpView(TemplateView):
                      'deploymentdate',
                      'deploymentfile',
                      'author'])
-        context['main_script'] = 'help'
+        context['main_script'] = 'views/consultations-help'
         user_check = request.user.is_authenticated and request.user.username != 'anonymous'
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
             if plugin.slug in context['plugin_labels'].keys() and request.user.has_perm('view_plugin', plugin) and user_check:
