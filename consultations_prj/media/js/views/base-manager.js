@@ -60,7 +60,7 @@ define([
                     return graph.isresource;
                 });
             });
-            options.viewModel.createableResources = ko.observableArray(data.createableResources);
+            options.viewModel.createableResources = ko.observableArray(data.createableResources) || null;
 
             options.viewModel.setResourceOptionDisable = function(option, item) {
                 if (item) {
@@ -84,6 +84,12 @@ define([
             });
             options.viewModel.inDashboard = ko.pureComputed(function() {
                 return window.location.pathname === "/consultations/plugins/dashboard";
+            });
+            options.viewModel.inHelp = ko.pureComputed(function() {
+                return window.location.pathname === "/consultations/consultations-help";
+            });
+            options.viewModel.inAbout = ko.pureComputed(function() {
+                return window.location.pathname === "/consultations/consultations-about";
             });
 
             PageView.prototype.constructor.call(this, options);
