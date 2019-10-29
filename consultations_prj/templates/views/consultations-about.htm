@@ -23,12 +23,34 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 {% block title %} {{ block.super }} {% trans "About" %} {% endblock title %}
 
 {% block header %}
-<!-- Page Title and Icon -->
-<div class="ep-tools-title">
-    <h1 class="page-header text-overflow ep-graph-title">
-        <i class="fa {{icon}} text-center icon-wrap bg-gray ep-graph-title-icon"></i>
-        <span>{% trans title %}</span>
-    </h1>
+<div class="ep-toolbar">
+
+    <!-- Page Title and Icon -->
+    <div class="ep-tools-title">
+        <h1 class="page-header text-overflow ep-graph-title">
+            <i class="fa {{icon}} text-center icon-wrap bg-gray ep-graph-title-icon"></i>
+            <span>{% trans title %}</span>
+        </h1>
+    </div>
+
+    <!-- Login -->
+    <a href="{% url 'auth' %}?next={{ request.get_full_path }}{% if user.username != 'anonymous' %}&logout=true{% endif %}" class="ep-tools ep-tools-login">
+        <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="{% if user.username != 'anonymous' %}Logout{% else %}Login{% endif %}">
+            {% if user.username == 'anonymous' %}
+            <h5 class="hidden-xs">{% trans "Login" %}</h5>
+            {% else %}
+            <h5 class="hidden-xs">{% trans "Welcome" %}, {{ user.first_name|default:user.username }}</h5>
+            {% endif %}
+        </div>
+    </a>
+
+    <!-- Search Bar -->
+    <a href="{% url 'search_home' %}" class="ep-tools ep-tools-right" data-bind="click:function () { navigate('{% url 'search_home' %}') }">
+        <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title='{% trans "Search" %}'>
+          <i class="ion-search"></i>
+
+        </div>
+    </a>
 </div>
 {% endblock header %}
 
