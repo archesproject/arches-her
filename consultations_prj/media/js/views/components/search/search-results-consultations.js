@@ -97,17 +97,19 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
                         if (result._source.points.length > 0) {
                             point = result._source.points[0].point;
                         }
-                        var applicationTypeTile = null, applicationTypeConcept = null, applicationType = null;
+                        var applicationTypeTile = null, applicationTypeConcept = null;
                         var applicationTypeNodeId = '8d41e4d5-a250-11e9-b968-00224800b26d';
                         if (result._source.tiles && result._source.domains) {
                             applicationTypeTile = result._source.tiles.find(function(tile) {
                                 return tile.data[applicationTypeNodeId] != undefined;
                             });
-                            applicationTypeConcept = result._source.domains.find(function(concept) {
-                                return concept['valueid'] == applicationTypeTile.data[applicationTypeNodeId];
-                            });
-                            applicationType = applicationTypeConcept != undefined ? applicationTypeConcept['label'] : null;
+                            if (applicationTypeTile) {
+                                applicationTypeConcept = result._source.domains.find(function(concept) {
+                                    return concept['valueid'] == applicationTypeTile.data[applicationTypeNodeId];
+                                });
+                            }
                         }
+                        var applicationType = (applicationTypeConcept) ? applicationTypeConcept['label'] : null;
                         this.results.push({
                             displayname: result._source.displayname,
                             resourceinstanceid: result._source.resourceinstanceid,

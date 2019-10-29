@@ -27,7 +27,7 @@ from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.utils.permission_backend import get_createable_resource_types
 
 
-class IndexView(TemplateView):
+class HelpView(TemplateView):
 
     template_name = ''
 
@@ -42,7 +42,21 @@ class IndexView(TemplateView):
             'active-consultations':'Active',
             'init-workflow':'New'
         }
-        context['main_script'] = 'index'
+        context['icon'] = 'fa-info'
+        context['title'] = 'Help'
+        context['createable_resources'] = JSONSerializer().serialize(
+            get_createable_resource_types(self.request.user),
+            exclude=['functions',
+                     'ontology',
+                     'subtitle',
+                     'color',
+                     'isactive',
+                     'isresource',
+                     'version',
+                     'deploymentdate',
+                     'deploymentfile',
+                     'author'])
+        context['main_script'] = 'views/consultations-help'
         user_check = request.user.is_authenticated and request.user.username != 'anonymous'
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
             if plugin.slug in context['plugin_labels'].keys() and request.user.has_perm('view_plugin', plugin) and user_check:
@@ -51,6 +65,6 @@ class IndexView(TemplateView):
 
         context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
 
-        return render(request, 'index.htm', context)
+        return render(request, 'views/consultations-help.htm', context)
 
 
