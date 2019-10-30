@@ -31,6 +31,11 @@ ROOT_URLCONF = 'consultations_prj.urls'
 # a prefix to append to all elasticsearch indexes, note: must be lower case
 ELASTICSEARCH_PREFIX = 'consultations_prj'
 
+CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_RESULT_BACKEND = 'django-db'
+CELERY_TASK_SERIALIZER = 'json'
+
 DATABASES = {
     "default": {
         "ATOMIC_REQUESTS": False,

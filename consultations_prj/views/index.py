@@ -25,7 +25,21 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.utils.permission_backend import get_createable_resource_types
+import consultations_prj.tasks as tasks
 
+# @shared_task
+# def add(x, y):
+#     return x + y
+#
+#
+# @shared_task
+# def mul(x, y):
+#     return x * y
+#
+#
+# @shared_task
+# def xsum(numbers):
+#     return sum(numbers)
 
 class IndexView(TemplateView):
 
@@ -49,8 +63,9 @@ class IndexView(TemplateView):
                 plugin.name = context['plugin_labels'][plugin.slug]
                 context['plugins'].append(plugin)
 
+        result = tasks.add.delay(1, 2)
+        print(result.backend)
+
         context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
 
         return render(request, 'index.htm', context)
-
-
