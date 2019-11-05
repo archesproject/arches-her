@@ -151,7 +151,7 @@ CACHES = {
 #Identify the usernames and duration (seconds) for which you want to cache the time wheel
 CACHE_BY_USER = {'anonymous': 3600 * 24}
 
-MOBILE_OAUTH_CLIENT_ID = ''  #'9JCibwrWQ4hwuGn5fu2u1oRZSs9V6gK8Vu8hpRC4'
+MOBILE_OAUTH_CLIENT_ID = ''
 MOBILE_DEFAULT_ONLINE_BASEMAP = {'default': 'mapbox://styles/mapbox/streets-v9'}
 
 APP_TITLE = 'Arches Consultations'
@@ -159,11 +159,11 @@ COPYRIGHT_TEXT = 'All Rights Reserved.'
 COPYRIGHT_YEAR = '2019'
 
 try:
-    from package_settings import *
+    from .package_settings import *
 except ImportError:
     pass
 
 try:
-    from settings_local import *
+    from .settings_local import *
 except ImportError:
     pass
