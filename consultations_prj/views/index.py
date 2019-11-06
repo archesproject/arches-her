@@ -25,7 +25,6 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.utils.permission_backend import get_createable_resource_types
-import consultations_prj.tasks as tasks
 
 
 class IndexView(TemplateView):
