@@ -52,5 +52,3 @@ class IndexView(TemplateView):
         context['user_is_reviewer'] = request.user.groups.filter(name='Resource Reviewer').exists()
 
         return render(request, 'index.htm', context)
-
-
