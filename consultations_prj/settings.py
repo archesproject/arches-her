@@ -35,6 +35,9 @@ CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_RESULT_BACKEND = 'django-db'
 CELERY_TASK_SERIALIZER = 'json'
+SEARCH_EXPORT_DIR = os.path.join(MEDIA_ROOT, 'uploadedfiles')
+SEARCH_EXPORT_EXPIRES = 60 # 24 * 3600 seconds
+SEARCH_EXPORT_DELETE_INTERVAL = 60
 
 DATABASES = {
     "default": {

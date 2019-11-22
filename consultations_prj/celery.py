@@ -13,23 +13,21 @@ app.autodiscover_tasks()
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(60.0, delete_file.s(), name='deleting file')
-    sender.add_periodic_task(25.0, test.s('The celery beat is running'))
+    sender.add_periodic_task(settings.SEARCH_EXPORT_FILE_DELETE_INTERVAL, delete_file.s(), name='deleting file')
+    sender.add_periodic_task(60, test.s('Celery Beat is running'), name='status', expires=300)
 
 @app.task
 def delete_file():
     now = datetime.timestamp(datetime.now())
-    CURRENT_DIR = '/Users/njk/Dropbox/arches_projects/arches_py3/miscellaneous/subdir/'
-    EXPIRES = 30
     file_list = []
     counter = 0
-    with os.scandir(CURRENT_DIR) as current_files:
+    with os.scandir(settings.SEARCH_EXPORT_DIR) as current_files:
         for file in current_files:
-            file_stat = os.stat(os.path.join(CURRENT_DIR,file))
-            if now-file_stat.st_ctime > EXPIRES:
+            file_stat = os.stat(os.path.join(settings.SEARCH_EXPORT_DIR, file))
+            if now-file_stat.st_ctime > settings.SEARCH_EXPORT_EXPIRES:
                 file_list.append(file.name)
     for file in file_list:
-        os.remove(os.path.join(CURRENT_DIR,file))
+        os.remove(os.path.join(settings.SEARCH_EXPORT_DIR,file))
         counter += 1
     return "{} files deleted".format(counter)
 
