@@ -38,6 +38,12 @@
     height: 60px;
     padding: 11px 10px 11px 15px;
     position: relative;
+    background: #fbfbfb;
+}
+
+.cons-search-results-container .search-result:hover {
+    background: #fff;
+    border-bottom: 1px solid steelblue;
 }
 
 .cons-search-results-container .search-result:hover .search-result-info {
@@ -58,7 +64,7 @@
     line-height: .79;
 }
 
-.search-result-resource-name:hover {
+.search-result-info a:hover {
     color: #2e29da;
 }
 
@@ -474,7 +480,7 @@ div.workflow-panel {
 .thumbnail-container {
     display: flex;
     justify-content: space-between;
-    width: calc(100% - 75px);
+    width: calc(100% - 438px);
 }
 
 .workbench-card-container-sidepanel-active .thumbnail-container {
@@ -522,12 +528,13 @@ div.workflow-panel {
     justify-content: space-between;
     position: fixed;
     bottom: 0px;
-    width: calc(100% - 50px);
+    width: calc(100% + 311px);
     left: 50px;
 }
 
 .workflow-step-container .workbench-card-sidebar {
     position: fixed;
+    top: 227px;
 }
 
 .workflow-step-container .thumbnail-gallery-container {
