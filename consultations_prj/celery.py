@@ -1,10 +1,12 @@
 from __future__ import absolute_import, unicode_literals
 import os
+import celery
 from celery import Celery
 from datetime import datetime
 import time
 from celery.schedules import crontab
 import consultations_prj.tasks as tasks
+from arches.app.models.system_settings import settings
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'consultations_prj.settings')
 app = Celery('consultations_prj')
@@ -13,8 +15,9 @@ app.autodiscover_tasks()
 
 @app.on_after_configure.connect
 def setup_periodic_tasks(sender, **kwargs):
-    sender.add_periodic_task(settings.SEARCH_EXPORT_FILE_DELETE_INTERVAL, delete_file.s(), name='deleting file')
-    sender.add_periodic_task(60, test.s('Celery Beat is running'), name='status', expires=300)
+    #sender.add_periodic_task(settings.SEARCH_EXPORT_FILE_DELETE_INTERVAL, delete_file.s(), name='deleting file')
+    sender.add_periodic_task(30, delete_file.s(), name='deleting file')
+    sender.add_periodic_task(60, test.s('Celery Beat is running from Consultations'), name='status', expires=300)
 
 @app.task
 def delete_file():
