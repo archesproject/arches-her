@@ -39,6 +39,17 @@ SEARCH_EXPORT_DIR = os.path.join(MEDIA_ROOT, 'uploadedfiles')
 SEARCH_EXPORT_EXPIRES = 60 # 24 * 3600 seconds
 SEARCH_EXPORT_DELETE_INTERVAL = 60
 
+CELERY_SEARCH_EXPORT_DIR = os.path.join(MEDIA_ROOT, 'uploadedfiles')
+CELERY_SEARCH_EXPORT_EXPIRES = 24 * 3600 # seconds
+CELERY_SEARCH_EXPORT_DELETE_INTERVAL = 60
+
+CELERY_BEAT_SCHEDULE = {
+    'delete_file': {
+        'task': 'arches.app.tasks.delete_file',
+        'schedule': CELERY_SEARCH_EXPORT_DELETE_INTERVAL,
+    },
+}
+
 DATABASES = {
     "default": {
         "ATOMIC_REQUESTS": False,
