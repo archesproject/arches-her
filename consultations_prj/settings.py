@@ -35,6 +35,13 @@ CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_RESULT_BACKEND = "django-db"
 CELERY_TASK_SERIALIZER = "json"
+CELERY_SEARCH_EXPORT_EXPIRES = 60 * 3  # seconds
+CELERY_SEARCH_EXPORT_CHECK = 15  # seconds
+
+CELERY_BEAT_SCHEDULE = {
+    "delete-expired-search-export": {"task": "arches.app.tasks.delete_file", "schedule": CELERY_SEARCH_EXPORT_CHECK,},
+    "notification": {"task": "arches.app.tasks.message", "schedule": CELERY_SEARCH_EXPORT_CHECK, "args": ("Celery Beat is Running",),},
+}
 
 DATABASES = {
     "default": {
