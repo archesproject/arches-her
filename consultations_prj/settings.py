@@ -30,6 +30,8 @@ ROOT_URLCONF = 'consultations_prj.urls'
 
 # a prefix to append to all elasticsearch indexes, note: must be lower case
 ELASTICSEARCH_PREFIX = 'consultations_prj'
+ELASTICSEARCH_TEMP_HTTP_ENDPOINT = "http://192.168.99.100:9800"
+ELASTICSEARCH_HOSTS = [{"host": "192.168.99.100", "port": ELASTICSEARCH_HTTP_PORT}]
 
 CELERY_BROKER_URL = 'amqp://guest:guest@localhost'
 CELERY_ACCEPT_CONTENT = ['json']
@@ -42,7 +44,7 @@ DATABASES = {
         "AUTOCOMMIT": True,
         "CONN_MAX_AGE": 0,
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "HOST": "localhost",
+        "HOST": "192.168.99.100",
         "NAME": "consultations_prj",
         "OPTIONS": {},
         "PASSWORD": "postgis",
@@ -61,6 +63,8 @@ DATABASES = {
 
 
 ALLOWED_HOSTS = []
+
+
 
 SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, 'system_settings', 'System_Settings.json')
 WSGI_APPLICATION = 'consultations_prj.wsgi.application'

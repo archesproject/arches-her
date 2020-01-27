@@ -1,0 +1,239 @@
+{
+    "graph": [
+        {
+            "author": "Phil",
+            "cards": [
+                {
+                    "active": true,
+                    "cardid": "17892d5e-20bf-11ea-8ea7-c4d9877d154e",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "Provides details of the Date of Last Update and the associated compiler. This unit of information is mandatory in MIDAS Heritage.",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Record_Update",
+                    "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "sortorder": null,
+                    "visible": true
+                }
+            ],
+            "cards_x_nodes_x_widgets": [],
+            "color": null,
+            "config": {
+                "basemap": "streets",
+                "bearing": 0,
+                "centerX": 1,
+                "centerY": 53,
+                "defaultValue": "",
+                "defaultValueType": 0,
+                "featureColor": "#FF0000",
+                "featureEditingDisabled": true,
+                "featureLineWidth": 1,
+                "featurePointSize": 3,
+                "geocodePlaceholder": "Search",
+                "geocodeProvider": "10000000-0000-0000-0000-010000000000",
+                "geocoderVisible": true,
+                "geometryTypes": [
+                    {
+                        "id": "Point",
+                        "text": "Point"
+                    },
+                    {
+                        "id": "Line",
+                        "text": "Line"
+                    },
+                    {
+                        "id": "Polygon",
+                        "text": "Polygon"
+                    }
+                ],
+                "mapControlsHidden": false,
+                "maxZoom": "17",
+                "minZoom": "1",
+                "overlayConfigs": [],
+                "overlayOpacity": 0,
+                "pitch": 0,
+                "zoom": 5
+            },
+            "deploymentdate": null,
+            "deploymentfile": null,
+            "description": "Provides details of the Date of Last Update and the associated compiler. This unit of information is mandatory in MIDAS Heritage.",
+            "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "17892d62-20bf-11ea-bfcd-c4d9877d154e",
+                    "edgeid": "17892d63-20bf-11ea-84ba-c4d9877d154e",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "rangenode_id": "17892d5f-20bf-11ea-94a2-c4d9877d154e"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "edgeid": "17892d64-20bf-11ea-87bb-c4d9877d154e",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by",
+                    "rangenode_id": "17892d60-20bf-11ea-b1f1-c4d9877d154e"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "edgeid": "17892d65-20bf-11ea-bb54-c4d9877d154e",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
+                    "rangenode_id": "17892d62-20bf-11ea-bfcd-c4d9877d154e"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "17892d60-20bf-11ea-b1f1-c4d9877d154e",
+                    "edgeid": "17892d66-20bf-11ea-90c7-c4d9877d154e",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "rangenode_id": "17892d61-20bf-11ea-a122-c4d9877d154e"
+                }
+            ],
+            "functions_x_graphs": [],
+            "graphid": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+            "iconclass": "fa fa-database",
+            "is_editable": true,
+            "isactive": true,
+            "isresource": false,
+            "jsonldcontext": null,
+            "name": "Record_Update",
+            "nodegroups": [
+                {
+                    "cardinality": "1",
+                    "legacygroupid": null,
+                    "nodegroupid": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "parentnodegroup_id": null
+                }
+            ],
+            "nodes": [
+                {
+                    "config": null,
+                    "datatype": "date",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Updated Date",
+                    "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "nodeid": "17892d5f-20bf-11ea-94a2-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Updater",
+                    "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "nodeid": "17892d60-20bf-11ea-b1f1-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E21_Person",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P14_carried_out_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Updated By",
+                    "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "nodeid": "17892d61-20bf-11ea-a122-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Update TImespan",
+                    "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "nodeid": "17892d62-20bf-11ea-bfcd-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Record_Update",
+                    "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "nodeid": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E65_Creation",
+                    "parentproperty": "",
+                    "sortorder": 0
+                }
+            ],
+            "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "relatable_resource_model_ids": [],
+            "resource_2_resource_constraints": [],
+            "root": {
+                "config": null,
+                "datatype": "semantic",
+                "description": null,
+                "exportable": false,
+                "fieldname": "",
+                "graph_id": "178919d8-20bf-11ea-88b3-c4d9877d154e",
+                "is_collector": true,
+                "isrequired": false,
+                "issearchable": true,
+                "istopnode": true,
+                "name": "Record_Update",
+                "nodegroup_id": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                "nodeid": "178919d9-20bf-11ea-9f4d-c4d9877d154e",
+                "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E65_Creation",
+                "sortorder": 0
+            },
+            "slug": null,
+            "subtitle": "Used to record the date of last update for legacy data.",
+            "template_id": "50000000-0000-0000-0000-000000000002",
+            "version": ""
+        }
+    ]
+}
