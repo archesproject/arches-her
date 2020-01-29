@@ -42,7 +42,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Contact Details",
                     "nodegroup_id": "d4a88462-5463-11e9-a825-000d3ab1e588",
                     "sortorder": 4,
@@ -87,7 +87,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Descriptions",
                     "nodegroup_id": "d4a8846b-5463-11e9-a3a8-000d3ab1e588",
                     "sortorder": 3,
@@ -106,7 +106,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Name(s)",
                     "nodegroup_id": "d4a88471-5463-11e9-95cb-000d3ab1e588",
                     "sortorder": 1,
@@ -151,7 +151,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "PrimaryReferenceNumber ",
                     "nodegroup_id": "12559b01-a3e1-11e9-b567-00224800b26d",
                     "sortorder": 0,
@@ -333,6 +333,21 @@
                     "sortorder": 0,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "22f5b902-200b-11ea-a00c-c4d9877d154e",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Currency",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "be80b599-41d9-11ea-9306-001fb5264ca8",
+                    "label": "Currency",
+                    "node_id": "8c8afb42-41d9-11ea-a8cd-001fb5264ca8",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "d0dbcc5f-200b-11ea-954f-c4d9877d154e",
@@ -999,6 +1014,15 @@
                 },
                 {
                     "description": null,
+                    "domainnode_id": "22f56ade-200b-11ea-b097-c4d9877d154e",
+                    "edgeid": "8c8afb43-41d9-11ea-a550-001fb5264ca8",
+                    "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "8c8afb42-41d9-11ea-a8cd-001fb5264ca8"
+                },
+                {
+                    "description": null,
                     "domainnode_id": "d4a8847e-5463-11e9-9e98-000d3ab1e588",
                     "edgeid": "d0dbdfe7-200b-11ea-963c-c4d9877d154e",
                     "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
@@ -1455,47 +1479,11 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Currency",
+                    "name": "Name Currency",
                     "nodegroup_id": "d4a88471-5463-11e9-95cb-000d3ab1e588",
                     "nodeid": "b8766740-a3e0-11e9-be3e-00224800b26d",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Addresses",
-                    "nodegroup_id": "a2cfc4c1-a266-11e9-b5ac-00224800b26d",
-                    "nodeid": "a2cfc4c1-a266-11e9-b5ac-00224800b26d",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Building Number Sub-Street",
-                    "nodegroup_id": "a2cfc4c1-a266-11e9-b5ac-00224800b26d",
-                    "nodeid": "a2cfc4c4-a266-11e9-85cd-00224800b26d",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0
                 },
                 {
@@ -1587,7 +1575,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Currency",
+                    "name": "Admin Area Currency",
                     "nodegroup_id": "d0dbcc5d-200b-11ea-a0e0-c4d9877d154e",
                     "nodeid": "d0dbcc62-200b-11ea-8beb-c4d9877d154e",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
@@ -1630,6 +1618,62 @@
                     "nodeid": "d4a88483-5463-11e9-8918-000d3ab1e588",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1i_identifies",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Addresses",
+                    "nodegroup_id": "a2cfc4c1-a266-11e9-b5ac-00224800b26d",
+                    "nodeid": "a2cfc4c1-a266-11e9-b5ac-00224800b26d",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P74_has_current_or_former_residence",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Building Number Sub-Street",
+                    "nodegroup_id": "a2cfc4c1-a266-11e9-b5ac-00224800b26d",
+                    "nodeid": "a2cfc4c4-a266-11e9-85cd-00224800b26d",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Organization Type Currency",
+                    "nodegroup_id": "22f56ade-200b-11ea-b097-c4d9877d154e",
+                    "nodeid": "8c8afb42-41d9-11ea-a8cd-001fb5264ca8",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 },
                 {
@@ -2222,5 +2266,11 @@
             "template_id": "50000000-0000-0000-0000-000000000001",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 11.2 on x86_64-pc-linux-musl, compiled by gcc (Alpine 8.2.0) 8.2.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "7"
+    }
 }

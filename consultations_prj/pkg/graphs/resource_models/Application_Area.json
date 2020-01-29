@@ -23,7 +23,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": false,
+                    "is_editable": true,
                     "name": "Designation",
                     "nodegroup_id": "e19fe3a1-6d22-11e9-98bf-dca90488358a",
                     "sortorder": 6,
@@ -52,7 +52,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": false,
+                    "is_editable": true,
                     "name": "Associated_Monuments",
                     "nodegroup_id": "ad364dc1-9cbd-11e9-acd9-00224800b26d",
                     "sortorder": 8,
@@ -108,7 +108,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": false,
+                    "is_editable": true,
                     "name": "Map",
                     "nodegroup_id": "eafced66-53d8-11e9-a4e2-dca90488358a",
                     "sortorder": 3,
@@ -190,7 +190,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": false,
+                    "is_editable": true,
                     "name": "Descriptions",
                     "nodegroup_id": "9f187b71-9cbb-11e9-9fd3-00224800b26d",
                     "sortorder": 1,
@@ -203,7 +203,14 @@
                     "config": {
                         "displayAsTable": true
                     },
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "e611c621-9cbc-11e9-8dd6-00224800b26d",
+                            "constraintid": "215ba141-fbb7-4967-b74b-c78ac047cba5",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "Represents a single node in a graph",
                     "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
@@ -267,7 +274,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": false,
+                    "is_editable": true,
                     "name": "Addresses",
                     "nodegroup_id": "5fea7890-9cbb-11e9-ae86-00224800b26d",
                     "sortorder": 2,
@@ -318,30 +325,11 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": "",
-                    "is_editable": false,
+                    "is_editable": true,
                     "name": "Application Area Names",
                     "nodegroup_id": "c5f909b5-53c7-11e9-a3ac-dca90488358a",
                     "sortorder": 0,
                     "visible": false
-                },
-                {
-                    "active": true,
-                    "cardid": "13cfc600-ae46-11e9-ba02-dca90488358a",
-                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
-                    "config": null,
-                    "constraints": [],
-                    "cssclass": null,
-                    "description": null,
-                    "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
-                    "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
-                    "instructions": null,
-                    "is_editable": true,
-                    "name": "Building Number, Name Sub-Street",
-                    "nodegroup_id": "5fea7893-9cbb-11e9-b00f-00224800b26d",
-                    "sortorder": null,
-                    "visible": true
                 },
                 {
                     "active": true,
@@ -554,6 +542,7 @@
                         "defaultValue": "",
                         "label": "Area Name",
                         "maxLength": null,
+                        "options": [],
                         "placeholder": "Enter text",
                         "width": "100%"
                     },
@@ -562,7 +551,35 @@
                     "node_id": "e611c623-9cbc-11e9-b2e9-00224800b26d",
                     "sortorder": 0,
                     "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "a200d6e1-9cd2-11e9-bdae-00224800b26d",
+                    "config": {
+                        "label": "Application Area",
+                        "placeholder": ""
+                    },
+                    "id": "1bb21941-9cd3-11e9-a1d7-00224800b26d",
+                    "label": "Application Area",
+                    "node_id": "ba480c9e-9cd2-11e9-b3b0-00224800b26d",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "ff3c400a-76ec-11e7-a793-784f435179ea"
+                },
+                {
+                    "card_id": "e611c621-9cbc-11e9-8dd6-00224800b26d",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Currency",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "f44e6823-41f3-11ea-b951-001fb5264ca8",
+                    "label": "Currency",
+                    "node_id": "df22d9cc-41f3-11ea-abb5-001fb5264ca8",
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "5fea7892-9cbb-11e9-9259-00224800b26d",
@@ -570,7 +587,7 @@
                         "defaultValue": "",
                         "label": "Building Number, Sub-Street Name",
                         "maxLength": null,
-                        "placeholder": "Enter text",
+                        "placeholder": "Optional. Use to record buildings accessed from a minor street, associated with a larger road or street.",
                         "width": "100%"
                     },
                     "id": "86fa5c10-9cbc-11e9-ac1e-00224800b26d",
@@ -592,7 +609,7 @@
                     "id": "8703d1f1-9cbc-11e9-a264-00224800b26d",
                     "label": "Town or City",
                     "node_id": "5fea7898-9cbb-11e9-81c8-00224800b26d",
-                    "sortorder": 4,
+                    "sortorder": 5,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -745,13 +762,13 @@
                         "defaultValue": "",
                         "label": "Locality",
                         "maxLength": null,
-                        "placeholder": "(Optionally) e.g.: Blackfriars",
+                        "placeholder": "Optional. Use to record a defined locality associated with the address e.g.: Blackfriars",
                         "width": "100%"
                     },
                     "id": "87018801-9cbc-11e9-b7e3-00224800b26d",
                     "label": "Locality",
                     "node_id": "5fea7897-9cbb-11e9-8375-00224800b26d",
-                    "sortorder": 3,
+                    "sortorder": 4,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -776,13 +793,13 @@
                         "defaultValue": "",
                         "label": "Building Name",
                         "maxLength": null,
-                        "placeholder": "(Optionally) Add the building name",
+                        "placeholder": "Optional. Where appropriate record the building name.",
                         "width": "100%"
                     },
                     "id": "86ff1703-9cbc-11e9-a208-00224800b26d",
                     "label": "Building Name",
                     "node_id": "5fea7896-9cbb-11e9-8971-00224800b26d",
-                    "sortorder": 1,
+                    "sortorder": 2,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -798,7 +815,7 @@
                     "id": "86ff1701-9cbc-11e9-a52b-00224800b26d",
                     "label": "Building Number, Street Name",
                     "node_id": "5fea7895-9cbb-11e9-b237-00224800b26d",
-                    "sortorder": 2,
+                    "sortorder": 3,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -814,22 +831,9 @@
                     "id": "870d6edf-9cbc-11e9-97f9-00224800b26d",
                     "label": "Postcode",
                     "node_id": "5fea7894-9cbb-11e9-b8a3-00224800b26d",
-                    "sortorder": 5,
+                    "sortorder": 6,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "a200d6e1-9cd2-11e9-bdae-00224800b26d",
-                    "config": {
-                        "label": "Application Area",
-                        "placeholder": ""
-                    },
-                    "id": "1bb21941-9cd3-11e9-a1d7-00224800b26d",
-                    "label": "Application Area",
-                    "node_id": "ba480c9e-9cd2-11e9-b3b0-00224800b26d",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "ff3c400a-76ec-11e7-a793-784f435179ea"
                 },
                 {
                     "card_id": "eb035680-53d8-11e9-81c0-dca90488358a",
@@ -1181,6 +1185,15 @@
                 },
                 {
                     "description": null,
+                    "domainnode_id": "e611c61f-9cbc-11e9-929d-00224800b26d",
+                    "edgeid": "df22d9cd-41f3-11ea-b2d0-001fb5264ca8",
+                    "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "df22d9cc-41f3-11ea-abb5-001fb5264ca8"
+                },
+                {
+                    "description": null,
                     "domainnode_id": "c5f909b5-53c7-11e9-a3ac-dca90488358a",
                     "edgeid": "b20716e1-53d7-11e9-8377-dca90488358a",
                     "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
@@ -1312,7 +1325,7 @@
             ],
             "graphid": "336d34e3-53c3-11e9-ba5f-dca90488358a",
             "iconclass": "fa fa-square-o",
-            "is_editable": false,
+            "is_editable": true,
             "isactive": true,
             "isresource": true,
             "jsonldcontext": null,
@@ -1389,12 +1402,6 @@
                     "legacygroupid": null,
                     "nodegroupid": "ecd5b950-a30e-11e9-82bc-00224800b26d",
                     "parentnodegroup_id": null
-                },
-                {
-                    "cardinality": "1",
-                    "legacygroupid": null,
-                    "nodegroupid": "5fea7893-9cbb-11e9-b00f-00224800b26d",
-                    "parentnodegroup_id": "5fea7890-9cbb-11e9-ae86-00224800b26d"
                 },
                 {
                     "cardinality": "n",
@@ -1526,6 +1533,26 @@
                     "nodeid": "aae8bd84-a30e-11e9-9721-00224800b26d",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E62_String",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Area Currency",
+                    "nodegroup_id": "e611c61f-9cbc-11e9-929d-00224800b26d",
+                    "nodeid": "df22d9cc-41f3-11ea-abb5-001fb5264ca8",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 },
                 {
@@ -1702,7 +1729,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "30d9ae59-fcc5-4395-891d-635a8edc02eb"
+                        "rdmCollection": "acb5feaf-e491-4e53-bff2-2801167fd65a"
                     },
                     "datatype": "concept",
                     "description": "Represents a single node in a graph",
@@ -1886,7 +1913,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "fb1a3563-c45e-417d-926a-3c90bdba38a8"
+                        "rdmCollection": "59a0a035-bbd0-4e5e-9528-862790edc610"
                     },
                     "datatype": "concept",
                     "description": "Represents a single node in a graph",
@@ -2017,6 +2044,24 @@
                 },
                 {
                     "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Building Number, Name Sub-Street",
+                    "nodegroup_id": "5fea7890-9cbb-11e9-ae86-00224800b26d",
+                    "nodeid": "5fea7893-9cbb-11e9-b00f-00224800b26d",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
                     "exportable": false,
@@ -2047,24 +2092,6 @@
                     "name": "Town or City",
                     "nodegroup_id": "5fea7890-9cbb-11e9-ae86-00224800b26d",
                     "nodeid": "5fea7898-9cbb-11e9-81c8-00224800b26d",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "336d34e3-53c3-11e9-ba5f-dca90488358a",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Building Number, Name Sub-Street",
-                    "nodegroup_id": "5fea7893-9cbb-11e9-b00f-00224800b26d",
-                    "nodeid": "5fea7893-9cbb-11e9-b00f-00224800b26d",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0
@@ -2231,5 +2258,11 @@
             "template_id": "50000000-0000-0000-0000-000000000004",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 11.2 on x86_64-pc-linux-musl, compiled by gcc (Alpine 8.2.0) 8.2.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "7"
+    }
 }
