@@ -1,7 +1,7 @@
 SET CLIENT_ENCODING TO UTF8;
 SET STANDARD_CONFORMING_STRINGS TO ON;
 BEGIN;
-INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap)
+INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap, searchonly)
    VALUES (public.uuid_generate_v1mc(), 'Search Results Heat Map', '[
         {
           "source": "search-results-hashes",
@@ -80,11 +80,11 @@ INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, acti
           "type": "heatmap",
           "id": "search-results-heat"
        }
-   ]', TRUE, 'ion-search', TRUE, FALSE);
+   ]', TRUE, 'ion-search', TRUE, FALSE, TRUE);
 
 
 
-INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap)
+INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap, searchonly)
    VALUES (public.uuid_generate_v1mc(), 'Map Markers', '[
        {
         "layout": {
@@ -195,11 +195,11 @@ INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, acti
         "type": "circle",
         "id": "search-results-points-markers-point"
       }
-   ]', TRUE, 'ion-location', TRUE, TRUE);
+   ]', TRUE, 'ion-location', TRUE, TRUE, TRUE);
 
 
 
-INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap)
+INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap, searchonly)
    VALUES (public.uuid_generate_v1mc(), 'Hex', '[
       {
         "layout": {},
@@ -287,4 +287,4 @@ INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, acti
         "id": "search-results-hex"
       }
 
-   ]', TRUE, 'ion-funnel', TRUE, FALSE);
+   ]', TRUE, 'ion-funnel', TRUE, FALSE, TRUE);
