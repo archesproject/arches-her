@@ -41,6 +41,11 @@ class BNGCentreDataType(BaseDataType):
         return errors 
 
 
+    def default_es_mapping(self):
+        print("DOING GREAT STUFF")
+        # let ES dyanamically map this datatype
+        return
+
 
     def append_to_document(self, document, nodevalue, nodeid, tile):
 
