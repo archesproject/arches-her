@@ -101,17 +101,7 @@ define([
                 setTimeout(self.defaultSelector, 150);
             };
 
-            this.dropzoneOptions = {
-                url: "arches.urls.root",
-                dictDefaultMessage: '',
-                autoProcessQueue: false,
-                autoQueue: false,
-                clickable: ".fileinput-button." + this.uniqueidClass(),
-                previewsContainer: '#hidden-dz-previews',
-                init: function() {
-                    var targetNode;
-                    self.dropzone = this;
-                    this.on("addedfile", function(file) {
+            this.addTile = function(file){
                         var newtile;
                         newtile = self.card.getNewTile();
                         var tilevalue = {
@@ -137,8 +127,21 @@ define([
                         newtile.data[targetNode]([tilevalue]);
                         newtile.formData.append('file-list_' + targetNode, file, file.name);
                         newtile.save();
-                    }, self);
+                self.card.newTile = undefined;
+            }
 
+            this.dropzoneOptions = {
+                url: "arches.urls.root",
+                dictDefaultMessage: '',
+                autoProcessQueue: false,
+                uploadMultiple: true,
+                autoQueue: false,
+                clickable: ".fileinput-button." + this.uniqueidClass(),
+                previewsContainer: '#hidden-dz-previews',
+                init: function() {
+                    var targetNode;
+                    self.dropzone = this;
+                    this.on("addedfile", self.addTile, self);
                     this.on("error", function(file, error) {
                         file.error = error;
                     });
