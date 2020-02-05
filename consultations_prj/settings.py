@@ -52,7 +52,7 @@ DATABASES = {
         "AUTOCOMMIT": True,
         "CONN_MAX_AGE": 0,
         "ENGINE": "django.contrib.gis.db.backends.postgis",
-        "HOST": "192.168.99.100",
+        "HOST": "localhost",
         "NAME": "consultations_prj",
         "OPTIONS": {},
         "PASSWORD": "postgis",
