@@ -16,7 +16,7 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-from django.http import HttpRequest, HttpResponseNotFound
+from django.http import HttpResponseNotFound
 from django.views.generic import View
 from django.core.paginator import Paginator
 from arches.app.utils.response import JSONResponse
@@ -42,8 +42,6 @@ class ActiveConsultationsView(View):
             "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d",
             "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
         }
-        self.exclude_statuses = ["Aborted","Completed"]
-        self.cons_status_node_id = '8d41e4d3-a250-11e9-8977-00224800b26d'
     
     def get(self, request):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
@@ -54,11 +52,8 @@ class ActiveConsultationsView(View):
         # self.active_cons_node_list = active_cons_config['nodes']
         # order_config = active_cons_config['sort config']
         datatype_factory = DataTypeFactory()
-        # cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_details_nodegroupid)
         cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_status_bool_nodeid)
         include_list = self.build_include_list(cons_details_tiles, datatype_factory)
-        exclude_list = self.build_exclude_list(cons_details_tiles, datatype_factory)
-        # filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid).exclude(resourceinstanceid__in=exclude_list)
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid, resourceinstanceid__in=include_list)
 
         order_config = { # if this is not up-to-date sorting will break
@@ -107,19 +102,6 @@ class ActiveConsultationsView(View):
 
         return include_list
 
-
-    def build_exclude_list(self, tiles, datatype_factory):
-        exclude_statuses = ["Aborted","Completed"]
-        exclude_list = []
-        cons_status_node = models.Node.objects.get(nodeid=self.cons_status_node_id)
-        datatype = datatype_factory.get_instance(cons_status_node.datatype)
-        for tile in tiles:
-            if self.cons_status_node_id in list(tile.data.keys()):
-                tile_status = datatype.get_display_value(tile, cons_status_node)
-                if tile_status in exclude_statuses:
-                    exclude_list.append(str(tile.resourceinstance.resourceinstanceid))
-
-        return exclude_list
 
     def get_paginated_data(self, grouped_tile_list, page_ct, page_num):
 
