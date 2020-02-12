@@ -12,6 +12,7 @@ except ImportError:
     pass
 
 APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+APP_PATHNAME = "arches-her"
 STATICFILES_DIRS = (os.path.join(APP_ROOT, "media"),) + STATICFILES_DIRS
 
 DATATYPE_LOCATIONS.append("Arches_HER.datatypes")
@@ -19,6 +20,7 @@ FUNCTION_LOCATIONS.append("Arches_HER.functions")
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "functions", "templates"))
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "widgets", "templates"))
 TEMPLATES[0]["DIRS"].insert(0, os.path.join(APP_ROOT, "templates"))
+TEMPLATES[0]["OPTIONS"]["context_processors"].append("Arches_HER.utils.context_processors.project_settings")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "vwo1!nn5s0m)89@pn7^!4a^+_+7mdhk^=&$zrwi(n2lisgi0_w"

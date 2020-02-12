@@ -13,7 +13,7 @@ class RedirectToConsultations(MiddlewareMixin):
     """
 
     def process_request(self, request):
-        project_name = 'consultations'
+        project_name = settings.APP_PATHNAME
         source = request.META.get('HTTP_REFERER')
         host = request.META['HTTP_HOST']
         path = request.META['PATH_INFO']

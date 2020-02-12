@@ -23,7 +23,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 {% block css %}
     {{ block.super }}
-    {% if '/consultations/' in request.path %}
+    {% if project_settings.APP_PATHNAME in request.path %}
     <link href="{% static 'css/consultations.css' %}" rel="stylesheet">
     {% endif %}
 {% endblock css%}
@@ -31,8 +31,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 {% block body_attributes %}style="overflow-y:hidden;"{% endblock %}
 
 {% block body %}
-
-    {% if '/consultations/' in request.path %}
+    {% if project_settings.APP_PATHNAME in request.path %}
         <!-- ko if: alert() -->
         <div data-bind="visible: alert().active" style="display: none;" class="relative">
             <div id="card-alert-panel" data-bind="css: 'ep-form-alert ' + (alert() ? alert().type() : '')">
@@ -56,7 +55,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <!-- /ko -->
         {% block navheader %}
             {% block mainnav %}
-            {% if '/consultations/' in request.path %}
+            {% if project_settings.APP_PATHNAME in request.path %}
                 <div id="workflow-container">
 
                     <!-- Vertical Nav Panel -->

@@ -12,10 +12,10 @@ class ConsultationView(PluginView):
     def index(self, request):
         context = {}
         context['plugins'] = []
-        context['main_script'] = 'index',
-        context['active_page'] = 'Home',
-        context['app_title'] = settings.APP_TITLE,
-        context['copyright_text'] = settings.COPYRIGHT_TEXT,
+        context['main_script'] = 'index'
+        context['active_page'] = 'Home'
+        context['app_title'] = settings.APP_TITLE
+        context['copyright_text'] = settings.COPYRIGHT_TEXT
         context['copyright_year'] = settings.COPYRIGHT_YEAR
         print('hello world')
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
