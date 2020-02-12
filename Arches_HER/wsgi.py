@@ -16,14 +16,21 @@ You should have received a copy of the GNU Affero General Public License
 along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
-
-#!/usr/bin/env python
 import os
 import sys
+import inspect
+path = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 
-if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "arches_her.settings")
+if path not in sys.path:
+    sys.path.append(path)
 
-    from django.core.management import execute_from_command_line
+# reverting back to the old style of setting the DJANGO_SETTINGS_MODULE env variable
+# refer to the following blog post under the heading "Leaking of process environment variables."
+# http://blog.dscpl.com.au/2012/10/requests-running-in-wrong-django.html
+os.environ['DJANGO_SETTINGS_MODULE'] = "arches_her.settings"
 
-    execute_from_command_line(sys.argv)
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
+
+from arches.app.models.system_settings import settings
+settings.update_from_db()
