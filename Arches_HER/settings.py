@@ -53,7 +53,7 @@ DATABASES = {
         "CONN_MAX_AGE": 0,
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "HOST": "localhost",
-        "NAME": "Arches_HER",
+        "NAME": "arches_her",
         "OPTIONS": {},
         "PASSWORD": "postgis",
         "PORT": "5432",
