@@ -80,7 +80,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
-            this.quitUrl = "/Arches-HER" + arches.urls.plugin('init-workflow');
+            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             self.getJSON('communication-workflow');
 
             self.activeStep.subscribe(this.updateState);

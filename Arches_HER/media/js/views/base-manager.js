@@ -74,22 +74,22 @@ define([
             });
 
             options.viewModel.inSearch = ko.pureComputed(function() {
-                return window.location.pathname === "/Arches-HER/search";
+                return window.location.pathname === "/arches-her/search";
             });
             options.viewModel.inActiveCons = ko.pureComputed(function() {
-                return window.location.pathname === "/Arches-HER/plugins/active-consultations";
+                return window.location.pathname === "/arches-her/plugins/active-consultations";
             });
             options.viewModel.inInitWorkflow = ko.pureComputed(function() {
-                return window.location.pathname === "/Arches-HER/plugins/init-workflow";
+                return window.location.pathname === "/arches-her/plugins/init-workflow";
             });
             options.viewModel.inDashboard = ko.pureComputed(function() {
-                return window.location.pathname === "/Arches-HER/plugins/dashboard";
+                return window.location.pathname === "/arches-her/plugins/dashboard";
             });
             options.viewModel.inHelp = ko.pureComputed(function() {
-                return window.location.pathname === "/Arches-HER/consultations-help";
+                return window.location.pathname === "/arches-her/consultations-help";
             });
             options.viewModel.inAbout = ko.pureComputed(function() {
-                return window.location.pathname === "/Arches-HER/consultations-about";
+                return window.location.pathname === "/arches-her/consultations-about";
             });
 
             PageView.prototype.constructor.call(this, options);

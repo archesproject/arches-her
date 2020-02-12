@@ -123,7 +123,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
-            this.quitUrl = "/Arches-HER" + arches.urls.plugin('init-workflow');
+            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             console.log(this.quitUrl);
             self.getJSON('consultation-workflow');
 

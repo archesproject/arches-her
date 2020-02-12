@@ -49,7 +49,7 @@ define([
         this.workflowJSON.subscribe(function(val){
             if(val) {
                 self.workflows(val['config']['workflows'].map(function(wf){
-                    wf.url = '/Arches-HER'+arches.urls.plugin(wf.slug);
+                    wf.url = '/arches-her'+arches.urls.plugin(wf.slug);
                     return wf;
                 }, this));
             }

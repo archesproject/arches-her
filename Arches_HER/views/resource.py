@@ -23,7 +23,7 @@ from arches.app.models.resource import Resource
 from arches.app.utils.response import JSONResponse
 from arches.app.search.search_engine_factory import SearchEngineFactory
 from arches.app.datatypes.datatypes import DataTypeFactory
-from Arches_HER.views.active_consultations import build_resource_dict
+from arches_her.views.active_consultations import build_resource_dict
 import logging
 
 logger = logging.getLogger(__name__)

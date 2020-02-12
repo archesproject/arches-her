@@ -2,15 +2,15 @@ from arches.app.views.plugin import PluginView
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
-from Arches_HER.views.main import ConsultationView
-from Arches_HER.views.file_template import FileTemplateView
-from Arches_HER.views.index import IndexView
-from Arches_HER.views.consultations_help import HelpView
-from Arches_HER.views.consultations_about import AboutView
-from Arches_HER.views import search
+from arches_her.views.main import ConsultationView
+from arches_her.views.file_template import FileTemplateView
+from arches_her.views.index import IndexView
+from arches_her.views.consultations_help import HelpView
+from arches_her.views.consultations_about import AboutView
+from arches_her.views import search
 from django.views.generic import RedirectView
-from Arches_HER.views.resource import ResourceDescriptors
-from Arches_HER.views.active_consultations import ActiveConsultationsView
+from arches_her.views.resource import ResourceDescriptors
+from arches_her.views.active_consultations import ActiveConsultationsView
 from arches.app.views import main
 from arches.app.views.user import UserManagerView
 

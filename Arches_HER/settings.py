@@ -1,5 +1,5 @@
 """
-Django settings for Arches_HER project.
+Django settings for arches_her project.
 """
 
 import os
@@ -15,12 +15,12 @@ APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe(
 APP_PATHNAME = "arches-her"
 STATICFILES_DIRS = (os.path.join(APP_ROOT, "media"),) + STATICFILES_DIRS
 
-DATATYPE_LOCATIONS.append("Arches_HER.datatypes")
-FUNCTION_LOCATIONS.append("Arches_HER.functions")
+DATATYPE_LOCATIONS.append("arches_her.datatypes")
+FUNCTION_LOCATIONS.append("arches_her.functions")
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "functions", "templates"))
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "widgets", "templates"))
 TEMPLATES[0]["DIRS"].insert(0, os.path.join(APP_ROOT, "templates"))
-TEMPLATES[0]["OPTIONS"]["context_processors"].append("Arches_HER.utils.context_processors.project_settings")
+TEMPLATES[0]["OPTIONS"]["context_processors"].append("arches_her.utils.context_processors.project_settings")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "vwo1!nn5s0m)89@pn7^!4a^+_+7mdhk^=&$zrwi(n2lisgi0_w"
@@ -28,10 +28,10 @@ SECRET_KEY = "vwo1!nn5s0m)89@pn7^!4a^+_+7mdhk^=&$zrwi(n2lisgi0_w"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ROOT_URLCONF = "Arches_HER.urls"
+ROOT_URLCONF = "arches_her.urls"
 
 # a prefix to append to all elasticsearch indexes, note: must be lower case
-ELASTICSEARCH_PREFIX = "Arches_HER"
+ELASTICSEARCH_PREFIX = "arches_her"
 
 SEARCH_EXPORT_IMMEDIATE_DOWNLOAD_THRESHOLD = 2000  # The maximum number of instances a user can download from search export without celery
 SEARCH_EXPORT_LIMIT = 15000  # The maximum documents ElasticSearch will return in an export - **System Settings**
@@ -70,7 +70,7 @@ DATABASES = {
 ALLOWED_HOSTS = []
 
 SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, "system_settings", "System_Settings.json")
-WSGI_APPLICATION = "Arches_HER.wsgi.application"
+WSGI_APPLICATION = "arches_her.wsgi.application"
 STATIC_ROOT = "/var/www/media"
 
 RESOURCE_IMPORT_LOG = os.path.join(APP_ROOT, "logs", "resource_import.log")
@@ -92,7 +92,7 @@ LOGGING = {
 }
 
 MIDDLEWARE = [
-    "Arches_HER.utils.consultations_middleware.RedirectToConsultations",
+    "arches_her.utils.consultations_middleware.RedirectToConsultations",
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
@@ -142,7 +142,7 @@ CACHE_BY_USER = {"anonymous": 3600 * 24}
 MOBILE_OAUTH_CLIENT_ID = ""
 MOBILE_DEFAULT_ONLINE_BASEMAP = {"default": "mapbox://styles/mapbox/streets-v9"}
 
-APP_TITLE = "Arches Consultations"
+APP_TITLE = "Arches-HER"
 COPYRIGHT_TEXT = "All Rights Reserved."
 COPYRIGHT_YEAR = "2020"
 
