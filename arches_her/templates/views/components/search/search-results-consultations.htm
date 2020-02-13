@@ -8,7 +8,7 @@
         <div class="search-result-info">
             <a class="" href="" data-bind="click: $parent.viewReport.bind($parent)"><span data-bind="text: displayname"></span></a>
             <div class="">
-                <span class="cons-type">{% trans "Application Type goes here" %}</span>
+                <span class="cons-type" data-bind="text: applicationType || 'No Application Type'"></span>
             </div>
         </div>
 
