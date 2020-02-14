@@ -30,7 +30,6 @@ urlpatterns = [
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
     url(r'^'+settings.APP_PATHNAME+'/index.htm', IndexView.as_view(), name='home'),
     url(r'^', include('arches.urls')),
-    # url(r'^'+settings.APP_PATHNAME+'/index.htm', main.index, name='home'),
     url(r'^'+settings.APP_PATHNAME+'/user$', UserManagerView.as_view(), name="user_profile_manager"),
     url(r'^filetemplate', FileTemplateView.as_view(), name='filetemplate'),
     url(r'^'+settings.APP_PATHNAME+'/plugins/active-consultations', PluginView.as_view(), name='active-consultations'),
