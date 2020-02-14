@@ -98,8 +98,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                             </li>
                             {% if user|can_create_resource_instance %}
                             <li class="workflow-main-nav-item">
-                                <a href="{% url 'resource' %}"><i class="fa fa-bookmark"></i><span>{% trans "Manage" %}</span></a>
+                                <a href="{% url 'resource' %}"><i class="fa fa-building-o"></i><span>{% trans "Resources" %}</span></a>
                                 <div class="nav-tooltip">{% trans "Manage Resources" %}</div>
+                            </li>
+                            {% endif %}
+                            {% if user|can_create_graph %}
+                            <li class="workflow-main-nav-item">
+                                <a href="{% url 'graph' '' %}"><i class="fa fa-bookmark"></i><span>{% trans "Admin" %}</span></a>
+                                <div class="nav-tooltip">{% trans "Go to Administrative view" %}</div>
                             </li>
                             {% endif %}
                         </ul>
