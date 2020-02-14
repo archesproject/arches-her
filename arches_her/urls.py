@@ -2,7 +2,6 @@ from arches.app.views.plugin import PluginView
 from django.conf.urls import include, url
 from django.conf import settings
 from django.conf.urls.static import static
-from arches_her.views.main import ConsultationView
 from arches_her.views.file_template import FileTemplateView
 from arches_her.views.index import IndexView
 from arches_her.views.consultations_help import HelpView
@@ -18,6 +17,7 @@ uuid_regex = settings.UUID_REGEX
 
 urlpatterns = [
     url(r'^$', IndexView.as_view(), name='root'),
+    url(r'^'+settings.APP_PATHNAME+'/$', IndexView.as_view(), name='consultations-root'),
     url(r'^index.htm', IndexView.as_view(), name='home'),
     url(r'^'+settings.APP_PATHNAME+'/index.htm', IndexView.as_view(), name='consultations-home'),
     url(r'^'+settings.APP_PATHNAME+'/search$', search.SearchView.as_view(), name="search_home_consultations"),
@@ -30,7 +30,6 @@ urlpatterns = [
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
     url(r'^'+settings.APP_PATHNAME+'/index.htm', IndexView.as_view(), name='home'),
     url(r'^', include('arches.urls')),
-    # url(r'^consultations', ConsultationView.as_view(), name='consultations'),
     # url(r'^'+settings.APP_PATHNAME+'/index.htm', main.index, name='home'),
     url(r'^'+settings.APP_PATHNAME+'/user$', UserManagerView.as_view(), name="user_profile_manager"),
     url(r'^filetemplate', FileTemplateView.as_view(), name='filetemplate'),

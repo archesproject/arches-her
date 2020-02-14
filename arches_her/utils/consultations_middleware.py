@@ -25,8 +25,15 @@ class RedirectToConsultations(MiddlewareMixin):
             r'^/report',
         )
 
-        if source is not None and project_name in source and project_name not in path:
+        if source is not None and path == r'/resource': # add-new-resource page
+            if (project_name + r'/resource/') in source: # referrer was DELETE request
+                destination = f'{url_scheme}://{host}/{project_name}/plugins/init-workflow'
+                return HttpResponseRedirect(destination)
+            elif project_name in source: # referrer was other from within arches-her namespace
+                destination = f'{url_scheme}://{host}/{project_name}{path}'
+                return HttpResponseRedirect(destination)
+        elif source is not None and project_name in source and project_name not in path:
             urlmatch = any(map(lambda x: re.compile(x).match(path), destination_paths))
             if urlmatch:
-                destination = '{0}://{1}/{2}{3}'.format(url_scheme, host, project_name, path)
+                destination = f'{url_scheme}://{host}/{project_name}{path}'
                 return HttpResponseRedirect(destination)
