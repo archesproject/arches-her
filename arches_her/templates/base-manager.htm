@@ -59,14 +59,14 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 <div id="workflow-container">
 
                     <!-- Vertical Nav Panel -->
-                    <div class="workflow-panel navbarclosed" data-bind="css: {'navbarclosed': navbarClosed}">
+                    <div class="workflow-panel" data-bind="css: {'navbarclosed': ko.unwrap(navbarClosed) === true}">
 
                         <!-- Menu Header -->
                         <div class="workflow-panel-nav-header" data-bind='click: function(){navbarToggle(!navbarClosed())}'>
                             <a>
                               <span>
-                                <i class="fa fa-lg" style="font-size: 23px;" data-bind="css: {'fa-chevron-circle-right': navbarClosed, 'fa-chevron-circle-left': !navbarClosed()}"></i>
-                                <span class="" data-bind="visible: !navbarClosed()">{% trans "Consultations" %}</span>
+                                <i class="fa fa-lg" style="font-size: 23px;" data-bind="css: {'fa-chevron-circle-right': navbarClosed, 'fa-chevron-circle-left': ko.unwrap(navbarClosed) === false}"></i>
+                                <span class="" data-bind="visible: ko.unwrap(navbarClosed) === false">{% trans "Consultations" %}</span>
                               </span>
                             </a>
                         </div>
