@@ -56,7 +56,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         {% block navheader %}
             {% block mainnav %}
             {% if project_settings.APP_PATHNAME in request.path %}
-                <div id="workflow-container">
+                <div id="workflow-container" data-bind="visible: true" style="display: none;">
 
                     <!-- Vertical Nav Panel -->
                     <div class="workflow-panel" data-bind="css: {'navbarclosed': ko.unwrap(navbarClosed) === true}">
