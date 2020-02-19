@@ -26,19 +26,20 @@ define([
         constructor: function(options) {
             options = options ? options : {};
             options.viewModel = (options && options.viewModel) ? options.viewModel : {};
+            options.viewModel.navbarClosed = ko.observable(false);
             var workflows = ['application-area', 'consultation-workflow', 'communication-workflow', 'site-visit', 'correspondence-workflow'];
 
-            if (options.viewModel.plugin !== undefined && workflows.includes(options.viewModel.plugin.componentname)) {
-                options.viewModel.navbarClosed = ko.observable(true);
-            } else if (localStorage.navbarClosedLocal !== undefined) {
-                options.viewModel.navbarClosed = ko.observable(JSON.parse(localStorage.navbarClosedLocal));
+            if (localStorage.getItem('navbarClosedLocal') !== undefined) {
+                options.viewModel.navbarClosed(JSON.parse(localStorage.getItem('navbarClosedLocal')));
+                // console.log("ko set to: "+options.viewModel.navbarClosed());
             } else {
-                localStorage.setItem("navbarClosedLocal", false);
-                options.viewModel.navbarClosed = ko.observable(false);
+                localStorage.setItem('navbarClosedLocal', false);
+                options.viewModel.navbarClosed(false);
+                // console.log("ko set to: "+options.viewModel.navbarClosed());
             }
 
             options.viewModel.navbarToggle = function(val) {
-                localStorage.setItem("navbarClosedLocal", val);
+                localStorage.setItem('navbarClosedLocal', val);
                 options.viewModel.navbarClosed(val);
             };
 
