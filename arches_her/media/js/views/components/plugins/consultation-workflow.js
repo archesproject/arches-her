@@ -115,6 +115,7 @@ define([
                     component: 'views/components/workflows/consultations-final-step',
                     componentname: 'consultations-final-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea', // consultation status
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
