@@ -1,0 +1,29 @@
+{% load i18n %}
+
+<div class="tabbed-report-sidepanel-content">
+    <div class="tabbed-report-sidepanel-title">
+        <h4>Site Visits List</h4>
+    </div>
+    <div class="tabbed-report-sidepanel-main">
+        <section class="sidebar-section">
+            <h4>{% trans "Visits" %}</h4>
+            <div class="sidebar-single-line-group">
+            <!-- ko foreach: visits -->
+                <div class="sidebar-single-line-type">
+                    <a data-bind="attr: {href: '#' + tileid}">
+                        <!-- ko component: {
+                            name: 'datepicker-widget',
+                            params: { value: date, state: 'display_value' }
+                        } --><!-- /ko -->
+                    </a>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: visits().length === 0 -->
+                <div class="sidebar-single-line-value">
+                    {% trans "No site visits added" %}
+                </div>
+            <!-- /ko -->
+            </div>
+        </section>
+    </div>
+</div>

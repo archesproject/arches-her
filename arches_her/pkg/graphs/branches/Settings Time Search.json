@@ -1,0 +1,173 @@
+{
+    "graph": [
+        {
+            "author": " ",
+            "cards": [
+                {
+                    "active": true,
+                    "cardid": "4f56d20c-fad7-11e6-bf11-6c4008b05c4c",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "Configuration Settings for temporal search",
+                    "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                    "helpenabled": true,
+                    "helptext": "<p>You can see the color ramps at:</p><p><a href='https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md'><font color='#f7f7f7'>https://github.com/d3/d3-3.x-api-reference/blob/master/Ordinal-Scales.md</font></a><br></p>",
+                    "helptitle": "Time Settings",
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Settings Time Search",
+                    "nodegroup_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "sortorder": null,
+                    "visible": true
+                }
+            ],
+            "cards_x_nodes_x_widgets": [],
+            "color": null,
+            "config": {},
+            "deploymentdate": null,
+            "deploymentfile": null,
+            "description": "Configuration Settings for temporal search",
+            "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "edgeid": "82ec989c-fad7-11e6-a66b-6c4008b05c4c",
+                    "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
+                    "rangenode_id": "82ec96bd-fad7-11e6-afb0-6c4008b05c4c"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "edgeid": "9c0401e3-fad7-11e6-bed1-6c4008b05c4c",
+                    "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
+                    "rangenode_id": "9c03ffdc-fad7-11e6-8cc9-6c4008b05c4c"
+                }
+            ],
+            "functions_x_graphs": [],
+            "graphid": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+            "iconclass": "fa fa-calendar",
+            "is_editable": true,
+            "isactive": true,
+            "isresource": false,
+            "jsonldcontext": null,
+            "name": "Settings Time Search",
+            "nodegroups": [
+                {
+                    "cardinality": "1",
+                    "legacygroupid": null,
+                    "nodegroupid": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "parentnodegroup_id": null
+                }
+            ],
+            "nodes": [
+                {
+                    "config": {
+                        "options": [
+                            {
+                                "id": "92fc786c-3713-46a5-80d0-39cbc5c554ca",
+                                "selected": false,
+                                "text": "d3.scale.category10()"
+                            },
+                            {
+                                "id": "94790607-b2bf-4328-bc1d-6c8e8d1aff42",
+                                "selected": false,
+                                "text": "d3.scale.category20()"
+                            },
+                            {
+                                "id": "d010673f-506c-4e11-b705-d994535fa937",
+                                "selected": false,
+                                "text": "d3.scale.category20b()"
+                            },
+                            {
+                                "id": "80e585ab-1eb6-44c0-a7de-222f27b1d8bb",
+                                "selected": false,
+                                "text": "d3.scale.category20c()"
+                            }
+                        ]
+                    },
+                    "datatype": "domain-value",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Color Ramp",
+                    "nodegroup_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "nodeid": "9c03ffdc-fad7-11e6-8cc9-6c4008b05c4c",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Time Wheel Configuration",
+                    "nodegroup_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "nodeid": "82ec96bd-fad7-11e6-afb0-6c4008b05c4c",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Temporal Search",
+                    "nodegroup_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "nodeid": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                    "parentproperty": "",
+                    "sortorder": 0
+                }
+            ],
+            "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "relatable_resource_model_ids": [],
+            "resource_2_resource_constraints": [],
+            "root": {
+                "config": null,
+                "datatype": "semantic",
+                "description": "",
+                "exportable": false,
+                "fieldname": "",
+                "graph_id": "4f565430-fad7-11e6-9950-6c4008b05c4c",
+                "is_collector": true,
+                "isrequired": false,
+                "issearchable": true,
+                "istopnode": true,
+                "name": "Temporal Search",
+                "nodegroup_id": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                "nodeid": "4f565180-fad7-11e6-a72e-6c4008b05c4c",
+                "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                "sortorder": 0
+            },
+            "slug": null,
+            "subtitle": "Configuration settings for temporal searches",
+            "template_id": "50000000-0000-0000-0000-000000000001",
+            "version": ""
+        }
+    ]
+}

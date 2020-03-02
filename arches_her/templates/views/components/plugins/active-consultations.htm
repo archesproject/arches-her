@@ -1,0 +1,185 @@
+{% load i18n %}
+{% load template_tags %}
+{% load staticfiles %}
+
+<!-- ko if: loading() === true -->
+
+<div class="active-cons-hover-loading">
+    <i class="fa fa-spin fa-spinner"></i>
+    {% trans "Loading Active Consultations..." %}
+</div>
+
+<!--/ko-->
+
+<!-- ko if: loading() === false -->
+<div class="active-cons-container" style="">
+    <div class="sticky">
+        <div class="active-cons-filters" data-bind="visible: layout() === 'grid'">
+            <input data-bind="value: keyword" placeholder="find..."></input>
+            <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">{% trans "Search" %}</button>
+            <button class="btn btn-sm btn-dark reset" data-bind="click: resetKeywordSearch"><i class="fa fa-remove"></i></button>
+        </div>
+        <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
+            <select data-bind="value: orderByOption,
+                              options: sortOptions,
+                              optionsCaption: 'Sort by...',
+                              chosen: {width: '300px'}">
+            </select>
+        </div>
+
+        <div class="active-consultations-display">
+            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 21px; margin-top: 3px;"></i></button>
+            <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 21px; margin-top: -2px;"></i></button>
+        </div>
+    </div>
+
+    <div class="active-cons-listing-container">
+        <div class="col-sm-12">
+            <!-- ko if: active_items().length > 0 -->
+            <div class="projects-grid" data-bind="visible: layout() === 'grid'">
+                <!-- ko foreach: active_items -->
+                <div class="card-grid-item">
+                    <div class="panel mar-no">
+                      <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
+                        <div class="active-cons-header"
+                            data-bind="css: {'status-ok': ($parent.getTargetDays($data['Target Date']) > 7),
+                                            'status-warning': ($parent.getTargetDays($data['Target Date']) <=7 &&
+                                                $parent.getTargetDays($data['Target Date']) >= 1),
+                                            'status-late': ($parent.getTargetDays($data['Target Date']) < 1)}">
+                            <div class="active-cons-header-title" data-bind="text: $data['Name'] || 'Unnamed Consultation'"></div>
+                        </div>
+                      </a>
+                      <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
+                        <div class="active-cons-map-container">
+
+                            <div class="active-cons-map">
+                                <!-- ko if: !$data["Geospatial Location"] -->
+                                <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; right: 20px;" >{% trans "No Geometry Defined in Consultation" %}</span>
+                                <!-- /ko -->
+                                <!-- ko if: $data["Geospatial Location"] && $data.mapImageUrl() == false -->
+                                <span style="z-index:2; font-size: 14px; position: absolute; top: 100px; left: 90px;" ><i class="fa fa-spin fa-spinner"></i>{% trans " Loading Map" %}</span>
+                                <!-- /ko -->
+                                <img data-bind="attr: {src: $data.mapImageUrl()}, css: {'active-cons-map-disabled': !$data['Geospatial Location']}"></img>
+                                <div class="map-credit">
+                                    <span>
+                                        <a class="mapboxgl-ctrl-logo" target="_blank" href="https://www.mapbox.com/" aria-label="Mapbox logo" rel="noopener"></a>
+                                    </span>
+                                    <span>© Mapbox © OpenStreetMap</span>
+                                </div>
+
+                            </div>
+                            <!-- ko if: $data.mapImageUrl() == false -->
+                            <div id="map" class="relative" style="height: 200px; opacity: 0;" data-bind="mapboxgl: {
+                                mapOptions: {
+                                    style: {
+                                        version: 8,
+                                        sources: $data.sources,
+                                        sprite: $parent.sprite,
+                                        glyphs: $parent.glyphs,
+                                        layers: $data.layers,
+                                        center: $data.center,
+                                        zoom: $data.zoom
+                                    },
+                                    preserveDrawingBuffer: true,
+                                    bounds: $data.bounds,
+                                    fitBoundsOptions: $data.fitBoundsOptions,
+                                },
+                                afterRender: function(map) {
+                                    $parent.setupMap(map, $data);
+                                }
+                                }">
+                            </div>
+                            <!-- /ko -->
+                        </div>
+                      </a>
+                      <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
+                      <div>
+                        <div class="active-cons-stubs">
+                            <div class="active-cons-stub-left">
+                                <div class="active-cons-stub-val" data-bind="text: $data['Target Date'] || 'Date not entered'"></div>
+                                <div class="active-cons-stub-label" data-bind="">Target Date</div>
+                            </div>
+                            <div class="active-cons-stub-right">
+                                <div class="active-cons-stub-val" data-bind="text: $data['Consultation Type'] || 'Type not entered'"></div>
+                                <div class="active-cons-stub-label" data-bind="">Type</div>
+                            </div>
+                        </div>
+
+                        <div class="active-cons-stub-summary" style="">
+                            <p class="active-cons-stub-summary-text" data-bind="html: $data['Proposal'] || 'Proposal not entered'"></p>
+                        </div>
+
+                        <div class="panel-footer" style="padding: 0px">
+                            <div class="ep-toolbar cons">
+                                <div class="cons-owner-title-panel">
+                                    <div class="cons-owner-title" data-bind="text: $data['Casework Officer'] || 'No Casework Officer'"></div>
+                                </div>
+                            </div>
+                        </div>
+                        </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- ko if: active_items().length === 0 && loading() === false -->
+            <div id="rr-splash" class="rr-splash">
+
+                <!-- Image -->
+
+                <!-- Splash Title -->
+                    <!-- ko ifnot: searched -->
+                    <div class="img-lg img-circle rr-splash-img-container">
+                        <img class="rr-splash-img" src="{% static "/img/inspection.png" %}" alt="Active Consultations">
+                    </div>
+                    <div class="rr-splash-title">{% trans "Welcome to Arches' Active Consultations" %}</div>
+                    <div class="rr-splash-description">{% trans "There are currently no Active Consultations." %}</div>
+                    <div class="rr-splash-description">{% trans "As soon as any Consultations move to Active status they will show up here." %}</div>
+                    <!-- /ko -->
+                    <!-- ko if: searched -->
+                    <div class="rr-splash-title">{% trans "No Active Consultations Match Your Search" %}</div>
+                    <!-- /ko -->
+                <!-- Splash Instructions -->
+            </div>
+            <!-- /ko -->
+
+            <div class="active-cons-table" data-bind="visible: layout() !== 'grid'">
+                <table data-bind="datatable: tableConfig" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead class="active-consultations-table-header">
+                        <tr>
+                            <th>{% trans "Name" %}</th>
+                            <th>{% trans "Type" %}</th>
+                            <th>{% trans "Target Date" %}</th>
+                            <th>{% trans "Casework Officer" %}</th>
+                            <th>{% trans "Proposal" %}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+
+        </div>
+    </div>
+    <!-- ko if: layout() == 'grid' && active_items().length > 0 -->
+    <div id="paginator" data-bind="with: paginator">
+        <div class="text-center">
+            <ul class="pagination">
+                <li><a data-bind="css: {'disabled': !has_previous()}, click: $parent.newPage.bind($parent, previous_page_number())" href="#">«</a></li>
+
+                <!-- ko foreach: { data: pages, as: 'page' } -->
+                <!-- ko if: page -->
+                    <li class="page" data-bind="click: $parents[1].newPage.bind($parents[1]), css: {'current active': (page == $parent.current_page())}">
+                        <a href="#" data-bind="text: page, attr:{'data-page':page}"></a>
+                    </li>
+                    <!-- /ko -->
+                    <!-- ko ifnot: page -->
+                    <li class="disabled"><a href="#">...</a></li>
+                    <!-- /ko -->
+                <!-- /ko -->
+                <li><a data-bind="css: { 'disabled': !has_next()}, click: $parent.newPage.bind($parent, next_page_number())" href="#">»</a></li>
+            </ul>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+<!-- /ko -->

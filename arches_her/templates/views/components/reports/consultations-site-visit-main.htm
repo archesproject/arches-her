@@ -1,0 +1,73 @@
+{% load i18n %}
+
+<div class="tabbed-report-mainpanel">
+    <div class="tabbed-report-mainpanel-title">
+        <h4>Site Visits</h4>
+    </div>
+    <div class="tabbed-report-mainpanel-content">
+    <!-- ko foreach: { data: visits, as: 'visit' } -->
+    <hr data-bind="visible: $index() > 0"></hr>
+    <div data-bind="text: $index() > 0"></div>
+    <dl class="dl-horizontal" style="padding-top: 12px" data-bind="attr: {id: tileid}">
+        <div><span class="rp-tile-title">Date</span><span class="tabbed-tile-value" data-bind="text: visit.date"></span></div>
+        <div><span class="rp-tile-title">Attendees</span><span class="tabbed-tile-value">
+            <!-- ko foreach: { data: visit.cardlookup.attendees, as: 'attendee' } -->
+                <span>
+                <!-- ko component: {
+                    name: 'resource-instance-multiselect-widget',
+                    params: { value: ko.observable(attendee), state: 'display_value'}
+                } --><!-- /ko -->
+                <span style="margin-left: -1px" data-bind="visible: $index() + 1 < Number(visit.cardlookup.attendees.length)">,</span>
+            </span>
+            <!-- /ko -->
+        </span></div>
+        <span class="rp-tile-title tabbed-report-tile-title">Location Description</span>
+        <span class="tabbed-tile-value" style="padding-bottom:15px">
+            <span class="tabbed-tile-value">
+                <!-- ko component: {
+                    name: 'rich-text-widget',
+                    params: { value: ko.observable(visit.locationdescription), state: 'display_value', displayfullvalue: true },
+                } --><!-- /ko -->
+            </span>
+        </span>
+    </dl>
+    <div>
+        <div class="report-tab-content-left-align">
+            <span class="rp-tile-title tabbed-report-tile-title">Observations</span>
+            <span class="tabbed-tile-value">
+                <!-- ko component: {
+                    name: 'rich-text-widget',
+                    params: { value: ko.observable(visit.cardlookup.observation), state: 'display_value', displayfullvalue: true }
+                } --><!-- /ko -->
+            </span>
+        </div>
+        <div class="report-tab-content-left-align">
+            <span class="rp-tile-title tabbed-report-tile-title">Recommendations</span>
+            <span class="tabbed-tile-value">
+                <!-- ko component: {
+                    name: 'rich-text-widget',
+                    params: { value: ko.observable(visit.cardlookup.recommendation), state: 'display_value', displayfullvalue: true }
+                } --><!-- /ko -->
+            </span>
+        </div>
+        <div class="report-tab-content-left-align">
+            <span class="rp-tile-title tabbed-report-tile-title">Photographs</span>
+            <!-- ko foreach: { data: visit.cards, as: 'card' } -->
+            <!-- ko if: card.nodegroupid === 'd8c9b821-a251-11e9-879b-00224800b26d' -->
+            <div>
+                <!-- ko component: {
+                name: card.model.cardComponentLookup[card.model.component_id()].componentname,
+                params: {
+                    state: 'report',
+                    card: card,
+                    pageVm: $root
+                }} -->
+                <!-- /ko -->
+            </div>
+            <!-- /ko -->
+            <!-- /ko -->
+        </div>
+    </div>
+    <!-- /ko -->
+    </div>
+</div>

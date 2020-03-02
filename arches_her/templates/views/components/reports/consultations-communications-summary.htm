@@ -1,0 +1,52 @@
+{% load i18n %}
+
+<div class="tabbed-report-sidepanel-content">
+    <div class="tabbed-report-sidepanel-title">
+        <h4>Communications/Correspondence</h4>
+    </div>
+    <div class="tabbed-report-sidepanel-main">
+        <section class="sidebar-section">
+            <h4>{% trans "Communications" %}</h4>
+            <!-- ko foreach: communications -->
+                <div class="sidebar-single-line-group">
+                    <a data-bind="attr: {href: '#' + tileid}">
+                        <!-- ko component: {
+                            name: 'datepicker-widget',
+                            params: { value: date, state: 'display_value' }
+                        } --><!-- /ko -->
+                        <span class="communication-type">
+                            <!-- ko component: {
+                                name: 'concept-select-widget',
+                                params: { value: type, state: 'display_value' }
+                            } --><!-- /ko -->
+                        </span>
+                    </a>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: communications().length === 0 -->
+                <div class="sidebar-single-line-value">
+                    {% trans "No communications added" %}
+                </div>
+            <!-- /ko -->
+        </section>
+
+        <section class="sidebar-section">
+            <h4>{% trans "Letters" %}</h4>
+            <!-- ko foreach: correspondences -->
+                <div class="sidebar-single-line-group">
+                    <a data-bind="attr: {href: '#' + tileid}">
+                        <!-- ko component: {
+                            name: 'concept-select-widget',
+                            params: { value: type, state: 'display_value' }
+                        } --><!-- /ko -->
+                    </a>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: correspondences().length === 0 -->
+                <div class="sidebar-single-line-value">
+                    {% trans "No letters added" %}
+                </div>
+            <!-- /ko -->
+        </section>
+    </div>
+</div>

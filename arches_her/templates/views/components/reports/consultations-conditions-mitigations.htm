@@ -1,0 +1,50 @@
+{% load i18n %}
+
+<div class="tabbed-report-sidepanel-content">
+    <div class="tabbed-report-sidepanel-title">
+        <h4>Condtions/Mitigations</h4>
+    </div>
+    <div class="tabbed-report-sidepanel-main">
+        <section class="sidebar-section">
+            <h4>{% trans "Conditions" %}</h4>
+            <div class="sidebar-single-line-group">
+            <!-- ko foreach: conditions -->
+                <div class="sidebar-single-line-type">
+                    <a data-bind="attr: {href: '#' + tileid}">
+                        <!-- ko component: {
+                            name: 'concept-select-widget',
+                            params: { value: type, state: 'display_value' }
+                        } --><!-- /ko -->
+                    </a>
+                </div>
+            <!-- /ko -->
+            <!-- ko if: conditions().length === 0 -->
+                <div class="sidebar-single-line-value">
+                    {% trans "No conditions added" %}
+                </div>
+            <!-- /ko -->
+            </div>
+          </section>
+
+          <section class="sidebar-section">
+              <h4>{% trans "Mitigations" %}</h4>
+              <div class="sidebar-single-line-group">
+                  <!-- ko foreach: mitigations -->
+                      <div class="sidebar-single-line-type">
+                          <a data-bind="attr: {href: '#' + tileid}">
+                              <!-- ko component: {
+                                  name: 'concept-select-widget',
+                                  params: { value: type, state: 'display_value' }
+                              } --><!-- /ko -->
+                          </a>
+                      </div>
+                  <!-- /ko -->
+                  <!-- ko if: mitigations().length === 0 -->
+                      <div class="sidebar-single-line-value">
+                          {% trans "No mitigations added" %}
+                      </div>
+                  <!-- /ko -->
+              </div>
+          </section>
+    </div>
+</div>

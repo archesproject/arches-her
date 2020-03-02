@@ -1,0 +1,19 @@
+{% load i18n %}
+
+<div id="rr-splash" class="rr-splash">
+    <div class="img-lg img-circle rr-splash-img-container">
+        <a><span><i class="fa" data-bind="class: icon"></i></span></a>
+    </div>
+
+    <div class="rr-splash-title" style="margin-bottom: 0px;">Site Visits</div>
+
+    <a class="btn btn-lg btn-file-select fileinput-button" data-bind="attr: {
+        href: '{% url 'plugins' 'site-visit' %}?resourceid=' + resourceId
+    }">
+        <i class="fa" data-bind="class: icon"></i>&nbsp;
+        <span>{% trans "Add Site Visit" %}</span>
+    </a>
+
+    <div class="rr-splash-description">{% trans "Arches allows you to add information about you observations you make during visits to the consultation site." %}</div>
+    <div class="rr-splash-description">{% trans "You can also include any recommendation that you want, as well as a listing of the people present at the visit." %}</div>
+</div>
