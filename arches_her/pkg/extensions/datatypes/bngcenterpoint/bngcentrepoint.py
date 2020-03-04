@@ -40,7 +40,9 @@ class BNGCentreDataType(BaseDataType):
 
         return errors 
 
-
+    def default_es_mapping(self):
+            bng_mapping = {"type": "text", "fields": {"keyword": {"ignore_above": 256, "type": "keyword"}}}
+            return bng_mapping
 
     def append_to_document(self, document, nodevalue, nodeid, tile):
 
@@ -48,8 +50,6 @@ class BNGCentreDataType(BaseDataType):
             'string': nodevalue,
             'nodegroup_id': tile.nodegroup_id
             })
-
-
 
     def get_search_terms(self, nodevalue, nodeid=None):
         return [
