@@ -35,7 +35,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Source Descriptions",
                     "nodegroup_id": "24d7b562-5464-11e9-8d59-000d3ab1e588",
                     "sortorder": 4,
@@ -54,7 +54,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Bibliographic Source Details",
                     "nodegroup_id": "24d7b565-5464-11e9-9f13-000d3ab1e588",
                     "sortorder": 6,
@@ -73,7 +73,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "System Reference Number ",
                     "nodegroup_id": "24d7b568-5464-11e9-b1d9-000d3ab1e588",
                     "sortorder": 1,
@@ -92,7 +92,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Publication Details",
                     "nodegroup_id": "24d7b56b-5464-11e9-ae30-000d3ab1e588",
                     "sortorder": 8,
@@ -130,7 +130,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Journal or Serial",
                     "nodegroup_id": "24d7b571-5464-11e9-a309-000d3ab1e588",
                     "sortorder": 7,
@@ -149,7 +149,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": "Use to record the creators of a resource exactly as they appear on the source.",
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Statement of Responsibility",
                     "nodegroup_id": "24d7b553-5464-11e9-96da-000d3ab1e588",
                     "sortorder": 5,
@@ -187,7 +187,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Bibliographic Title",
                     "nodegroup_id": "24d7b55c-5464-11e9-8e00-000d3ab1e588",
                     "sortorder": 3,
@@ -225,7 +225,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "External Cross References",
                     "nodegroup_id": "24d7b574-5464-11e9-858b-000d3ab1e588",
                     "sortorder": 11,
@@ -255,7 +255,14 @@
                     "cardid": "12619603-a3ee-11e9-8732-00224800b26d",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "12619603-a3ee-11e9-8732-00224800b26d",
+                            "constraintid": "bff82cb5-89e6-41c7-9bd2-d7439582c592",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
@@ -263,8 +270,8 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
-                    "name": "GLHER PrimaryReferenceNumber ",
+                    "is_editable": false,
+                    "name": "PrimaryReferenceNumber ",
                     "nodegroup_id": "12619601-a3ee-11e9-9ded-00224800b26d",
                     "sortorder": 0,
                     "visible": true
@@ -1912,13 +1919,13 @@
                     "card_id": "12619603-a3ee-11e9-8732-00224800b26d",
                     "config": {
                         "defaultValue": "",
-                        "label": "EventUID",
+                        "label": "SourceUID",
                         "maxLength": null,
                         "placeholder": "Enter text",
                         "width": "100%"
                     },
                     "id": "12619605-a3ee-11e9-8dbf-00224800b26d",
-                    "label": "EventUID",
+                    "label": "SourceUID",
                     "node_id": "12619604-a3ee-11e9-a87d-00224800b26d",
                     "sortorder": 0,
                     "visible": true,
@@ -2772,7 +2779,7 @@
             ],
             "graphid": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
             "iconclass": "fa fa-file-text",
-            "is_editable": true,
+            "is_editable": false,
             "isactive": true,
             "isresource": true,
             "jsonldcontext": null,
@@ -4076,5 +4083,11 @@
             "template_id": "50000000-0000-0000-0000-000000000001",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 11.2 on x86_64-pc-linux-musl, compiled by gcc (Alpine 8.2.0) 8.2.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "7"
+    }
 }
