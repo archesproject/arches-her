@@ -42,9 +42,8 @@ class BNGCentreDataType(BaseDataType):
 
 
     def default_es_mapping(self):
-        print("DOING GREAT STUFF")
-        # let ES dyanamically map this datatype
-        return
+        bng_mapping = {"type": "text", "fields": {"keyword": {"ignore_above": 256, "type": "keyword"}}}
+        return bng_mapping
 
 
     def append_to_document(self, document, nodevalue, nodeid, tile):
