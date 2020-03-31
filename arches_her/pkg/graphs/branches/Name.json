@@ -8,9 +8,16 @@
                     "cardid": "bbd0d025-955d-11e6-b664-024f9e178154",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "bbd0d025-955d-11e6-b664-024f9e178154",
+                            "constraintid": "436400bc-cd28-4a81-aa14-106dfd1200fa",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
-                    "description": "The name of a resource.\n\nApplies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their \"names\" from the Appellation branch.",
+                    "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "helpenabled": false,
                     "helptext": null,
@@ -23,12 +30,44 @@
                     "visible": true
                 }
             ],
-            "cards_x_nodes_x_widgets": [],
+            "cards_x_nodes_x_widgets": [
+                {
+                    "card_id": "bbd0d025-955d-11e6-b664-024f9e178154",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Name",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "9dacd447-7263-11ea-8450-287fcf6a5e72",
+                    "label": "Name",
+                    "node_id": "bbd0d022-955d-11e6-b664-024f9e178154",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "bbd0d025-955d-11e6-b664-024f9e178154",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Name Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "9daf4529-7263-11ea-ade3-287fcf6a5e72",
+                    "label": "Name Type",
+                    "node_id": "f9d9b911-955d-11e6-b664-024f9e178154",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                }
+            ],
             "color": null,
             "config": {},
             "deploymentdate": null,
             "deploymentfile": null,
-            "description": "The name of a resource.\n\nApplies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their \"names\" from the Appellation branch.",
+            "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
             "edges": [
                 {
                     "description": null,
@@ -58,26 +97,6 @@
             ],
             "nodes": [
                 {
-                    "config": {
-                        "rdmCollection": "051b5950-2c1e-49ff-af0d-dfbaa971d2fa"
-                    },
-                    "datatype": "concept",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Name Type",
-                    "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
-                    "nodeid": "f9d9b911-955d-11e6-b664-024f9e178154",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
                     "config": null,
                     "datatype": "string",
                     "description": "",
@@ -93,6 +112,26 @@
                     "nodeid": "bbd0d022-955d-11e6-b664-024f9e178154",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
+                    },
+                    "datatype": "concept",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Name Type",
+                    "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
+                    "nodeid": "f9d9b911-955d-11e6-b664-024f9e178154",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],

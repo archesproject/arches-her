@@ -17,7 +17,7 @@
                     "helptitle": null,
                     "instructions": null,
                     "is_editable": true,
-                    "name": "TImespan",
+                    "name": "Timespan",
                     "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
                     "sortorder": null,
                     "visible": true
@@ -100,7 +100,7 @@
             "isactive": true,
             "isresource": false,
             "jsonldcontext": null,
-            "name": "TImespan",
+            "name": "Timespan",
             "nodegroups": [
                 {
                     "cardinality": "1",
@@ -110,6 +110,44 @@
                 }
             ],
             "nodes": [
+                {
+                    "config": {
+                        "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Date Qualifier",
+                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "nodeid": "7a83f7f0-1b47-11ea-b284-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Timespan",
+                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "nodeid": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
                 {
                     "config": null,
                     "datatype": "date",
@@ -144,45 +182,7 @@
                     "nodeid": "6f279888-1b47-11ea-a84f-c4d9877d154e",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": null
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Date Qualifier",
-                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
-                    "nodeid": "7a83f7f0-1b47-11ea-b284-c4d9877d154e",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "TImespan",
-                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
-                    "nodeid": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
-                    "parentproperty": "",
-                    "sortorder": 0
+                    "sortorder": 1
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
@@ -199,7 +199,7 @@
                 "isrequired": false,
                 "issearchable": true,
                 "istopnode": true,
-                "name": "TImespan",
+                "name": "Timespan",
                 "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
                 "nodeid": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
                 "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",

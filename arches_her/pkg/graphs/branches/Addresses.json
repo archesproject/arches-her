@@ -8,13 +8,20 @@
                     "cardid": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                            "constraintid": "514aae4e-f262-4040-bfa1-29cfb51ca017",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "cc817a2e-85f5-11e9-8a02-80000b44d1d9",
-                    "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
+                    "helpenabled": true,
+                    "helptext": "<p><strong>Full Address</strong></p>\n\n<p>The full address of a building or site. Use this for recording the address for display purposes.</p>\n\n<p><strong>Building name</strong></p>\n\n<p>The name of the building or site. This should be included if there is no building number, eg. Buckingham Palace.</p>\n\n<p><strong>Building Number</strong></p>\n\n<p>The number of the building, eg. 23, 15A, 1B</p>\n\n<p><strong>Building Number Sub-Street</strong></p>\n\n<p>The number of the building on the sub-street, eg. 23, 15A, 1B</p>\n\n<p><strong>Sub-street</strong></p>\n\n<p>This may be included if the building or site&nbsp;is accessed from a minor street, associated with the main&nbsp;street. This should not be included unless it is essential for identifying the building or site. If it is included then a street must also be included.</p>\n\n<p><strong>Street</strong></p>\n\n<p>The name of the street the building/site is on. In certain cases, for instances in small villages and hamlets, there may be no designated street name and locality should be used, eg. Lover&#39;s Cottage, Shelford, Newtown, Madeupshire (where Shelford&nbsp;is the name of the hamlet)</p>\n\n<p><strong>Locality</strong></p>\n\n<p>The name of the locality used for the delivery.</p>\n\n<p>Town or City</p>\n\n<p>The name of the town/city associated with the building or site, eg.&nbsp;Nottingham, Southampton.&nbsp;</p>\n\n<p>&nbsp;</p>\n\n<p><strong>Post code</strong></p>\n\n<p>A post code identifies a group of delivery points, eg. NG4 3FN.This should always be included where known.&nbsp;</p>\n\n<p><strong>Address Status</strong></p>\n\n<p>The status of the address. This will usually be primary for the current address.</p>\n\n<p><strong>From Date</strong></p>\n\n<p>The date from which an address was in use (where known)</p>\n\n<p><strong>To Date</strong></p>\n\n<p>The date up to&nbsp;which an address was in use (where known)</p>\n\n<p><strong>Address Data Qualifier</strong></p>\n\n<p>Used to qualify the period defined by the&nbsp;date range, eg. Ongoing throughout</p>\n",
+                    "helptitle": "Address Details",
                     "instructions": null,
                     "is_editable": true,
                     "name": "Addresses",
@@ -36,56 +43,9 @@
                     "id": "cc817a3b-85f5-11e9-b3c5-80000b44d1d9",
                     "label": "Building Number",
                     "node_id": "cc817a34-85f5-11e9-b147-80000b44d1d9",
-                    "sortorder": 0,
+                    "sortorder": 4,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Sub-Street",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "cc817a3c-85f5-11e9-88e6-80000b44d1d9",
-                    "label": "Sub-Street",
-                    "node_id": "cc817a3a-85f5-11e9-b576-80000b44d1d9",
-                    "sortorder": 6,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Road",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "cc817a3d-85f5-11e9-b242-80000b44d1d9",
-                    "label": "Road",
-                    "node_id": "cc817a39-85f5-11e9-8ab8-80000b44d1d9",
-                    "sortorder": 7,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Address Status",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "cc81a140-85f5-11e9-80d2-80000b44d1d9",
-                    "label": "Address Status",
-                    "node_id": "cc817a38-85f5-11e9-9fd4-80000b44d1d9",
-                    "sortorder": 8,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
@@ -99,7 +59,23 @@
                     "id": "cc81a141-85f5-11e9-8b80-80000b44d1d9",
                     "label": "Locality",
                     "node_id": "cc817a36-85f5-11e9-a736-80000b44d1d9",
-                    "sortorder": 2,
+                    "sortorder": 6,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                    "config": {
+                        "defaultValue": null,
+                        "label": "Postcode",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "cc81a143-85f5-11e9-b165-80000b44d1d9",
+                    "label": "Postcode",
+                    "node_id": "cc817a33-85f5-11e9-8f4d-80000b44d1d9",
+                    "sortorder": 8,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -115,39 +91,7 @@
                     "id": "cc81a142-85f5-11e9-85dd-80000b44d1d9",
                     "label": "Town or City",
                     "node_id": "cc817a37-85f5-11e9-8446-80000b44d1d9",
-                    "sortorder": 3,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Postcode",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "cc81a143-85f5-11e9-b165-80000b44d1d9",
-                    "label": "Postcode",
-                    "node_id": "cc817a33-85f5-11e9-8f4d-80000b44d1d9",
-                    "sortorder": 1,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Building Name",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "cc81a144-85f5-11e9-ac2e-80000b44d1d9",
-                    "label": "Building Name",
-                    "node_id": "cc817a35-85f5-11e9-9d9c-80000b44d1d9",
-                    "sortorder": 5,
+                    "sortorder": 7,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -163,7 +107,86 @@
                     "id": "cc81a145-85f5-11e9-bcba-80000b44d1d9",
                     "label": "Building Number Sub-Street",
                     "node_id": "cc817a32-85f5-11e9-b2c0-80000b44d1d9",
-                    "sortorder": 4,
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Building Name",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "cc81a144-85f5-11e9-ac2e-80000b44d1d9",
+                    "label": "Building Name",
+                    "node_id": "cc817a35-85f5-11e9-9d9c-80000b44d1d9",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Sub-Street",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "cc817a3c-85f5-11e9-88e6-80000b44d1d9",
+                    "label": "Sub-Street",
+                    "node_id": "cc817a3a-85f5-11e9-b576-80000b44d1d9",
+                    "sortorder": 3,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                    "config": {
+                        "defaultValue": null,
+                        "label": "Street",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "cc817a3d-85f5-11e9-b242-80000b44d1d9",
+                    "label": "Street",
+                    "node_id": "cc817a39-85f5-11e9-8ab8-80000b44d1d9",
+                    "sortorder": 5,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Address Status",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "cc81a140-85f5-11e9-80d2-80000b44d1d9",
+                    "label": "Address Status",
+                    "node_id": "cc817a38-85f5-11e9-9fd4-80000b44d1d9",
+                    "sortorder": 9,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "cc817a31-85f5-11e9-92ee-80000b44d1d9",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Full Address",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "28c3c854-6e7e-11ea-b149-287fcf6a5e72",
+                    "label": "Full Address",
+                    "node_id": "103ee02e-6e7e-11ea-8ba8-287fcf6a5e72",
+                    "sortorder": 0,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 }
@@ -287,11 +310,20 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "rangenode_id": "cc817a32-85f5-11e9-b2c0-80000b44d1d9"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
+                    "edgeid": "103ee02f-6e7e-11ea-b1bd-287fcf6a5e72",
+                    "graph_id": "cc817a2e-85f5-11e9-8a02-80000b44d1d9",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by",
+                    "rangenode_id": "103ee02e-6e7e-11ea-8ba8-287fcf6a5e72"
                 }
             ],
             "functions_x_graphs": [],
             "graphid": "cc817a2e-85f5-11e9-8a02-80000b44d1d9",
-            "iconclass": "fa fa-cogs",
+            "iconclass": "fa fa-map-marker",
             "is_editable": true,
             "isactive": true,
             "isresource": false,
@@ -407,6 +439,42 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
+                    "name": "Sub-Street",
+                    "nodegroup_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
+                    "nodeid": "cc817a3a-85f5-11e9-b576-80000b44d1d9",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "cc817a2e-85f5-11e9-8a02-80000b44d1d9",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Full Address",
+                    "nodegroup_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
+                    "nodeid": "103ee02e-6e7e-11ea-8ba8-287fcf6a5e72",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E62_String",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "cc817a2e-85f5-11e9-8a02-80000b44d1d9",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
                     "name": "Locality",
                     "nodegroup_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
                     "nodeid": "cc817a36-85f5-11e9-a736-80000b44d1d9",
@@ -445,7 +513,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Road",
+                    "name": "Street",
                     "nodegroup_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
                     "nodeid": "cc817a39-85f5-11e9-8ab8-80000b44d1d9",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
@@ -466,24 +534,6 @@
                     "name": "Town or City",
                     "nodegroup_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
                     "nodeid": "cc817a37-85f5-11e9-8446-80000b44d1d9",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "cc817a2e-85f5-11e9-8a02-80000b44d1d9",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Sub-Street",
-                    "nodegroup_id": "cc817a2f-85f5-11e9-a21d-80000b44d1d9",
-                    "nodeid": "cc817a3a-85f5-11e9-b576-80000b44d1d9",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0
