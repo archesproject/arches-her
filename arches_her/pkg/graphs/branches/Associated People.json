@@ -10,7 +10,7 @@
                     "config": null,
                     "constraints": [],
                     "cssclass": null,
-                    "description": "Links an instance of an E74_Group to any E1_CRM entity.Dependencies:> Actor_Organisation Resource Model (to record the Affiliated Organisation) - Need to set Associated Organisations as node value> Actor_Person Resource Model> Role Type concept collection in the RDM",
+                    "description": "Links an instance of an E21 Actor to any E1_CRM entity. Dependencies:> Actor_Organisation Resource Model (to record the Affiliated Organisation) - Need to set Associated Organisations as node value> Actor_Person Resource Model> Role Type concept collection in the RDM",
                     "graph_id": "5056359f-4a35-11e9-9f92-000d3ab1e588",
                     "helpenabled": false,
                     "helptext": null,
@@ -104,7 +104,7 @@
             },
             "deploymentdate": null,
             "deploymentfile": null,
-            "description": "Links an instance of an E74_Group to any E1_CRM entity.Dependencies:> Actor_Organisation Resource Model (to record the Affiliated Organisation) - Need to set Associated Organisations as node value> Actor_Person Resource Model> Role Type concept collection in the RDM",
+            "description": "Links an instance of an E21 Actor to any E1_CRM entity. Dependencies:> Actor_Organisation Resource Model (to record the Affiliated Organisation) - Need to set Associated Organisations as node value> Actor_Person Resource Model> Role Type concept collection in the RDM",
             "edges": [
                 {
                     "description": null,
@@ -142,27 +142,6 @@
                 }
             ],
             "nodes": [
-                {
-                    "config": {
-                        "nodeid": "39e5cce1-499f-11e9-a39d-000d3ab1e588",
-                        "property": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by"
-                    },
-                    "datatype": "node-value",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "5056359f-4a35-11e9-9f92-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Affiliated Organisation",
-                    "nodegroup_id": "505635a0-4a35-11e9-b29b-000d3ab1e588",
-                    "nodeid": "505635a3-4a35-11e9-ab31-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of",
-                    "sortorder": 0
-                },
                 {
                     "config": {
                         "graphid": [
@@ -203,6 +182,27 @@
                     "nodeid": "505635a4-4a35-11e9-b4ae-000d3ab1e588",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "nodeid": null,
+                        "property": null
+                    },
+                    "datatype": "node-value",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "5056359f-4a35-11e9-9f92-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Affiliated Organisation",
+                    "nodegroup_id": "505635a0-4a35-11e9-b29b-000d3ab1e588",
+                    "nodeid": "505635a3-4a35-11e9-ab31-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P107i_is_current_or_former_member_of",
                     "sortorder": 0
                 }
             ],

@@ -1,0 +1,192 @@
+{
+    "graph": [
+        {
+            "author": "",
+            "cards": [
+                {
+                    "active": true,
+                    "cardid": "6983e385-733d-11ea-a816-287fcf6a5e72",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "",
+                    "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Contact Details",
+                    "nodegroup_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "sortorder": 8,
+                    "visible": true
+                }
+            ],
+            "cards_x_nodes_x_widgets": [
+                {
+                    "card_id": "6983e385-733d-11ea-a816-287fcf6a5e72",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Contact point",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "6983e388-733d-11ea-ae5d-287fcf6a5e72",
+                    "label": "Contact point",
+                    "node_id": "6983e387-733d-11ea-8f87-287fcf6a5e72",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "6983e385-733d-11ea-a816-287fcf6a5e72",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Contact Point Types",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6983e389-733d-11ea-b9ad-287fcf6a5e72",
+                    "label": "Contact Point Types",
+                    "node_id": "6983e386-733d-11ea-89ab-287fcf6a5e72",
+                    "sortorder": null,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                }
+            ],
+            "color": null,
+            "config": {
+                "nodes": [
+                    "b6503555-a303-11e9-a361-00224800b26d"
+                ]
+            },
+            "deploymentdate": null,
+            "deploymentfile": null,
+            "description": "",
+            "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "edgeid": "698409f8-733d-11ea-86ad-287fcf6a5e72",
+                    "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1i_identifies",
+                    "rangenode_id": "6983e387-733d-11ea-8f87-287fcf6a5e72"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "edgeid": "698409f9-733d-11ea-a011-287fcf6a5e72",
+                    "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "6983e386-733d-11ea-89ab-287fcf6a5e72"
+                }
+            ],
+            "functions_x_graphs": [],
+            "graphid": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+            "iconclass": "fa fa-user",
+            "is_editable": true,
+            "isactive": true,
+            "isresource": false,
+            "jsonldcontext": null,
+            "name": "Contact Details",
+            "nodegroups": [
+                {
+                    "cardinality": "n",
+                    "legacygroupid": null,
+                    "nodegroupid": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "parentnodegroup_id": null
+                }
+            ],
+            "nodes": [
+                {
+                    "config": {
+                        "rdmCollection": "3a6e31d6-0de9-49be-ae0b-80a7bae14b0a"
+                    },
+                    "datatype": "concept",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Contact Point Types",
+                    "nodegroup_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "nodeid": "6983e386-733d-11ea-89ab-287fcf6a5e72",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Contact point",
+                    "nodegroup_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "nodeid": "6983e387-733d-11ea-8f87-287fcf6a5e72",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1i_identifies",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "fillColor": "rgba(233,112,111,0.8)"
+                    },
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Contact Details",
+                    "nodegroup_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "nodeid": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "",
+                    "sortorder": 0
+                }
+            ],
+            "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "relatable_resource_model_ids": [],
+            "resource_2_resource_constraints": [],
+            "root": {
+                "config": {
+                    "fillColor": "rgba(233,112,111,0.8)"
+                },
+                "datatype": "semantic",
+                "description": "",
+                "exportable": false,
+                "fieldname": "",
+                "graph_id": "6983e382-733d-11ea-a32e-287fcf6a5e72",
+                "is_collector": true,
+                "isrequired": false,
+                "issearchable": true,
+                "istopnode": true,
+                "name": "Contact Details",
+                "nodegroup_id": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                "nodeid": "6983e383-733d-11ea-8b82-287fcf6a5e72",
+                "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                "sortorder": 0
+            },
+            "slug": null,
+            "subtitle": "Used to record contact details associated with an actor resource",
+            "template_id": "50000000-0000-0000-0000-000000000003",
+            "version": ""
+        }
+    ]
+}
