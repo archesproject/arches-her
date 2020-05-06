@@ -1,0 +1,152 @@
+{
+    "graph": [
+        {
+            "author": "",
+            "cards": [
+                {
+                    "active": true,
+                    "cardid": "2878fa79-8934-11ea-a547-f875a44e0e11",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "",
+                    "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Extent",
+                    "nodegroup_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": true
+                }
+            ],
+            "cards_x_nodes_x_widgets": [],
+            "color": null,
+            "config": {},
+            "deploymentdate": null,
+            "deploymentfile": null,
+            "description": "",
+            "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "edgeid": "2878fa7c-8934-11ea-a16f-f875a44e0e11",
+                    "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P90_has_value",
+                    "rangenode_id": "2878fa7b-8934-11ea-af5b-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "edgeid": "2878fa7d-8934-11ea-881f-f875a44e0e11",
+                    "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P91_has_unit",
+                    "rangenode_id": "2878fa7a-8934-11ea-9494-f875a44e0e11"
+                }
+            ],
+            "functions_x_graphs": [],
+            "graphid": "2878fa76-8934-11ea-8116-f875a44e0e11",
+            "iconclass": "fa fa-archive",
+            "is_editable": true,
+            "isactive": true,
+            "isresource": false,
+            "jsonldcontext": null,
+            "name": "Extent",
+            "nodegroups": [
+                {
+                    "cardinality": "1",
+                    "legacygroupid": null,
+                    "nodegroupid": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "parentnodegroup_id": null
+                }
+            ],
+            "nodes": [
+                {
+                    "config": {
+                        "rdmCollection": "51407fe6-9f8d-439d-8309-d6804b4437d2"
+                    },
+                    "datatype": "concept",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Extent Measurement Unit",
+                    "nodegroup_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "nodeid": "2878fa7a-8934-11ea-9494-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E58_Measurement_Unit",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P91_has_unit",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "number",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Quantity",
+                    "nodegroup_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "nodeid": "2878fa7b-8934-11ea-af5b-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P90_has_value",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Extent",
+                    "nodegroup_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "nodeid": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E54_Dimension",
+                    "parentproperty": "",
+                    "sortorder": 0
+                }
+            ],
+            "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "relatable_resource_model_ids": [],
+            "resource_2_resource_constraints": [],
+            "root": {
+                "config": null,
+                "datatype": "semantic",
+                "description": "Represents a single node in a graph",
+                "exportable": false,
+                "fieldname": "",
+                "graph_id": "2878fa76-8934-11ea-8116-f875a44e0e11",
+                "is_collector": true,
+                "isrequired": false,
+                "issearchable": true,
+                "istopnode": true,
+                "name": "Extent",
+                "nodegroup_id": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                "nodeid": "2878fa77-8934-11ea-985f-f875a44e0e11",
+                "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E54_Dimension",
+                "sortorder": 0
+            },
+            "slug": null,
+            "subtitle": "",
+            "template_id": "50000000-0000-0000-0000-000000000001",
+            "version": ""
+        }
+    ]
+}
