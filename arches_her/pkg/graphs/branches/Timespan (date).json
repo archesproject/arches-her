@@ -8,7 +8,14 @@
                     "cardid": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
+                            "constraintid": "b5a32a24-999a-401e-9a9f-5a90fe702fc9",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
@@ -23,7 +30,90 @@
                     "visible": true
                 }
             ],
-            "cards_x_nodes_x_widgets": [],
+            "cards_x_nodes_x_widgets": [
+                {
+                    "card_id": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Display Date",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "0943beda-993e-11ea-a561-f875a44e0e11",
+                    "label": "Display Date",
+                    "node_id": "d272ab5a-993d-11ea-ba4d-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Date Qualifier",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "09453c31-993e-11ea-901a-f875a44e0e11",
+                    "label": "Date Qualifier",
+                    "node_id": "7a83f7f0-1b47-11ea-b284-c4d9877d154e",
+                    "sortorder": 3,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Start Date",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "0946c343-993e-11ea-98b1-f875a44e0e11",
+                    "label": "Start Date",
+                    "node_id": "3d4678b4-1b47-11ea-af54-c4d9877d154e",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
+                },
+                {
+                    "card_id": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "End Date",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "09482281-993e-11ea-b838-f875a44e0e11",
+                    "label": "End Date",
+                    "node_id": "6f279888-1b47-11ea-a84f-c4d9877d154e",
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
+                },
+                {
+                    "card_id": "8aeb4e5b-1b46-11ea-9f0d-c4d9877d154e",
+                    "config": {
+                        "defaultValue": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
+                        "label": "Date Qualifier Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "155218a2-993e-11ea-a7be-f875a44e0e11",
+                    "label": "Date Qualifier Metatype",
+                    "node_id": "de99993a-993d-11ea-875a-f875a44e0e11",
+                    "sortorder": 4,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                }
+            ],
             "color": null,
             "config": {
                 "basemap": "streets",
@@ -91,6 +181,24 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "rangenode_id": "7a83f7f0-1b47-11ea-b284-c4d9877d154e"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "edgeid": "d272ab5b-993d-11ea-bd41-f875a44e0e11",
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "rangenode_id": "d272ab5a-993d-11ea-ba4d-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "7a83f7f0-1b47-11ea-b284-c4d9877d154e",
+                    "edgeid": "de99993b-993d-11ea-bac1-f875a44e0e11",
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "de99993a-993d-11ea-875a-f875a44e0e11"
                 }
             ],
             "functions_x_graphs": [],
@@ -110,6 +218,44 @@
                 }
             ],
             "nodes": [
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Display Date",
+                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "nodeid": "d272ab5a-993d-11ea-ba4d-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Date Qualifier Metatype",
+                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "nodeid": "de99993a-993d-11ea-875a-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
                 {
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"

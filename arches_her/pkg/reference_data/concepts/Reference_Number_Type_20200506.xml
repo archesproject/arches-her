@@ -4,19 +4,31 @@
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <skos:ConceptScheme rdf:about="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb">
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/29c8434f-04bc-41ef-9878-39be151d850f">
-        <skos:inScheme rdf:resource="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb"/>
-        <skos:prefLabel xml:lang="en">{"id": "59b0e616-3c31-424c-8c32-2bf82e49b086", "value": "Planning reference"}</skos:prefLabel>
-      </skos:Concept>
-    </skos:hasTopConcept>
-    <dcterms:title xml:lang="en">{"id": "a48b0c42-2fec-4115-a32e-1de53c4d460e", "value": "Reference Number Type"}</dcterms:title>
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/35e21609-393b-43d6-8223-663fbe689eb4">
-        <skos:prefLabel xml:lang="en">{"id": "a297378a-41af-48c5-9e75-2aac61b96677", "value": "External reference"}</skos:prefLabel>
-        <skos:inScheme rdf:resource="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb"/>
-      </skos:Concept>
-    </skos:hasTopConcept>
-  </skos:ConceptScheme>
+  <skos:Concept rdf:about="http://localhost:8000/ac881db7-6b46-401a-8503-9885ac113815">
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb">
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/210544de-dea1-4f11-a938-c407d8c5c664"/>
+        <dcterms:identifier xml:lang="en-us">{"id": "e6cc5c27-20ea-4710-8b39-2574b648c481", "value": "http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb"}</dcterms:identifier>
+        <dcterms:title xml:lang="en">{"id": "a48b0c42-2fec-4115-a32e-1de53c4d460e", "value": "Reference Number Type"}</dcterms:title>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/35e21609-393b-43d6-8223-663fbe689eb4"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/29c8434f-04bc-41ef-9878-39be151d850f"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/ac881db7-6b46-401a-8503-9885ac113815"/>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <skos:prefLabel xml:lang="en">{"id": "8143c8e3-dc87-46fa-b672-d9a4a9b6303d", "value": "Archive Object Reference"}</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/29c8434f-04bc-41ef-9878-39be151d850f">
+    <skos:inScheme rdf:resource="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb"/>
+    <dcterms:identifier xml:lang="en-us">{"id": "cad85a6b-8f56-4f15-b2dc-a9c3163c43f5", "value": "http://localhost:8000/29c8434f-04bc-41ef-9878-39be151d850f"}</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">{"id": "59b0e616-3c31-424c-8c32-2bf82e49b086", "value": "Planning reference"}</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/35e21609-393b-43d6-8223-663fbe689eb4">
+    <dcterms:identifier xml:lang="en-us">{"id": "87554972-8964-45de-976c-8561c43126a4", "value": "http://localhost:8000/35e21609-393b-43d6-8223-663fbe689eb4"}</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">{"id": "a297378a-41af-48c5-9e75-2aac61b96677", "value": "External reference"}</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb"/>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/210544de-dea1-4f11-a938-c407d8c5c664">
+    <skos:prefLabel xml:lang="en">{"id": "1992741b-cc36-4613-b04e-943fa8c9d6fa", "value": "System Reference Number"}</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/b33672f5-f9c8-4cc7-a990-9f298e766fbb"/>
+  </skos:Concept>
 </rdf:RDF>
