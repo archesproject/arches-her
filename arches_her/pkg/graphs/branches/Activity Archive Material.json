@@ -165,6 +165,22 @@
                 {
                     "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
                     "config": {
+                        "defaultValue": "",
+                        "label": "Building Number",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "260c6007-9f6b-11ea-9af8-f875a44e0e11",
+                    "label": "Building Number",
+                    "node_id": "260b9c96-9f6b-11ea-a0cb-f875a44e0e11",
+                    "sortorder": 17,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
+                    "config": {
                         "defaultValue": "6bdffb5e-9f5b-44f7-a3a6-11cf81219fd8",
                         "label": "Building Number Metatype",
                         "options": [],
@@ -287,52 +303,6 @@
                 {
                     "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
                     "config": {
-                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
-                        "label": "Address Currency Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "260c6006-9f6b-11ea-acae-f875a44e0e11",
-                    "label": "Address Currency Metatype",
-                    "node_id": "260b9c9b-9f6b-11ea-a57d-f875a44e0e11",
-                    "sortorder": 38,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Building Number",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "260c6007-9f6b-11ea-9af8-f875a44e0e11",
-                    "label": "Building Number",
-                    "node_id": "260b9c96-9f6b-11ea-a0cb-f875a44e0e11",
-                    "sortorder": 17,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "6bdffb5e-9f5b-44f7-a3a6-11cf81219fd8",
-                        "label": "Locality Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "260c6008-9f6b-11ea-8ee7-f875a44e0e11",
-                    "label": "Locality Metatype",
-                    "node_id": "260b9c99-9f6b-11ea-95bd-f875a44e0e11",
-                    "sortorder": 25,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
-                    "config": {
                         "defaultValue": "326b5f21-b744-41a1-a009-e60adb9de95c",
                         "label": "County Type",
                         "options": [],
@@ -433,6 +403,36 @@
                     "label": "Postcode Type",
                     "node_id": "260c38d9-9f6b-11ea-a5b8-f875a44e0e11",
                     "sortorder": 33,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
+                        "label": "Address Currency Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "260c6006-9f6b-11ea-acae-f875a44e0e11",
+                    "label": "Address Currency Metatype",
+                    "node_id": "260b9c9b-9f6b-11ea-a57d-f875a44e0e11",
+                    "sortorder": 38,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "260b9c95-9f6b-11ea-a075-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "6bdffb5e-9f5b-44f7-a3a6-11cf81219fd8",
+                        "label": "Locality Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "260c6008-9f6b-11ea-8ee7-f875a44e0e11",
+                    "label": "Locality Metatype",
+                    "node_id": "260b9c99-9f6b-11ea-95bd-f875a44e0e11",
+                    "sortorder": 25,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -677,6 +677,15 @@
             "edges": [
                 {
                     "description": null,
+                    "domainnode_id": "260b9c9a-9f6b-11ea-8967-f875a44e0e11",
+                    "edgeid": "2610a5b0-9f6b-11ea-b663-f875a44e0e11",
+                    "graph_id": "260b9c92-9f6b-11ea-a237-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "260bc3b7-9f6b-11ea-85d8-f875a44e0e11"
+                },
+                {
+                    "description": null,
                     "domainnode_id": "260bc3c0-9f6b-11ea-8090-f875a44e0e11",
                     "edgeid": "2610092e-9f6b-11ea-9847-f875a44e0e11",
                     "graph_id": "260b9c92-9f6b-11ea-a237-f875a44e0e11",
@@ -917,15 +926,6 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
                     "rangenode_id": "260c38e2-9f6b-11ea-ad8c-f875a44e0e11"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "260b9c9a-9f6b-11ea-8967-f875a44e0e11",
-                    "edgeid": "2610a5b0-9f6b-11ea-b663-f875a44e0e11",
-                    "graph_id": "260b9c92-9f6b-11ea-a237-f875a44e0e11",
-                    "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "rangenode_id": "260bc3b7-9f6b-11ea-85d8-f875a44e0e11"
                 },
                 {
                     "description": null,
@@ -1255,7 +1255,7 @@
                     "nodeid": "260b9c9a-9f6b-11ea-8967-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -1293,7 +1293,7 @@
                     "nodeid": "260b9c9c-9f6b-11ea-9a6d-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 9
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -1409,7 +1409,7 @@
                     "nodeid": "260bc3ba-9f6b-11ea-af28-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -1553,7 +1553,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "3c52740f-4fa3-4469-b0a1-155944409c13"
+                        "rdmCollection": null
                     },
                     "datatype": "concept",
                     "description": "",
@@ -1741,7 +1741,7 @@
                     "nodeid": "260bead1-9f6b-11ea-a872-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -1817,7 +1817,7 @@
                     "nodeid": "260bead5-9f6b-11ea-bc77-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 7
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -1835,7 +1835,7 @@
                     "nodeid": "260bead6-9f6b-11ea-805a-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 5
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -1891,7 +1891,7 @@
                     "nodeid": "260bead9-9f6b-11ea-a139-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 2
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -1969,7 +1969,7 @@
                     "nodeid": "260c38db-9f6b-11ea-a4dd-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -2025,7 +2025,7 @@
                     "nodeid": "260c38de-9f6b-11ea-895d-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 10
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -2043,7 +2043,7 @@
                     "nodeid": "260c38df-9f6b-11ea-b834-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 4
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -2081,7 +2081,7 @@
                     "nodeid": "260c38e1-9f6b-11ea-83ae-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -2099,7 +2099,7 @@
                     "nodeid": "260c38e2-9f6b-11ea-ad8c-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 6
+                    "sortorder": 0
                 },
                 {
                     "config": {

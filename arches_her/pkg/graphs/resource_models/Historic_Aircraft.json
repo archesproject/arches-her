@@ -2244,6 +2244,21 @@
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
                 {
+                    "card_id": "daa1dd33-5a08-11e9-9cfd-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Aircraft Mark",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "daa20450-5a08-11e9-8250-18cf5eb368c4",
+                    "label": "Aircraft Mark",
+                    "node_id": "daa1dd36-5a08-11e9-9344-18cf5eb368c4",
+                    "sortorder": 8,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
                     "card_id": "5c86337b-7041-11ea-b9ed-287fcf6a5e72",
                     "config": {
                         "dateFormat": "YYYY-MM-DD",
@@ -2785,21 +2800,6 @@
                     "sortorder": 11,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "daa1dd33-5a08-11e9-9cfd-18cf5eb368c4",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Aircraft Mark",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "daa20450-5a08-11e9-8250-18cf5eb368c4",
-                    "label": "Aircraft Mark",
-                    "node_id": "daa1dd36-5a08-11e9-9344-18cf5eb368c4",
-                    "sortorder": 8,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "6e14d59a-80bc-11ea-9971-f875a44e0e11",
@@ -4868,7 +4868,7 @@
                     },
                     "function_id": "60000000-0000-0000-0000-000000000001",
                     "graph_id": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
-                    "id": "174d3a26-9911-11ea-b57b-f875a44e0e11"
+                    "id": "bc2e8068-b62f-11ea-a9fe-f875a44e0e11"
                 }
             ],
             "graphid": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
@@ -5061,6 +5061,24 @@
                 }
             ],
             "nodes": [
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Display Date",
+                    "nodegroup_id": "daa1dd31-5a08-11e9-882d-18cf5eb368c4",
+                    "nodeid": "daa20445-5a08-11e9-b3e4-18cf5eb368c4",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E62_String",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
                 {
                     "config": null,
                     "datatype": "string",
@@ -5307,7 +5325,8 @@
                     "config": {
                         "graphid": [
                             "d4a88461-5463-11e9-90d9-000d3ab1e588"
-                        ]
+                        ],
+                        "graphs": []
                     },
                     "datatype": "resource-instance-list",
                     "description": null,
@@ -5585,28 +5604,11 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Display Date",
-                    "nodegroup_id": "daa1dd31-5a08-11e9-882d-18cf5eb368c4",
-                    "nodeid": "daa20445-5a08-11e9-b3e4-18cf5eb368c4",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E62_String",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
                     "config": {
                         "graphid": [
                             "24d7b54f-5464-11e9-a86b-000d3ab1e588"
-                        ]
+                        ],
+                        "graphs": []
                     },
                     "datatype": "resource-instance-list",
                     "description": null,
@@ -8004,7 +8006,8 @@
                     "config": {
                         "graphid": [
                             "22477f01-1a44-11e9-b0a9-000d3ab1e588"
-                        ]
+                        ],
+                        "graphs": []
                     },
                     "datatype": "resource-instance-list",
                     "description": null,
@@ -8268,7 +8271,8 @@
                     "config": {
                         "graphid": [
                             "076f9381-7b00-11e9-8d6b-80000b44d1d9"
-                        ]
+                        ],
+                        "graphs": []
                     },
                     "datatype": "resource-instance-list",
                     "description": null,
@@ -8482,7 +8486,8 @@
                     "config": {
                         "graphid": [
                             "b9e0701e-5463-11e9-b5f5-000d3ab1e588"
-                        ]
+                        ],
+                        "graphs": []
                     },
                     "datatype": "resource-instance-list",
                     "description": "",
@@ -9118,14 +9123,7 @@
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
-            "relatable_resource_model_ids": [
-                "b07cfa6f-894d-11ea-82aa-f875a44e0e11",
-                "934cd7f0-480a-11ea-9240-c4d9877d154e",
-                "343cc20c-2c5a-11e8-90fa-0242ac120005",
-                "a535a235-8481-11ea-a6b9-f875a44e0e11",
-                "24d7b54f-5464-11e9-a86b-000d3ab1e588",
-                "b9e0701e-5463-11e9-b5f5-000d3ab1e588"
-            ],
+            "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
                 "config": null,
@@ -9149,11 +9147,5 @@
             "template_id": "50000000-0000-0000-0000-000000000002",
             "version": ""
         }
-    ],
-    "metadata": {
-        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
-        "git hash": "fatal: unable to access 'H://.gitconfig': Invalid argument",
-        "os": "Windows",
-        "os version": "10"
-    }
+    ]
 }

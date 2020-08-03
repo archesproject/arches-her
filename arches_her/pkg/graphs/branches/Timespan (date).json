@@ -118,8 +118,6 @@
             "config": {
                 "basemap": "streets",
                 "bearing": 0,
-                "centerX": 1,
-                "centerY": 53,
                 "defaultValue": "",
                 "defaultValueType": 0,
                 "featureColor": "#FF0000",
@@ -129,20 +127,6 @@
                 "geocodePlaceholder": "Search",
                 "geocodeProvider": "10000000-0000-0000-0000-010000000000",
                 "geocoderVisible": true,
-                "geometryTypes": [
-                    {
-                        "id": "Point",
-                        "text": "Point"
-                    },
-                    {
-                        "id": "Line",
-                        "text": "Line"
-                    },
-                    {
-                        "id": "Polygon",
-                        "text": "Polygon"
-                    }
-                ],
                 "mapControlsHidden": false,
                 "maxZoom": "17",
                 "minZoom": "1",
@@ -237,6 +221,24 @@
                     "sortorder": 0
                 },
                 {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Timespan (date)",
+                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "nodeid": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -274,24 +276,6 @@
                     "nodeid": "7a83f7f0-1b47-11ea-b284-c4d9877d154e",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "8aeb4e58-1b46-11ea-89a5-c4d9877d154e",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Timespan (date)",
-                    "nodegroup_id": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
-                    "nodeid": "8aeb4e59-1b46-11ea-a459-c4d9877d154e",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
-                    "parentproperty": "",
                     "sortorder": 0
                 },
                 {
@@ -353,7 +337,7 @@
             },
             "slug": null,
             "subtitle": "",
-            "template_id": "50000000-0000-0000-0000-000000000002",
+            "template_id": "50000000-0000-0000-0000-000000000001",
             "version": ""
         }
     ]

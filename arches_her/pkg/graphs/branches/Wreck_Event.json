@@ -87,6 +87,21 @@
                 {
                     "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
                     "config": {
+                        "defaultValue": "",
+                        "label": "Place of Departure Name",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "80117d83-5aae-11e9-94c8-000d3ab1e588",
+                    "label": "Place of Departure Name",
+                    "node_id": "80117d7c-5aae-11e9-860d-000d3ab1e588",
+                    "sortorder": 6,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
+                    "config": {
                         "dateFormat": "YYYY-MM-DD",
                         "defaultValue": "",
                         "label": "Expected Date of Arrival",
@@ -257,21 +272,6 @@
                     "label": "Manner of Loss",
                     "node_id": "80117d7d-5aae-11e9-b35c-000d3ab1e588",
                     "sortorder": 5,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Place of Departure Name",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "80117d83-5aae-11e9-94c8-000d3ab1e588",
-                    "label": "Place of Departure Name",
-                    "node_id": "80117d7c-5aae-11e9-860d-000d3ab1e588",
-                    "sortorder": 6,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
@@ -503,6 +503,44 @@
             "nodes": [
                 {
                     "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Crew",
+                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
+                    "nodeid": "2765d5c1-5ab0-11e9-9664-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P11_had_participant",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "d2b35bce-b10a-4935-b50b-64d7eb433503"
+                    },
+                    "datatype": "concept-list",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Cargo Type",
+                    "nodegroup_id": "acfaeadf-5ab0-11e9-85ff-000d3ab1e588",
+                    "nodeid": "acfaeae2-5ab0-11e9-b10c-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
                     "datatype": "string",
                     "description": "Represents a single node in a graph",
                     "exportable": false,
@@ -593,44 +631,6 @@
                     "nodeid": "2765d5c6-5ab0-11e9-bfab-000d3ab1e588",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "d2b35bce-b10a-4935-b50b-64d7eb433503"
-                    },
-                    "datatype": "concept-list",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Cargo Type",
-                    "nodegroup_id": "acfaeadf-5ab0-11e9-85ff-000d3ab1e588",
-                    "nodeid": "acfaeae2-5ab0-11e9-b10c-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Crew",
-                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
-                    "nodeid": "2765d5c1-5ab0-11e9-9664-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P11_had_participant",
                     "sortorder": 0
                 },
                 {
