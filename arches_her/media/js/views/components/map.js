@@ -218,7 +218,7 @@ define([
 
                     // Keeps user without edit permission from seeing edit button
                     if (!self.userIsReviewer()) {
-                        ko.unwrap(data.permissions).users_without_edit_perm.push(self.userid())
+                        data.permissions().users_without_edit_perm.push(self.userid())
                     }
 
                     ko.applyBindingsToDescendants(
