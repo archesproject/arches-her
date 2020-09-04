@@ -39,6 +39,7 @@ define([
                         data.reportURL = arches.urls.resource_report;
                         data.editURL = arches.urls.resource_editor;
                         data.sources= ko.observable(arches.mapSources);
+                        data.userid = self.userid;
                         var color = "#f0c200";
                         data.layers = arches.mapLayers.find(function(layer){
                             return layer.addtomap && !layer.isoverlay;
@@ -213,6 +214,13 @@ define([
                 self.popup.setHTML(this.popupTemplate);
                 self.popup.addTo(self.map());
                 self.getPopupData(feature, function(data){
+                    data.permissions(JSON.parse(data.permissions()))
+
+                    // Keeps user without edit permission from seeing edit button
+                    if (!self.userIsReviewer()) {
+                        ko.unwrap(data.permissions).users_without_edit_perm.push(self.userid())
+                    }
+
                     ko.applyBindingsToDescendants(
                         data,
                         self.popup._content
