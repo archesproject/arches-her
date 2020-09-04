@@ -214,11 +214,15 @@ define([
                 self.popup.setHTML(this.popupTemplate);
                 self.popup.addTo(self.map());
                 self.getPopupData(feature, function(data){
-                    data.permissions(JSON.parse(data.permissions()))
+                    // forces shape expected by generic arches instance
+                    data.permissions = JSON.parse(data.permissions());
+                    Object.keys(data.permissions).forEach(function(permissionKey) {
+                        data.permissions[permissionKey] = ko.observableArray(data.permissions[permissionKey]);
+                    });
 
-                    // Keeps user without edit permission from seeing edit button
+                    // Keeps permission-less users from seeing edit button
                     if (!self.userIsReviewer()) {
-                        data.permissions().users_without_edit_perm.push(self.userid())
+                        data.permissions.users_without_edit_perm.push(self.userid());
                     }
 
                     ko.applyBindingsToDescendants(
