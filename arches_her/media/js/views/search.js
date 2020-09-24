@@ -60,6 +60,7 @@ define([
         this.query = ko.observable(getQueryObject());
         this.mouseoverInstanceId = ko.observable();
         this.mapLinkData = ko.observable(null);
+        this.userid = ko.observable(null);
         this.userIsReviewer = ko.observable(false);
         this.searchResults = {'timestamp': ko.observable()};
         this.selectPopup = function(componentname) {
@@ -133,6 +134,7 @@ define([
                         }
                     }, this);
                     this.viewModel.sharedStateObject.searchResults.timestamp(response.timestamp);
+                    this.viewModel.sharedStateObject.userid(response.userid);
                     this.viewModel.sharedStateObject.userIsReviewer(response.reviewer);
                     this.viewModel.total(response.total_results);
                     this.viewModel.alert(false);
