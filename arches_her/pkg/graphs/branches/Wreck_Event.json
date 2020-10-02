@@ -654,24 +654,6 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Date of Loss",
-                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
-                    "nodeid": "f7b260f0-5aaf-11e9-bd24-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
                     "config": {
                         "rdmCollection": "e9adad02-1ed9-4370-b9e5-9547413bc77c"
                     },
@@ -771,24 +753,6 @@
                 },
                 {
                     "config": null,
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Expected Date of Arrival",
-                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
-                    "nodeid": "80117d75-5aae-11e9-8d87-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
                     "datatype": "semantic",
                     "description": null,
                     "exportable": false,
@@ -845,24 +809,6 @@
                 },
                 {
                     "config": null,
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Date of Departure",
-                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
-                    "nodeid": "80117d79-5aae-11e9-9049-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
                     "datatype": "semantic",
                     "description": null,
                     "exportable": false,
@@ -913,6 +859,66 @@
                     "nodeid": "80117d74-5aae-11e9-9d7b-000d3ab1e588",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P161_has_spatial_projection",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD"
+                    },
+                    "datatype": "date",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Expected Date of Arrival",
+                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
+                    "nodeid": "80117d75-5aae-11e9-8d87-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD"
+                    },
+                    "datatype": "date",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Date of Departure",
+                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
+                    "nodeid": "80117d79-5aae-11e9-9049-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD"
+                    },
+                    "datatype": "date",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "80117d70-5aae-11e9-b76d-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Date of Loss",
+                    "nodegroup_id": "80117d71-5aae-11e9-a605-000d3ab1e588",
+                    "nodeid": "f7b260f0-5aaf-11e9-bd24-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E50_Date",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0
                 }
             ],
