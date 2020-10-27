@@ -33,7 +33,7 @@ from arches.app.search.elasticsearch_dsl_builder import Bool, Match, Query, Term
 from arches.app.search.time_wheel import TimeWheel
 from arches.app.search.components.base import SearchFilterFactory
 from arches.app.views.base import MapBaseManagerView
-from arches.app.views.concept import get_preflabel_from_conceptid
+from arches.app.models.concept import get_preflabel_from_conceptid
 from arches.app.utils.permission_backend import get_nodegroups_by_perm
 from pprint import pprint
 

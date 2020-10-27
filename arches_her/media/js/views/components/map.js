@@ -3,6 +3,7 @@ define([
     'underscore',
     'arches',
     'knockout',
+    'knockout-mapping',
     'mapbox-gl',
     'moment',
     'viewmodels/map',
@@ -10,7 +11,7 @@ define([
     'text!templates/views/components/map-popup-consultations.htm',
     'bindings/mapbox-gl',
     'bindings/sortable'
-], function($, _, arches, ko, mapboxgl, moment, MapViewModel, geojsonExtent, popupConsultationsTemplate) {
+], function($, _, arches, ko, koMapping, mapboxgl, moment, MapViewModel, geojsonExtent, popupConsultationsTemplate) {
     var viewModel = function(params){
         var self = this;
         this.resourceLookup = {};
@@ -215,14 +216,19 @@ define([
                 self.popup.addTo(self.map());
                 self.getPopupData(feature, function(data){
                     // forces shape expected by generic arches instance
-                    data.permissions = JSON.parse(data.permissions());
-                    Object.keys(data.permissions).forEach(function(permissionKey) {
-                        data.permissions[permissionKey] = ko.observableArray(data.permissions[permissionKey]);
-                    });
-
-                    // Keeps permission-less users from seeing edit button
-                    if (!self.userIsReviewer()) {
-                        data.permissions.users_without_edit_perm.push(self.userid());
+                    data.showEditButton = false; 
+                    if (data.permissions ) {
+                        try {
+                            data.permissions = JSON.parse(ko.unwrap(data.permissions));
+                        } catch (err) {
+                            data.permissions = koMapping.toJS(ko.unwrap(data.permissions));
+                        }
+                        Object.keys(data.permissions).forEach(function(permissionKey) {
+                            data.permissions[permissionKey] = ko.observableArray(data.permissions[permissionKey]);
+                        });
+                        if (data.permissions.users_without_edit_perm().indexOf(self.userid()) === -1) {
+                            data.showEditButton = true;
+                        }
                     }
 
                     ko.applyBindingsToDescendants(
