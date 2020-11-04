@@ -168,6 +168,7 @@
                 {
                     "card_id": "2c478fc3-12dc-11eb-85a7-f875a44e0e11",
                     "config": {
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": "",
                         "label": "Area Status Start Date",
                         "maxDate": false,
@@ -527,7 +528,7 @@
                     "nodeid": "2c478fc9-12dc-11eb-8c3f-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
-                    "sortorder": 4
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -584,46 +585,6 @@
                     "nodeid": "2c478fca-12dc-11eb-bc10-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
-                    "sortorder": 6
-                },
-                {
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD"
-                    },
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "2c478fc0-12dc-11eb-9ce9-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Area Status End Date",
-                    "nodegroup_id": "2c478fc1-12dc-11eb-a397-f875a44e0e11",
-                    "nodeid": "2c478fcc-12dc-11eb-8aa7-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD"
-                    },
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "2c478fc0-12dc-11eb-9ce9-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Area Status Start Date",
-                    "nodegroup_id": "2c478fc1-12dc-11eb-a397-f875a44e0e11",
-                    "nodeid": "2c478fcd-12dc-11eb-a1bc-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
                     "sortorder": 0
                 },
                 {
@@ -715,7 +676,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Area Reference",
+                    "name": "Area Reference_2c47b6ee-12dc-11eb-989a-f875a44e0e11",
                     "nodegroup_id": "2c478fc1-12dc-11eb-a397-f875a44e0e11",
                     "nodeid": "2c47b6ee-12dc-11eb-989a-f875a44e0e11",
                     "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
@@ -753,7 +714,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Area Reference",
+                    "name": "Area Reference_2c47b6f0-12dc-11eb-aebc-f875a44e0e11",
                     "nodegroup_id": "2c478fc1-12dc-11eb-a397-f875a44e0e11",
                     "nodeid": "2c47b6f0-12dc-11eb-aebc-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
@@ -812,7 +773,7 @@
                     "nodeid": "2c47b6f1-12dc-11eb-a821-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
-                    "sortorder": 5
+                    "sortorder": 0
                 },
                 {
                     "config": {},
@@ -830,6 +791,46 @@
                     "nodeid": "2c478fc4-12dc-11eb-97e4-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ"
+                    },
+                    "datatype": "date",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "2c478fc0-12dc-11eb-9ce9-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Area Status End Date",
+                    "nodegroup_id": "2c478fc1-12dc-11eb-a397-f875a44e0e11",
+                    "nodeid": "2c478fcc-12dc-11eb-8aa7-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD"
+                    },
+                    "datatype": "date",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "2c478fc0-12dc-11eb-9ce9-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Area Status Start Date",
+                    "nodegroup_id": "2c478fc1-12dc-11eb-a397-f875a44e0e11",
+                    "nodeid": "2c478fcd-12dc-11eb-a1bc-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
                     "sortorder": 0
                 }
             ],
