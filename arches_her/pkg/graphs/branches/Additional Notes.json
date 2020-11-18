@@ -8,7 +8,14 @@
                     "cardid": "ae716824-025b-11eb-8635-f875a44e0e11",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "ae716824-025b-11eb-8635-f875a44e0e11",
+                            "constraintid": "10847819-a5ea-40f0-9914-4f67efebf66a",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
@@ -27,14 +34,14 @@
                 {
                     "card_id": "ae716824-025b-11eb-8635-f875a44e0e11",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Notes",
+                        "defaultValue": null,
+                        "label": "Note",
                         "maxLength": null,
                         "placeholder": "Enter text",
                         "width": "100%"
                     },
                     "id": "ae716828-025b-11eb-81e3-f875a44e0e11",
-                    "label": "Notes",
+                    "label": "Note",
                     "node_id": "ae716826-025b-11eb-be06-f875a44e0e11",
                     "sortorder": 0,
                     "visible": true,
@@ -171,64 +178,6 @@
             ],
             "nodes": [
                 {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Note Metatype",
-                    "nodegroup_id": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
-                    "nodeid": "ae716825-025b-11eb-ba04-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Notes",
-                    "nodegroup_id": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
-                    "nodeid": "ae716826-025b-11eb-be06-f875a44e0e11",
-                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Note Type",
-                    "nodegroup_id": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
-                    "nodeid": "ae716827-025b-11eb-8fcc-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -244,6 +193,64 @@
                     "nodeid": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Additional Note",
+                    "nodegroup_id": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
+                    "nodeid": "ae716826-025b-11eb-be06-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Additional Note Metatype",
+                    "nodegroup_id": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
+                    "nodeid": "ae716825-025b-11eb-ba04-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "ae71416c-025b-11eb-9eec-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Additional Note Type",
+                    "nodegroup_id": "ae71416d-025b-11eb-ba9b-f875a44e0e11",
+                    "nodeid": "ae716827-025b-11eb-8fcc-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],

@@ -460,24 +460,6 @@
             ],
             "nodes": [
                 {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "74195ea4-9930-11ea-8d78-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Subject_74195eab-9930-11ea-81a7-f875a44e0e11",
-                    "nodegroup_id": "74195ea8-9930-11ea-8a90-f875a44e0e11",
-                    "nodeid": "74195eab-9930-11ea-81a7-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "sortorder": 0
-                },
-                {
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -773,7 +755,12 @@
                         "graphid": [
                             "a535a235-8481-11ea-a6b9-f875a44e0e11"
                         ],
-                        "graphs": []
+                        "graphs": [
+                            {
+                                "graphid": "a535a235-8481-11ea-a6b9-f875a44e0e11",
+                                "name": "Digital_Object"
+                            }
+                        ]
                     },
                     "datatype": "resource-instance",
                     "description": null,
@@ -831,6 +818,24 @@
                 },
                 {
                     "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "74195ea4-9930-11ea-8d78-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Subjects",
+                    "nodegroup_id": "74195ea8-9930-11ea-8a90-f875a44e0e11",
+                    "nodeid": "74195eab-9930-11ea-81a7-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
                     "datatype": "string",
                     "description": null,
                     "exportable": false,
@@ -840,7 +845,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Subject_74195eae-9930-11ea-a36e-f875a44e0e11",
+                    "name": "Subject",
                     "nodegroup_id": "74195ea8-9930-11ea-8a90-f875a44e0e11",
                     "nodeid": "74195eae-9930-11ea-a36e-f875a44e0e11",
                     "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
