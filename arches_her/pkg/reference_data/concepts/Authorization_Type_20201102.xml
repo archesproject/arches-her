@@ -4,25 +4,27 @@
   xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <skos:ConceptScheme rdf:about="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85">
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/dd174aff-6f27-4aaa-ac77-c0c4ec228734">
-        <skos:prefLabel xml:lang="en">{"id": "8d653928-e41f-455f-89a0-d649d24feafe", "value": "Awaiting Authorization"}</skos:prefLabel>
-        <skos:inScheme rdf:resource="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85"/>
-      </skos:Concept>
-    </skos:hasTopConcept>
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/0df064b1-8da5-44d9-a3d4-7bed04826b07">
-        <skos:prefLabel xml:lang="en">{"id": "194451c6-c361-4533-96d7-eca939814088", "value": "Authorized"}</skos:prefLabel>
-        <skos:inScheme rdf:resource="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85"/>
-      </skos:Concept>
-    </skos:hasTopConcept>
-    <dcterms:title xml:lang="en">{"id": "d31e309d-9a9c-4dc1-992a-bb2d2be30d5b", "value": "Authorization Type"}</dcterms:title>
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/3324413d-2873-478c-8cb8-91b32b3e6534">
-        <skos:inScheme rdf:resource="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85"/>
-        <skos:prefLabel xml:lang="en">{"id": "1373b8e6-2607-4586-b8c0-8aa28d4aaf8c", "value": "Not Authorized"}</skos:prefLabel>
-      </skos:Concept>
-    </skos:hasTopConcept>
-  </skos:ConceptScheme>
+  <skos:Concept rdf:about="http://localhost:8000/0df064b1-8da5-44d9-a3d4-7bed04826b07">
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85">
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/0df064b1-8da5-44d9-a3d4-7bed04826b07"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/3324413d-2873-478c-8cb8-91b32b3e6534"/>
+        <dcterms:title xml:lang="en">{"id": "d31e309d-9a9c-4dc1-992a-bb2d2be30d5b", "value": "Authorization Type"}</dcterms:title>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/dd174aff-6f27-4aaa-ac77-c0c4ec228734"/>
+        <dcterms:identifier xml:lang="en">{"id": "fc5e05fd-6820-4b93-bf8c-7a49e9d4bc3a", "value": "http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85"}</dcterms:identifier>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <skos:prefLabel xml:lang="en">{"id": "194451c6-c361-4533-96d7-eca939814088", "value": "Authorized"}</skos:prefLabel>
+    <dcterms:identifier xml:lang="en">{"id": "195f852d-74c0-4e68-a94b-afcc249e9fec", "value": "http://localhost:8000/0df064b1-8da5-44d9-a3d4-7bed04826b07"}</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/dd174aff-6f27-4aaa-ac77-c0c4ec228734">
+    <skos:inScheme rdf:resource="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85"/>
+    <skos:prefLabel xml:lang="en">{"id": "8d653928-e41f-455f-89a0-d649d24feafe", "value": "Awaiting Authorization"}</skos:prefLabel>
+    <dcterms:identifier xml:lang="en">{"id": "3dca1e84-def1-4e90-aaf2-074bd5d8f3a9", "value": "http://localhost:8000/dd174aff-6f27-4aaa-ac77-c0c4ec228734"}</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/3324413d-2873-478c-8cb8-91b32b3e6534">
+    <skos:inScheme rdf:resource="http://localhost:8000/dc2ab5bf-4600-48c7-b5a3-4461feb79e85"/>
+    <skos:prefLabel xml:lang="en">{"id": "1373b8e6-2607-4586-b8c0-8aa28d4aaf8c", "value": "Not Authorized"}</skos:prefLabel>
+    <dcterms:identifier xml:lang="en">{"id": "f47dd313-6ebc-4654-abda-a127f8d94261", "value": "http://localhost:8000/3324413d-2873-478c-8cb8-91b32b3e6534"}</dcterms:identifier>
+  </skos:Concept>
 </rdf:RDF>

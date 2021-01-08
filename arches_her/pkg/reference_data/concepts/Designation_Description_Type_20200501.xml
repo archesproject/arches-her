@@ -1,42 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:arches="http://localhost:8000/"
+  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <skos:Concept rdf:about="http://localhost:8000/5392a0ad-5eb3-444c-9e74-740d48dd2272">
-    <arches:sortorder xml:lang="en">{"id": "752d150a-c924-4492-93b7-db554fa7d715", "value": "2"}</arches:sortorder>
-    <skos:prefLabel xml:lang="en">{"id": "463a7c8a-f608-4d84-b5ab-4bab8522a715", "value": "Reasons for Designation"}</skos:prefLabel>
-    <skos:inScheme>
-      <skos:ConceptScheme rdf:about="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2">
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/e318a6ed-0eab-48cb-a27b-7ffb7c6a6c98"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/5392a0ad-5eb3-444c-9e74-740d48dd2272"/>
-        <dcterms:title xml:lang="en">{"id": "dce8b396-3647-4991-a5f6-51fc661433bf", "value": "Designation Description Type"}</dcterms:title>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/196df723-f598-4a33-9d7f-11c77ac7d611"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/0d33e40b-c45d-4e9e-9206-90aa8f4796de"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/25c04a66-2abc-4a8b-823b-767d6fa977ea"/>
-      </skos:ConceptScheme>
-    </skos:inScheme>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/e318a6ed-0eab-48cb-a27b-7ffb7c6a6c98">
-    <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
-    <skos:prefLabel xml:lang="en">{"id": "efb96625-2227-4456-8f8d-2ee47f5d2882", "value": "Summary"}</skos:prefLabel>
-    <arches:sortorder xml:lang="en">{"id": "2ac99c9a-7cbc-4958-874d-9fdfac9883b3", "value": "1"}</arches:sortorder>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/196df723-f598-4a33-9d7f-11c77ac7d611">
-    <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
-    <arches:sortorder xml:lang="en">{"id": "b5e2f944-9df9-440a-a9a2-1ebf348e2237", "value": "3"}</arches:sortorder>
-    <skos:prefLabel xml:lang="en">{"id": "d5da296a-8d30-46f8-9780-7ecc26f6334d", "value": "History"}</skos:prefLabel>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/0d33e40b-c45d-4e9e-9206-90aa8f4796de">
-    <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
-    <arches:sortorder xml:lang="en">{"id": "6458a9db-0117-4b38-8a75-79b60a0f9988", "value": "4"}</arches:sortorder>
-    <skos:prefLabel xml:lang="en">{"id": "d6f5171c-2c3b-4ff9-ba4d-203f2df134a1", "value": "Details"}</skos:prefLabel>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/25c04a66-2abc-4a8b-823b-767d6fa977ea">
-    <arches:sortorder xml:lang="en">{"id": "49af5084-bf66-48c8-8dc1-a52748f6351d", "value": "5"}</arches:sortorder>
-    <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
-    <skos:prefLabel xml:lang="en">{"id": "e1a3d3d1-a286-4e5f-a5da-cb87449382a9", "value": "Legal"}</skos:prefLabel>
-  </skos:Concept>
+  <skos:ConceptScheme rdf:about="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2">
+    <dcterms:title xml:lang="en">{"id": "dce8b396-3647-4991-a5f6-51fc661433bf", "value": "Designation Description Type"}</dcterms:title>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/5392a0ad-5eb3-444c-9e74-740d48dd2272">
+        <dcterms:identifier xml:lang="en">{"id": "de7c0362-8a6b-49bd-95fa-0130168a25c5", "value": "http://localhost:8000/5392a0ad-5eb3-444c-9e74-740d48dd2272"}</dcterms:identifier>
+        <skos:prefLabel xml:lang="en">{"id": "463a7c8a-f608-4d84-b5ab-4bab8522a715", "value": "Reasons for Designation"}</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
+        <arches:sortorder xml:lang="en">{"id": "752d150a-c924-4492-93b7-db554fa7d715", "value": "2"}</arches:sortorder>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/25c04a66-2abc-4a8b-823b-767d6fa977ea">
+        <skos:prefLabel xml:lang="en">{"id": "e1a3d3d1-a286-4e5f-a5da-cb87449382a9", "value": "Legal"}</skos:prefLabel>
+        <dcterms:identifier xml:lang="en">{"id": "501f1c91-f60a-4840-828d-7cab8afee6d1", "value": "http://localhost:8000/25c04a66-2abc-4a8b-823b-767d6fa977ea"}</dcterms:identifier>
+        <arches:sortorder xml:lang="en">{"id": "49af5084-bf66-48c8-8dc1-a52748f6351d", "value": "5"}</arches:sortorder>
+        <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/196df723-f598-4a33-9d7f-11c77ac7d611">
+        <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
+        <skos:prefLabel xml:lang="en">{"id": "d5da296a-8d30-46f8-9780-7ecc26f6334d", "value": "History"}</skos:prefLabel>
+        <arches:sortorder xml:lang="en">{"id": "b5e2f944-9df9-440a-a9a2-1ebf348e2237", "value": "3"}</arches:sortorder>
+        <dcterms:identifier xml:lang="en">{"id": "4fdd3835-0f71-44bc-a919-da79e122bf14", "value": "http://localhost:8000/196df723-f598-4a33-9d7f-11c77ac7d611"}</dcterms:identifier>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <dcterms:identifier xml:lang="en">{"id": "9e9efdca-f2d8-44c5-a835-963510c91409", "value": "http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"}</dcterms:identifier>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/0d33e40b-c45d-4e9e-9206-90aa8f4796de">
+        <skos:prefLabel xml:lang="en">{"id": "d6f5171c-2c3b-4ff9-ba4d-203f2df134a1", "value": "Details"}</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
+        <dcterms:identifier xml:lang="en">{"id": "d2754c67-e92d-48aa-938b-7ce09c06decc", "value": "http://localhost:8000/0d33e40b-c45d-4e9e-9206-90aa8f4796de"}</dcterms:identifier>
+        <arches:sortorder xml:lang="en">{"id": "6458a9db-0117-4b38-8a75-79b60a0f9988", "value": "4"}</arches:sortorder>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/e318a6ed-0eab-48cb-a27b-7ffb7c6a6c98">
+        <arches:sortorder xml:lang="en">{"id": "2ac99c9a-7cbc-4958-874d-9fdfac9883b3", "value": "1"}</arches:sortorder>
+        <dcterms:identifier xml:lang="en">{"id": "84cece34-d672-4810-99e6-9e98fd360fbd", "value": "http://localhost:8000/e318a6ed-0eab-48cb-a27b-7ffb7c6a6c98"}</dcterms:identifier>
+        <skos:prefLabel xml:lang="en">{"id": "efb96625-2227-4456-8f8d-2ee47f5d2882", "value": "Summary"}</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://localhost:8000/9c541fe6-c598-4293-a556-e49b3f1a33e2"/>
+      </skos:Concept>
+    </skos:hasTopConcept>
+  </skos:ConceptScheme>
 </rdf:RDF>
