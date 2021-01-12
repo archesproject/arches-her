@@ -23,7 +23,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": "Enter the resource name and its respective type.",
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Placenames",
                     "nodegroup_id": "972d3864-b6f2-11ea-9a38-f875a44e0e11",
                     "sortorder": 0,
@@ -49,7 +49,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Descriptions",
                     "nodegroup_id": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11",
                     "sortorder": 1,
@@ -75,10 +75,10 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Location Descriptions",
                     "nodegroup_id": "5518ba9b-b6f3-11ea-ba58-f875a44e0e11",
-                    "sortorder": 2,
+                    "sortorder": 3,
                     "visible": true
                 },
                 {
@@ -101,10 +101,10 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": null,
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Addresses",
                     "nodegroup_id": "27387ee5-29b5-11eb-b4ea-f875a44e0e11",
-                    "sortorder": 3,
+                    "sortorder": 4,
                     "visible": true
                 },
                 {
@@ -123,55 +123,6 @@
                     "is_editable": true,
                     "name": "Spatial Record Compilation",
                     "nodegroup_id": "cb6ca570-4f66-11eb-85cd-f875a44e0e11",
-                    "sortorder": null,
-                    "visible": true
-                },
-                {
-                    "active": true,
-                    "cardid": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
-                    "component_id": "2d2e0ca3-089c-4f4c-96a5-fb7eb53963bd",
-                    "config": {
-                        "basemap": "streets",
-                        "centerX": "-0.06082584263822355",
-                        "centerY": "51.53253624357751",
-                        "colorpalette": [
-                            "#A4DB6E",
-                            "#F0C200",
-                            "#fdb462",
-                            "#22ff33",
-                            "#D29EFF"
-                        ],
-                        "defaultcolor": "#F0C200",
-                        "fillopacity": 0.2,
-                        "hovercolor": "#ff0000",
-                        "linewidth": 2,
-                        "minzoom": 15,
-                        "overlayConfigs": [],
-                        "overviewzoom": 11,
-                        "pointradius": 4,
-                        "selectRelatedSource": "select-application-area",
-                        "selectRelatedSourceLayer": "",
-                        "selectSource": "",
-                        "selectSourceLayer": "",
-                        "selectText": "",
-                        "selectioncolor": "#427AFF",
-                        "strokecolor": "#fff",
-                        "strokelinewidth": 4,
-                        "strokepointopacity": 1,
-                        "strokepointradius": 6,
-                        "zoom": "9"
-                    },
-                    "constraints": [],
-                    "cssclass": null,
-                    "description": "",
-                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
-                    "instructions": null,
-                    "is_editable": true,
-                    "name": "Geometry",
-                    "nodegroup_id": "cb6ca579-4f66-11eb-9200-f875a44e0e11",
                     "sortorder": null,
                     "visible": true
                 },
@@ -307,6 +258,62 @@
                     "nodegroup_id": "cb6ca576-4f66-11eb-a7d5-f875a44e0e11",
                     "sortorder": null,
                     "visible": true
+                },
+                {
+                    "active": true,
+                    "cardid": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
+                    "component_id": "3c103484-22d1-4ca9-a9f3-eb3902d567ac",
+                    "config": {
+                        "basemap": "streets",
+                        "centerX": "-0.06082584263822355",
+                        "centerY": "51.53253624357751",
+                        "colorpalette": [
+                            "#A4DB6E",
+                            "#F0C200",
+                            "#fdb462",
+                            "#22ff33",
+                            "#D29EFF"
+                        ],
+                        "defaultcolor": "#F0C200",
+                        "fillopacity": 0.2,
+                        "hovercolor": "#ff0000",
+                        "linewidth": 2,
+                        "minzoom": 15,
+                        "overlayConfigs": [],
+                        "overviewzoom": 11,
+                        "pointradius": 4,
+                        "selectRelatedSource": "select-application-area",
+                        "selectRelatedSourceLayer": "",
+                        "selectSource": "",
+                        "selectSourceLayer": "",
+                        "selectText": "",
+                        "selectioncolor": "#427AFF",
+                        "strokecolor": "#fff",
+                        "strokelinewidth": 4,
+                        "strokepointopacity": 1,
+                        "strokepointradius": 6,
+                        "zoom": "9"
+                    },
+                    "constraints": [
+                        {
+                            "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
+                            "constraintid": "50024908-6892-495c-80cf-749b2392350c",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
+                    "cssclass": null,
+                    "description": "",
+                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": false,
+                    "name": "Mapped Location",
+                    "nodegroup_id": "cb6ca579-4f66-11eb-9200-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": true
                 }
             ],
             "cards_x_nodes_x_widgets": [
@@ -321,7 +328,7 @@
                     "id": "5518baa2-b6f3-11ea-9e04-f875a44e0e11",
                     "label": "Location Description Type",
                     "node_id": "5518ba9e-b6f3-11ea-b47a-f875a44e0e11",
-                    "sortorder": 1,
+                    "sortorder": 0,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -332,6 +339,7 @@
                         "label": "County ",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738ccbc-29b5-11eb-945a-f875a44e0e11",
@@ -432,22 +440,6 @@
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
-                    "card_id": "5518ba9d-b6f3-11ea-b7d2-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Location Description",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "5518baa3-b6f3-11ea-833d-f875a44e0e11",
-                    "label": "Location Description",
-                    "node_id": "5518baa0-b6f3-11ea-a9fc-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000005"
-                },
-                {
                     "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
                     "config": {
                         "defaultValue": null,
@@ -459,21 +451,6 @@
                     "label": "Authorization Type",
                     "node_id": "cb6cf3f2-4f66-11eb-9298-f875a44e0e11",
                     "sortorder": 11,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Feature Shape",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "cb6d1ae0-4f66-11eb-bd3e-f875a44e0e11",
-                    "label": "Feature Shape",
-                    "node_id": "cb6cf3fb-4f66-11eb-8414-f875a44e0e11",
-                    "sortorder": 2,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -751,21 +728,6 @@
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
-                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
-                        "label": "Description Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "4f8b9fd8-b6f3-11ea-835b-f875a44e0e11",
-                    "label": "Description Metatype",
-                    "node_id": "4f8b9fd1-b6f3-11ea-a69d-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
                     "card_id": "5518ba9d-b6f3-11ea-b7d2-f875a44e0e11",
                     "config": {
                         "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
@@ -1038,36 +1000,6 @@
                 {
                     "card_id": "972d3866-b6f2-11ea-81e9-f875a44e0e11",
                     "config": {
-                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
-                        "label": "Placename Currency Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "972d386f-b6f2-11ea-ac1d-f875a44e0e11",
-                    "label": "Placename Currency Metatype",
-                    "node_id": "972d386c-b6f2-11ea-bdfa-f875a44e0e11",
-                    "sortorder": 6,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "972d3866-b6f2-11ea-81e9-f875a44e0e11",
-                    "config": {
-                        "defaultValue": null,
-                        "label": "Placename Currency",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "972d3870-b6f2-11ea-bfd1-f875a44e0e11",
-                    "label": "Placename Currency",
-                    "node_id": "972d3868-b6f2-11ea-b60e-f875a44e0e11",
-                    "sortorder": 5,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "972d3866-b6f2-11ea-81e9-f875a44e0e11",
-                    "config": {
                         "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
                         "label": "Placename Metatype",
                         "options": [],
@@ -1087,6 +1019,7 @@
                         "label": "Placename",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "972d3873-b6f2-11ea-87f2-f875a44e0e11",
@@ -1112,65 +1045,21 @@
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
-                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "b5f1ff2d-d667-4c4e-86a1-c17fa4b9447b",
-                        "label": "Description Language",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "4f8b9fd4-b6f3-11ea-87c3-f875a44e0e11",
-                    "label": "Description Language",
-                    "node_id": "4f8b9fd2-b6f3-11ea-9a14-f875a44e0e11",
-                    "sortorder": 3,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "d5366899-09ec-4db1-8a49-a32b7e4784e3",
-                        "label": "Description Language Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "4f8b9fd5-b6f3-11ea-b1e8-f875a44e0e11",
-                    "label": "Description Language Metatype",
-                    "node_id": "4f8b9fd3-b6f3-11ea-b197-f875a44e0e11",
-                    "sortorder": 4,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
+                    "card_id": "27387ee7-29b5-11eb-abfa-f875a44e0e11",
                     "config": {
                         "defaultValue": "",
-                        "label": "Description Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "4f8b9fd6-b6f3-11ea-b50c-f875a44e0e11",
-                    "label": "Description Type",
-                    "node_id": "4f8b9fd0-b6f3-11ea-9d2e-f875a44e0e11",
-                    "sortorder": 1,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Description",
+                        "label": "Town or City",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
-                    "id": "4f8b9fd7-b6f3-11ea-be2e-f875a44e0e11",
-                    "label": "Description",
-                    "node_id": "4f8b9fcf-b6f3-11ea-9978-f875a44e0e11",
-                    "sortorder": 0,
+                    "id": "2738ccb2-29b5-11eb-980c-f875a44e0e11",
+                    "label": "Town or City",
+                    "node_id": "2738a5da-29b5-11eb-a65f-f875a44e0e11",
+                    "sortorder": 18,
                     "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000005"
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
                 {
                     "card_id": "5518ba9d-b6f3-11ea-b7d2-f875a44e0e11",
@@ -1185,21 +1074,6 @@
                     "node_id": "a95b3c10-29b4-11eb-8dc2-f875a44e0e11",
                     "sortorder": 3,
                     "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "5518ba9d-b6f3-11ea-b7d2-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "d5366899-09ec-4db1-8a49-a32b7e4784e3",
-                        "label": "Location Description Language Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "e3ba4eef-29b4-11eb-a481-f875a44e0e11",
-                    "label": "Location Description Language Metatype",
-                    "node_id": "c226b59e-29b4-11eb-84b3-f875a44e0e11",
-                    "sortorder": 4,
-                    "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
@@ -1254,6 +1128,7 @@
                         "label": "Locality",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738a5f4-29b5-11eb-af51-f875a44e0e11",
@@ -1378,6 +1253,7 @@
                         "label": "Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "972d3872-b6f2-11ea-8c52-f875a44e0e11",
@@ -1424,6 +1300,7 @@
                         "label": "Building Number Sub-Street",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738ccc0-29b5-11eb-974c-f875a44e0e11",
@@ -1440,6 +1317,7 @@
                         "label": "Full Address",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738ccc1-29b5-11eb-8c29-f875a44e0e11",
@@ -1491,21 +1369,6 @@
                     "label": "Current Base Map Name Type",
                     "node_id": "cb6d1ad1-4f66-11eb-8142-f875a44e0e11",
                     "sortorder": 1,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "dbc18bc0-ec10-4623-b866-52ece47d9780",
-                        "label": "Feature Shape Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "cb6d1b09-4f66-11eb-b450-f875a44e0e11",
-                    "label": "Feature Shape Metatype",
-                    "node_id": "cb6d1ad2-4f66-11eb-a5a1-f875a44e0e11",
-                    "sortorder": 6,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -1771,51 +1634,6 @@
                 {
                     "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
                     "config": {
-                        "basemap": "streets",
-                        "bearing": null,
-                        "centerX": -0.088352147666961,
-                        "centerY": 51.5123507637671,
-                        "defaultValue": null,
-                        "defaultValueType": null,
-                        "featureColor": "#FF0000",
-                        "featureLineWidth": 1,
-                        "featurePointSize": 3,
-                        "geocodePlaceholder": "Search",
-                        "geocodeProvider": "10000000-0000-0000-0000-010000000000",
-                        "geocoderVisible": true,
-                        "geometryTypes": [
-                            {
-                                "id": "Point",
-                                "text": "Point"
-                            },
-                            {
-                                "id": "Line",
-                                "text": "Line"
-                            },
-                            {
-                                "id": "Polygon",
-                                "text": "Polygon"
-                            }
-                        ],
-                        "label": "Geospatial Coordinates",
-                        "maxZoom": 20,
-                        "minZoom": null,
-                        "overlayConfigs": [],
-                        "overlayOpacity": null,
-                        "pitch": null,
-                        "rerender": true,
-                        "zoom": null
-                    },
-                    "id": "cb6d1b08-4f66-11eb-b8c0-f875a44e0e11",
-                    "label": "Geospatial Coordinates",
-                    "node_id": "cb6cf3e7-4f66-11eb-bd0a-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000007"
-                },
-                {
-                    "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
-                    "config": {
                         "defaultValue": "ecf19964-58a0-49a1-a31a-76262d807130",
                         "label": "Spatial Record Compilation Type",
                         "options": [],
@@ -1868,6 +1686,7 @@
                         "label": "Postcode",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738a5eb-29b5-11eb-9e00-f875a44e0e11",
@@ -1899,6 +1718,7 @@
                         "label": "Building Number",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738a5ed-29b5-11eb-af53-f875a44e0e11",
@@ -1930,6 +1750,7 @@
                         "label": "Building Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738ccbd-29b5-11eb-8534-f875a44e0e11",
@@ -1991,6 +1812,7 @@
                         "label": "Sub-Street",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738ccb5-29b5-11eb-bef8-f875a44e0e11",
@@ -2037,6 +1859,7 @@
                         "label": "Street",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "2738ccb9-29b5-11eb-894d-f875a44e0e11",
@@ -2064,22 +1887,6 @@
                 {
                     "card_id": "27387ee7-29b5-11eb-abfa-f875a44e0e11",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Town or City",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "2738ccb2-29b5-11eb-980c-f875a44e0e11",
-                    "label": "Town or City",
-                    "node_id": "2738a5da-29b5-11eb-a65f-f875a44e0e11",
-                    "sortorder": 18,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "27387ee7-29b5-11eb-abfa-f875a44e0e11",
-                    "config": {
                         "defaultValue": "6bdffb5e-9f5b-44f7-a3a6-11cf81219fd8",
                         "label": "Town or City Metatype",
                         "options": [],
@@ -2089,6 +1896,243 @@
                     "label": "Town or City Metatype",
                     "node_id": "27387eec-29b5-11eb-a413-f875a44e0e11",
                     "sortorder": 20,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Description Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "4f8b9fd6-b6f3-11ea-b50c-f875a44e0e11",
+                    "label": "Description Type",
+                    "node_id": "4f8b9fd0-b6f3-11ea-9d2e-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Description",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "4f8b9fd7-b6f3-11ea-be2e-f875a44e0e11",
+                    "label": "Description",
+                    "node_id": "4f8b9fcf-b6f3-11ea-9978-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000005"
+                },
+                {
+                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
+                        "label": "Description Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "4f8b9fd8-b6f3-11ea-835b-f875a44e0e11",
+                    "label": "Description Metatype",
+                    "node_id": "4f8b9fd1-b6f3-11ea-a69d-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "b5f1ff2d-d667-4c4e-86a1-c17fa4b9447b",
+                        "label": "Description Language",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "4f8b9fd4-b6f3-11ea-87c3-f875a44e0e11",
+                    "label": "Description Language",
+                    "node_id": "4f8b9fd2-b6f3-11ea-9a14-f875a44e0e11",
+                    "sortorder": 3,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "4f8b9fce-b6f3-11ea-9b21-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "d5366899-09ec-4db1-8a49-a32b7e4784e3",
+                        "label": "Description Language Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "4f8b9fd5-b6f3-11ea-b1e8-f875a44e0e11",
+                    "label": "Description Language Metatype",
+                    "node_id": "4f8b9fd3-b6f3-11ea-b197-f875a44e0e11",
+                    "sortorder": 4,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
+                    "config": {
+                        "basemap": "streets",
+                        "bearing": null,
+                        "centerX": -0.088352147666961,
+                        "centerY": 51.5123507637671,
+                        "defaultValue": null,
+                        "defaultValueType": null,
+                        "featureColor": "#FF0000",
+                        "featureLineWidth": 1,
+                        "featurePointSize": 3,
+                        "geocodePlaceholder": "Search",
+                        "geocodeProvider": "10000000-0000-0000-0000-010000000000",
+                        "geocoderVisible": true,
+                        "geometryTypes": [
+                            {
+                                "id": "Point",
+                                "text": "Point"
+                            },
+                            {
+                                "id": "Line",
+                                "text": "Line"
+                            },
+                            {
+                                "id": "Polygon",
+                                "text": "Polygon"
+                            }
+                        ],
+                        "label": "Geospatial Coordinates",
+                        "maxZoom": 20,
+                        "minZoom": null,
+                        "overlayConfigs": [],
+                        "overlayOpacity": null,
+                        "pitch": null,
+                        "rerender": true,
+                        "zoom": null
+                    },
+                    "id": "cb6d1b08-4f66-11eb-b8c0-f875a44e0e11",
+                    "label": "Geospatial Coordinates",
+                    "node_id": "cb6cf3e7-4f66-11eb-bd0a-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000007"
+                },
+                {
+                    "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Feature Shape",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "cb6d1ae0-4f66-11eb-bd3e-f875a44e0e11",
+                    "label": "Feature Shape",
+                    "node_id": "cb6cf3fb-4f66-11eb-8414-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "cb6ca57b-4f66-11eb-a3db-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "dbc18bc0-ec10-4623-b866-52ece47d9780",
+                        "label": "Feature Shape Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "cb6d1b09-4f66-11eb-b450-f875a44e0e11",
+                    "label": "Feature Shape Metatype",
+                    "node_id": "cb6d1ad2-4f66-11eb-a5a1-f875a44e0e11",
+                    "sortorder": 6,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "5518ba9d-b6f3-11ea-b7d2-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Location Description",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "5518baa3-b6f3-11ea-833d-f875a44e0e11",
+                    "label": "Location Description",
+                    "node_id": "5518baa0-b6f3-11ea-a9fc-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000005"
+                },
+                {
+                    "card_id": "5518ba9d-b6f3-11ea-b7d2-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "d5366899-09ec-4db1-8a49-a32b7e4784e3",
+                        "label": "Location Description Language Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "e3ba4eef-29b4-11eb-a481-f875a44e0e11",
+                    "label": "Location Description Language Metatype",
+                    "node_id": "c226b59e-29b4-11eb-84b3-f875a44e0e11",
+                    "sortorder": 4,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "972d3866-b6f2-11ea-81e9-f875a44e0e11",
+                    "config": {
+                        "defaultValue": null,
+                        "label": "Placename Currency",
+                        "options": [
+                            {
+                                "children": [],
+                                "collector": "",
+                                "conceptid": "9f404b29-797a-44cf-8693-25089566935f",
+                                "id": "c2051d53-40e7-4a2d-a4b4-02a31da37fd1",
+                                "sortorder": "",
+                                "text": "Current"
+                            },
+                            {
+                                "children": [],
+                                "collector": "",
+                                "conceptid": "d8b0f140-9cce-482b-be4e-fbaedc4e04c2",
+                                "id": "e756530f-40af-4a88-a1d5-39b03c1b809a",
+                                "sortorder": "",
+                                "text": "Former"
+                            },
+                            {
+                                "children": [],
+                                "collector": "",
+                                "conceptid": "4ef38f1c-ff8c-4d4c-bc0b-c06231419c80",
+                                "id": "2e820298-0d7b-4810-9e46-e16f255b9631",
+                                "sortorder": "",
+                                "text": "Historic"
+                            }
+                        ],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "972d3870-b6f2-11ea-bfd1-f875a44e0e11",
+                    "label": "Placename Currency",
+                    "node_id": "972d3868-b6f2-11ea-b60e-f875a44e0e11",
+                    "sortorder": 5,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000009"
+                },
+                {
+                    "card_id": "972d3866-b6f2-11ea-81e9-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
+                        "label": "Placename Currency Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "972d386f-b6f2-11ea-ac1d-f875a44e0e11",
+                    "label": "Placename Currency Metatype",
+                    "node_id": "972d386c-b6f2-11ea-bdfa-f875a44e0e11",
+                    "sortorder": 6,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
@@ -2293,15 +2337,6 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "rangenode_id": "4f8b9fd3-b6f3-11ea-b197-f875a44e0e11"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "78b30634-b6f2-11ea-9a17-f875a44e0e11",
-                    "edgeid": "4f8b9fde-b6f3-11ea-a34b-f875a44e0e11",
-                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "name": null,
-                    "ontologyproperty": "http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as",
-                    "rangenode_id": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11"
                 },
                 {
                     "description": null,
@@ -2689,15 +2724,6 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "rangenode_id": "972d386c-b6f2-11ea-bdfa-f875a44e0e11"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "78b30634-b6f2-11ea-9a17-f875a44e0e11",
-                    "edgeid": "972d387d-b6f2-11ea-b093-f875a44e0e11",
-                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "rangenode_id": "972d3864-b6f2-11ea-9a38-f875a44e0e11"
                 },
                 {
                     "description": null,
@@ -3391,6 +3417,24 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
                     "rangenode_id": "cb6ccce7-4f66-11eb-9339-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "78b30634-b6f2-11ea-9a17-f875a44e0e11",
+                    "edgeid": "4f8b9fde-b6f3-11ea-a34b-f875a44e0e11",
+                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as",
+                    "rangenode_id": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "78b30634-b6f2-11ea-9a17-f875a44e0e11",
+                    "edgeid": "972d387d-b6f2-11ea-b093-f875a44e0e11",
+                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "rangenode_id": "972d3864-b6f2-11ea-9a38-f875a44e0e11"
                 }
             ],
             "functions_x_graphs": [
@@ -3401,8 +3445,8 @@
                             "string_template": "<Description>"
                         },
                         "map_popup": {
-                            "nodegroup_id": "",
-                            "string_template": ""
+                            "nodegroup_id": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11",
+                            "string_template": "<Description>"
                         },
                         "name": {
                             "nodegroup_id": "972d3864-b6f2-11ea-9a38-f875a44e0e11",
@@ -3412,12 +3456,12 @@
                     },
                     "function_id": "60000000-0000-0000-0000-000000000001",
                     "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "id": "128cdc71-29b5-11eb-9aa7-f875a44e0e11"
+                    "id": "43045ec4-51f2-11eb-ab6e-acde48001122"
                 }
             ],
             "graphid": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
             "iconclass": "fa fa-map-marker",
-            "is_editable": true,
+            "is_editable": false,
             "isactive": true,
             "isresource": true,
             "jsonldcontext": null,
@@ -3503,6 +3547,42 @@
                 }
             ],
             "nodes": [
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Description",
+                    "nodegroup_id": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11",
+                    "nodeid": "4f8b9fcf-b6f3-11ea-9978-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "County",
+                    "nodegroup_id": "27387ee5-29b5-11eb-b4ea-f875a44e0e11",
+                    "nodeid": "2738a5ce-29b5-11eb-bc19-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
+                    "sortorder": 0
+                },
                 {
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
@@ -3729,7 +3809,7 @@
                     "nodeid": "27387ee5-29b5-11eb-b4ea-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 2
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -3843,7 +3923,7 @@
                     "nodeid": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -3941,7 +4021,7 @@
                     "nodeid": "5518ba9b-b6f3-11ea-ba58-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as",
-                    "sortorder": 3
+                    "sortorder": 0
                 },
                 {
                     "config": null,
@@ -4371,6 +4451,26 @@
                     "name": "Update Date Qualifier Metatype",
                     "nodegroup_id": "cb6ca576-4f66-11eb-a7d5-f875a44e0e11",
                     "nodeid": "cb6cccdc-4f66-11eb-b35e-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "County Metatype",
+                    "nodegroup_id": "27387ee5-29b5-11eb-b4ea-f875a44e0e11",
+                    "nodeid": "27387eef-29b5-11eb-866d-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
@@ -5061,62 +5161,6 @@
                     "nodeid": "cb6ca582-4f66-11eb-95dc-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "County Metatype",
-                    "nodegroup_id": "27387ee5-29b5-11eb-b4ea-f875a44e0e11",
-                    "nodeid": "27387eef-29b5-11eb-866d-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Description",
-                    "nodegroup_id": "4f8b9fcc-b6f3-11ea-bdcf-f875a44e0e11",
-                    "nodeid": "4f8b9fcf-b6f3-11ea-9978-f875a44e0e11",
-                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "County",
-                    "nodegroup_id": "27387ee5-29b5-11eb-b4ea-f875a44e0e11",
-                    "nodeid": "2738a5ce-29b5-11eb-bc19-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
                     "sortorder": 0
                 },
                 {
@@ -6248,27 +6292,7 @@
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
-            "relatable_resource_model_ids": [
-                "f9045867-8861-11ea-b06f-f875a44e0e11",
-                "cf3a2979-f1aa-11e8-9f5d-022b22146258",
-                "42ce82f6-83bf-11ea-b1e8-f875a44e0e11",
-                "49bac32e-5464-11e9-a6e2-000d3ab1e588",
-                "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
-                "b9e0701e-5463-11e9-b5f5-000d3ab1e588",
-                "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                "24d7b54f-5464-11e9-a86b-000d3ab1e588",
-                "0add0e11-99aa-11ea-9ab8-f875a44e0e11",
-                "934cd7f0-480a-11ea-9240-c4d9877d154e",
-                "b07cfa6f-894d-11ea-82aa-f875a44e0e11",
-                "a535a235-8481-11ea-a6b9-f875a44e0e11",
-                "343cc20c-2c5a-11e8-90fa-0242ac120005",
-                "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                "8d41e49e-a250-11e9-9eab-00224800b26d",
-                "979aaf0b-7042-11ea-9674-287fcf6a5e72",
-                "78b32d8c-b6f2-11ea-af42-f875a44e0e11",
-                "22477f01-1a44-11e9-b0a9-000d3ab1e588",
-                "d4a88461-5463-11e9-90d9-000d3ab1e588"
-            ],
+            "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
                 "config": null,
@@ -6292,5 +6316,11 @@
             "template_id": "50000000-0000-0000-0000-000000000002",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 12.3 on x86_64-apple-darwin16.7.0, compiled by Apple LLVM version 8.1.0 (clang-802.0.42), 64-bit",
+        "git hash": "de7013c3d 2021-01-08 12:17:38 -0800",
+        "os": "Darwin",
+        "os version": "19.6.0"
+    }
 }
