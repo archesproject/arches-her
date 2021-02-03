@@ -9,17 +9,19 @@ define([
         viewModel: function(params) {
 
             var self = this;
+            this.resourceId = ko.observable();
 
             params.steps = [
                 {
                     title: 'Related Application Area',
-                    name: 'setrelatedapplicationarea',
+                    name: 'set-related-application-area',
                     description: 'Identify the Development Area for this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4ba-a250-11e9-9b20-00224800b26d',
                     resourceid: null,
+                    shouldtrackresource: true,
                     tileid: null,
                     parenttileid: null,
                     required: true,
@@ -28,7 +30,7 @@ define([
                 },
                 {
                     title: 'Consultation GeoJSON',
-                    name: 'consultationlocation',
+                    name: 'consultation-location',
                     description: 'Set geospatial data for this consultation',
                     component: 'views/components/workflows/consultation-map-step',
                     componentname: 'consultation-map-step',
@@ -42,7 +44,7 @@ define([
                 },
                 {
                     title: 'Consultation Dates',
-                    name: 'setdatedetails',
+                    name: 'set-date-details',
                     description: 'Consultation Dates',
                     component: 'views/components/workflows/consultation-dates-step',
                     componentname: 'consultation-dates-step',
@@ -57,7 +59,7 @@ define([
                 },
                 {
                     title: 'Consultation Details',
-                    name: 'setconsdetails',
+                    name: 'set-cons-details',
                     description: 'Consultation Details',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -71,7 +73,7 @@ define([
                 },
                 {
                     title: 'Reference Numbers',
-                    name: 'setrefnumbers',
+                    name: 'set-ref-numbers',
                     description: 'Application Reference Numbers',
                     component: 'views/components/workflows/new-multi-tile-step',
                     componentname: 'new-multi-tile-step',
@@ -85,6 +87,7 @@ define([
                 },
                 {
                     title: 'Application Proposal',
+                    name: 'application-proposal',
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -98,6 +101,7 @@ define([
                 },
                 {
                     title: 'Contacts',
+                    name: 'consultation-contacts',
                     description: 'Identify the key people/organizations associated with this consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -111,6 +115,7 @@ define([
                 },
                 {
                     title: 'Add Consulation Complete',
+                    name: 'consultation-complete',
                     description: 'Choose an option below',
                     component: 'views/components/workflows/consultations-final-step',
                     componentname: 'consultations-final-step',
@@ -125,10 +130,8 @@ define([
 
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            console.log(this.quitUrl);
             self.getJSON('consultation-workflow');
 
-            self.activeStep.subscribe(this.updateState);
 
             self.ready(true);
         },
