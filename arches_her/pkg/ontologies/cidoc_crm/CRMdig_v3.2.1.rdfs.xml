@@ -61,7 +61,7 @@ A D1 Digital Object does not depend on a specific physical carrier, and it can e
 	<rdfs:comment>This class comprises identifiable material items such as computers, scanners, cameras, etc. that 
 	have the capability to process or produce instances of  D1 Digital Object.
 	</rdfs:comment>
-	<rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"/>
+	<rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object"/>
 </rdfs:Class>
 <rdfs:Class rdf:about="D9_Data_Object">
 	<rdfs:comment>This class comprises instances of D1 Digital Object that are the direct result of a digital 
@@ -442,7 +442,7 @@ This property expresses the approximation of the ending date of a time span.</rd
 <rdf:Property rdf:about="L33_has_maker">
 <rdfs:comment>This property identifies the maker, the actor who is responsible for the production of a device,
  a computer, a digital camera, any kind of a machine that has been produced.
-This property is a shortcut of a more fully developed path from CRM E12 Production:P108 has produced:E24 Physical Man-Made Thing. 
+This property is a shortcut of a more fully developed path from CRM E12 Production:P108 has produced:E24 Physical Human-Made Thing. 
 In this case, there is no need to describe the more detailed property through a production event,so L33 has maker is reccomended to be used instead. </rdfs:comment>
 	<rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E72_Legal_Object"/>
 	<rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E39_Actor"/>
@@ -607,7 +607,7 @@ part of the image data analysis.This property is a specialisation of P90 has val
 <rdf:Property rdf:about="L59_has_serial_number">
 <rdfs:comment>This property records the serial number that was assigned to identify an instance of E22 Man Made Object.
  This property is a specialisation of L53 is not uniquely identified by.</rdfs:comment>
-	<rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E22_Man-Made_Object"/>
+	<rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object"/>
 	<rdfs:range rdf:resource="http://www.w3.org/2000/01/rdf-schema#Literal"/>
 	<rdfs:subPropertyOf rdf:resource="L53_is_not_uniquely_identified_by"/>	
 </rdf:Property>

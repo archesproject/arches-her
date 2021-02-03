@@ -1,29 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
   xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <skos:Concept rdf:about="http://localhost:8000/4ef38f1c-ff8c-4d4c-bc0b-c06231419c80">
-    <skos:inScheme>
-      <skos:ConceptScheme rdf:about="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda">
-        <dcterms:title xml:lang="en">{"id": "d6ae88aa-1e45-4c94-81f0-ced6e61b8da6", "value": "Currency"}</dcterms:title>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/4ef38f1c-ff8c-4d4c-bc0b-c06231419c80"/>
-        <dcterms:identifier xml:lang="en-us">{"id": "7ac65af1-5538-4391-acc0-88cee4db91c5", "value": "http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"}</dcterms:identifier>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/9f404b29-797a-44cf-8693-25089566935f"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/d8b0f140-9cce-482b-be4e-fbaedc4e04c2"/>
-      </skos:ConceptScheme>
-    </skos:inScheme>
-    <skos:prefLabel xml:lang="en">{"id": "2e820298-0d7b-4810-9e46-e16f255b9631", "value": "Historic"}</skos:prefLabel>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/d8b0f140-9cce-482b-be4e-fbaedc4e04c2">
-    <dcterms:identifier xml:lang="en-us">{"id": "a01b1178-1536-4bc4-8f9a-09b8c6ca4ded", "value": "http://localhost:8000/d8b0f140-9cce-482b-be4e-fbaedc4e04c2"}</dcterms:identifier>
-    <skos:prefLabel xml:lang="en">{"id": "e756530f-40af-4a88-a1d5-39b03c1b809a", "value": "Former"}</skos:prefLabel>
-    <skos:inScheme rdf:resource="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"/>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/9f404b29-797a-44cf-8693-25089566935f">
-    <skos:inScheme rdf:resource="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"/>
-    <skos:prefLabel xml:lang="en">{"id": "c2051d53-40e7-4a2d-a4b4-02a31da37fd1", "value": "Current"}</skos:prefLabel>
-    <dcterms:identifier xml:lang="en-us">{"id": "4297e152-bcd2-4326-b7eb-f83d90514834", "value": "http://localhost:8000/9f404b29-797a-44cf-8693-25089566935f"}</dcterms:identifier>
-  </skos:Concept>
+  <skos:ConceptScheme rdf:about="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda">
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/4ef38f1c-ff8c-4d4c-bc0b-c06231419c80">
+        <skos:prefLabel xml:lang="en">{"id": "2e820298-0d7b-4810-9e46-e16f255b9631", "value": "Historic"}</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"/>
+        <dcterms:identifier xml:lang="en">{"id": "97b2d591-f1e7-4fee-8789-c6c9a7c93336", "value": "http://localhost:8000/4ef38f1c-ff8c-4d4c-bc0b-c06231419c80"}</dcterms:identifier>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <dcterms:title xml:lang="en">{"id": "d6ae88aa-1e45-4c94-81f0-ced6e61b8da6", "value": "Currency"}</dcterms:title>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/d8b0f140-9cce-482b-be4e-fbaedc4e04c2">
+        <skos:prefLabel xml:lang="en">{"id": "e756530f-40af-4a88-a1d5-39b03c1b809a", "value": "Former"}</skos:prefLabel>
+        <dcterms:identifier xml:lang="en">{"id": "a01b1178-1536-4bc4-8f9a-09b8c6ca4ded", "value": "http://localhost:8000/d8b0f140-9cce-482b-be4e-fbaedc4e04c2"}</dcterms:identifier>
+        <skos:inScheme rdf:resource="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"/>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <dcterms:identifier xml:lang="en">{"id": "7ac65af1-5538-4391-acc0-88cee4db91c5", "value": "http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"}</dcterms:identifier>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/9f404b29-797a-44cf-8693-25089566935f">
+        <skos:prefLabel xml:lang="en">{"id": "c2051d53-40e7-4a2d-a4b4-02a31da37fd1", "value": "Current"}</skos:prefLabel>
+        <skos:inScheme rdf:resource="http://localhost:8000/cf4d479f-74bf-4100-b666-cc41da68dfda"/>
+        <dcterms:identifier xml:lang="en">{"id": "4297e152-bcd2-4326-b7eb-f83d90514834", "value": "http://localhost:8000/9f404b29-797a-44cf-8693-25089566935f"}</dcterms:identifier>
+      </skos:Concept>
+    </skos:hasTopConcept>
+  </skos:ConceptScheme>
 </rdf:RDF>

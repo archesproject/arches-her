@@ -1,0 +1,274 @@
+{
+    "graph": [
+        {
+            "author": " ",
+            "cards": [
+                {
+                    "active": true,
+                    "cardid": "4a4057c5-03d5-11eb-a318-f875a44e0e11",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "Allows a concept collection to be typed. Useful for data sharing.",
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Mitigation Type",
+                    "nodegroup_id": "4a4057c3-03d5-11eb-a49e-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": true
+                },
+                {
+                    "active": true,
+                    "cardid": "19fbb040-03d5-11eb-91e4-f875a44e0e11",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [
+                        {
+                            "card_id": "19fbb040-03d5-11eb-91e4-f875a44e0e11",
+                            "constraintid": "87dc0f02-b09a-4ee7-80bc-0612b7973e99",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
+                    "cssclass": null,
+                    "description": "",
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Mitigations",
+                    "nodegroup_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": true
+                }
+            ],
+            "cards_x_nodes_x_widgets": [
+                {
+                    "card_id": "19fbb040-03d5-11eb-91e4-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Mitigation",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "cb365737-03d5-11eb-a3b3-f875a44e0e11",
+                    "label": "Mitigation",
+                    "node_id": "5f24298a-03d5-11eb-8df5-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "19fbb040-03d5-11eb-91e4-f875a44e0e11",
+                    "config": {
+                        "displayOnlySelectedNode": false,
+                        "label": "Related Condition",
+                        "placeholder": ""
+                    },
+                    "id": "cb37de23-03d5-11eb-bab7-f875a44e0e11",
+                    "label": "Related Condition",
+                    "node_id": "941e36d2-03d5-11eb-a7c6-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "f5d6b190-bbf0-4dc9-b991-1debab8cb4a9"
+                }
+            ],
+            "color": null,
+            "config": {},
+            "deploymentdate": null,
+            "deploymentfile": null,
+            "description": "",
+            "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "4a4057c3-03d5-11eb-a49e-f875a44e0e11",
+                    "edgeid": "4a4057c7-03d5-11eb-ae3a-f875a44e0e11",
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "4a4057c6-03d5-11eb-b508-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "edgeid": "4a4057c8-03d5-11eb-ab5b-f875a44e0e11",
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "4a4057c3-03d5-11eb-a49e-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "edgeid": "5f24298b-03d5-11eb-9e4e-f875a44e0e11",
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "rangenode_id": "5f24298a-03d5-11eb-8df5-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "edgeid": "941e36d3-03d5-11eb-8575-f875a44e0e11",
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P67_refers_to",
+                    "rangenode_id": "941e36d2-03d5-11eb-a7c6-f875a44e0e11"
+                }
+            ],
+            "functions_x_graphs": [],
+            "graphid": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+            "iconclass": "fa fa-briefcase",
+            "is_editable": true,
+            "isactive": true,
+            "isresource": false,
+            "jsonldcontext": null,
+            "name": "Mitigations",
+            "nodegroups": [
+                {
+                    "cardinality": "1",
+                    "legacygroupid": null,
+                    "nodegroupid": "4a4057c3-03d5-11eb-a49e-f875a44e0e11",
+                    "parentnodegroup_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11"
+                },
+                {
+                    "cardinality": "1",
+                    "legacygroupid": null,
+                    "nodegroupid": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "parentnodegroup_id": null
+                }
+            ],
+            "nodes": [
+                {
+                    "config": {},
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Mitigations",
+                    "nodegroup_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "nodeid": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E29_Design_or_Procedure",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "f60c394e-c99f-4c91-9f68-791465036cde"
+                    },
+                    "datatype": "concept",
+                    "description": "Allows a concept collection to be typed. Useful for data sharing.",
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Mitigation Type",
+                    "nodegroup_id": "4a4057c3-03d5-11eb-a49e-f875a44e0e11",
+                    "nodeid": "4a4057c3-03d5-11eb-a49e-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Mitigation Metatype",
+                    "nodegroup_id": "4a4057c3-03d5-11eb-a49e-f875a44e0e11",
+                    "nodeid": "4a4057c6-03d5-11eb-b508-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Mitigation",
+                    "nodegroup_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "nodeid": "5f24298a-03d5-11eb-8df5-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "nodeid": null,
+                        "property": null
+                    },
+                    "datatype": "node-value",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Related Condition",
+                    "nodegroup_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                    "nodeid": "941e36d2-03d5-11eb-a7c6-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E29_Design_or_Procedure",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67_refers_to",
+                    "sortorder": 0
+                }
+            ],
+            "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "relatable_resource_model_ids": [],
+            "resource_2_resource_constraints": [],
+            "root": {
+                "config": {},
+                "datatype": "semantic",
+                "description": "",
+                "exportable": false,
+                "fieldname": null,
+                "graph_id": "19f87c07-03d5-11eb-b20f-f875a44e0e11",
+                "is_collector": true,
+                "isrequired": false,
+                "issearchable": true,
+                "istopnode": true,
+                "name": "Mitigations",
+                "nodegroup_id": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                "nodeid": "19f87c06-03d5-11eb-99d9-f875a44e0e11",
+                "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E29_Design_or_Procedure",
+                "sortorder": 0
+            },
+            "slug": null,
+            "subtitle": "",
+            "template_id": "50000000-0000-0000-0000-000000000001",
+            "version": ""
+        }
+    ]
+}
