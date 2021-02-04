@@ -10,11 +10,10 @@ define([
         NewTileStep.apply(this, [params]);
         var self = this;
 
-        if (!params.resourceid()) {
-            params.resourceid(params.workflow.state.resourceid);
-        }
-        if (params.workflow.state.steps[params._index]) {
-            params.tileid(params.workflow.state.steps[params._index].tileid);
+        if (!params.resourceid()) { 
+            if (ko.unwrap(params.workflow.resourceId)) {
+                params.resourceid(ko.unwrap(params.workflow.resourceId));
+            }
         }
 
         var url = arches.urls.api_card + (ko.unwrap(params.resourceid) || ko.unwrap(params.graphid));
@@ -102,8 +101,7 @@ define([
                 params.tileid(tile.tileid);
                 self.resourceId(tile.resourceinstance_id);
             }
-            self.setStateProperties();
-            params.workflow.updateUrl();
+            params.value(params.defineStateProperties());
             if (self.completeOnSave === true) { self.complete(true); }
         };
     };
