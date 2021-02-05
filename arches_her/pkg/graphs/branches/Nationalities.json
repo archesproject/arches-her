@@ -1,0 +1,192 @@
+{
+    "graph": [
+        {
+            "author": " Phil Carlisle",
+            "cards": [
+                {
+                    "active": true,
+                    "cardid": "52182d0f-59f0-11e9-95ad-18cf5eb368c4",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [
+                        {
+                            "card_id": "52182d0f-59f0-11e9-95ad-18cf5eb368c4",
+                            "constraintid": "56bcc6b8-b0ed-4353-8a62-2f49f6a44ee3",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
+                    "cssclass": null,
+                    "description": "Used to record the nationality of a vessel or aircraft. Includes Flags of Convenience.Dependencies:> Nationality concept collection in the RDM",
+                    "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": "Record the nationality of the vessel or aircraft",
+                    "is_editable": true,
+                    "name": "Nationalities",
+                    "nodegroup_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "sortorder": null,
+                    "visible": true
+                }
+            ],
+            "cards_x_nodes_x_widgets": [
+                {
+                    "card_id": "52182d0f-59f0-11e9-95ad-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Nationality",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "be30729f-59f0-11e9-ab9d-18cf5eb368c4",
+                    "label": "Nationality",
+                    "node_id": "8a195591-59f0-11e9-98f4-18cf5eb368c4",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "52182d0f-59f0-11e9-95ad-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "e3d9c240-026a-4c1b-8a8e-0ec72541d32a",
+                        "label": "Nationailty Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "d3b90f59-28ef-11eb-a754-f875a44e0e11",
+                    "label": "Nationailty Metatype",
+                    "node_id": "bd52b5cc-28ef-11eb-b33b-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                }
+            ],
+            "color": null,
+            "config": {},
+            "deploymentdate": null,
+            "deploymentfile": null,
+            "description": "Used to record the nationality of a vessel or aircraft. Includes Flags of Convenience.Dependencies:> Nationality concept collection in the RDM",
+            "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "edgeid": "8a197ca1-59f0-11e9-9464-18cf5eb368c4",
+                    "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
+                    "rangenode_id": "8a195591-59f0-11e9-98f4-18cf5eb368c4"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "8a195591-59f0-11e9-98f4-18cf5eb368c4",
+                    "edgeid": "bd52dc9a-28ef-11eb-871e-f875a44e0e11",
+                    "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "bd52b5cc-28ef-11eb-b33b-f875a44e0e11"
+                }
+            ],
+            "functions_x_graphs": [],
+            "graphid": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+            "iconclass": "fa fa-flag",
+            "is_editable": true,
+            "isactive": true,
+            "isresource": false,
+            "jsonldcontext": null,
+            "name": "Nationalities",
+            "nodegroups": [
+                {
+                    "cardinality": "n",
+                    "legacygroupid": null,
+                    "nodegroupid": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "parentnodegroup_id": null
+                }
+            ],
+            "nodes": [
+                {
+                    "config": {
+                        "rdmCollection": "fc7631d8-849d-41b8-902e-45c6b9bb07bf"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Nationality",
+                    "nodegroup_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "nodeid": "8a195591-59f0-11e9-98f4-18cf5eb368c4",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
+                    "sortorder": 0
+                },
+                {
+                    "config": {},
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Nationalities",
+                    "nodegroup_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "nodeid": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Nationailty Metatype",
+                    "nodegroup_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                    "nodeid": "bd52b5cc-28ef-11eb-b33b-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                }
+            ],
+            "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "relatable_resource_model_ids": [],
+            "resource_2_resource_constraints": [],
+            "root": {
+                "config": {},
+                "datatype": "semantic",
+                "description": "",
+                "exportable": false,
+                "fieldname": "",
+                "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+                "is_collector": true,
+                "isrequired": false,
+                "issearchable": true,
+                "istopnode": true,
+                "name": "Nationalities",
+                "nodegroup_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                "nodeid": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
+                "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                "sortorder": 0
+            },
+            "slug": null,
+            "subtitle": "Used to record the nationality of a vessel or aircraft.",
+            "template_id": "50000000-0000-0000-0000-000000000001",
+            "version": ""
+        }
+    ]
+}

@@ -135,7 +135,7 @@ function($, _, BaseFilter, bootstrap, arches, select2, ko, koMapping, viewdata) 
             },
 
             editResource: function(resourceinstance){
-                window.open('/arches-her' + arches.urls.resource_editor + resourceinstance.resourceinstanceid);
+                window.open('/consultations' + arches.urls.resource_editor + resourceinstance.resourceinstanceid);
             },
 
             zoomToFeature: function(evt){

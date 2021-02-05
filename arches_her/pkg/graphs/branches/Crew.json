@@ -34,14 +34,27 @@
                 {
                     "card_id": "8f6b220d-3e8f-11ea-8be4-c4d9877d154e",
                     "config": {
+                        "label": "Crew member",
+                        "placeholder": ""
+                    },
+                    "id": "cc4cb159-3ed2-11eb-aad4-f875a44e0e11",
+                    "label": "Crew member",
+                    "node_id": "12a71603-29bc-11eb-8604-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "31f3728c-7613-11e7-a139-784f435179ea"
+                },
+                {
+                    "card_id": "8f6b220d-3e8f-11ea-8be4-c4d9877d154e",
+                    "config": {
                         "defaultValue": "",
                         "label": "Crew Role",
                         "options": [],
                         "placeholder": "Select an option"
                     },
-                    "id": "bd494ed3-3e8f-11ea-8ff4-c4d9877d154e",
+                    "id": "cc4e5edf-3ed2-11eb-8e90-f875a44e0e11",
                     "label": "Crew Role",
-                    "node_id": "8f6b220e-3e8f-11ea-b643-c4d9877d154e",
+                    "node_id": "12a7160d-29bc-11eb-afa7-f875a44e0e11",
                     "sortorder": 1,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000012"
@@ -49,18 +62,17 @@
                 {
                     "card_id": "8f6b220d-3e8f-11ea-8be4-c4d9877d154e",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Crew Member Name",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
+                        "defaultValue": "b81d4b16-0633-4d7a-b4b2-5c2d3e2e782e",
+                        "label": "Crew Role Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
                     },
-                    "id": "bd4bd37b-3e8f-11ea-b462-c4d9877d154e",
-                    "label": "Crew Member Name",
-                    "node_id": "8f6b220f-3e8f-11ea-a01f-c4d9877d154e",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                    "id": "cc4fe583-3ed2-11eb-b2fc-f875a44e0e11",
+                    "label": "Crew Role Metatype",
+                    "node_id": "12a7160e-29bc-11eb-a561-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
             ],
             "color": null,
@@ -104,30 +116,30 @@
             "edges": [
                 {
                     "description": null,
-                    "domainnode_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "edgeid": "8f6b2211-3e8f-11ea-9276-c4d9877d154e",
-                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
-                    "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P107_has_current_or_former_member",
-                    "rangenode_id": "8f6b2210-3e8f-11ea-84a9-c4d9877d154e"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "8f6b2210-3e8f-11ea-84a9-c4d9877d154e",
-                    "edgeid": "8f6b2212-3e8f-11ea-b287-c4d9877d154e",
+                    "domainnode_id": "12a71603-29bc-11eb-8604-f875a44e0e11",
+                    "edgeid": "12a73d29-29bc-11eb-b5ca-f875a44e0e11",
                     "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "rangenode_id": "8f6b220e-3e8f-11ea-b643-c4d9877d154e"
+                    "rangenode_id": "12a7160d-29bc-11eb-afa7-f875a44e0e11"
                 },
                 {
                     "description": null,
-                    "domainnode_id": "8f6b2210-3e8f-11ea-84a9-c4d9877d154e",
-                    "edgeid": "8f6b2213-3e8f-11ea-a46b-c4d9877d154e",
+                    "domainnode_id": "12a7160d-29bc-11eb-afa7-f875a44e0e11",
+                    "edgeid": "12a73d2b-29bc-11eb-bf82-f875a44e0e11",
                     "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
                     "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "rangenode_id": "8f6b220f-3e8f-11ea-a01f-c4d9877d154e"
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "rangenode_id": "12a7160e-29bc-11eb-a561-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "edgeid": "12a73d2c-29bc-11eb-a124-f875a44e0e11",
+                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P107_has_current_or_former_member",
+                    "rangenode_id": "12a71603-29bc-11eb-8604-f875a44e0e11"
                 }
             ],
             "functions_x_graphs": [],
@@ -148,44 +160,6 @@
             ],
             "nodes": [
                 {
-                    "config": {
-                        "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
-                    },
-                    "datatype": "concept-list",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Crew Role",
-                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "nodeid": "8f6b220e-3e8f-11ea-b643-c4d9877d154e",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "string",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Crew Member Name",
-                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "nodeid": "8f6b220f-3e8f-11ea-a01f-c4d9877d154e",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -204,9 +178,56 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "semantic",
+                    "config": {
+                        "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
+                    },
+                    "datatype": "concept-list",
                     "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Crew Role",
+                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "nodeid": "12a7160d-29bc-11eb-afa7-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Crew Role Metatype",
+                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "nodeid": "12a7160e-29bc-11eb-a561-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "graphs": [
+                            {
+                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
+                                "name": "Person"
+                            }
+                        ]
+                    },
+                    "datatype": "resource-instance",
+                    "description": "",
                     "exportable": false,
                     "fieldname": "",
                     "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
@@ -216,7 +237,7 @@
                     "istopnode": false,
                     "name": "Crew member",
                     "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "nodeid": "8f6b2210-3e8f-11ea-84a9-c4d9877d154e",
+                    "nodeid": "12a71603-29bc-11eb-8604-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E21_Person",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P107_has_current_or_former_member",
                     "sortorder": 0
