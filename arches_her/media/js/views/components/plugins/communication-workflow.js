@@ -9,10 +9,12 @@ define([
     return ko.components.register('communication-workflow', {
         viewModel: function(params) {
             var self = this;
+            this.resourceId = ko.observable();
+            
             params.steps = [
                 {
                     title: 'Related Consultation / Details',
-                    name: 'relatedconsultation',
+                    name: 'related-consultation',
                     description: 'Select the related consultation and Enter the details for this Communication',
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
@@ -25,10 +27,12 @@ define([
                     icon: 'fa-tag',
                     nameheading: 'Communication',
                     namelabel: '[no label]',
+                    shouldtrackresource: true,
                     wastebin: {tile: null, description: 'a communication instance'}
                 },
                 {
                     title: 'Notes',
+                    name: 'notes',
                     description: ' Meeting notes',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -42,6 +46,7 @@ define([
                 },
                 {
                     title: 'Follow-On Actions',
+                    name: 'follow-on-actions',
                     description: 'Follow-on actions, To-Dos',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -55,6 +60,7 @@ define([
                 },
                 {
                     title: 'Upload Documents',
+                    name: 'upload-documents',
                     description: 'Document Upload',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -68,10 +74,12 @@ define([
                 },
                 {
                     title: 'Add Communication Complete',
+                    name: 'communication-complete',
                     description: 'Choose an option below',
                     component: 'views/components/workflows/consultations-final-step',
                     componentname: 'consultations-final-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea',
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
@@ -82,8 +90,6 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             self.getJSON('communication-workflow');
-
-            self.activeStep.subscribe(this.updateState);
 
             self.ready(true);
         },
