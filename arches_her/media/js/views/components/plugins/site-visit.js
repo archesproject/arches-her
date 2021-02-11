@@ -8,15 +8,17 @@ define([
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
-            if (!params.resourceid) {
+            /*if (!params.resourceid) {
                 params.resourceid = ko.observable();
-            }
+            }*/
             var self = this;
+            this.resourceId = ko.observable()
+
             params.steps = [
                 {
-                    title: 'Site Visit Details - Related Consultation',
-                    name: 'sitevisitdetailsrelatedconsultation',
-                    description: '',
+                    title: 'Site Visit Details',
+                    name: 'site-visit-details',
+                    description: 'Site Visit Details - Related Consultation',
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
@@ -28,12 +30,13 @@ define([
                     icon: 'fa-tag',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
+                    shouldtrackresource: true,
                     wastebin: {tile: null, description: 'a site visit instance'}
                 },
                 {
                     title: 'Site Visit Attendees',
-                    name: 'siteattendees',
-                    description: '',
+                    name: 'site-visit-attendees',
+                    description: 'Site Visit Attendees',
                     component: 'views/components/workflows/new-multi-tile-step',
                     componentname: 'new-multi-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
@@ -48,7 +51,7 @@ define([
                 },
                 {
                     title: 'Site Visit Observations',
-                    name: 'siteobservations',
+                    name: 'site-visit-observations',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -64,7 +67,7 @@ define([
                 },
                 {
                     title: 'Recommendations',
-                    name: 'siterecommendations',
+                    name: 'site-recommendations',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -80,7 +83,7 @@ define([
                 },
                 {
                     title: 'Site Photos (Upload)',
-                    name: 'sitephotosupload',
+                    name: 'site-photos-upload',
                     description: '',
                     component: 'views/components/workflows/photo-gallery-step',
                     componentname: 'photo-gallery-step',
@@ -98,7 +101,7 @@ define([
                 },
                 {
                     title: 'Site Visit Workflow Complete',
-                    name: 'sitevisitcomplete',
+                    name: 'site-visit-complete',
                     description: '',
                     component: 'views/components/workflows/consultations-final-step',
                     componentname: 'consultations-final-step',
@@ -117,9 +120,7 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             self.getJSON('site-visit');
-
-            self.activeStep.subscribe(this.updateState);
-
+            
             self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/site-visit.htm' }
