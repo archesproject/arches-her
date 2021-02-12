@@ -15,8 +15,14 @@ define([
         self.loading(true);
         params.tile = self.tile;
         this.urls = arches.urls;
-        this.resourceid = params.resourceid();
         this.report = ko.observable();
+
+        if (!params.resourceid()) { 
+            if (ko.unwrap(params.workflow.resourceId)) {
+                params.resourceid(ko.unwrap(params.workflow.resourceId));
+            }
+        }
+        this.resourceid = params.resourceid();
 
         this.nodegroupids = params.workflow.steps
             .filter(function(step){return ko.unwrap(step.nodegroupid);})
