@@ -12,10 +12,10 @@ define([
 
         params.applyOutputToTarget = ko.observable(true);
         if (!params.resourceid()) {
-            params.resourceid(params.workflow.state.resourceid);
+            params.resourceid(ko.unwrap(params.workflow.resourceId));
         }
-        if (params.workflow.state.steps[params._index]) {
-            params.tileid(params.workflow.state.steps[params._index].tileid);
+        if (params.workflow.steps[params._index]) {
+            params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));
         }
 
         this.nameheading = params.nameheading;
@@ -23,9 +23,9 @@ define([
         this.applyOutputToTarget = params.applyOutputToTarget;
         params.tile = self.tile;
 
-        params.getStateProperties = function(){
+        params.defineStateProperties = function(){
             var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
-            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('resourceid'))) {
+            if (wastebin && 'resourceid' in wastebin) {
                 wastebin.resourceid = ko.unwrap(params.resourceid);
             }
             return {

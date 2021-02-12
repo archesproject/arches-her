@@ -22,14 +22,14 @@ define([
 
         params.applyOutputToTarget = ko.observable(false);
         if (!params.resourceid()) {
-            params.resourceid(params.workflow.state.resourceid);
+            params.resourceid(ko.unwrap(params.workflow.resourceId));
         }
-        if (params.workflow.state.steps[params._index]) {
-            params.tileid(params.workflow.state.steps[params._index].tileid);
+        if (params.workflow.steps[params._index]) {
+            params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));
         }
 
-        if (params.workflow.state.steps[params._index - 1]) {
-            this.sourceStep = params.workflow.state.steps[params._index - 1];
+        if (params.workflow.steps[params._index - 1]) {
+            this.sourceStep = params.workflow.steps[params._index - 1];
         }
 
         self.targetNode = params.targetnode();

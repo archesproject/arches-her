@@ -9,10 +9,12 @@ define([
     return ko.components.register('application-area', {
         viewModel: function(params) {
             var self = this;
+            this.resourceId = ko.observable();
+
             params.steps = [
                 {
                     title: 'Assign Address',
-                    name: 'assignaddress',
+                    name: 'assign-address',
                     description: 'Assign an address to your application area. Use the address as the default name',
                     component: 'views/components/workflows/app-area-address-step',
                     componentname: 'app-area-address-step',
@@ -27,10 +29,12 @@ define([
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
+                    shouldtrackresource: true,
                     wastebin: {resourceid: null, description: 'an application area instance'}
                 },
                 {
-                    title: 'Assign Address',
+                    title: 'Assign Name',
+                    name: 'assign-name',
                     description: 'Assign an address to your application area. Use the address as the default name',
                     component: 'views/components/workflows/app-area-name-step',
                     componentname: 'app-area-name-step',
@@ -45,6 +49,7 @@ define([
                 },
                 {
                     title: 'Area Map',
+                    name: 'area-map',
                     description: 'Draw (or select from the Development Area Overlay) the extent of...',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -58,6 +63,7 @@ define([
                 },
                 {
                     title: 'Related Heritage Resources',
+                    name: 'related-heritage-resource',
                     description: '',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -71,6 +77,7 @@ define([
                 },
                 {
                     title: 'Area Description',
+                    name: 'area-description',
                     description: 'Describe the Application Area',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -84,6 +91,7 @@ define([
                 },
                 {
                     title: 'Area Designations',
+                    name: 'area-designations',
                     description: 'Select the Application Area designations',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -97,6 +105,7 @@ define([
                 },
                 {
                     title: 'Application Area Complete',
+                    name: 'application-area-complete',
                     description: 'Choose an option below',
                     component: 'views/components/workflows/consultations-final-step',
                     componentname: 'consultations-final-step',
@@ -111,9 +120,7 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             self.getJSON('application-area');
-
-            self.activeStep.subscribe(this.updateState);
-
+            
             self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/application-area.htm' }
