@@ -9,9 +9,11 @@ define([
     return ko.components.register('correspondence-workflow', {
         viewModel: function(params) {
             var self = this;
+            this.resourceId = ko.observable();
             params.steps = [
                 {
                     title: 'Select Related Consultation',
+                    name: 'select-related-consultation',
                     description: 'New Correspondence',
                     component: 'views/components/workflows/select-resource-step',
                     componentname: 'select-resource-step',
@@ -22,11 +24,12 @@ define([
                     parenttileid: null,
                     required: true,
                     icon: 'fa-tag',
+                    shouldtrackresource: true,
                     wastebin: {tile: null, description: 'a communication instance'}
                 },
                 {
                     title: 'Correspondence Workflow Complete',
-                    name: 'correspondencecomplete',
+                    name: 'correspondence-complete',
                     description: '',
                     component: 'views/components/workflows/correspondence-final-step',
                     componentname: 'correspondence-final-step',
@@ -44,8 +47,6 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             self.getJSON('correspondence-workflow');
-
-            self.activeStep.subscribe(this.updateState);
 
             self.ready(true);
         },

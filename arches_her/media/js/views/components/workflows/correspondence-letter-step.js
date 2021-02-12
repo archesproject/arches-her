@@ -23,7 +23,7 @@ define([
         this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
         this.dataURL = ko.observable(false);
 
-        params.stateProperties = function(){
+        params.defineStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
