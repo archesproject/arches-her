@@ -22,7 +22,7 @@ define([
         params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
 
-        params.getStateProperties = function(){
+        params.defineStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
