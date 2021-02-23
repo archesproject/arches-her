@@ -121,10 +121,13 @@ define([
 
         NewTileStep.apply(this, [params]);
         this.tile.subscribe(function(tile) {
-            var geoJSON = koMapping.toJS(tile.data['8d41e4d6-a250-11e9-accd-00224800b26d']);
-            var tiles = self.getTiles('8d41e4ba-a250-11e9-9b20-00224800b26d');
+            const GeoJsonNode = 'b949053a-184f-11eb-ac4a-f875a44e0e11';
+            const ConsultationLocationNodegroup = '152aa058-936d-11ea-b517-f875a44e0e11';
+            const RelatedApplicationAreaNode = 'ba54228c-2f4e-11eb-abb5-acde48001122';
+            var geoJSON = koMapping.toJS(tile.data[GeoJsonNode]);
+            var tiles = self.getTiles(ConsultationLocationNodegroup);
             if (tiles.length > 0) {
-                var resourceIds = koMapping.toJS(tiles[0].data['8d41e4de-a250-11e9-973b-00224800b26d']);
+                var resourceIds = koMapping.toJS(tiles[0].data[RelatedApplicationAreaNode]);
                 $.getJSON({
                     url: arches.urls.geojson,
                     data: {
