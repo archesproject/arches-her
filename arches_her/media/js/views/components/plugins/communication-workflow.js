@@ -31,48 +31,6 @@ define([
                     wastebin: {tile: null, description: 'a communication instance'}
                 },
                 {
-                    title: 'Notes',
-                    name: 'notes',
-                    description: ' Meeting notes',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bffb-a3d7-11e9-aebc-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-lightbulb-o'
-                },
-                {
-                    title: 'Follow-On Actions',
-                    name: 'follow-on-actions',
-                    description: 'Follow-on actions, To-Dos',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bff8-a3d7-11e9-a37c-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-clipboard'
-                },
-                {
-                    title: 'Upload Documents',
-                    name: 'upload-documents',
-                    description: 'Document Upload',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'caf5bff7-a3d7-11e9-baa0-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-file-o'
-                },
-                {
                     title: 'Add Communication Complete',
                     name: 'communication-complete',
                     description: 'Choose an option below',
