@@ -38,23 +38,23 @@ define([
             };
             this.activeConsulationConfig = { // could pass this into GET req
                 "nodes":{
-                    "Map":"8d41e4d6-a250-11e9-accd-00224800b26d",
-                    "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
+                    "Geospatial Coordinates":"b949053a-184f-11eb-ac4a-f875a44e0e11",
+                    "Consultation Name":"4ad69684-951f-11ea-b5c3-f875a44e0e11",
                     "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
-                    "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
-                    "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
-                    "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d",
-                    "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
+                    "Proposal Text":"1b0e15ec-8864-11ea-8493-f875a44e0e11",
+                    "Target Date Start":"7224417b-893a-11ea-b383-f875a44e0e11",
+                    "Casework Officer":"4ea4a197-184f-11eb-9152-f875a44e0e11",
+                    "Log Date":"40eff4cd-893a-11ea-b0cc-f875a44e0e11"
                 },
                 "sort config":{
-                    "Log Date: Newest to Oldest":["Consultation Log Date",false],
-                    "Log Date: Oldest to Newest":["Consultation Log Date",true],
+                    "Log Date: Newest to Oldest":["Log Date",false],
+                    "Log Date: Oldest to Newest":["Log Date",true],
                     "Casework Officer: A to Z":["Casework Officer",false],
                     "Casework Officer: Z to A":["Casework Officer",true],
                     "Consultation Type: A to Z":["Consultation Type",false],
                     "Consultation Type: Z to A":["Consultation Type",true],
-                    "Consultation Name: A to Z":["Name",false],
-                    "Consultation Name: Z to A":["Name",true]
+                    "Consultation Name: A to Z":["Consultation Name",false],
+                    "Consultation Name: Z to A":["Consultation Name",true]
                 }
             };
             this.sortOptions = ko.observableArray([]);
@@ -248,7 +248,7 @@ define([
                                 $('<a></a>').attr("href",link).text(consultation['Consultation Type'])[0].outerHTML,
                                 $('<a></a>').attr("href",link).text(consultation['Target Date'])[0].outerHTML,
                                 $('<a></a>').attr("href",link).text(consultation['Casework Officer'])[0].outerHTML,
-                                $('<a></a>').attr("href",link).html(consultation['Proposal'])[0].outerHTML
+                                $('<a></a>').attr("href",link).html(consultation['Proposal Text'])[0].outerHTML
                             ]);
                         });
                         return results;

@@ -30,19 +30,19 @@ import json
 class ActiveConsultationsView(View):
 
     def __init__(self):
-        self.cons_details_nodegroupid = '8d41e4c0-a250-11e9-a7e3-00224800b26d'
+        self.cons_details_nodegroupid = '771bb1e2-8895-11ea-8446-f875a44e0e11' # "Consultation Type" nodegroup, needs to be updated but not used
         self.consultation_graphid = '8d41e49e-a250-11e9-9eab-00224800b26d'
         self.cons_status_bool_nodeid = "6a773228-db20-11e9-b6dd-784f435179ea"
         self.active_cons_node_list = { # if this is not up-to-date sorting will break
-            "Geospatial Location":"8d41e4d6-a250-11e9-accd-00224800b26d",
-            "Name":"8d41e4ab-a250-11e9-87d1-00224800b26d",
-            "Consultation Type":"8d41e4dd-a250-11e9-9032-00224800b26d",
-            "Proposal":"8d41e4bd-a250-11e9-89e8-00224800b26d",
-            "Target Date":"8d41e4cb-a250-11e9-9cf2-00224800b26d",
-            "Casework Officer":"8d41e4d4-a250-11e9-a3ff-00224800b26d",
-            "Consultation Log Date":"8d41e4cf-a250-11e9-a86d-00224800b26d"
+            "Geospatial Coordinates":"b949053a-184f-11eb-ac4a-f875a44e0e11",
+            "Consultation Name":"4ad69684-951f-11ea-b5c3-f875a44e0e11",
+            "Consultation Type":"771bb1e2-8895-11ea-8446-f875a44e0e11",
+            "Proposal Text":"1b0e15ec-8864-11ea-8493-f875a44e0e11",
+            "Target Date":"7224417b-893a-11ea-b383-f875a44e0e11",
+            "Casework Officer":"4ea4a197-184f-11eb-9152-f875a44e0e11",
+            "Log Date":"40eff4cd-893a-11ea-b0cc-f875a44e0e11"
         }
-    
+
     def get(self, request):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
         order_param = request.GET.get('order')
@@ -176,7 +176,7 @@ def build_resource_dict(consultations, active_cons_node_list, datatype_factory, 
                     try:
                         datatype = datatype_factory.get_instance(node.datatype)
                         val = datatype.get_display_value(tile, node)
-                        if layout == 'grid' and nodeid == active_cons_node_list["Geospatial Location"]:
+                        if layout == 'grid' and nodeid == active_cons_node_list["Geospatial Coordinates"]:
                             val = json.loads(val)
                     except Exception as e:
                         # print('Error:',e)
