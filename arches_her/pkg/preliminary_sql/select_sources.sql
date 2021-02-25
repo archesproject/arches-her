@@ -4,13 +4,19 @@ BEGIN;
 
 INSERT INTO map_sources(name, source)
     VALUES ('select-application-area', '{
-        "data": "/geojson?nodeid=6c923175-53d9-11e9-8c78-dca90488358a&include_geojson_link=true",
+        "data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11&include_geojson_link=true",
         "type": "geojson"
     }');
-    
+
 INSERT INTO map_sources(name, source)
-    VALUES ('select-heritage-resource', '{
-        "data": "/geojson?nodeid=26c00b1f-9801-11e9-9ea6-00224800b26d&include_geojson_link=true",
+    VALUES ('select-heritage-area', '{
+        "data": "/geojson?nodeid=64be56e3-3ee5-11eb-b1f0-f875a44e0e11&include_geojson_link=true",
+        "type": "geojson"
+    }');
+
+INSERT INTO map_sources(name, source)
+    VALUES ('select-heritage-asset', '{
+        "data": "/geojson?nodeid=ca063178-28cf-11eb-be6d-f875a44e0e11&include_geojson_link=true",
         "type": "geojson"
     }');
     
