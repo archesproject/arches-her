@@ -17,19 +17,19 @@ define([
             };
             
             this.consultationStatus = ko.computed(function() {
-                return getNodeValues('8d41e4d3-a250-11e9-8977-00224800b26d')[0];
+                return getNodeValues('6a773228-db20-11e9-b6dd-784f435179ea')[0];
             });
             
             this.logDate = ko.computed(function() {
-                return getNodeValues('8d41e4cf-a250-11e9-a86d-00224800b26d')[0];
+                return getNodeValues('40eff4cd-893a-11ea-b0cc-f875a44e0e11')[0];
             });
             
             this.dueDate = ko.computed(function() {
-                return getNodeValues('8d41e4cb-a250-11e9-9cf2-00224800b26d')[0];
+                return getNodeValues('7224417b-893a-11ea-b383-f875a44e0e11')[0];
             });
             
             this.completionDate = ko.computed(function() {
-                return getNodeValues('8d41e4cd-a250-11e9-a25b-00224800b26d')[0];
+                return getNodeValues('40eff4ce-893a-11ea-ae2e-f875a44e0e11')[0];
             });
             
             this.planningOutcome = ko.computed(function() {
@@ -47,7 +47,7 @@ define([
                 
                 return tiles.map(function(tile) {
                     return {
-                        identifier: tile.data['8d41e4c9-a250-11e9-b2d4-00224800b26d'],
+                        identifier: tile.data['c128bf36-9384-11ea-bfe1-f875a44e0e11'],
                         agency: tile.data['8d41e4dc-a250-11e9-8e44-00224800b26d']
                     };
                 });
