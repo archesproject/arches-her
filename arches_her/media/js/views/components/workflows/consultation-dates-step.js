@@ -10,11 +10,10 @@ define([
         NewTileStep.apply(this, [params]);
         var self = this;
 
-        if (!params.resourceid()) {
-            params.resourceid(params.workflow.state.resourceid);
-        }
-        if (params.workflow.state.steps[params._index]) {
-            params.tileid(params.workflow.state.steps[params._index].tileid);
+        if (!params.resourceid()) { 
+            if (ko.unwrap(params.workflow.resourceId)) {
+                params.resourceid(ko.unwrap(params.workflow.resourceId));
+            }
         }
 
         var url = arches.urls.api_card + (ko.unwrap(params.resourceid) || ko.unwrap(params.graphid));
@@ -23,7 +22,7 @@ define([
         params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
 
-        params.getStateProperties = function(){
+        params.defineStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
@@ -33,11 +32,13 @@ define([
 
         this.displayName = ko.observable();
         this.concatName = ko.observable('Consultation for [Application Area] on [Log Date]');
-        this.consultationNameNodeId = '8d41e4ab-a250-11e9-87d1-00224800b26d';
-        this.appAreaNodeId = "8d41e4de-a250-11e9-973b-00224800b26d";
-        this.relatedAppAreaNodeId = '8d41e4ba-a250-11e9-9b20-00224800b26d';
-        this.logDateNodeId = "8d41e4cf-a250-11e9-a86d-00224800b26d";
-        this.targetDateNodeId = "8d41e4cb-a250-11e9-9cf2-00224800b26d";
+        this.consultationNameNodegroupId = '4ad66f55-951f-11ea-b2e2-f875a44e0e11';
+        this.consultationNameNodeId = '4ad69684-951f-11ea-b5c3-f875a44e0e11';
+        this.consultationAppAreaNodegroupId = '152aa058-936d-11ea-b517-f875a44e0e11';
+        this.appAreaNodeId = "ba54228c-2f4e-11eb-abb5-acde48001122";
+        this.consultationLocationNodegroupId = '152aa058-936d-11ea-b517-f875a44e0e11';
+        this.logDateNodeId = "40eff4cd-893a-11ea-b0cc-f875a44e0e11";
+        this.targetDateNodeId = "7224417b-893a-11ea-b383-f875a44e0e11";
 
         this.workflowStepClass = ko.unwrap(params.class());
 
@@ -56,10 +57,10 @@ define([
 
         this.saveConsNameTile = function() {
             var nameCard = self.topCards.find(function(topCard) {
-                return topCard.nodegroupid == self.consultationNameNodeId;
+                return topCard.nodegroupid == self.consultationNameNodegroupId;
             });
             var nameCardTile = nameCard.getNewTile();
-            nameCardTile.data[self.consultationNameNodeId](self.concatName());
+            nameCardTile.data[self.consultationNameNodeId] = self.concatName();
             nameCardTile.save();
         };
 
@@ -75,10 +76,13 @@ define([
         };
 
         self.tile.subscribe(function(val) {
-            var resourceids, logDateVal, targetDateVal;
-            var DefaultTargetDateLeadTime = 22, relatedAppAreaTile = self.getTiles(self.relatedAppAreaNodeId)[0];
+            var resourceids = [];
+            var logDateVal, targetDateVal;
+            var DefaultTargetDateLeadTime = 22, relatedAppAreaTile = self.getTiles(self.consultationAppAreaNodegroupId)[0];
             if(!ko.unwrap(self.displayName) && !ko.unwrap(val.data[self.targetDateNodeId])) {
-                resourceids = ko.unwrap(relatedAppAreaTile.data[self.appAreaNodeId]);
+                ko.unwrap(relatedAppAreaTile.data[self.appAreaNodeId]).forEach(function(obj){
+                    resourceids.push(ko.unwrap(obj["resourceId"]));
+                });
                 self.getResourceDisplayName(resourceids);
             }
             if(val) {
@@ -102,8 +106,7 @@ define([
                 params.tileid(tile.tileid);
                 self.resourceId(tile.resourceinstance_id);
             }
-            self.setStateProperties();
-            params.workflow.updateUrl();
+            params.value(params.defineStateProperties());
             if (self.completeOnSave === true) { self.complete(true); }
         };
     };
