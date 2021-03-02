@@ -16,19 +16,65 @@ define([
                     title: 'Related Consultation / Details',
                     name: 'related-consultation',
                     description: 'Select the related consultation and Enter the details for this Communication',
-                    component: 'views/components/workflows/select-resource-step',
-                    componentname: 'select-resource-step',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    class: 'show-only-details',
                     required: true,
                     icon: 'fa-tag',
                     nameheading: 'Communication',
                     namelabel: '[no label]',
                     shouldtrackresource: true,
                     wastebin: {tile: null, description: 'a communication instance'}
+                },
+                {
+                    title: 'Notes',
+                    name: 'notes',
+                    description: ' Meeting notes',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    parenttileid: null,
+                    class: 'show-only-notes',
+                    required: false,
+                    icon: 'fa-lightbulb-o'
+                },
+                {
+                    title: 'Follow-On Actions',
+                    name: 'follow-on-actions',
+                    description: 'Follow-on actions, To-Dos',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    class: 'show-only-followup',
+                    parenttileid: null,
+                    required: false,
+                    icon: 'fa-clipboard'
+                },
+                {
+                    title: 'Upload Documents',
+                    name: 'upload-documents',
+                    description: 'Document Upload',
+                    component: 'views/components/workflows/hide-card-step',
+                    componentname: 'hide-card-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
+                    resourceid: null,
+                    tileid: null,
+                    class: 'show-only-upload',
+                    parenttileid: null,
+                    required: false,
+                    icon: 'fa-file-o'
                 },
                 {
                     title: 'Add Communication Complete',
@@ -44,7 +90,7 @@ define([
                     parenttileid: null
                 }
             ];
-
+            
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
             self.getJSON('communication-workflow');

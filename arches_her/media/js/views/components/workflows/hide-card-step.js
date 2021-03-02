@@ -9,10 +9,10 @@ define([
     function viewModel(params) {
         NewTileStep.apply(this, [params]);
         if (!params.resourceid()) {
-            params.resourceid(params.workflow.state.resourceid);
+            params.resourceid(ko.unwrap(params.workflow.resourceId));
         }
-        if (params.workflow.state.steps[params._index]) {
-            params.tileid(params.workflow.state.steps[params._index].tileid);
+        if (params.workflow.steps[params._index]) {
+            params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));
         }
 
         this.workflowStepClass = ko.unwrap(params.class());
