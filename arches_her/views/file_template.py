@@ -206,9 +206,12 @@ class FileTemplateView(View):
                     my_node = models.Node.objects.get(nodeid=value)
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
-                    if '<' in lookup_val: # not ideal
-                        html = True
-                    self.replace_string(self.doc, key, lookup_val, html)
+                    try:
+                        if '<' in lookup_val: # not ideal
+                            html = True
+                        self.replace_string(self.doc, key, lookup_val, html)
+                    except TypeError:
+                        pass
 
     
     def replace_string(self, document, key, v, html=False):

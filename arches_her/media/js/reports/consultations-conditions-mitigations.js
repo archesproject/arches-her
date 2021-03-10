@@ -17,11 +17,11 @@ define([
             };
             
             this.conditions = ko.computed(function() {
-                return getTiles('8d41e49f-a250-11e9-b6b3-00224800b26d', '8d41e4db-a250-11e9-bddf-00224800b26d');
+                return getTiles('8d41e49f-a250-11e9-b6b3-00224800b26d', '56fa335d-06fa-11eb-8328-f875a44e0e11');
             });
-            
+
             this.mitigations = ko.computed(function() {
-                return getTiles('8d41e4ae-a250-11e9-8c00-00224800b26d', '8d41e4ca-a250-11e9-abe7-00224800b26d');
+                return getTiles('a5e15f5c-51a3-11eb-b240-f875a44e0e11', 'e2585f8a-51a3-11eb-a7be-f875a44e0e11');
             });
         },
         template: { require: 'text!templates/views/components/reports/consultations-conditions-mitigations.htm' }

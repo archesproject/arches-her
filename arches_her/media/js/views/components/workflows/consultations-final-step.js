@@ -110,9 +110,11 @@ define([
                     }
                 });
 
-                // custom logic specific to the status nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea'
-                self.tile().data[params.nodegroupid()](true);
-                self.tile().save();
+                if (params.nodegroupid()) {
+                    // custom logic specific to the status nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea'
+                    self.tile().data[params.nodegroupid()](true);
+                    self.tile().save();
+                }
                 self.loading(false);
             });
         }
@@ -128,7 +130,7 @@ define([
             }
         });
 
-        params.getStateProperties = function(){
+        params.defineStateProperties = function(){
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,

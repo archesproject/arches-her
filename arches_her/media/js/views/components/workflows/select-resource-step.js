@@ -11,14 +11,14 @@ define([
         NewTileStep.apply(this, [params]);
         this.resValue = ko.observable();
         if (!params.resourceid()) {
-            params.resourceid(params.workflow.state.resourceid);
+            params.resourceid(ko.unwrap(params.workflow.resourceId));
         }
-        if (params.workflow.state.steps[params._index]) {
-            params.tileid(params.workflow.state.steps[params._index].tileid);
+        if (params.workflow.steps[params._index]) {
+            params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));
         }
         this.disableResourceSelection = ko.observable(false);
-        if (params.workflow.state.resourceid) {
-            this.resValue(params.workflow.state.resourceid);
+        if (ko.unwrap(params.workflow.resourceId)) {
+            this.resValue(ko.unwrap(params.workflow.resourceId));
             this.disableResourceSelection(true);
         }
         this.loading(true);
@@ -37,11 +37,12 @@ define([
         params.tile = self.tile;
 
         this.setStateProperties = function(){
-            params.workflow.state.steps[params._index] = params.getStateProperties();
+            console.log("State Properties Updated")
+            params.workflow.steps[params._index] = params.defineStateProperties();
             this.disableResourceSelection(true);
         };
 
-        params.getStateProperties = function(){
+        params.defineStateProperties = function(){
             var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
             var tileid = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined;
             var tile = !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined;

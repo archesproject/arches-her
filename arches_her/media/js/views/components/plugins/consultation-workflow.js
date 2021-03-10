@@ -9,60 +9,48 @@ define([
         viewModel: function(params) {
 
             var self = this;
+            this.resourceId = ko.observable();
 
             params.steps = [
                 {
-                    title: 'Related Application Area',
-                    name: 'setrelatedapplicationarea',
-                    description: 'Identify the Development Area for this Consultation',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4ba-a250-11e9-9b20-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: true,
-                    icon: 'fa-code-fork',
-                    wastebin: {resourceid: null, description: 'a consulation instance'}
-                },
-                {
                     title: 'Consultation GeoJSON',
-                    name: 'consultationlocation',
+                    name: 'consultation-location',
                     description: 'Set geospatial data for this consultation',
                     component: 'views/components/workflows/consultation-map-step',
                     componentname: 'consultation-map-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4c6-a250-11e9-a54d-00224800b26d',
+                    nodegroupid: '152aa058-936d-11ea-b517-f875a44e0e11',
+                    resourceid: null,
+                    shouldtrackresource: true,
+                    tileid: null,
+                    parenttileid: null,
+                    required: true,
+                    icon: 'fa-map-marker',
+                    wastebin: {resourceid: null, description: 'a consultation instance'}
+                },
+                {
+                    title: 'Consultation Dates',
+                    name: 'set-date-details',
+                    description: 'Consultation Dates',
+                    component: 'views/components/workflows/consultation-dates-step',
+                    componentname: 'consultation-dates-step',
+                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                    nodegroupid: '40eff4c9-893a-11ea-ac3a-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-map-marker'
-                },
-                {
-                    title: 'Consultation Dates',
-                    name: 'setdatedetails',
-                    description: 'Consultation Dates',
-                    component: 'views/components/workflows/consultation-dates-step',
-                    componentname: 'consultation-dates-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-002s24800b26d',
-                    nodegroupid: '8d41e4a5-a250-11e9-840c-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: true,
                     class: 'hide-completion-date',
                     icon: 'fa-calendar-o'
                 },
                 {
-                    title: 'Consultation Details',
-                    name: 'setconsdetails',
+                    title: 'Consultation Details/Type',
+                    name: 'set-cons-details',
                     description: 'Consultation Details',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4c0-a250-11e9-a7e3-00224800b26d',
+                    nodegroupid: '771bb1e2-8895-11ea-8446-f875a44e0e11', //consultation type node
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -71,7 +59,7 @@ define([
                 },
                 {
                     title: 'Reference Numbers',
-                    name: 'setrefnumbers',
+                    name: 'set-ref-numbers',
                     description: 'Application Reference Numbers',
                     component: 'views/components/workflows/new-multi-tile-step',
                     componentname: 'new-multi-tile-step',
@@ -85,11 +73,12 @@ define([
                 },
                 {
                     title: 'Application Proposal',
+                    name: 'application-proposal',
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4bd-a250-11e9-89e8-00224800b26d',
+                    nodegroupid: '1b0e15e9-8864-11ea-b5f3-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -98,11 +87,12 @@ define([
                 },
                 {
                     title: 'Contacts',
+                    name: 'consultation-contacts',
                     description: 'Identify the key people/organizations associated with this consultation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4a8-a250-11e9-aff0-00224800b26d',
+                    nodegroupid: '4ea4a189-184f-11eb-b45e-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -111,6 +101,7 @@ define([
                 },
                 {
                     title: 'Add Consulation Complete',
+                    name: 'consultation-complete',
                     description: 'Choose an option below',
                     component: 'views/components/workflows/consultations-final-step',
                     componentname: 'consultations-final-step',
@@ -125,10 +116,8 @@ define([
 
             Workflow.apply(this, [params]);
             this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            console.log(this.quitUrl);
             self.getJSON('consultation-workflow');
 
-            self.activeStep.subscribe(this.updateState);
 
             self.ready(true);
         },

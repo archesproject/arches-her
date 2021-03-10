@@ -9,7 +9,7 @@ define([
                 }).map(function(tile) {
                     return {
                         tileid: tile.tileid,
-                        date: tile.data['299e6d51-a251-11e9-9eb6-00224800b26d']
+                        date: tile.data['1cf746f6-1853-11eb-a9df-f875a44e0e11']
                     };
                 });
             });
