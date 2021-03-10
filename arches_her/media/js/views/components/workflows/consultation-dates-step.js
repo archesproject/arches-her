@@ -16,9 +16,6 @@ define([
             }
         }
 
-        var url = arches.urls.api_card + (ko.unwrap(params.resourceid) || ko.unwrap(params.graphid));
-
-
         params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
 
