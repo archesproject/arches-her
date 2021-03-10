@@ -127,7 +127,7 @@ define([
             var geoJSON = koMapping.toJS(tile.data[GeoJsonNode]);
             var tiles = self.getTiles(ConsultationLocationNodegroup);
             if (tiles.length > 0) {
-                var resourceIds = koMapping.toJS(tiles[0].data[RelatedApplicationAreaNode]);
+                var resourceIds = koMapping.toJS(tiles[0].data[RelatedApplicationAreaNode]) || [];
                 $.getJSON({
                     url: arches.urls.geojson,
                     data: {

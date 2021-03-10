@@ -16,9 +16,6 @@ define([
             }
         }
 
-        var url = arches.urls.api_card + (ko.unwrap(params.resourceid) || ko.unwrap(params.graphid));
-
-
         params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
 
@@ -77,12 +74,14 @@ define([
 
         self.tile.subscribe(function(val) {
             var resourceids = [];
+            var appAreas;
             var logDateVal, targetDateVal;
             var DefaultTargetDateLeadTime = 22, relatedAppAreaTile = self.getTiles(self.consultationAppAreaNodegroupId)[0];
             if(!ko.unwrap(self.displayName) && !ko.unwrap(val.data[self.targetDateNodeId])) {
-                ko.unwrap(relatedAppAreaTile.data[self.appAreaNodeId]).forEach(function(obj){
-                    resourceids.push(ko.unwrap(obj["resourceId"]));
-                });
+                appAreas = relatedAppAreaTile.data[self.appAreaNodeId]()
+                if (appAreas) {
+                    resourceids = appAreas.map(function(obj){return obj.resourceId();});
+                }
                 self.getResourceDisplayName(resourceids);
             }
             if(val) {
