@@ -74,8 +74,9 @@ class FileTemplateView(View):
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
         resourceinstance_id = request.POST.get('resourceinstance_id', None)
-        self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
+        self.resource = Resource.objects.get_or_create(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
+        resourceinstance_id = self.resource.resourceinstance_id
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
@@ -101,11 +102,16 @@ class FileTemplateView(View):
         new_req.POST['data'] = None
         host = request.get_host()
 
+        digitalObjectFileNodegroup = '7db68c6c-8490-11ea-a543-f875a44e0e11'
+        digitalObjectFileNode = '96f8830a-8490-11ea-9aba-f875a44e0e11'
+        digitalObjectNamesNodegroup = 'c61ab163-9513-11ea-9bb6-f875a44e0e11'
+        digitalObjectNameNode = 'c61ab16c-9513-11ea-89a4-f875a44e0e11'
+
         self.doc.save(new_file_path)
         saved_file = open(new_file_path, 'rb')
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
-        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
+        file_list_node_id = digitalObjectFileNode
 
         tile = json.dumps({
             "tileid":None,

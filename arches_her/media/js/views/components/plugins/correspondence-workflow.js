@@ -15,7 +15,7 @@ define([
                     title: 'Select Related Consultation',
                     name: 'select-related-consultation',
                     description: 'New Correspondence',
-                    component: 'views/components/workflows/select-resource-step',
+                    component: 'views/components/workflows/correspondence-select-resource',
                     componentname: 'select-resource-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
@@ -25,7 +25,7 @@ define([
                     required: true,
                     icon: 'fa-tag',
                     shouldtrackresource: true,
-                    wastebin: {tile: null, description: 'a communication instance'}
+                    wastebin: {tile: null, description: 'a correspondence instance'}
                 },
                 {
                     title: 'Correspondence Workflow Complete',
