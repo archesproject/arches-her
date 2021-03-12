@@ -30,6 +30,8 @@ define([
 
         this.workflowJSON = ko.observable();
         this.workflows = ko.observableArray();
+        this.dataURL = ko.observable(params.workflow.getStepData("select-related-consultation").dataURL);
+
         this.getJSON = function() {
             $.ajax({
                 type: "GET",
@@ -63,16 +65,6 @@ define([
         
         self.requirements = params.requirements;
         params.tile = self.tile;
-        
-        var digitalObjectFileNodegroup = '7db68c6c-8490-11ea-a543-f875a44e0e11';
-        var digitalObjectFileNode = '96f8830a-8490-11ea-9aba-f875a44e0e11';
-        var digitalObjectNamesNodegroup = 'c61ab163-9513-11ea-9bb6-f875a44e0e11';
-        var digitalObjectNameNode = 'c61ab16c-9513-11ea-89a4-f875a44e0e11';
-
-        this.letterFileNodeId = "8d41e4d1-a250-11e9-9a12-00224800b26d";
-        this.correspondenceNodegroupId = "8d41e4b4-a250-11e9-993d-00224800b26d";
-        this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
-        this.dataURL = ko.observable(false);
 
         params.defineStateProperties = function(){
             return {
@@ -81,62 +73,6 @@ define([
                 tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
             };
         };
-
-        /*this.retrieveFile = function(tile) {
-            var letterTypeTiles = self.getTiles(self.correspondenceNodegroupId);
-            //note that the statement below assumes the last index of this array is the tile associated with the 
-            //preceding step in the workflow
-            var templateId = letterTypeTiles[letterTypeTiles.length - 1].data[self.letterTypeNodeId]();
-            $.ajax({
-                type: "POST",
-                url: arches.urls.root + 'filetemplate',
-                data: {
-                    "resourceinstance_id": null,
-                    "template_id": templateId,
-                    "parenttile_id": null,
-                    "tile": tile
-                },
-                context: self,
-                success: function(data){
-                    console.log(data.tile)
-                    self.downloadFile(data.tile);
-                },
-                error: function(response) {
-                    if(response.statusText !== 'abort'){
-                        self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
-                    }
-                }
-            });
-            self.loading(false);
-        };
-
-        this.downloadFile = function(tile) {
-            $.ajax({
-                type: "GET",
-                url: arches.urls.root + 'filetemplate',
-                data: {
-                    "resourceinstance_id": tile.resourceinstance_id,
-                    "parenttile_id": tile.parenttile_id
-                },
-                context: self,
-                success: function(responseText, status, response){
-                    self.dataURL(response.responseJSON['download']);
-                    self.loading(false);
-                },
-                error: function(response) {
-                    if(response.statusText !== 'abort'){
-                        self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
-                    }
-                }
-            });
-        };
-
-        var createDocxTileOnLoad = self.tile.subscribe(function(val) {
-            if(val) {
-                self.retrieveFile(val);
-                createDocxTileOnLoad.dispose();
-            }
-        });*/
 
         self.onSaveSuccess = function(tiles) {
             var tile;

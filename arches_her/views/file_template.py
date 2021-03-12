@@ -53,7 +53,7 @@ class FileTemplateView(View):
         parenttile_id = request.GET.get('parenttile_id')
         parent_tile = Tile.objects.get(tileid=parenttile_id)
         letter_tiles = Tile.objects.filter(parenttile=parent_tile)
-        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
+        file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11" # Digital Object
         url = None
         for tile in letter_tiles:
             if url is not None:
@@ -74,9 +74,9 @@ class FileTemplateView(View):
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
         resourceinstance_id = request.POST.get('resourceinstance_id', None)
-        self.resource = Resource.objects.get_or_create(resourceinstanceid=resourceinstance_id)
+        print("resourceid recieved is: " + resourceinstance_id)
+        self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
-        resourceinstance_id = self.resource.resourceinstance_id
 
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, 'docx', template_name)
@@ -102,17 +102,12 @@ class FileTemplateView(View):
         new_req.POST['data'] = None
         host = request.get_host()
 
-        digitalObjectFileNodegroup = '7db68c6c-8490-11ea-a543-f875a44e0e11'
-        digitalObjectFileNode = '96f8830a-8490-11ea-9aba-f875a44e0e11'
-        digitalObjectNamesNodegroup = 'c61ab163-9513-11ea-9bb6-f875a44e0e11'
-        digitalObjectNameNode = 'c61ab16c-9513-11ea-89a4-f875a44e0e11'
-
         self.doc.save(new_file_path)
         saved_file = open(new_file_path, 'rb')
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
-        file_list_node_id = digitalObjectFileNode
-
+        file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11" # Digital Object
+ 
         tile = json.dumps({
             "tileid":None,
             "data": {
@@ -131,9 +126,9 @@ class FileTemplateView(View):
                     "content":"blob:"+host+"/{0}".format(uuid.uuid4())
                 }]
             },
-            "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
-            "parenttile_id":parenttile_id,
-            "resourceinstance_id":resourceinstance_id,
+            "nodegroup_id":"7db68c6c-8490-11ea-a543-f875a44e0e11",
+            "parenttile_id":None,
+            "resourceinstance_id":"",
             "sortorder":0,
             "tiles":{}
         })
@@ -143,14 +138,15 @@ class FileTemplateView(View):
         new_req.user = request.user
         new_req.POST['data'] = tile
         new_req.FILES['file-list_' + file_list_node_id] = file_data
-        new_tile_data_instance = TileData()
+        new_tile = TileData()
+        new_tile.action = "update_tile"
 
-        post_resp = TileData.post(new_tile_data_instance, new_req)
-
-        if post_resp.status_code == 200:
+        response = TileData.post(new_tile, new_req)
+        if response.status_code == 200:
+            tile = json.loads(response.content)
             return JSONResponse({'tile':tile, 'status':'success' })
 
-        return HttpResponseNotFound(post_resp.status_code)
+        return HttpResponseNotFound(response.status_code)
 
 
     def get_template_path(self, template_id):
