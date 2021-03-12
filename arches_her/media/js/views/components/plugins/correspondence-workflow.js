@@ -16,16 +16,17 @@ define([
                     name: 'select-related-consultation',
                     description: 'New Correspondence',
                     component: 'views/components/workflows/correspondence-select-resource',
-                    componentname: 'select-resource-step',
+                    componentname: 'correspondence-select-resource',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     required: true,
+                    class: 'hide-letter-resource',
                     icon: 'fa-tag',
                     shouldtrackresource: true,
-                    wastebin: {tile: null, description: 'a correspondence instance'}
+                    wastebin: {tile: null, description: 'a correspondence tile'}
                 },
                 {
                     title: 'Correspondence Workflow Complete',
