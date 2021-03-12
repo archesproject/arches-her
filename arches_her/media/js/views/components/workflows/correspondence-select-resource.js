@@ -14,11 +14,10 @@ define([
 
         this.workflowStepClass = ko.unwrap(params.class());
 
-        this.letterFileNodeId = "8d41e4d1-a250-11e9-9a12-00224800b26d";
-        this.correspondenceNodegroupId = "8d41e4b4-a250-11e9-993d-00224800b26d";
         this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
         this.digitalObjectFileNodeId = "96f8830a-8490-11ea-9aba-f875a44e0e11";
         this.dataURL = ko.observable(null);
+        this.digitalObjectResourceId = ko.observable(null)
 
         var nameTemplate = {
             "tileid": null,
@@ -49,6 +48,7 @@ define([
             })
             .done(function(data){
                 self.dataURL(data.tile.data[self.digitalObjectFileNodeId][0].url);
+                self.digitalObjectResourceId(data.tile.resourceinstance_id);
 
                 nameTemplate["resourceinstance_id"] = data.tile.resourceinstance_id;
                 nameTemplate["nodegroup_id"] = 'c61ab163-9513-11ea-9bb6-f875a44e0e11'
@@ -116,11 +116,8 @@ define([
 
         params.defineStateProperties = function(){
             var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
-            var tileid = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined;
-            var tile = !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined;
-            var completeTile = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile).getData() : undefined;
-            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('tile'))) {
-                wastebin.tile = completeTile;
+            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('resourceid'))) {
+                wastebin.resourceid = ko.unwrap(self.digitalObjectResourceId);                
             }
             return {
                 resourceid: ko.unwrap(params.resourceid),

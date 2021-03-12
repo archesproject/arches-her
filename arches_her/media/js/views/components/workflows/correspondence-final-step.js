@@ -67,10 +67,19 @@ define([
         params.tile = self.tile;
 
         params.defineStateProperties = function(){
+            var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
+            var tileid = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined;
+            var tile = !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined;
+            var completeTile = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile).getData() : undefined;
+            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('tile'))) {
+                wastebin.tile = completeTile;
+            }
+
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
-                tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
+                tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined,
+                wastebin: wastebin
             };
         };
 

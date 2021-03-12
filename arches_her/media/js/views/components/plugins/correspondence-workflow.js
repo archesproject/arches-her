@@ -26,7 +26,7 @@ define([
                     class: 'hide-letter-resource',
                     icon: 'fa-tag',
                     shouldtrackresource: true,
-                    wastebin: {tile: null, description: 'a correspondence tile'}
+                    wastebin: {resourceid: null, description: 'a digital object instance'}
                 },
                 {
                     title: 'Correspondence Workflow Complete',
@@ -41,7 +41,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-cloud-upload',
                     nameheading: 'New Correspondence',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    wastebin: {tile: null, description: 'a correspondence tile'}
                 }
             ];
 
