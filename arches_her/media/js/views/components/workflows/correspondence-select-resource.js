@@ -38,6 +38,7 @@ define([
 
         this.retrieveFile = function(tile) {
             var templateId = ko.mapping.toJS(tile.data)[self.letterTypeNodeId];
+
             $.ajax({
                 type: "POST",
                 url: arches.urls.root + 'filetemplate',
@@ -49,9 +50,32 @@ define([
             .done(function(data){
                 self.dataURL(data.tile.data[self.digitalObjectFileNodeId][0].url);
                 self.digitalObjectResourceId(data.tile.resourceinstance_id);
-
                 nameTemplate["resourceinstance_id"] = data.tile.resourceinstance_id;
                 nameTemplate["nodegroup_id"] = 'c61ab163-9513-11ea-9bb6-f875a44e0e11'
+    
+                var relateDocuNodeTemplate = [{
+                    'resourceId': data.tile.resourceinstance_id,
+                    'ontologyProperty': '',
+                    'inverseOntologyProperty':'',
+                    'resourceXresourceId':''
+                }];
+
+                $.ajax({
+                    url: arches.urls.api_node_value,
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {
+                        'resourceinstanceid': ko.unwrap(params.resourceid),
+                        'nodeid': '87e0b839-9391-11ea-8a85-f875a44e0e11', // Correspondence Related Node
+                        'data': JSON.stringify(relateDocuNodeTemplate),
+                        'tileid': ko.unwrap(params.tileid)
+                    }
+                }).done(function(response) {
+                    console.log("Successfully Updated the Node Value")
+                })
+                .fail(function(response) {
+                    console.log("Updating the node value failed: \n", response)
+                });
 
                 $.ajax({
                     url: arches.urls.api_resources(ko.unwrap(params.resourceid)),
@@ -72,39 +96,18 @@ define([
                         },
                     })
                     .then(function(response) {
-                        console.log("Creating the name tile is done")
+                        if (params.value) {
+                            params.value(params.defineStateProperties());
+                        }
+                        self.loading(false);
+                        if (self.completeOnSave === true) { self.complete(true); }    
                     })
                     .catch(function(response){
                         console.log("Creating the name tile failed: \n", response)
                     });
-                    self.loading(false);
-                    if (self.completeOnSave === true) { self.complete(true); }
                 })
                 .fail(function(response) {
-                    console.log("getting consultation name failed: \n", response)
-                });
-                var relateDocuNodeTemplate = [{
-                    'resourceId': data.tile.resourceinstance_id,
-                    'ontologyProperty': '',
-                    'inverseOntologyProperty':'',
-                    'resourceXresourceId':''
-                }]
-
-                $.ajax({
-                    url: arches.urls.api_node_value,
-                    type: 'POST',
-                    dataType: 'json',
-                    data: {
-                        'resourceinstanceid': ko.unwrap(params.resourceid),
-                        'nodeid': '87e0b839-9391-11ea-8a85-f875a44e0e11', // Correspondence Related Node
-                        'data': JSON.stringify(relateDocuNodeTemplate),
-                        'tileid': ko.unwrap(params.tileid)
-                    }
-                }).done(function(response) {
-                    console.log("Successfully Updated the Node Value")
-                })
-                .fail(function(response) {
-                    console.log("Updating the node value failed: \n", response)
+                    console.log("Getting consultation name failed: \n", response)
                 });
             })
             .fail(function(response) {
@@ -121,8 +124,8 @@ define([
             }
             return {
                 resourceid: ko.unwrap(params.resourceid),
-                tile: tile,
-                tileid: tileid,
+                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
                 dataURL: ko.unwrap(self.dataURL),
                 wastebin: wastebin
             };
@@ -140,12 +143,6 @@ define([
 
                 self.retrieveFile(tile);
             }
-
-            if (params.value) {
-                params.value(params.defineStateProperties());
-            }
-            
-            //if (self.completeOnSave === true) { self.complete(true); }
         };
     }
 
