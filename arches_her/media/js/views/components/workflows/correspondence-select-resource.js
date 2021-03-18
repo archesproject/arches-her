@@ -71,10 +71,10 @@ define([
                         'tileid': ko.unwrap(params.tileid)
                     }
                 }).done(function(response) {
-                    console.log("Successfully Updated the Node Value")
+                    console.log("Digital related resource updated")
                 })
                 .fail(function(response) {
-                    console.log("Updating the node value failed: \n", response)
+                    console.log("Updating digital related resource failed: \n", response)
                 });
 
                 $.ajax({
@@ -87,23 +87,21 @@ define([
                 }).done(function(data) {
                     let today = new Date().toLocaleDateString()
                     nameTemplate.data["c61ab16c-9513-11ea-89a4-f875a44e0e11"] = today + " Letter for " + data.displayname;
-                    window.fetch(arches.urls.api_tiles(uuid.generate()), {
-                        method: 'POST',
-                        credentials: 'include',
-                        body: JSON.stringify(nameTemplate),
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                    })
-                    .then(function(response) {
+
+                    $.ajax({
+                        url: arches.urls.api_tiles(uuid.generate()),
+                        type: 'POST',
+                        dataType: 'json',
+                        data: JSON.stringify(nameTemplate),
+                    }).done(function(response) {
                         if (params.value) {
                             params.value(params.defineStateProperties());
                         }
                         self.loading(false);
                         if (self.completeOnSave === true) { self.complete(true); }    
                     })
-                    .catch(function(response){
-                        console.log("Creating the name tile failed: \n", response)
+                    .fail(function(response){
+                        console.log("Adding the digital object name failed: \n", response)
                     });
                 })
                 .fail(function(response) {
