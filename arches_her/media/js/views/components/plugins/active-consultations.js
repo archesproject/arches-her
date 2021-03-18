@@ -198,19 +198,19 @@ define([
                             consultation.sources = Object.assign({
                                 'app-area-geom': {
                                     "type": "geojson",
-                                    "data": consultation["Geospatial Location"] ?
-                                        consultation["Geospatial Location"] :
+                                    "data": consultation["Geospatial Coordinates"] ?
+                                        consultation["Geospatial Coordinates"] :
                                         {
                                             "features": [],
                                             "type":"FeatureCollection"
                                         }
                                 }
                             }, arches.mapSources);
-                            if (consultation["Geospatial Location"]) {
-                                if (consultation["Geospatial Location"]["features"].length > 0) {
+                            if (consultation["Geospatial Coordinates"]) {
+                                if (consultation["Geospatial Coordinates"]["features"].length > 0) {
                                     consultation.bounds = geojsonExtent({
                                         type: 'FeatureCollection',
-                                        features: consultation["Geospatial Location"]["features"]
+                                        features: consultation["Geospatial Coordinates"]["features"]
                                     });
                                     consultation.fitBoundsOptions = {
                                         padding: 40,
