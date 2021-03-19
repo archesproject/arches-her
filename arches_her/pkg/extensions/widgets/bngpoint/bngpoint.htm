@@ -4,18 +4,25 @@
 {% block form %}
 <div class="row widget-wrapper">
     <div class="form-group">
-        <label class="control-label widget-input-label" data-bind="text: label"></label>
+        <p class="control-label widget-input-label" data-bind="text: label"></p>
         <div class="col-xs-12" style="margin-top:5px;">
-            <strong>Coordinate Format</strong><br />
+            <label for="formatType"><strong>Coordinate Format</strong></label><br />
             <span>Select input coordinate format from drop down list:</span>
-            <select data-bind="options:coordOptions, value:coordFormat, optionsCaption:'Select A Format'" id="formatType"></select>
+            <select data-bind="options:coordOptions, value:coordFormat, optionsCaption:'Select A Format'"
+                id="formatType"></select>
 
 
         </div>
         <div class="col-xs-12" style="margin-top:5px;">
-            <strong>Central Point Coordinate</strong><br />
-            <span>Enter the central coordinate of the record in either of the following formats:<ul><li>Alphanumeric BNG: SU1025169962</li><li>Absolute BNG: 410251,169962</li><li>Long/Lat: -1.853942,51.428572</li></ul</span>
-            <input type="text" data-bind="textInput: bngVal, hasFocus: isSelected, attr: {placeholder: placeholder}" class="form-control input-lg widget-input" style="margin-top:5px;margin-bottom: 5px">
+            <label for="coordinatePoint"><strong>Central Point Coordinate</strong><br /></label>
+            <span>Enter the central coordinate of the record in either of the following formats:<ul>
+                    <li>Alphanumeric BNG: SU1025169962</li>
+                    <li>Absolute BNG: 410251,169962</li>
+                    <li>Long/Lat: -1.853942,51.428572</li>
+                </ul></span>
+            <input type="text" data-bind="textInput: bngVal, hasFocus: isSelected, attr: {placeholder: placeholder}"
+                class="form-control input-lg widget-input" style="margin-top:5px;margin-bottom: 5px"
+                id="coordinatePoint">
         </div>
 
         <!--<div style="margin-top:5px;" data-bind="visible:messageVisible">-->
@@ -24,8 +31,9 @@
         </div>
 
         <div class="col-xs-12" style="margin-top:5px;">
-            <label class="control-label widget-input-label" for="">Preview</label>	
-            <input disabled type="text" data-bind="textInput: preview" class="form-control input-lg widget-input">
+            <label class="control-label widget-input-label" for="previewPoint">Preview</label>
+            <input disabled type="text" data-bind="textInput: preview" class="form-control input-lg widget-input"
+                id="previewPoint">
         </div>
     </div>
 </div>
@@ -36,15 +44,14 @@
     {% trans "Placeholder" %}
 </div>
 <div class="col-xs-12 pad-no crud-widget-container">
-    <input type="text" placeholder="{% trans "Placeholder" %}" id="" class="form-control input-md widget-input" data-bind="textInput: placeholder">
+    <input type="text" placeholder="{% trans "Placeholder" %}" aria-label="{% trans "Placeholder" %}" id=""
+        class="form-control input-md widget-input" data-bind="textInput: placeholder">
 </div>
 {% endblock config_form %}
 
 {% block report %}
 <dt data-bind="text: label"></dt>
 <dd>
-  <div style='margin-bottom:2px' data-bind="text: value"></div>
+    <div style='margin-bottom:2px' data-bind="text: value"></div>
 </dd>
 {% endblock report %}
-
-

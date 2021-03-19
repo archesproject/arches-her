@@ -17,7 +17,7 @@ define(['knockout', 'proj4','underscore', 'viewmodels/widget'], function (ko, pr
             var self = this;
             
             this.coordOptions = ['Alphanumeric BNG','Absolute BNG','Long/Lat']
-            this.coordFormat = ko.observable();
+            this.coordFormat = ko.observable('Alphanumeric BNG');
             this.isSelected = ko.observable(false);
             this.errorMessage = ko.observable();
             this.messageVisible = ko.observable(false);
@@ -201,22 +201,63 @@ define(['knockout', 'proj4','underscore', 'viewmodels/widget'], function (ko, pr
                 
 
                 var gridSquare = {
+                    "NA":[0,9],
+                    "NB":[1,9],
+                    "NC":[2,9],
+                    "ND":[3,9],
+                    "NE":[4,9],
+                    "OA":[5,9],
+                    "OB":[6,9],
+                    "NF":[0,8],
+                    "NG":[1,8],
+                    "NH":[2,8],
+                    "NJ":[3,8],
+                    "NK":[4,8],
+                    "OF":[5,8],
+                    "OG":[6,8],
+                    "NL":[0,7],
+                    "NM":[1,7],
+                    "NN":[2,7],
+                    "NO":[3,7],
+                    "NP":[4,7],
+                    "OL":[5,7],
+                    "OM":[6,7],
+                    "NQ":[0,6],
+                    "NR":[1,6],
+                    "NS":[2,6],
                     "NT":[3,6],
                     "NU":[4,6],
+                    "OQ":[5,6],
+                    "OR":[6,6],
+                    "NV":[0,5],
+                    "NW":[1,5],
                     "NX":[2,5],
                     "NY":[3,5],
                     "NZ":[4,5],
+                    "OV":[5,5],
+                    "OW":[6,5],
+                    "SA":[0,4],
+                    "SB":[1,4],
+                    "SC":[2,4],
                     "SD":[3,4],
                     "SE":[4,4],
                     "TA":[5,4],
+                    "SF":[0,3],
+                    "SG":[1,3],
+                    "SH":[2,3],
                     "SJ":[3,3],
                     "SK":[4,3],
                     "TF":[5,3],
                     "TG":[6,3],
+                    "SL":[0,2],
+                    "SR":[1,2],
+                    "SS":[2,2],
                     "SO":[3,2],
                     "SP":[4,2],
                     "TL":[5,2],
                     "TM":[6,2],
+                    "SQ":[0,1],
+                    "SR":[1,1],
                     "SS":[2,1],
                     "ST":[3,1],
                     "SU":[4,1],
@@ -227,7 +268,8 @@ define(['knockout', 'proj4','underscore', 'viewmodels/widget'], function (ko, pr
                     "SX":[2,0],
                     "SY":[3,0],
                     "SZ":[4,0],
-                    "TV":[5,0]}
+                    "TV":[5,0],
+                    "TW":[6,0]}
 
 
                 pre = this.bngVal();
