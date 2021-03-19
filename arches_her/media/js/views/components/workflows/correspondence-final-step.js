@@ -30,6 +30,8 @@ define([
 
         this.workflowJSON = ko.observable();
         this.workflows = ko.observableArray();
+        this.dataURL = ko.observable(params.workflow.getStepData("select-related-consultation").dataURL);
+
         this.getJSON = function() {
             $.ajax({
                 type: "GET",
@@ -63,72 +65,23 @@ define([
         
         self.requirements = params.requirements;
         params.tile = self.tile;
-        this.letterFileNodeId = "8d41e4d1-a250-11e9-9a12-00224800b26d";
-        this.letterTypeNodegroupId = "8d41e4b4-a250-11e9-993d-00224800b26d";
-        this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
-        this.dataURL = ko.observable(false);
 
         params.defineStateProperties = function(){
+            var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
+            var tileid = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined;
+            var tile = !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined;
+            var completeTile = !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile).getData() : undefined;
+            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('tile'))) {
+                wastebin.tile = completeTile;
+            }
+
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
-                tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
+                tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined,
+                wastebin: wastebin
             };
         };
-
-        this.retrieveFile = function(tile) {
-            var letterTypeTiles = self.getTiles(self.letterTypeNodegroupId);
-            //note that the statement below assumes the last index of this array is the tile associated with the 
-            //preceding step in the workflow
-            var templateId = letterTypeTiles[letterTypeTiles.length - 1].data[self.letterTypeNodeId]();
-            $.ajax({
-                type: "POST",
-                url: arches.urls.root + 'filetemplate',
-                data: {
-                    "resourceinstance_id": tile.resourceinstance_id,
-                    "template_id": templateId,
-                    "parenttile_id":tile.parenttile_id
-                },
-                context: self,
-                success: function(){
-                    self.downloadFile(tile);
-                },
-                error: function(response) {
-                    if(response.statusText !== 'abort'){
-                        self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
-                    }
-                }
-            });
-            self.loading(false);
-        };
-
-        this.downloadFile = function(tile) {
-            $.ajax({
-                type: "GET",
-                url: arches.urls.root + 'filetemplate',
-                data: {
-                    "resourceinstance_id": tile.resourceinstance_id,
-                    "parenttile_id": tile.parenttile_id
-                },
-                context: self,
-                success: function(responseText, status, response){
-                    self.dataURL(response.responseJSON['download']);
-                    self.loading(false);
-                },
-                error: function(response) {
-                    if(response.statusText !== 'abort'){
-                        self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
-                    }
-                }
-            });
-        };
-
-        var createDocxTileOnLoad = self.tile.subscribe(function(val) {
-            if(val) {
-                self.retrieveFile(val);
-                createDocxTileOnLoad.dispose();
-            }
-        });
 
         self.onSaveSuccess = function(tiles) {
             var tile;
