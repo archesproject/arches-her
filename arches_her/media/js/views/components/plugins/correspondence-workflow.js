@@ -15,17 +15,18 @@ define([
                     title: 'Select Related Consultation',
                     name: 'select-related-consultation',
                     description: 'New Correspondence',
-                    component: 'views/components/workflows/select-resource-step',
-                    componentname: 'select-resource-step',
+                    component: 'views/components/workflows/correspondence-select-resource',
+                    componentname: 'correspondence-select-resource',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     required: true,
+                    class: 'hide-letter-resource',
                     icon: 'fa-tag',
                     shouldtrackresource: true,
-                    wastebin: {tile: null, description: 'a communication instance'}
+                    wastebin: {resourceid: null, description: 'a digital object instance'}
                 },
                 {
                     title: 'Correspondence Workflow Complete',
@@ -40,7 +41,8 @@ define([
                     parenttileid: null,
                     icon: 'fa-cloud-upload',
                     nameheading: 'New Correspondence',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    wastebin: {tile: null, description: 'a correspondence tile'}
                 }
             ];
 
