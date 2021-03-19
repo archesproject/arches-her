@@ -43,7 +43,7 @@ define([
                     tileid: null,
                     parenttileid: null,
                     class: 'show-only-notes',
-                    required: false,
+                    required: true,
                     icon: 'fa-lightbulb-o'
                 },
                 {
@@ -58,7 +58,7 @@ define([
                     tileid: null,
                     class: 'show-only-followup',
                     parenttileid: null,
-                    required: false,
+                    required: true,
                     icon: 'fa-clipboard'
                 },
                 {
@@ -72,7 +72,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    required: false,
+                    required: true,
                     icon: 'fa-file-o',
                     wastebin: {resourceid: null, description: 'a digital object resource'}
                 },
