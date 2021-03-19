@@ -37,17 +37,23 @@ define([
                     title: 'Site Visit Attendees',
                     name: 'site-visit-attendees',
                     description: 'Site Visit Attendees',
-                    component: 'views/components/workflows/new-multi-tile-step',
-                    componentname: 'new-multi-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-user-plus',
-                    nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'foo', /* unique to step */
+                                    tilesManaged: 'many',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Site Visit Observations',
@@ -76,7 +82,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    required: false,
+                    required: true,
                     icon: 'fa-clipboard',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]'
