@@ -60,7 +60,7 @@ define([
                     ],
                     informationboxdata: {
                         heading: 'Site Visit Attendees',
-                        text: 'Add all attendees and click save and coninue when done',
+                        text: 'Add all attendees and click save and continue when done',
                     },
                 },
                 {
@@ -121,8 +121,8 @@ define([
                     createTile: false,
                     autoAdvance: false,
                     informationboxdata: {
-                        heading: 'Site Photos',
-                        text: 'Upload a Photographs from the Visit by Drag & Drop or Click the button',
+                        heading: 'Upload Site Photos',
+                        text: 'Upload photographs from the visit by dragging and dropping or clicking the button',
                     }
                 },
                 {
