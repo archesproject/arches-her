@@ -28,7 +28,7 @@ define([
                     shouldtrackresource: true,
                     informationboxdata: {
                         heading: 'Select Related Consultation',
-                        text: 'Select a Consultation and a Letter Type to create a Letter',
+                        text: 'Select a consultation and a letter type to create a Letter',
                     },
                     wastebin: {resourceid: null, description: 'a digital object instance'}
                 },
@@ -48,7 +48,7 @@ define([
                     namelabel: '[no label]',
                     informationboxdata: {
                         heading: 'Correspondence Workflow Complete',
-                        text: 'A Letter has created. click Download to see the Letter',
+                        text: 'A letter has been created. click Download to review the letter',
                     },
                     wastebin: {tile: null, description: 'a correspondence tile'}
                 }

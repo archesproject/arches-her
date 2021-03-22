@@ -31,7 +31,7 @@ define([
                     namelabel: 'Make the Area Name the same as the Area Address',
                     shouldtrackresource: true,
                     informationboxdata: {
-                        heading: 'Assign Address',
+                        heading: 'Assign an address',
                         text: 'Assign an address to your application area. Use the address as the default name',
                     },
                     wastebin: {resourceid: null, description: 'an application area instance'}
@@ -51,8 +51,8 @@ define([
                     required: true,
                     icon: 'fa-map',
                     informationboxdata: {
-                        heading: 'Assign Name',
-                        text: 'Assign an address to your application area. Use the address as the default name',
+                        heading: 'Assign a name',
+                        text: 'Assign a name to your application area. Use the address as the default name',
                     }
                 },
                 {
@@ -69,8 +69,8 @@ define([
                     required: true,
                     icon: 'fa-map-marker',
                     informationboxdata: {
-                        heading: 'Area Map',
-                        text: 'Draw (or select from the Development Area Overlay) the extent of...',
+                        heading: 'Application Area Map',
+                        text: 'Draw (or select from the development area overlay) the extent of the area',
                     }
                 },
                 {
@@ -88,7 +88,7 @@ define([
                     icon: 'fa-bank',
                     informationboxdata: {
                         heading: 'Related Heritage Resources',
-                        text: 'Select the other Heritage Sites or Artifacts related to the current Consulation',
+                        text: 'Select the other heritage sites or artifacts related to the current Consulation',
                     }
                 },
                 {
@@ -106,7 +106,7 @@ define([
                     icon: 'fa-clipboard',
                     informationboxdata: {
                         heading: 'Area Description',
-                        text: 'Describe the Application Area',
+                        text: 'Describe the application area',
                     }
                 },
                 {
@@ -124,7 +124,7 @@ define([
                     icon: 'fa-bookmark',
                     informationboxdata: {
                         heading: 'Area Designations',
-                        text: 'Select the Application Area designations',
+                        text: 'Select the application Area designations',
                     }
                 },
                 {

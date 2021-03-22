@@ -38,7 +38,7 @@ define([
                     description: 'Consultation Dates',
                     informationboxdata: {
                         heading: 'Consultation Dates',
-                        text: 'The target date is automatically set 21 days from Log Date',
+                        text: 'The target date is automatically set 21 days from log date',
                     },
                     component: 'views/components/workflows/consultation-dates-step',
                     componentname: 'consultation-dates-step',
@@ -104,7 +104,7 @@ define([
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     informationboxdata: {
                         heading: 'Application Proposal',
-                        text: 'Summary of the Application that will be reviewed under this Consultation',
+                        text: 'Summary of the application that will be reviewed under this consultation',
                     },
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
