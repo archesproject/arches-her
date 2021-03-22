@@ -74,7 +74,7 @@ define([
                     name: 'set-ref-numbers',
                     description: 'Application Reference Numbers',
                     informationboxdata: {
-                        heading: 'Create reference numbers for your application',
+                        heading: 'Application Reference Numbers',
                         text: 'Save one or more reference numbers before moving to the next step',
                     },
                     resourceid: null,
@@ -103,8 +103,8 @@ define([
                     name: 'application-proposal',
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     informationboxdata: {
-                        heading: 'Summary of the Application that will be reviewed under this Consultation',
-                        text: 'Describe the proposal and identify the corresponding proposal file',
+                        heading: 'Application Proposal',
+                        text: 'Summary of the Application that will be reviewed under this Consultation',
                     },
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
@@ -121,8 +121,8 @@ define([
                     name: 'consultation-contacts',
                     description: 'Identify the key people/organizations associated with this consultation',
                     informationboxdata: {
-                        heading: 'Identify the key people/organizations associated with this consultation',
-                        text: '',
+                        heading: 'Contacts',
+                        text: 'Identify the key people/organizations associated with this consultation',
                     },
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
