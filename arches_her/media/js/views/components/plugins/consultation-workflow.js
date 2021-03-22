@@ -61,15 +61,26 @@ define([
                     title: 'Reference Numbers',
                     name: 'set-ref-numbers',
                     description: 'Application Reference Numbers',
-                    component: 'views/components/workflows/new-multi-tile-step',
-                    componentname: 'new-multi-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4a2-a250-11e9-82f1-00224800b26d',
                     resourceid: null,
                     tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-hashtag'
+                    icon: 'fa-hashtag',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'app-ref-numbers', /* unique to step */
+                                    tilesManaged: 'many',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '8d41e4a2-a250-11e9-82f1-00224800b26d',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Application Proposal',
