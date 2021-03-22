@@ -110,7 +110,7 @@ define([
                     }
                 });
 
-                if (params.nodegroupid()) {
+                if (params.updatestatus && params.nodegroupid()) {
                     // custom logic specific to the status nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea'
                     self.tile().data[params.nodegroupid()](true);
                     self.tile().save();

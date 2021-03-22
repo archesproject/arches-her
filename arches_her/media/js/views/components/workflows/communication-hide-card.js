@@ -11,6 +11,13 @@ define([
         if (!params.resourceid()) {
             params.resourceid(ko.unwrap(params.workflow.resourceId));
         }
+
+        if (params.workflow.steps[params._index - 1]) {
+            params.tileid(ko.unwrap(params.workflow.steps[params._index - 1].tileid));
+        } else if (params.workflow.getStepData("related-consultation").tileid()) {
+            params.tileid(params.workflow.getStepData("related-consultation").tileid);
+        };
+
         if (params.workflow.steps[params._index]) {
             params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));
         }
@@ -25,7 +32,7 @@ define([
         };
     }
 
-    return ko.components.register('hide-card-step', {
+    return ko.components.register('communication-hide-card', {
         viewModel: viewModel,
         template: {
             require: 'text!templates/views/components/workflows/hide-card-step.htm'

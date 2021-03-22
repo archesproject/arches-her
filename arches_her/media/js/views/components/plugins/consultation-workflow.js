@@ -108,6 +108,7 @@ define([
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea', // consultation status
                     icon: 'fa-check',
+                    updatestatus: true,
                     resourceid: null,
                     tileid: null,
                     parenttileid: null
