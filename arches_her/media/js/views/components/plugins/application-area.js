@@ -30,6 +30,10 @@ define([
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
                     shouldtrackresource: true,
+                    informationboxdata: {
+                        heading: 'Assign Address',
+                        text: 'Assign an address to your application area. Use the address as the default name',
+                    },
                     wastebin: {resourceid: null, description: 'an application area instance'}
                 },
                 {
@@ -46,6 +50,10 @@ define([
                     parenttileid: null,
                     required: true,
                     icon: 'fa-map',
+                    informationboxdata: {
+                        heading: 'Assign Name',
+                        text: 'Assign an address to your application area. Use the address as the default name',
+                    }
                 },
                 {
                     title: 'Area Map',
@@ -59,12 +67,16 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: true,
-                    icon: 'fa-map-marker'
+                    icon: 'fa-map-marker',
+                    informationboxdata: {
+                        heading: 'Area Map',
+                        text: 'Draw (or select from the Development Area Overlay) the extent of...',
+                    }
                 },
                 {
                     title: 'Related Heritage Resources',
                     name: 'related-heritage-resource',
-                    description: '',
+                    description: 'Select the other Heritage Sites or Artifacts related to the current Consulation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
@@ -73,7 +85,11 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-bank'
+                    icon: 'fa-bank',
+                    informationboxdata: {
+                        heading: 'Related Heritage Resources',
+                        text: 'Select the other Heritage Sites or Artifacts related to the current Consulation',
+                    }
                 },
                 {
                     title: 'Area Description',
@@ -87,7 +103,11 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-clipboard'
+                    icon: 'fa-clipboard',
+                    informationboxdata: {
+                        heading: 'Area Description',
+                        text: 'Describe the Application Area',
+                    }
                 },
                 {
                     title: 'Area Designations',
@@ -101,7 +121,11 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-bookmark'
+                    icon: 'fa-bookmark',
+                    informationboxdata: {
+                        heading: 'Area Designations',
+                        text: 'Select the Application Area designations',
+                    }
                 },
                 {
                     title: 'Application Area Complete',
@@ -113,7 +137,11 @@ define([
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
-                    parenttileid: null
+                    parenttileid: null,
+                    informationboxdata: {
+                        heading: 'Application Area Complete',
+                        text: 'Choose an option below',
+                    }
                 }
             ];
 
