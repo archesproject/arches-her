@@ -29,12 +29,16 @@ define([
                     nameheading: 'Communication',
                     namelabel: '[no label]',
                     shouldtrackresource: true,
+                    informationboxdata: {
+                        heading: 'Related Consultation',
+                        text: 'Select the related consultation and Enter the details for this Communication',
+                    },
                     wastebin: {tile: null, description: 'a communication tile'}
                 },
                 {
                     title: 'Notes',
                     name: 'notes',
-                    description: ' Meeting notes',
+                    description: 'Meeting notes',
                     component: 'views/components/workflows/communication-hide-card',
                     componentname: 'communication-hide-card',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
@@ -44,7 +48,11 @@ define([
                     parenttileid: null,
                     class: 'show-only-notes',
                     required: true,
-                    icon: 'fa-lightbulb-o'
+                    icon: 'fa-lightbulb-o',
+                    informationboxdata: {
+                        heading: 'Meeting notes',
+                        text: 'Add Notes about the Communication',
+                    }
                 },
                 {
                     title: 'Follow-On Actions',
@@ -59,7 +67,11 @@ define([
                     class: 'show-only-followup',
                     parenttileid: null,
                     required: true,
-                    icon: 'fa-clipboard'
+                    icon: 'fa-clipboard',
+                    informationboxdata: {
+                        heading: 'Follow-On Actions',
+                        text: 'Add Follow-On Actions regarding the Communication',
+                    }
                 },
                 {
                     title: 'Upload Documents',
@@ -74,6 +86,10 @@ define([
                     parenttileid: null,
                     required: true,
                     icon: 'fa-file-o',
+                    informationboxdata: {
+                        heading: 'Upload Documents',
+                        text: 'Upload a Document or File regarding the Communication',
+                    },
                     wastebin: {resourceid: null, description: 'a digital object resource'}
                 },
                 {
@@ -87,7 +103,11 @@ define([
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
-                    parenttileid: null
+                    parenttileid: null,
+                    informationboxdata: {
+                        heading: 'Communication Complete',
+                        text: 'Choose an option below',
+                    }
                 }
             ];
             
