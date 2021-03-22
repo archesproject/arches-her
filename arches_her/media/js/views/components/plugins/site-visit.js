@@ -31,6 +31,10 @@ define([
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
                     shouldtrackresource: true,
+                    informationboxdata: {
+                        heading: '',
+                        text: 'Select a Consultation and Enter datails for the Visit',
+                    },
                     wastebin: {tile: null, description: 'a site visit instance'}
                 },
                 {
@@ -54,6 +58,10 @@ define([
                             ], 
                         },
                     ],
+                    informationboxdata: {
+                        heading: 'Site Visit Attendees',
+                        text: 'Add all the Attendees and Click Save and Coninue when done',
+                    },
                 },
                 {
                     title: 'Site Visit Observations',
@@ -69,7 +77,11 @@ define([
                     required: false,
                     icon: 'fa-lightbulb-o',
                     nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    informationboxdata: {
+                        heading: 'Site Visit Observations',
+                        text: 'Add the Observations during the Visit',
+                    }
                 },
                 {
                     title: 'Recommendations',
@@ -85,7 +97,11 @@ define([
                     required: true,
                     icon: 'fa-clipboard',
                     nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    informationboxdata: {
+                        heading: 'Recommendations',
+                        text: 'Add recommendations from the Visit',
+                    }
                 },
                 {
                     title: 'Site Photos (Upload)',
@@ -103,7 +119,11 @@ define([
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
                     createTile: false,
-                    autoAdvance: false
+                    autoAdvance: false,
+                    informationboxdata: {
+                        heading: 'Site Photos',
+                        text: 'Upload a Photographs from the Visit by Drag & Drop or Click the button',
+                    }
                 },
                 {
                     title: 'Site Visit Workflow Complete',
@@ -118,7 +138,11 @@ define([
                     parenttileid: null,
                     icon: 'fa-check',
                     nameheading: 'New Site Visit',
-                    namelabel: '[no label]'
+                    namelabel: '[no label]',
+                    informationboxdata: {
+                        heading: 'Site Visit Workflow Complete',
+                        text: 'Choose an option below',
+                    }
                 }
 
             ];
