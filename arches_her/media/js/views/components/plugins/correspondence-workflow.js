@@ -26,6 +26,10 @@ define([
                     class: 'hide-letter-resource',
                     icon: 'fa-tag',
                     shouldtrackresource: true,
+                    informationboxdata: {
+                        heading: 'Select Related Consultation',
+                        text: 'Select a Consultation and a Letter Type to create a Letter',
+                    },
                     wastebin: {resourceid: null, description: 'a digital object instance'}
                 },
                 {
@@ -42,6 +46,10 @@ define([
                     icon: 'fa-cloud-upload',
                     nameheading: 'New Correspondence',
                     namelabel: '[no label]',
+                    informationboxdata: {
+                        heading: 'Correspondence Workflow Complete',
+                        text: 'A Letter has created. click Download to see the Letter',
+                    },
                     wastebin: {tile: null, description: 'a correspondence tile'}
                 }
             ];
