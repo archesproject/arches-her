@@ -31,7 +31,7 @@ define([
                     shouldtrackresource: true,
                     informationboxdata: {
                         heading: 'Related Consultation',
-                        text: 'Select the related consultation and Enter the details for this Communication',
+                        text: 'Select the related consultation and enter the details for this communication',
                     },
                     wastebin: {tile: null, description: 'a communication tile'}
                 },
@@ -51,7 +51,7 @@ define([
                     icon: 'fa-lightbulb-o',
                     informationboxdata: {
                         heading: 'Meeting notes',
-                        text: 'Add Notes about the Communication',
+                        text: 'Add notes about the communication',
                     }
                 },
                 {
@@ -70,7 +70,7 @@ define([
                     icon: 'fa-clipboard',
                     informationboxdata: {
                         heading: 'Follow-On Actions',
-                        text: 'Add Follow-On Actions regarding the Communication',
+                        text: 'Add follow-on actions regarding the communication',
                     }
                 },
                 {
@@ -88,7 +88,7 @@ define([
                     icon: 'fa-file-o',
                     informationboxdata: {
                         heading: 'Upload Documents',
-                        text: 'Upload a Document or File regarding the Communication',
+                        text: 'Upload a document or file regarding the communication',
                     },
                     wastebin: {resourceid: null, description: 'a digital object resource'}
                 },

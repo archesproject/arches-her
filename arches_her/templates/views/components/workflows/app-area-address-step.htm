@@ -8,7 +8,7 @@
             </label>
         </div>
     </div>
-    <div>
+    <div data-bind="class: workflowStepClass">
         <div data-bind="component: {
             name: cardComponentLookup[card().model.component_id()].componentname,
             params: {

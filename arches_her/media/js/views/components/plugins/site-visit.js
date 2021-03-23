@@ -32,8 +32,8 @@ define([
                     namelabel: '[no label]',
                     shouldtrackresource: true,
                     informationboxdata: {
-                        heading: '',
-                        text: 'Select a Consultation and Enter datails for the Visit',
+                        heading: 'Site Visit Details',
+                        text: 'Select a consultation and enter datails for the site visit',
                     },
                     wastebin: {tile: null, description: 'a site visit instance'}
                 },
@@ -60,7 +60,7 @@ define([
                     ],
                     informationboxdata: {
                         heading: 'Site Visit Attendees',
-                        text: 'Add all the Attendees and Click Save and Coninue when done',
+                        text: 'Add all attendees and click save and continue when done',
                     },
                 },
                 {
@@ -80,7 +80,7 @@ define([
                     namelabel: '[no label]',
                     informationboxdata: {
                         heading: 'Site Visit Observations',
-                        text: 'Add the Observations during the Visit',
+                        text: 'Add the observations during the site visit',
                     }
                 },
                 {
@@ -100,7 +100,7 @@ define([
                     namelabel: '[no label]',
                     informationboxdata: {
                         heading: 'Recommendations',
-                        text: 'Add recommendations from the Visit',
+                        text: 'Add recommendations from the site visit',
                     }
                 },
                 {
@@ -121,8 +121,8 @@ define([
                     createTile: false,
                     autoAdvance: false,
                     informationboxdata: {
-                        heading: 'Site Photos',
-                        text: 'Upload a Photographs from the Visit by Drag & Drop or Click the button',
+                        heading: 'Upload Site Photos',
+                        text: 'Upload photographs from the visit by dragging and dropping or clicking the button',
                     }
                 },
                 {

@@ -17,7 +17,7 @@ define([
         if (params.workflow.steps[params._index]) {
             params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));
         }
-
+        this.workflowStepClass = ko.unwrap(params.class());
         this.nameheading = params.nameheading;
         this.namelabel = params.namelabel;
         this.applyOutputToTarget = params.applyOutputToTarget;
@@ -45,7 +45,6 @@ define([
                 var locality = self.tile().data["c7ec9613-28c8-11eb-966c-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9613-28c8-11eb-966c-f875a44e0e11"]) + ", " : '';
                 var city     = self.tile().data["c7ec9607-28c8-11eb-acf0-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9607-28c8-11eb-acf0-f875a44e0e11"]) + ", " : '';
                 var postcode = self.tile().data["c7ec9609-28c8-11eb-a6a3-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9609-28c8-11eb-a6a3-f875a44e0e11"]) : '';
-                console.log(building + street + locality + city + postcode)
                 return building + street + locality + city + postcode;
             }
         });
