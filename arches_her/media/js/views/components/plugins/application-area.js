@@ -25,6 +25,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
+                    class: 'hide-full-address',
                     required: true,
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
