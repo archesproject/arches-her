@@ -15,22 +15,32 @@ define([
                 {
                     title: 'Consultation GeoJSON',
                     name: 'consultation-location',
+                    icon: 'fa-map-marker',
                     description: 'Set geospatial data for this consultation',
                     informationboxdata: {
                         heading: 'Consultation GeoJSON',
                         text: 'Set geospatial data for this consultation',
                     },
-                    component: 'views/components/workflows/consultation-map-step',
-                    componentname: 'consultation-map-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '152aa058-936d-11ea-b517-f875a44e0e11',
-                    resourceid: null,
-                    shouldtrackresource: true,
-                    tileid: null,
-                    parenttileid: null,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     required: true,
-                    icon: 'fa-map-marker',
-                    wastebin: {resourceid: null, description: 'a consultation instance'}
+                    wastebin: {resourceid: null, description: 'a consultation instance'},
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentPath: 'views/components/workflows/consultation-map-step',  /* necessary for custom components */
+                                    componentName: 'consultation-map-step',
+                                    uniqueInstanceName: 'app-cons-details', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '152aa058-936d-11ea-b517-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Consultation Dates',
