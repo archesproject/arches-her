@@ -90,6 +90,7 @@ define([
                     icon: 'fa-hashtag',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
+                    required: true,
                     layoutSections: [
                         {
                             componentConfigs: [
@@ -117,6 +118,7 @@ define([
                     },
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
+                    required: true,
                     layoutSections: [
                         {
                             componentConfigs: [
