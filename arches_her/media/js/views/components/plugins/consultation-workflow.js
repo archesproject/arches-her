@@ -54,20 +54,30 @@ define([
                 {
                     title: 'Consultation Details/Type',
                     name: 'set-cons-details',
+                    icon: 'fa-list-alt',
                     description: 'Consultation Details',
                     informationboxdata: {
                         heading: 'Consultation Details',
                         text: 'Select the type of consultation',
                     },
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '771bb1e2-8895-11ea-8446-f875a44e0e11', //consultation type node
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     required: true,
-                    icon: 'fa-list-alt'
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'grouping-card-component',
+                                    uniqueInstanceName: 'app-cons-details', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '771bb1e2-8895-11ea-8446-f875a44e0e11', //consultation type node
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Reference Numbers',
@@ -77,8 +87,6 @@ define([
                         heading: 'Application Reference Numbers',
                         text: 'Save one or more reference numbers before moving to the next step',
                     },
-                    resourceid: null,
-                    tileid: null,
                     icon: 'fa-hashtag',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
@@ -101,20 +109,29 @@ define([
                 {
                     title: 'Application Proposal',
                     name: 'application-proposal',
+                    icon: 'fa-clipboard',
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     informationboxdata: {
                         heading: 'Application Proposal',
                         text: 'Summary of the application that will be reviewed under this consultation',
                     },
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '1b0e15e9-8864-11ea-b5f3-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-clipboard'
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'app-proposal', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '1b0e15e9-8864-11ea-b5f3-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Contacts',
