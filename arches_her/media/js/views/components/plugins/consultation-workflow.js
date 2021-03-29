@@ -3,7 +3,7 @@ define([
     'jquery',
     'arches',
     'viewmodels/workflow',
-    'viewmodels/workflow-step'
+    'views/components/workflows/consultation-map-step'
 ], function(ko, $, arches, Workflow) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
@@ -29,7 +29,6 @@ define([
                         {
                             componentConfigs: [
                                 { 
-                                    componentPath: 'views/components/workflows/consultation-map-step',  /* necessary for custom components */
                                     componentName: 'consultation-map-step',
                                     uniqueInstanceName: 'app-cons-details', /* unique to step */
                                     tilesManaged: 'one',
@@ -147,21 +146,31 @@ define([
                 },
                 {
                     title: 'Contacts',
+                    icon: 'fa-users',
                     name: 'consultation-contacts',
                     description: 'Identify the key people/organizations associated with this consultation',
                     informationboxdata: {
                         heading: 'Contacts',
                         text: 'Identify the key people/organizations associated with this consultation',
                     },
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '4ea4a189-184f-11eb-b45e-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
                     required: false,
-                    icon: 'fa-users'
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'app-contacts', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '4ea4a189-184f-11eb-b45e-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Add Consulation Complete',
