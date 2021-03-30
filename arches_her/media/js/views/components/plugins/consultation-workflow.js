@@ -3,7 +3,7 @@ define([
     'jquery',
     'arches',
     'viewmodels/workflow',
-    'viewmodels/workflow-step'
+    'views/components/workflows/consultation-map-step'
 ], function(ko, $, arches, Workflow) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
@@ -15,22 +15,31 @@ define([
                 {
                     title: 'Consultation GeoJSON',
                     name: 'consultation-location',
+                    icon: 'fa-map-marker',
                     description: 'Set geospatial data for this consultation',
                     informationboxdata: {
                         heading: 'Consultation GeoJSON',
                         text: 'Set geospatial data for this consultation',
                     },
-                    component: 'views/components/workflows/consultation-map-step',
-                    componentname: 'consultation-map-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '152aa058-936d-11ea-b517-f875a44e0e11',
-                    resourceid: null,
-                    shouldtrackresource: true,
-                    tileid: null,
-                    parenttileid: null,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     required: true,
-                    icon: 'fa-map-marker',
-                    wastebin: {resourceid: null, description: 'a consultation instance'}
+                    wastebin: {resourceid: null, description: 'a consultation instance'},
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'consultation-map-step',
+                                    uniqueInstanceName: 'app-cons-details', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '152aa058-936d-11ea-b517-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Consultation Dates',
@@ -54,20 +63,30 @@ define([
                 {
                     title: 'Consultation Details/Type',
                     name: 'set-cons-details',
+                    icon: 'fa-list-alt',
                     description: 'Consultation Details',
                     informationboxdata: {
                         heading: 'Consultation Details',
                         text: 'Select the type of consultation',
                     },
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '771bb1e2-8895-11ea-8446-f875a44e0e11', //consultation type node
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     required: true,
-                    icon: 'fa-list-alt'
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'grouping-card-component',
+                                    uniqueInstanceName: 'app-cons-details', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '771bb1e2-8895-11ea-8446-f875a44e0e11', //consultation type node
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Reference Numbers',
@@ -77,11 +96,10 @@ define([
                         heading: 'Application Reference Numbers',
                         text: 'Save one or more reference numbers before moving to the next step',
                     },
-                    resourceid: null,
-                    tileid: null,
                     icon: 'fa-hashtag',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
+                    required: true,
                     layoutSections: [
                         {
                             componentConfigs: [
@@ -101,38 +119,58 @@ define([
                 {
                     title: 'Application Proposal',
                     name: 'application-proposal',
+                    icon: 'fa-clipboard',
                     description: 'Summary of the Application that will be reviewed under this Consultation',
                     informationboxdata: {
                         heading: 'Application Proposal',
                         text: 'Summary of the application that will be reviewed under this consultation',
                     },
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '1b0e15e9-8864-11ea-b5f3-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: false,
-                    icon: 'fa-clipboard'
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    required: true,
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'app-proposal', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '1b0e15e9-8864-11ea-b5f3-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Contacts',
+                    icon: 'fa-users',
                     name: 'consultation-contacts',
                     description: 'Identify the key people/organizations associated with this consultation',
                     informationboxdata: {
                         heading: 'Contacts',
                         text: 'Identify the key people/organizations associated with this consultation',
                     },
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '4ea4a189-184f-11eb-b45e-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
                     required: false,
-                    icon: 'fa-users'
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'app-contacts', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '4ea4a189-184f-11eb-b45e-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Add Consulation Complete',
