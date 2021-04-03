@@ -153,8 +153,8 @@ define([
                     tileid: null,
                     parenttileid: null,
                     informationboxdata: {
-                        heading: 'Application Area Complete',
-                        text: 'Choose an option below!',
+                        heading: 'Workflow Complete: Review your work',
+                        text: 'Please review the summary information. You can go back to a previous step to make changes or "Quit Workflow" to discard your changes and start over',
                     }
                 }
             ];

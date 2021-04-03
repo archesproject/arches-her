@@ -1,7 +1,8 @@
+{% load i18n %}
 <!-- ko if: loading() === false -->
 <div class="final-step">
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
-        <h5 class="summary-value">Application Area Address</h5>
+        <h5 class="summary-value">{% trans 'Application Area Address' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
                 <div style="display: inline-flex;">
@@ -56,11 +57,51 @@
         </div>
     </div>
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Application Area Name' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.applicationAreaName.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.applicationAreaName.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <div style="border: solid 1px #ddd" data-bind="value: console.log($data)">
         <div data-bind="component: {
             name: 'arches-map',
             params: $data
         }" style="height: 400px; width: 100%"></div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Application Area Description' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-value" data-bind="html: reportVals.applicationAreaDescription.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Application Area Designations' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.designationType.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.designationType.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.designationGrade.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.designationGrade.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.designationReference.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.designationReference.value"></div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

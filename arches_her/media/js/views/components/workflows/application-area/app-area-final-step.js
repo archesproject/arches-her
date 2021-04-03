@@ -61,6 +61,11 @@ define([
                 postcode: {'name': 'Postcode', 'value': val.resource['Addresses']['Postcode']['Postcode Value']['@value'] || 'none'},
                 status: {'name': 'Status', 'value': val.resource['Addresses']['Address Status']['@value'] || 'none'},
                 currency: {'name': 'Currency', 'value': val.resource['Addresses']['Address Currency']['@value'] || 'none'},
+                applicationAreaName: {'name': 'Name', 'value': val.resource['Application Area Names']['Application Area Name']['@value'] || 'none'},
+                applicationAreaDescription: {'name': '', 'value': val.resource['Descriptions']['Description']['@value'] || 'none'},
+                designationType: {'name': 'Designation/Protection Type', 'value': val.resource['Designation and Protection Assignment']['Designation or Protection Type']['@value'] || 'none'},
+                designationGrade: {'name': 'CanvasGradient', 'value': val.resource['Designation and Protection Assignment']['Grade']['@value'] || 'none'},
+                designationReference: {'name': 'Reference', 'value': val.resource['Designation and Protection Assignment']['References']['Reference']['@value'] || 'none'},
             }
             var geojsonStr = val.resource['Geometry']['Geospatial Coordinates']['@value'].replaceAll("'", '"');
             var geojson = JSON.parse(geojsonStr);
