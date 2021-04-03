@@ -10,11 +10,6 @@ define([
     function viewModel(params) {
         FinalStep.apply(this, [params]);
         this.resourceData = ko.observable();
-
-        window.fetch(this.urls.api_resources(this.resourceid) + '?format=json&compact=false')
-            .then(response => response.json())
-            .then(data => this.resourceData(data))
-
         this.prepareMap = function(geojson){
             var mapParams = {};
             if (geojson.features.length > 0) {
@@ -27,21 +22,20 @@ define([
                     "data": geojson
                 }
             }, mapParams.sources);
-            // resourceId, source, sourceLayer, selectedResourceIds, visible, color
             mapParams.layers = selectFeatureLayersFactory(
                 '', //resourceid
                 'app-area-map-data', //source
                 undefined, //sourceLayer
                 [], //selectedResourceIds
                 true, //visible
-                '#ff2222'
+                '#ff2222' //color
             );
             MapComponentViewModel.apply(this, [Object.assign({},  mapParams,
                 {
                     "activeTab": ko.observable(false),
                     "zoom": null
                 }
-                )]);
+            )]);
         
             this.layers = mapParams.layers;
             this.sources = mapParams.sources;
@@ -72,6 +66,11 @@ define([
             this.prepareMap(geojson);
             this.loading(false);
         }, this);
+
+        window.fetch(this.urls.api_resources(this.resourceid) + '?format=json&compact=false')
+        .then(response => response.json())
+        .then(data => this.resourceData(data))
+        
     }
 
     ko.components.register('app-area-final-step', {
