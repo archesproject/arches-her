@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/app-area-name-step'
+    'views/components/workflows/app-area-name-step',
+    'views/components/workflows/application-area/app-area-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('application-area', {
         viewModel: function(params) {
@@ -132,16 +133,28 @@ define([
                     title: 'Application Area Complete',
                     name: 'application-area-complete',
                     description: 'Choose an option below',
-                    component: 'views/components/workflows/consultations-final-step',
-                    componentname: 'consultations-final-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'app-area-final-step',
+                                    uniqueInstanceName: 'app-area-final', /* unique to step */
+                                    tilesManaged: 'none',
+                                    parameters: {},
+                                },
+                            ], 
+                        },
+                    ],
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
                     informationboxdata: {
-                        heading: 'Application Area Complete',
-                        text: 'Choose an option below',
+                        heading: 'Workflow Complete: Review your work',
+                        text: 'Please review the summary information. You can go back to a previous step to make changes or "Quit Workflow" to discard your changes and start over',
                     }
                 }
             ];
