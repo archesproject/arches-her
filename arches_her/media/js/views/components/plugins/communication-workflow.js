@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/select-resource-step'
+    'views/components/workflows/select-resource-step',
+    'views/components/workflows/communication-workflow/communication-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('communication-workflow', {
         viewModel: function(params) {
@@ -96,8 +97,20 @@ define([
                     title: 'Add Communication Complete',
                     name: 'communication-complete',
                     description: 'Choose an option below',
-                    component: 'views/components/workflows/consultations-final-step',
-                    componentname: 'consultations-final-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'communication-final-step',
+                                    uniqueInstanceName: 'communication-final',
+                                    tilesManaged: 'none',
+                                    parameters: {},
+                                },
+                            ], 
+                        },
+                    ],
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea',
                     icon: 'fa-check',
@@ -105,8 +118,8 @@ define([
                     tileid: null,
                     parenttileid: null,
                     informationboxdata: {
-                        heading: 'Communication Complete',
-                        text: 'Choose an option below',
+                        heading: 'Workflow Complete: Review your work',
+                        text: 'Please review the summary information. You can go back to a previous step to make changes or "Quit Workflow" to discard your changes and start over',
                     }
                 }
             ];
