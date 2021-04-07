@@ -76,6 +76,18 @@
         </div>
     </div>
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Related Resources' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <!--ko foreach: relatedResources -->
+                    <div class="summary-value" data-bind="text: $data.displayname"></div>
+                    <!--/ko-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <h5 class="summary-value">{% trans 'Application Area Description' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
