@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/select-resource-step'
+    'views/components/workflows/select-resource-step',
+    'views/components/workflows/site-visit/site-visit-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
@@ -129,8 +130,20 @@ define([
                     title: 'Site Visit Workflow Complete',
                     name: 'site-visit-complete',
                     description: '',
-                    component: 'views/components/workflows/consultations-final-step',
-                    componentname: 'consultations-final-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'site-visit-final-step',
+                                    uniqueInstanceName: 'site-visit-final', /* unique to step */
+                                    tilesManaged: 'none',
+                                    parameters: {},
+                                },
+                            ], 
+                        },
+                    ],
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '',
                     resourceid: null,
@@ -140,8 +153,8 @@ define([
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
                     informationboxdata: {
-                        heading: 'Site Visit Workflow Complete',
-                        text: 'Choose an option below',
+                        heading: 'Workflow Complete: Review your work',
+                        text: 'Please review the summary information. You can go back to a previous step to make changes or "Quit Workflow" to discard your changes and start over',
                     }
                 }
 
