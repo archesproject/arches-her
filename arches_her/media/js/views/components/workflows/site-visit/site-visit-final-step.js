@@ -1,13 +1,13 @@
 define([
     'knockout',
-    'views/components/workflows/final-step',
+    'views/components/workflows/summary-step',
     'viewmodels/alert'
-], function(ko, FinalStep, AlertViewModel) {
+], function(ko, SummaryStep, AlertViewModel) {
 
     function viewModel(params) {
         var self = this;
-        FinalStep.apply(this, [params]);
-        this.resourceData = ko.observable();
+        SummaryStep.apply(this, [params]);
+
         this.attendees = ko.observableArray();
         this.photographs = ko.observableArray();
 
@@ -63,14 +63,8 @@ define([
                     copyrightNotes: {'name': 'Copyright Notes', 'value': currentSiteVisit['Photographs']['Copyright']['Copyright Note']['Copyright Note Text']['@value'] || 'none'},
                 }]
             };
-    
             this.loading(false);
         }, this);
-
-        window.fetch(this.urls.api_resources(this.resourceid) + '?format=json&compact=false')
-        .then(response => response.json())
-        .then(data => this.resourceData(data))
-        
     }
 
     ko.components.register('site-visit-final-step', {
