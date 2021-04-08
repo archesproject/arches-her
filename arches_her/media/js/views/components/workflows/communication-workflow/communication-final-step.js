@@ -1,12 +1,16 @@
 define([
     'knockout',
-    'views/components/workflows/final-step',
+    'views/components/workflows/summary-step',
     'viewmodels/alert'
-], function(ko, FinalStep, AlertViewModel) {
+], function(ko, SummaryStep, AlertViewModel) {
 
     function viewModel(params) {
-        FinalStep.apply(this, [params]);
-        this.resourceData = ko.observable();
+        var self = this;
+        SummaryStep.apply(this, [params]);
+
+        this.documents = ko.observableArray();
+        this.resourceLoading = ko.observable(true);
+        this.relatedResourceLoading = ko.observable(true);
 
         this.resourceData.subscribe(function(val){
             var currentCommunication;
@@ -31,13 +35,46 @@ define([
                 followOnActions: {'name': 'Follow-on Actions', 'value': currentCommunication['Follow on Actions']['Follow-On Actions']['@value'] || 'none'},
                 uploadedFiles: {'name': 'Uploaded Files', 'value': currentCommunication['Digital File(s)']['@value'] || 'none'},
             }
-            this.loading(false);
+            this.resourceLoading(false);
+            if (!this.relatedResourceLoading()){
+                this.loading(false);
+            };
         }, this);
 
-        window.fetch(this.urls.api_resources(this.resourceid) + '?format=json&compact=false')
-        .then(response => response.json())
-        .then(data => this.resourceData(data))
-        
+        this.formatSize = function(file) {
+            var bytes = ko.unwrap(file.size);
+            if(bytes == 0) return '0 Byte';
+            var k = 1024;
+            var dm = 2;
+            var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            var i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + sizes[i];
+        };
+
+        this.relatedResources.subscribe(function(val){
+            fileNodeId = '96f8830a-8490-11ea-9aba-f875a44e0e11';
+            digitalObjectGraphId = 'a535a235-8481-11ea-a6b9-f875a44e0e11';
+            if (Array.isArray(val)){
+                val.forEach(function(resource){
+                    if (resource.graph_id = digitalObjectGraphId) {
+                        resource.tiles.forEach(function(tile){
+                            if (tile.data[fileNodeId]){
+                                tile.data[fileNodeId].forEach(function(file){
+                                    self.documents.push({
+                                        'name': file.name,
+                                        'size': file.size,
+                                    })
+                                })
+                            }
+                        })
+                    }
+                });
+            }
+            this.relatedResourceLoading(false);
+            if (!this.resourceLoading()){
+                this.loading(false);
+            };
+        }, this);
     }
 
     ko.components.register('communication-final-step', {

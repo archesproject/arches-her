@@ -58,11 +58,19 @@
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <h5 class="summary-value">{% trans 'Uploaded Files' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
-                <div style="display: inline-flex;">
-                    <div class="summary-label" data-bind="text: reportVals.uploadedFiles.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.uploadedFiles.value"></div>
+            <div class="file-list" style="display: flex; flex-direction: column;">
+                <!-- ko foreach: documents -->
+                <div class="file-upload-card">
+                    <div class="media-block">
+                        <div class="media-left">
+                            <span data-bind="text: name"></span>
+                        </div>
+                        <div class="media-right">
+                            <span data-bind="text: $parent.formatSize($data)"></span>
+                        </div>
+                    </div>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
     </div>
