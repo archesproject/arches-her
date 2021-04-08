@@ -7,7 +7,6 @@ define([
     function viewModel(params) {
         var self = this;
         SummaryStep.apply(this, [params]);
-
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
@@ -20,7 +19,6 @@ define([
                         currentCommunication = comm;
                     }
                 });
-                currentCommunication = val.resource.Communications[val.resource.Communications.length-1];
             } else {
                 currentCommunication = val.resource.Communications;
             }
