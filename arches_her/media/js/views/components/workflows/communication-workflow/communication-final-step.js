@@ -11,11 +11,14 @@ define([
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
 
+        // needs to be updated
+        var currentTileId = JSON.parse(localStorage["workflow-steps"])[JSON.parse(localStorage.workflow)["workflow-step-ids"][0]].value.tileid
+
         this.resourceData.subscribe(function(val){
             var currentCommunication;
             if (Array.isArray(val.resource.Communications)){
                 val.resource.Communications.forEach(function(comm) {
-                    if (comm['@tile_id'] === JSON.parse(localStorage["workflow-steps"])[JSON.parse(localStorage.workflow)["workflow-step-ids"][0]].value.tileid){
+                    if (comm['@tile_id'] === currentTileId){
                         currentCommunication = comm;
                     }
                 });
@@ -50,24 +53,29 @@ define([
         };
 
         this.relatedResources.subscribe(function(val){
+            var currentFileList = [];
             fileNodeId = '96f8830a-8490-11ea-9aba-f875a44e0e11';
             digitalObjectGraphId = 'a535a235-8481-11ea-a6b9-f875a44e0e11';
-            if (Array.isArray(val)){
-                val.forEach(function(resource){
-                    if (resource.graph_id = digitalObjectGraphId) {
-                        resource.tiles.forEach(function(tile){
-                            if (tile.data[fileNodeId]){
-                                tile.data[fileNodeId].forEach(function(file){
-                                    self.documents.push({
-                                        'name': file.name,
-                                        'size': file.size,
-                                    })
+            val["resource_relationships"].forEach(function(relationship){
+                if (relationship.tileid === currentTileId){
+                    currentFileList.push(relationship.resourceinstanceidto)
+                }
+            })
+
+            val["related_resources"].forEach(function(rr){
+                if (rr.graph_id = digitalObjectGraphId && currentFileList.indexOf(rr.resourceinstanceid) > -1) {
+                    rr.tiles.forEach(function(tile){
+                        if (tile.data[fileNodeId]){
+                            tile.data[fileNodeId].forEach(function(file){
+                                self.documents.push({
+                                    'name': file.name,
+                                    'size': file.size,
                                 })
-                            }
-                        })
-                    }
-                });
-            }
+                            })
+                        }
+                    })
+                }
+            });
             this.relatedResourceLoading(false);
             if (!this.resourceLoading()){
                 this.loading(false);
