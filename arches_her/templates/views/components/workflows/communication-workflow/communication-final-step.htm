@@ -73,6 +73,10 @@
                 <!-- /ko -->
             </div>
         </div>
+        <div style="display: inline-flex; padding: 15px;">
+            <div class="summary-label">{% trans 'Files: ' %}</div>
+            <div class="summary-value" data-bind='text: documents().length + "{% trans ' files for upload' %}"'></div>
+        </div>
     </div>
 </div>
 <!-- /ko -->
