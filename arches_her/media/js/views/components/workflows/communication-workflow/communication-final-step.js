@@ -15,11 +15,11 @@ define([
         this.resourceData.subscribe(function(val){
             var currentCommunication;
             if (Array.isArray(val.resource.Communications)){
-                /*val.resource.Communications.forEach(function(comm) {
-                    if (comm['Communication Type']['@tile_id'] === params.workflow.getStepData("related-consultation")['tileid']){
+                val.resource.Communications.forEach(function(comm) {
+                    if (comm['@tile_id'] === JSON.parse(localStorage["workflow-steps"])[JSON.parse(localStorage.workflow)["workflow-step-ids"][0]].value.tileid){
                         currentCommunication = comm;
                     }
-                });*/
+                });
                 currentCommunication = val.resource.Communications[val.resource.Communications.length-1];
             } else {
                 currentCommunication = val.resource.Communications;
