@@ -59,7 +59,7 @@ define([
                 if (relationship.tileid === currentTileId){
                     currentFileList.push(relationship.resourceinstanceidto)
                 }
-            })
+            });
 
             val["related_resources"].forEach(function(rr){
                 if (rr.graph_id = digitalObjectGraphId && currentFileList.indexOf(rr.resourceinstanceid) > -1) {
@@ -70,14 +70,16 @@ define([
                                     'name': file.name,
                                     'size': file.size,
                                     'url': file.url,
+                                });
+                            });
                         }
-                    })
+                    });
                 }
             });
             this.relatedResourceLoading(false);
             if (!this.resourceLoading()){
                 this.loading(false);
-            };
+            }
         }, this);
     }
 
