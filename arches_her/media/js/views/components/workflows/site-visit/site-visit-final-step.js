@@ -11,15 +11,16 @@ define([
         this.attendees = ko.observableArray();
         this.photographs = ko.observableArray();
 
+        var currentTileId = ko.unwrap(params.form.externalStepData.sitevisitedetailsstep.data.tileid);
+
         this.resourceData.subscribe(function(val){
             var currentSiteVisit;
             if (Array.isArray(val.resource['Site Visits'])){
-                /*val.resource['Site Visits'].forEach(function(visit) {
-                    if (visit['Communication Type']['@tile_id'] === params.workflow.getStepData("related-consultation")['tileid']){
+                val.resource['Site Visits'].forEach(function(visit) {
+                    if (visit['@tile_id'] === currentTileId){
                         currentSiteVisit = visit;
                     }
-                });*/
-                currentSiteVisit = val.resource['Site Visits'][val.resource['Site Visits'].length-1];
+                });
             } else {
                 currentSiteVisit = val.resource['Site Visits'];
             }

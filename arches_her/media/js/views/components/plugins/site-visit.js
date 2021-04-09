@@ -132,6 +132,9 @@ define([
                     description: '',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
+                    externalstepdata: { 
+                        sitevisitedetailsstep: 'site-visit-details',
+                    },
                     layoutSections: [
                         {
                             componentConfigs: [
