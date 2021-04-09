@@ -41,8 +41,8 @@ define([
                 })
             } else {
                 self.attendees = [{
-                    attendee: {'name': 'Attendee', 'value': attendee['Attendee']['@value'] || 'none'},
-                    attendeeType: {'name': 'Type', 'value': attendee['Attendee Type']['@value'] || 'none'},    
+                    attendee: {'name': 'Attendee', 'value': currentSiteVisit['Attendees']['Attendee']['@value'] || 'none'},
+                    attendeeType: {'name': 'Type', 'value': currentSiteVisit['Attendees']['Attendee Type']['@value'] || 'none'},    
                 }]
             };
             if (Array.isArray(currentSiteVisit['Photographs'])){
