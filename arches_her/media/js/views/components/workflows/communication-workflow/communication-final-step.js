@@ -69,8 +69,7 @@ define([
                                 self.documents.push({
                                     'name': file.name,
                                     'size': file.size,
-                                })
-                            })
+                                    'url': file.url,
                         }
                     })
                 }

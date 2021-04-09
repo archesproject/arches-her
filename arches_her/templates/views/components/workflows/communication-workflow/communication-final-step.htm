@@ -63,7 +63,7 @@
                 <div class="file-upload-card" data-bind="style: {'border-width': $index() === ($parent.documents().length - 1) ? '0px' : '1px'}">
                     <div class="media-block">
                         <div class="media-left">
-                            <span class="summary-value" data-bind="text: name"></span>
+                            <a class="summary-value" data-bind="clickBubble: false, attr: {href: url}, text: name"></a>
                         </div>
                         <div class="media-right">
                             <span data-bind="text: $parent.formatSize($data)"></span>
