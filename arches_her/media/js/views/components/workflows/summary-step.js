@@ -19,9 +19,9 @@ define([
         };
 
         this.getRelatedResources = function() {
-            window.fetch(this.urls.related_resources + this.resourceid)
+            window.fetch(this.urls.related_resources + this.resourceid + "?paginate=false")
             .then(response => response.json())
-            .then(data => this.relatedResources(data.related_resources.related_resources))
+            .then(data => this.relatedResources(data))
         };
 
         this.init = function(){
