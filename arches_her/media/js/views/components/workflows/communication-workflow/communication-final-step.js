@@ -11,7 +11,6 @@ define([
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
 
-        // needs to be updated
         var currentTileId = ko.unwrap(params.form.externalStepData.relatedconsultationstep.data.tileid)
 
         this.resourceData.subscribe(function(val){
