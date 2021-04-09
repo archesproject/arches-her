@@ -1,0 +1,93 @@
+{% load i18n %}
+<!-- ko if: loading() === false -->
+<div class="final-step">
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Site Visit Details' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.consultationName.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.consultationName.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.date.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.date.value"></div>
+                </div>
+                    <div class="summary-label" data-bind="text: reportVals.locatinDescription.name + ':'"></div>
+                <div style="display: inline-flex;">
+                    <div class="summary-value" data-bind="html: reportVals.locatinDescription.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Visit Attendees' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <!-- ko foreach: attendees -->
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: $data.attendee.name + ':'"></div>
+                    <div class="summary-value" data-bind="html: $data.attendee.value"></div>
+                </div>
+                <div style="display: inline-flex;margin-bottom: 10px;">
+                    <div class="summary-label" data-bind="text: $data.attendeeType.name + ':'"></div>
+                    <div class="summary-value" data-bind="html: $data.attendeeType.value"></div>
+                </div>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Observations' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-value" data-bind="html: reportVals.observation.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Recommendations' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-value" data-bind="html: reportVals.recommendations.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column;">
+        <h5 class="summary-value">{% trans 'Photographs' %}</h5>
+        <div style="flex-direction: unset; flex-wrap: wrap;">
+            <!-- ko foreach: photographs -->
+            <div class="summary-image-container">
+                <img class="summary-image" alt="Image" data-bind="attr: {src: $data.photo.value}">
+                <div style="display: flex; flex-direction: column; padding: 10px">
+                    <div style="display: inline-flex;">
+                        <div class="summary-label" data-bind="text: $data.caption.name + ':'"></div>
+                        <div class="summary-value" data-bind="text: $data.caption.value"></div>
+                    </div>
+                    <div style="display: inline-flex;">
+                        <div class="summary-label" data-bind="text: $data.copyrightType.name + ':'"></div>
+                        <div class="summary-value" data-bind="text: $data.copyrightType.value"></div>
+                    </div>
+                    <div style="display: inline-flex;">
+                        <div class="summary-label" data-bind="text: $data.copyrightHolder.name + ':'"></div>
+                        <div class="summary-value" data-bind="text: $data.copyrightHolder.value"></div>
+                    </div>
+                    <div style="display: inline-flex;">
+                        <div class="summary-label" data-bind="text: $data.copyrightNotes.name + ':'"></div>
+                        <div class="summary-value" data-bind="text: $data.copyrightNotes.value"></div>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+</div>
+<!-- /ko -->
