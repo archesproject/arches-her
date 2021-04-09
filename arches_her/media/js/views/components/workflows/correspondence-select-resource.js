@@ -120,6 +120,7 @@ define([
             if (wastebin && ko.unwrap(wastebin.hasOwnProperty('resourceid'))) {
                 wastebin.resourceid = ko.unwrap(self.digitalObjectResourceId);                
             }
+            ko.mapping.fromJS(wastebin, {}, params.wastebin);
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,

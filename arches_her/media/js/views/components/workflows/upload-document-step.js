@@ -36,7 +36,7 @@ define([
             if (wastebin && 'resourceid' in wastebin) {
                 wastebin.resourceid = ko.unwrap(self.digitalObjectResourceId);
             }
-
+            ko.mapping.fromJS(wastebin, {}, params.wastebin);
             return {
                 digitalObjectResourceId: ko.unwrap(self.digitalObjectResourceId),
                 consultationTileId: ko.unwrap(self.consultationTileId),
