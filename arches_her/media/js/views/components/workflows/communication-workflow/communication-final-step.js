@@ -12,7 +12,7 @@ define([
         this.relatedResourceLoading = ko.observable(true);
 
         // needs to be updated
-        var currentTileId = JSON.parse(localStorage["workflow-steps"])[JSON.parse(localStorage.workflow)["workflow-step-ids"][0]].value.tileid
+        var currentTileId = ko.unwrap(params.form.externalStepData.relatedconsultationstep.data.tileid)
 
         this.resourceData.subscribe(function(val){
             var currentCommunication;

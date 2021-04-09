@@ -99,6 +99,9 @@ define([
                     description: 'Choose an option below',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
+                    externalstepdata: { 
+                        relatedconsultationstep: 'related-consultation',
+                    },
                     layoutSections: [
                         {
                             componentConfigs: [
@@ -106,7 +109,8 @@ define([
                                     componentName: 'communication-final-step',
                                     uniqueInstanceName: 'communication-final',
                                     tilesManaged: 'none',
-                                    parameters: {},
+                                    parameters: {
+                                    },
                                 },
                             ], 
                         },
