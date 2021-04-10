@@ -95,7 +95,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    required: true,
+                    required: false,
                     icon: 'fa-clipboard',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
