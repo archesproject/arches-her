@@ -3,7 +3,8 @@ define([
     'jquery',
     'arches',
     'viewmodels/workflow',
-    'views/components/workflows/consultation-map-step'
+    'views/components/workflows/consultation-map-step',
+    'views/components/workflows/consultations-final-step'
 ], function(ko, $, arches, Workflow) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
@@ -177,16 +178,29 @@ define([
                     title: 'Add Consulation Complete',
                     name: 'consultation-complete',
                     description: 'Choose an option below',
-                    component: 'views/components/workflows/consultations-final-step',
-                    componentname: 'consultations-final-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '6a773228-db20-11e9-b6dd-784f435179ea', // consultation status
-                    icon: 'fa-check',
-                    updatestatus: true,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'consultations-final-step',
+                                    uniqueInstanceName: 'consultation-final', /* unique to step */
+                                    tilesManaged: 'none',
+                                    parameters: {},
+                                },
+                            ], 
+                        },
+                    ],
+                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
-                    parenttileid: null
-                }
+                    parenttileid: null,
+                    informationboxdata: {
+                        heading: 'Workflow Complete: Review your work',
+                        text: 'Please review the summary information. You can go back to a previous step to make changes or "Quit Workflow" to discard your changes and start over',
+                    }
+                },
             ];
 
             Workflow.apply(this, [params]);
