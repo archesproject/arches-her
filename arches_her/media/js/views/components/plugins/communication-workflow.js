@@ -48,7 +48,7 @@ define([
                     tileid: null,
                     parenttileid: null,
                     class: 'show-only-notes',
-                    required: true,
+                    required: false,
                     icon: 'fa-lightbulb-o',
                     informationboxdata: {
                         heading: 'Meeting notes',
@@ -67,7 +67,7 @@ define([
                     tileid: null,
                     class: 'show-only-followup',
                     parenttileid: null,
-                    required: true,
+                    required: false,
                     icon: 'fa-clipboard',
                     informationboxdata: {
                         heading: 'Follow-On Actions',
@@ -85,7 +85,7 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    required: true,
+                    required: false,
                     icon: 'fa-file-o',
                     informationboxdata: {
                         heading: 'Upload Documents',
