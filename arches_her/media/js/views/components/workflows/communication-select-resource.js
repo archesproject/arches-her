@@ -52,6 +52,7 @@ define([
             if (wastebin && ko.unwrap(wastebin.hasOwnProperty('tile'))) {
                 wastebin.tile = completeTile;
             }
+            ko.mapping.fromJS(wastebin, {}, params.wastebin);
             return {
                 resourceid: ko.unwrap(params.resourceid),
                 tile: tile,
