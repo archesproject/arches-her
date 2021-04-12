@@ -6,6 +6,7 @@ define([
 
     function viewModel(params) {
         var self = this;
+        params.form.resourceId = params.form.externalStepData.relatedconsultationstep.data.resourceid;
         SummaryStep.apply(this, [params]);
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
