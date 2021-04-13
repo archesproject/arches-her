@@ -1,11 +1,7 @@
 define([
     'knockout',
     'views/components/workflows/summary-step',
-    'geojson-extent',
-    'views/components/map',
-    'views/components/cards/select-feature-layers',
-    'viewmodels/alert'
-], function(ko, SummaryStep, geojsonExtent, MapComponentViewModel, selectFeatureLayersFactory, AlertViewModel) {
+], function(ko, SummaryStep) {
 
     function viewModel(params) {
         SummaryStep.apply(this, [params]);
