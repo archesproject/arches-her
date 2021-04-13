@@ -1,13 +1,88 @@
 {% load i18n %}
 <!-- ko if: loading() === false -->
 <div class="final-step">
+
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
-        <h5 class="summary-value">{% trans 'Consultation Name' %}</h5>
+        <h5 class="summary-value">{% trans 'Consultation Area' %}</h5>
+        <div style="border: solid 1px #ddd">
+        <div data-bind="component: {
+            name: 'arches-map',
+            params: $data
+        }" style="height: 400px; width: 100%"></div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
                 <div style="display: inline-flex;">
-                    <div class="summary-label" data-bind="text: 'cat' + ':'"></div>
-                    <div class="summary-value" data-bind="text: 'dog'"></div>
+                    <div class="summary-label" data-bind="text: reportVals.featureShape.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.featureShape.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Consultation Dates' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.logDate.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.logDate.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.targetDate.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.targetDate.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Consultation Scope' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.consultationType.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.consultationType.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.applicationType.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.applicationType.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.developmentType.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.developmentType.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Reference Numbers' %}</h5>
+        <!-- ko foreach: { data: reportVals.references, as: 'ref' } -->
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column; padding-bottom: 10px;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: ref.referenceName.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: ref.referenceName.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: ref.referenceType.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: ref.referenceType.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: ref.agency.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: ref.agency.value"></div>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Proposal Description' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.proposalDescription.name + ':'"></div>
+                    <div class="summary-value" data-bind="html: reportVals.proposalDescription.value"></div>
                 </div>
             </div>
         </div>
