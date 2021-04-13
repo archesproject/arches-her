@@ -87,5 +87,50 @@
             </div>
         </div>
     </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Proposal Description' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.planningOfficer.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.planningOfficer.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.consultingContact.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.consultingContact.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.caseworkOfficer.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.caseworkOfficer.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.agent.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.agent.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.owner.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.owner.value"></div>
+                </div>
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.applicant.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.applicant.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Related Files' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.relatedFiles.name + ':'"></div>
+                    <div class="summary-value" data-bind="html: reportVals.relatedFiles.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 </div>
 <!-- /ko -->

@@ -22,6 +22,13 @@ define([
                     };
                 }) || 'none',
                 proposalDescription: {'name': 'Proposal Description', 'value': val.resource['Proposal']['Proposal Text']['@value'] || 'none'},
+                planningOfficer: {'name': 'Planning Officer', 'value': val.resource['Contacts']['Planning Officers']['Planning Officer']['@value'] || 'none'},
+                consultingContact: {'name': 'Consulting Contact', 'value': val.resource['Contacts']['Consulting Contact']['@value'] || 'none'},
+                caseworkOfficer: {'name': 'Casework Officer', 'value': val.resource['Contacts']['Casework Officers']['Casework Officer']['@value'] || 'none'},
+                agent: {'name': 'Agent', 'value': val.resource['Contacts']['Agents']['Agent']['@value'] || 'none'},
+                owner: {'name': 'Owner', 'value': val.resource['Contacts']['Owners']['Owner']['@value'] || 'none'},
+                applicant: {'name': 'Applicant', 'value': val.resource['Contacts']['Applicants']['Applicant']['@value'] || 'none'},
+                relatedFiles:  {'name': 'Related Files', 'value': val.resource['Proposal']['Digital File(s)']['@value'] || 'none'},
             };
             var geojsonStr = val.resource['Consultation Area']['Geometry']['Geospatial Coordinates']['@value'].replaceAll("'", '"');
             var geojson = JSON.parse(geojsonStr);
