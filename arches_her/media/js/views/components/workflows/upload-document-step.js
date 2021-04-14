@@ -11,45 +11,32 @@ define([
     function viewModel(params) {
         var self = this;
 
-        this.digitalObjectResourceId = ko.observable();
-        this.digitalObjectTileId = ko.observable();
         this.consultationResourceId = ko.observable(ko.unwrap(params.workflow.resourceId));
         this.consultationTileId = ko.observable(params.workflow.getStepData("related-consultation").tileid);
-
-        if (params.value() && params.value().digitalObjectResourceId) {
-            this.resourceId = params.value().digitalObjectResourceId;
-        }
 
         params.resourceid(null);
         params.workflow.resourceId(null);
 
-        if (params.value() &&  params.value().digitalObjectResourceId) {
-            params.resourceid(params.value().digitalObjectResourceId);
-            params.workflow.resourceId(params.value().digitalObjectResourceId);
-        }
-
         NewTileStep.apply(this, [params]);
 
         params.defineStateProperties = function(){
-            //from new-teil-step.js, not modified yet
             var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
             if (wastebin && 'resourceid' in wastebin) {
-                wastebin.resourceid = ko.unwrap(self.digitalObjectResourceId);
+                wastebin.resourceid = ko.unwrap(self.resourceId);
             }
             ko.mapping.fromJS(wastebin, {}, params.wastebin);
             return {
-                digitalObjectResourceId: ko.unwrap(self.digitalObjectResourceId),
+                consultationObjectResourceId: ko.unwrap(self.consultationResourceId),
                 consultationTileId: ko.unwrap(self.consultationTileId),
-                resourceid: ko.unwrap(self.consultationResourceId),
-                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined, //digitalObjectTile
-                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined, //gigitalObjectTile
+                resourceid: ko.unwrap(self.resourceId),
+                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
                 wastebin: wastebin
             };
         };
 
         this.onSaveSuccess = function(tile) {
-            this.digitalObjectResourceId(tile.resourceinstance_id);
-
+            this.resourceId(tile.resourceinstance_id);
             params.tileid(tile.tileid);
             params.tile(tile);
 
@@ -78,7 +65,7 @@ define([
                     'format': 'json'
                 }
             }).done(function(data) {
-                nameTemplate["resourceinstance_id"] =  self.digitalObjectResourceId();
+                nameTemplate["resourceinstance_id"] =  self.resourceId();
                 nameTemplate["nodegroup_id"] = 'c61ab163-9513-11ea-9bb6-f875a44e0e11'
                 nameTemplate.data["c61ab16c-9513-11ea-89a4-f875a44e0e11"] = "Communication for " + data.displayname
                 window.fetch(arches.urls.api_tiles(uuid.generate()), {
@@ -90,19 +77,19 @@ define([
                     },
                 })
                 .then(function(response) {
-                    console.log("Creating the name tile is done")
+                    console.log("The digital object name is saved")
                 })
                 .catch(function(response){
-                    console.log("Creating the name tile failed: \n", response)
+                    console.log("Saving the digital object name failed: \n", response)
                 });
             })
             .fail(function(response) {
-                console.log("getting resource failed: \n", response)
+                console.log("Getting the consultation name failed: \n", response)
             });
 
             // Add a Docu from the digital object to the "existing" communication tile
             var relateDocuNodeTemplate = [{
-                'resourceId': self.digitalObjectResourceId(),
+                'resourceId': self.resourceId(),
                 'ontologyProperty': '',
                 'inverseOntologyProperty':'',
                 'resourceXresourceId':''
@@ -119,20 +106,18 @@ define([
                     'tileid': ko.unwrap(self.consultationTileId)
                 }
             }).done(function(response) {
-                console.log("Successfully Updated the Node Value")
+                console.log("Related resource instance added")
             })
             .fail(function(response) {
-                console.log("Updating the node value failed: \n", response)
+                console.log("Adding related resource instance failed: \n", response)
             });
 
             params.resourceid(ko.unwrap(this.consultationResourceId));
             params.workflow.resourceId(ko.unwrap(this.consultationResourceId));
-            self.resourceId(ko.unwrap(this.consultationResourceId));
     
             if (params.value) {
                 params.value(params.defineStateProperties());
             }
-            
             if (self.completeOnSave === true) { self.complete(true); }
         };
     };
