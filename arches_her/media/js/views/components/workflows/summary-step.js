@@ -29,7 +29,15 @@ define([
             this.getRelatedResources()
         };
 
-        this.prepareMap = function(geojson, source){
+        this.getResourceValue = function(obj, attrs, missingValue='none') {
+            try {
+                return attrs.reduce(function index(obj, i) {return obj[i]}, obj) || missingValue;
+            } catch(e) {
+                return missingValue;
+            }
+        };
+
+        this.prepareMap = function(geojson, source) {
             console.log(source);
             var mapParams = {};
             if (geojson.features.length > 0) {

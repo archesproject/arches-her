@@ -25,45 +25,37 @@ define([
                 currentSiteVisit = val.resource['Site Visits'];
             }
             this.reportVals = {
-                consultationName: {'name': 'Consultation', 'value': val.resource['Consultation Names']['Consultation Name']['@value'] || 'none'},
-                date: {'name': 'Date', 'value': currentSiteVisit['Timespan of Visit']['Date of Visit']['@value'] || 'none'},
-                locatinDescription: {'name': 'Visit Location Description', 'value': currentSiteVisit['Location']['Location Descriptions']['Location Description']['@value'] || 'none'},
-                observation: {'name': 'Observations', 'value': currentSiteVisit['Observations']['Observation']['Observation Notes']['@value'] || 'none'},
-                recommendations: {'name': 'Recommendations', 'value': currentSiteVisit['Recommendations']['Recommendation']['Recommendation Value']['@value'] || 'none'},
+                consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val.resource, ['Consultation Names','Consultation Name','@value'])},
+                date: {'name': 'Date', 'value': this.getResourceValue(currentSiteVisit, ['Timespan of Visit', 'Date of Visit', '@value'])},
+                locatinDescription: {'name': 'Visit Location Description', 'value': this.getResourceValue(currentSiteVisit, ['Location', 'Location Descriptions', 'Location Description', '@value'])},
+                observation: {'name': 'Observations', 'value': this.getResourceValue(currentSiteVisit, ['Observations', 'Observation', 'Observation Notes', '@value'])},
+                recommendations: {'name': 'Recommendations', 'value': this.getResourceValue(currentSiteVisit, ['Recommendations', 'Recommendation', 'Recommendation Value', '@value'])},
             }
 
-            if (Array.isArray(currentSiteVisit['Attendees'])) {
-                currentSiteVisit['Attendees'].forEach(function(attendee){
-                    self.attendees.push({
-                        attendee: {'name': 'Attendee', 'value': attendee['Attendee']['@value'] || 'none'},
-                        attendeeType: {'name': 'Type', 'value': attendee['Attendee Type']['@value'] || 'none'},
-                    });
+            try {
+                this.reportVals.attendees = currentSiteVisit['Attendees'].map(function(attendee){
+                    return {
+                        attendee: {'name': 'Attendee', 'value': self.getResourceValue(attendee, ['Attendee', '@value'])},
+                        attendeeType: {'name': 'Type', 'value': self.getResourceValue(attendee, ['Attendee Type', '@value'])},
+                    };
                 })
-            } else {
-                self.attendees = [{
-                    attendee: {'name': 'Attendee', 'value': currentSiteVisit['Attendees']['Attendee']['@value'] || 'none'},
-                    attendeeType: {'name': 'Type', 'value': currentSiteVisit['Attendees']['Attendee Type']['@value'] || 'none'},    
-                }]
-            };
-            if (Array.isArray(currentSiteVisit['Photographs'])){
-                currentSiteVisit['Photographs'].forEach(function(photograph){
-                    self.photographs.push({
-                        photo: {'name': 'Photo', 'value': photograph['@value'] || 'none'},
-                        caption: {'name': 'Caption', 'value': photograph['Caption Notes']['Caption Note']['@value'] || 'none'},
-                        copyrightType: {'name': 'Copyright Type', 'value': photograph['Copyright']['Copyright Type']['@value'] || 'none'},
-                        copyrightHolder: {'name': 'Copyright Holder', 'value': photograph['Copyright']['Copyright Holder']['@value'] || 'none'},
-                        copyrightNotes: {'name': 'Copyright Notes', 'value': photograph['Copyright']['Copyright Note']['Copyright Note Text']['@value'] || 'none'},
-                    });
+            } catch(e) {
+                this.reportVals.attendees = [];
+            }
+
+            try {
+                this.reportVals.photographs = currentSiteVisit['Photographs'].map(function(photograph){
+                    return {
+                        photo: {'name': 'Photo', 'value': self.getResourceValue(photograph, ['@value'])},
+                        caption: {'name': 'Caption', 'value': self.getResourceValue(photograph, ['Caption Notes', 'Caption Note', '@value'])},
+                        copyrightType: {'name': 'Copyright Type', 'value': self.getResourceValue(photograph, ['Copyright', 'Copyright Type', '@value'])},
+                        copyrightHolder: {'name': 'Copyright Holder', 'value': self.getResourceValue(photograph, ['Copyright', 'Copyright Holder', '@value'])},
+                        copyrightNotes: {'name': 'Copyright Notes', 'value': self.getResourceValue(photograph, ['Copyright', 'Copyright Note', 'Copyright Note Text', '@value'])},
+                    };
                 })
-            } else {
-                self.photographs = [{
-                    photo: {'name': 'photo', 'value': currentSiteVisit['Photographs']['@value'] || 'none'},
-                    caption: {'name': 'Caption', 'value': currentSiteVisit['Photographs']['Caption Notes']['Caption Note']['@value'] || 'none'},
-                    copyrightType: {'name': 'Copyright Type', 'value': currentSiteVisit['Photographs']['Copyright']['Copyright Type']['@value'] || 'none'},
-                    copyrightHolder: {'name': 'Copyright Holder', 'value': currentSiteVisit['Photographs']['Copyright']['Copyright Holder']['@value'] || 'none'},
-                    copyrightNotes: {'name': 'Copyright Notes', 'value': currentSiteVisit['Photographs']['Copyright']['Copyright Note']['Copyright Note Text']['@value'] || 'none'},
-                }]
-            };
+            } catch(e) {
+                this.reportVals.photographs = [];
+            }
             this.loading(false);
         }, this);
     }

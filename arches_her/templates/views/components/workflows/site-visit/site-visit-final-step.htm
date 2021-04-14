@@ -25,7 +25,7 @@
         <h5 class="summary-value">{% trans 'Visit Attendees' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
-                <!-- ko foreach: attendees -->
+                <!-- ko foreach: reportVals.attendees -->
                 <div style="display: inline-flex;">
                     <div class="summary-label" data-bind="text: $data.attendee.name + ':'"></div>
                     <div class="summary-value" data-bind="html: $data.attendee.value"></div>
@@ -64,7 +64,7 @@
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column;">
         <h5 class="summary-value">{% trans 'Photographs' %}</h5>
         <div style="flex-direction: unset; flex-wrap: wrap;">
-            <!-- ko foreach: photographs -->
+            <!-- ko foreach: reportVals.photographs -->
             <div class="summary-image-container">
                 <img class="summary-image" alt="Image" data-bind="attr: {src: $data.photo.value}">
                 <div style="display: flex; flex-direction: column; padding: 10px">
