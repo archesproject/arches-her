@@ -4,6 +4,7 @@ define([
 ], function(ko, SummaryStep) {
 
     function viewModel(params) {
+        var self = this;
         SummaryStep.apply(this, [params]);
 
         this.resourceData.subscribe(function(val){
@@ -27,13 +28,13 @@ define([
             try {
                 this.reportVals.references = val.resource['References'].map(function(ref){
                     return {
-                        referenceName: {'name': 'Reference', 'value': this.getResourceValue(ref, ['Agency Identifier', 'Reference', '@value'])},
-                        referenceType: {'name': 'Reference Type', 'value': this.getResourceValue(ref, ['Agency Identifier', 'Reference Type', '@value'])},
-                        agency: {'name': 'Agency', 'value': this.getResourceValue(ref, ['Agency', '@value'])}
+                        referenceName: {'name': 'Reference', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference', '@value'])},
+                        referenceType: {'name': 'Reference Type', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference Type', '@value'])},
+                        agency: {'name': 'Agency', 'value': self.getResourceValue(ref, ['Agency', '@value'])}
                     };
                 })
             } catch(e) {
-                //pass
+                this.reportVals.references = [];
             }
 
             var geojsonStr = this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Geospatial Coordinates', '@value']);
