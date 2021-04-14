@@ -31,7 +31,7 @@ define([
 
         this.getResourceValue = function(obj, attrs, missingValue='none') {
             try {
-                return attrs.reduce(function index(obj, i) {return obj[i]}, obj);
+                return attrs.reduce(function index(obj, i) {return obj[i]}, obj) || missingValue;
             } catch(e) {
                 return missingValue;
             }
