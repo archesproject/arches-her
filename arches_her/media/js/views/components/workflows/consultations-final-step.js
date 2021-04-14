@@ -8,31 +8,39 @@ define([
 
         this.resourceData.subscribe(function(val){
             this.reportVals = {
-                featureShape: {'name': 'Feature Shape', 'value': val.resource['Consultation Area']['Geometry']['Feature Shape']['@value'] || 'none'},
-                logDate: {'name': 'Log Date', 'value': val.resource['Consultation Dates']['Log Date']['@value'] || 'none'},
-                targetDate: {'name': 'Target Date', 'value': val.resource['Consultation Dates']['Target Date']['Target Date Start']['@value'] || 'none'},
-                consultationType: {'name': 'Consultation Type', 'value': val.resource['Consultation Type']['@value'] || 'none'},
-                applicationType: {'name': 'Application Type', 'value': val.resource['Application Type']['@value'] || 'none'},
-                developmentType: {'name': 'Development Type', 'value': val.resource['Development Type']['@value'] || 'none'},
-                references: val.resource['References'].map(function(ref){
-                    return {
-                        referenceName: {'name': 'Reference', 'value': ref['Agency Identifier']['Reference']['@value'] || 'none'},
-                        referenceType: {'name': 'Reference Type', 'value': ref['Agency Identifier']['Reference Type']['@value'] || 'none'},
-                        agency: {'name': 'Agency', 'value': ref['Agency']['@value'] || 'none'},
-                    };
-                }) || 'none',
-                proposalDescription: {'name': 'Proposal Description', 'value': val.resource['Proposal']['Proposal Text']['@value'] || 'none'},
-                planningOfficer: {'name': 'Planning Officer', 'value': val.resource['Contacts']['Planning Officers']['Planning Officer']['@value'] || 'none'},
-                consultingContact: {'name': 'Consulting Contact', 'value': val.resource['Contacts']['Consulting Contact']['@value'] || 'none'},
-                caseworkOfficer: {'name': 'Casework Officer', 'value': val.resource['Contacts']['Casework Officers']['Casework Officer']['@value'] || 'none'},
-                agent: {'name': 'Agent', 'value': val.resource['Contacts']['Agents']['Agent']['@value'] || 'none'},
-                owner: {'name': 'Owner', 'value': val.resource['Contacts']['Owners']['Owner']['@value'] || 'none'},
-                applicant: {'name': 'Applicant', 'value': val.resource['Contacts']['Applicants']['Applicant']['@value'] || 'none'},
-                relatedFiles:  {'name': 'Related Files', 'value': val.resource['Proposal']['Digital File(s)']['@value'] || 'none'},
+                featureShape: {'name': 'Feature Shape', 'value': this.getResourceValue(val.resource, ['Consultation Area','Geometry','Feature Shape','@value'])},
+                logDate: {'name': 'Log Date', 'value': this.getResourceValue(val.resource, ['Consultation Dates','Log Date','@value'])},
+                targetDate: {'name': 'Target Date', 'value': this.getResourceValue(val.resource, ['Consultation Dates','Target Date','Target Date Start','@value'])},
+                consultationType: {'name': 'Consultation Type', 'value': this.getResourceValue(val.resource, ['Consultation Type','@value'])},
+                applicationType: {'name': 'Application Type', 'value': this.getResourceValue(val.resource, ['Application Type','@value'])},
+                developmentType: {'name': 'Development Type', 'value': this.getResourceValue(val.resource, ['Development Type','@value'])},
+                proposalDescription: {'name': 'Proposal Description', 'value': this.getResourceValue(val.resource, ['Proposal','Proposal Text','@value'])},
+                planningOfficer: {'name': 'Planning Officer', 'value': this.getResourceValue(val.resource, ['Contacts','Planning Officers','Planning Officer','@value'])},
+                consultingContact: {'name': 'Consulting Contact', 'value': this.getResourceValue(val.resource, ['Contacts','Consulting Contact','@value'])},
+                caseworkOfficer: {'name': 'Casework Officer', 'value': this.getResourceValue(val.resource, ['Contacts','Casework Officers','Casework Officer','@value'])},
+                agent: {'name': 'Agent', 'value': this.getResourceValue(val.resource, ['Contacts','Agents','Agent','@value'])},
+                owner: {'name': 'Owner', 'value': this.getResourceValue(val.resource, ['Contacts','Owners','Owner','@value'])},
+                applicant: {'name': 'Applicant', 'value': this.getResourceValue(val.resource, ['Contacts','Applicants','Applicant','@value'])},
+                relatedFiles:  {'name': 'Related Files', 'value': this.getResourceValue(val.resource, ['Proposal','Digital File(s)','@value'])},
             };
-            var geojsonStr = val.resource['Consultation Area']['Geometry']['Geospatial Coordinates']['@value'].replaceAll("'", '"');
-            var geojson = JSON.parse(geojsonStr);
-            this.prepareMap(geojson, 'consultation-map-data');
+
+            try {
+                this.reportVals.references = val.resource['References'].map(function(ref){
+                    return {
+                        referenceName: {'name': 'Reference', 'value': this.getResourceValue(ref, ['Agency Identifier', 'Reference', '@value'])},
+                        referenceType: {'name': 'Reference Type', 'value': this.getResourceValue(ref, ['Agency Identifier', 'Reference Type', '@value'])},
+                        agency: {'name': 'Agency', 'value': this.getResourceValue(ref, ['Agency', '@value'])}
+                    };
+                })
+            } catch(e) {
+                //pass
+            }
+
+            var geojsonStr = this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Geospatial Coordinates', '@value']);
+            if (geojsonStr) {
+                var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
+                this.prepareMap(geojson, 'app-area-map-data');
+            };
             this.loading(false);
         }, this);
     }
