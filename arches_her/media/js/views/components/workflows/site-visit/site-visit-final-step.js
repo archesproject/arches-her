@@ -25,11 +25,11 @@ define([
                 currentSiteVisit = val.resource['Site Visits'];
             }
             this.reportVals = {
-                consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val.resource, ['Consultation Names','Consultation Name','@value'])},
+                consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 date: {'name': 'Date', 'value': this.getResourceValue(currentSiteVisit, ['Timespan of Visit', 'Date of Visit', '@value'])},
                 locatinDescription: {'name': 'Visit Location Description', 'value': this.getResourceValue(currentSiteVisit, ['Location', 'Location Descriptions', 'Location Description', '@value'])},
-                observation: {'name': 'Observations', 'value': this.getResourceValue(currentSiteVisit, ['Observations', 'Observation', 'Observation Notes', '@value'])},
-                recommendations: {'name': 'Recommendations', 'value': this.getResourceValue(currentSiteVisit, ['Recommendations', 'Recommendation', 'Recommendation Value', '@value'])},
+                observation: {'name': 'Observations', 'value': this.getResourceValue(currentSiteVisit["Observations"][0], ['Observation', 'Observation Notes', '@value'])},
+                recommendations: {'name': 'Recommendations', 'value': this.getResourceValue(currentSiteVisit['Recommendations'][0], ['Recommendation', 'Recommendation Value', '@value'])},
             }
 
             try {
