@@ -11,6 +11,10 @@ define([
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
+        this.digitalObjectResourceId = ko.observable();
+        if (params.form.externalStepData.uploaddocumentstep.data) {
+            this.digitalObjectResourceId(params.form.externalStepData.uploaddocumentstep.data.resourceid);
+        };
 
         var currentTileId = ko.unwrap(params.form.externalStepData.relatedconsultationstep.data.tileid)
 
