@@ -1,7 +1,9 @@
 define([
     'knockout',
+    'uuid',
+    'arches',
     'views/components/workflows/summary-step',
-], function(ko, SummaryStep) {
+], function(ko, uuid, arches, SummaryStep) {
 
     function viewModel(params) {
         var self = this;
@@ -43,6 +45,34 @@ define([
                 this.prepareMap(geojson, 'app-area-map-data');
             };
             this.loading(false);
+            
+            if (!val.resource['Status']) {
+                var statusNodegroupId = '6a773228-db20-11e9-b6dd-784f435179ea'
+                var statusTemplate = {
+                    "tileid": null,
+                    "data": {},
+                    "nodegroup_id": null,
+                    "parenttile_id": null,
+                    "resourceinstance_id": null,
+                    "sortorder": 0
+                };
+                statusTemplate["resourceinstance_id"] =  self.resourceid;
+                statusTemplate["nodegroup_id"] = statusNodegroupId;
+                statusTemplate["data"][statusNodegroupId] =  true;
+        
+                window.fetch(arches.urls.api_tiles(uuid.generate()), {
+                    method: 'POST',
+                    credentials: 'include',
+                    body: JSON.stringify(statusTemplate),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                }).then(function(response) {
+                    console.log("The status is now active")
+                }).catch(function(response){
+                    console.log("The status has not updated: \n", response)
+                });        
+            }
         }, this);
     }
 
