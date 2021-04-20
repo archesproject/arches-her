@@ -2,6 +2,26 @@
 <!-- ko if: loading() === false -->
 <div class="final-step">
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Created or Modified Resource Instance' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <a data-bind="attr: { href: urls.resource + '/' + resourceid}" target="_blank">
+                    <div class="summary-value">
+                        {% trans 'Consultation Resource Instance' %}
+                    </div>
+                </a>
+                <!-- ko if: digitalObjectResourceId -->
+                <a data-bind="attr: { href: urls.resource + '/' + digitalObjectResourceId()}" target="_blank">
+                    <div class="summary-value">
+                        {% trans 'Digital Object Resource Instance' %}
+                    </div>
+                </a>
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <h5 class="summary-value">{% trans 'Consultation Communication Details' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">

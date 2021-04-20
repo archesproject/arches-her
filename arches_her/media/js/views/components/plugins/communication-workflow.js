@@ -101,6 +101,7 @@ define([
                     componentname: 'component-based-step',
                     externalstepdata: { 
                         relatedconsultationstep: 'related-consultation',
+                        uploaddocumentstep: 'upload-documents',
                     },
                     layoutSections: [
                         {
