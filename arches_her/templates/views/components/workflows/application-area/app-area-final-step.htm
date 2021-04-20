@@ -2,6 +2,18 @@
 <!-- ko if: loading() === false -->
 <div class="final-step">
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value">{% trans 'Created or Modified Resource Instance' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <a data-bind="attr: { href: urls.resource + '/' + resourceid}" target="_blank">
+                    <div class="summary-value">
+                        {% trans 'Application Area Resource Instance' %}
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <h5 class="summary-value">{% trans 'Application Area Address' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
