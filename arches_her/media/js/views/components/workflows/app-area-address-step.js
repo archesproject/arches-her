@@ -41,12 +41,18 @@ define([
 
         self.getAddressString = ko.computed(function(){
             if (self.tile()){
-                var building = self.tile().data["c7ec960d-28c8-11eb-aee4-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec960d-28c8-11eb-aee4-f875a44e0e11"]) + ", " : '';
-                var street   = self.tile().data["c7ec9611-28c8-11eb-b865-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9611-28c8-11eb-b865-f875a44e0e11"]) + ", " : '';
-                var locality = self.tile().data["c7ec9613-28c8-11eb-966c-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9613-28c8-11eb-966c-f875a44e0e11"]) + ", " : '';
-                var city     = self.tile().data["c7ec9607-28c8-11eb-acf0-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9607-28c8-11eb-acf0-f875a44e0e11"]) + ", " : '';
-                var postcode = self.tile().data["c7ec9609-28c8-11eb-a6a3-f875a44e0e11"] ? ko.unwrap(self.tile().data["c7ec9609-28c8-11eb-a6a3-f875a44e0e11"]) : '';
-                return building + street + locality + city + postcode;
+                var buildingName = ko.unwrap(self.tile().data["c7ec960d-28c8-11eb-aee4-f875a44e0e11"]);
+                var buildingNumber = ko.unwrap(self.tile().data["c7ec960f-28c8-11eb-86f0-f875a44e0e11"]);
+                var buildingNumberSubStreet = ko.unwrap(self.tile().data["c7ec9605-28c8-11eb-bfd4-f875a44e0e11"]);
+                var subStreet = ko.unwrap(self.tile().data["c7ec960b-28c8-11eb-b8ad-f875a44e0e11"]);
+                var street = ko.unwrap(self.tile().data["c7ec9611-28c8-11eb-b865-f875a44e0e11"]);
+                var locality = ko.unwrap(self.tile().data["c7ec9613-28c8-11eb-966c-f875a44e0e11"]);
+                var city = ko.unwrap(self.tile().data["c7ec9607-28c8-11eb-acf0-f875a44e0e11"]);
+                var county = ko.unwrap(self.tile().data["c7ec9615-28c8-11eb-a5c5-f875a44e0e11"]);
+                var postcode = ko.unwrap(self.tile().data["c7ec9609-28c8-11eb-a6a3-f875a44e0e11"]);
+                var building = [buildingName, buildingNumber, buildingNumberSubStreet].filter(Boolean).join(" ");
+                var fullStreet = [subStreet, street].filter(Boolean).join(" ");
+                return [building, fullStreet, locality, city, county, postcode].filter(Boolean).join(", ")
             }
         });
 
@@ -62,6 +68,7 @@ define([
             } else {
                 self.address = null;
             }
+            console.log(self.address)
         });
 
     }
