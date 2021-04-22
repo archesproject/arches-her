@@ -47,10 +47,6 @@ class ActiveConsultationsView(View):
         page_num = 1 if request.GET.get('page') == '' else int(request.GET.get('page'))
         order_param = request.GET.get('order')
         keyword = None if request.GET.get('keyword') == '' or request.GET.get('keyword') == None else (request.GET.get('keyword'))
-
-        # active_cons_config = request.GET.get('config')
-        # self.active_cons_node_list = active_cons_config['nodes']
-        # order_config = active_cons_config['sort config']
         datatype_factory = DataTypeFactory()
         cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_status_bool_nodeid)
         include_list = self.build_include_list(cons_details_tiles, datatype_factory)
