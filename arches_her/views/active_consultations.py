@@ -48,8 +48,8 @@ class ActiveConsultationsView(View):
         order_param = request.GET.get('order')
         keyword = None if request.GET.get('keyword') == '' or request.GET.get('keyword') == None else (request.GET.get('keyword'))
         datatype_factory = DataTypeFactory()
-        cons_details_tiles = Tile.objects.filter(nodegroup_id=self.cons_status_bool_nodeid)
-        include_list = self.build_include_list(cons_details_tiles, datatype_factory)
+        consultation_status_tiles = Tile.objects.filter(nodegroup_id=self.cons_status_bool_nodeid)
+        include_list = [tile.resourceinstance_id for tile in consultation_status_tiles if tile.data[self.cons_status_bool_nodeid] is not False]
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid, resourceinstanceid__in=include_list)
 
         order_config = { # if this is not up-to-date sorting will break
@@ -86,21 +86,7 @@ class ActiveConsultationsView(View):
 
         return HttpResponseNotFound()
 
-
-    def build_include_list(self, tiles, datatype_factory):
-        include_list = []
-        cons_status_node = models.Node.objects.get(nodeid=self.cons_status_bool_nodeid)
-        datatype = datatype_factory.get_instance(cons_status_node.datatype)
-        for tile in tiles:
-            tile_status = datatype.get_display_value(tile, cons_status_node)
-            if tile_status is not False:
-                include_list.append(str(tile.resourceinstance.resourceinstanceid))
-
-        return include_list
-
-
     def get_paginated_data(self, grouped_tile_list, page_ct, page_num):
-
         paginator = Paginator(grouped_tile_list, page_ct)
         page_results = paginator.page(page_num)
         if page_results.has_next() is True:
