@@ -18,7 +18,7 @@ define([
             this.setLayout = function(layout){ self.layout(layout); };
             this.loading = ko.observable(true);
             // this.mapImageURL = ko.observable('');
-            this.active_items = ko.observableArray([]);
+            this.activeItems = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
             this.orderByOption = ko.observable("");
             this.keyword = ko.observable("");
@@ -176,7 +176,7 @@ define([
 
             this.getConsultations = function() {
                 self.loading(true);
-                self.active_items.removeAll();
+                self.activeItems.removeAll();
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
@@ -220,7 +220,7 @@ define([
                             }
 
                             consultation.layers = self.layers;
-                            self.active_items.push(consultation);
+                            self.activeItems.push(consultation);
                         });
                         self.loading(false);
                     },
