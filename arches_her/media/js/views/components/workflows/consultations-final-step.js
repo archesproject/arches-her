@@ -47,7 +47,7 @@ define([
             this.loading(false);
             
             if (!val.resource['Status']) {
-                var statusNodegroupId = '6a773228-db20-11e9-b6dd-784f435179ea'
+                var statusNodegroupId = '6a773228-db20-11e9-b6dd-784f435179ea';
                 var statusTemplate = {
                     "tileid": null,
                     "data": {},
