@@ -35,9 +35,9 @@
 
     <div class="active-cons-listing-container">
         <div class="col-sm-12">
-            <!-- ko if: active_items().length > 0 -->
+            <!-- ko if: activeItems().length > 0 -->
             <div class="projects-grid" data-bind="visible: layout() === 'grid'">
-                <!-- ko foreach: active_items -->
+                <!-- ko foreach: activeItems -->
                 <div class="card-grid-item">
                     <div class="panel mar-no">
                       <a data-bind="attr: { href: $parent.resourceEditorURL + $data['resourceinstanceid'] }">
@@ -123,7 +123,7 @@
                 <!-- /ko -->
             </div>
             <!-- /ko -->
-            <!-- ko if: active_items().length === 0 && loading() === false -->
+            <!-- ko if: activeItems().length === 0 && loading() === false -->
             <div id="rr-splash" class="rr-splash">
 
                 <!-- Image -->
@@ -160,7 +160,7 @@
 
         </div>
     </div>
-    <!-- ko if: layout() == 'grid' && active_items().length > 0 -->
+    <!-- ko if: layout() == 'grid' && activeItems().length > 0 -->
     <div id="paginator" data-bind="with: paginator">
         <div class="text-center">
             <ul class="pagination">
