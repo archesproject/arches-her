@@ -68,9 +68,10 @@ define([
                         'Content-Type': 'application/json'
                     },
                 }).then(function(response) {
-                    console.log("The status is now active")
+                    // pass;
                 }).catch(function(response){
-                    console.log("The status has not updated: \n", response)
+                    // eslint-disable-next-line no-console
+                    console.log("The status has not updated: \n", response);
                 });        
             }
         }, this);
