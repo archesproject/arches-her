@@ -44,6 +44,9 @@ define([
                     description: 'Site Visit Attendees',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
+                    externalstepdata: { 
+                        sitevisitedetailsstep: 'site-visit-details',
+                    },
                     layoutSections: [
                         {
                             componentConfigs: [
@@ -54,6 +57,7 @@ define([
                                     parameters: {
                                         graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                                         nodegroupid: 'ab622f1f-a251-11e9-bda5-00224800b26d',
+                                        parenttilesourcestep: 'sitevisitedetailsstep'
                                     },
                                 },
                             ], 
@@ -68,17 +72,28 @@ define([
                     title: 'Site Visit Observations',
                     name: 'site-visit-observations',
                     description: '',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'a2b47f25-938d-11ea-82cb-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    externalstepdata: { 
+                        sitevisitedetailsstep: 'site-visit-details',
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'foo', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: 'a2b47f25-938d-11ea-82cb-f875a44e0e11',
+                                        parenttilesourcestep: 'sitevisitedetailsstep'
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                     required: false,
-                    icon: 'fa-lightbulb-o',
-                    nameheading: 'New Site Visit',
-                    namelabel: '[no label]',
                     informationboxdata: {
                         heading: 'Site Visit Observations',
                         text: 'Add the observations during the site visit',
@@ -88,17 +103,28 @@ define([
                     title: 'Recommendations',
                     name: 'site-recommendations',
                     description: '',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: 'f5ecfbca-938b-11ea-865d-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    externalstepdata: { 
+                        sitevisitedetailsstep: 'site-visit-details',
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'foo', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: 'f5ecfbca-938b-11ea-865d-f875a44e0e11',
+                                        parenttilesourcestep: 'sitevisitedetailsstep'
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                     required: false,
-                    icon: 'fa-clipboard',
-                    nameheading: 'New Site Visit',
-                    namelabel: '[no label]',
                     informationboxdata: {
                         heading: 'Recommendations',
                         text: 'Add recommendations from the site visit',
@@ -116,6 +142,9 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
+                    externalstepdata: { 
+                        sitevisitedetailsstep: 'site-visit-details',
+                    },
                     icon: 'fa-camera',
                     nameheading: 'New Site Visit',
                     namelabel: '[no label]',
