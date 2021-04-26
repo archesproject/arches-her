@@ -38,7 +38,6 @@ define([
         };
 
         this.prepareMap = function(geojson, source) {
-            console.log(source);
             var mapParams = {};
             if (geojson.features.length > 0) {
                 mapParams.bounds = geojsonExtent(geojson);

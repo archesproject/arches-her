@@ -30,7 +30,7 @@ define([
                 currentCommunication = val.resource.Communications;
             }
             this.reportVals = {
-                consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val.resource, ['Consultation Names', 'Consultation Name', '@value'])},
+                consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 subject: {'name': 'Subject', 'value': this.getResourceValue(currentCommunication, ['Subjects', 'Subject', '@value'])},
                 type: {'name': 'Type', 'value': this.getResourceValue(currentCommunication, ['Communication Type', '@value'])},
                 date: {'name': 'Date', 'value': this.getResourceValue(currentCommunication, ['Dates', 'Date', '@value'])},
