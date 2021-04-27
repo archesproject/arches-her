@@ -202,7 +202,7 @@ class BNGPointToGeoJSON(BaseFunction):
 
             cursor = connection.cursor()
             sql = """
-                    REFRESH MATERIALIZED VIEW mv_geojson_geoms;
+                    SELECT * FROM refresh_geojson_geometries();
                 """
             cursor.execute(sql)  #
 
