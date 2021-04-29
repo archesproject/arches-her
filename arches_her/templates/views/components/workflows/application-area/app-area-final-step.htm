@@ -2,6 +2,20 @@
 <!-- ko if: loading() === false -->
 <div class="final-step">
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <h5 class="summary-value" style="color: red;">{% trans 'Unfiinished Steps' %}</h5>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <!-- ko foreach: {data: $parents[6].steps, as: 'step'} -->
+                <!-- ko if: (step.hasDirtyTile() || !step.complete()) &&  step._index !== $parents[7].steps.length-1 -->
+                <div style="cursor: pointer;" data-bind="click: function() {$parents[7].activeStep(step)}">
+                    <span class="summary-value" data-bind="text: step.title"></span>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <h5 class="summary-value">{% trans 'Created or Modified Resource Instance' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
