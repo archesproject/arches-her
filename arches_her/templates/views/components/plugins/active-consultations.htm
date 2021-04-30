@@ -18,6 +18,11 @@
         <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">{% trans "Search" %}</button>
         <button class="btn btn-sm btn-dark reset" data-bind="click: resetKeywordSearch"><i class="fa fa-remove"></i></button>
     </div>
+
+    <div class="active-cons-table-view" data-bind="visible: layout() !== 'grid'">
+        <h2 class="active-cons-container-title">{% trans "Consultations Table" %}</h2>
+    </div>
+
     <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
         <select data-bind="value: orderByOption,
                           options: sortOptions,
