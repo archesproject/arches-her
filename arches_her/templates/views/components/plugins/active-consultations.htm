@@ -12,27 +12,27 @@
 <!--/ko-->
 
 <!-- ko if: loading() === false -->
-<div class="active-cons-container">
-    <div class="sticky">
-        <div class="active-cons-filters" data-bind="visible: layout() === 'grid'">
-            <input data-bind="value: keyword" placeholder="find..."></input>
-            <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">{% trans "Search" %}</button>
-            <button class="btn btn-sm btn-dark reset" data-bind="click: resetKeywordSearch"><i class="fa fa-remove"></i></button>
-        </div>
-        <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
-            <select data-bind="value: orderByOption,
-                              options: sortOptions,
-                              optionsCaption: 'Sort by...',
-                              chosen: {width: '300px'}">
-            </select>
-        </div>
-
-        <div class="active-consultations-display">
-            <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 21px; margin-top: 3px;"></i></button>
-            <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 21px; margin-top: -2px;"></i></button>
-        </div>
+<div class="active-cons-container-header">
+    <div class="active-cons-filters" data-bind="visible: layout() === 'grid'">
+        <input data-bind="value: keyword" placeholder="find..."></input>
+        <button class="btn btn-md btn-primary filter" data-bind="click: keywordSearch">{% trans "Search" %}</button>
+        <button class="btn btn-sm btn-dark reset" data-bind="click: resetKeywordSearch"><i class="fa fa-remove"></i></button>
+    </div>
+    <div class="active-consultations-sort" data-bind="visible: layout() === 'grid'">
+        <select data-bind="value: orderByOption,
+                          options: sortOptions,
+                          optionsCaption: 'Sort by...',
+                          chosen: {width: '300px'}">
+        </select>
     </div>
 
+    <div class="active-consultations-display">
+        <button class="btn" data-bind="click: function(){setLayout('grid');}"><i data-bind="css: { disabled: layout() === 'table' }" class="text-center fa fa-th" style="font-size: 21px; margin-top: 3px;"></i></button>
+        <button class="btn" data-bind="click: function(){setLayout('table');}"><i data-bind="css: { disabled: layout() === 'grid' }" class="text-center fa fa-bars" style="font-size: 21px; margin-top: -2px;"></i></button>
+    </div>
+</div>
+
+<div class="active-cons-container">
     <div class="active-cons-listing-container">
         <div class="col-sm-12">
             <!-- ko if: activeItems().length > 0 -->

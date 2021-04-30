@@ -264,22 +264,22 @@ div.workflow-content {
 }
 
 .active-cons-container {
-    margin: 30px;
+    margin: 60px 30px 30px 30px;
     overflow-y: scroll;
     width: 100%;
-    height: calc(100vh - 125px);
+    height: calc(100vh - 155px);
 }
 
-.active-cons-container .sticky {
-    position: sticky;
-    top: 0px;
-    z-index: 20;
-    background: #fafafa;
+.active-cons-container-header {
+    position: absolute;
+    width: 100%;
+    margin: 0px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ddd;
 }
 
 .active-cons-filters {
-    padding: 0px 10px 13px 8px;
-    border-bottom: 1px solid #ddd;
+    padding: 15px 10px 10px 30px;
     margin-bottom: 5px;
 }
 
@@ -310,7 +310,7 @@ div.workflow-content {
     height: 15px;
     width: 15px;
     position: absolute;
-    top: 8px;
+    top: 22px;
     left: 278px;
     font-size: 9px;
 }
@@ -511,11 +511,15 @@ div.active-cons-hover-loading {
 }
 
 .active-cons-table {
-    padding-top: 5px;
+    padding: 0px 20px;
+}
+
+.active-cons-table tr {
+    height: 35px;
 }
 
 .active-cons-table input {
-    margin-top: -8px;
+    margin-top: 0px;
 }
 
 .active-cons-table label {
@@ -540,7 +544,7 @@ div.active-cons-hover-loading {
 }
 
 .active-cons-table .btn-group {
-    margin-top: -5px;
+    margin-top: 0px;
 }
 
 .active-cons-table .row:first-child {
@@ -687,19 +691,19 @@ table.dataTable thead .sorting:after {
 .active-consultations-sort {
     position: absolute;
     right: 100px;
-    top: 0px;
+    top: 15px;
 }
 
-div.dataTables_wrapper div.dataTables_filter {
+.active-cons-table div.dataTables_wrapper div.dataTables_filter {
     text-justify: inherit;
     float: right;
-    margin-right: 140px;
+    margin-right: 0px;
 }
 
 .active-consultations-display {
     position: absolute;
     right: 20px;
-    top: -3px;
+    top: 15px;
     z-index: 300;
 }
 
