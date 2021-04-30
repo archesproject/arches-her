@@ -33,6 +33,16 @@
         </div>
     </div>
     <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
+            <div style="display: flex; flex-direction: column;">
+                <div style="display: inline-flex;">
+                    <div class="summary-label" data-bind="text: reportVals.relatedApplicationAreas.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.relatedApplicationAreas.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
         <h5 class="summary-value">{% trans 'Consultation Dates' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">

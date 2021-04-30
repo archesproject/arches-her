@@ -25,6 +25,7 @@ define([
                 owner: {'name': 'Owner', 'value': this.getResourceValue(val.resource, ['Contacts','Owners','Owner','@value'])},
                 applicant: {'name': 'Applicant', 'value': this.getResourceValue(val.resource, ['Contacts','Applicants','Applicant','@value'])},
                 relatedFiles:  {'name': 'Related Files', 'value': this.getResourceValue(val.resource, ['Proposal','Digital File(s)','@value'])},
+                relatedApplicationAreas:  {'name': 'Related Application Areas', 'value': this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Related Application Area', '@value'])},
             };
 
             try {
