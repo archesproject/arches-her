@@ -266,7 +266,8 @@ div.workflow-content {
 .active-cons-container {
     margin: 30px;
     overflow-y: scroll;
-    width: 100%
+    width: 100%;
+    height: calc(100vh - 125px);
 }
 
 .active-cons-container .sticky {
@@ -423,6 +424,18 @@ div.active-cons-stubs {
     background: #FFFF1A;
     color: #9B9B00;
     border: 1px solid #bbb;
+}
+
+.active-cons-paginator {
+    position: absolute;
+    bottom: 0px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+    width: 100%;
+}
+
+.active-cons-paginator .pagination {
+    margin: 5px 0px;
 }
 
 .card-grid-item:hover .active-cons-header.status-warning {
