@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/select-resource-step'
+    'views/components/workflows/select-resource-step',
+    'views/components/workflows/correspondence-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('correspondence-workflow', {
         viewModel: function(params) {
@@ -36,10 +37,26 @@ define([
                     title: 'Correspondence Workflow Complete',
                     name: 'correspondence-complete',
                     description: '',
-                    component: 'views/components/workflows/correspondence-final-step',
-                    componentname: 'correspondence-final-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                     nodegroupid: '8d41e4d1-a250-11e9-9a12-00224800b26d',
+                    externalstepdata: { 
+                        relatedconsultationstep: 'select-related-consultation',
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'correspondence-final-step',
+                                    uniqueInstanceName: 'correspondence-final',
+                                    tilesManaged: 'none',
+                                    parameters: {
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
