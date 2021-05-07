@@ -17,6 +17,7 @@ class RedirectToConsultations(MiddlewareMixin):
         source = request.META.get('HTTP_REFERER')
         host = request.META['HTTP_HOST']
         path = request.META['PATH_INFO']
+        qs = request.META['QUERY_STRING']
         url_scheme = request.META['wsgi.url_scheme']
         destination_paths = (
             r'^/resource/(?P<resourceid>{0})'.format(settings.UUID_REGEX),
@@ -36,4 +37,6 @@ class RedirectToConsultations(MiddlewareMixin):
             urlmatch = any(map(lambda x: re.compile(x).match(path), destination_paths))
             if urlmatch:
                 destination = f'{url_scheme}://{host}/{project_name}{path}'
+                if qs is not None:
+                    destination = f'{destination}?{qs}'
                 return HttpResponseRedirect(destination)
