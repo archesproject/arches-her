@@ -26,6 +26,7 @@ define([
                     componentname: 'component-based-step',
                     required: true,
                     shouldtrackresource: true,
+                    workflowstepclass: 'consultation-map-step',
                     wastebin: {resourceid: null, description: 'a consultation instance'},
                     layoutSections: [
                         {
