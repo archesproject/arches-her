@@ -71,7 +71,7 @@ ALLOWED_HOSTS = []
 
 SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, "system_settings", "System_Settings.json")
 WSGI_APPLICATION = "arches_her.wsgi.application"
-STATIC_ROOT = "/var/www/media"
+STATIC_ROOT = ""
 
 RESOURCE_IMPORT_LOG = os.path.join(APP_ROOT, "logs", "resource_import.log")
 
