@@ -50,6 +50,9 @@ define([
                     class: 'show-only-notes',
                     required: false,
                     icon: 'fa-lightbulb-o',
+                    externalstepdata: {
+                        'relatedconsultation': 'related-consultation'
+                    },
                     informationboxdata: {
                         heading: 'Meeting notes',
                         text: 'Add notes about the communication',
