@@ -68,7 +68,6 @@ define([
             } else {
                 self.address = null;
             }
-            console.log(self.address)
         });
 
     }
