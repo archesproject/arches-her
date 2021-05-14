@@ -14,9 +14,9 @@ define([
 
         if (params.workflow.steps[params._index - 1]) {
             params.tileid(ko.unwrap(params.workflow.steps[params._index - 1].tileid));
-        } else if (params.workflow.getStepData("related-consultation").tileid()) {
-            params.tileid(params.workflow.getStepData("related-consultation").tileid);
-        };
+        } else if (params.externalStepData.relatedconsultation.data.tileid) {
+            params.tileid(params.externalStepData.relatedconsultation.data.tileid);
+        }
 
         if (params.workflow.steps[params._index]) {
             params.tileid(ko.unwrap(params.workflow.steps[params._index].tileid));

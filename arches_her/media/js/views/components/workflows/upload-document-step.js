@@ -12,7 +12,7 @@ define([
         var self = this;
 
         this.consultationResourceId = ko.observable(ko.unwrap(params.workflow.resourceId));
-        this.consultationTileId = ko.observable(params.workflow.getStepData("related-consultation").tileid);
+        this.consultationTileId = params.externalStepData.relatedconsultation.data.tileid;
 
         params.resourceid(null);
         params.workflow.resourceId(null);
