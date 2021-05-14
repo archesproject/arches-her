@@ -10,7 +10,7 @@ define([
         var self = this;
         NewTileStep.apply(this, [params]);
 
-        self.address = params.workflow.getStepData("assign-address").address
+        self.address = params.externalStepData.addressinfo.data.address;
 
         if (!params.resourceid()) {
             params.resourceid(ko.unwrap(params.workflow.resourceId));
