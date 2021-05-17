@@ -50,6 +50,9 @@ define([
                     class: 'show-only-notes',
                     required: false,
                     icon: 'fa-lightbulb-o',
+                    externalstepdata: {
+                        'relatedconsultation': 'related-consultation'
+                    },
                     informationboxdata: {
                         heading: 'Meeting notes',
                         text: 'Add notes about the communication',
@@ -87,6 +90,9 @@ define([
                     parenttileid: null,
                     required: false,
                     icon: 'fa-file-o',
+                    externalstepdata: {
+                        'relatedconsultation': 'related-consultation'
+                    },
                     informationboxdata: {
                         heading: 'Upload Documents',
                         text: 'Upload a document or file regarding the communication',

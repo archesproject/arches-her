@@ -52,6 +52,9 @@ define([
                     parenttileid: null,
                     required: true,
                     icon: 'fa-map',
+                    externalstepdata: { 
+                        addressinfo: 'assign-address',
+                    },
                     informationboxdata: {
                         heading: 'Assign a name',
                         text: 'Assign a name to your application area. Use the address as the default name',
