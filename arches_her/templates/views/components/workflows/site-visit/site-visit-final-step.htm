@@ -35,19 +35,23 @@
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Visit Attendees' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
-                <!-- ko foreach: reportVals.attendees -->
-                <div style="display: inline-flex;">
-                    <div class="summary-label" data-bind="text: $data.attendee.name + ':'"></div>
-                    <div class="summary-value" data-bind="html: $data.attendee.value"></div>
-                </div>
-                <div style="display: inline-flex;margin-bottom: 10px;">
-                    <div class="summary-label" data-bind="text: $data.attendeeType.name + ':'"></div>
-                    <div class="summary-value" data-bind="html: $data.attendeeType.value"></div>
-                </div>
-                <!-- /ko -->
-            </div>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;"> 
+            <table class="table table-striped attendee-table">
+                <thead class="">
+                    <tr>
+                        <th class="attendee-name">{% trans 'Attendee' %}</th>
+                        <th class="attendee-type">{% trans 'Type' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: reportVals.attendees -->
+                    <tr>
+                        <td class="" data-bind="text: $data.attendee.value"></td>
+                        <td class="" data-bind="text: $data.attendeeType.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
     </div>
 
