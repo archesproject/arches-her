@@ -79,7 +79,7 @@
             <!-- ko foreach: reportVals.photographs -->
             <div class="summary-image-container">
                 <img class="summary-image" alt="Image" data-bind="attr: {src: $data.photo.value}">
-                <div style="display: flex; flex-direction: column; padding: 10px">
+                <div class="summary-image-metadata">
                     <div style="display: inline-flex;">
                         <div class="summary-label" data-bind="text: $data.caption.name + ':'"></div>
                         <div class="summary-value" data-bind="text: $data.caption.value"></div>
