@@ -73,24 +73,26 @@
     </div>
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Reference Numbers' %}</h5>
-        <!-- ko foreach: { data: reportVals.references, as: 'ref' } -->
-        <div class="final-step-section-block">
-            <div style="display: flex; flex-direction: column; padding-bottom: 10px;">
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: ref.referenceName.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: ref.referenceName.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: ref.referenceType.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: ref.referenceType.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: ref.agency.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: ref.agency.value"></div>
-                </div>
-            </div>
+        <div class="final-step-section-block"> 
+            <table class="table table-striped reference-number-table">
+                <thead class="">
+                    <tr>
+                        <th class="reference-number">{% trans 'Reference Number' %}</th>
+                        <th class="reference-type">{% trans 'Reference Type' %}</th>
+                        <th class="reference-agency">{% trans 'Agency' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: { data: reportVals.references, as: 'ref' } -->
+                    <tr>
+                        <td class="" data-bind="text: ref.referenceName.value"></td>
+                        <td class="" data-bind="text: ref.referenceName.value"></td>
+                        <td class="" data-bind="text: ref.agency.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
-        <!-- /ko -->
     </div>
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Proposal Description' %}</h5>
