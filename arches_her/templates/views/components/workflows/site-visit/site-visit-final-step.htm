@@ -3,8 +3,8 @@
 <div class="final-step">
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Created or Modified Resource Instance' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
+        <div class="final-step-section-block">
+            <div class="final-step-section-block-item">
                 <a data-bind="attr: { href: urls.resource + '/' + resourceid}" target="_blank">
                     <div class="summary-value">
                         {% trans 'Consultation Resource Instance' %}
@@ -15,8 +15,8 @@
     </div>
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Site Visit Details' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
+        <div class="final-step-section-block">
+            <div class="final-step-section-block-item">
                 <div style="display: inline-flex;">
                     <div class="summary-label" data-bind="text: reportVals.consultationName.name + ':'"></div>
                     <div class="summary-value" data-bind="text: reportVals.consultationName.value"></div>
@@ -35,7 +35,7 @@
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Visit Attendees' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;"> 
+        <div class="final-step-section-block"> 
             <table class="table table-striped attendee-table">
                 <thead class="">
                     <tr>
@@ -57,8 +57,8 @@
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Observations' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
+        <div class="final-step-section-block">
+            <div class="final-step-section-block-item">
                 <div style="display: inline-flex;">
                     <div class="summary-value" data-bind="html: reportVals.observation.value"></div>
                 </div>
@@ -68,8 +68,8 @@
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Recommendations' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
+        <div class="final-step-section-block">
+            <div class="final-step-section-block-item">
                 <div style="display: inline-flex;">
                     <div class="summary-value" data-bind="html: reportVals.recommendations.value"></div>
                 </div>

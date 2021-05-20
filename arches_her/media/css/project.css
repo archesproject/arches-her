@@ -767,6 +767,10 @@ table.report-tabular-card {
     padding-right: 40px; */
 }
 
+.tabbed-workflow-step-body .photo-workbench-photos {
+    margin-top: 10px;
+}
+
 .report-tabular-card td {
     padding: 4px;
     color: #a3a4a4;
@@ -822,6 +826,17 @@ span.rp-tile-title {
     flex-direction: column;
 }
 
+.final-step-section-block {
+    display: inline-flex; 
+    width: inherit; 
+    justify-content: space-between;
+}
+
+.final-step-section-block-item {
+    display: flex; 
+    flex-direction: column;
+}
+
 .final-step .summary-label {
     padding-right: 5px; 
     color: #777;
@@ -857,6 +872,10 @@ span.rp-tile-title {
 
 .attendee-table {
     max-width: 750px;
+}
+
+.attendee-table>tbody>tr:nth-of-type(odd) {
+    background-color: #F5FAFE;
 }
 
 .attendee-table .attendee-name{
