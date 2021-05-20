@@ -1,7 +1,7 @@
 {% load i18n %}
 <!-- ko if: loading() === false -->
 <div class="final-step">
-    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Created or Modified Resource Instance' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
@@ -13,7 +13,7 @@
             </div>
         </div>
     </div>
-    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Site Visit Details' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
@@ -33,25 +33,29 @@
         </div>
     </div>
 
-    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Visit Attendees' %}</h5>
-        <div style="display: inline-flex; width: inherit; justify-content: space-between;">
-            <div style="display: flex; flex-direction: column;">
-                <!-- ko foreach: reportVals.attendees -->
-                <div style="display: inline-flex;">
-                    <div class="summary-label" data-bind="text: $data.attendee.name + ':'"></div>
-                    <div class="summary-value" data-bind="html: $data.attendee.value"></div>
-                </div>
-                <div style="display: inline-flex;margin-bottom: 10px;">
-                    <div class="summary-label" data-bind="text: $data.attendeeType.name + ':'"></div>
-                    <div class="summary-value" data-bind="html: $data.attendeeType.value"></div>
-                </div>
-                <!-- /ko -->
-            </div>
+        <div style="display: inline-flex; width: inherit; justify-content: space-between;"> 
+            <table class="table table-striped attendee-table">
+                <thead class="">
+                    <tr>
+                        <th class="attendee-name">{% trans 'Attendee' %}</th>
+                        <th class="attendee-type">{% trans 'Type' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: reportVals.attendees -->
+                    <tr>
+                        <td class="" data-bind="text: $data.attendee.value"></td>
+                        <td class="" data-bind="text: $data.attendeeType.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
     </div>
 
-    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Observations' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
@@ -62,7 +66,7 @@
         </div>
     </div>
 
-    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column">
+    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Recommendations' %}</h5>
         <div style="display: inline-flex; width: inherit; justify-content: space-between;">
             <div style="display: flex; flex-direction: column;">
@@ -73,13 +77,13 @@
         </div>
     </div>
 
-    <div class="her-final-step-section" style="padding: 15px; display: flex; flex-direction: column;">
+    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Photographs' %}</h5>
         <div style="flex-direction: unset; flex-wrap: wrap;">
             <!-- ko foreach: reportVals.photographs -->
             <div class="summary-image-container">
                 <img class="summary-image" alt="Image" data-bind="attr: {src: $data.photo.value}">
-                <div style="display: flex; flex-direction: column; padding: 10px">
+                <div class="summary-image-metadata">
                     <div style="display: inline-flex;">
                         <div class="summary-label" data-bind="text: $data.caption.name + ':'"></div>
                         <div class="summary-value" data-bind="text: $data.caption.value"></div>
