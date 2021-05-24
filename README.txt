@@ -1,5 +1,3 @@
-# Welcome to the Arches Project!
-
 The Arches-HER project requires Arches 5.2.
 
 Please see the [project page](http://archesproject.org/) for more information on the Arches project.
