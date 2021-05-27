@@ -10,16 +10,6 @@ define([
     function viewModel(params) {
         var self = this;
 
-        /*var buildingNameNodeId = 'c7ec960d-28c8-11eb-aee4-f875a44e0e11';
-        var buildingNumberNodeId = 'c7ec960f-28c8-11eb-86f0-f875a44e0e11';
-        var buildingNumberSubNodeId = 'c7ec9605-28c8-11eb-bfd4-f875a44e0e11';
-        var subStreetNodeId = 'c7ec960b-28c8-11eb-b8ad-f875a44e0e11';
-        var streetNodeId = 'c7ec9611-28c8-11eb-b865-f875a44e0e11';
-        var localityNodeId = 'c7ec9613-28c8-11eb-966c-f875a44e0e11';
-        var townCityNodeId = 'c7ec9607-28c8-11eb-acf0-f875a44e0e11';
-        var countyNodeId = 'c7ec9615-28c8-11eb-a5c5-f875a44e0e11';
-        var postcodeNodeId = 'c7ec9609-28c8-11eb-a6a3-f875a44e0e11';
-        var fullAddressNodeId = 'c7ec6f07-28c8-11eb-8fb9-f875a44e0e11';*/
         var addressNodegroupId = 'c7ec6efa-28c8-11eb-9ed1-f875a44e0e11';
         var nameNodegroupId = '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11'
 
@@ -40,7 +30,7 @@ define([
         this.addressCurrency = ko.observable(getValue('addressCurrency'));
         this.addressTileid = ko.observable(getValue('addressTileid'));
         this.nameTileid = ko.observable(getValue('nameTileid'));
-        this.appAreaResourceId = ko.observable(getValue('appAreaResourceId'));
+        this.resourceInstanceId = ko.observable(getValue('resourceInstanceId'));
 
         this.showName = ko.observable(false);
 
@@ -115,7 +105,7 @@ define([
                 addressCurrency: self.addressCurrency(),
                 addressTileid: self.addressTileid(),
                 nameTileid: self.nameTileid(),
-                appAreaResourceId: self.appAreaResourceId(),
+                resourceInstanceId: self.resourceInstanceId(),
             };
         });
 
@@ -157,9 +147,9 @@ define([
         };
 
         params.form.save = function() {
-            self.saveTile(nameTileDataObj(), nameNodegroupId, self.appAreaResourceId(), self.nameTileid())
+            self.saveTile(nameTileDataObj(), nameNodegroupId, self.resourceInstanceId(), self.nameTileid())
                 .then(function(data) {
-                    self.appAreaResourceId(data.resourceinstance_id);
+                    self.resourceInstanceId(data.resourceinstance_id);
                     self.nameTileid(data.tileid);
                     return self.saveTile(addressTileDataObj(), addressNodegroupId, data.resourceinstance_id, self.addressTileid());
                 })
