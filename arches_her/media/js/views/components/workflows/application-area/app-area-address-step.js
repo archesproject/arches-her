@@ -40,6 +40,7 @@ define([
         this.addressCurrency = ko.observable(getValue('addressCurrency'));
         this.addressTileid = ko.observable(getValue('addressTileid'));
         this.nameTileid = ko.observable(getValue('nameTileid'));
+        this.appAreaResourceId = ko.observable(getValue('appAreaResourceId'));
 
         this.showName = ko.observable(false);
 
@@ -114,6 +115,7 @@ define([
                 addressCurrency: self.addressCurrency(),
                 addressTileid: self.addressTileid(),
                 nameTileid: self.nameTileid(),
+                appAreaResourceId: self.appAreaResourceId(),
             };
         });
 
@@ -155,8 +157,9 @@ define([
         };
 
         params.form.save = function() {
-            self.saveTile(nameTileDataObj(), nameNodegroupId, null, self.nameTileid())
+            self.saveTile(nameTileDataObj(), nameNodegroupId, self.appAreaResourceId(), self.nameTileid())
                 .then(function(data) {
+                    self.appAreaResourceId(data.resourceinstance_id);
                     self.nameTileid(data.tileid);
                     return self.saveTile(addressTileDataObj(), addressNodegroupId, data.resourceinstance_id, self.addressTileid());
                 })
