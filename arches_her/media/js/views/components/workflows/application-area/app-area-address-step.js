@@ -155,10 +155,10 @@ define([
         };
 
         params.form.save = function() {
-            self.saveTile(nameTileDataObj, nameNodegroupId, null, self.nameTileid())
+            self.saveTile(nameTileDataObj(), nameNodegroupId, null, self.nameTileid())
                 .then(function(data) {
                     self.nameTileid(data.tileid);
-                    return self.saveTile(addressTileDataObj, addressNodegroupId, data.resourceinstance_id, self.addressTileid());
+                    return self.saveTile(addressTileDataObj(), addressNodegroupId, data.resourceinstance_id, self.addressTileid());
                 })
                 .then(function(data) {
                     self.addressTileid(data.tileid);
