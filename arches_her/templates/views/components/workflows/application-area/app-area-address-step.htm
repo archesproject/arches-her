@@ -1,0 +1,128 @@
+{% load i18n %}
+<div style="height: 100%; padding: 10px 24px;">
+    <div style="padding: 5px">
+        <div class="widget-input-label">Building Name</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: buildingName,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Building Number</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: buildingNumber,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Building Number Sub-Street</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: buildingNumberSub,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Sub-Street</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: subStreet,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Street</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: street,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Locality</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: locality,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Town or City</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: townCity,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">County</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: county,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Postcode</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: postcode,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Address Status</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'concept-select-widget',
+            params: {
+                node: {'config': {'rdmCollection': '46d6c3b3-fa78-48c0-8668-28362a608c70'}},
+                renderContext: 'display_value', 
+                value: addressStatus,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">Address Currency</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'concept-select-widget',
+            params: {
+                node: {'config': {'rdmCollection': 'a346ee99-67f6-44cd-87f7-b564ce32cdf3'}},
+                renderContext: 'display_value',
+                value: addressCurrency,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div style="color:#2b547c; cursor: pointer;" data-bind="click: function(){showName(!showName())}, text: showName() ? 'Hide experiment name' : 'Show experiment name'"></div>
+        <div data-bind="visible: showName">
+            <div class="widget-input-label">Full Address</div>
+            <div style="margin: -10px -5px;" data-bind="component: {
+                name: 'text-widget',
+                params: {
+                    renderContext: 'workflow', 
+                    value: fullAddress,
+                }
+            }"></div>
+        </div>
+    </div>
+</div>

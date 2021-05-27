@@ -4,7 +4,7 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/app-area-name-step',
+    'views/components/workflows/application-area/app-area-address-step',
     'views/components/workflows/application-area/app-area-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('application-area', {
@@ -17,8 +17,8 @@ define([
                     title: 'Assign Address',
                     name: 'assign-address',
                     description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/app-area-address-step',
-                    componentname: 'app-area-address-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                     nodegroupid: 'c7ec6efa-28c8-11eb-9ed1-f875a44e0e11',
                     targetnodegroup: '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11',
@@ -26,7 +26,6 @@ define([
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
-                    class: 'hide-full-address',
                     required: true,
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
@@ -36,29 +35,22 @@ define([
                         heading: 'Assign an address',
                         text: 'Assign an address to your application area. Use the address as the default name',
                     },
+                    layoutSections: [
+                        {
+                            sectionTitle: null,
+                            componentConfigs: [
+                                { 
+                                    componentName: 'app-area-address-step',
+                                    uniqueInstanceName: 'app-area-address', /* unique to step */
+                                    parameters: {
+                                        renderContext: 'workflow',
+                                    },
+                                    required: true,
+                                },
+                            ], 
+                        },
+                    ],
                     wastebin: {resourceid: null, description: 'an application area instance'}
-                },
-                {
-                    title: 'Assign Name',
-                    name: 'assign-name',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/app-area-name-step',
-                    componentname: 'app-area-name-step',
-                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                    nodegroupid: '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11',
-                    targetnode: '9c9f9dc0-83bf-11ea-8d22-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: true,
-                    icon: 'fa-map',
-                    externalstepdata: { 
-                        addressinfo: 'assign-address',
-                    },
-                    informationboxdata: {
-                        heading: 'Assign a name',
-                        text: 'Assign a name to your application area. Use the address as the default name',
-                    }
                 },
                 {
                     title: 'Area Map',
