@@ -120,6 +120,7 @@ define([
             this.viewModel.total = ko.observable('0');
             _.extend(this, this.viewModel.sharedStateObject);
             this.viewModel.sharedStateObject.total = this.viewModel.total;
+            this.viewModel.sharedStateObject.loading = this.viewModel.loading;
             this.queryString = ko.computed(function() {
                 return JSON.stringify(this.query());
             }, this);
@@ -128,9 +129,9 @@ define([
                 this.doQuery();
             }, this);
 
+            this.viewModel.loading(true);
+            this.firstLoadComplete = ko.observable(false);  /* logic to not call `loading(complete)` too early in page load */
             BaseManagerView.prototype.initialize.call(this, options);
-
-            this.doQuery();
         },
 
         doQuery: function() {
@@ -169,7 +170,13 @@ define([
                     }
                 },
                 complete: function(request, status) {
-                    this.viewModel.loading(false);
+                    if (!this.firstLoadComplete()) {
+                        this.firstLoadComplete(true);
+                    }
+                    else {
+                        this.viewModel.loading(false);
+                    }
+
                     this.updateRequest = undefined;
                     window.history.pushState({}, '', '?' + $.param(queryString).split('+').join('%20'));
                 }
