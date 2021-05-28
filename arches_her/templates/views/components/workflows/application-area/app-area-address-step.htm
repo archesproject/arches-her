@@ -1,7 +1,7 @@
 {% load i18n %}
 <div style="height: 100%; padding: 10px 24px;">
     <div style="padding: 5px">
-        <div class="widget-input-label">Building Name</div>
+        <div class="widget-input-label">{% trans "Building Name" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -11,7 +11,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Building Number</div>
+        <div class="widget-input-label">{% trans "Building Number" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -21,7 +21,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Building Number Sub-Street</div>
+        <div class="widget-input-label">{% trans "Building Number Sub-Street" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -31,7 +31,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Sub-Street</div>
+        <div class="widget-input-label">{% trans "Sub-Street" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -41,7 +41,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Street</div>
+        <div class="widget-input-label">{% trans "Street" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -51,7 +51,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Locality</div>
+        <div class="widget-input-label">{% trans "Locality" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -61,7 +61,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Town or City</div>
+        <div class="widget-input-label">{% trans "Town or City" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -71,7 +71,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">County</div>
+        <div class="widget-input-label">{% trans "County" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -81,7 +81,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Postcode</div>
+        <div class="widget-input-label">{% trans "Postcode" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
             params: {
@@ -91,7 +91,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Address Status</div>
+        <div class="widget-input-label">{% trans "Address Status" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'concept-select-widget',
             params: {
@@ -102,7 +102,7 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">Address Currency</div>
+        <div class="widget-input-label">{% trans "Address Currency" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'concept-select-widget',
             params: {
@@ -113,9 +113,9 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div style="color:#2b547c; cursor: pointer;" data-bind="click: function(){showName(!showName())}, text: showName() ? 'Hide experiment name' : 'Show experiment name'"></div>
+        <div style="color:#2b547c; cursor: pointer;" data-bind="click: function(){showName(!showName())}, text: showName() ? '{% trans 'Hide application area name' %}' : '{% trans 'Show application area name' %}'"></div>
         <div data-bind="visible: showName">
-            <div class="widget-input-label">Full Address</div>
+            <div class="widget-input-label">{% trans "Application Area Name (The full address is used as the default name)" %}</div>
             <div style="margin: -10px -5px;" data-bind="component: {
                 name: 'text-widget',
                 params: {
