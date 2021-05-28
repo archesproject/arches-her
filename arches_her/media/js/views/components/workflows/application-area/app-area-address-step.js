@@ -31,6 +31,7 @@ define([
         this.addressTileid = ko.observable(getValue('addressTileid'));
         this.nameTileid = ko.observable(getValue('nameTileid'));
         this.resourceInstanceId = ko.observable(getValue('resourceInstanceId'));
+        this.applicationAreaName = ko.observable(getValue('applicationAreaName'));
 
         this.showName = ko.observable(false);
 
@@ -40,13 +41,17 @@ define([
             return [building, fullStreet, self.locality(), self.townCity(), self.county(), self.postcode()].filter(Boolean).join(", ")
         });
 
+        this.fullAddress.subscribe(function(val){
+            self.applicationAreaName(val);
+        })
+
         var nameTileDataObj = ko.pureComputed(function(){
             return {
                 "279329b0-94fc-11ea-8279-f875a44e0e11": "a0e096e2-f5ae-4579-950d-3040714713b4",
                 "45cef0b8-94fc-11ea-85ca-f875a44e0e11": "04a4c4d5-5a5e-4018-93aa-65abaa53fb53",
                 "9c9f9dbe-83bf-11ea-aa43-f875a44e0e11": "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f",
                 "9c9f9dbf-83bf-11ea-b1a9-f875a44e0e11": "e987fb72-6fa6-43ab-8812-867c4813a2a2",
-                "9c9f9dc0-83bf-11ea-8d22-f875a44e0e11": self.fullAddress()    
+                "9c9f9dc0-83bf-11ea-8d22-f875a44e0e11": self.applicationAreaName()    
             }
         })
 
@@ -106,6 +111,7 @@ define([
                 addressTileid: self.addressTileid(),
                 nameTileid: self.nameTileid(),
                 resourceInstanceId: self.resourceInstanceId(),
+                applicationAreaName: self.applicationAreaName(),
             };
         });
 
