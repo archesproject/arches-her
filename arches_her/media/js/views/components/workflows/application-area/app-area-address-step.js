@@ -38,12 +38,12 @@ define([
         this.fullAddress = ko.pureComputed(function(){
             var building = [self.buildingName(), self.buildingNumber(), self.buildingNumberSub()].filter(Boolean).join(" ");
             var fullStreet = [self.subStreet(), self.street()].filter(Boolean).join(" ");
-            return [building, fullStreet, self.locality(), self.townCity(), self.county(), self.postcode()].filter(Boolean).join(", ")
+            return [building, fullStreet, self.locality(), self.townCity(), self.county(), self.postcode()].filter(Boolean).join(", ");
         });
 
         this.fullAddress.subscribe(function(val){
             self.applicationAreaName(val);
-        })
+        });
 
         var nameTileDataObj = ko.pureComputed(function(){
             return {
@@ -51,9 +51,9 @@ define([
                 "45cef0b8-94fc-11ea-85ca-f875a44e0e11": "04a4c4d5-5a5e-4018-93aa-65abaa53fb53",
                 "9c9f9dbe-83bf-11ea-aa43-f875a44e0e11": "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f",
                 "9c9f9dbf-83bf-11ea-b1a9-f875a44e0e11": "e987fb72-6fa6-43ab-8812-867c4813a2a2",
-                "9c9f9dc0-83bf-11ea-8d22-f875a44e0e11": self.applicationAreaName()    
+                "9c9f9dc0-83bf-11ea-8d22-f875a44e0e11": self.applicationAreaName()
             }
-        })
+        });
 
         var addressTileDataObj = ko.pureComputed(function(){
             return {
@@ -90,9 +90,9 @@ define([
                 'c7ec9607-28c8-11eb-acf0-f875a44e0e11': self.townCity(),
                 'c7ec9615-28c8-11eb-a5c5-f875a44e0e11': self.county(),
                 'c7ec9609-28c8-11eb-a6a3-f875a44e0e11': self.postcode(),
-                'c7ec6f07-28c8-11eb-8fb9-f875a44e0e11': self.fullAddress(),
+                'c7ec6f07-28c8-11eb-8fb9-f875a44e0e11': self.fullAddress()
             }
-        })
+        });
 
         this.updatedValue = ko.pureComputed(function(){
             return {
@@ -111,7 +111,7 @@ define([
                 addressTileid: self.addressTileid(),
                 nameTileid: self.nameTileid(),
                 resourceInstanceId: self.resourceInstanceId(),
-                applicationAreaName: self.applicationAreaName(),
+                applicationAreaName: self.applicationAreaName()
             };
         });
 
@@ -165,7 +165,7 @@ define([
                     params.form.savedData(params.form.addedData());
                 });
         };
-    }
+    };
 
     return ko.components.register('app-area-address-step', {
         viewModel: viewModel,
