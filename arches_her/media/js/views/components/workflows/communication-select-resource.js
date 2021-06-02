@@ -41,7 +41,6 @@ define([
         params.tile = self.tile;
 
         this.setStateProperties = function(){
-            console.log("State Properties Updated")
             params.workflow.steps[params._index] = params.defineStateProperties();
             this.disableResourceSelection(true);
         };
