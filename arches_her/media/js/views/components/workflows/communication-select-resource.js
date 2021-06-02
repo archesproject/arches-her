@@ -10,6 +10,7 @@ define([
         var self = this;
         NewTileStep.apply(this, [params]);
         this.resValue = ko.observable();
+        var relatedConditionNode = '5d89cd18-51a5-11eb-a920-f875a44e0e11';
         if (!params.resourceid()) {
             params.resourceid(ko.unwrap(params.workflow.resourceId));
         }
@@ -28,6 +29,9 @@ define([
         this.resValue.subscribe(function(val){
             if (ko.unwrap(self.tile)) {
                 self.tile().resourceinstance_id = ko.unwrap(val);
+                self.resourceId(null); // force the card component to rerender
+                self.resourceId(val);
+                self.tile().data[relatedConditionNode]('');
             }
             params.resourceid(ko.unwrap(val));
         }, this);
@@ -37,7 +41,6 @@ define([
         params.tile = self.tile;
 
         this.setStateProperties = function(){
-            console.log("State Properties Updated")
             params.workflow.steps[params._index] = params.defineStateProperties();
             this.disableResourceSelection(true);
         };
