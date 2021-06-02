@@ -16,7 +16,7 @@
             } --><!-- /ko -->
         </div>
     </div>
-    <!-- ko if: tile() && card() -->
+    <!-- ko if: tile() && card() && resourceId -->
     <div data-bind="class: workflowStepClass">
         <div data-bind="component: {
             name: cardComponentLookup[card().model.component_id()].componentname,
