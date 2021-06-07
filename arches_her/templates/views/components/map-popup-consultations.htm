@@ -141,7 +141,7 @@
         <i class="ion-document-text"></i>
         {% trans "Report" %}
     </a>
-    {% if request.user|can_edit_resource_instance %}
+    {% if user_can_edit %}
     <a data-bind="click: function () {
         window.open(editURL + resourceinstanceid());
     }" href="javascript:void(0)">
