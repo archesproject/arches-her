@@ -3,13 +3,23 @@
 
 
 {% block report %}
-    <p>YO!
-        Note: This report currently inherits from the default report using the {% verbatim %}"{% extends
-        "views/report-templates/default.htm" %}"{% endverbatim %}, template tag, but could also inherit from "image.htm",
-        "map.htm", or "tabbed.htm"</p>
+    
 
     {% block report_title_bar %}
-    <p>Custom report title here ...</p>
+    <!-- Report Title Bar -->
+    <div class="relative report-title-bar">
+
+        <!-- Title Block -->
+        <div class="report-toolbar-preview ep-form-toolbar">
+            <h4 class="report-toolbar-title"><span data-bind="text: report.get('name')"></span> - <span data-bind="text: report.get('displayname') "></span></h4>
+
+            <!-- Tools -->
+            <div class="ep-form-toolbar-tools mar-no flex" style="position: relative;">
+                <p class="report-print-date">{% trans "Report Date:" %} <span data-bind="text: reportDate"></span></p>
+                <div class="report-print-date" style="position: absolute; margin-top: 30px; margin-left: -11px; " data-bind="component: { name: 'views/components/simple-switch', params: {value: hideEmptyNodes, config:{ label: '{% trans "Hide Null Values" %}', subtitle: ''}}}"></div>
+            </div>
+        </div>
+    </div>
     {% endblock report_title_bar %}
 
     {% block header %}
