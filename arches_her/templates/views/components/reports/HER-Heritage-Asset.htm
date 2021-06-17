@@ -1,0 +1,42 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+
+{% block report %}
+    <p>YO!
+        Note: This report currently inherits from the default report using the {% verbatim %}"{% extends
+        "views/report-templates/default.htm" %}"{% endverbatim %}, template tag, but could also inherit from "image.htm",
+        "map.htm", or "tabbed.htm"</p>
+
+    {% block report_title_bar %}
+    <p>Custom report title here ...</p>
+    {% endblock report_title_bar %}
+
+    {% block header %}
+    <p>Custom header here ...</p>
+    {% endblock header %}
+
+    {% block body %}
+    <p>Main body of the report here ...</p>
+    {% endblock body %}
+
+
+    {% block related_resources %}
+    <p>Related resources here ...</p>
+    {% endblock related_resources %}
+
+    {% block footer %}
+    <p>Footer of the report here ...</p>
+    {% endblock footer %}
+
+{% endblock report %}
+
+
+{% block summary %}
+<p>Contents of the summary report here ...</p>
+{% endblock summary %}
+
+
+{% block header_form %}
+<p>Custom configuration settings, if you need them, go here...</p>
+{% endblock header_form %}
