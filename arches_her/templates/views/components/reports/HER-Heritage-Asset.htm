@@ -87,7 +87,18 @@
             <h2>Photographs (<span class="">2</span>)</h2>
         </div>
         <div class="her-summary-block-content">
-            Photo thumbnails go here
+            <!-- If no data, show default -->
+            <div class="her-summary-block-content">
+                No photos for this resource
+            </div>
+
+            <div class="" style="flex-direction: unset; flex-wrap: wrap;">
+                <!-- ko foreach: reportVals.photographs -->
+                <div class="summary-image-container">
+                    <img class="summary-image" alt="Image" data-bind="attr: {src: $data.photo.value}">
+                </div>
+                <!-- /ko -->
+            </div>
         </div>
     </div>
 
@@ -141,9 +152,6 @@
                     </tbody>
                 </table>
             </div>
-
-
-
         </div>
     </div>
 
@@ -151,8 +159,41 @@
         <div class="her-summary-block-title">
             <h2>Use Phases (<span class="">2</span>)</h2>
         </div>
+
+        <!-- If no data, show default -->
         <div class="her-summary-block-content">
             No use phases entered
+        </div>
+
+        <!-- Ise Phase Table  -->
+        <div class="her-table" data-bind="">
+            <table data-bind="datatable: tableConfig" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                <thead class="">
+                    <tr>
+                        <th>{% trans "Type of Use" %}</th>
+                        <th>{% trans "Period" %}</th>
+                        <th>{% trans "Usage Start" %}</th>
+                        <th>{% trans "Usage End" %}</th>
+                        <th class="min-desktop">{% trans "Evidence" %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Hospital</td>
+                        <td>--</td>
+                        <td>1911</td>
+                        <td>1917</td>
+                        <td>Architectural Component</td>
+                    </tr>
+                    <tr>
+                        <td>Public House</td>
+                        <td>--</td>
+                        <td>1899</td>
+                        <td>2021</td>
+                        <td>Documentary Evidence</td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
@@ -160,5 +201,5 @@
 
 
 {% block header_form %}
-<p>Custom configuration settings, if you need them, go here...</p>
+
 {% endblock header_form %}
