@@ -1,49 +1,161 @@
 {% extends "views/report-templates/default.htm" %}
 {% load i18n %}
 
-
 {% block report %}
-    
-
     {% block report_title_bar %}
-    <!-- Report Title Bar -->
-    <div class="relative report-title-bar">
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
 
-        <!-- Title Block -->
+        <!-- Title Block (Only displays outside of Arches Editor-->
+        <!--ko if: (editorContext === false) -->
         <div class="report-toolbar-preview ep-form-toolbar">
-            <h4 class="report-toolbar-title"><span data-bind="text: report.get('name')"></span> - <span data-bind="text: report.get('displayname') "></span></h4>
+            <h4 class="report-toolbar-title"><span data-bind="">HER Heritage Asset Report</span></h4><span class="">Instance Name Goes Here</span>
 
             <!-- Tools -->
-            <div class="ep-form-toolbar-tools mar-no flex" style="position: relative;">
-                <p class="report-print-date">{% trans "Report Date:" %} <span data-bind="text: reportDate"></span></p>
-                <div class="report-print-date" style="position: absolute; margin-top: 30px; margin-left: -11px; " data-bind="component: { name: 'views/components/simple-switch', params: {value: hideEmptyNodes, config:{ label: '{% trans "Hide Null Values" %}', subtitle: ''}}}"></div>
-            </div>
+            <!-- Add print and possibly edit buttons here -->
         </div>
+        <!--/ko-->
     </div>
     {% endblock report_title_bar %}
 
-    {% block header %}
-    <p>Custom header here ...</p>
-    {% endblock header %}
+    <!-- Report Tabs -->
+    <div class="her-tabbed-report">
+        <div class="her-tab-container">
+            <ul class="nav nav-tabs her-tab-list">
+                <li class="her-tab-list-item">
+                    <div class='her-nav-tab active'>
+                        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                            <span data-bind="">Name/Identifiers</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='her-nav-tab'>
+                        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                            <span data-bind="">Location</span>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
 
     {% block body %}
-    <p>Main body of the report here ...</p>
+    <!-- Tab content -->
+    <div class="her-tabbed-report-content">
+        Tab content goes here
+    </div>
     {% endblock body %}
 
 
     {% block related_resources %}
-    <p>Related resources here ...</p>
     {% endblock related_resources %}
 
     {% block footer %}
-    <p>Footer of the report here ...</p>
+    <div class="her-tabbed-report-footer">
+        <div>Footer of the report here ...</div>
+    </div>
     {% endblock footer %}
 
 {% endblock report %}
 
 
 {% block summary %}
-<p>Contents of the summary report here ...</p>
+<!-- Summary Report -->
+<div class="her-summary-report">
+
+    <div class="her-summary-block">
+        <div class="her-title-block">
+            <h1>Instance Name Goes Here</h1>
+        </div>
+        <div class="her-block-attributes">
+            <div class="her-block-key">Resource Type:</div>
+            <div class="her-block-value">Heritage Asset</div>
+        </div>
+        <div class="her-block-attributes">
+            <div class="her-block-key">Address:</div>
+            <div class="her-block-value">Carlisle House, 12 Dalgity Mews, Cakebread Lane, Shoreditch, London, MEW 123</div>
+        </div>
+        <div class="her-block-attributes">
+            <div class="her-block-key">Protection:</div>
+            <div class="her-block-value">Grade I</div>
+        </div>
+    </div>
+
+    <div class="her-summary-block">
+        <div class="her-summary-block-title">
+            <h2>Photographs (<span class="">2</span>)</h2>
+        </div>
+        <div class="her-summary-block-content">
+            Photo thumbnails go here
+        </div>
+    </div>
+
+    <div class="her-summary-block">
+        <div class="her-summary-block-title">
+            <h2>Summary</h2>
+        </div>
+        <div class="her-summary-block-content">
+            No use summary entered
+        </div>
+    </div>
+
+    <div class="her-summary-block">
+        <div class="her-summary-block-title">
+            <h2>Construction Phases (<span class="">2</span>)</h2>
+        </div>
+        <div class="her-summary-block-content">
+            
+            <!-- If no data, show default -->
+            <div class="her-summary-block-content">
+                No use summary entered
+            </div>
+
+            <!-- Construction Phase Table  -->
+            <div class="her-table" data-bind="">
+                <table data-bind="datatable: tableConfig" class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <thead class="">
+                        <tr>
+                            <th>{% trans "Asset Type" %}</th>
+                            <th>{% trans "Cultural Period" %}</th>
+                            <th>{% trans "Construction Start" %}</th>
+                            <th>{% trans "Construction End" %}</th>
+                            <th class="min-desktop">{% trans "Date Confidence" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Church</td>
+                            <td>Victorian</td>
+                            <td>1856</td>
+                            <td>1862</td>
+                            <td>Certain</td>
+                        </tr>
+                        <tr>
+                            <td>Public House</td>
+                            <td>--</td>
+                            <td>1899</td>
+                            <td>--</td>
+                            <td>Uncertain</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+
+        </div>
+    </div>
+
+    <div class="her-summary-block">
+        <div class="her-summary-block-title">
+            <h2>Use Phases (<span class="">2</span>)</h2>
+        </div>
+        <div class="her-summary-block-content">
+            No use phases entered
+        </div>
+    </div>
+</div>
 {% endblock summary %}
 
 

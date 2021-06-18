@@ -1,7 +1,116 @@
 /*CSS specifically for Arches-HER custom reports*/
 
-.drw {
-    padding: 20px;
-    background: steelblue;
-    font-size: 27px;
+.her-tabbed-report{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.her-tab-container {
+    overflow-x: scroll;
+    min-height: 45px;
+}
+
+.her-tab-list {
+    padding: 0px 10px 0px 10px;
+    background-color: #fbfbfb;
+    display: flex;
+    min-width: max-content;
+}
+
+.her-tab-list-item {
+    display: flex !important;
+    align-items: center;
+}
+
+.her-tab-list-item:last-child {
+    border-right: 1px solid #ddd;
+}
+
+.her-nav-tab {
+    min-width: 220px;
+    padding: 12px 20px;
+    border-left: 1px solid #BBD1EA;
+    background: #F7F9FB;
+    border-bottom: 1px solid #BBD1EA;
+    height: 45px;
+}
+
+.her-nav-tab.active {
+    background-color: #fff;
+    border-bottom: 1px solid #fff;
+    font-weight: 600;
+}
+
+.her-nav-tab:not(.active):hover {
+    cursor: pointer;
+}
+
+.her-tabbed-report-content {
+    margin-top: 45px;
+    background: #fff;
+    padding: 15px 25px;
+}
+
+
+
+/* Summary Report Classes */
+.her-summary-report {
+    padding: 15px 25px;
+    background: #fff;
+}
+
+.her-title-block h1 {
+    font-size: 17px;
+    margin: 5px 0px 2px 0px;
+}
+
+.her-summary-block:not(:first-child) {
+    margin-top: 25px;
+    min-height: 25px;
+}
+
+.her-block-attributes {
+    font-size: 14px;
+    line-height: 1.25;
+}
+
+.her-block-key {
+    margin-right: 5px;
+    color: #0d3b63;
+    display: inline-block;
+}
+
+.her-block-value {
+    color: #777;
+    display: inline-block;
+}
+
+.her-summary-block-title h2 {
+    font-size: 15px;
+    color: #727272;
+    margin-bottom: 5px;
+}
+
+.her-summary-block-content {
+    color: #898989;
+    font-size: 14px;
+    margin-top: -5px;
+}
+
+.her-table .table th {
+    border-bottom: none !important;
+    font-size: 13px !important;
+}
+
+.her-tabbed-report-footer {
+    position: fixed;
+    bottom: 0px;
+    padding: 15px 20px;
+    border-top: 1px solid #ddd;
+    width: 100%;
+    background: #f9f9f9;
 }
