@@ -6,21 +6,13 @@
     <!-- Custom Template Report Title Bar -->
     <div class="relative">
 
-        <!-- Title Block (Only displays outside of Arches Editor-->
-        <!--ko if: (editorContext === false) -->
-        <div class="report-toolbar-preview ep-form-toolbar">
-            <h4 class="report-toolbar-title"><span data-bind="">HER Heritage Asset Report</span></h4><span class="">Instance Name Goes Here</span>
-
-            <!-- Tools -->
-            <!-- Add print and possibly edit buttons here -->
+        <!-- Title Block -->
+        <div class="her-report-toolbar">
+            <h1 class="her-report-toolbar-title"><span class="her-report-name">Heritage Asset:</span><span class="her-report-instance-name">Instance Name Goes Here</span></h1>
         </div>
-        <!--/ko-->
-    </div>
-    {% endblock report_title_bar %}
 
-    <!-- Report Tabs -->
-    <div class="her-tabbed-report">
-        <div class="her-tab-container">
+        <!-- Altenative Nav and Content -->
+        <div class="her-tab-container" style="display: none;">
             <ul class="nav nav-tabs her-tab-list">
                 <li class="her-tab-list-item">
                     <div class='her-nav-tab active'>
@@ -39,11 +31,77 @@
             </ul>
         </div>
     </div>
+    {% endblock report_title_bar %}
 
+    
     {% block body %}
-    <!-- Tab content -->
-    <div class="her-tabbed-report-content">
-        Tab content goes here
+    <!-- Link nav -->
+    <div class="her-report-anchor-container">
+        <ol class="her-report-anchors breadcrumb">
+            <li><a class="her-report-a" href="#">Names/Indentifiers</a></li>
+            <li class="her-report-a">Descriptions</li>
+            <li class="her-report-a">Locations</li>
+            <li class="her-report-a">Designation/Protection</li>
+            <li class="her-report-a active">Phases/Components</li>
+            <li class="her-report-a">Bibliography</li>
+            <li class="her-report-a">Photos</li>
+            <li class="her-report-a">Scientific Dates</li>
+            <li class="her-report-a">Related Resources</li>
+            <li class="her-report-a">JSON</li>
+        </ol>
+    </div>
+
+    <div class="her-tabbed-report">
+        <div class="her-tabbed-report-content">
+            
+            <!-- Names -->
+            <div class="her-report-page">
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">Asset Names</h2>
+                    <a class="her-report-a"><i class="fa fa-plus-circle"></i> Add Name</a>
+
+                    <!-- Names Table -->
+                    <div class="her-table" data-bind="">
+                        <table data-bind="" class="table table-striped table-bordered" cellspacing="15" width="100%">
+                            <thead class="">
+                                <tr>
+                                    <th>{% trans "Name" %}</th>
+                                    <th>{% trans "Type" %}</th>
+                                    <th class="min-desktop">{% trans "Currency" %}</th>
+                                    <th class="her-table-control">Edit</th>
+                                    <th class="her-table-control"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Huxley House</td>
+                                    <td>Primary</td>
+                                    <td>Current</td>
+                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a></td>
+                                    <td class="her-table-control"><a><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                                <tr>
+                                    <td>Aldus Huxley Manor</td>
+                                    <td>Alternate</td>
+                                    <td>Current</td>
+                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a></td>
+                                    <td class="her-table-control"><a><i class="fa fa-trash"></i></a></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- External Reference -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">External Cross References</h2>
+                    <a class="her-report-a"><i class="fa fa-plus-circle"></i> Add Reference</a>
+                </div>
+            </div>
+
+
+
+        </div>
     </div>
     {% endblock body %}
 
