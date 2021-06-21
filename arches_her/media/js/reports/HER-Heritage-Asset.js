@@ -10,6 +10,7 @@ define(['knockout',  'viewmodels/report'],
                     // code specific to summary reports here
                 } else {
                     // code specific to full reports here
+                    nav = ['Names/Indentifiers', 'Descriptions', 'Locations', 'Designation/Protection', 'Phases/Components', 'Bibliography', 'Photos', 'Scientific Dates', 'Associated Resources', 'JSON'];
                 }
             },
             template: { require: 'text!templates/views/components/reports/HER-Heritage-Asset.htm' }

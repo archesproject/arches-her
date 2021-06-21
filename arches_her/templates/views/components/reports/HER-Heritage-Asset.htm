@@ -8,7 +8,7 @@
 
         <!-- Title Block -->
         <div class="her-report-toolbar">
-            <h1 class="her-report-toolbar-title"><span class="her-report-name">{% trans "Heritage Asset" %}:</span><span class="her-report-instance-name">Instance Name Goes Here</span></h1>
+            <h1 class="her-report-toolbar-title"><span class="her-report-name">{% trans "Heritage Asset Report" %}:</span><span class="her-report-instance-name">Instance Name Goes Here</span></h1>
         </div>
 
         <!-- Altenative Nav and Content -->
@@ -125,6 +125,7 @@
     <div class="her-summary-block">
         <div class="her-title-block">
             <h1>Instance Name Goes Here</h1>
+            <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "edit resource" %}</a>
         </div>
         <div class="her-block-attributes">
             <div class="her-block-key">Resource Type:</div>
@@ -190,6 +191,8 @@
                             <th>{% trans "Construction Start" %}</th>
                             <th>{% trans "Construction End" %}</th>
                             <th class="min-desktop">{% trans "Date Confidence" %}</th>
+                            <th class="her-table-control"></th>
+                            <th class="her-table-control"></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -199,6 +202,8 @@
                             <td>1856</td>
                             <td>1862</td>
                             <td>Certain</td>
+                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a></td>
+                            <td class="her-table-control"><a><i class="fa fa-trash"></i></a></td>
                         </tr>
                         <tr>
                             <td>Public House</td>
@@ -206,6 +211,8 @@
                             <td>1899</td>
                             <td>--</td>
                             <td>Uncertain</td>
+                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a></td>
+                            <td class="her-table-control"><a><i class="fa fa-trash"></i></a></td>
                         </tr>
                     </tbody>
                 </table>
@@ -229,10 +236,12 @@
                 <thead class="">
                     <tr>
                         <th>{% trans "Type of Use" %}</th>
-                        <th>{% trans "Period" %}</th>
+                        <th>{% trans "Cultural Period" %}</th>
                         <th>{% trans "Usage Start" %}</th>
                         <th>{% trans "Usage End" %}</th>
                         <th class="min-desktop">{% trans "Evidence" %}</th>
+                        <th class="her-table-control"></th>
+                        <th class="her-table-control"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -242,6 +251,8 @@
                         <td>1911</td>
                         <td>1917</td>
                         <td>Architectural Component</td>
+                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a></td>
+                        <td class="her-table-control"><a><i class="fa fa-trash"></i></a></td>
                     </tr>
                     <tr>
                         <td>Public House</td>
@@ -249,6 +260,8 @@
                         <td>1899</td>
                         <td>2021</td>
                         <td>Documentary Evidence</td>
+                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a></td>
+                        <td class="her-table-control"><a><i class="fa fa-trash"></i></a></td>
                     </tr>
                 </tbody>
             </table>
