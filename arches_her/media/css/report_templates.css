@@ -1,10 +1,21 @@
 /*CSS specifically for Arches-HER custom reports*/
 
+.resource-report {
+    display: table;
+    height: 100%;
+    width: 100%;
+}
+
+.scroll-y footer {
+    display: none !important;
+}
+
 .her-report-toolbar {
     width: 100%;
     height: 50px;
-    background: #f8f8f8;
+    background: #f5f5f5;
     border-bottom: 1px solid #ddd;
+    position: fixed;
     z-index: 10;
 }
 
@@ -15,6 +26,10 @@
     padding: 15px 0 5px 25px;
     color: #555;
     margin-bottom: 13px;
+}
+
+.resource-report:not(.editor-report) .her-report-toolbar {
+    /*margin-top: -85px;*/
 }
 
 .her-report-name {
@@ -30,13 +45,20 @@
 .her-report-anchor-container {
     overflow-x: scroll;
     white-space: nowrap;
+    position: fixed;
+    width: 100%;
+    margin-top: 50px;
+}
+
+.resource-report:not(.editor-report) .her-report-anchor-container {
+    /*margin-top: -35px;*/
 }
 
 .her-report-anchors {
     margin-bottom: 0px;
     padding-top: 9px;
     padding-bottom: 9px;
-    background: #fdfdfd;
+    background: #fcfcfc;
     border-bottom: 1px solid #ddd;
 }
 
@@ -47,6 +69,11 @@
 
 li, .her-report-a:hover {
     cursor: pointer;
+    color: #25476a !important;
+}
+
+li, .her-report-a.active:hover {
+    cursor: default;
 }
 
 .her-report-a.active {
@@ -54,12 +81,12 @@ li, .her-report-a:hover {
 }
 
 .her-tabbed-report{
-    position: absolute;
     width: 100%;
     height: 100%;
     overflow: hidden;
     display: flex;
     flex-direction: column;
+    margin-top: 85px;
 }
 
 .her-tab-container {
@@ -105,6 +132,7 @@ li, .her-report-a:hover {
 .her-tabbed-report-content {
     background: #fff;
     padding: 15px 25px;
+    height: 100%;
 }
 
 .her-report-section {
@@ -131,17 +159,31 @@ li, .her-report-a:hover {
 
 .her-table {
     margin-right: 20px;
-    display: table;
-    min-width: 50%;
+    /*display: table;
+    min-width: 50%;*/
+}
+
+.her-summary-report .her-table {
+    width: 100%;
 }
 
 .her-table thead th {
     font-weight: 500 !important;
+    color: #454545;
+}
+
+.her-table .table td {
+    color: #777;
+    font-size: 13px;
 }
 
 .her-table-control {
     padding: 6px;
     color: #999;
+}
+
+tr .her-table-control:last-of-type {
+    width: 42px;
 }
 
 .her-table thead .her-table-control {
