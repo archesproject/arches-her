@@ -8,22 +8,7 @@ define([
             viewModel: function(params) {
                 params.configKeys = [];
 
-                ReportViewModel.apply(this, [params]);
-                this.activeSection = ko.observable('name')
-                this.nameTableConfig = {
-                    "responsive": true,
-                    "paging": false,
-                    "scrollCollapse": true,
-                    "info": false,
-                    "columns": [
-                        null,
-                        null,
-                        null,
-                        null,
-                        null
-                    ]
-                };
-
+                //Set-up nav sections
                 this.sections = [
                     {'id': 'name', 'title': 'Names/Indentifiers'},
                     {'id': 'description', 'title': 'Descriptions'},
@@ -37,6 +22,28 @@ define([
                     {'id': 'json', 'title': 'JSON'},
                 ];
 
+                //Names Table
+                ReportViewModel.apply(this, [params]);
+                this.activeSection = ko.observable('name')
+                this.nameTableConfig = {
+                    "responsive": true,
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+               
                 if (params.summary) {
                     // code specific to summary reports here
                 } else {

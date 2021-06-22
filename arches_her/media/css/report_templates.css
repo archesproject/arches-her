@@ -136,7 +136,7 @@ li, .her-report-a.active:hover {
 }
 
 .her-report-section {
-    margin-bottom: 15px;
+    margin-bottom: 25px;
     min-height: 80px;
 }
 
@@ -172,9 +172,52 @@ li, .her-report-a.active:hover {
     color: #454545;
 }
 
+/*.her-table .dataTable tr:hover {
+    background: inherit !important;
+}*/
+
+.her-table-header:hover {
+    background: #fff !important;
+}
+
+.her-table .dataTable tbody tr:nth-child(2n+1):hover {
+    background-color: #f6f8fa !important;
+}
+
+.her-table .dataTable tbody tr:nth-child(2n):hover {
+    background-color: #fff !important;
+}
+
+.her-table .dataTable thead tr:hover {
+    background: #fff !important;
+}
+
+.her-table .dataTable thead th:hover {
+    background: rgba(218, 226, 234,0.3);
+}
+
+.her-table .dataTable thead th.her-table-control:hover {
+    background: #fff;
+}
+
 .her-table .table td {
     color: #777;
     font-size: 13px;
+}
+
+.her-table table.dataTable thead .sorting_asc:after {
+    color: #454545;
+    opacity: 1;
+}
+
+.her-table table.dataTable thead .sorting_desc:after {
+    color: #454545;
+    opacity: 1;
+}
+
+.her-table table.dataTable thead .sorting:after {
+    color: #bbb;
+    opacity: 1;
 }
 
 .her-table-control {
@@ -188,7 +231,7 @@ tr .her-table-control:last-of-type {
 
 .her-table thead .her-table-control {
     border: none;
-    width: 40px;
+    width: 50px;
 }
 
 .her-table-control i {
@@ -204,10 +247,10 @@ tr .her-table-control:last-of-type {
     color: #25476a;
 }
 
-.her-table tbody .her-table-control:hover {
+/*.her-table tbody .her-table-control:hover {
     background: rgba(172, 189, 206, 0.18);
 }
-
+*/
 
 
 /* Summary Report Classes */
