@@ -38,16 +38,9 @@
     <!-- Link nav -->
     <div class="her-report-anchor-container">
         <ol class="her-report-anchors breadcrumb">
-            <li data-bind="click: function(){activeSection('name')}, css: {active: activeSection() === 'name'}" class="her-report-a">Names/Indentifiers</a></li>
-            <li data-bind="click: function(){activeSection('description')}, css: {active: activeSection() === 'description'}" class="her-report-a">Descriptions</li>
-            <li data-bind="click: function(){activeSection('location')}, css: {active: activeSection() === 'location'}" class="her-report-a">Locations</li>
-            <li data-bind="click: function(){activeSection('designation')}, css: {active: activeSection() === 'designation'}" class="her-report-a">Designation/Protection</li>
-            <li data-bind="click: function(){activeSection('phase')}, css: {active: activeSection() === 'phase'}" class="her-report-a">Phases/Components</li>
-            <li data-bind="click: function(){activeSection('biblio')}, css: {active: activeSection() === 'biblio'}" class="her-report-a">Bibliography</li>
-            <li data-bind="click: function(){activeSection('photos')}, css: {active: activeSection() === 'photos'}" class="her-report-a">Photos</li>
-            <li data-bind="click: function(){activeSection('dates')}, css: {active: activeSection() === 'dates'}" class="her-report-a">Scientific Dates</li>
-            <li data-bind="click: function(){activeSection('related')}, css: {active: activeSection() === 'related'}" class="her-report-a">Related Resources</li>
-            <li data-bind="click: function(){activeSection('json')}, css: {active: activeSection() === 'json'}" class="her-report-a">JSON</li>
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="her-report-a"></li>
+            <!-- /ko -->
         </ol>
     </div>
 

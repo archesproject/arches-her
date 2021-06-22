@@ -23,7 +23,20 @@ define([
                         null
                     ]
                 };
-                
+
+                this.sections = [
+                    {'id': 'name', 'title': 'Names/Indentifiers'},
+                    {'id': 'description', 'title': 'Descriptions'},
+                    {'id': 'location', 'title': 'Locations'},
+                    {'id': 'designation', 'title': 'Designation/Protection'},
+                    {'id': 'phase', 'title': 'Phases/Components'},
+                    {'id': 'biblio', 'title': 'Bibliography'},
+                    {'id': 'photos', 'title': 'Photos'},
+                    {'id': 'dates', 'title': 'Scientific Dates'},
+                    {'id': 'related', 'title': 'Related Resources'},
+                    {'id': 'json', 'title': 'JSON'},
+                ];
+
                 if (params.summary) {
                     // code specific to summary reports here
                 } else {
