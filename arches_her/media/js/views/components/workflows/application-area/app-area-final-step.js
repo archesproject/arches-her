@@ -11,6 +11,7 @@ define([
             var designation = val.resource['Designation and Protection Assignment'] && val.resource['Designation and Protection Assignment'].length ? val.resource['Designation and Protection Assignment'][0] : {};
             var description = val.resource['Descriptions'] && val.resource['Descriptions'].length ? val.resource['Descriptions'][0] : {};
 
+            this.displayName = val['displayname'] || 'Unnamed';
             this.reportVals = {
                 buildingName: {'name': 'Building Name', 'value': this.getResourceValue(address, ['Building Name','Building Name Value','@value'])},
                 buildingNumber: {'name': 'Building Number', 'value': this.getResourceValue(address, ['Building Number','Building Number Value','@value'])},
