@@ -28,6 +28,7 @@ define([
             var observation = currentSiteVisit['Observations'] && currentSiteVisit['Observations'].length ? currentSiteVisit['Observations'][0] : {};
             var recommendation = currentSiteVisit['Recommendations'] && currentSiteVisit['Recommendations'].length ? currentSiteVisit['Recommendations'][0] : {};
 
+            this.displayName = val['displayname'] || 'Unnamed';
             this.reportVals = {
                 consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 date: {'name': 'Date', 'value': this.getResourceValue(currentSiteVisit, ['Timespan of Visit', 'Date of Visit', '@value'])},

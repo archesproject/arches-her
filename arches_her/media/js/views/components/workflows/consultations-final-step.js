@@ -10,6 +10,7 @@ define([
         SummaryStep.apply(this, [params]);
 
         this.resourceData.subscribe(function(val){
+            this.displayName = val['displayname'] || 'Unnamed';
             this.reportVals = {
                 featureShape: {'name': 'Feature Shape', 'value': this.getResourceValue(val.resource, ['Consultation Area','Geometry','Feature Shape','@value'])},
                 logDate: {'name': 'Log Date', 'value': this.getResourceValue(val.resource, ['Consultation Dates','Log Date','@value'])},

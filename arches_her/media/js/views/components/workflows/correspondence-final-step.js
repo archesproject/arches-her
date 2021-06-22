@@ -28,6 +28,7 @@ define([
                 currentCorrespondence = val.resource.Correspondence;
             }
             
+            this.displayName = val['displayname'] || 'Unnamed';
             this.reportVals = {
                 consultationName: {'name': 'Related Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 letterType: {'name': 'Letter Type', 'value': this.getResourceValue(currentCorrespondence, ['Letter Type', '@value'])},
