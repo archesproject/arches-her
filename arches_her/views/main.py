@@ -17,7 +17,6 @@ class ConsultationView(PluginView):
         context['app_title'] = settings.APP_TITLE
         context['copyright_text'] = settings.COPYRIGHT_TEXT
         context['copyright_year'] = settings.COPYRIGHT_YEAR
-        print('hello world')
         for plugin in models.Plugin.objects.all().order_by('sortorder'):
             print('iter plugins')
             if self.request.user.has_perm('view_plugin', plugin):
