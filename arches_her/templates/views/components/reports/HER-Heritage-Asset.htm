@@ -17,13 +17,13 @@
                 <li class="her-tab-list-item">
                     <div class='her-nav-tab active'>
                         <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                            <span data-bind="">Name/Identifiers</span>
+                            <span>Name/Identifiers</span>
                             </span>
                         </div>
                     </div>
                     <div class='her-nav-tab'>
                         <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
-                            <span data-bind="">Location</span>
+                            <span>Location</span>
                             </span>
                         </div>
                     </div>
@@ -38,16 +38,16 @@
     <!-- Link nav -->
     <div class="her-report-anchor-container">
         <ol class="her-report-anchors breadcrumb">
-            <li><a class="her-report-a" href="#">Names/Indentifiers</a></li>
-            <li class="her-report-a">Descriptions</li>
-            <li class="her-report-a">Locations</li>
-            <li class="her-report-a">Designation/Protection</li>
-            <li class="her-report-a active">Phases/Components</li>
-            <li class="her-report-a">Bibliography</li>
-            <li class="her-report-a">Photos</li>
-            <li class="her-report-a">Scientific Dates</li>
-            <li class="her-report-a">Related Resources</li>
-            <li class="her-report-a">JSON</li>
+            <li data-bind="click: function(){activeSection('name')}, css: {active: activeSection() === 'name'}" class="her-report-a">Names/Indentifiers</a></li>
+            <li data-bind="click: function(){activeSection('description')}, css: {active: activeSection() === 'description'}" class="her-report-a">Descriptions</li>
+            <li data-bind="click: function(){activeSection('location')}, css: {active: activeSection() === 'location'}" class="her-report-a">Locations</li>
+            <li data-bind="click: function(){activeSection('designation')}, css: {active: activeSection() === 'designation'}" class="her-report-a">Designation/Protection</li>
+            <li data-bind="click: function(){activeSection('phase')}, css: {active: activeSection() === 'phase'}" class="her-report-a">Phases/Components</li>
+            <li data-bind="click: function(){activeSection('biblio')}, css: {active: activeSection() === 'biblio'}" class="her-report-a">Bibliography</li>
+            <li data-bind="click: function(){activeSection('photos')}, css: {active: activeSection() === 'photos'}" class="her-report-a">Photos</li>
+            <li data-bind="click: function(){activeSection('dates')}, css: {active: activeSection() === 'dates'}" class="her-report-a">Scientific Dates</li>
+            <li data-bind="click: function(){activeSection('related')}, css: {active: activeSection() === 'related'}" class="her-report-a">Related Resources</li>
+            <li data-bind="click: function(){activeSection('json')}, css: {active: activeSection() === 'json'}" class="her-report-a">JSON</li>
         </ol>
     </div>
 
@@ -55,7 +55,7 @@
         <div class="her-tabbed-report-content">
             
             <!-- Names -->
-            <div class="her-report-page">
+            <div class="her-report-page" data-bind="if: activeSection() === 'name'">
                 <div class="her-report-section">
                     <h2 class="her-report-section-title">{% trans "Asset Names" %}</h2>
                     <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Name" %}</a>
@@ -100,6 +100,11 @@
             </div>
             <!-- End Names -->
 
+            <!-- Location -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'location'">
+                <div>Location content here</div>
+            </div>
+            <!-- End Location -->
 
         </div>
     </div>

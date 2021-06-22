@@ -5,6 +5,7 @@ define(['knockout',  'viewmodels/report'],
                 params.configKeys = [];
 
                 ReportViewModel.apply(this, [params]);
+                this.activeSection = ko.observable('name')
 
                 if (params.summary) {
                     // code specific to summary reports here
