@@ -1,4 +1,8 @@
-define(['knockout',  'viewmodels/report'], 
+define([
+    'knockout',
+    'viewmodels/report',
+    'bindings/datatable',
+    ], 
     function(ko, ReportViewModel) {
         return ko.components.register('HER-Heritage-Asset', {
             viewModel: function(params) {
@@ -6,7 +10,20 @@ define(['knockout',  'viewmodels/report'],
 
                 ReportViewModel.apply(this, [params]);
                 this.activeSection = ko.observable('name')
-
+                this.nameTableConfig = {
+                    "responsive": true,
+                    "paging": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+                
                 if (params.summary) {
                     // code specific to summary reports here
                 } else {
