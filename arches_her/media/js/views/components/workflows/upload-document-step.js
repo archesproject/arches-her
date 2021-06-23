@@ -13,27 +13,16 @@ define([
 
         this.consultationResourceId = ko.observable(ko.unwrap(params.workflow.resourceId));
         this.consultationTileId = params.externalStepData.relatedconsultation.data.tileid;
+        this.digitalObjectResourceInstanceName = ko.observable();
 
         params.resourceid(null);
         params.workflow.resourceId(null);
 
         NewTileStep.apply(this, [params]);
 
-        params.defineStateProperties = function(){
-            var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
-            if (wastebin && 'resourceid' in wastebin) {
-                wastebin.resourceid = ko.unwrap(self.resourceId);
-            }
-            ko.mapping.fromJS(wastebin, {}, params.wastebin);
-            return {
-                consultationObjectResourceId: ko.unwrap(self.consultationResourceId),
-                consultationTileId: ko.unwrap(self.consultationTileId),
-                resourceid: ko.unwrap(self.resourceId),
-                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
-                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-                wastebin: wastebin
-            };
-        };
+        if (params.value() && params.value().digitalObjectResourceInstanceName) {
+            this.digitalObjectResourceInstanceName(params.value().digitalObjectResourceInstanceName);
+        }
 
         this.onSaveSuccess = function(tile) {
             this.resourceId(tile.resourceinstance_id);
@@ -77,6 +66,11 @@ define([
                     },
                 })
                 .then(function(response) {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                }).then(function(json) {
+                    self.digitalObjectResourceInstanceName(json.data["c61ab16c-9513-11ea-89a4-f875a44e0e11"]);
                     console.log("The digital object name is saved")
                 })
                 .catch(function(response){
@@ -114,6 +108,23 @@ define([
 
             params.resourceid(ko.unwrap(this.consultationResourceId));
             params.workflow.resourceId(ko.unwrap(this.consultationResourceId));
+    
+            params.defineStateProperties = function(){
+                var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
+                if (wastebin && 'resourceid' in wastebin) {
+                    wastebin.resourceid = ko.unwrap(self.resourceId);
+                }
+                ko.mapping.fromJS(wastebin, {}, params.wastebin);
+                return {
+                    consultationObjectResourceId: ko.unwrap(self.consultationResourceId),
+                    consultationTileId: ko.unwrap(self.consultationTileId),
+                    resourceid: ko.unwrap(self.resourceId),
+                    digitalObjectResourceInstanceName: ko.unwrap(self.digitalObjectResourceInstanceName),
+                    tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
+                    tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
+                    wastebin: wastebin
+                };
+            };
     
             if (params.value) {
                 params.value(params.defineStateProperties());

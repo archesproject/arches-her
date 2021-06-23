@@ -12,8 +12,10 @@ define([
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
         this.digitalObjectResourceId = ko.observable();
+
         if (params.form.externalStepData.uploaddocumentstep.data) {
             this.digitalObjectResourceId(params.form.externalStepData.uploaddocumentstep.data.resourceid);
+            this.digitalObjectResourceName = params.form.externalStepData.uploaddocumentstep.data.digitalObjectResourceInstanceName;
         };
 
         var currentTileId = ko.unwrap(params.form.externalStepData.relatedconsultationstep.data.tileid)
@@ -29,6 +31,8 @@ define([
             } else {
                 currentCommunication = val.resource.Communications;
             }
+
+            this.displayName = val['displayname'] || 'Unnamed';
             this.reportVals = {
                 consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 subject: {'name': 'Subject', 'value': this.getResourceValue(currentCommunication, ['Subjects', 'Subject', '@value'])},
