@@ -48,6 +48,7 @@
     position: fixed;
     width: 100%;
     margin-top: 50px;
+    z-index: 10;
 }
 
 .resource-report:not(.editor-report) .her-report-anchor-container {
@@ -159,8 +160,11 @@ li, .her-report-a.active:hover {
 
 .her-table {
     margin-right: 20px;
+    margin-top: -8px;
     /*display: table;
     min-width: 50%;*/
+    position: relative;
+    z-index: 1;
 }
 
 .her-summary-report .her-table {
@@ -193,7 +197,7 @@ li, .her-report-a.active:hover {
 }
 
 .her-table .dataTable thead th:hover {
-    background: rgba(218, 226, 234,0.3);
+    background: rgba(218, 226, 234,0.5);
 }
 
 .her-table .dataTable thead th.her-table-control:hover {
@@ -220,18 +224,22 @@ li, .her-report-a.active:hover {
     opacity: 1;
 }
 
+.her-table .dataTable thead th:hover.sorting:after{
+    color: #888;
+}
+
+.her-table .dataTables_filter {
+    margin-top: -15px;
+}
+
 .her-table-control {
     padding: 6px;
     color: #999;
 }
 
-tr .her-table-control:last-of-type {
-    width: 42px;
-}
-
 .her-table thead .her-table-control {
     border: none;
-    width: 50px;
+    width: 58px;
 }
 
 .her-table-control i {
