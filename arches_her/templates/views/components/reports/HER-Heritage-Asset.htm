@@ -96,6 +96,323 @@
             </div>
             <!-- End Location -->
 
+            <!-- Phase -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'phase'">
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">{% trans "Production Events" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Production Event" %}</a>
+
+                    <!-- Show this block if there's NO data -->
+                    <div class="her-nodata-note" style="display: none;">No events created for this Physical Thing</div>
+
+                    <!-- Show this div if there are event data -->
+                    <!-- Production Event Block (one for each production event) -->
+                    <div class="her-report-subsection">
+                        <h3 class=""><i class="fa fa-angle-double-right"></i> {% trans "Production Event: " %} <span>Statue Carving</span></h3>
+                        <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Edit this Event" %}</a>
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
+
+                        <!-- Show this if there is Event data (Top Card) -->
+                        <div class="her-report-collapsible-container">
+                            <div class="her-report-subsection-container">
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Creator of Production Event: </h4>
+                                        <div class="her-block-value">Paul Gaugan</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Production Event Techniques: </h4>
+                                        <div class="her-block-value">Technique Number #1</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Location of Production Event: </h4>
+                                        <div class="her-block-value">Paris, France</div>
+                                    </div>
+                                </div>
+
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Objects used in Production Event: </h4>
+                                        <div class="her-block-value">Chisel</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Influence on Production Event: </h4>
+                                        <div class="her-block-value">Neo-classical school</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Names</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Name" %}</a>
+
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No statements for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <!-- Names Table -->
+                                    <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                        <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead class="">
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Name" %}</th>
+                                                    <th class="min-tabletl">{% trans "Type" %}</th>
+                                                    <th class="min-medium">{% trans "Currency" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Huxley House</td>
+                                                    <td>Primary</td>
+                                                    <td>Current</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Aldus Huxley Manor</td>
+                                                    <td>Alternate</td>
+                                                    <td>Current</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Statements</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Statement" %}</a>
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No statements for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Identifiers</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Identifier" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No identifiers for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Timespan</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Edit Event Timespan" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No timespan for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="">
+                                    <div class="her-report-subsection-item flex">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Beginning of the beginning: </h6>
+                                            <div class="her-block-value">2021-02-18</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">End of the beginning: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Beginning of the end: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">End of the end: </h6>
+                                            <div class="her-block-value">2021-05-22</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="her-report-subsection-item flex">
+                                        <div class="her-block-attributes">
+                                            <h4 class="her-block-key">Duration: </h4>
+                                            <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Parts</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Part" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No parts for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="">
+                                    <div class="her-block-attributes">
+                                        <h6 class="her-block-key"><span>Pedestal</span></h6>
+                                        <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Edit this Part" %}</a>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h6 class="her-block-key"><span>Torso</span></h6>
+                                        <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Edit this Part" %}</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Prodcuction Event Block (one for each production evenet) -->
+                    <div class="her-report-subsection">
+                        <h3 class=""><i class="fa fa-angle-double-right"></i> {% trans "Production Event: " %} <span>Statue Painting</span></h3>
+                        <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Edit this Event" %}</a>
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
+
+                        <!-- Show this if there is Event data (Top Card) -->
+                        <div class="her-report-collapsible-container">
+                            <div class="her-report-subsection-container">
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Creator of Production Event: </h4>
+                                        <div class="her-block-value">Paul Gaugan</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Production Event Techniques: </h4>
+                                        <div class="her-block-value">Technique Number #13</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Location of Production Event: </h4>
+                                        <div class="her-block-value">Paris, France</div>
+                                    </div>
+                                </div>
+
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Objects used in Production Event: </h4>
+                                        <div class="her-block-value">Paints, Brushes</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Influence on Production Event: </h4>
+                                        <div class="her-block-value">Neo-classical school</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Names</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Name" %}</a>
+
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No statements for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <!-- Names Table -->
+                                    <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                        <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead class="">
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Name" %}</th>
+                                                    <th class="min-tabletl">{% trans "Type" %}</th>
+                                                    <th class="min-medium">{% trans "Currency" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Huxley House</td>
+                                                    <td>Primary</td>
+                                                    <td>Current</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Aldus Huxley Manor</td>
+                                                    <td>Alternate</td>
+                                                    <td>Current</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Statements</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Statement" %}</a>
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No statements for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Identifiers</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Identifier" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No identifiers for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Timespan</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Timespan" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No timespan for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5 class="">Production Event Parts</h5>
+                                <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Part" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No parts for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Reference -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">{% trans "Next Page section" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Reference" %}</a>
+                </div>
+            </div>
+            <!-- End Location -->
+
         </div>
     </div>
     {% endblock body %}
