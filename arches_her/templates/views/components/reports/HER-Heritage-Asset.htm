@@ -120,7 +120,7 @@
                                 <div class="her-report-subsection-item">
                                     <div class="her-block-attributes">
                                         <h4 class="her-block-key">Creator of Production Event: </h4>
-                                        <div class="her-block-value">Paul Gaugan</div>
+                                        <div class="her-block-value">Paul Gauguin</div>
                                     </div>
                                     <div class="her-block-attributes">
                                         <h4 class="her-block-key">Production Event Techniques: </h4>
@@ -155,27 +155,27 @@
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container">
                                     <!-- Names Table -->
-                                    <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                    <div class="her-table" style="max-width: 100%">
                                         <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                             <thead class="">
                                                 <tr class="her-table-header">
                                                     <th>{% trans "Name" %}</th>
                                                     <th class="min-tabletl">{% trans "Type" %}</th>
-                                                    <th class="min-medium">{% trans "Currency" %}</th>
+                                                    <th class="min-medium">{% trans "Language" %}</th>
                                                     <th class="her-table-control all"></th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>Huxley House</td>
-                                                    <td>Primary</td>
-                                                    <td>Current</td>
+                                                    <td>Creation of a  great statue</td>
+                                                    <td>Primary Name</td>
+                                                    <td>English (language)</td>
                                                     <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                                 </tr>
                                                 <tr>
-                                                    <td>Aldus Huxley Manor</td>
-                                                    <td>Alternate</td>
-                                                    <td>Current</td>
+                                                    <td>The statue creation</td>
+                                                    <td>Informal Title</td>
+                                                    <td>English (language)</td>
                                                     <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                                 </tr>
                                             </tbody>
@@ -190,11 +190,40 @@
                                 <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Statement" %}</a>
                                 
                                 <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note">No statements for this event</div>
+                                <div class="her-nodata-note" style="display: none;">No statements for this event</div>
 
                                 <!-- Show this block if there's data -->
-                                <div class="firstchild-container" style="display: none;">
-
+                                <div class="firstchild-container" style="">
+                                    <!-- Statements Table -->
+                                    <div class="her-table" style="">
+                                        <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead class="">
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Statement Type" %}</th>
+                                                    <th class="">{% trans "Statement" %}</th>
+                                                    <th class="none">{% trans "Language" %}</th>
+                                                    <th class="none">{% trans "Name of Statement" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Acknowledgements</td>
+                                                    <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                    <td>English (language)</td>
+                                                    <td>Acknowledgement statement from wikipedia</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brief Text</td>
+                                                    <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                    <td>English (language)</td>
+                                                    <td>--</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
                                 </div>
                             </div>
 
@@ -221,19 +250,21 @@
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container" style="">
                                     <div class="her-report-subsection-item flex">
-                                        <div class="her-block-attributes">
+                                        <div class="her-block-attributes timespan">
                                             <h6 class="her-block-key">Beginning of the beginning: </h6>
                                             <div class="her-block-value">2021-02-18</div>
                                         </div>
-                                        <div class="her-block-attributes">
+                                        <div class="her-block-attributes timespan">
                                             <h6 class="her-block-key">End of the beginning: </h6>
                                             <div class="her-block-value">--</div>
                                         </div>
-                                        <div class="her-block-attributes">
+                                    </div>
+                                    <div class="her-report-subsection-item flex" style="margin-top: -5px;">
+                                        <div class="her-block-attributes timespan">
                                             <h6 class="her-block-key">Beginning of the end: </h6>
                                             <div class="her-block-value">--</div>
                                         </div>
-                                        <div class="her-block-attributes">
+                                        <div class="her-block-attributes timespan">
                                             <h6 class="her-block-key">End of the end: </h6>
                                             <div class="her-block-value">2021-05-22</div>
                                         </div>
@@ -247,6 +278,7 @@
                                     </div>
                                 </div>
                             </div>
+
 
                             <!-- Event First Generation Cards -->
                             <div class="her-report-subsection-firstchild">
@@ -285,7 +317,7 @@
                                 <div class="her-report-subsection-item">
                                     <div class="her-block-attributes">
                                         <h4 class="her-block-key">Creator of Production Event: </h4>
-                                        <div class="her-block-value">Paul Gaugan</div>
+                                        <div class="her-block-value">Paul Gauguin</div>
                                     </div>
                                     <div class="her-block-attributes">
                                         <h4 class="her-block-key">Production Event Techniques: </h4>
@@ -315,10 +347,11 @@
                                 <a class="her-report-a"><i class="fa fa-plus-circle"></i> {% trans "Add Event Name" %}</a>
 
                                 <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note" style="display: none;">No statements for this event</div>
+                                <div class="her-nodata-note" style="">No names for this event</div>
 
                                 <!-- Show this block if there's data -->
-                                <div class="firstchild-container">
+                                <div class="firstchild-container" style="display: none;">
+                                    
                                     <!-- Names Table -->
                                     <div class="her-table" data-bind="" style="max-width: 1000px;">
                                         <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
