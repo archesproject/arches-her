@@ -15,10 +15,11 @@ define([
                     {'id': 'location', 'title': 'Locations'},
                     {'id': 'designation', 'title': 'Designation/Protection'},
                     {'id': 'phase', 'title': 'Phases/Components'},
+                    {'id': 'prod', 'title': 'Production'},
                     {'id': 'biblio', 'title': 'Bibliography'},
                     {'id': 'photos', 'title': 'Photos'},
                     {'id': 'dates', 'title': 'Scientific Dates'},
-                    {'id': 'related', 'title': 'Related Resources'},
+                    {'id': 'related', 'title': 'Associated Resources'},
                     {'id': 'json', 'title': 'JSON'}
                 ];
 
@@ -27,6 +28,12 @@ define([
                 
                 //Set default Nav tab
                 this.activeSection = ko.observable('name');
+
+                //toggle display of a div
+                this.blockVisiblity = ko.observable(true);
+                this.toggleVis =  function(){
+                     this.blockVisiblity(!this.blockVisiblity());
+                };
 
                 //Names table configuration
                 this.nameTableConfig = {

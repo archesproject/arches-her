@@ -47,45 +47,124 @@
     <div class="her-tabbed-report">
         <div class="her-tabbed-report-content">
             
-            <!-- Names -->
+            <!-- Names Tab -->
             <div class="her-report-page" data-bind="if: activeSection() === 'name'">
+                
+                <!-- Names section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title">{% trans "Asset Names" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Names" %}</h2>
                     <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
 
-                    <!-- Names Table -->
-                    <div class="her-table" data-bind="" style="max-width: 1000px;">
-                        <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
-                            <thead class="">
-                                <tr class="her-table-header">
-                                    <th>{% trans "Name" %}</th>
-                                    <th class="min-tabletl">{% trans "Type" %}</th>
-                                    <th class="min-medium">{% trans "Currency" %}</th>
-                                    <th class="her-table-control all"></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>Huxley House</td>
-                                    <td>Primary</td>
-                                    <td>Current</td>
-                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                                <tr>
-                                    <td>Aldus Huxley Manor</td>
-                                    <td>Alternate</td>
-                                    <td>Current</td>
-                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                </tr>
-                            </tbody>
-                        </table>
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No names for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-table" data-bind="" style="max-width: 1000px;">
+                            <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                <thead class="">
+                                    <tr class="her-table-header">
+                                        <th>{% trans "Name" %}</th>
+                                        <th class="min-tabletl">{% trans "Type" %}</th>
+                                        <th class="min-medium">{% trans "Currency" %}</th>
+                                        <th class="her-table-control all"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Huxley House</td>
+                                        <td>Primary</td>
+                                        <td>Current</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aldus Huxley Manor</td>
+                                        <td>Alternate</td>
+                                        <td>Current</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
                     </div>
                 </div>
 
                 <!-- External Reference -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title">{% trans "External Cross References" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "External Cross References" %}</h2>
                     <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No references for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-table" data-bind="" style="max-width: 1000px;">
+                            <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                <thead class="">
+                                    <tr class="her-table-header">
+                                        <th>{% trans "Name" %}</th>
+                                        <th class="min-tabletl">{% trans "Type" %}</th>
+                                        <th class="min-medium">{% trans "Currency" %}</th>
+                                        <th class="her-table-control all"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Huxley House</td>
+                                        <td>Primary</td>
+                                        <td>Current</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Aldus Huxley Manor</td>
+                                        <td>Alternate</td>
+                                        <td>Current</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- System Reference Numbers section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Identifier" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No identifiers for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection-container">
+                            <div class="her-report-subsection-item">
+                                <div class="her-block-attributes">
+                                    <h4 class="her-block-key">Resource ID: </h4>
+                                    <div class="her-block-value">076f9381-7b00-11e9-8d6b-80000b44d1d9</div>
+                                </div>
+                                <div class="her-block-attributes">
+                                    <h4 class="her-block-key">Legacy ID: </h4>
+                                    <div class="her-block-value">MOR-34772</div>
+                                </div>
+                                <div class="her-block-attributes">
+                                    <h4 class="her-block-key">Primary Reference Number: </h4>
+                                    <div class="her-block-value">22a</div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- End Names -->
@@ -96,8 +175,14 @@
             </div>
             <!-- End Location -->
 
-            <!-- Phase -->
+            <!-- Location -->
             <div class="her-report-page" data-bind="if: activeSection() === 'phase'">
+                <div>phase content here</div>
+            </div>
+            <!-- End Location -->
+
+            <!-- Production -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'prod'">
                 <div class="her-report-section">
                     <h2 class="her-report-section-title">{% trans "Production Events" %}</h2>
                     <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Production Event" %}</a>
@@ -108,14 +193,14 @@
                     <!-- Show this div if there are event data -->
                     <!-- Production Event Block (one for each production event) -->
                     <div class="her-report-subsection">
-                        <h3 class=""><i class="fa fa-angle-double-right"></i> {% trans "Production Event: " %} <span>Statue Carving</span></h3>
+                        <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Production Event: " %} <span>Statue Carving</span></h3>
                         <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Event" %}</a>
 
                         <!-- Show this block if there's NO data -->
                         <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
 
                         <!-- Show this if there is Event data (Top Card) -->
-                        <div class="her-report-collapsible-container">
+                        <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
                             <div class="her-report-subsection-container">
                                 <div class="her-report-subsection-item">
                                     <div class="her-block-attributes">
@@ -269,11 +354,18 @@
                                             <div class="her-block-value">2021-05-22</div>
                                         </div>
                                     </div>
-
-                                    <div class="her-report-subsection-item flex">
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
                                         <div class="her-block-attributes">
-                                            <h4 class="her-block-key">Duration: </h4>
+                                            <h6 class="her-block-key">Name of event timespan: </h6>
+                                            <div class="her-block-value">Probable time period of statue creation</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Duration: </h6>
                                             <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event duration: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
                                         </div>
                                     </div>
                                 </div>

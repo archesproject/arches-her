@@ -6,7 +6,7 @@
     width: 100%;
 }
 
-.scroll-y {
+.scroll-y .her-tabbed-report {
     background: #fff;
 }
 
@@ -65,6 +65,10 @@
     padding-bottom: 9px;
     background: #fcfcfc;
     border-bottom: 1px solid #ddd;
+    width: 100%;
+    overflow-x: scroll;
+    position: relative;
+    padding-right: 550px;
 }
 
 .her-report-a {
@@ -72,7 +76,7 @@
     font-size: 13px;
 }
 
-li, .her-report-a:hover {
+.her-report-page li, .her-report-a:hover {
     cursor: pointer;
     color: #25476a !important;
 }
@@ -143,8 +147,11 @@ li, .her-report-a.active:hover {
 }
 
 .her-report-section {
-    margin-bottom: 25px;
-    min-height: 80px;
+    margin-bottom: 5px;
+}
+
+i.toggle:hover {
+    cursor: pointer;
 }
 
 .her-report-section-title {
@@ -214,6 +221,7 @@ li, .her-report-a.active:hover {
 .her-table .table td {
     color: #777;
     font-size: 13px;
+    padding: 3px 8px;
 }
 
 .her-table table.dataTable thead .sorting_asc:after {
@@ -250,8 +258,9 @@ li, .her-report-a.active:hover {
 }
 
 .her-table-control i {
-    padding: 6px;
-    color: #999;
+    padding: 7px 6px;
+    color: steelblue;
+    font-size: 12px;
 }
 
 .her-table-control a:hover {
@@ -285,7 +294,7 @@ li, .her-report-a.active:hover {
 }
 
 .her-report-collapsible-container {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .her-report-subsection-container {
@@ -300,6 +309,23 @@ li, .her-report-a.active:hover {
 
 .her-report-subsection-item.flex .her-block-attributes {
     padding: 3px 20px 0px 0px;
+}
+
+.her-report-subsection-item.flex.column-order {
+    flex-direction: column;
+}
+
+.her-report-subsection-item.flex.column-order.pad-top {
+    padding-top: 10px;
+}
+
+.her-report-subsection-item.flex.column-order.pad-btm {
+    padding-bottom: 5px;
+}
+
+.her-report-subsection-item.flex.column-order .her-block-attributes h6 {
+    padding: 0px;
+    margin: 0px;
 }
 
 .her-block-attributes h4 {
@@ -351,9 +377,17 @@ li, .her-report-a.active:hover {
     margin-bottom: -10px;
 }
 
+.her-report-subsection-container .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th {
+    padding: 7px;
+}
+
+.her-report-subsection-container table.dataTable thead .sorting:after, table.dataTable thead .sorting_asc:after, table.dataTable thead .sorting_desc:after, table.dataTable thead .sorting_asc_disabled:after, table.dataTable thead .sorting_desc_disabled:after {
+    bottom: 6px;
+}
+
 .firstchild-container .her-table table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before, table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
-    top: 6px;
-    line-height: 15px;
+    top: 7px;
+    line-height: 14px;
 }
 
 .her-report-subsection-firstchild .her-table td {
