@@ -4,7 +4,8 @@ define([
     'viewmodels/workflow',
     'viewmodels/workflow-step',
     'views/components/workflows/new-tile-step',
-    'views/components/workflows/app-area-name-step'
+    'views/components/workflows/application-area/app-area-address-step',
+    'views/components/workflows/application-area/app-area-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('application-area', {
         viewModel: function(params) {
@@ -16,8 +17,8 @@ define([
                     title: 'Assign Address',
                     name: 'assign-address',
                     description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/app-area-address-step',
-                    componentname: 'app-area-address-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                     nodegroupid: 'c7ec6efa-28c8-11eb-9ed1-f875a44e0e11',
                     targetnodegroup: '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11',
@@ -30,22 +31,26 @@ define([
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
                     shouldtrackresource: true,
+                    informationboxdata: {
+                        heading: 'Assign an address',
+                        text: 'Assign an address to your application area. Use the address as the default name',
+                    },
+                    layoutSections: [
+                        {
+                            sectionTitle: null,
+                            componentConfigs: [
+                                { 
+                                    componentName: 'app-area-address-step',
+                                    uniqueInstanceName: 'app-area-address', /* unique to step */
+                                    parameters: {
+                                        renderContext: 'workflow',
+                                    },
+                                    required: true,
+                                },
+                            ], 
+                        },
+                    ],
                     wastebin: {resourceid: null, description: 'an application area instance'}
-                },
-                {
-                    title: 'Assign Name',
-                    name: 'assign-name',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/app-area-name-step',
-                    componentname: 'app-area-name-step',
-                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                    nodegroupid: '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11',
-                    targetnode: '9c9f9dc0-83bf-11ea-8d22-f875a44e0e11',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: true,
-                    icon: 'fa-map',
                 },
                 {
                     title: 'Area Map',
@@ -59,12 +64,16 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: true,
-                    icon: 'fa-map-marker'
+                    icon: 'fa-map-marker',
+                    informationboxdata: {
+                        heading: 'Application Area Map',
+                        text: 'Draw (or select from the development area overlay) the extent of the area',
+                    }
                 },
                 {
                     title: 'Related Heritage Resources',
                     name: 'related-heritage-resource',
-                    description: '',
+                    description: 'Select the other Heritage Sites or Artifacts related to the current Consulation',
                     component: 'views/components/workflows/new-tile-step',
                     componentname: 'new-tile-step',
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
@@ -73,7 +82,11 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-bank'
+                    icon: 'fa-bank',
+                    informationboxdata: {
+                        heading: 'Related Heritage Resources',
+                        text: 'Select the other heritage sites or artifacts related to the current Consulation',
+                    }
                 },
                 {
                     title: 'Area Description',
@@ -87,7 +100,11 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-clipboard'
+                    icon: 'fa-clipboard',
+                    informationboxdata: {
+                        heading: 'Area Description',
+                        text: 'Describe the application area',
+                    }
                 },
                 {
                     title: 'Area Designations',
@@ -101,19 +118,39 @@ define([
                     tileid: null,
                     parenttileid: null,
                     required: false,
-                    icon: 'fa-bookmark'
+                    icon: 'fa-bookmark',
+                    informationboxdata: {
+                        heading: 'Area Designations',
+                        text: 'Select the application Area designations',
+                    }
                 },
                 {
                     title: 'Application Area Complete',
                     name: 'application-area-complete',
                     description: 'Choose an option below',
-                    component: 'views/components/workflows/consultations-final-step',
-                    componentname: 'consultations-final-step',
+                    component: 'views/components/workflows/component-based-step',
+                    componentname: 'component-based-step',
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'app-area-final-step',
+                                    uniqueInstanceName: 'app-area-final', /* unique to step */
+                                    tilesManaged: 'none',
+                                    parameters: {},
+                                },
+                            ], 
+                        },
+                    ],
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                     icon: 'fa-check',
                     resourceid: null,
                     tileid: null,
-                    parenttileid: null
+                    parenttileid: null,
+                    informationboxdata: {
+                        heading: 'Workflow Complete: Review your work',
+                        text: 'Please review the summary information. You can go back to a previous step to make changes or "Quit Workflow" to discard your changes and start over',
+                    }
                 }
             ];
 

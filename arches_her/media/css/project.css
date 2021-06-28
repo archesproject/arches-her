@@ -219,183 +219,20 @@ div.workflow-content {
     display: inline-flex;
 }
 
-.gallery-container {
-    position: relative;
-}
-
-.gallery-thumbnails {
-    display: inline-flex;
-    align-items: center;
-    text-align: center;
-    background-color: rgba(0,0,0, 0.65);
-    height: 105px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    width: 100%;
-    border-top: solid 1px #000;
-}
-
-.gallery-thumbnails img {
-    height: 80px;
-    margin: 3px 6px;
-    border: solid 1.5px #333;
-}
-
-.gallery-thumbnails img:hover {
-    cursor: pointer;
-    border: 1.5px solid #FFF;
-}
-
-.gallery .preview img {
-    border: solid 1px #333;
-    width: 100%;
-    height: auto;
-    margin: 0 auto !important;
-    display: block !important;
-}
-
-.gallery-thumbnails .dz-cancel {
-    color: black;
-    background-color: #ccc;
-    position: absolute;
-    right: 0;
-    opacity: 0.75;
-    position: absolute;
-}
-
-.gallery-thumbnails .dz-cancel:hover {
-    background-color: #eee;
-    opacity: 1;
-}
-
-.gallery-thumbnails .btn-xs {
-    padding: 0.5px 3.5px;
-}
-
-.gallery-controls {
-    display: flex;
-    position:absolute;
-    right: 0px;
-    top: 0px;
-    height: 100%;
-}
-
-.gallery-controls.new-tile {
-    background: #ededed;
-    justify-content: center;
-    width: 100%
-}
-
-.gallery-controls.new-tile .dropzone-photo-upload {
-    margin-top: 0;
-    padding: 45px;
-    background-color: #ffffff;
-    width: 100%;
-}
-
-.workbench-card-sidepanel .gallery-controls.new-tile .dropzone-photo-upload {
-    margin-top: 0;
-    padding: 15px;
-    background-color: #ffffff;
-    width: 100%;
-}
-
-.thumbnail-gallery-controls {
-    width: 35px;
-    height: 105px;
-    display: flex;
-    background-color: rgba(0,0,0, 0.75);
-    align-items: center;
-    font-size: 41px;
-    justify-content: center;
-    border-bottom: solid 1px #333;
-    color: #ddd
-}
-
-.thumbnail-gallery-controls.left {
-    border-left: solid 1px #333;
-}
-
-.thumbnail-gallery-controls.right {
-    border-right: solid 1px #333;
-}
-
-.thumbnail-container {
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 438px);
-}
-
-.workbench-card-container-sidepanel-active .thumbnail-container {
-    display: flex;
-    justify-content: space-between;
-    width: calc(100% - 475px);
-}
-
-.show-thumbnails-btn {
-    padding: 4px 10px;
-    font-size: 14px;
-    margin-left: 35px;
-    width: 130px;
-    color: #fff;
-    font-weight: 500;
-    background-color: rgba(0,0,0, 0.7);
-    text-align: center;
-}
-
-.show-thumbnails-btn:hover {
-    cursor: pointer;
-}
-
-.show-thumbnails-btn.open {
-    position: relative;
-}
-
-.show-thumbnails-btn.closed {
-    position: absolute;
-    bottom: 0;
-}
-
-.thumbnail-gallery-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    bottom: 0px;
-    width: 100%;
-}
-
-.workflow-step-body .thumbnail-gallery-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    position: fixed;
-    bottom: 0px;
-    width: calc(100% + 311px);
-    left: 50px;
-}
-
-.workflow-step-container .workbench-card-sidebar {
-    position: fixed;
-    top: 227px;
-}
-
-.workflow-step-container .thumbnail-gallery-container {
-    bottom: 0px;
-    left: 50px;
-}
-
 /* workflows */
 .workflows-get-tile-value {
-    margin: 10px -10px 25px 25px;
+    margin: 10px -10px 25px 20px;
     border: solid 1px #acf;
-    padding: 20px 30px 30px 30px;
+    padding: 20px 30px 40px 30px;
     max-width: 615px;
     background-color: #f3f3f3;
 }
 
 .workflows-get-tile-value h4 {
-    margin-bottom: 0px;
+    margin-bottom: 3px;
+    margin-left: 3px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .workflows-get-tile-value > .checkbox {
@@ -427,21 +264,22 @@ div.workflow-content {
 }
 
 .active-cons-container {
-    margin: 30px;
+    margin: 65px 30px 30px 30px;
     overflow-y: scroll;
-    width: 100%
+    width: 100%;
+    height: calc(100vh - 160px);
 }
 
-.active-cons-container .sticky {
-    position: sticky;
-    top: 0px;
-    z-index: 20;
-    background: #fafafa;
+.active-cons-container-header {
+    position: absolute;
+    width: 100%;
+    margin: 0px;
+    background: #f1f1f1;
+    border-bottom: 1px solid #ddd;
 }
 
 .active-cons-filters {
-    padding: 0px 10px 13px 8px;
-    border-bottom: 1px solid #ddd;
+    padding: 15px 10px 10px 30px;
     margin-bottom: 5px;
 }
 
@@ -472,8 +310,8 @@ div.workflow-content {
     height: 15px;
     width: 15px;
     position: absolute;
-    top: 8px;
-    left: 278px;
+    top: 24px;
+    left: 298px;
     font-size: 9px;
 }
 
@@ -486,10 +324,29 @@ div.active-cons-header {
     height: 50px;
 }
 
+.active-cons-table-view {
+    height: 57px;
+    margin-bottom: 5px;
+}
+
+.active-cons-container-title {
+    font-size: 17px;
+    color: #585858;
+    padding: 22px 45px;
+    margin: 0px;
+}
+
 .active-cons-header-title {
+    margin-top: 2px;
     font-weight: 600;
     font-size: 13px;
     text-align: center;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
 }
 
 /* div.active-cons-header ~ div div, div.active-cons-header ~ div p {
@@ -588,6 +445,18 @@ div.active-cons-stubs {
     border: 1px solid #bbb;
 }
 
+.active-cons-paginator {
+    position: absolute;
+    bottom: 0px;
+    background: #f1f1f1;
+    border-top: 1px solid #ddd;
+    width: 100%;
+}
+
+.active-cons-paginator .pagination {
+    margin: 5px 0px;
+}
+
 .card-grid-item:hover .active-cons-header.status-warning {
     border: 1px solid #25476A;
     border-bottom: 1px solid #bbb;
@@ -661,11 +530,19 @@ div.active-cons-hover-loading {
 }
 
 .active-cons-table {
-    padding-top: 5px;
+    padding: 10px 20px;
+}
+
+.active-cons-table .dataTables_info {
+    margin-top: -5px;
+}
+
+.active-cons-table tr {
+    height: 35px;
 }
 
 .active-cons-table input {
-    margin-top: -8px;
+    margin-top: 0px;
 }
 
 .active-cons-table label {
@@ -690,7 +567,7 @@ div.active-cons-hover-loading {
 }
 
 .active-cons-table .btn-group {
-    margin-top: -5px;
+    margin-top: 0px;
 }
 
 .active-cons-table .row:first-child {
@@ -701,6 +578,18 @@ div.active-cons-hover-loading {
 
 .active-cons-table td {
     margin-top: 3px;
+}
+
+.active-cons-table .dataTables_paginate {
+    position: fixed;
+    bottom: 5px;
+    right: 40px;
+}
+
+.active-cons-table .dataTables_info {
+    position: fixed;
+    bottom: 10px;
+    left: 90px;
 }
 
 .workflow-main-nav-item {
@@ -721,7 +610,51 @@ li.workflow-main-nav-item a {
     display: block;
 }
 
-div.hide-completion-date > div > div > div > div > form > div > div:nth-child(3) {
+div.hide-completion-date > div > div > div > div > form > div > div:nth-child(5) {
+    display: none;
+}
+
+div.show-only-details > div > div > div > div > form > div > div:nth-child(9),
+div.show-only-details > div > div > div > div > form > div > div:nth-child(12),
+div.show-only-details > div > div > div > div > form > div > div:nth-child(16) {
+    display: none;
+}
+
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(1),
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(2),
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(3),
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(4),
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(5),
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(12),
+div.show-only-notes > div > div > div > div > form > div > div:nth-child(16) {
+    display: none;
+}
+
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(1),
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(2),
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(3),
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(4),
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(5),
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(9),
+div.show-only-followup > div > div > div > div > form > div > div:nth-child(16) {
+    display: none;
+}
+
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(1),
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(2),
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(3),
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(4),
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(5),
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(9),
+div.show-only-upload > div > div > div > div > form > div > div:nth-child(12) {
+    display: none;
+}
+
+div.hide-letter-resource > div > div > div > div > form > div > div:nth-child(2) {
+    display: none;
+}
+
+div.hide-full-address > div > div > div > div > form > div > div:nth-child(1) {
     display: none;
 }
 
@@ -793,24 +726,34 @@ table.dataTable thead .sorting:after {
 .active-consultations-sort {
     position: absolute;
     right: 100px;
-    top: 0px;
+    top: 15px;
 }
 
-div.dataTables_wrapper div.dataTables_filter {
+.active-cons-table div.dataTables_wrapper div.dataTables_filter {
     text-justify: inherit;
     float: right;
-    margin-right: 140px;
+    margin-right: 0px;
+    margin-top: 3px;
 }
 
 .active-consultations-display {
     position: absolute;
     right: 20px;
-    top: -3px;
+    top: 12px;
     z-index: 300;
 }
 
 .active-consultations-display .btn {
     margin-right: -20px;
+    color: #888;
+}
+
+.active-consultations-display .btn:hover {
+    color:#041B33;
+}
+
+.active-consultations-display .btn:focus {
+    color:#041B33;
 }
 
 .dataTables_wrapper .row {
@@ -822,6 +765,10 @@ table.report-tabular-card {
     margin-top: 4px;
     /* padding-left: 40px;
     padding-right: 40px; */
+}
+
+.tabbed-workflow-step-body .photo-workbench-photos {
+    margin-top: 10px;
 }
 
 .report-tabular-card td {
@@ -871,4 +818,143 @@ span.rp-tile-title {
 .communication-type {
     color: rgb(134, 134, 134);
     font-size: 0.95em;
+}
+
+.her-final-step-section {
+    padding: 0px 15px 15px 15px; 
+    display: flex; 
+    flex-direction: column;
+}
+
+.her-final-step-section .map-container {
+    border: solid 1px #ddd;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.her-final-step-section .map-container .map {
+    height: 400px; 
+    width: 100%;
+}
+
+.final-step-section-block {
+    display: inline-flex; 
+    width: inherit; 
+    justify-content: space-between;
+}
+
+.address-block {
+    width: 75%;
+    min-width: 700px;
+}
+
+.final-step-section-block-item {
+    display: flex; 
+    flex-direction: column;
+}
+
+.final-step-section-block-item .block-item {
+    display: inline-flex;
+}
+
+.summary-image-metadata .block-item {
+    display: inline-flex;
+}
+
+.final-step-section-block-item a {
+    text-decoration: underline;
+    font-size: 14px;
+}
+
+.block-item.files-metadata {
+    padding: 5px 0px 5px 5px;
+    font-size: 12px;
+}
+
+.final-step .summary-label {
+    padding-right: 5px; 
+    color: #777;
+}
+
+.final-step h5 {
+    font-size: 14px;
+    margin-bottom: 2px;
+}
+
+.final-step .summary-value {
+    color: #2b547c;
+}
+
+.final-step .file-list .file-upload-card {
+    border-bottom: 1px solid #D3E5F4;
+    border-radius: 2px;
+    padding: 7px 8px 5px 15px;
+    background: #fff;
+    color: #666;
+    height: 30px;
+}
+
+.final-step .file-list {
+    margin-top: 5px;
+    border: 1px solid #ddd;
+    overflow-y: scroll;
+    width: 100%;
+}
+
+.final-step .file-list .file-upload-card:nth-child(odd) {
+    background: #F5FAFE;
+}
+
+.attendee-table {
+    max-width: 750px;
+}
+
+.attendee-table>tbody>tr:nth-of-type(odd) {
+    background-color: #F5FAFE;
+}
+
+.attendee-table .attendee-name{
+    width: 300px;
+}
+
+.attendee-table .attendee-type{
+    width: 450px;
+}
+
+.reference-number-table {
+    max-width: 750px;
+}
+
+.reference-number-table>tbody>tr:nth-of-type(odd) {
+    background-color: #F5FAFE;
+}
+
+.reference-number-table th {
+    width: 250px;
+}
+
+.final-step .summary-image {
+    max-height: 240px;
+    border: 1px solid #343434;
+}
+
+.summary-image-metadata {
+    display: flex; 
+    flex-direction: column; 
+    padding: 5px 5px 10px 0px;
+}
+
+.summary-image-metadata .summary-value {
+    max-width: 300px;
+}
+
+.final-step .summary-image-container {
+    margin: 5px 5px 5px 0px;
+    display: inline-block;
+}
+
+.consultation-map-step {
+    width: 100%;
+    height: 100%;
+    padding: 0px;
 }

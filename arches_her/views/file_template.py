@@ -53,7 +53,7 @@ class FileTemplateView(View):
         parenttile_id = request.GET.get('parenttile_id')
         parent_tile = Tile.objects.get(tileid=parenttile_id)
         letter_tiles = Tile.objects.filter(parenttile=parent_tile)
-        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
+        file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11" # Digital Object
         url = None
         for tile in letter_tiles:
             if url is not None:
@@ -84,11 +84,7 @@ class FileTemplateView(View):
             os.mkdir(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx'))
 
         self.doc = Document(template_path)
-
-        if template_name == 'GLAAS Planning Letter A - No Progression - template.docx':
-            self.edit_letter_A(self.resource, datatype_factory)
-        elif template_name == 'GLAAS Planning Letter B2 - Predetermination - template.docx':
-            self.edit_letter_B2(self.resource, datatype_factory)
+        self.edit_letter(self.resource, datatype_factory)
 
         date = datetime.today()
         date = date.strftime("%Y")+'-'+date.strftime("%m")+'-'+date.strftime("%d")
@@ -105,8 +101,8 @@ class FileTemplateView(View):
         saved_file = open(new_file_path, 'rb')
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
-        file_list_node_id = "8d41e4d1-a250-11e9-9a12-00224800b26d"
-
+        file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11" # Digital Object
+ 
         tile = json.dumps({
             "tileid":None,
             "data": {
@@ -125,9 +121,9 @@ class FileTemplateView(View):
                     "content":"blob:"+host+"/{0}".format(uuid.uuid4())
                 }]
             },
-            "nodegroup_id":"8d41e4d1-a250-11e9-9a12-00224800b26d",
-            "parenttile_id":parenttile_id,
-            "resourceinstance_id":resourceinstance_id,
+            "nodegroup_id":"7db68c6c-8490-11ea-a543-f875a44e0e11",
+            "parenttile_id":None,
+            "resourceinstance_id":"",
             "sortorder":0,
             "tiles":{}
         })
@@ -137,66 +133,65 @@ class FileTemplateView(View):
         new_req.user = request.user
         new_req.POST['data'] = tile
         new_req.FILES['file-list_' + file_list_node_id] = file_data
-        new_tile_data_instance = TileData()
+        new_tile = TileData()
+        new_tile.action = "update_tile"
 
-        post_resp = TileData.post(new_tile_data_instance, new_req)
-
-        if post_resp.status_code == 200:
+        response = TileData.post(new_tile, new_req)
+        if response.status_code == 200:
+            tile = json.loads(response.content)
             return JSONResponse({'tile':tile, 'status':'success' })
 
-        return HttpResponseNotFound(post_resp.status_code)
+        return HttpResponseNotFound(response.status_code)
 
 
     def get_template_path(self, template_id):
-        template_dict = { # keys are conceptids from "Letters" concept list; values are known file names
-            "a26c77ff-1d04-4b76-a45f-417f7ed24333":'', # Addit Cond Text
-            "8c12a812-8000-4ec9-913d-c6fd516117f2":'', # Arch Rec Text
-            "01dec356-e72e-40e6-b1b1-b847b9799d2f":'GLAAS Planning Letter A - No Progression - template.docx', # Letter A
-            "320abc26-db82-44a6-be11-8d44aaa23365":'', # Letter A2
-            "fd15c6c7-e94d-4914-8d51-a98bda6f4a7b":'', # Letter B1
-            "8cc91474-11ce-47d9-b886-f0e3fc49d277":'GLAAS Planning Letter B2 - Predetermination - template.docx', # Letter B2
-            "08bb630d-a27b-45bc-a13f-567b428018c5":'GLAAS Planning Letter C - Condition two stage - template.docx' # Letter C
-            }
+        template_dict = { # keys are valueids from "Letters" concept list; values are known file names
+            "01dec356-e72e-40e6-b1b1-b847b9799d2f": "No progression letter.docx", # Letter A
+            "320abc26-db82-44a6-be11-8d44aaa23365":	"No Need to Consult letter.docx", # Letter A2
+            "fd15c6c7-e94d-4914-8d51-a98bda6f4a7b":	"Pre-app Predetermination letter.docx", # Letter B1
+            "8cc91474-11ce-47d9-b886-f0e3fc49d277": "Predetermination Letter.docx", # Letter B2
+            "08bb630d-a27b-45bc-a13f-567b428018c5": "Condition Two-Stage Letter.docx", # Letter C
+            "e14bd058-e9f2-48f8-8ef5-337310c3420f":	"Pre-App Recommend Condition Letter.docx", # Letter D1
+            "92e745c3-7157-4831-bce9-73792d32abec":	"Condition Investigation Letter.docx", # Letter D2
+            "41f3d0bb-a94d-469f-80c8-85ab03283972":	"Condition Historic Building Recording Letter.docx", # Letter D3
+            "7f1e7061-8bb0-4338-9342-118f1e9214aa":	"WSI Approval Letter.docx", # Letter F1
+            "eaa8a075-50e6-4c3d-ac08-fbe84865f577":	"WSI Amend Letter.docx", # Letter F2
+            "a31061ea-9b80-435f-82c8-94dc10afcbae":	"Condition Satisfied Letter.docx", # Letter H
+            # No template available yet
+            "8d605e5c-d0da-4b72-9ce3-2f7dac3381d1":	"", # Letter G - PXA Approval
+            "eed24dd2-85a0-4402-a6ba-bda426b5da89":	"", # Letter I - Bespoke Letter
+            "a26c77ff-1d04-4b76-a45f-417f7ed24333": "", # Additional Condition Text
+            "8c12a812-8000-4ec9-913d-c6fd516117f2": "", # Archaeological Recommendation Text
+            # No concept selection available
+            "missing 0": "Conditions Scope Notes.docx",
+            "missing 1": "Mitigation Scope Notes.docx",
+            "missing 2": "Post Excavation Assessment Approval Letter.docx"
+        }
         for key, value in list(template_dict.items()):
             if key == template_id:
                 return value
 
         return None
 
-
-    """
-    def edit_letter_X(self, consultation, datatype_factory):
-        # dict of string/node pairs specific to docx template
+    def edit_letter(self, consultation, datatype_factory):
         template_dict = {
-           string_key1: 'node_id1',
-           string_key2: 'node_id2'
+            "Reference": "c128bf36-9384-11ea-bfe1-f875a44e0e11",
+            "Primary Reference Number": "b37552bd-9527-11ea-97f4-f875a44e0e11",
+            "Casework Officer": "4ea4a197-184f-11eb-9152-f875a44e0e11",
+            "Completion Date": "40eff4ce-893a-11ea-ae2e-f875a44e0e11",
+            "Consultation Name": "4ad69684-951f-11ea-b5c3-f875a44e0e11",
+            "Proposal Description": "1b0e15ec-8864-11ea-8493-f875a44e0e11",
+            "Log Date": "40eff4cd-893a-11ea-b0cc-f875a44e0e11",
+            "Signature": "4ea4a197-184f-11eb-9152-f875a44e0e11",
+            "Archaeological Priority Area": "58a2b98f-a255-11e9-9a30-00224800b26d",
+            "Assessment of Significance": "8d41e4e0-a250-11e9-877f-00224800b26d",
+            "Condition Type": "56fa335d-06fa-11eb-8328-f875a44e0e11",
+            "Condition": "c36808b0-952c-11ea-9ff0-f875a44e0e11",
+            "Mitigation Type": "e2585f8a-51a3-11eb-a7be-f875a44e0e11",
+            "Mitigation": "bfd39106-51a3-11eb-9104-f875a44e0e11"
         }
-        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
-    """
 
-
-    def edit_letter_A(self, consultation, datatype_factory):
-        template_dict = {
-            'Case Officer':'8d41e4d4-a250-11e9-a3ff-00224800b26d',
-            'Completion Date': '8d41e4cd-a250-11e9-a25b-00224800b26d',
-            'Proposal': '8d41e4bd-a250-11e9-89e8-00224800b26d',
-            'Log Date': '8d41e4cf-a250-11e9-a86d-00224800b26d',
-            'Action': 'caf5bff8-a3d7-11e9-a37c-00224800b26d'
-        }
-        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
-
-    
-    def edit_letter_B2(self, consultation, datatype_factory):
-        template_dict = {
-            'Case Officer':'8d41e4d4-a250-11e9-a3ff-00224800b26d',
-            'Completion Date': '8d41e4cd-a250-11e9-a25b-00224800b26d',
-            'Proposal': '8d41e4bd-a250-11e9-89e8-00224800b26d',
-            'Log Date': '8d41e4cf-a250-11e9-a86d-00224800b26d',
-            'Action': 'caf5bff8-a3d7-11e9-a37c-00224800b26d',
-            'Site Name': '???'
-        }
-        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
-
+        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)    
 
     def replace_in_letter(self, tiles, template_dict, datatype_factory):
         for tile in tiles:
@@ -207,12 +202,77 @@ class FileTemplateView(View):
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
                     try:
-                        if '<' in lookup_val: # not ideal
+                        if '<' in lookup_val: # look for html tag, not ideal
                             html = True
                         self.replace_string(self.doc, key, lookup_val, html)
                     except TypeError:
                         pass
 
+            contactNodeId = "b7304f4c-3ace-11eb-8884-f875a44e0e11"
+            contacts = {
+                "Applicant": "4ea4a19a-184f-11eb-aef8-f875a44e0e11",
+                "Planning Officer": "4ea4a192-184f-11eb-a0d6-f875a44e0e11",
+                "Owner": "4ea4c885-184f-11eb-b4d5-f875a44e0e11",
+                "Agent": "4ea4c884-184f-11eb-b64d-f875a44e0e11",
+                "Casework Officer": "4ea4a197-184f-11eb-9152-f875a44e0e11"
+            }
+
+            addressNodegroupId = "5f93048e-80a9-11ea-b0da-f875a44e0e11"
+            nameNodegroupId = "4110f741-1a44-11e9-885e-000d3ab1e588"
+            contactDetailsNodegroupId = "2547c12f-9505-11ea-a507-f875a44e0e11"
+            contactNamesNodegroupId = "2beefb51-4084-11eb-9b2b-f875a44e0e11"
+
+            fullnameNodeId = "5f8ded26-7ef9-11ea-8e29-f875a44e0e11"
+            contactNameforCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
+            contactPointNodeId = "2547c133-9505-11ea-8e49-f875a44e0e11"
+            contactPointTypeNodeId = "2547c132-9505-11ea-b22f-f875a44e0e11"
+            addressDict = {
+                "Building Name": "e157f10c-3af6-11eb-9ad2-f875a44e0e11",
+                "Building Number": "e157f10e-3af6-11eb-9c5e-f875a44e0e11",
+                "Street": "e157f110-3af6-11eb-80dc-f875a44e0e11",
+                "Locality": "e157f127-3af6-11eb-9394-f875a44e0e11",
+                "Town or City": "e157c9ff-3af6-11eb-9162-f875a44e0e11",
+                "Postcode": "e157ca01-3af6-11eb-bb2d-f875a44e0e11"
+            }
+
+            if contactNodeId in tile.data:
+                caseAgentResourceiId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
+                caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceiId)
+                caseAgentResource.load_tiles()
+                for caseAgentTile in caseAgentResource.tiles:
+                    if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
+                        if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
+                            print("email: " + caseAgentTile.data[contactPointNodeId])
+                            self.replace_string(self.doc, "Casework Officer Email", caseAgentTile.data[contactPointNodeId], False)
+                        elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
+                            print("phone number: " + caseAgentTile.data[contactPointNodeId])
+                            self.replace_string(self.doc, "Casework Officer Number", caseAgentTile.data[contactPointNodeId], False)
+
+                if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4":
+                    contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
+                elif tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912":
+                    contactResourceiId = tile.data[contacts["Owner"]][0]["resourceId"]
+                elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b":
+                    contactResourceiId = tile.data[contacts["Agent"]][0]["resourceId"]
+                contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
+                contactResource.load_tiles()
+
+                for contactTile in contactResource.tiles:
+                    if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
+                        self.replace_string(self.doc, "Name of person consulting", contactTile.data[fullnameNodeId], False)
+                    if contactTile.nodegroup.nodegroupid == uuid.UUID(contactNamesNodegroupId):
+                        self.replace_string(self.doc, "Contact Name", contactTile.data[contactNameforCorrespondenceNodeId], False)
+                    if contactTile.nodegroup.nodegroupid == uuid.UUID(addressNodegroupId):
+                        addressString = "{}, {}\n{}, {}\n{}\n{}".format(
+                            contactTile.data[addressDict["Building Name"]],
+                            contactTile.data[addressDict["Building Number"]],
+                            contactTile.data[addressDict["Street"]],
+                            contactTile.data[addressDict["Locality"]],
+                            contactTile.data[addressDict["Town or City"]],
+                            contactTile.data[addressDict["Postcode"]]
+                        )
+                        print("Address of consulting organisation" + addressString)
+                        self.replace_string(self.doc, "Address of consulting organisation", addressString, False)
     
     def replace_string(self, document, key, v, html=False):
         # Note that the intent here is to preserve how things are styled in the docx
@@ -245,7 +305,7 @@ class FileTemplateView(View):
                         replace_in_runs(cell.paragraphs, k, v)
         
         if v is not None and key is not None:
-            k = "{{"+key+"}}"
+            k = "<"+key+">"
             doc = document
             # some of these are probably unnecessary
             # foot_style = styles['Footer']

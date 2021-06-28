@@ -18,7 +18,7 @@ define([
             this.setLayout = function(layout){ self.layout(layout); };
             this.loading = ko.observable(true);
             // this.mapImageURL = ko.observable('');
-            this.active_items = ko.observableArray([]);
+            this.activeItems = ko.observableArray([]);
             this.page = ko.observable(1); // pages indexed at 1
             this.orderByOption = ko.observable("");
             this.keyword = ko.observable("");
@@ -176,7 +176,7 @@ define([
 
             this.getConsultations = function() {
                 self.loading(true);
-                self.active_items.removeAll();
+                self.activeItems.removeAll();
                 $.ajax({
                     type: "GET",
                     url: arches.urls.root + 'activeconsultations',
@@ -198,19 +198,19 @@ define([
                             consultation.sources = Object.assign({
                                 'app-area-geom': {
                                     "type": "geojson",
-                                    "data": consultation["Geospatial Location"] ?
-                                        consultation["Geospatial Location"] :
+                                    "data": consultation["Geospatial Coordinates"] ?
+                                        consultation["Geospatial Coordinates"] :
                                         {
                                             "features": [],
                                             "type":"FeatureCollection"
                                         }
                                 }
                             }, arches.mapSources);
-                            if (consultation["Geospatial Location"]) {
-                                if (consultation["Geospatial Location"]["features"].length > 0) {
+                            if (consultation["Geospatial Coordinates"]) {
+                                if (consultation["Geospatial Coordinates"]["features"].length > 0) {
                                     consultation.bounds = geojsonExtent({
                                         type: 'FeatureCollection',
-                                        features: consultation["Geospatial Location"]["features"]
+                                        features: consultation["Geospatial Coordinates"]["features"]
                                     });
                                     consultation.fitBoundsOptions = {
                                         padding: 40,
@@ -220,7 +220,7 @@ define([
                             }
 
                             consultation.layers = self.layers;
-                            self.active_items.push(consultation);
+                            self.activeItems.push(consultation);
                         });
                         self.loading(false);
                     },
