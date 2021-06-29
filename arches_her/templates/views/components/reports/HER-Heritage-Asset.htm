@@ -185,7 +185,7 @@
             <div class="her-report-page" data-bind="if: activeSection() === 'prod'">
                 <div class="her-report-section">
                     <h2 class="her-report-section-title">{% trans "Production Events" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Production Event" %}</a>
+                    <a class="her-report-a disabled"><i class="fa fa-mail-reply"></i> {% trans "Add Production Event" %}</a>
 
                     <!-- Show this block if there's NO data -->
                     <div class="her-nodata-note" style="display: none;">No events created for this Physical Thing</div>
@@ -370,35 +370,19 @@
                                     </div>
                                 </div>
                             </div>
-
-
-                            <!-- Event First Generation Cards -->
-                            <div class="her-report-subsection-firstchild">
-                                <h5 class="">Production Event Parts</h5>
-                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Part" %}</a>
-                                <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note" style="display: none;">No parts for this event</div>
-
-                                <!-- Show this block if there's data -->
-                                <div class="firstchild-container" style="">
-                                    <div class="her-block-attributes">
-                                        <h6 class="her-block-key"><span>Pedestal</span></h6>
-                                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Part" %}</a>
-                                    </div>
-                                    <div class="her-block-attributes">
-                                        <h6 class="her-block-key"><span>Torso</span></h6>
-                                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Part" %}</a>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
-                    </div>
+                    </div> 
+                </div>
 
+                <!-- Production Event Parts -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">{% trans "Production Event Parts" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part" %}</a>
 
-                    <!-- Prodcuction Event Block (one for each production evenet) -->
-                    <div class="her-report-subsection">
-                        <h3 class=""><i class="fa fa-angle-double-right"></i> {% trans "Production Event: " %} <span>Statue Painting</span></h3>
-                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Event" %}</a>
+                    <!-- Prodcuction Event Part -->
+                    <div class="her-report-subsection production-part">
+                        <h3 class=""><i class="fa fa-angle-double-right"></i> {% trans "Production Event Part: " %} <span>Statue Torso</span></h3>
+                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Part" %}</a>
 
                         <!-- Show this block if there's NO data -->
                         <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
@@ -510,30 +494,44 @@
 
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container" style="display: none;">
-
-                                </div>
-                            </div>
-
-                            <!-- Event First Generation Cards -->
-                            <div class="her-report-subsection-firstchild">
-                                <h5 class="">Production Event Parts</h5>
-                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Part" %}</a>
-                                <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note">No parts for this event</div>
-
-                                <!-- Show this block if there's data -->
-                                <div class="firstchild-container" style="display: none;">
-
+                                    <div class="her-report-subsection-item flex">
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">Beginning of the beginning: </h6>
+                                            <div class="her-block-value">2021-02-18</div>
+                                        </div>
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">End of the beginning: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                    </div>
+                                    <div class="her-report-subsection-item flex" style="margin-top: -5px;">
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">Beginning of the end: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">End of the end: </h6>
+                                            <div class="her-block-value">2021-05-22</div>
+                                        </div>
+                                    </div>
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event timespan: </h6>
+                                            <div class="her-block-value">Probable time period of statue creation</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Duration: </h6>
+                                            <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event duration: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-
-                <!-- External Reference -->
-                <div class="her-report-section">
-                    <h2 class="her-report-section-title">{% trans "Next Page section" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
                 </div>
             </div>
             <!-- End Location -->
