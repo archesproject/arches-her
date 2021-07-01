@@ -101,11 +101,11 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">No references for this resource</div>
+                        <div class="her-nodata-note" style="">No references for this resource</div>
 
 
                         <!-- Show this block if there is resource tile content -->
-                        <div class="her-table" data-bind="" style="max-width: 1000px;">
+                        <div class="her-table" data-bind="" style="max-width: 1000px; display: none;">
                             <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                 <thead class="">
                                     <tr class="her-table-header">
@@ -171,7 +171,234 @@
 
             <!-- Location -->
             <div class="her-report-page" data-bind="if: activeSection() === 'location'">
-                <div>Location content here</div>
+                
+                <!-- Geometry/Map -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <div class="her-report-subsection">
+                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry: " %}  <span>(Shape type: Locality)</span></h3>
+                            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+
+                            <!-- Show this block if there's NO data -->
+                            <div class="her-nodata-note her-top-card" style="display: none;">No geometry for this resource</div>
+
+                    
+                            <!-- Show this block if there is resource tile content -->
+                            <div class="her-report-subsection-container no-flex">
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No geometry for this resource</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+
+                                    <div class="her-report-map">
+                                        map showing resource geometry goes here
+                                    </div>
+
+                                </div>   
+                            </div>
+                        </div>
+
+                        <div class="her-report-subsection">
+
+                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry Metadata: " %}</h3>
+                            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit metadata" %}</a>
+
+                            <!-- Show this block if there's NO data -->
+                            <div class="her-nodata-note her-top-card" style="display: none;">No metadata for this resource</div>
+
+                    
+                            <!-- Show this block if there is resource tile content -->
+                            <div class="her-report-subsection-container no-flex">
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No metadata for this resource</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="her-report-subsection-container multi-cards">
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5 class="">Production Event Timespan</h5>
+                                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit Event Timespan" %}</a>
+                                        <!-- Show this block if there's NO data -->
+                                        <div class="her-nodata-note" style="display: none;">No timespan for this event</div>
+
+                                        <!-- Show this block if there's data -->
+                                        <div class="firstchild-container" style="">
+                                            <div class="her-report-subsection-item flex">
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key">Beginning of the beginning: </h6>
+                                                    <div class="her-block-value">2021-02-18</div>
+                                                </div>
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key">End of the beginning: </h6>
+                                                    <div class="her-block-value">--</div>
+                                                </div>
+                                            </div>
+                                            <div class="her-report-subsection-item flex" style="margin-top: -5px;">
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key">Beginning of the end: </h6>
+                                                    <div class="her-block-value">--</div>
+                                                </div>
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key">End of the end: </h6>
+                                                    <div class="her-block-value">2021-05-22</div>
+                                                </div>
+                                            </div>
+                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Name of event timespan: </h6>
+                                                    <div class="her-block-value">Probable time period of statue creation</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Duration: </h6>
+                                                    <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Name of event duration: </h6>
+                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+
+
+
+                                </div>   
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Addresses -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Adresses" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="">No addresses for this resource</div>
+
+                        <!-- Show this block if there's IS data -->
+                        <div class="her-report-subsection" style="display: none;">
+                            
+                            Address Table goes here
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Location Description -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Location Description" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="">No location description for this resource</div>
+
+                        <!-- Show this block if there's IS data -->
+                        <div class="her-report-subsection" style="display: none;">
+                            
+                            description goes here
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Areas -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Administrative Areas" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="">No administrative areas for this resource</div>
+
+                        <!-- Show this block if there's IS data -->
+                        <div class="her-report-subsection" style="display: none;">
+                            
+                            admin area data goes here
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- National Grid References -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "National Grid References" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="">No grid references for this resource</div>
+
+                        <!-- Show this block if there's IS data -->
+                        <div class="her-report-subsection" style="display: none;">
+                            
+                            grid reference data goes here
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Area Assignments -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Area Assignments" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Area Assignment" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="">No area assignments for this resource</div>
+
+                        <!-- Show this block if there's IS data -->
+                        <div class="her-report-subsection" style="display: none;">
+                            
+                            area assignment data goes here
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Land Use Classification -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Land Use Classification" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Classification" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="">No land use classes for this resource</div>
+
+                        <!-- Show this block if there's IS data -->
+                        <div class="her-report-subsection" style="display: none;">
+                            
+                            land use data goes here
+
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
             <!-- End Location -->
 
@@ -184,11 +411,11 @@
             <!-- Production -->
             <div class="her-report-page" data-bind="if: activeSection() === 'prod'">
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title">{% trans "Production Events" %}</h2>
+                    <h2 class="her-report-section-title">{% trans "Production Event" %}</h2>
                     <a class="her-report-a disabled"><i class="fa fa-mail-reply"></i> {% trans "Add Production Event" %}</a>
 
                     <!-- Show this block if there's NO data -->
-                    <div class="her-nodata-note" style="display: none;">No events created for this Physical Thing</div>
+                    <div class="her-nodata-note" style="display: none;">No event created for this Physical Thing</div>
 
                     <!-- Show this div if there are event data -->
                     <!-- Production Event Block (one for each production event) -->
