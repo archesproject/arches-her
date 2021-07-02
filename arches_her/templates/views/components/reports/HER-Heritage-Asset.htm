@@ -382,7 +382,7 @@
 
                 <!-- Location Description -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Location Description" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Location Descriptions" %}</h2>
                     <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
 
                     <!-- Collapsible content -->
@@ -397,29 +397,18 @@
                             <div class="firstchild-container">
                                 <!-- Statements Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: locDescriptionsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Statement Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "Type" %}</th>
+                                                <th class="">{% trans "Description" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
-                                                <td>--</td>
+                                                <td>Abstract</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Take a right at the light. Then go straight until night.  Look for the big red barn, then turn left. Go another few miles and you're almost there.</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
@@ -451,7 +440,7 @@
                                     <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Statement Type" %}</th>
+                                                <th>{% trans "Type" %}</th>
                                                 <th class="">{% trans "Statement" %}</th>
                                                 <th class="none">{% trans "Language" %}</th>
                                                 <th class="none">{% trans "Name of Statement" %}</th>
@@ -502,7 +491,7 @@
                                     <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Statement Type" %}</th>
+                                                <th>{% trans "Type" %}</th>
                                                 <th class="">{% trans "Statement" %}</th>
                                                 <th class="none">{% trans "Language" %}</th>
                                                 <th class="none">{% trans "Name of Statement" %}</th>
@@ -553,7 +542,7 @@
                                     <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Statement Type" %}</th>
+                                                <th>{% trans "Type" %}</th>
                                                 <th class="">{% trans "Statement" %}</th>
                                                 <th class="none">{% trans "Language" %}</th>
                                                 <th class="none">{% trans "Name of Statement" %}</th>
@@ -586,7 +575,7 @@
 
                 <!-- Land Use Classification -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Land Use Classification" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Land Use Classifications" %}</h2>
                     <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Classification" %}</a>
 
                     <!-- Collapsible content -->
@@ -604,7 +593,7 @@
                                     <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Statement Type" %}</th>
+                                                <th>{% trans "Type" %}</th>
                                                 <th class="">{% trans "Statement" %}</th>
                                                 <th class="none">{% trans "Language" %}</th>
                                                 <th class="none">{% trans "Name of Statement" %}</th>
@@ -748,7 +737,7 @@
                                         <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                             <thead class="">
                                                 <tr class="her-table-header">
-                                                    <th>{% trans "Statement Type" %}</th>
+                                                    <th>{% trans "Type" %}</th>
                                                     <th class="">{% trans "Statement" %}</th>
                                                     <th class="none">{% trans "Language" %}</th>
                                                     <th class="none">{% trans "Name of Statement" %}</th>
