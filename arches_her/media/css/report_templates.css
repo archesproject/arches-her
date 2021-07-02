@@ -326,7 +326,7 @@ i.toggle:hover {
     display: block;
 }
 
-.her-report-subsection-container .multi-cards {
+.her-report-subsection-container.multi-cards {
     margin-left: -30px;
 }
 
@@ -379,9 +379,19 @@ i.toggle:hover {
     color: #555;
 }
 
+.her-block-attributes.actor-name {
+    width: 300px;
+}
+
 .her-block-attributes.timespan {
     width: 300px;
 }
+
+.her-block-key.compressed {
+    padding-top: 0px;
+    margin: 0px;
+}
+
 
 .her-report-subsection-firstchild {
     padding: 0px 0px 15px 30px;;
@@ -517,8 +527,11 @@ i.toggle:hover {
     width: 100%;
     height: 450px;
     background: #f6f6f6;
-    border:  1px solid #ddd;
+    border-right:  1px solid #ddd;
+    border-bottom:  1px solid #ddd;
+    border-left:  1px solid #ddd;
     margin-bottom: 5px;
+    margin-top: 0px;
 }
 
 

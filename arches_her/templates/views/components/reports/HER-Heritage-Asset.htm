@@ -181,7 +181,7 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <div class="her-report-subsection">
-                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry: " %}  <span>(Shape type: Locality)</span></h3>
+                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry " %}  <span>(Shape type: Locality)</span></h3>
                             <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
 
                             <!-- Show this block if there's NO data -->
@@ -205,74 +205,114 @@
                             </div>
                         </div>
 
+                        <!-- Geometry Metadata -->
                         <div class="her-report-subsection">
-
-                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry Metadata: " %}</h3>
-                            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit metadata" %}</a>
-
-                            <!-- Show this block if there's NO data -->
-                            <div class="her-nodata-note her-top-card" style="display: none;">No metadata for this resource</div>
-
+                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry Metadata" %}</h3>
+                            
+                            <!-- Collapsible content -->
+                            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
                     
-                            <!-- Show this block if there is resource tile content -->
-                            <div class="her-report-subsection-container no-flex">
-                                
                                 <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note" style="display: none;">No metadata for this resource</div>
+                                <div class="her-nodata-note her-top-card" style="display: none;">No metadata for this resource</div>
 
-                                <!-- Show this block if there's data -->
-                                <div class="her-report-subsection-container multi-cards">
+                                <!-- Show this block if there is resource tile content -->   
+                                <div class="her-report-subsection-container multi-cards no-flex">
+
+                                    <!-- Record Authorization/Compilation/Update -->
                                     <div class="her-report-subsection-firstchild">
-                                        <h5 class="">Production Event Timespan</h5>
-                                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit Event Timespan" %}</a>
-                                        <!-- Show this block if there's NO data -->
-                                        <div class="her-nodata-note" style="display: none;">No timespan for this event</div>
+                                        <h5 class="">Record Edit History</h5>
+                                        
+                                        <!-- Show this block if there's NO data (for all 3 tiles in this tile) -->
+                                        <div class="her-nodata-note" style="display: none;">No authorization record for this resource</div>
 
                                         <!-- Show this block if there's data -->
                                         <div class="firstchild-container" style="">
                                             <div class="her-report-subsection-item flex">
-                                                <div class="her-block-attributes timespan">
-                                                    <h6 class="her-block-key">Beginning of the beginning: </h6>
-                                                    <div class="her-block-value">2021-02-18</div>
+                                                <div class="her-block-attributes actor-name">
+                                                    <h6 class="her-block-key compressed">Record Reviewer: </h6>
+                                                    <div class="her-block-value">Stuart Cakebread</div>
                                                 </div>
                                                 <div class="her-block-attributes timespan">
-                                                    <h6 class="her-block-key">End of the beginning: </h6>
-                                                    <div class="her-block-value">--</div>
+                                                    <h6 class="her-block-key compressed">Review Date: </h6>
+                                                    <div class="her-block-value">2020-06-17</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Type of Review: </h6>
+                                                    <div class="her-block-value">Authorized</div>
                                                 </div>
                                             </div>
-                                            <div class="her-report-subsection-item flex" style="margin-top: -5px;">
-                                                <div class="her-block-attributes timespan">
-                                                    <h6 class="her-block-key">Beginning of the end: </h6>
-                                                    <div class="her-block-value">--</div>
+                                            <div class="her-report-subsection-item flex">
+                                                <div class="her-block-attributes actor-name">
+                                                    <h6 class="her-block-key compressed">Compiler: </h6>
+                                                    <div class="her-block-value">Laura O'Gorman</div>
                                                 </div>
                                                 <div class="her-block-attributes timespan">
-                                                    <h6 class="her-block-key">End of the end: </h6>
+                                                    <h6 class="her-block-key compressed">Compile Date: </h6>
                                                     <div class="her-block-value">2021-05-22</div>
                                                 </div>
                                             </div>
-                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Name of event timespan: </h6>
-                                                    <div class="her-block-value">Probable time period of statue creation</div>
+                                            <div class="her-report-subsection-item flex">
+                                                <div class="her-block-attributes actor-name">
+                                                    <h6 class="her-block-key compressed">Last Update: </h6>
+                                                    <div class="her-block-value">Phil Carlisle</div>
                                                 </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Duration: </h6>
-                                                    <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Name of event duration: </h6>
-                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key compressed">Update Date: </h6>
+                                                    <div class="her-block-value">2021-06-03</div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
 
-                                    
+                                    <!-- Geometry Sources/Scale -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5 class="">Record Sources/Scale</h5>
 
+                                        <!-- Show this block if there's NO data (for all tiles in this block-->
+                                        <div class="her-nodata-note" style="display: none;">No authorization record for this resource</div>
 
+                                        <!-- Show this block if there's data -->
+                                        <div class="firstchild-container" style="">
+                                            <div class="her-report-subsection-item flex column-order pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Coordinate System: </h6>
+                                                    <div class="her-block-value">WGS84 NAD83</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Basemap: </h6>
+                                                    <div class="her-block-value">Central London</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Capture Scale: </h6>
+                                                    <div class="her-block-value">--</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Accuracy: </h6>
+                                                    <div class="her-block-value">100</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
 
+                                    <!-- Record Description -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5 class="">Description</h5>
+                                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Description" %}</a>
+                                        
+                                        <!-- Show this block if there's NO data -->
+                                        <div class="her-nodata-note" style="display: none;">No description record for this resource</div>
 
-                                </div>   
+                                        <!-- Show this block if there's data -->
+                                        <div class="firstchild-container pad-btm" style="">
+                                            <div class="her-report-subsection-item">
+                                                <div class="her-block-attributes" style="margin-top: 5px;">
+                                                    <h6 class="her-block-key compressed">Metadata Description: </h6>
+                                                    <div class="her-block-value">Stuart Cakebread did this</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>  
                             </div>
                         </div>
                     </div>
@@ -287,12 +327,43 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="">No addresses for this resource</div>
+                        <div class="her-nodata-note" style="display: none;">No addresses for this resource</div>
 
                         <!-- Show this block if there's IS data -->
-                        <div class="her-report-subsection" style="display: none;">
+                        <div class="her-report-subsection" style="">
                             
-                            Address Table goes here
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm" style="">
+                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Statement Type" %}</th>
+                                                <th class="">{% trans "Statement" %}</th>
+                                                <th class="none">{% trans "Language" %}</th>
+                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Acknowledgements</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                <td>English (language)</td>
+                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brief Text</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                <td>English (language)</td>
+                                                <td>--</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -307,12 +378,43 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="">No location description for this resource</div>
+                        <div class="her-nodata-note" style="display: none;">No location description for this resource</div>
 
                         <!-- Show this block if there's IS data -->
-                        <div class="her-report-subsection" style="display: none;">
+                        <div class="her-report-subsection" style="">
                             
-                            description goes here
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm" style="">
+                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Statement Type" %}</th>
+                                                <th class="">{% trans "Statement" %}</th>
+                                                <th class="none">{% trans "Language" %}</th>
+                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Acknowledgements</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                <td>English (language)</td>
+                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brief Text</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                <td>English (language)</td>
+                                                <td>--</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -327,12 +429,43 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="">No administrative areas for this resource</div>
+                        <div class="her-nodata-note" style="display: none;">No administrative areas for this resource</div>
 
                         <!-- Show this block if there's IS data -->
-                        <div class="her-report-subsection" style="display: none;">
+                        <div class="her-report-subsection" style="">
                             
-                            admin area data goes here
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm" style="">
+                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Statement Type" %}</th>
+                                                <th class="">{% trans "Statement" %}</th>
+                                                <th class="none">{% trans "Language" %}</th>
+                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Acknowledgements</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                <td>English (language)</td>
+                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brief Text</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                <td>English (language)</td>
+                                                <td>--</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -347,12 +480,43 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="">No grid references for this resource</div>
+                        <div class="her-nodata-note" style="display: none;">No grid references for this resource</div>
 
                         <!-- Show this block if there's IS data -->
-                        <div class="her-report-subsection" style="display: none;">
+                        <div class="her-report-subsection" style="">
                             
-                            grid reference data goes here
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm" style="">
+                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Statement Type" %}</th>
+                                                <th class="">{% trans "Statement" %}</th>
+                                                <th class="none">{% trans "Language" %}</th>
+                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Acknowledgements</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                <td>English (language)</td>
+                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brief Text</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                <td>English (language)</td>
+                                                <td>--</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -367,12 +531,43 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="">No area assignments for this resource</div>
+                        <div class="her-nodata-note" style="display: none;">No area assignments for this resource</div>
 
                         <!-- Show this block if there's IS data -->
-                        <div class="her-report-subsection" style="display: none;">
+                        <div class="her-report-subsection" style="">
                             
-                            area assignment data goes here
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm" style="">
+                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Statement Type" %}</th>
+                                                <th class="">{% trans "Statement" %}</th>
+                                                <th class="none">{% trans "Language" %}</th>
+                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Acknowledgements</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                <td>English (language)</td>
+                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brief Text</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                <td>English (language)</td>
+                                                <td>--</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
@@ -387,12 +582,43 @@
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="">No land use classes for this resource</div>
+                        <div class="her-nodata-note" style="isplay: none;">No land use classes for this resource</div>
 
                         <!-- Show this block if there's IS data -->
-                        <div class="her-report-subsection" style="display: none;">
+                        <div class="her-report-subsection" style="d">
                             
-                            land use data goes here
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm" style="">
+                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Statement Type" %}</th>
+                                                <th class="">{% trans "Statement" %}</th>
+                                                <th class="none">{% trans "Language" %}</th>
+                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Acknowledgements</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                <td>English (language)</td>
+                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Brief Text</td>
+                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                <td>English (language)</td>
+                                                <td>--</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
 
                         </div>
                     </div>
