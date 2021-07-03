@@ -49,7 +49,7 @@
             
             <!-- Names Tab -->
             <div class="her-report-page" data-bind="if: activeSection() === 'name'">
-                
+
                 <!-- Names section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Names" %}</h2>
@@ -63,31 +63,35 @@
 
 
                         <!-- Show this block if there is resource tile content -->
-                        <div class="her-table" data-bind="" style="max-width: 1000px;">
-                            <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
-                                <thead class="">
-                                    <tr class="her-table-header">
-                                        <th>{% trans "Name" %}</th>
-                                        <th class="min-tabletl">{% trans "Type" %}</th>
-                                        <th class="min-medium">{% trans "Currency" %}</th>
-                                        <th class="her-table-control all"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Huxley House</td>
-                                        <td>Primary</td>
-                                        <td>Current</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aldus Huxley Manor</td>
-                                        <td>Alternate</td>
-                                        <td>Current</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                    <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th class="min-tabletl">{% trans "Type" %}</th>
+                                                <th class="min-medium">{% trans "Currency" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Huxley House</td>
+                                                <td>Primary</td>
+                                                <td>Current</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aldus Huxley Manor</td>
+                                                <td>Alternate</td>
+                                                <td>Current</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -105,31 +109,35 @@
 
 
                         <!-- Show this block if there is resource tile content -->
-                        <div class="her-table" data-bind="" style="max-width: 1000px; display: none;">
-                            <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
-                                <thead class="">
-                                    <tr class="her-table-header">
-                                        <th>{% trans "Name" %}</th>
-                                        <th class="min-tabletl">{% trans "Type" %}</th>
-                                        <th class="min-medium">{% trans "Currency" %}</th>
-                                        <th class="her-table-control all"></th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>Huxley House</td>
-                                        <td>Primary</td>
-                                        <td>Current</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Aldus Huxley Manor</td>
-                                        <td>Alternate</td>
-                                        <td>Current</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div class="her-report-subsection" style="display: none;">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                    <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th class="min-tabletl">{% trans "Type" %}</th>
+                                                <th class="min-medium">{% trans "Currency" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Huxley House</td>
+                                                <td>Primary</td>
+                                                <td>Current</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Aldus Huxley Manor</td>
+                                                <td>Alternate</td>
+                                                <td>Current</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -147,22 +155,23 @@
 
 
                         <!-- Show this block if there is resource tile content -->
-                        <div class="her-report-subsection-container">
-                            <div class="her-report-subsection-item">
-                                <div class="her-block-attributes">
-                                    <h4 class="her-block-key">Resource ID: </h4>
-                                    <div class="her-block-value">076f9381-7b00-11e9-8d6b-80000b44d1d9</div>
-                                </div>
-                                <div class="her-block-attributes">
-                                    <h4 class="her-block-key">Legacy ID: </h4>
-                                    <div class="her-block-value">MOR-34772</div>
-                                </div>
-                                <div class="her-block-attributes">
-                                    <h4 class="her-block-key">Primary Reference Number: </h4>
-                                    <div class="her-block-value">22a</div>
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Resource ID: </h4>
+                                        <div class="her-block-value">076f9381-7b00-11e9-8d6b-80000b44d1d9</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Legacy ID: </h4>
+                                        <div class="her-block-value">MOR-34772</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Primary Reference Number: </h4>
+                                        <div class="her-block-value">22a</div>
+                                    </div>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -644,7 +653,7 @@
                         <div class="her-report-subsection" style="">
                             
                             <div class="firstchild-container">
-                                <!-- Statements Table -->
+                                
                                 <div class="her-table pad-btm" style="">
                                     <table data-bind="datatable: conPhasesTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
@@ -728,38 +737,39 @@
                         <div class="her-report-subsection" style="">
                             
                             <div class="firstchild-container">
-                                <!-- Statements Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: componentsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "Associated Construction" %}</th>
+                                                <th class="">{% trans "Component" %}</th>
+                                                <th class="">{% trans "Technique" %}</th>
+                                                <th class="">{% trans "Material" %}</th>
+                                                <th class="medium">{% trans "Evidence" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td>Church Hall</td>
+                                                <td>Chapel</td>
+                                                <td>Brickwork</td>
+                                                <td>Flint stone</td>
+                                                <td>Conjectural</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                             <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
-                                                <td>--</td>
+                                                <td>Church Hall</td>
+                                                <td>Apse</td>
+                                                <td>Brickwork</td>
+                                                <td>Stone</td>
+                                                <td>Conjectural</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -779,38 +789,39 @@
                         <div class="her-report-subsection" style="">
                             
                             <div class="firstchild-container">
-                                <!-- Statements Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: usePhasesTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
                                                 <th>{% trans "Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "Period" %}</th>
+                                                <th>{% trans "Start Date" %}</th>
+                                                <th>{% trans "End Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Use Evidence" %}</th>
+                                                <th class="none">{% trans "Description Type" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
+                                                <td>Pub</td>
+                                                <td>Edwardian</td>
+                                                <td>Spring 1918</td>
                                                 <td>--</td>
+                                                <td>Throughout</td>
+                                                <td>Spring 1918 - present</td>
+                                                <td>Documentary Evidence</td>
+                                                <td>Abstract</td>
+                                                <td>A very nice pub in an old chuch.  Lovely building, lovely setting.  You can see why they built it here.  Excellent architecture.  Just wish that they had added a bit of paint to the outside.  A touch up on the inside wouldn't hurt either</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div>
+                                </div>            
                             </div>
-
                         </div>
                     </div>
                 </div>
