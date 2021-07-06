@@ -65,7 +65,7 @@
                         <!-- Show this block if there is resource tile content -->
                         <div class="her-report-subsection" style="">
                             <div class="firstchild-container">
-                                <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                <div class="her-table" data-bind="" style="">
                                     <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
@@ -384,7 +384,6 @@
                                     </table>
                                 </div>
                             </div>
-
                         </div>
                     </div>
                 </div>
@@ -635,6 +634,149 @@
             </div>
             <!-- End Location -->
 
+            <!-- Designation/Protection -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'designation'">
+                
+                <!-- Geometry/Map -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Designation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <div class="her-report-subsection">
+                            <!-- Show this block if there's NO data -->
+                            <div class="her-nodata-note her-top-card" style="display: none;">No geometry for this resource</div>
+
+                    
+                            <!-- Show this block if there is resource tile content -->
+                            <div class="her-report-subsection-container no-flex">
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No geometry for this resource</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <div class="her-report-map her-designation">
+                                        map showing resource geometry goes here.  Map shows all the designation geometries for all designation/protection tiles.  Highlight the geometries associated with the tile in the table below when the user hovers over the row or expands the row.
+                                    </div>
+                                </div>   
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild outdent">
+                                <h5 class="">Designation/Protection Details</h5>
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No designation information for this resource</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="">
+                                    <!-- designation table  -->
+                                    <div class="her-table" style="max-width: 100%">
+                                        <table data-bind="datatable: designationTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead class="">
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Designation Name" %}</th>
+                                                    <th class="">{% trans "Protection Type" %}</th>
+                                                    <th class="min-medium">{% trans "Start Date" %}</th>
+                                                    <th class="min-medium">{% trans "End Date" %}</th>
+                                                    <th class="">{% trans "Grade" %}</th>
+                                                    <th class="">{% trans "Risk" %}</th>
+                                                    <th class="none">{% trans "Amendment Date" %}</th>
+                                                    <th class="none">{% trans "Display Date" %}</th>
+                                                    <th class="none">{% trans "Date Qualifier" %}</th>
+                                                    <th class="none">{% trans "Reference" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Carlisle Building Protection</td>
+                                                    <td>Locally Listed Building</td>
+                                                    <td>2012-03-12</td>
+                                                    <td>2019-09-21</td>
+                                                    <td>Grade I</td>
+                                                    <td>Not at risk</td>
+                                                    <td>--</td>
+                                                    <td>2012 - 2019</td>
+                                                    <td>Between</td>
+                                                    <td>Designated by HE in response to a petition by a local group</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Carlisle Building Protection</td>
+                                                    <td>Locally Listed Building</td>
+                                                    <td>2020-11-12</td>
+                                                    <td>--</td>
+                                                    <td>Grade II</td>
+                                                    <td>Not at risk</td>
+                                                    <td>--</td>
+                                                    <td>2020 - present</td>
+                                                    <td>Between</td>
+                                                    <td>re-designated by HE after an unauthorized renovation</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Files section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection Files" %}</h2>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: designationFilesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Designation/Protection" %}</th>
+                                                <th class="">{% trans "File" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Carlisle Building Protection</td>
+                                                <td>Onsite Inspection Report</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carlisle Building Protection</td>
+                                                <td>Building Permit #12224 </td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Designation/Protection -->
+
             <!-- Construction Phases and Components -->
             <div class="her-report-page" data-bind="if: activeSection() === 'phase'">
                 
@@ -826,7 +968,7 @@
                     </div>
                 </div>
             </div>
-            <!-- End Phases -->
+            <!-- End Construction Phases and Components -->
 
             <!-- Production -->
             <div class="her-report-page" data-bind="if: activeSection() === 'prod'">
@@ -1336,8 +1478,6 @@
                         </div>
                     </div>
                 </div>
-
-               
             </div>
             <!-- End Photos -->
 
