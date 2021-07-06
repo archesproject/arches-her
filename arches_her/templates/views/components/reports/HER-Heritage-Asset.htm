@@ -645,16 +645,16 @@
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
 
+                        <!-- Designation Map  -->
                         <div class="her-report-subsection">
+                            <h3 class=""><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation Extent " %}</h3>
+
                             <!-- Show this block if there's NO data -->
-                            <div class="her-nodata-note her-top-card" style="display: none;">No geometry for this resource</div>
+                            <div class="her-nodata-note her-top-card" style="display: none;">No extent for this resource</div>
 
                     
                             <!-- Show this block if there is resource tile content -->
                             <div class="her-report-subsection-container no-flex">
-                                
-                                <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note" style="display: none;">No geometry for this resource</div>
 
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container">
@@ -663,72 +663,79 @@
                                     </div>
                                 </div>   
                             </div>
+                        </div>
 
-                            <!-- Event First Generation Cards -->
-                            <div class="her-report-subsection-firstchild outdent">
-                                <h5 class="">Designation/Protection Details</h5>
-                                
-                                <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note" style="display: none;">No designation information for this resource</div>
 
-                                <!-- Show this block if there's data -->
-                                <div class="firstchild-container" style="">
-                                    <!-- designation table  -->
-                                    <div class="her-table" style="max-width: 100%">
-                                        <table data-bind="datatable: designationTableConfig" class="table table-striped" cellspacing="0" width="100%">
-                                            <thead class="">
-                                                <tr class="her-table-header">
-                                                    <th>{% trans "Designation Name" %}</th>
-                                                    <th class="">{% trans "Protection Type" %}</th>
-                                                    <th class="min-medium">{% trans "Start Date" %}</th>
-                                                    <th class="min-medium">{% trans "End Date" %}</th>
-                                                    <th class="">{% trans "Grade" %}</th>
-                                                    <th class="">{% trans "Risk" %}</th>
-                                                    <th class="none">{% trans "Amendment Date" %}</th>
-                                                    <th class="none">{% trans "Display Date" %}</th>
-                                                    <th class="none">{% trans "Date Qualifier" %}</th>
-                                                    <th class="none">{% trans "Reference" %}</th>
-                                                    <th class="her-table-control all"></th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Carlisle Building Protection</td>
-                                                    <td>Locally Listed Building</td>
-                                                    <td>2012-03-12</td>
-                                                    <td>2019-09-21</td>
-                                                    <td>Grade I</td>
-                                                    <td>Not at risk</td>
-                                                    <td>--</td>
-                                                    <td>2012 - 2019</td>
-                                                    <td>Between</td>
-                                                    <td>Designated by HE in response to a petition by a local group</td>
-                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Carlisle Building Protection</td>
-                                                    <td>Locally Listed Building</td>
-                                                    <td>2020-11-12</td>
-                                                    <td>--</td>
-                                                    <td>Grade II</td>
-                                                    <td>Not at risk</td>
-                                                    <td>--</td>
-                                                    <td>2020 - present</td>
-                                                    <td>Between</td>
-                                                    <td>re-designated by HE after an unauthorized renovation</td>
-                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                        <!-- Designation Records -->
+                        <div class="her-report-subsection">
+                            
+                            <!-- Collapsible content -->
+                            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
+ 
+                                <div class="her-report-subsection-container multi-cards no-flex">
+
+                                    <!-- Event First Generation Cards -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5 class="">Designation/Protection Details</h5>
+                                        
+                                        <!-- Show this block if there's NO data -->
+                                        <div class="her-nodata-note" style="display: none;">No designation information for this resource</div>
+
+                                        <!-- Show this block if there's data -->
+                                        <div class="firstchild-container" style="">
+                                            <!-- designation table  -->
+                                            <div class="her-table" style="max-width: 100%">
+                                                <table data-bind="datatable: designationTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead class="">
+                                                        <tr class="her-table-header">
+                                                            <th>{% trans "Designation Name" %}</th>
+                                                            <th class="">{% trans "Protection Type" %}</th>
+                                                            <th class="min-medium">{% trans "Start Date" %}</th>
+                                                            <th class="min-medium">{% trans "End Date" %}</th>
+                                                            <th class="">{% trans "Grade" %}</th>
+                                                            <th class="">{% trans "Risk" %}</th>
+                                                            <th class="none">{% trans "Amendment Date" %}</th>
+                                                            <th class="none">{% trans "Display Date" %}</th>
+                                                            <th class="none">{% trans "Date Qualifier" %}</th>
+                                                            <th class="none">{% trans "Reference" %}</th>
+                                                            <th class="her-table-control all"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Carlisle Building Protection</td>
+                                                            <td>Locally Listed Building</td>
+                                                            <td>2012-03-12</td>
+                                                            <td>2019-09-21</td>
+                                                            <td>Grade I</td>
+                                                            <td>Not at risk</td>
+                                                            <td>--</td>
+                                                            <td>2012 - 2019</td>
+                                                            <td>Between</td>
+                                                            <td>Designated by HE in response to a petition by a local group</td>
+                                                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Carlisle Building Protection</td>
+                                                            <td>Locally Listed Building</td>
+                                                            <td>2020-11-12</td>
+                                                            <td>--</td>
+                                                            <td>Grade II</td>
+                                                            <td>Not at risk</td>
+                                                            <td>--</td>
+                                                            <td>2020 - present</td>
+                                                            <td>Between</td>
+                                                            <td>re-designated by HE after an unauthorized renovation</td>
+                                                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
+
                             </div>
-
-
-
-
-
-
                         </div>
                     </div>
                 </div>
@@ -1208,11 +1215,11 @@
                         
                             <!-- Event First Generation Cards -->
                             <div class="her-report-subsection-firstchild">
-                                <h5 class="">Production Event Names</h5>
-                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Name" %}</a>
+                                <h5 class="">Production Event Part Names</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Name" %}</a>
 
                                 <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note" style="">No names for this event</div>
+                                <div class="her-nodata-note" style="">No names for this part</div>
 
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container" style="display: none;">
@@ -1249,11 +1256,11 @@
                             
                             <!-- Event First Generation Cards -->
                             <div class="her-report-subsection-firstchild">
-                                <h5 class="">Production Event Statements</h5>
-                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Statement" %}</a>
+                                <h5 class="">Production Event Part Statements</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Statement" %}</a>
                                 
                                 <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note">No statements for this event</div>
+                                <div class="her-nodata-note">No statements for this part</div>
 
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container" style="display: none;">
@@ -1263,10 +1270,10 @@
 
                             <!-- Event First Generation Cards -->
                             <div class="her-report-subsection-firstchild">
-                                <h5 class="">Production Event Identifiers</h5>
-                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Identifier" %}</a>
+                                <h5 class="">Production Event Part Identifiers</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Identifier" %}</a>
                                 <!-- Show this block if there's NO data -->
-                                <div class="her-nodata-note">No identifiers for this event</div>
+                                <div class="her-nodata-note">No identifiers for this part</div>
 
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container" style="display: none;">
@@ -1276,8 +1283,8 @@
 
                             <!-- Event First Generation Cards -->
                             <div class="her-report-subsection-firstchild">
-                                <h5 class="">Production Event Timespan</h5>
-                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Timespan" %}</a>
+                                <h5 class="">Production Event Part Timespan</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Timespan" %}</a>
                                 <!-- Show this block if there's NO data -->
                                 <div class="her-nodata-note">No timespan for this event</div>
 
