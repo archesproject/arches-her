@@ -140,6 +140,66 @@ define([
                     ]
                 };
 
+                //admin areas table configuration
+                this.adminAreasTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                //grid references table configuration
+                this.gridReferencesTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null
+                    ]
+                };
+
                 //Statements Table
                 this.statementsTableConfig = {
                     "responsive": true,
@@ -152,6 +212,75 @@ define([
                         "targets":   -1
                     } ],
                     "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                //area assignments table configuration
+                this.areaAssignmentsTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                 //land use table configuration
+                this.landUseTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
                         null,
                         null,
                         null,

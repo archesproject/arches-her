@@ -342,7 +342,7 @@
                         <div class="her-report-subsection" style="">
                             
                             <div class="firstchild-container">
-                                <!-- Statements Table -->
+                                <!-- Address Table -->
                                 <div class="her-table pad-btm" style="">
                                     <table data-bind="datatable: addressTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
@@ -445,29 +445,26 @@
                             <div class="firstchild-container">
                                 <!-- Statements Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: adminAreasTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "Name" %}</th>
+                                                <th class="">{% trans "Type" %}</th>
+                                                <th class="none">{% trans "Currency" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td>Holborn</td>
+                                                <td>District</td>
+                                                <td>Current</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                             <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
-                                                <td>--</td>
+                                                <td>London</td>
+                                                <td>County</td>
+                                                <td>Current</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
@@ -496,29 +493,20 @@
                             <div class="firstchild-container">
                                 <!-- Statements Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: gridReferencesTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "National Grid Reference" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
+                                                <td>SU1025169962</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                             <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
-                                                <td>--</td>
+                                                <td>SU1025169954</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
@@ -545,31 +533,30 @@
                         <div class="her-report-subsection" style="">
                             
                             <div class="firstchild-container">
-                                <!-- Statements Table -->
+                                <!-- Area Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: areaAssignmentsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "Status" %}</th>
+                                                <th class="">{% trans "Ownership" %}</th>
+                                                <th class="">{% trans "Start Date" %}</th>
+                                                <th class="">{% trans "End Date" %}</th>
+                                                <th class="">{% trans "SHINE Form" %}</th>
+                                                <th class="none">{% trans "SHINE Significance" %}</th>
+                                                <th class="none">{% trans "Reference" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
-                                                <td>--</td>
+                                                <td>Archaeological Priority Area - Tier I</td>
+                                                <td>Public</td>
+                                                <td>1998-10-11</td>
+                                                <td>2019-03-13</td>
+                                                <td>Below-ground feature(s)</td>
+                                                <td>Low</td>
+                                                <td>Deskktop survey</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
@@ -596,31 +583,28 @@
                         <div class="her-report-subsection" style="">
                             
                             <div class="firstchild-container">
-                                <!-- Statements Table -->
+                                <!-- Land Use Table -->
                                 <div class="her-table pad-btm" style="">
-                                    <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table data-bind="datatable: landUseTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Type" %}</th>
-                                                <th class="">{% trans "Statement" %}</th>
-                                                <th class="none">{% trans "Language" %}</th>
-                                                <th class="none">{% trans "Name of Statement" %}</th>
+                                                <th>{% trans "Land Use" %}</th>
+                                                <th class="">{% trans "Start Date" %}</th>
+                                                <th class="">{% trans "End Date" %}</th>
+                                                <th class="">{% trans "Geology" %}</th>
+                                                <th class="none">{% trans "Sub-soil" %}</th>
+                                                <th class="none">{% trans "Reference" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <tr>
-                                                <td>Acknowledgements</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
-                                                <td>English (language)</td>
-                                                <td>Acknowledgement statement from wikipedia</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Brief Text</td>
-                                                <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
-                                                <td>English (language)</td>
-                                                <td>--</td>
+                                                <td>Woodland 1 (Deciduous Native)</td>
+                                                <td>1998-10-11</td>
+                                                <td>2019-03-13</td>
+                                                <td>Alluvium</td>
+                                                <td>Cultivated Land (minimal cultivation)</td>
+                                                <td>Deskktop survey</td>
                                                 <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
                                             </tr>
                                         </tbody>
