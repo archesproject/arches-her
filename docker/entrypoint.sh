@@ -164,7 +164,7 @@ run_django_server() {
 
 run_livereload_server() {
 	echo ""
-	echo "----- *** RUNNING DJANGO DEVELOPMENT SERVER *** -----"
+	echo "----- *** RUNNING LIVERELOAD SERVER *** -----"
 	echo ""
 	cd ${APP_FOLDER}
     echo "Running livereload"
