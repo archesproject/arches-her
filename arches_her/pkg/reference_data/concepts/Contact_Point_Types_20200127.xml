@@ -1,32 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
 >
-  <skos:ConceptScheme rdf:about="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b">
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/12acd509-aadb-4692-a152-b404c1f7a626">
-        <skos:inScheme rdf:resource="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"/>
-        <dcterms:identifier xml:lang="en">{"id": "142453e1-fd65-48b2-8028-ff20b5116493", "value": "http://localhost:8000/12acd509-aadb-4692-a152-b404c1f7a626"}</dcterms:identifier>
-        <skos:prefLabel xml:lang="en">{"id": "e6d433a2-7f77-4eb7-96f2-57ebe0ac251e", "value": "Mail"}</skos:prefLabel>
-      </skos:Concept>
-    </skos:hasTopConcept>
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/084c4ed7-e6c5-4af4-be0f-7fe5d20375a0">
-        <skos:inScheme rdf:resource="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"/>
-        <skos:prefLabel xml:lang="en">{"id": "0f466b8b-a347-439f-9b61-bee9811ccbf0", "value": "Email"}</skos:prefLabel>
-        <dcterms:identifier xml:lang="en">{"id": "6b3e179e-1a73-40ef-b8b2-8c83d60c85bf", "value": "http://localhost:8000/084c4ed7-e6c5-4af4-be0f-7fe5d20375a0"}</dcterms:identifier>
-      </skos:Concept>
-    </skos:hasTopConcept>
-    <dcterms:identifier xml:lang="en">{"id": "b91f9469-df7a-4dee-bd63-30ef5e80a9a1", "value": "http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"}</dcterms:identifier>
-    <skos:hasTopConcept>
-      <skos:Concept rdf:about="http://localhost:8000/183d4d65-5a7e-466d-83df-858eef939448">
-        <skos:inScheme rdf:resource="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"/>
-        <dcterms:identifier xml:lang="en">{"id": "77d540c1-1a67-47a1-b09a-b92fcd80aab2", "value": "http://localhost:8000/183d4d65-5a7e-466d-83df-858eef939448"}</dcterms:identifier>
-        <skos:prefLabel xml:lang="en">{"id": "75e6cfad-7418-4ed3-841b-3c083d7df30b", "value": "Telephone"}</skos:prefLabel>
-      </skos:Concept>
-    </skos:hasTopConcept>
-    <dcterms:title xml:lang="en">{"id": "119f5f65-4c70-41cf-b2ba-997f5f9d9292", "value": "Contact Point Types"}</dcterms:title>
-  </skos:ConceptScheme>
+  <skos:Concept rdf:about="http://localhost:8000/f061dc1b-97db-45e6-aa70-1ffb00e9cfdc">
+    <skos:prefLabel xml:lang="en">{"id": "ee62df87-ae9f-40d6-9697-2304f6bb0aa2", "value": "Fax"}</skos:prefLabel>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b">
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/183d4d65-5a7e-466d-83df-858eef939448"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/084c4ed7-e6c5-4af4-be0f-7fe5d20375a0"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/12acd509-aadb-4692-a152-b404c1f7a626"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/f061dc1b-97db-45e6-aa70-1ffb00e9cfdc"/>
+        <dcterms:title xml:lang="en">{"id": "119f5f65-4c70-41cf-b2ba-997f5f9d9292", "value": "Contact Point Types"}</dcterms:title>
+        <dcterms:identifier xml:lang="en">{"id": "b91f9469-df7a-4dee-bd63-30ef5e80a9a1", "value": "http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"}</dcterms:identifier>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <dcterms:identifier xml:lang="en">{"id": "fbd39cd6-b081-48ca-aa0b-5b08a34ce4af", "value": "http://localhost:8000/f061dc1b-97db-45e6-aa70-1ffb00e9cfdc"}</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/12acd509-aadb-4692-a152-b404c1f7a626">
+    <skos:inScheme rdf:resource="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"/>
+    <skos:prefLabel xml:lang="en">{"id": "e6d433a2-7f77-4eb7-96f2-57ebe0ac251e", "value": "Mail"}</skos:prefLabel>
+    <dcterms:identifier xml:lang="en">{"id": "142453e1-fd65-48b2-8028-ff20b5116493", "value": "http://localhost:8000/12acd509-aadb-4692-a152-b404c1f7a626"}</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/084c4ed7-e6c5-4af4-be0f-7fe5d20375a0">
+    <dcterms:identifier xml:lang="en">{"id": "6b3e179e-1a73-40ef-b8b2-8c83d60c85bf", "value": "http://localhost:8000/084c4ed7-e6c5-4af4-be0f-7fe5d20375a0"}</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"/>
+    <skos:prefLabel xml:lang="en">{"id": "0f466b8b-a347-439f-9b61-bee9811ccbf0", "value": "Email"}</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/183d4d65-5a7e-466d-83df-858eef939448">
+    <skos:prefLabel xml:lang="en">{"id": "75e6cfad-7418-4ed3-841b-3c083d7df30b", "value": "Telephone"}</skos:prefLabel>
+    <dcterms:identifier xml:lang="en">{"id": "77d540c1-1a67-47a1-b09a-b92fcd80aab2", "value": "http://localhost:8000/183d4d65-5a7e-466d-83df-858eef939448"}</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/7bf5f24a-5655-4449-87c1-2097af235e9b"/>
+  </skos:Concept>
 </rdf:RDF>

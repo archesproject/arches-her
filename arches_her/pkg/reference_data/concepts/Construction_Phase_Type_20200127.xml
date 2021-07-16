@@ -1,42 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
   xmlns:dcterms="http://purl.org/dc/terms/"
-  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
 >
-  <skos:Concept rdf:about="http://localhost:8000/bfcbafbd-26ab-4b2f-9b49-c8a06fb6a8ea">
-    <dcterms:identifier xml:lang="en">{"id": "824f80f2-158e-4524-8894-bef4a98a67b6", "value": "http://localhost:8000/bfcbafbd-26ab-4b2f-9b49-c8a06fb6a8ea"}</dcterms:identifier>
-    <skos:prefLabel xml:lang="en">{"id": "50c2a6a8-5e9d-4524-8624-7399be87e238", "value": "Initial build"}</skos:prefLabel>
+  <skos:Concept rdf:about="http://localhost:8000/6c049531-c0bd-417b-b604-7033e1326869">
+    <skos:prefLabel xml:lang="en">{"id": "f1384d94-86d9-40bf-a7ab-75a69e7fcd98", "value": "Repairs"}</skos:prefLabel>
+    <dcterms:identifier xml:lang="en">{"id": "66a4cdfa-9e7e-4d7c-bfde-8ddc04a6bc39", "value": "http://localhost:8000/6c049531-c0bd-417b-b604-7033e1326869"}</dcterms:identifier>
     <skos:inScheme>
       <skos:ConceptScheme rdf:about="http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56">
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/bfcbafbd-26ab-4b2f-9b49-c8a06fb6a8ea"/>
-        <dcterms:identifier xml:lang="en">{"id": "1914eda8-4cef-4d2d-85b5-a1dc332ceea6", "value": "http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"}</dcterms:identifier>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/dce5d773-01d8-4113-b998-bebbba5886e2"/>
         <skos:hasTopConcept rdf:resource="http://localhost:8000/5f0892b4-402b-446d-90ac-a85089b29e76"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/a55bacce-1186-47b9-abca-e3606f26f961"/>
+        <dcterms:identifier xml:lang="en">{"id": "1914eda8-4cef-4d2d-85b5-a1dc332ceea6", "value": "http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"}</dcterms:identifier>
+        <dcterms:title xml:lang="en">{"id": "62a5e842-d6a9-4206-b52c-8c6e09431443", "value": "Construction Phase Type"}</dcterms:title>
         <skos:hasTopConcept rdf:resource="http://localhost:8000/b010e402-2126-4260-854f-48e5405f380c"/>
         <skos:hasTopConcept rdf:resource="http://localhost:8000/6c049531-c0bd-417b-b604-7033e1326869"/>
-        <dcterms:title xml:lang="en">{"id": "62a5e842-d6a9-4206-b52c-8c6e09431443", "value": "Construction Phase Type"}</dcterms:title>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/bfcbafbd-26ab-4b2f-9b49-c8a06fb6a8ea"/>
+        <skos:hasTopConcept rdf:resource="http://localhost:8000/a55bacce-1186-47b9-abca-e3606f26f961"/>
       </skos:ConceptScheme>
     </skos:inScheme>
   </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/a55bacce-1186-47b9-abca-e3606f26f961">
-    <skos:prefLabel xml:lang="en">{"id": "05f23c56-8617-4be0-8389-27839f550e9e", "value": "Destruction"}</skos:prefLabel>
-    <dcterms:identifier xml:lang="en">{"id": "dd8c9d5b-6dbb-4f2d-94df-65afee0f784d", "value": "http://localhost:8000/a55bacce-1186-47b9-abca-e3606f26f961"}</dcterms:identifier>
+  <skos:Concept rdf:about="http://localhost:8000/bfcbafbd-26ab-4b2f-9b49-c8a06fb6a8ea">
+    <dcterms:identifier xml:lang="en">{"id": "824f80f2-158e-4524-8894-bef4a98a67b6", "value": "http://localhost:8000/bfcbafbd-26ab-4b2f-9b49-c8a06fb6a8ea"}</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">{"id": "50c2a6a8-5e9d-4524-8624-7399be87e238", "value": "Construction"}</skos:prefLabel>
     <skos:inScheme rdf:resource="http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"/>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/a55bacce-1186-47b9-abca-e3606f26f961">
+    <skos:inScheme rdf:resource="http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"/>
+    <dcterms:identifier xml:lang="en">{"id": "dd8c9d5b-6dbb-4f2d-94df-65afee0f784d", "value": "http://localhost:8000/a55bacce-1186-47b9-abca-e3606f26f961"}</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">{"id": "05f23c56-8617-4be0-8389-27839f550e9e", "value": "Destruction"}</skos:prefLabel>
   </skos:Concept>
   <skos:Concept rdf:about="http://localhost:8000/5f0892b4-402b-446d-90ac-a85089b29e76">
-    <skos:prefLabel xml:lang="en">{"id": "920eb901-d9cc-4574-8c6a-279bd6fe9af3", "value": "Conversion"}</skos:prefLabel>
     <dcterms:identifier xml:lang="en">{"id": "b9a57397-4d2a-4032-9391-0abf4f6cbc7d", "value": "http://localhost:8000/5f0892b4-402b-446d-90ac-a85089b29e76"}</dcterms:identifier>
     <skos:inScheme rdf:resource="http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"/>
+    <skos:prefLabel xml:lang="en">{"id": "920eb901-d9cc-4574-8c6a-279bd6fe9af3", "value": "Conversion"}</skos:prefLabel>
   </skos:Concept>
   <skos:Concept rdf:about="http://localhost:8000/b010e402-2126-4260-854f-48e5405f380c">
+    <skos:prefLabel xml:lang="en">{"id": "ff8d9dff-1896-4aae-b17b-0905307a6896", "value": "Alteration"}</skos:prefLabel>
     <dcterms:identifier xml:lang="en">{"id": "217687df-da84-41b2-b8c9-b610629b493a", "value": "http://localhost:8000/b010e402-2126-4260-854f-48e5405f380c"}</dcterms:identifier>
     <skos:inScheme rdf:resource="http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"/>
-    <skos:prefLabel xml:lang="en">{"id": "ff8d9dff-1896-4aae-b17b-0905307a6896", "value": "Alteration"}</skos:prefLabel>
   </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/6c049531-c0bd-417b-b604-7033e1326869">
+  <skos:Concept rdf:about="http://localhost:8000/dce5d773-01d8-4113-b998-bebbba5886e2">
     <skos:inScheme rdf:resource="http://localhost:8000/9eb6dfdd-f985-4e58-a27c-cfbd29dcea56"/>
-    <skos:prefLabel xml:lang="en">{"id": "f1384d94-86d9-40bf-a7ab-75a69e7fcd98", "value": "Repairs"}</skos:prefLabel>
-    <dcterms:identifier xml:lang="en">{"id": "66a4cdfa-9e7e-4d7c-bfde-8ddc04a6bc39", "value": "http://localhost:8000/6c049531-c0bd-417b-b604-7033e1326869"}</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">{"id": "2e78bf52-f3a7-402a-8f2c-f4a18d671db8", "value": "Move"}</skos:prefLabel>
   </skos:Concept>
 </rdf:RDF>
