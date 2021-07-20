@@ -74,6 +74,7 @@
 .her-report-a {
     color: steelblue !important;
     font-size: 13px;
+    padding: 3px 8px;
 }
 
 .her-report-a.disabled {
@@ -86,8 +87,13 @@
 }
 
 .her-report-page li, .her-report-a:hover {
+    border-radius: 2px;
     cursor: pointer;
     color: #25476a !important;
+}
+
+.her-summary-report .her-report-page li, .her-report-a:hover {
+    background: inherit;
 }
 
 li, .her-report-a.active:hover {
@@ -496,7 +502,7 @@ i.toggle:hover {
 
 .her-title-block h1 {
     font-size: 17px;
-    margin: 5px 7px 2px 0px;
+    margin: 5px 0px 2px 0px;
     display: inline-block;
 }
 
