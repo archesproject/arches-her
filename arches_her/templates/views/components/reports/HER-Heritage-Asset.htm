@@ -178,6 +178,54 @@
             </div>
             <!-- End Names -->
 
+            <!-- Descriptions Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'description'">
+
+                <!-- Names section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Descriptions" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Desription" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">{% trans "No descriptions for this resource" %}</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: descriptionTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th class="">{% trans "Description" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Abstract</td>
+                                                <td>An example of a very long abstract using a convenient snippet of text: Flights and Last Known Flights – Place of Departure. How do we manually as locations?  For example, would like to add RAF Tangmere, but can only currently add West Sussex.  Would create a very unwieldy list if we could add anything, but perhaps could need a note field?</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Full</td>
+                                                <td>Another convenient bit of text: Historic Map – Can only add ‘Archive Sources’.  Some of the maps will not be from Archives, or we don’t know where they have originated from.  I think this needs to be ‘Bibliographic Source’ which is then linked to an Archive Source, or is it possible to add from both Source Resource Models?</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Descriptions -->
+
             <!-- Location -->
             <div class="her-report-page" data-bind="if: activeSection() === 'location'">
                 
@@ -450,7 +498,7 @@
                                             <tr class="her-table-header">
                                                 <th>{% trans "Name" %}</th>
                                                 <th class="">{% trans "Type" %}</th>
-                                                <th class="none">{% trans "Currency" %}</th>
+                                                <th class="">{% trans "Currency" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
@@ -874,7 +922,7 @@
                                     <table data-bind="datatable: componentsTableConfig" class="table table-striped" cellspacing="0" width="100%">
                                         <thead class="">
                                             <tr class="her-table-header">
-                                                <th>{% trans "Associated Construction" %}</th>
+                                                <th>{% trans "Construction Phase" %}</th>
                                                 <th class="">{% trans "Component" %}</th>
                                                 <th class="">{% trans "Technique" %}</th>
                                                 <th class="">{% trans "Material" %}</th>
@@ -1316,6 +1364,57 @@
             </div>
             <!-- End Prodcution -->
 
+            <!-- Bibliography Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'biblio'">
+
+                <!-- Biblio section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Bibliographic Citation" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">{% trans "No citations for this resource" %}</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: biblioTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-link">
+                                                <th class="">{% trans "Citation" %}</th>
+                                                <th class="">{% trans "Source Number" %}</th>
+                                                <th>{% trans "Pages" %}</th>
+                                                <th class="">{% trans "Figs." %}</th>
+                                                <th>{% trans "Plate(s)" %}</th>
+                                                <th class="none">{% trans "Comment" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Report on Site Excaction at 123 Sumner Rd</a></td>
+                                                <td>--</td>
+                                                <td>13-19</td>
+                                                <td>--</td>
+                                                <td>--</td>
+                                                <td>A very nice bit of research.  Grey literature, unfortunately.  Lukcily HE have a copy in our corporate library</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bibliography -->
+
             <!-- Photos Tab -->
             <div class="her-report-page" data-bind="if: activeSection() === 'photos'">
 
@@ -1471,6 +1570,243 @@
                 </div>
             </div>
             <!-- End Photos -->
+
+            <!-- Associate Resources Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'related'">
+
+                <!-- Associated Activities section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Activities" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Activity" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No activities for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Activity" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Trench at 33 Aspinall Lane</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Desktop Survey of Pre-Victorian Buildings in Holborn</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Actors -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Actors" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Actor" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;  ">No actors for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: relatedActorsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Actor" %}</th>
+                                                <th class="">{% trans "Role" %}</th>
+                                                <th class="">{% trans "Start of Role" %}</th>
+                                                <th class="">{% trans "End of Role" %}</th>
+                                                <th class="none">{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Role Type" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Abel Tasman</a></td>
+                                                <td>Architect</td>
+                                                <td>03-11-1788</td>
+                                                <td>12-10-1792</td>
+                                                <td>1788-1792</td>
+                                                <td>Occasionally</td>
+                                                <td>Is referred to by</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Bob the Builder</a></td>
+                                                <td>Builder</td>
+                                                <td>1793</td>
+                                                <td>1794</td>
+                                                <td>1793-1794</td>
+                                                <td>Throughout</td>
+                                                <td>Is referred to by</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Consultations section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Consultations" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Consultation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No consultations for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Consultation" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Carlisle House Consultation on 12/10/2019</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Carlisle House Consultation on 23/02/2016</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Digital Files section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Files" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add File" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "File Name" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Site visit report for Carlisle House</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Heritage Assets section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add resource" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No hertiage/area/artifacts for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" style="">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="" style="">
+                                    <table data-bind="datatable: relatedResourceThreeColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead class="">
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Resource Name" %}</th>
+                                                <th>{% trans "Association" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Roman Coin</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Roman Villa</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Pottery Sherds</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Central Holborn Heritage Area</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Victorian Hospital</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Associated Resources -->
 
         </div>
     </div>

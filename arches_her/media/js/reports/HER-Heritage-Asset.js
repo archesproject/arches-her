@@ -36,8 +36,6 @@ define([
                 };
 
 
-
-
                 //Names table configuration
                 this.nameTableConfig = {
                     "responsive": {
@@ -63,6 +61,36 @@ define([
                     } ],
                     "columns": [
                         null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                //Description table configuration
+                this.descriptionTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
                         null,
                         null,
                         null
@@ -447,6 +475,129 @@ define([
                     "columns": [
                         null,
                         null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                //Biblio Citation Table
+                this.biblioTableConfig = {
+                    "responsive": true,
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+
+                //Related Resource 2 column table configuration
+                this.relatedResourceTwoColumnTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": true,
+                    "searching": true,
+                    "scrollY": "250px",
+                    "scrollCollapse": true,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null
+                    ]
+                };
+
+                //Related Resource 3 column table configuration
+                this.relatedResourceThreeColumnTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": true,
+                    "searching": true,
+                    "scrollY": "250px",
+                    "scrollCollapse": true,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                //Related Actors table configuration
+                this.relatedActorsTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": true,
+                    "searching": true,
+                    "scrollY": "250px",
+                    "scrollCollapse": true,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
                         null,
                         null,
                         null,
