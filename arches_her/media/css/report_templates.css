@@ -484,7 +484,7 @@ i.toggle:hover {
 
 
 .her-summary-report {
-    padding: 15px 25px;
+    padding: 0px 25px;
     background: #fff;
 }
 
@@ -494,6 +494,10 @@ i.toggle:hover {
 
 .her-summary-report .her-report-page .her-report-section:last-child {
     padding-bottom: 5px;
+}
+
+.her-summary-report .her-report-page:first-child .firstchild-container {
+    border-top: none;
 }
 
 .her-summary-report .her-report-photo-container {
@@ -507,7 +511,12 @@ i.toggle:hover {
 }
 
 .her-summary-report .her-summary-block:first-child {
-    margin-bottom: 20px;
+    background: #fff;
+    position: sticky;
+    padding: 10px 0px 0px 0px;
+    width: calc(100% + 10px);
+    top: 0px;
+    z-index: 10;
 }
 
 .her-summary-block:not(:first-child) {
