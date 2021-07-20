@@ -477,16 +477,31 @@ i.toggle:hover {
 }
 
 
-/* Summary Report Classes */
 .her-summary-report {
     padding: 15px 25px;
     background: #fff;
+}
+
+.her-summary-report .her-report-page {
+    padding-bottom: 0px;
+}
+
+.her-summary-report .her-report-page .her-report-section:last-child {
+    padding-bottom: 5px;
+}
+
+.her-summary-report .her-report-photo-container {
+    padding-bottom: 5px;
 }
 
 .her-title-block h1 {
     font-size: 17px;
     margin: 5px 7px 2px 0px;
     display: inline-block;
+}
+
+.her-summary-report .her-summary-block:first-child {
+    margin-bottom: 20px;
 }
 
 .her-summary-block:not(:first-child) {
@@ -613,4 +628,12 @@ i.toggle:hover {
     cursor: pointer;
 }
 
-
+.her-report-json {
+    margin-left: -10px;
+    margin-top: 5px;
+    height: 750px;
+    /*height: calc(100% - 20px);*/
+    width: calc(100% - 10px);
+    border: 1px solid #ddd;
+    background: #f6f6f6;
+}

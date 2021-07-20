@@ -18,7 +18,7 @@ define([
                     {'id': 'prod', 'title': 'Production'},
                     {'id': 'biblio', 'title': 'Bibliography'},
                     {'id': 'photos', 'title': 'Photos'},
-                    {'id': 'dates', 'title': 'Scientific Dates'},
+                    {'id': 'sci', 'title': 'Scientific Dates'},
                     {'id': 'related', 'title': 'Associated Resources'},
                     {'id': 'json', 'title': 'JSON'}
                 ];
@@ -498,6 +498,46 @@ define([
                         "targets":   -1
                     } ],
                     "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ]
+                };
+
+                //Scientific Dates table configuration
+                this.scientificDatesTableConfig = {
+                    "responsive": {
+                        breakpoints: [
+                          {name: 'bigdesktop', width: Infinity},
+                          {name: 'meddesktop', width: 1480},
+                          {name: 'smalldesktop', width: 1280},
+                          {name: 'medium', width: 1188},
+                          {name: 'tabletl', width: 1024},
+                          {name: 'btwtabllandp', width: 848},
+                          {name: 'tabletp', width: 768},
+                          {name: 'mobilel', width: 480},
+                          {name: 'mobilep', width: 320}
+                        ]
+                      },
+                    "paging": false,
+                    "searching": false,
+                    "scrollCollapse": true,
+                    "info": false,
+                    "columnDefs": [ {
+                        "orderable": false,
+                        "targets":   -1
+                    } ],
+                    "columns": [
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
                         null,
                         null,
                         null,
