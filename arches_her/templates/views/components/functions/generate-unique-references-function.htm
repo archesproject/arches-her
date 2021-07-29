@@ -1,0 +1,40 @@
+{% load i18n %}
+
+<div style="height:0px">
+  <div class="row widget-container">
+
+      <div class="form-group">
+          <div class="relative">
+              <label class="col-xs-12 control-label widget-input-label"> {% trans "References Nodegroup" %}</label>
+          </div>
+    
+          <div class="col-xs-12">
+              <select data-placeholder="{% trans "Choose a card." %}"
+              data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: uniqueresource_nodegroup, options: nodesSemantic, optionsText: 'name', optionsValue: 'nodeid', valueAllowUnset: true"></select>
+          </div>
+        </div>
+
+    <div class="form-group">
+      <div class="relative">
+          <label class="col-xs-12 control-label widget-input-label"> {% trans "Simple UID Node" %}</label>
+      </div>
+
+      <div class="col-xs-12">
+          <select data-placeholder="{% trans "Choose a node." %}"
+          data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: simpleuid_node, options: nodesReference, optionsText: 'name', optionsValue: 'nodeid', valueAllowUnset: true"></select>
+      </div>
+    </div>
+
+    <div class="form-group">
+        <div class="relative">
+            <label class="col-xs-12 control-label widget-input-label"> {% trans "Globally Unique ID Node" %}</label>
+        </div>
+  
+        <div class="col-xs-12">
+            <select data-placeholder="{% trans "Choose a node." %}"
+            data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: resourceid_node, options: nodesReference, optionsText: 'name', optionsValue: 'nodeid', valueAllowUnset: true"></select>
+        </div>
+      </div>
+
+  </div>
+</div>
