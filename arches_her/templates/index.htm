@@ -1,4 +1,3 @@
-
 <!--
 ARCHES - a program developed to inventory and manage immovable cultural heritage.
 Copyright (C) 2013 J. Paul Getty Trust and World Monuments Fund
@@ -37,12 +36,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     <link rel="shortcut icon" href="{% static 'img/favicon.png' %}" />
 
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
+    <link rel='stylesheet' type='text/css'
+        href='//fonts.googleapis.com/css?family=Open+Sans:400,300,600&amp;subset=cyrillic,latin'>
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
 
     <link href="{% static 'css/unify.css' %}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
     <link href="{% static 'css/index.css' %}" rel="stylesheet">
+    <!-- To collect end-user usage analytics about your application, insert the following script into each page you want to track. Place this code immediately before the closing </head> tag, and before any other scripts. Your first data will appear automatically in just a few seconds. -->
+
+    <script type="text/javascript">
+        // ##### APPINSIGHTS MONITORING #####
+        var aikey = '#{SETTINGS_APPINSIGHTS_KEY}#';
+        if (/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(aikey) == false) {
+            console.log("aikey not valid - using default", '#{SETTINGS_APPINSIGHTS_DEFAULT_KEY}#');
+            aikey = '#{SETTINGS_APPINSIGHTS_DEFAULT_KEY}#';
+        }
+        else {
+            console.log("aikey valid", aikey);
+        }
+        var appInsights = window.appInsights || function (a) { function b(a) { c[a] = function () { var b = arguments; c.queue.push(function () { c[a].apply(c, b) }) } } var c = { config: a }, d = document, e = window; setTimeout(function () { var b = d.createElement("script"); b.src = a.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js", d.getElementsByTagName("script")[0].parentNode.appendChild(b) }); try { c.cookie = d.cookie } catch (a) { } c.queue = []; for (var f = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; f.length;)b("track" + f.pop()); if (b("setAuthenticatedUserContext"), b("clearAuthenticatedUserContext"), b("startTrackEvent"), b("stopTrackEvent"), b("startTrackPage"), b("stopTrackPage"), b("flush"), !a.disableExceptionTracking) { f = "onerror", b("_" + f); var g = e[f]; e[f] = function (a, b, d, e, h) { var i = g && g(a, b, d, e, h); return !0 !== i && c["_" + f](a, b, d, e, h), i } } return c }({ instrumentationKey: aikey }); window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length && appInsights.trackPageView();
+            //####################################
+    </script>-->
 
 </head>
 
@@ -58,7 +73,8 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         <div class="nav-container">
             <div class="navbar-brand-disco">
                 <div class="navbar-brand-disco-icon-container" style="">
-                    <img class="navbar-brand-disco-icon" src="{% static 'img/landing/arches_logo_dark.png' %}" style="" alt="Arches Logo">
+                    <img class="navbar-brand-disco-icon" src="{% static 'img/landing/arches_logo_dark.png' %}" style=""
+                        alt="Arches Logo">
                 </div>
                 <div class="application-name">
                     <h2>{{app_title}}</h2>
@@ -75,11 +91,11 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             <a href="{% url p.slug %}">{{ p.name }}</a>
                         </li>
                         {% endfor %}
-                        
+
                         <li class="page-scroll">
                             <a href="{% url 'search_home_consultations' %}">{% trans "Find" %}</a>
                         </li>
-                        
+
                         {% if user|can_create_resource_instance and user.username != 'anonymous' %}
                         <li class="page-scroll">
                             <a href="{% url 'standard' %}" target="_blank">{% trans "Manage" %}</a>
@@ -91,17 +107,21 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             <a href="{% url 'graph' '' %}" target="_blank">{% trans "Graphs" %}</a>
                         </li>
                         {% endif %}
-                        
+
                         <li class="page-scroll">
                             {% if user.username == 'anonymous' %}
-                                <a class="application-login" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
+                            <a class="application-login" id="auth-link"
+                                href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{%
+                                trans "Login" %}</a>
                             {% else %}
-                                <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
-                                    {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                            <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
+                                {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
+                            </a>
+                        </li>
+                        <li>
+                            <a
+                                href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({%
+                                trans 'logoff' %})</a>
                             {% endif %}
                         </li>
                     </ul>
@@ -121,25 +141,32 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                     <!-- SLIDE 1 -->
                     <li data-transition="fade" data-slotamount="9" data-masterspeed="0" data-title="Slide 1">
                         <!-- MAIN IMAGE -->
-                        <img src="{% static 'img/landing/the_shard.jpg' %}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+                        <img src="{% static 'img/landing/the_shard.jpg' %}" alt="slidebg1" data-bgfit="cover"
+                            data-bgposition="center center" data-bgrepeat="no-repeat">
 
                         <!-- LAYERS -->
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="-50" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="-50"
+                            data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut"
+                            data-endspeed="300">
                             <h2><a href="#info-block-1">{% trans "Consultations at GLAAS..." %}</a></h2>
                             <p>{% trans "How the Greater London Archaeology Advisory Service manages development" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450"
+                            data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut"
+                            data-endspeed="300">
                             <h2><a href="#info-block-2">{% trans "Search and Discover..." %}</a></h2>
                             <p>{% trans "Find and review information on our current and past consultations" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="950" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="950"
+                            data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut"
+                            data-endspeed="300">
                             <h2><a href="#info-block-3">{% trans "Get Involved..." %}</a></h2>
-                            <p>{% trans "Want to help?  Here's how you can participate" %}</p>
+                            <p>{% trans "Want to help? Here's how you can participate" %}</p>
                         </div>
 
                         <!-- Gradient -->
@@ -147,7 +174,8 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
                         <!-- Attribution -->
                         <div class="image-attribution" style="">
-                            <span class="">{% trans "The Shard | https://www.flickr.com/photos/cathedraljack/ | Attribution 2.0 Generic (CC BY 2.0)" %}</span>
+                            <span class="">{% trans "The Shard | https://www.flickr.com/photos/cathedraljack/ |
+                                Attribution 2.0 Generic (CC BY 2.0)" %}</span>
                         </div>
                     </li>
 
@@ -162,21 +190,21 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <div class="custom-content-container">
         <!-- Info Block 1 -->
         <div id="info-block-1" class="app-info-block">
-          <h2 class="">{% trans "Consultations at GLAAS" %}</h2>
+            <h2 class="">{% trans "Consultations at GLAAS" %}</h2>
 
         </div>
         <!-- End Info Block 1 -->
 
         <!-- Info Block 2 -->
         <div id="info-block-2" class="app-info-block">
-          <h2 class="">{% trans "Find and Review Consultations" %}</h2>
+            <h2 class="">{% trans "Find and Review Consultations" %}</h2>
 
         </div>
         <!-- End Info Block 2 -->
 
         <!-- Info Block 3 -->
         <div id="info-block-3" class="app-info-block">
-          <h2 class="">{% trans "Working with GLAAS" %}</h2>
+            <h2 class="">{% trans "Working with GLAAS" %}</h2>
 
         </div>
         <!-- End Info Block 3 -->
@@ -192,15 +220,16 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
             <!-- branding column -->
             <div class="app-footer-branding">
-                <img class="app-footer-image" src='/media/img/projects/consultations/HE_Logo_White.svg' title="Historic England" alt="Historic England">
+                <img class="app-footer-image" src='/media/img/projects/consultations/HE_Logo_White.svg'
+                    title="Historic England" alt="Historic England">
 
                 <div class="organization-address">
-                  Greater London Archaeological Advisory Service<br>
-                  Historic England<br>
-                  4th floor, Cannon Bridge House<br>
-                  25 Dowgate Hill<br>
-                  London<br>
-                  EC4R 2YA
+                    Greater London Archaeological Advisory Service<br>
+                    Historic England<br>
+                    4th floor, Cannon Bridge House<br>
+                    25 Dowgate Hill<br>
+                    London<br>
+                    EC4R 2YA
                 </div>
             </div>
 
@@ -252,7 +281,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
 
     <script>
-        jQuery(document).ready(function() {
+        jQuery(document).ready(function () {
             App.init();
             App.initCounter();
             App.initParallaxBg();
@@ -261,7 +290,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             RevolutionSlider.initRSfullScreen();
         });
 
-        var ViewModel = function(first, last) {
+        var ViewModel = function (first, last) {
             this.showAuthMenu = ko.observable(false);
         };
         ko.applyBindings(new ViewModel());
