@@ -20,7 +20,9 @@ FUNCTION_LOCATIONS.append("arches_her.functions")
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "functions", "templates"))
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "widgets", "templates"))
 TEMPLATES[0]["DIRS"].insert(0, os.path.join(APP_ROOT, "templates"))
-TEMPLATES[0]["OPTIONS"]["context_processors"].append("arches_her.utils.context_processors.project_settings")
+TEMPLATES[0]["OPTIONS"]["context_processors"].append(
+    "arches_her.utils.context_processors.project_settings"
+)
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "vwo1!nn5s0m)89@pn7^!4a^+_+7mdhk^=&$zrwi(n2lisgi0_w"
@@ -44,8 +46,15 @@ CELERY_SEARCH_EXPORT_EXPIRES = 60 * 3  # seconds
 CELERY_SEARCH_EXPORT_CHECK = 15  # seconds
 
 CELERY_BEAT_SCHEDULE = {
-    "delete-expired-search-export": {"task": "arches.app.tasks.delete_file", "schedule": CELERY_SEARCH_EXPORT_CHECK,},
-    "notification": {"task": "arches.app.tasks.message", "schedule": CELERY_SEARCH_EXPORT_CHECK, "args": ("Celery Beat is Running",),},
+    "delete-expired-search-export": {
+        "task": "arches.app.tasks.delete_file",
+        "schedule": CELERY_SEARCH_EXPORT_CHECK,
+    },
+    "notification": {
+        "task": "arches.app.tasks.message",
+        "schedule": CELERY_SEARCH_EXPORT_CHECK,
+        "args": ("Celery Beat is Running",),
+    },
 }
 
 DATABASES = {
@@ -69,7 +78,9 @@ DATABASES = {
 
 ALLOWED_HOSTS = []
 
-SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, "system_settings", "System_Settings.json")
+SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(
+    APP_ROOT, "system_settings", "System_Settings.json"
+)
 WSGI_APPLICATION = "arches_her.wsgi.application"
 STATIC_ROOT = ""
 
@@ -78,7 +89,11 @@ RESOURCE_IMPORT_LOG = os.path.join(APP_ROOT, "logs", "resource_import.log")
 LOGGING = {
     "version": 1,
     "disable_existing_loggers": False,
-    "formatters": {"console": {"format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",},},
+    "formatters": {
+        "console": {
+            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
+        },
+    },
     "handlers": {
         "file": {
             "level": "WARNING",  # DEBUG, INFO, WARNING, ERROR
@@ -86,9 +101,15 @@ LOGGING = {
             "filename": os.path.join(APP_ROOT, "arches.log"),
             "formatter": "console",
         },
-        "console": {"level": "DEBUG", "class": "logging.StreamHandler", "formatter": "console",},
+        "console": {
+            "level": "DEBUG",
+            "class": "logging.StreamHandler",
+            "formatter": "console",
+        },
     },
-    "loggers": {"arches": {"handlers": ["file", "console"], "level": "DEBUG", "propagate": True}},
+    "loggers": {
+        "arches": {"handlers": ["file", "console"], "level": "DEBUG", "propagate": True}
+    },
 }
 
 MIDDLEWARE = [
@@ -98,7 +119,7 @@ MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     #'arches.app.utils.middleware.TokenMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "arches.app.utils.middleware.ModifyAuthorizationHeader",
@@ -133,7 +154,10 @@ CACHES = {
     #         'MAX_ENTRIES': 1000
     #     }
     # }
-    "default": {"BACKEND": "django.core.cache.backends.memcached.MemcachedCache", "LOCATION": "127.0.0.1:11211",}
+    "default": {
+        "BACKEND": "django.core.cache.backends.memcached.MemcachedCache",
+        "LOCATION": "127.0.0.1:11211",
+    }
 }
 
 # Identify the usernames and duration (seconds) for which you want to cache the time wheel
@@ -153,5 +177,10 @@ except ImportError:
 
 try:
     from .settings_local import *
+except ImportError:
+    pass
+
+try:
+    from .settings_docker import *
 except ImportError:
     pass
