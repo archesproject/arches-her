@@ -47,7 +47,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
     <script type="text/javascript">
         // ##### APPINSIGHTS MONITORING #####
-        var aikey = '#{SETTINGS_APPINSIGHTS_KEY}#';
+        var aikey = '#{appinsights-key}#';
         if (/^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/.test(aikey) == true) {
             console.log("aikey valid", aikey);
             var appInsights = window.appInsights || function (a) { function b(a) { c[a] = function () { var b = arguments; c.queue.push(function () { c[a].apply(c, b) }) } } var c = { config: a }, d = document, e = window; setTimeout(function () { var b = d.createElement("script"); b.src = a.url || "https://az416426.vo.msecnd.net/scripts/a/ai.0.js", d.getElementsByTagName("script")[0].parentNode.appendChild(b) }); try { c.cookie = d.cookie } catch (a) { } c.queue = []; for (var f = ["Event", "Exception", "Metric", "PageView", "Trace", "Dependency"]; f.length;)b("track" + f.pop()); if (b("setAuthenticatedUserContext"), b("clearAuthenticatedUserContext"), b("startTrackEvent"), b("stopTrackEvent"), b("startTrackPage"), b("stopTrackPage"), b("flush"), !a.disableExceptionTracking) { f = "onerror", b("_" + f); var g = e[f]; e[f] = function (a, b, d, e, h) { var i = g && g(a, b, d, e, h); return !0 !== i && c["_" + f](a, b, d, e, h), i } } return c }({ instrumentationKey: aikey }); window.appInsights = appInsights, appInsights.queue && 0 === appInsights.queue.length && appInsights.trackPageView();
@@ -56,7 +56,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             console.log("aikey not valid - app insights not instantiated");
         }
             //####################################
-    </script>-->
+    </script>
 
 </head>
 
@@ -110,8 +110,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <li class="page-scroll">
                             {% if user.username == 'anonymous' %}
                             <a class="application-login" id="auth-link"
-                                href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{%
-                                trans "Login" %}</a>
+                                href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
                             {% else %}
                             <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
                                 {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
@@ -119,8 +118,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         </li>
                         <li>
                             <a
-                                href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({%
-                                trans 'logoff' %})</a>
+                                href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
                             {% endif %}
                         </li>
                     </ul>
@@ -173,8 +171,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
                         <!-- Attribution -->
                         <div class="image-attribution" style="">
-                            <span class="">{% trans "The Shard | https://www.flickr.com/photos/cathedraljack/ |
-                                Attribution 2.0 Generic (CC BY 2.0)" %}</span>
+                            <span class="">{% trans "The Shard | https://www.flickr.com/photos/cathedraljack/ | Attribution 2.0 Generic (CC BY 2.0)" %}</span>
                         </div>
                     </li>
 
