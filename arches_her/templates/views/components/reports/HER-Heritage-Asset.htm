@@ -1,0 +1,2395 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+{% block report %}
+    {% block report_title_bar %}
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
+
+        <!-- Title Block -->
+        <div class="her-report-toolbar">
+            <h1 class="her-report-toolbar-title"><span class="her-report-name">{% trans "Heritage Asset Report" %}:</span><span data-bind="text: displayname" class="her-report-instance-name"></span></h1>
+        </div>
+
+        <!-- Altenative Nav and Content -->
+        <div class="her-tab-container" style="display: none;">
+            <ul class="nav nav-tabs her-tab-list">
+                <li class="her-tab-list-item">
+                    <div class='her-nav-tab active'>
+                        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                            <span>Name/Identifiers</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class='her-nav-tab'>
+                        <div style="display: flex; flex-direction: row; justify-content: center; align-items: center;">
+                            <span>Location</span>
+                            </span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {% endblock report_title_bar %}
+
+    
+    {% block body %}
+    <!-- Link nav -->
+    <div class="her-report-anchor-container">
+        <ol class="her-report-anchors breadcrumb">
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="her-report-a"></li>
+            <!-- /ko -->
+        </ol>
+    </div>
+
+    <div class="her-tabbed-report">
+        <div class="her-tabbed-report-content">
+            
+            <!-- Names Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'name'">
+
+                <!-- Names section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.assetNames)}" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Names" %}</h2>
+                    <a class="her-report-a" data-bind="{event:{ mousedown:function(d, e){addNewTile(assetNameCard, e)}}}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.assetNames" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No names for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection" >
+                            <div class="firstchild-container">
+                                <div class="her-table">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th class="min-tabletl">{% trans "Type" %}</th>
+                                                <th class="min-medium">{% trans "Currency" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: names.assetNames, dataTableOptions: nameTableConfig }">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: currency"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.assetNameCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.assetNameCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- External Reference -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.externalCrossReferences)}" class="fa fa-angle-double-right toggle"></i> {% trans "External Cross References" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(externalCrossReferencesCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.externalCrossReferences" class="her-report-collapsible-container pad-lft">
+                        <!-- ko ifnot: externalCrossReferencesCard.tiles().length -->
+                        <div class="her-nodata-note">No references for this resource</div>
+                        <!-- /ko -->
+                        
+                        <!-- ko if: externalCrossReferencesCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th class="min-tabletl">{% trans "Source" %}</th>
+                                                <th class="min-medium">{% trans "Note" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: names.externalCrossReferences, dataTableOptions: crossReferenceTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: number"></td>
+                                                <td data-bind="text: source"></td>
+                                                <td data-bind="text: description"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function(){$parent.editTile(tileid, $parent.externalCrossReferencesCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.externalCrossReferencesCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- System Reference Numbers section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.systemReferenceNumbers)}" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(systemReferenceNumbersCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Identifier" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.systemReferenceNumbers" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: systemReferenceNumbersCard.tiles().length -->
+                        <div class="her-nodata-note">No references for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: systemReferenceNumbersCard.tiles().length -->
+                        <div class="her-report-subsection">
+
+                            <div class="firstchild-container">
+                                <div class="her-report-subsection-ite" style="padding-top: 10px;">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Resource ID: </h4>
+                                        <div class="her-block-value" data-bind="text:names.systemReferenceNumbers.resourceId"></div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Legacy ID: </h4>
+                                        <div class="her-block-value" data-bind="text:names.systemReferenceNumbers.legacyId"></div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Primary Reference Number: </h4>
+                                        <div class="her-block-value" data-bind="text:names.systemReferenceNumbers.primaryReferenceNumber"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Names -->
+
+            <!-- Descriptions Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'description'">
+
+                <!-- Description section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.descriptions)}" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Descriptions" %}</h2>
+                    <a class="her-report-a" data-bind="click: function(){addNewTile(assetDescriptionCard)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.descriptions" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: assetDescriptionCard.tiles().length -->
+                        <div class="her-nodata-note">{% trans "No descriptions for this resource" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: assetDescriptionCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Description" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: descriptions, dataTableOptions: descriptionTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: description" class="her-table-descrip-col"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function(){$parent.editTile(tileid, $parent.assetDescriptionCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.assetDescriptionCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Descriptions -->
+
+            <!-- Location -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'location'">
+                
+                <!-- Geometry/Map -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.coordinates)}" class="fa fa-angle-double-right toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(locationGeometryCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.coordinates" class="her-report-collapsible-container pad-lft">
+
+                        <div class="her-report-subsection">
+                            <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry " %}  <span>(Shape type: Locality)</span></h3>
+                            <a class="her-report-a" data-bind="{click: function(){addNewTile(locationGeometryCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+                            
+                            <!-- ko ifnot: locationGeometryCard.tiles().length -->
+                            <div class="her-nodata-note her-top-card">No geometry for this resource</div>
+                            <!-- /ko -->
+                    
+                            <!-- ko if: locationGeometryCard.tiles().length -->
+                            <div class="her-report-subsection-container no-flex">
+                                
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+
+                                    <div class="her-report-map">
+                                        <div class="map-container" style="height:475px">
+                                            <div class="map" style="height:475px" data-bind="component: {
+                                                name: 'arches-map',
+                                                params: $data
+                                            }">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>   
+                            </div>
+                            <!-- /ko -->
+                        </div>
+
+                        <!-- Geometry Metadata -->
+                        <div class="her-report-subsection">
+                            <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry Metadata" %}</h3>
+                            
+                            <!-- Collapsible content -->
+                            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
+                                <!-- ko ifnot: hasGeometryMetadata(location.geometry) -->
+                                <div class="her-nodata-note her-top-card">No metadata for this resource</div>
+                                <!-- /ko -->
+
+                                <!-- ko if: hasGeometryMetadata(location.geometry) -->   
+                                <div class="her-report-subsection-container multi-cards no-flex">
+
+                                    <!-- Record Authorization/Compilation/Update -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5>Record Edit History</h5>
+                                        
+                                        <!-- ko ifnot: hasGeometryAuthorization(location.geometry) -->
+                                        <div class="her-nodata-note">No authorization record for this resource</div>
+                                        <!-- /ko -->
+
+                                        <!-- ko if: hasGeometryAuthorization(location.geometry) -->   
+                                        <div class="firstchild-container">
+                                            <div class="her-report-subsection-item flex">
+                                                <div class="her-block-attributes actor-name">
+                                                    <h6 class="her-block-key compressed">Record Reviewer: </h6>
+                                                    <div data-bind="text: geometry.reviewer" class="her-block-value"></div>
+                                                </div>
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key compressed">Review Date: </h6>
+                                                    <div data-bind="text: geometry.reviewDate" class="her-block-value"></div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Type of Review: </h6>
+                                                    <div data-bind="text: geometry.reviewType" class="her-block-value"></div>
+                                                </div>
+                                            </div>
+                                            <div class="her-report-subsection-item flex">
+                                                <div class="her-block-attributes actor-name">
+                                                    <h6 class="her-block-key compressed">Compiler: </h6>
+                                                    <div data-bind="text: geometry.compiler" class="her-block-value"></div>
+                                                </div>
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key compressed">Compile Date: </h6>
+                                                    <div data-bind="text: geometry.compileDate" class="her-block-value"></div>
+                                                </div>
+                                            </div>
+                                            <div class="her-report-subsection-item flex">
+                                                <div class="her-block-attributes actor-name">
+                                                    <h6 class="her-block-key compressed">Last Update: </h6>
+                                                    <div data-bind="text: geometry.lastUpdateName"  class="her-block-value"></div>
+                                                </div>
+                                                <div class="her-block-attributes timespan">
+                                                    <h6 class="her-block-key compressed">Update Date: </h6>
+                                                    <div data-bind="text: geometry.lastUpdate"  class="her-block-value"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->   
+                                    </div>
+
+                                    <!-- Geometry Sources/Scale -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5>Record Sources/Scale</h5>
+
+                                        <!-- ko ifnot: hasGeometrySourcesScale(location.geometry) -->
+                                        <div class="her-nodata-note" style="display: none;">No record sources/scale for this resource</div>
+                                        <!-- /ko -->   
+
+                                        <!-- ko if: hasGeometrySourcesScale(location.geometry) -->
+                                        <div class="firstchild-container">
+                                            <div class="her-report-subsection-item flex column-order pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Coordinate System: </h6>
+                                                    <div data-bind="text: geometry.coordinateSystem" class="her-block-value"></div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Basemap: </h6>
+                                                    <div data-bind="text: geometry.basemap" class="her-block-value"></div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Capture Scale: </h6>
+                                                    <div data-bind="text: geometry.captureScale" class="her-block-value">--</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key compressed">Accuracy: </h6>
+                                                    <div data-bind="text: geometry.accuracy" class="her-block-value"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->   
+                                    </div>
+
+                                    <!-- Record Description -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5>Description</h5>
+                                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Description" %}</a>
+                                        
+                                        <!-- ko ifnot: location.geometry.description -->
+                                        <div class="her-nodata-note" style="display: none;">No description record for this resource</div>
+                                        <!-- /ko -->   
+
+                                        <!-- ko ifnot: location.geometry.description -->
+                                        <div class="firstchild-container pad-btm">
+                                            <div class="her-report-subsection-item">
+                                                <div class="her-block-attributes" style="margin-top: 5px;">
+                                                    <h6 class="her-block-key compressed">Metadata Description: </h6>
+                                                    <div data-bind="text: geometry.description" class="her-block-value">Stuart Cakebread did this</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- /ko -->   
+                                    </div>
+                                </div>  
+                                <!-- /ko -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Addresses -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.addresses)}" class="fa fa-angle-double-right toggle"></i> {% trans "Addresses" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(addressesCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.addresses" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: addressesCard.tiles().length -->
+                        <div class="her-nodata-note">No addresses for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: addressesCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Address Table -->
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Street Number" %}</th>
+                                                <th>{% trans "Street" %}</th>
+                                                <th>{% trans "Locality" %}</th>
+                                                <th>{% trans "Town/City" %}</th>
+                                                <th>{% trans "Postcode" %}</th>
+                                                <th>{% trans "Status" %}</th>
+                                                <th class="none">{% trans "Building Name" %}</th>
+                                                <th class="none">{% trans "Building Number" %}</th>
+                                                <th class="none">{% trans "Build No. Sub-street" %}</th>
+                                                <th class="none">{% trans "Sub-street" %}</th>
+                                                <th class="none">{% trans "County" %}</th>
+                                                <th class="none">{% trans "Full Address" %}</th>
+                                                <th class="none">{% trans "Currency" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: location.addresses, dataTableOptions: addressTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: buildingNumber"></td>
+                                                <td data-bind="text: street"></td>
+                                                <td data-bind="text: locality"></td>
+                                                <td data-bind="text: town"></td>
+                                                <td data-bind="text: postcode"></td>
+                                                <td data-bind="text: status"></td>
+                                                <td data-bind="text: buildingName"></td>
+                                                <td data-bind="text: buildingNumber"></td>
+                                                <td data-bind="text: buildingNumberSubStreet"></td>
+                                                <td data-bind="text: subStreet"></td>
+                                                <td data-bind="text: county"></td>
+                                                <td data-bind="text: fullAddress"></td>
+                                                <td data-bind="text: currency"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.addressesCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.addressesCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- Location Description -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.descriptions)}" class="fa fa-angle-double-right toggle"></i> {% trans "Location Descriptions" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(locationDescriptionsCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.descriptions" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: locationDescriptionsCard.tiles().length -->
+                        <div class="her-nodata-note">No location description for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: locationDescriptionsCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Description" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: location.descriptions, dataTableOptions: locDescriptionsTableConfig }">
+                                            <tr>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: description" class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Take a right at the light. Then go straight until night.  Look for the big red barn, then turn left. Go another few miles and you're almost there.</td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.locationDescriptionsCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.locationDescriptionsCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- Admin Areas -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.administrativeAreas)}" class="fa fa-angle-double-right toggle"></i> {% trans "Administrative Areas" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(administrativeAreasCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.administrativeAreas" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: location.administrativeAreas().length -->
+                        <div class="her-nodata-note">No administrative areas for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: location.administrativeAreas().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm">
+                                    <table data-bind="datatable: adminAreasTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Currency" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Holborn</td>
+                                                <td>District</td>
+                                                <td>Current</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>London</td>
+                                                <td>County</td>
+                                                <td>Current</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- National Grid References -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.nationalGrid)}" class="fa fa-angle-double-right toggle"></i> {% trans "National Grid References" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(nationalGridReferencesCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.nationalGrid" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: location.nationalGridReferences().length -->
+                        <div class="her-nodata-note">No grid references for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: location.nationalGridReferences().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Statements Table -->
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "National Grid Reference" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: location.nationalGridReferences, dataTableOptions: gridReferencesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: reference"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.nationalGridReferencesCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.nationalGridReferencesCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- Area Assignments -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.areaAssignment)}" class="fa fa-angle-double-right toggle"></i> {% trans "Area Assignment" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(areaAssignmentCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area Assignment" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.areaAssignment" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: location.areaAssignment().length -->
+                        <div class="her-nodata-note">No area assignments for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: location.areaAssignment().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Area Table -->
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Status" %}</th>
+                                                <th>{% trans "Ownership" %}</th>
+                                                <th>{% trans "Start Date" %}</th>
+                                                <th>{% trans "End Date" %}</th>
+                                                <th>{% trans "SHINE Form" %}</th>
+                                                <th class="none">{% trans "SHINE Significance" %}</th>
+                                                <th class="none">{% trans "Reference" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach:{ data: location.areaAssignment, dataTableOptions: areaAssignmentsTableConfig}" >
+                                            <tr>
+                                                <td>Archaeological Priority Area - Tier I</td>
+                                                <td>Public</td>
+                                                <td>1998-10-11</td>
+                                                <td>2019-03-13</td>
+                                                <td>Below-ground feature(s)</td>
+                                                <td>Low</td>
+                                                <td>Deskktop survey</td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.areaAssignmentCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.areaAssignmentCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- Land Use Classification -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.landUse)}" class="fa fa-angle-double-right toggle"></i> {% trans "Land Use Classification" %}</h2>
+                    <a class="her-report-a" data-bind="{event:{ mousedown:function(d, e){addNewTile(landUseCard, e)}}}"><i class="fa fa-mail-reply"></i> {% trans "Add Classification" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.locations.landUse" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: landUseCard.tiles().length -->
+                        <div class="her-nodata-note">No land use classes for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: landUseCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Land Use Table -->
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Land Use" %}</th>
+                                                <th>{% trans "Start Date" %}</th>
+                                                <th>{% trans "End Date" %}</th>
+                                                <th>{% trans "Geology" %}</th>
+                                                <th class="none">{% trans "Sub-soil" %}</th>
+                                                <th class="none">{% trans "Reference" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: location.landUseClassification, dataTableOptions: landUseTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: classification"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: geology"></td>
+                                                <td data-bind="text: subSoil"></td>
+                                                <td data-bind="text: reference"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.landUseCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.landUseCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Location -->
+
+            <!-- Designation/Protection -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'designation'">
+                
+                <!-- Designation Geometry/Map -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.designation)}" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Designation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Designation Map  -->
+                        <div class="her-report-subsection">
+                            <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation Extent " %}</h3>
+
+                            <!-- Show this block if there's NO data -->
+                            <div class="her-nodata-note her-top-card" style="display: none;">No extent for this resource</div>
+
+                    
+                            <!-- Show this block if there is resource tile content -->
+                            <div class="her-report-subsection-container no-flex">
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <div class="her-report-map her-designation">
+                                        map showing resource geometry goes here.  Map shows all the designation geometries for all designation/protection tiles.  Highlight the geometries associated with the tile in the table below when the user hovers over the row or expands the row.
+                                    </div>
+                                </div>   
+                            </div>
+                        </div>
+
+
+                        <!-- Designation Records -->
+                        <div class="her-report-subsection">
+                            
+                            <!-- Collapsible content -->
+                            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
+ 
+                                <div class="her-report-subsection-container multi-cards no-flex">
+
+                                    <!-- Event First Generation Cards -->
+                                    <div class="her-report-subsection-firstchild">
+                                        <h5>Designation/Protection Details</h5>
+                                        
+                                        <!-- Show this block if there's NO data -->
+                                        <div class="her-nodata-note" style="display: none;">No designation information for this resource</div>
+
+                                        <!-- Show this block if there's data -->
+                                        <div class="firstchild-container">
+                                            <!-- designation table  -->
+                                            <div class="her-table" style="max-width: 100%">
+                                                <table data-bind="datatable: designationTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr class="her-table-header">
+                                                            <th>{% trans "Designation Name" %}</th>
+                                                            <th>{% trans "Protection Type" %}</th>
+                                                            <th class="min-medium">{% trans "Start Date" %}</th>
+                                                            <th class="min-medium">{% trans "End Date" %}</th>
+                                                            <th>{% trans "Grade" %}</th>
+                                                            <th>{% trans "Risk" %}</th>
+                                                            <th class="none">{% trans "Amendment Date" %}</th>
+                                                            <th class="none">{% trans "Display Date" %}</th>
+                                                            <th class="none">{% trans "Date Qualifier" %}</th>
+                                                            <th class="none">{% trans "Reference" %}</th>
+                                                            <th class="her-table-control all"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr>
+                                                            <td>Carlisle Building Protection</td>
+                                                            <td>Locally Listed Building</td>
+                                                            <td>2012-03-12</td>
+                                                            <td>2019-09-21</td>
+                                                            <td>Grade I</td>
+                                                            <td>Not at risk</td>
+                                                            <td>--</td>
+                                                            <td>2012 - 2019</td>
+                                                            <td>Between</td>
+                                                            <td>Designated by HE in response to a petition by a local group</td>
+                                                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td>Carlisle Building Protection</td>
+                                                            <td>Locally Listed Building</td>
+                                                            <td>2020-11-12</td>
+                                                            <td>--</td>
+                                                            <td>Grade II</td>
+                                                            <td>Not at risk</td>
+                                                            <td>--</td>
+                                                            <td>2020 - present</td>
+                                                            <td>Between</td>
+                                                            <td>re-designated by HE after an unauthorized renovation</td>
+                                                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Files section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection Files" %}</h2>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: designationFilesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Designation/Protection" %}</th>
+                                                <th>{% trans "File" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Carlisle Building Protection</td>
+                                                <td>Onsite Inspection Report</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Carlisle Building Protection</td>
+                                                <td>Building Permit #12224 </td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Designation/Protection -->
+
+            <!-- Construction Phases and Components -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'phase'">
+                
+                <!-- Construction Phases -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionPhases)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
+                    <a class="her-report-a" data-bind="click: function(){addNewTile(constructionPhasesCard)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.phases.constructionPhases" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: constructionPhasesCard.tiles().length -->
+                        <div class="her-nodata-note">No construction phases for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: constructionPhasesCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Period" %}</th>
+                                                <th>{% trans "Start Date" %}</th>
+                                                <th>{% trans "End Date" %}</th>
+                                                <th>{% trans "Method" %}</th>
+                                                <th>{% trans "Phase" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Date Confidence" %}</th>
+                                                <th class="none">{% trans "Phase Evidence" %}</th>
+                                                <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                                <th class="none">{% trans "Construction Material" %}</th>
+                                                <th class="none">{% trans "Covering Material" %}</th>
+                                                <th class="none">{% trans "Construction Technique" %}</th>
+                                                <th class="none">{% trans "Phase Description" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead><span data-bind="text: console.log(phase.constructionPhases())"></span>
+                                        <tbody data-bind="dataTablesForEach: {data: phase.constructionPhases, dataTableOptions: conPhasesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: assetType"></td>
+                                                <td data-bind="text: period"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: method"></td>
+                                                <td data-bind="text: phase"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: displayDate"></td>
+                                                <td data-bind="text: dateConfidence"></td>
+                                                <td data-bind="text: phaseEvidence"></td>
+                                                <td data-bind="text: interpretationConfidence"></td>
+                                                <td data-bind="text: constructionMaterial"></td>
+                                                <td data-bind="text: coveringMaterial"></td>
+                                                <td data-bind="text: constructionTechnique"></td>
+                                                <td data-bind="text: phaseDescription"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.constructionPhasesCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.constructionPhasesCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- Components -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionComponents)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Components" %}</h2>
+                    <a class="her-report-a"  data-bind="click: function(){addNewTile(constructionComponentsCard)}"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.phases.constructionComponents" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: constructionComponentsCard.tiles().length -->
+                        <div class="her-nodata-note">No components for this resource</div>
+                        <!-- /ko -->
+                        
+                        <!-- ko if: constructionComponentsCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Construction Phase" %}</th>
+                                                <th>{% trans "Component" %}</th>
+                                                <th>{% trans "Technique" %}</th>
+                                                <th>{% trans "Material" %}</th>
+                                                <th class="medium">{% trans "Evidence" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: phase.constructionComponents, dataTableOptions: componentsTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: constructionPhase"></td>
+                                                <td data-bind="text: component"></td>
+                                                <td data-bind="text: technique"></td>
+                                                <td data-bind="text: material"></td>
+                                                <td data-bind="text: evidence"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.constructionComponentsCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.constructionComponentsCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <!-- Use Phases -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
+                    <a class="her-report-a" data-bind="click: function(){addNewTile(usePhaseCard)}"></a><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisible.phases.usePhase" class="her-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: usePhaseCard.tiles().length -->
+                        <div class="her-nodata-note" style="display: none;">No uses for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: usePhaseCard.tiles().length -->
+                        <div class="her-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <div class="her-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Period" %}</th>
+                                                <th>{% trans "Start Date" %}</th>
+                                                <th>{% trans "End Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Use Evidence" %}</th>
+                                                <th class="none">{% trans "Description Type" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: phase.usePhase, dataTableOptions: usePhasesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: period"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: displayDate"></td>
+                                                <td data-bind="text: useEvidence"></td>
+                                                <td data-bind="text: descriptionType"></td>
+                                                <td data-bind="text: description"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.usePhaseCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.usePhaseCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>            
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- End Construction Phases and Components -->
+
+            <!-- Production -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'prod'">
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">{% trans "Production Event" %}</h2>
+                    <a class="her-report-a disabled"><i class="fa fa-mail-reply"></i> {% trans "Add Production Event" %}</a>
+
+                    <!-- Show this block if there's NO data -->
+                    <div class="her-nodata-note" style="display: none;">No event created for this Physical Thing</div>
+
+                    <!-- Show this div if there are event data -->
+                    <!-- Production Event Block (one for each production event) -->
+                    <div class="her-report-subsection">
+                        <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Production Event: " %} <span>Statue Carving</span></h3>
+                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Event" %}</a>
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
+
+                        <!-- Show this if there is Event data (Top Card) -->
+                        <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
+                            <div class="her-report-subsection-container">
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Creator of Production Event: </h4>
+                                        <div class="her-block-value">Paul Gauguin</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Production Event Techniques: </h4>
+                                        <div class="her-block-value">Technique Number #1</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Location of Production Event: </h4>
+                                        <div class="her-block-value">Paris, France</div>
+                                    </div>
+                                </div>
+
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Objects used in Production Event: </h4>
+                                        <div class="her-block-value">Chisel</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Influence on Production Event: </h4>
+                                        <div class="her-block-value">Neo-classical school</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Names</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Name" %}</a>
+
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No statements for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <!-- Names Table -->
+                                    <div class="her-table" style="max-width: 100%">
+                                        <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Name" %}</th>
+                                                    <th class="min-tabletl">{% trans "Type" %}</th>
+                                                    <th class="min-medium">{% trans "Language" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Creation of a  great statue</td>
+                                                    <td>Primary Name</td>
+                                                    <td>English (language)</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>The statue creation</td>
+                                                    <td>Informal Title</td>
+                                                    <td>English (language)</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Statements</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Statement" %}</a>
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No statements for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <!-- Statements Table -->
+                                    <div class="her-table">
+                                        <table data-bind="datatable: statementsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Type" %}</th>
+                                                    <th>{% trans "Statement" %}</th>
+                                                    <th class="none">{% trans "Language" %}</th>
+                                                    <th class="none">{% trans "Name of Statement" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Acknowledgements</td>
+                                                    <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Eugène Henri Paul Gauguin was a French Post-Impressionist artist. Unappreciated until after his death, Gauguin is now recognized for his experimental use of color and Synthetist style that were distinct from Impressionism. Toward the end of his life, he spent ten years in French Polynesia.</td>
+                                                    <td>English (language)</td>
+                                                    <td>Acknowledgement statement from wikipedia</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Brief Text</td>
+                                                    <td class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Paul Gauguin was a great guy</td>
+                                                    <td>English (language)</td>
+                                                    <td>--</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Identifiers</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Event Identifier" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No identifiers for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Timespan</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit Event Timespan" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note" style="display: none;">No timespan for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container">
+                                    <div class="her-report-subsection-item flex">
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">Beginning of the beginning: </h6>
+                                            <div class="her-block-value">2021-02-18</div>
+                                        </div>
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">End of the beginning: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                    </div>
+                                    <div class="her-report-subsection-item flex" style="margin-top: -5px;">
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">Beginning of the end: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">End of the end: </h6>
+                                            <div class="her-block-value">2021-05-22</div>
+                                        </div>
+                                    </div>
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event timespan: </h6>
+                                            <div class="her-block-value">Probable time period of statue creation</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Duration: </h6>
+                                            <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event duration: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+
+                <!-- Production Event Parts -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title">{% trans "Production Event Parts" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part" %}</a>
+
+                    <!-- Prodcuction Event Part -->
+                    <div class="her-report-subsection production-part">
+                        <h3><i class="fa fa-angle-double-right"></i> {% trans "Production Event Part: " %} <span>Statue Torso</span></h3>
+                        <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Part" %}</a>
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
+
+                        <!-- Show this if there is Event data (Top Card) -->
+                        <div class="her-report-collapsible-container">
+                            <div class="her-report-subsection-container">
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Creator of Production Event: </h4>
+                                        <div class="her-block-value">Paul Gauguin</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Production Event Techniques: </h4>
+                                        <div class="her-block-value">Technique Number #13</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Location of Production Event: </h4>
+                                        <div class="her-block-value">Paris, France</div>
+                                    </div>
+                                </div>
+
+                                <div class="her-report-subsection-item">
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Objects used in Production Event: </h4>
+                                        <div class="her-block-value">Paints, Brushes</div>
+                                    </div>
+                                    <div class="her-block-attributes">
+                                        <h4 class="her-block-key">Influence on Production Event: </h4>
+                                        <div class="her-block-value">Neo-classical school</div>
+                                    </div>
+                                </div>
+                            </div>
+                        
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Part Names</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Name" %}</a>
+
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No names for this part</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+                                    
+                                    <!-- Names Table -->
+                                    <div class="her-table" data-bind="" style="max-width: 1000px;">
+                                        <table data-bind="datatable: nameTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                            <thead>
+                                                <tr class="her-table-header">
+                                                    <th>{% trans "Name" %}</th>
+                                                    <th class="min-tabletl">{% trans "Type" %}</th>
+                                                    <th class="min-medium">{% trans "Currency" %}</th>
+                                                    <th class="her-table-control all"></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Huxley House</td>
+                                                    <td>Primary</td>
+                                                    <td>Current</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Aldus Huxley Manor</td>
+                                                    <td>Alternate</td>
+                                                    <td>Current</td>
+                                                    <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Part Statements</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Statement" %}</a>
+                                
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No statements for this part</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Part Identifiers</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Identifier" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No identifiers for this part</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+
+                                </div>
+                            </div>
+
+                            <!-- Event First Generation Cards -->
+                            <div class="her-report-subsection-firstchild">
+                                <h5>Production Event Part Timespan</h5>
+                                <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Part Timespan" %}</a>
+                                <!-- Show this block if there's NO data -->
+                                <div class="her-nodata-note">No timespan for this event</div>
+
+                                <!-- Show this block if there's data -->
+                                <div class="firstchild-container" style="display: none;">
+                                    <div class="her-report-subsection-item flex">
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">Beginning of the beginning: </h6>
+                                            <div class="her-block-value">2021-02-18</div>
+                                        </div>
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">End of the beginning: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                    </div>
+                                    <div class="her-report-subsection-item flex" style="margin-top: -5px;">
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">Beginning of the end: </h6>
+                                            <div class="her-block-value">--</div>
+                                        </div>
+                                        <div class="her-block-attributes timespan">
+                                            <h6 class="her-block-key">End of the end: </h6>
+                                            <div class="her-block-value">2021-05-22</div>
+                                        </div>
+                                    </div>
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event timespan: </h6>
+                                            <div class="her-block-value">Probable time period of statue creation</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Duration: </h6>
+                                            <div class="her-block-value">2 days (units of time) (at least 1 and no more than 2 units)</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Name of event duration: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Prodcution -->
+
+            <!-- Bibliography Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'biblio'">
+
+                <!-- Biblio section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Bibliographic Citation" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">{% trans "No citations for this resource" %}</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: biblioTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Citation" %}</th>
+                                                <th>{% trans "Source Number" %}</th>
+                                                <th>{% trans "Pages" %}</th>
+                                                <th>{% trans "Figs." %}</th>
+                                                <th>{% trans "Plate(s)" %}</th>
+                                                <th class="none">{% trans "Comment" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Report on Site Excaction at 123 Sumner Rd</a></td>
+                                                <td>--</td>
+                                                <td>13-19</td>
+                                                <td>--</td>
+                                                <td>--</td>
+                                                <td>A very nice bit of research.  Grey literature, unfortunately.  Lukcily HE have a copy in our corporate library</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Bibliography -->
+
+            <!-- Photos Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'photos'">
+
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No photos for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                
+                                <div class="her-report-photo-container">
+                                    <div class="her-report-photo-block">
+                                        <div class="her-report-photo">
+                                            photo goes here
+                                        </div>
+                                        <div class="her-report-photo-caption">
+                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Caption: </h6>
+                                                    <div class="her-block-value">View of resource from the west</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright Holder: </h6>
+                                                    <div class="her-block-value">Historic England</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright type: </h6>
+                                                    <div class="her-block-value">Copyright: All rights reserved</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright note: </h6>
+                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="her-report-photo-block">
+                                        <div class="her-report-photo">
+                                            photo goes here
+                                        </div>
+                                        <div class="her-report-photo-caption">
+                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Caption: </h6>
+                                                    <div class="her-block-value">View of resource from the west</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright Holder: </h6>
+                                                    <div class="her-block-value">Historic England</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright type: </h6>
+                                                    <div class="her-block-value">Copyright: All rights reserved</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright note: </h6>
+                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="her-report-photo-block">
+                                        <div class="her-report-photo">
+                                            photo goes here
+                                        </div>
+                                        <div class="her-report-photo-caption">
+                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Caption: </h6>
+                                                    <div class="her-block-value">View of resource from the west</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright Holder: </h6>
+                                                    <div class="her-block-value">Historic England</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright type: </h6>
+                                                    <div class="her-block-value">Copyright: All rights reserved</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright note: </h6>
+                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="her-report-photo-block">
+                                        <div class="her-report-photo">
+                                            photo goes here
+                                        </div>
+                                        <div class="her-report-photo-caption">
+                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Caption: </h6>
+                                                    <div class="her-block-value">View of resource from the west</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright Holder: </h6>
+                                                    <div class="her-block-value">Historic England</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright type: </h6>
+                                                    <div class="her-block-value">Copyright: All rights reserved</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright note: </h6>
+                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="her-report-photo-block">
+                                        <div class="her-report-photo">
+                                            photo goes here
+                                        </div>
+                                        <div class="her-report-photo-caption">
+                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Caption: </h6>
+                                                    <div class="her-block-value">View of resource from the west</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright Holder: </h6>
+                                                    <div class="her-block-value">Historic England</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright type: </h6>
+                                                    <div class="her-block-value">Copyright: All rights reserved</div>
+                                                </div>
+                                                <div class="her-block-attributes">
+                                                    <h6 class="her-block-key">Copyright note: </h6>
+                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Photos -->
+
+            <!-- Scientific Dates Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'sci'">
+
+                <!-- Scientific date section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Scientific Date Determination" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">{% trans "No dates for this resource" %}</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: scientificDatesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Construction Phase" %}</th>
+                                                <th>{% trans "Dating Method" %}</th>
+                                                <th>{% trans "Earliest Date" %}</th>
+                                                <th>{% trans "Latest Date" %}</th>
+                                                <th>{% trans "Date Qualifier)" %}</th>
+                                                <th class="none">{% trans "Standard Deviation" %}</th>
+                                                <th class="none">{% trans "Standard Deviation Comment" %}</th>
+                                                <th class="none">{% trans "Laboratory Note" %}</th>
+                                                <th class="none">{% trans "Start Date of Date Determination" %}</th>
+                                                <th class="none">{% trans "End Date of Date Determination" %}</th>
+                                                <th class="none">{% trans "Date Determination Qualifier" %}</th>
+                                                <th class="none">{% trans "General Note" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Churchhall</td>
+                                                <td>Dendrochronlogy</td>
+                                                <td>1412</td>
+                                                <td>1427</td>
+                                                <td>At some time</td>
+                                                <td>3.4 years</td>
+                                                <td>Standard deviation calculated by Phil Carlisle</td>
+                                                <td>--</td>
+                                                <td>21/03/2019</td>
+                                                <td>2203/2019</td>
+                                                <td>--</td>
+                                                <td>Dating conducted on a timber in the main church hall</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Scientific Date -->
+
+            <!-- Associate Resources Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'related'">
+
+                <!-- Associated Activities section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Activities" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Activity" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No activities for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Activity" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Trench at 33 Aspinall Lane</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Desktop Survey of Pre-Victorian Buildings in Holborn</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Actors -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Actors" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Actor" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;  ">No actors for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: relatedActorsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Actor" %}</th>
+                                                <th>{% trans "Role" %}</th>
+                                                <th>{% trans "Start of Role" %}</th>
+                                                <th>{% trans "End of Role" %}</th>
+                                                <th class="none">{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Role Type" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Abel Tasman</a></td>
+                                                <td>Architect</td>
+                                                <td>03-11-1788</td>
+                                                <td>12-10-1792</td>
+                                                <td>1788-1792</td>
+                                                <td>Occasionally</td>
+                                                <td>Is referred to by</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Bob the Builder</a></td>
+                                                <td>Builder</td>
+                                                <td>1793</td>
+                                                <td>1794</td>
+                                                <td>1793-1794</td>
+                                                <td>Throughout</td>
+                                                <td>Is referred to by</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Consultations section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Consultations" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Consultation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No consultations for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Consultation" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Carlisle House Consultation on 12/10/2019</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Carlisle House Consultation on 23/02/2016</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Digital Files section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Files" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add File" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "File Name" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Site visit report for Carlisle House</a></td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Associated Heritage Assets section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
+                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add resource" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there's NO data -->
+                        <div class="her-nodata-note" style="display: none;">No hertiage/area/artifacts for this resource</div>
+
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="her-table" data-bind="">
+                                    <table data-bind="datatable: relatedResourceThreeColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="her-table-header">
+                                                <th>{% trans "Resource Name" %}</th>
+                                                <th>{% trans "Association" %}</th>
+                                                <th class="her-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Roman Coin</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Roman Villa</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Pottery Sherds</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Central Holborn Heritage Area</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                            <tr>
+                                                <td><a href="" class="her-table-link">Victorian Hospital</a></td>
+                                                <td>General Association</td>
+                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Associated Resources -->
+
+            <!-- JSON Tab -->
+            <div class="her-report-page" data-bind="if: activeSection() === 'json'">
+
+                <!-- JSON section -->
+                <div class="her-report-section">
+                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Resource JSON" %}</h2>
+                    
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                        <!-- Show this block if there is resource tile content -->
+                        <div class="her-report-subsection">
+                            <div class="her-report-json">
+                                Show resource instance json here using the same display widget as used to show the geojson in the map card
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- End Names -->
+
+        </div>
+    </div>
+    {% endblock body %}
+
+
+    {% block related_resources %}
+    {% endblock related_resources %}
+
+    {% block footer %}
+    <div class="her-tabbed-report-footer">
+        <div>Footer of the report here ...</div>
+    </div>
+    {% endblock footer %}
+
+{% endblock report %}
+
+
+{% block summary %}
+<!-- Summary Report -->
+<div class="her-summary-report">
+    <div class="her-summary-block">
+        <div class="her-title-block">
+            <h1 data-bind="text: displayname">Instance Name Goes Here</h1>
+            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "edit resource" %}</a>
+        </div>
+        <div class="her-block-attributes">
+            <div class="her-block-key">Resource Type:</div>
+            <div class="her-block-value">Heritage Asset</div>
+        </div>
+        <div class="her-block-attributes">
+            <div class="her-block-key">Address:</div>
+            <div class="her-block-value">Carlisle House, 12 Dalgity Mews, Cakebread Lane, Shoreditch, London, MEW 123</div>
+        </div>
+        <div class="her-block-attributes">
+            <div class="her-block-key">Protection:</div>
+            <div class="her-block-value">Grade I</div>
+        </div>
+    </div>
+
+    <!-- Photos Tab -->
+    <div class="her-report-page">
+
+        <div class="her-report-section" style="padding-top: 10px;">
+            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
+            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+
+            <!-- Collapsible content -->
+            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                <!-- Show this block if there's NO data -->
+                <div class="her-nodata-note" style="display: none;">No photos for this resource</div>
+
+
+                <!-- Show this block if there is resource tile content -->
+                <div class="her-report-subsection">
+                    <div class="firstchild-container">
+                        
+                        <div class="her-report-photo-container">
+                            <div class="her-report-photo-block">
+                                <div class="her-report-photo">
+                                    photo goes here
+                                </div>
+                                <div class="her-report-photo-caption">
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Caption: </h6>
+                                            <div class="her-block-value">View of resource from the west</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright Holder: </h6>
+                                            <div class="her-block-value">Historic England</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright type: </h6>
+                                            <div class="her-block-value">Copyright: All rights reserved</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright note: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="her-report-photo-block">
+                                <div class="her-report-photo">
+                                    photo goes here
+                                </div>
+                                <div class="her-report-photo-caption">
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Caption: </h6>
+                                            <div class="her-block-value">View of resource from the west</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright Holder: </h6>
+                                            <div class="her-block-value">Historic England</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright type: </h6>
+                                            <div class="her-block-value">Copyright: All rights reserved</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright note: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="her-report-photo-block">
+                                <div class="her-report-photo">
+                                    photo goes here
+                                </div>
+                                <div class="her-report-photo-caption">
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Caption: </h6>
+                                            <div class="her-block-value">View of resource from the west</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright Holder: </h6>
+                                            <div class="her-block-value">Historic England</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright type: </h6>
+                                            <div class="her-block-value">Copyright: All rights reserved</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright note: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="her-report-photo-block">
+                                <div class="her-report-photo">
+                                    photo goes here
+                                </div>
+                                <div class="her-report-photo-caption">
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Caption: </h6>
+                                            <div class="her-block-value">View of resource from the west</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright Holder: </h6>
+                                            <div class="her-block-value">Historic England</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright type: </h6>
+                                            <div class="her-block-value">Copyright: All rights reserved</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright note: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="her-report-photo-block">
+                                <div class="her-report-photo">
+                                    photo goes here
+                                </div>
+                                <div class="her-report-photo-caption">
+                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Caption: </h6>
+                                            <div class="her-block-value">View of resource from the west</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright Holder: </h6>
+                                            <div class="her-block-value">Historic England</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright type: </h6>
+                                            <div class="her-block-value">Copyright: All rights reserved</div>
+                                        </div>
+                                        <div class="her-block-attributes">
+                                            <h6 class="her-block-key">Copyright note: </h6>
+                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Photos -->         
+
+
+    <!-- Descriptions Tab -->
+    <div class="her-report-page">
+
+        <!-- Description section -->
+        <div class="her-report-section">
+            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Descriptions" %}</h2>
+            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Desription" %}</a>
+
+            <!-- Collapsible content -->
+            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                <!-- Show this block if there's NO data -->
+                <div class="her-nodata-note" style="display: none;">{% trans "No descriptions for this resource" %}</div>
+
+
+                <!-- Show this block if there is resource tile content -->
+                <div class="her-report-subsection">
+                    <div class="firstchild-container">
+                        <div class="her-table" data-bind="">
+                            <table data-bind="datatable: descriptionTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="her-table-header">
+                                        <th>{% trans "Type" %}</th>
+                                        <th>{% trans "Description" %}</th>
+                                        <th class="her-table-control all"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Abstract</td>
+                                        <td class="her-table-descrip-col">An example of a very long abstract using a convenient snippet of text: Flights and Last Known Flights – Place of Departure. How do we manually as locations?  For example, would like to add RAF Tangmere, but can only currently add West Sussex.  Would create a very unwieldy list if we could add anything, but perhaps could need a note field?</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Full</td>
+                                        <td class="her-table-descrip-col">Another convenient bit of text: Historic Map – Can only add ‘Archive Sources’.  Some of the maps will not be from Archives, or we don’t know where they have originated from.  I think this needs to be ‘Bibliographic Source’ which is then linked to an Archive Source, or is it possible to add from both Source Resource Models?</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Descriptions -->
+
+
+    <!-- Construction Phases and Components -->
+    <div class="her-report-page">
+        
+        <!-- Construction Phases -->
+        <div class="her-report-section">
+            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
+            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+
+            <!-- Collapsible content -->
+            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                <!-- Show this block if there's NO data -->
+                <div class="her-nodata-note" style="display: none;">No construction phases for this resource</div>
+
+                <!-- Show this block if there's IS data -->
+                <div class="her-report-subsection">
+                    
+                    <div class="firstchild-container">
+                        
+                        <div class="her-table pad-btm">
+                            <table data-bind="datatable: conPhasesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="her-table-header">
+                                        <th>{% trans "Type" %}</th>
+                                        <th>{% trans "Period" %}</th>
+                                        <th>{% trans "Start Date" %}</th>
+                                        <th>{% trans "End Date" %}</th>
+                                        <th>{% trans "Method" %}</th>
+                                        <th>{% trans "Phase" %}</th>
+                                        <th class="none">{% trans "Date Qualifier" %}</th>
+                                        <th class="none">{% trans "Display Date" %}</th>
+                                        <th class="none">{% trans "Date Confidence" %}</th>
+                                        <th class="none">{% trans "Phase Evidence" %}</th>
+                                        <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                        <th class="none">{% trans "Construction Material" %}</th>
+                                        <th class="none">{% trans "Covering Material" %}</th>
+                                        <th class="none">{% trans "Construction Technique" %}</th>
+                                        <th class="none">{% trans "Phase Description" %}</th>
+                                        <th class="her-table-control all"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Church Hall</td>
+                                        <td>--</td>
+                                        <td>1602</td>
+                                        <td>1637</td>
+                                        <td>Handbuilt</td>
+                                        <td>Initial build</td>
+                                        <td>Throughout</td>
+                                        <td>1602-1637</td>
+                                        <td>Probable</td>
+                                        <td>Extant Structure</td>
+                                        <td>Certain</td>
+                                        <td>Pulhamite Stone</td>
+                                        <td>Pulhamite Stone</td>
+                                        <td>Brickwork</td>
+                                        <td>A very nice church, really.  Lovely building, lovely setting.  You can see why they built it here.  Excellent architecture.  Just wish that they had added a bit of paint to the outside.  A touch up on the inside wouldn't hurt either</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Dovecote</td>
+                                        <td>Edwarian</td>
+                                        <td>1899</td>
+                                        <td>1900</td>
+                                        <td>Handbuilt</td>
+                                        <td>--</td>
+                                        <td>Throughout</td>
+                                        <td>--</td>
+                                        <td>Possible</td>
+                                        <td>Extant Structure</td>
+                                        <td>Certain</td>
+                                        <td>--</td>
+                                        <td>--</td>
+                                        <td>--</td>
+                                        <td>Nicest dovecote you'll ever see</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <!-- Components -->
+        <div class="her-report-section">
+            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Components" %}</h2>
+            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
+
+            <!-- Collapsible content -->
+            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                <!-- Show this block if there's NO data -->
+                <div class="her-nodata-note" style="display: none;">No components for this resource</div>
+
+                <!-- Show this block if there's IS data -->
+                <div class="her-report-subsection">
+                    
+                    <div class="firstchild-container">
+                        <div class="her-table pad-btm">
+                            <table data-bind="datatable: componentsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="her-table-header">
+                                        <th>{% trans "Construction Phase" %}</th>
+                                        <th>{% trans "Component" %}</th>
+                                        <th>{% trans "Technique" %}</th>
+                                        <th>{% trans "Material" %}</th>
+                                        <th class="medium">{% trans "Evidence" %}</th>
+                                        <th class="her-table-control all"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Church Hall</td>
+                                        <td>Chapel</td>
+                                        <td>Brickwork</td>
+                                        <td>Flint stone</td>
+                                        <td>Conjectural</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                    <tr>
+                                        <td>Church Hall</td>
+                                        <td>Apse</td>
+                                        <td>Brickwork</td>
+                                        <td>Stone</td>
+                                        <td>Conjectural</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Use Phases -->
+        <div class="her-report-section">
+            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
+            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
+
+            <!-- Collapsible content -->
+            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+
+                <!-- Show this block if there's NO data -->
+                <div class="her-nodata-note" style="display: none;">No uses for this resource</div>
+
+                <!-- Show this block if there's IS data -->
+                <div class="her-report-subsection">
+                    
+                    <div class="firstchild-container">
+                        <div class="her-table pad-btm">
+                            <table data-bind="datatable: usePhasesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                <thead>
+                                    <tr class="her-table-header">
+                                        <th>{% trans "Type" %}</th>
+                                        <th>{% trans "Period" %}</th>
+                                        <th>{% trans "Start Date" %}</th>
+                                        <th>{% trans "End Date" %}</th>
+                                        <th class="none">{% trans "Date Qualifier" %}</th>
+                                        <th class="none">{% trans "Display Date" %}</th>
+                                        <th class="none">{% trans "Use Evidence" %}</th>
+                                        <th class="none">{% trans "Description Type" %}</th>
+                                        <th class="none">{% trans "Description" %}</th>
+                                        <th class="her-table-control all"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Pub</td>
+                                        <td>Edwardian</td>
+                                        <td>Spring 1918</td>
+                                        <td>--</td>
+                                        <td>Throughout</td>
+                                        <td>Spring 1918 - present</td>
+                                        <td>Documentary Evidence</td>
+                                        <td>Abstract</td>
+                                        <td>A very nice pub in an old chuch.  Lovely building, lovely setting.  You can see why they built it here.  Excellent architecture.  Just wish that they had added a bit of paint to the outside.  A touch up on the inside wouldn't hurt either</td>
+                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>            
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Construction Phases and Components -->
+    
+</div>
+{% endblock summary %}
+
+
+{% block header_form %}
+
+{% endblock header_form %}
