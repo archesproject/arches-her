@@ -1424,21 +1424,21 @@
 
                 <!-- Biblio section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Bibliographic Citation" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.bibliography)}" class="fa fa-angle-double-right toggle"></i> {% trans "Bibliographic Citation" %}</h2>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(bibliographyCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.bibliography" class="her-report-collapsible-container pad-lft">
+                        
+                        <!-- ko ifnot: bibliographyCard.tiles().length --> 
+                        <div class="her-nodata-note">{% trans "No citations for this resource" %}</div>
+                        <!-- /ko -->
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">{% trans "No citations for this resource" %}</div>
-
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: bibliographyCard.tiles().length --> 
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: biblioTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Citation" %}</th>
@@ -1450,21 +1450,29 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { dataTableOptions: biblioTableConfig}">
                                             <tr>
                                                 <td><a href="" class="her-table-link">Report on Site Excaction at 123 Sumner Rd</a></td>
-                                                <td>--</td>
-                                                <td>13-19</td>
-                                                <td>--</td>
-                                                <td>--</td>
-                                                <td>A very nice bit of research.  Grey literature, unfortunately.  Lukcily HE have a copy in our corporate library</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td data-bind="sourceNumber"></td>
+                                                <td data-bind="pages"></td>
+                                                <td data-bind="figs"></td>
+                                                <td data-bind="plates"></td>
+                                                <td data-bind="comment"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.bibliographyCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.bibliographyCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>
@@ -1474,153 +1482,51 @@
             <div class="her-report-page" data-bind="if: activeSection() === 'photos'">
 
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.photos)}"  class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(photosCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.photos" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">No photos for this resource</div>
+                        <!-- ko ifnot: photosCard.tiles().length -->
+                        <div class="her-nodata-note">No photos for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: photosCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
-                                
                                 <div class="her-report-photo-container">
+                                    <!-- ko foreach: {data: photos} -->
                                     <div class="her-report-photo-block">
                                         <div class="her-report-photo">
-                                            photo goes here
+                                            <img data-bind="attr: {src: path}" />
                                         </div>
                                         <div class="her-report-photo-caption">
                                             <div class="her-report-subsection-item flex column-order pad-top pad-btm">
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key">Caption: </h6>
-                                                    <div class="her-block-value">View of resource from the west</div>
+                                                    <div class="her-block-value" data-bind="text: caption"></div>
                                                 </div>
                                                 <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright Holder: </h6>
-                                                    <div class="her-block-value">Historic England</div>
+                                                    <h6 class="her-block-key">Copyright holder: </h6>
+                                                    <div class="her-block-value" data-bind="text: copyrightHolder"></div>
                                                 </div>
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key">Copyright type: </h6>
-                                                    <div class="her-block-value">Copyright: All rights reserved</div>
+                                                    <div class="her-block-value" data-bind="text: copyrightType"></div>
                                                 </div>
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key">Copyright note: </h6>
-                                                    <div class="her-block-value">Actual work days required to create statue</div>
+                                                    <div class="her-block-value" data-bind="text: copyrightNote"></div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-
-                                    <div class="her-report-photo-block">
-                                        <div class="her-report-photo">
-                                            photo goes here
-                                        </div>
-                                        <div class="her-report-photo-caption">
-                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Caption: </h6>
-                                                    <div class="her-block-value">View of resource from the west</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright Holder: </h6>
-                                                    <div class="her-block-value">Historic England</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright type: </h6>
-                                                    <div class="her-block-value">Copyright: All rights reserved</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright note: </h6>
-                                                    <div class="her-block-value">Actual work days required to create statue</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="her-report-photo-block">
-                                        <div class="her-report-photo">
-                                            photo goes here
-                                        </div>
-                                        <div class="her-report-photo-caption">
-                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Caption: </h6>
-                                                    <div class="her-block-value">View of resource from the west</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright Holder: </h6>
-                                                    <div class="her-block-value">Historic England</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright type: </h6>
-                                                    <div class="her-block-value">Copyright: All rights reserved</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright note: </h6>
-                                                    <div class="her-block-value">Actual work days required to create statue</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="her-report-photo-block">
-                                        <div class="her-report-photo">
-                                            photo goes here
-                                        </div>
-                                        <div class="her-report-photo-caption">
-                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Caption: </h6>
-                                                    <div class="her-block-value">View of resource from the west</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright Holder: </h6>
-                                                    <div class="her-block-value">Historic England</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright type: </h6>
-                                                    <div class="her-block-value">Copyright: All rights reserved</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright note: </h6>
-                                                    <div class="her-block-value">Actual work days required to create statue</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="her-report-photo-block">
-                                        <div class="her-report-photo">
-                                            photo goes here
-                                        </div>
-                                        <div class="her-report-photo-caption">
-                                            <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Caption: </h6>
-                                                    <div class="her-block-value">View of resource from the west</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright Holder: </h6>
-                                                    <div class="her-block-value">Historic England</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright type: </h6>
-                                                    <div class="her-block-value">Copyright: All rights reserved</div>
-                                                </div>
-                                                <div class="her-block-attributes">
-                                                    <h6 class="her-block-key">Copyright note: </h6>
-                                                    <div class="her-block-value">Actual work days required to create statue</div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- /ko -->
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>

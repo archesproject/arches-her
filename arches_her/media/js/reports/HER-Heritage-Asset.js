@@ -64,6 +64,8 @@ define([
                 this.constructionPhasesCard = this.report.cards.find(x => x.nodegroupid == '4a24d890-7bd5-11e9-9de9-80000b44d1d9')
                 this.constructionComponentsCard = this.report.cards.find(x => x.nodegroupid == '55d6a53e-049c-11eb-8618-f875a44e0e11');
                 this.usePhaseCard = this.report.cards.find(x => x.nodegroupid == 'c01aa119-8a25-11ea-8dd6-f875a44e0e11');
+                this.bibliographyCard = this.report.cards.find(x => x.nodegroupid == 'c4230739-28ce-11eb-8b35-f875a44e0e11')
+                this.photosCard = this.report.cards.find(x => x.nodegroupid == '46f25cd9-b6c7-11ea-8651-f875a44e0e11');
                 this.locationDataCard = this.report.cards.find(x => x.nodegroupid == "ca05bc7e-28cf-11eb-95f4-f875a44e0e11");
                 const locationDataCardBase = this.locationDataCard.tiles()?.[0]?.cards ? this.locationDataCard.tiles()[0].cards : this.locationDataCard.cards()
 
@@ -176,6 +178,7 @@ define([
                 this.resource = ko.observable(params.report?.report_json);
 
                 this.descriptions = ko.observableArray();
+                this.bibliography = ko.observableArray();
 
                 // set up observables for data in view
                 this.names = {
@@ -217,6 +220,8 @@ define([
                     constructionComponents: ko.observableArray(),
                     usePhase: ko.observableArray()
                 }
+
+                this.photos = ko.observableArray();
 
                 this.loadData = (resource) => {
                     const names = self.names;
@@ -457,6 +462,47 @@ define([
                         }]);
                     }
 
+                    const photos = resource?.['Images'];
+                    if(photos?.length) {
+                        this.photos(photos.map(x => {
+                            const caption = self.getNameTileNodeValue(x, 'Captions', 'Caption');
+                            const copyrightHolder = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Holder');
+                            const copyrightNote = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Note', 'Copyright Note Text');
+                            const copyrightType = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Type');
+                            const path = self.getNameTileNodeValue(x);
+                            const tileid = x?.['@tile_id'];
+
+                            return { 
+                                caption,
+                                copyrightHolder,
+                                copyrightNote,
+                                copyrightType,
+                                path,
+                                tileid
+                            };
+                        }));
+                    }
+                   
+                    const bibliography = resource?.['Bibliographic Source Citations']; 
+                    if(bibliography?.length) {
+                        this.bibliography(bibliography.map(x => {
+                            const caption = self.getNameTileNodeValue(x, 'Captions', 'Caption');
+                            const copyrightHolder = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Holder');
+                            const copyrightNote = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Note', 'Copyright Note Text');
+                            const copyrightType = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Type');
+                            const path = self.getNameTileNodeValue(x);
+                            const tileid = x?.['@tile_id'];
+
+                            return { 
+                                caption,
+                                copyrightHolder,
+                                copyrightNote,
+                                copyrightType,
+                                path,
+                                tileid
+                            };
+                        }));
+                    }
                 }
 
 
@@ -487,7 +533,8 @@ define([
                         constructionPhases: ko.observable(true),
                         constructionComponents: ko.observable(true),
                         usePhase: ko.observable(true)
-                    }
+                    }, 
+                    photos: ko.observable(true)
                 }
                 this.toggleBlockVisibility = (block) => {
                     block(!block());
