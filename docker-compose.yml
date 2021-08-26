@@ -10,7 +10,6 @@ services:
       volumes:
         - ../arches/:/web_root/arches
         - ./:/web_root/arches_her
-        - cantaloupe-data:/web_root/arches_her/arches_her/uploadedfiles
       env_file:
         - ./docker/env_file.env
       ports:
@@ -35,7 +34,6 @@ services:
       volumes:
         - ../arches/:/web_root/arches
         - ./:/web_root/arches_her
-        - cantaloupe-data:/web_root/arches_her/arches_her/uploadedfiles
       env_file:
         - ./docker/env_file.env
       ports:
@@ -90,17 +88,18 @@ services:
         - 5673:5672
         - 15673:15672
 
-    # for documentation on using the uclalibrary cantaloupe image:        
-    # https://gitlab.com/ucla-library/docker-cantaloupe/-/blob/master/configs/cantaloupe.properties.default-dev
-    cantaloupe_aher:
-      container_name: cantaloupe_aher
-      image: uclalibrary/cantaloupe
-      volumes:
-        - cantaloupe-data:/imageroot
+    koop_aher:
+      container_name: koop_aher
+      image: ryana86/arches-koop:1.0
       ports:
-        - 8183:8182
+        - 3000:3000
+      volumes:
+      - ./arches_her/pkg/koop:/usr/src/app/config
       env_file:
         - ./docker/env_file.env
+      depends_on:
+        - aher
+    
 
 volumes:
     arches-log:
@@ -112,4 +111,3 @@ volumes:
     elasticsearch-data:
     rabbitmq-logs:
     rabbitmq-data:
-    cantaloupe-data:
