@@ -147,7 +147,7 @@
                 <!-- System Reference Numbers section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.systemReferenceNumbers)}" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(systemReferenceNumbersCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Identifier" %}</a>
+                    <a data-bind="{click: function(){addNewTile(systemReferenceNumbersCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> <span data-bind="if: systemReferenceNumbersCard.tiles().length">{% trans "Edit Identifier" %}</span><span data-bind="ifnot: systemReferenceNumbersCard.tiles().length">{% trans "Add Identifier" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.systemReferenceNumbers" class="her-report-collapsible-container pad-lft">
@@ -245,40 +245,41 @@
                     <div data-bind="visible: blockVisible.locations.coordinates" class="her-report-collapsible-container pad-lft">
 
                         <div class="her-report-subsection">
-                            <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry " %}  <span>(Shape type: Locality)</span></h3>
+                            <h3><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.locality)}" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry " %}  <span>(Shape type: Locality)</span></h3>
                             <a class="her-report-a" data-bind="{click: function(){addNewTile(locationGeometryCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
-                            
-                            <!-- ko ifnot: locationGeometryCard.tiles().length -->
-                            <div class="her-nodata-note her-top-card">No geometry for this resource</div>
-                            <!-- /ko -->
-                    
-                            <!-- ko if: locationGeometryCard.tiles().length -->
-                            <div class="her-report-subsection-container no-flex">
-                                
-                                <!-- Show this block if there's data -->
-                                <div class="firstchild-container">
+                            <div data-bind="visible: blockVisible.locations.locality">
+                                <!-- ko ifnot: locationGeometryCard.tiles().length -->
+                                <div class="her-nodata-note her-top-card">No geometry for this resource</div>
+                                <!-- /ko --> 
+                        
+                                <!-- ko if: locationGeometryCard.tiles().length -->
+                                <div class="her-report-subsection-container no-flex">
+                                    
+                                    <!-- Show this block if there's data -->
+                                    <div class="firstchild-container">
 
-                                    <div class="her-report-map">
-                                        <div class="map-container" style="height:475px">
-                                            <div class="map" style="height:475px" data-bind="component: {
-                                                name: 'arches-map',
-                                                params: $data
-                                            }">
+                                        <div class="her-report-map">
+                                            <div class="map-container" style="height:475px">
+                                                <div class="map" style="height:475px" data-bind="component: {
+                                                    name: 'arches-map',
+                                                    params: $data
+                                                }">
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
 
-                                </div>   
+                                    </div>   
+                                </div>
+                                <!-- /ko -->
                             </div>
-                            <!-- /ko -->
                         </div>
 
                         <!-- Geometry Metadata -->
                         <div class="her-report-subsection">
-                            <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry Metadata" %}</h3>
+                            <h3><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.geometryMetadata)}" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry Metadata" %}</h3>
                             
                             <!-- Collapsible content -->
-                            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
+                            <div data-bind="visible: blockVisible.locations.geometryMetadata" class="her-report-collapsible-container">
                                 <!-- ko ifnot: hasGeometryMetadata(location.geometry) -->
                                 <div class="her-nodata-note her-top-card">No metadata for this resource</div>
                                 <!-- /ko -->
@@ -295,39 +296,39 @@
                                         <!-- /ko -->
 
                                         <!-- ko if: hasGeometryAuthorization(location.geometry) -->   
-                                        <div class="firstchild-container">
+                                        <span data-bind="text: console.log(location.geometry)"></span><div class="firstchild-container" data-bind="{with: location.geometry}">
                                             <div class="her-report-subsection-item flex">
                                                 <div class="her-block-attributes actor-name">
                                                     <h6 class="her-block-key compressed">Record Reviewer: </h6>
-                                                    <div data-bind="text: geometry.reviewer" class="her-block-value"></div>
+                                                    <div data-bind="text: reviewer" class="her-block-value"></div>
                                                 </div>
                                                 <div class="her-block-attributes timespan">
                                                     <h6 class="her-block-key compressed">Review Date: </h6>
-                                                    <div data-bind="text: geometry.reviewDate" class="her-block-value"></div>
+                                                    <div data-bind="text: reviewDate" class="her-block-value"></div>
                                                 </div>
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key compressed">Type of Review: </h6>
-                                                    <div data-bind="text: geometry.reviewType" class="her-block-value"></div>
+                                                    <div data-bind="text: reviewType" class="her-block-value"></div>
                                                 </div>
                                             </div>
                                             <div class="her-report-subsection-item flex">
                                                 <div class="her-block-attributes actor-name">
                                                     <h6 class="her-block-key compressed">Compiler: </h6>
-                                                    <div data-bind="text: geometry.compiler" class="her-block-value"></div>
+                                                    <div data-bind="text: compiler" class="her-block-value"></div>
                                                 </div>
                                                 <div class="her-block-attributes timespan">
                                                     <h6 class="her-block-key compressed">Compile Date: </h6>
-                                                    <div data-bind="text: geometry.compileDate" class="her-block-value"></div>
+                                                    <div data-bind="text: compileDate" class="her-block-value"></div>
                                                 </div>
                                             </div>
                                             <div class="her-report-subsection-item flex">
                                                 <div class="her-block-attributes actor-name">
                                                     <h6 class="her-block-key compressed">Last Update: </h6>
-                                                    <div data-bind="text: geometry.lastUpdateName"  class="her-block-value"></div>
+                                                    <div data-bind="text: lastUpdateName"  class="her-block-value"></div>
                                                 </div>
                                                 <div class="her-block-attributes timespan">
                                                     <h6 class="her-block-key compressed">Update Date: </h6>
-                                                    <div data-bind="text: geometry.lastUpdate"  class="her-block-value"></div>
+                                                    <div data-bind="text: lastUpdate"  class="her-block-value"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -344,22 +345,22 @@
 
                                         <!-- ko if: hasGeometrySourcesScale(location.geometry) -->
                                         <div class="firstchild-container">
-                                            <div class="her-report-subsection-item flex column-order pad-btm">
+                                            <div class="her-report-subsection-item flex column-order pad-btm" data-bind="{with: location.geometry}">
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key compressed">Coordinate System: </h6>
-                                                    <div data-bind="text: geometry.coordinateSystem" class="her-block-value"></div>
+                                                    <div data-bind="text: coordinateSystem" class="her-block-value"></div>
                                                 </div>
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key compressed">Basemap: </h6>
-                                                    <div data-bind="text: geometry.basemap" class="her-block-value"></div>
+                                                    <div data-bind="text: basemap" class="her-block-value"></div>
                                                 </div>
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key compressed">Capture Scale: </h6>
-                                                    <div data-bind="text: geometry.captureScale" class="her-block-value">--</div>
+                                                    <div data-bind="text: captureScale" class="her-block-value">--</div>
                                                 </div>
                                                 <div class="her-block-attributes">
                                                     <h6 class="her-block-key compressed">Accuracy: </h6>
-                                                    <div data-bind="text: geometry.accuracy" class="her-block-value"></div>
+                                                    <div data-bind="text: accuracy" class="her-block-value"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -378,9 +379,9 @@
                                         <!-- ko ifnot: location.geometry.description -->
                                         <div class="firstchild-container pad-btm">
                                             <div class="her-report-subsection-item">
-                                                <div class="her-block-attributes" style="margin-top: 5px;">
+                                                <div data-bind="{with: location.geometry}" class="her-block-attributes" style="margin-top: 5px;">
                                                     <h6 class="her-block-key compressed">Metadata Description: </h6>
-                                                    <div data-bind="text: geometry.description" class="her-block-value">Stuart Cakebread did this</div>
+                                                    <div data-bind="text: description" class="her-block-value"></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -529,7 +530,7 @@
                             <div class="firstchild-container">
                                 <!-- Statements Table -->
                                 <div class="her-table pad-btm">
-                                    <table data-bind="datatable: adminAreasTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "Name" %}</th>
@@ -538,18 +539,19 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: {data: location.administrativeAreas, dataTableOptions: adminAreasTableConfig }">
                                             <tr>
-                                                <td>Holborn</td>
-                                                <td>District</td>
-                                                <td>Current</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>London</td>
-                                                <td>County</td>
-                                                <td>Current</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: currency"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.administrativeAreasCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.administrativeAreasCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -609,7 +611,7 @@
                 <!-- Area Assignments -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.areaAssignment)}" class="fa fa-angle-double-right toggle"></i> {% trans "Area Assignment" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(areaAssignmentCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area Assignment" %}</a>
+                    <a class="her-report-a" data-bind="{click: function(){addNewTile(areaAssignmentCard)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: location.areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: location.areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.areaAssignment" class="her-report-collapsible-container pad-lft">
@@ -639,13 +641,13 @@
                                         </thead>
                                         <tbody data-bind="dataTablesForEach:{ data: location.areaAssignment, dataTableOptions: areaAssignmentsTableConfig}" >
                                             <tr>
-                                                <td>Archaeological Priority Area - Tier I</td>
-                                                <td>Public</td>
-                                                <td>1998-10-11</td>
-                                                <td>2019-03-13</td>
-                                                <td>Below-ground feature(s)</td>
-                                                <td>Low</td>
-                                                <td>Deskktop survey</td>
+                                                <td data-bind="text: status"></td>
+                                                <td data-bind="text: ownership"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: shineForm"></td>
+                                                <td data-bind="text: shineSignificance"></td>
+                                                <td data-bind="text: reference"></td>
                                                 <td class="her-table-control">
                                                     <a data-bind="click: function() {$parent.editTile(tileid, $parent.areaAssignmentCard)}">
                                                         <i class="fa fa-mail-reply"></i>
@@ -666,7 +668,7 @@
                 <!-- Land Use Classification -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.landUse)}" class="fa fa-angle-double-right toggle"></i> {% trans "Land Use Classification" %}</h2>
-                    <a class="her-report-a" data-bind="{event:{ mousedown:function(d, e){addNewTile(landUseCard, e)}}}"><i class="fa fa-mail-reply"></i> {% trans "Add Classification" %}</a>
+                    <a class="her-report-a" data-bind="{event:{ mousedown:function(d, e){addNewTile(landUseCard, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: landUseCard.tiles().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: landUseCard.tiles().length">{% trans "Add Classification" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.landUse" class="her-report-collapsible-container pad-lft">
@@ -726,30 +728,37 @@
                 
                 <!-- Designation Geometry/Map -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.designation)}" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.designation.designation)}" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection" %}</h2>
                     <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Designation" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.designation.designation" class="her-report-collapsible-container pad-lft">
 
                         <!-- Designation Map  -->
                         <div class="her-report-subsection">
-                            <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation Extent " %}</h3>
+                            <h3><i data-bind="click: function() {toggleBlockVisibility(blockVisible.designation.extent)}" class="fa fa-angle-double-right toggle"></i> {% trans "Designation Extent " %}</h3>
 
-                            <!-- Show this block if there's NO data -->
-                            <div class="her-nodata-note her-top-card" style="display: none;">No extent for this resource</div>
-
-                    
-                            <!-- Show this block if there is resource tile content -->
+                            <!-- ko ifnot: designationsCard.tiles().length -->
+                            <div class="her-nodata-note her-top-card">No extent for this resource</div>
+                            <!-- /ko -->
+                   
+                            <!-- ko if: designationsCard.tiles().length --> 
                             <div class="her-report-subsection-container no-flex">
 
                                 <!-- Show this block if there's data -->
                                 <div class="firstchild-container">
                                     <div class="her-report-map her-designation">
-                                        map showing resource geometry goes here.  Map shows all the designation geometries for all designation/protection tiles.  Highlight the geometries associated with the tile in the table below when the user hovers over the row or expands the row.
+                                        <div class="map-container" style="height:475px">
+                                            <div class="map" style="height:475px" data-bind="component: {
+                                                name: 'arches-map',
+                                                params: $data
+                                            }">
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>   
                             </div>
+                            <!-- /ko --> 
                         </div>
 
 
@@ -757,7 +766,7 @@
                         <div class="her-report-subsection">
                             
                             <!-- Collapsible content -->
-                            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
+                            <div data-bind="visible: blockVisible.designation.extent" class="her-report-collapsible-container">
  
                                 <div class="her-report-subsection-container multi-cards no-flex">
 
@@ -765,14 +774,15 @@
                                     <div class="her-report-subsection-firstchild">
                                         <h5>Designation/Protection Details</h5>
                                         
-                                        <!-- Show this block if there's NO data -->
-                                        <div class="her-nodata-note" style="display: none;">No designation information for this resource</div>
+                                        <!-- ko ifnot: designationsCard.tiles().length -->
+                                        <div class="her-nodata-note">No designation information for this resource</div>
+                                        <!-- /ko -->
 
-                                        <!-- Show this block if there's data -->
+                                        <!-- ko if: designationsCard.tiles().length -->
                                         <div class="firstchild-container">
                                             <!-- designation table  -->
                                             <div class="her-table" style="max-width: 100%">
-                                                <table data-bind="datatable: designationTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                                <table class="table table-striped designation" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr class="her-table-header">
                                                             <th>{% trans "Designation Name" %}</th>
@@ -788,37 +798,36 @@
                                                             <th class="her-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody>
+                                                    <tbody data-bind="dataTablesForEach: {data: designations, dataTableOptions: designationTableConfig}">
                                                         <tr>
-                                                            <td>Carlisle Building Protection</td>
-                                                            <td>Locally Listed Building</td>
-                                                            <td>2012-03-12</td>
-                                                            <td>2019-09-21</td>
-                                                            <td>Grade I</td>
-                                                            <td>Not at risk</td>
-                                                            <td>--</td>
-                                                            <td>2012 - 2019</td>
-                                                            <td>Between</td>
-                                                            <td>Designated by HE in response to a petition by a local group</td>
-                                                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>Carlisle Building Protection</td>
-                                                            <td>Locally Listed Building</td>
-                                                            <td>2020-11-12</td>
-                                                            <td>--</td>
-                                                            <td>Grade II</td>
-                                                            <td>Not at risk</td>
-                                                            <td>--</td>
-                                                            <td>2020 - present</td>
-                                                            <td>Between</td>
-                                                            <td>re-designated by HE after an unauthorized renovation</td>
-                                                            <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                            <td data-bind="text: name"></td>
+                                                            <td data-bind="text: protectionType"></td>
+                                                            <td data-bind="text: startDate"></td>
+                                                            <td data-bind="text: endDate"></td>
+                                                            <td data-bind="text: grade"></td>
+                                                            <td data-bind="text: risk"></td>
+                                                            <td data-bind="text: amendmentDate"></td>
+                                                            <td data-bind="text: displayDate"></td>
+                                                            <td data-bind="text: dateQualifier"></td>
+                                                            <td data-bind="text: reference"></td>
+                                                            <td class="her-table-control">
+                                                                <a data-bind="click: function() {$parent.editTile(tileid, $parent.designationsCard)}">
+                                                                    <i class="fa fa-mail-reply"></i>
+                                                                </a>
+                                                                <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.designationsCard)}">
+                                                                    <i class="fa fa-trash"></i>
+                                                                </a>
+                                                                <a data-bind="click: function(){$parent.currentDesignation(tileid); $parent.jumpToDesignationGeometry($data)}">
+                                                                    <i class="fa fa-globe"></i>
+                                                                </a>
+                                                                <i data-bind="visible: $parent.currentDesignation() == tileid" class="fa fa-arrow-left"></i>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                             </div>
                                         </div>
+                                        <!-- /ko -->
                                     </div>
                                 </div>
 
@@ -829,20 +838,21 @@
 
                 <!-- Related Files section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection Files" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.designation.files)}" class="fa fa-angle-double-right toggle"></i> {% trans "Designation/Protection Files" %}</h2>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.designation.files" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
+
+                        <!-- ko ifnot: designationFiles.length -->
                         <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko ifnot: designationFiles.length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: designationFilesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "Designation/Protection" %}</th>
@@ -850,22 +860,22 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: {data: designationFiles, dataTableOptions: designationFilesTableConfig}">
                                             <tr>
-                                                <td>Carlisle Building Protection</td>
-                                                <td>Onsite Inspection Report</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Carlisle Building Protection</td>
-                                                <td>Building Permit #12224 </td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td data-bind="text: designation"></td>
+                                                <td data-bind="text: file"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.designationsCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>
@@ -1450,18 +1460,18 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody data-bind="dataTablesForEach: { dataTableOptions: biblioTableConfig}">
+                                        <tbody data-bind="dataTablesForEach: { data: bibliography, dataTableOptions: biblioTableConfig}">
                                             <tr>
-                                                <td><a href="" class="her-table-link">Report on Site Excaction at 123 Sumner Rd</a></td>
-                                                <td data-bind="sourceNumber"></td>
-                                                <td data-bind="pages"></td>
-                                                <td data-bind="figs"></td>
-                                                <td data-bind="plates"></td>
-                                                <td data-bind="comment"></td>
+                                                <td><a href="" data-bind="text: citation" class="her-table-link"></a></td>
+                                                <td data-bind="text: sourceNumber"></td>
+                                                <td data-bind="text: pages"></td>
+                                                <td data-bind="text: figs"></td>
+                                                <td data-bind="text: plates"></td>
+                                                <td data-bind="text: comment"></td>
                                                 <td class="her-table-control">
                                                     <a data-bind="click: function() {$parent.editTile(tileid, $parent.bibliographyCard)}">
                                                         <i class="fa fa-mail-reply"></i>
-                                                    </a>
+                                                   </a>
                                                     <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.bibliographyCard)}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
@@ -1498,7 +1508,7 @@
                                 <div class="her-report-photo-container">
                                     <!-- ko foreach: {data: photos} -->
                                     <div class="her-report-photo-block">
-                                        <div class="her-report-photo">
+                                        <div class="her-report-photo" data-bind="click: function(){$parent.editTile(tileid, $parent.photosCard)}">
                                             <img data-bind="attr: {src: path}" />
                                         </div>
                                         <div class="her-report-photo-caption">
@@ -1537,21 +1547,21 @@
 
                 <!-- Scientific date section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Scientific Date Determination" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.scientificDate)}" class="fa fa-angle-double-right toggle"></i> {% trans "Scientific Date Determination" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(scientificDateCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.scientificDate" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">{% trans "No dates for this resource" %}</div>
+                        <!-- ko ifnot: scientificDateCard.tiles().length -->
+                        <div class="her-nodata-note">{% trans "No dates for this resource" %}</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: scientificDateCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: scientificDatesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Construction Phase" %}</th>
@@ -1569,27 +1579,35 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { data: scientificDate, dataTableOptions: scientificDatesTableConfig}">
                                             <tr>
-                                                <td>Churchhall</td>
-                                                <td>Dendrochronlogy</td>
-                                                <td>1412</td>
-                                                <td>1427</td>
-                                                <td>At some time</td>
-                                                <td>3.4 years</td>
-                                                <td>Standard deviation calculated by Phil Carlisle</td>
-                                                <td>--</td>
-                                                <td>21/03/2019</td>
-                                                <td>2203/2019</td>
-                                                <td>--</td>
-                                                <td>Dating conducted on a timber in the main church hall</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td data-bind="text: constructionPhase"></td>
+                                                <td data-bind="text: datingMethod"></td>
+                                                <td data-bind="text: earliestDate"></td>
+                                                <td data-bind="text: latestDate"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: datingMethod"></td>
+                                                <td data-bind="text: standardDeviation"></td>
+                                                <td data-bind="text: standardDeviationComment"></td>
+                                                <td data-bind="text: laboratoryNote"></td>
+                                                <td data-bind="text: startDateOfDetermination"></td>
+                                                <td data-bind="text: endDateOfDetermination"></td>
+                                                <td data-bind="text: dateDeterminationQualifier"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.scientificDateCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                   </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.scientificDateCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>
@@ -1600,61 +1618,73 @@
 
                 <!-- Associated Activities section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Activities" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Activity" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.activities)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Activities" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(associatedActivitiesCard)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Activity" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.associatedResources.activities" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">No activities for this resource</div>
+                        <!-- ko ifnot: associatedActivitiesCard.tiles().length -->
+                        <div class="her-nodata-note">No activities for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: associatedActivitiesCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "Activity" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { data: associatedResources.activities, dataTableOptions: relatedResourceTwoColumnTableConfig}">
                                             <tr>
-                                                <td><a href="" class="her-table-link">Trench at 33 Aspinall Lane</a></td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Desktop Survey of Pre-Victorian Buildings in Holborn</a></td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td>
+                                                    <!-- ko if: resourceUrl -->
+                                                    <a data-bind="text: activity, attr: {href: resourceUrl}" class="her-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: resourceUrl -->
+                                                    <span data-bind="text:activity"></span>
+                                                    <!-- /ko -->
+                                                
+                                                </td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedActivitiesCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                   </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedActivitiesCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
 
                 <!-- Associated Actors -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Actors" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Actor" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.actors)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Actors" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(associatedActorsCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Actor" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.associatedResources.actors" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;  ">No actors for this resource</div>
+                        <!-- ko ifnot: associatedActorsCard.tiles().length -->
+                        <div class="her-nodata-note">No actors for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: associatedActorsCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: relatedActorsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "Actor" %}</th>
@@ -1667,128 +1697,152 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { data: associatedResources.actors, dataTableOptions: relatedActorsTableConfig}">
                                             <tr>
-                                                <td><a href="" class="her-table-link">Abel Tasman</a></td>
-                                                <td>Architect</td>
-                                                <td>03-11-1788</td>
-                                                <td>12-10-1792</td>
-                                                <td>1788-1792</td>
-                                                <td>Occasionally</td>
-                                                <td>Is referred to by</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Bob the Builder</a></td>
-                                                <td>Builder</td>
-                                                <td>1793</td>
-                                                <td>1794</td>
-                                                <td>1793-1794</td>
-                                                <td>Throughout</td>
-                                                <td>Is referred to by</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td data-bind="text: actor"><a href="" class="her-table-link"></a></td>
+                                                <td data-bind="text: role"></td>
+                                                <td data-bind="text: startOfRole"></td>
+                                                <td data-bind="text: endOfRole"></td>
+                                                <td data-bind="text: displayDate"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: roleType"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedActorsCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                   </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedActorsCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
 
                 <!-- Associated Consultations section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Consultations" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Consultation" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.consultations)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Consultations" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(associatedConsultationsCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Consultation" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.associatedResources.consultations" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">No consultations for this resource</div>
+                        <!-- ko ifnot: associatedConsultationsCard.tiles().length -->
+                        <div class="her-nodata-note">No consultations for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: associatedConsultationsCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "Consultation" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { data: associatedResources.consultations, dataTableOptions: relatedResourceTwoColumnTableConfig}">
                                             <tr>
-                                                <td><a href="" class="her-table-link">Carlisle House Consultation on 12/10/2019</a></td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Carlisle House Consultation on 23/02/2016</a></td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td>
+                                                    <!-- ko if: resourceUrl -->
+                                                    <a data-bind="text: consultation, attr: {href: resourceUrl}" class="her-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: resourceUrl -->
+                                                    <span data-bind="text: consultation"></span>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedConsultationsCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                   </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedConsultationsCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
 
                 <!-- Associated Digital Files section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Files" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add File" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.files)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Files" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(associatedFilesCard)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add File" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.associatedResources.files" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+                        <!-- ko ifnot: associatedFilesCard.tiles().length -->
+                        <div class="her-nodata-note">No files for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: associatedFilesCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: relatedResourceTwoColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "File Name" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { data: associatedResources.files, dataTableOptions: relatedResourceTwoColumnTableConfig}">
                                             <tr>
-                                                <td><a href="" class="her-table-link">Site visit report for Carlisle House</a></td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td>
+                                                    <!-- ko if: resourceUrl -->
+                                                    <a data-bind="text: file, attr: {href: resourceUrl}" class="her-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: resourceUrl -->
+                                                    <span data-bind="text:file"></span>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedFilesCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                   </a>
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedFilesCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
 
                 <!-- Associated Heritage Assets section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
-                    <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add resource" %}</a>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.artifacts)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
+                    <a data-bind="{click: function(){addNewTile(associatedArtifactsCard)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add resource" %}</a>
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.associatedResources.artifacts" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
-                        <div class="her-nodata-note" style="display: none;">No hertiage/area/artifacts for this resource</div>
+                        <!-- ko ifnot: associatedArtifactsCard.tiles().length -->
+                        <div class="her-nodata-note">No hertiage/area/artifacts for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: associatedArtifactsCard.tiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
-                                    <table data-bind="datatable: relatedResourceThreeColumnTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="her-table-header">
                                                 <th>{% trans "Resource Name" %}</th>
@@ -1796,37 +1850,32 @@
                                                 <th class="her-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody data-bind="dataTablesForEach: { data: associatedResources.artifacts, dataTableOptions: relatedResourceThreeColumnTableConfig}">
                                             <tr>
-                                                <td><a href="" class="her-table-link">Roman Coin</a></td>
-                                                <td>General Association</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Roman Villa</a></td>
-                                                <td>General Association</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Pottery Sherds</a></td>
-                                                <td>General Association</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Central Holborn Heritage Area</a></td>
-                                                <td>General Association</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                            </tr>
-                                            <tr>
-                                                <td><a href="" class="her-table-link">Victorian Hospital</a></td>
-                                                <td>General Association</td>
-                                                <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                                <td>
+                                                    <!-- ko if: resourceUrl -->
+                                                    <a data-bind="text: resourceName, attr: {href: resourceUrl}" class="her-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: resourceUrl -->
+                                                    <span data-bind="text: resourceName"></span>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td data-bind="text: association"></td>
+                                                <td class="her-table-control">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedArtifactsCard)}">
+                                                        <i class="fa fa-mail-reply"></i>
+                                                   </a>
+                                                    <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.associatedArtifactsCard)}">
+                                                        <i class="fa fa-trash"></i>
+                                                    </a>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>
@@ -1837,16 +1886,20 @@
 
                 <!-- JSON section -->
                 <div class="her-report-section">
-                    <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Resource JSON" %}</h2>
+                    <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.json)}" class="fa fa-angle-double-right toggle"></i> {% trans "Resource JSON" %}</h2>
                     
 
                     <!-- Collapsible content -->
-                    <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+                    <div data-bind="visible: blockVisible.json" class="her-report-collapsible-container pad-lft">
 
                         <!-- Show this block if there is resource tile content -->
                         <div class="her-report-subsection">
-                            <div class="her-report-json">
-                                Show resource instance json here using the same display widget as used to show the geojson in the map card
+                            <div class="her-codemirror">
+                                <div class="geojson-editor" data-bind="codemirror: {
+                                    value: JSON.stringify(report.report_json, null, 2),
+                                    mode: { name: 'javascript', json: true },
+                                    lineNumbers: true
+                                }"></div>
                             </div>
                         </div>
                     </div>

@@ -6,12 +6,13 @@ define([
     'geojson-extent',
     'views/components/cards/select-feature-layers',
     'bindings/datatable',
+    'bindings/codemirror'
     ], 
-    function(ko, ReportViewModel, arches, MapComponentViewModel, geojsonExtent, selectFeatureLayersFactory) {
+    (ko, ReportViewModel, arches, MapComponentViewModel, geojsonExtent, selectFeatureLayersFactory) => {
         return ko.components.register('HER-Heritage-Asset', {
-            viewModel: function(params) {
+            viewModel: function (params) {
                 params.configKeys = [];
-
+                this.currentDesignation = ko.observable();
                 this.defaultTableConfig = {
                     responsive: {
                         breakpoints: [
@@ -55,7 +56,7 @@ define([
                 ReportViewModel.apply(this, [params]);
 
                 const self = this;
-
+                
                 // Get cards for interactivity
                 this.assetNameCard = this.report.cards.find(x => x.nodegroupid == "676d47f9-9c1c-11ea-9aa0-f875a44e0e11");
                 this.assetDescriptionCard = this.report.cards.find(x => x.nodegroupid == "ba342e69-b554-11ea-a027-f875a44e0e11");
@@ -64,8 +65,15 @@ define([
                 this.constructionPhasesCard = this.report.cards.find(x => x.nodegroupid == '4a24d890-7bd5-11e9-9de9-80000b44d1d9')
                 this.constructionComponentsCard = this.report.cards.find(x => x.nodegroupid == '55d6a53e-049c-11eb-8618-f875a44e0e11');
                 this.usePhaseCard = this.report.cards.find(x => x.nodegroupid == 'c01aa119-8a25-11ea-8dd6-f875a44e0e11');
-                this.bibliographyCard = this.report.cards.find(x => x.nodegroupid == 'c4230739-28ce-11eb-8b35-f875a44e0e11')
+                this.bibliographyCard = this.report.cards.find(x => x.nodegroupid == 'c4230739-28ce-11eb-8b35-f875a44e0e11');
+                this.designationsCard = this.report.cards.find(x => x.nodegroupid == '8fc1a099-b61f-11ea-8121-f875a44e0e11')
                 this.photosCard = this.report.cards.find(x => x.nodegroupid == '46f25cd9-b6c7-11ea-8651-f875a44e0e11');
+                this.scientificDateCard = this.report.cards.find(x => x.nodegroupid == "c0d8a80a-04ba-11eb-b44b-f875a44e0e11");
+                this.associatedActivitiesCard = this.report.cards.find(x => x.nodegroupid == "6300b212-9801-11e9-b99f-00224800b26d");
+                this.associatedActorsCard = this.report.cards.find(x => x.nodegroupid == "9682621d-0262-11eb-ab33-f875a44e0e11");
+                this.associatedConsultationsCard = this.report.cards.find(x => x.nodegroupid == "e0991c1b-51b4-11eb-b7ef-f875a44e0e11");
+                this.associatedFilesCard = this.report.cards.find(x => x.nodegroupid == "fc6b6b0b-5118-11eb-b342-f875a44e0e11");
+                this.associatedArtifactsCard = this.report.cards.find(x => x.nodegroupid == "055b3e3f-04c7-11eb-8d64-f875a44e0e11");
                 this.locationDataCard = this.report.cards.find(x => x.nodegroupid == "ca05bc7e-28cf-11eb-95f4-f875a44e0e11");
                 const locationDataCardBase = this.locationDataCard.tiles()?.[0]?.cards ? this.locationDataCard.tiles()[0].cards : this.locationDataCard.cards()
 
@@ -79,37 +87,168 @@ define([
                 
                 this.displayname = ko.observable(this.report.attributes.displayname);
 
-                this.prepareMap = function(geojson, source) {
+                const createUnselectedLayers = (source) => {
+                    const color = '#A020F0';
+                    const visible = true;
+                    const strokecolor = '#fff'
+
+                    const layers = [{
+                        "id": "unselected-feature-polygon-fill",
+                        "type": "fill",
+                        "minzoom": 11,
+                        "filter": ['all',[
+                            "==", "$type", "Polygon"
+                        ]],
+                        "paint": {
+                            "fill-color": color,
+                            "fill-outline-color": color,
+                            "fill-opacity": 0.2
+                        },
+                        "layout": {
+                            "visibility": visible ? "visible": "none"
+                        }
+                    },  {
+                        "id": "unselected-feature-polygon-under-stroke",
+                        "type": "line",
+                        "minzoom": 15,
+                        "filter": ['all',[
+                            "==", "$type", "Polygon"
+                        ]],
+                        "layout": {
+                            "line-cap": "round",
+                            "line-join": "round",
+                            "visibility": visible ? "visible": "none"
+                        },
+                        "paint": {
+                            "line-color": strokecolor,
+                            "line-width": 4
+                        }
+                    }, {
+                        "id": "unselected-feature-polygon-stroke",
+                        "type": "line",
+                        "minzoom": 11,
+                        "filter": ['all',[
+                            "==", "$type", "Polygon"
+                        ]], 
+                        "layout": {
+                            "line-cap": "round",
+                            "line-join": "round",
+                            "visibility": visible ? "visible": "none"
+                        },
+                        "paint": {
+                            "line-color": color,
+                            "line-width": 2
+                        }
+                    }, {
+                        "id": "unselected-feature-line",
+                        "type": "line",
+                        "minzoom": 15,
+                        "filter": ['all',[
+                            "==", "$type", "LineString"
+                        ]],
+                        "layout": {
+                            "line-cap": "round",
+                            "line-join": "round",
+                            "visibility": visible ? "visible": "none"
+                        },
+                        "paint": {
+                            "line-color": color,
+                            "line-width": 2
+                        }
+                    }, {
+                        "id": "unselected-feature-point-point-stroke",
+                        "type": "circle",
+                        "minzoom": 15,
+                        "filter": ['all',[
+                            "==", "$type", "Point"
+                        ]],
+                        "paint": {
+                            "circle-radius": 6,
+                            "circle-opacity": 1,
+                            "circle-color": "#fff"
+                        },
+                        "layout": {
+                            "visibility": visible ? "visible": "none"
+                        }
+                    }, {
+                        "id": "unselected-feature-point",
+                        "type": "circle",
+                        "minzoom": 15,
+                        "filter": ['all',[
+                            "==", "$type", "Point"
+                        ]],
+                        "paint": {
+                            "circle-radius": 4,
+                            "circle-color": color
+                        },
+                        "layout": {
+                            "visibility": visible ? "visible": "none"
+                        }
+                    }];
+
+                    layers.forEach((layer) => {
+                        layer["source"] = source;
+                    });
+
+                    return layers;
+                }
+
+                this.prepareMap = (sourceId, geojson) => {
                     var mapParams = {};
                     if (geojson.features.length > 0) {
                         mapParams.bounds = geojsonExtent(geojson);
                         mapParams.fitBoundsOptions = { padding: 20 };
                     }
+                    
                     var sourceConfig = {};
-                    sourceConfig[source] = {
+                    sourceConfig[sourceId] = {
                             "type": "geojson",
                             "data": geojson
                         };
                     mapParams.sources = Object.assign(sourceConfig, mapParams.sources);
-                    mapParams.layers = selectFeatureLayersFactory(
+                    mapParams.layers = [...selectFeatureLayersFactory(
                         '', //resourceid
-                        source, //source
+                        sourceId, //source
                         undefined, //sourceLayer
                         [], //selectedResourceIds
                         true, //visible
                         '#ff2222' //color
-                    );
+                    ), ...createUnselectedLayers(sourceId)];
                     MapComponentViewModel.apply(this, [Object.assign({},  mapParams,
                         {
                             "activeTab": ko.observable(false),
                             "zoom": null
                         }
                     )]);
-                
-                    this.layers = mapParams.layers;
+                    
+                    this.layers = mapParams.layers; 
                     this.sources = mapParams.sources;
+                    this.map = ko.observable();
                 };
 
+                const changeSelectedSource = (layers, source) => {
+                    layers.forEach(x => {
+                        if(x.id.startsWith('select-')){ x.source = source; }
+                    })
+                };
+
+                this.jumpToDesignationGeometry = (row) => {
+                    self.map().
+                        fitBounds(geojsonExtent(row.geometry));
+                    const source = self.map().getSource('selected-designation')
+                    if(source) {
+                        data = row.geometry;
+                    } else {
+                        self.map().addSource('selected-designation', {
+                            type: 'geojson', 
+                            data: row.geometry
+                        });
+                    }
+                    changeSelectedSource(self.layers, 'selected-designation');
+                };
+
+                // Used to add a new tile object to a given card.  If nested card, saves the parent tile for the
+                // card and uses the same card underneath the parent tile.
                 this.addNewTile = async (card) => {
                     let currentCard = card;
                     if(card.parentCard && !card.parent?.tileid){
@@ -147,32 +286,55 @@ define([
                         const arg = args[i];
                         node = node?.[arg];
                     }
-                    const nodeValue = node?.["@value"]
-                    if(nodeValue != undefined && nodeValue != null){
+                    const nodeValue = node?.["@display_value"]
+                    const geojson = node?.geojson;
+                    if(geojson){
+                        return geojson;
+                    }
+                    if(nodeValue !== undefined){
+                        if(nodeValue === "" || nodeValue === null){
+                            return "--"
+                        }
                         return $(`<span>${nodeValue}</span>`).text();
                     }
-                    return undefined;
+                    return "--";
+                };
+
+                const getResourceId = (resource) => {
+                    return resource?.resourceId || resource?.instance_details?.[0]?.resourceId;
+                }
+
+                // utitility function - checks whether at least one observable
+                // has a set value (used to determine whether a section is visible)
+                const observableValueSet = (...observables) => {
+                    for(observable of observables) {
+                        observableValue = ko.unwrap(observable);
+                        if (observableValue && observableValue != "--"){
+                            return true;
+                        }
+                    }
+                    return false;
                 }
 
                 this.hasGeometryMetadata = (geometry) => {
                     if(!self.locationDataCard.tiles().length) {
                         return false;
                     }
-                    return geometry.reviewer || geometry.compiler || geometry.lastUpdateName || geometry.accuracy || geometry.basemap || geometry.captureScale || geometry.coordinateSystem || geometry.description
+                    return observableValueSet(geometry.reviewer, geometry.compiler, geometry.lastUpdateName, geometry.accuracy, geometry.basemap, geometry.captureScale, geometry.coordinateSystem, geometry.description);
                 }
 
                 this.hasGeometryAuthorization = (geometry) => {
                     if(!self.locationDataCard.tiles().length) {
                         return false;
                     }
-                    return geometry.reviewer || geometry.compiler || geometry.lastUpdateName
+                    return observableValueSet(geometry.reviewer, geometry.compiler, geometry.lastUpdateName);
                 }
 
                 this.hasGeometrySourcesScale = (geometry) => {
                     if(!self.locationDataCard.tiles().length) {
                         return false;
                     }
-                    return geometry.accuracy || geometry.basemap || geometry.captureScale || geometry.coordinateSystem
+                    return observableValueSet(geometry.accuracy, geometry.basemap, geometry.captureScale, geometry.coordinateSystem);
                 }
 
                 this.resource = ko.observable(params.report?.report_json);
@@ -213,8 +375,10 @@ define([
                     landUseClassification: ko.observableArray(),
                     descriptions: ko.observableArray(),
                     nationalGridReferences: ko.observableArray(),
-                }
+                };
 
+                this.designations = ko.observableArray();
+                this.designationFiles = ko.observableArray();
                 this.phase = {
                     constructionPhases: ko.observableArray(),
                     constructionComponents: ko.observableArray(),
@@ -222,6 +386,16 @@ define([
                 }
 
                 this.photos = ko.observableArray();
+
+                this.scientificDate = ko.observableArray();
+
+                this.associatedResources = {
+                    activities: ko.observableArray(),
+                    actors: ko.observableArray(),
+                    consultations: ko.observableArray(),
+                    files: ko.observableArray(),
+                    artifacts: ko.observableArray()
+                }
 
                 this.loadData = (resource) => {
                     const names = self.names;
@@ -368,10 +542,70 @@ define([
                         self.getNameTileNodeValue(resource, 'Location Data', 'Geometry', 'Spatial Record Authorization', 'Authorization Type')
                     );
 
-                    const geojsonStr = self.getNameTileNodeValue(resource, 'Location Data', 'Geometry', 'Geospatial Coordinates');
-                    if (geojsonStr) {
-                        const geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
-                        this.prepareMap(geojson, 'app-area-map-data');
+                    const locationDataGeometry = self.getNameTileNodeValue(resource, 'Location Data', 'Geometry', 'Geospatial Coordinates');
+                    if (locationDataGeometry) {
+                        this.locationMapData = locationDataGeometry;
+                    };   
+                              
+                    const designations = resource?.['Designation and Protection Assignment']; 
+                    if (designations?.length) {
+                        this.designations(designations.map(x => {
+                            const name = self.getNameTileNodeValue(x, 'Designation Names', 'Designation Name');
+                            const protectionType = self.getNameTileNodeValue(x, 'Designation or Protection Type');
+                            const startDate = self.getNameTileNodeValue(x, 'Designation and Protection Timespan', 'Designation Start Date');
+                            const endDate = self.getNameTileNodeValue(x, 'Designation and Protection Timespan', 'Designation End Date');
+                            const grade = self.getNameTileNodeValue(x, 'Grade');
+                            const risk = self.getNameTileNodeValue(x, 'Risk Status');
+                            const amendmentDate = self.getNameTileNodeValue(x, 'Designation and Protection Timespan', 'Designation Amendment Date');
+                            const displayDate = self.getNameTileNodeValue(x, 'Designation and Protection Timespan', 'Display Date');
+                            const dateQualifier = self.getNameTileNodeValue(x, 'Designation and Protection Timespan', 'Date Qualifier');
+                            const reference = self.getNameTileNodeValue(x, 'References', 'Reference');
+                            const tileid = x?.['@tile_id'];
+                            const geometry = 
+                                self.getNameTileNodeValue(
+                                    x, 
+                                    'Designation Mapping', 
+                                    'Designation Geometry'
+                                );
+                            return {
+                                amendmentDate,
+                                dateQualifier,
+                                displayDate,
+                                endDate,
+                                geometry,
+                                grade, 
+                                name,
+                                protectionType,
+                                reference,
+                                risk,
+                                startDate,
+                                tileid
+                            };
+                        }));
+
+                        this.designationFiles(designations.map(x => {
+                            const file = self.getNameTileNodeValue(x, 'Digital File(s)');
+                            if (file == "") { return null; }
+                            const designation = self.getNameTileNodeValue(x, 'Designation Names', 'Designation Name');
+                            const tileid = x?.['@tile_id'];
+                            return {
+                                file, 
+                                designation,
+                                tileid
+                            };
+                        }).filter(x => x != null));
+
+                        const geojson = this.designations().reduce((geojson, currentJson) => {
+                            const tileId = currentJson.tileid;
+                            const jsonWithTileId = currentJson.geometry.features.map(x => {
+                                x.properties.tileId = tileId;
+                                return x;
+                            });
+                            geojson.features = [...geojson.features, ...jsonWithTileId];
+                            return geojson;
+                        }, {features: [], type: 'FeatureCollection'})
+                        
+                        this.designationMapData = geojson;
                     };
 
                     const constructionPhases = resource?.['Construction Phases'];
@@ -388,7 +622,7 @@ define([
                             const method = self.getNameTileNodeValue(x, 'Construction Method');
                             const period = self.getNameTileNodeValue(x, 'Cultural Period');
                             const phase = self.getNameTileNodeValue(x, 'Construction Phase Type');
-                            const phaseDescription = self.getNameTileNodeValue(x, 'Phase Classification', 'Phase Classification Description');
+                            const phaseDescription = self.getNameTileNodeValue(x, 'Phase Classification', 'Phase Classification Description', 'Phase Description');
                             const phaseEvidence = self.getNameTileNodeValue(x, 'Phase Classification', 'Construction Phase Evidence Type');
                             const startDate = self.getNameTileNodeValue(x, 'Construction Phase Timespan', 'Construction Phase Start Date');
                             const tileid = x?.['@tile_id'];
@@ -483,26 +717,129 @@ define([
                         }));
                     }
                    
-                    const bibliography = resource?.['Bibliographic Source Citations']; 
+                    const bibliography = resource?.['Bibliographic Source Citation']; 
                     if(bibliography?.length) {
                         this.bibliography(bibliography.map(x => {
-                            const caption = self.getNameTileNodeValue(x, 'Captions', 'Caption');
-                            const copyrightHolder = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Holder');
-                            const copyrightNote = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Note', 'Copyright Note Text');
-                            const copyrightType = self.getNameTileNodeValue(x, 'Copyright', 'Copyright Type');
-                            const path = self.getNameTileNodeValue(x);
+                            const citation = self.getNameTileNodeValue(x);
+                            const comment = self.getNameTileNodeValue(x, 'Source Comment', 'Comment');
+                            const figs = self.getNameTileNodeValue(x, 'Figures', 'Figs.');
+                            const pages = self.getNameTileNodeValue(x, 'Pages', 'Page(s)');
+                            const plates = self.getNameTileNodeValue(x, 'Plates', 'Plate(s)');
+                            const sourceNumber = self.getNameTileNodeValue(x, 'Source Number', 'Source Number Value');
                             const tileid = x?.['@tile_id'];
 
                             return { 
-                                caption,
-                                copyrightHolder,
-                                copyrightNote,
-                                copyrightType,
-                                path,
+                                citation,
+                                comment,
+                                figs,
+                                pages,
+                                plates,
+                                sourceNumber,
                                 tileid
                             };
                         }));
                     }
+
+                    const scientificDate = resource?.['Scientific Date Assignment'];
+                    if(scientificDate){
+                        const constructionPhase = self.getNameTileNodeValue(scientificDate, 'Associated Construction Phase');
+                        const dateDeterminationQualifier = self.getNameTileNodeValue(scientificDate, 'When Determined', 'When Determined Date Qualifier');
+                        const dateQualifier = self.getNameTileNodeValue(scientificDate, 'Scientific Date Timespan', 'Scientific Date Qualifier');
+                        const datingMethod = self.getNameTileNodeValue(scientificDate, 'Dating Method');
+                        const earliestDate = self.getNameTileNodeValue(scientificDate, 'Scientific Date Timespan', 'Scientific Date Start Date');
+                        const endDateOfDetermination = self.getNameTileNodeValue(scientificDate, 'When Determined', 'When Determined End Date');
+                        const generalNote = self.getNameTileNodeValue(scientificDate, 'Notes', 'Note');
+                        const laboratoryNote = self.getNameTileNodeValue(scientificDate, 'Laboratory References', 'Laboratory Reference');
+                        const latestDate = self.getNameTileNodeValue(scientificDate, 'Scientific Date Timespan', 'Scientific Date End Date');
+                        const standardDeviation = self.getNameTileNodeValue(scientificDate,  'Standard Deviation', 'Standard Deviation Type');
+                        const standardDeviationComment = self.getNameTileNodeValue(scientificDate, 'Standard Deviation', 'Standard Deviation Notes', 'Standard Deviation Note');
+                        const startDateOfDetermination = self.getNameTileNodeValue(scientificDate, 'When Determined', 'When Determined Start Date');
+                        const tileid = scientificDate?.['@tile_id'];
+                        this.scientificDate([{
+                            constructionPhase,
+                            dateDeterminationQualifier,
+                            dateQualifier,
+                            datingMethod,
+                            earliestDate,
+                            endDateOfDetermination,
+                            generalNote,
+                            laboratoryNote,
+                            latestDate,
+                            standardDeviation,
+                            standardDeviationComment,
+                            startDateOfDetermination,
+                            tileid
+                        }]);
+                    }
+
+                    const associatedActivities = resource?.['Associated_Activities'];
+                    if(associatedActivities?.length){
+                        this.associatedResources.activities(associatedActivities.map(x => {
+                            const activity = self.getNameTileNodeValue(x);
+                            const tileid = x?.['@tile_id'];
+                            const resourceId = getResourceId(x);
+                            const resourceUrl = resourceId ? `${arches.urls.resource}/${resourceId}` : undefined;
+                            return {activity, resourceUrl, tileid};
+                        }));
+                    }
+
+                    const associatedActors = resource?.['Associated Actors'];
+                    if(associatedActors?.length){
+                        this.associatedResources.actors(associatedActors.map(x => {
+                            const actor = self.getNameTileNodeValue(x, 'Associated Actor', 'Actor');
+                            const role = self.getNameTileNodeValue(x, 'Associated Actor', 'Role Type');
+                            const startOfRole = self.getNameTileNodeValue(x, 'Associated Actor', 'Associated Actor Timespan', 'Associated Actor Start Date');
+                            const endOfRole = self.getNameTileNodeValue(x, 'Associated Actor', 'Associated Actor Timespan', 'Associated Actor End Date');
+                            const displayDate = self.getNameTileNodeValue(x, 'Associated Actor', 'Associated Actor Timespan', 'Associated Actor Display Date');
+                            const dateQualifier = self.getNameTileNodeValue(x, 'Associated Actor', 'Associated Actor Timespan', 'Associated Actor Date Qualifier');
+                            const roleType = self.getNameTileNodeValue(x, 'Role Type');
+                            const tileid = x?.['@tile_id'];
+                            return {
+                                actor,
+                                role,
+                                startOfRole,
+                                endOfRole,
+                                displayDate,
+                                dateQualifier,
+                                roleType,
+                                tileid
+                            };
+                        }));
+                    }
+                    const associatedConsultations = resource?.['Associated Consultations'];
+                    if(associatedConsultations?.length){
+                        this.associatedResources.consultations(associatedConsultations.map(x => {
+                            const consultation = self.getNameTileNodeValue(x);
+                            const tileid = x?.['@tile_id'];
+                            const resourceId = getResourceId(x);
+                            const resourceUrl = resourceId ? `${arches.urls.resource}/${resourceId}` : undefined;
+                            return {consultation, resourceUrl, tileid};
+                        }));
+                    }
+
+                    const associatedFiles = resource?.['Digital File(s)'];
+                    if(associatedFiles?.length){
+                        this.associatedResources.files(associatedFiles.map(x => {
+                            const file = self.getNameTileNodeValue(x);
+                            const tileid = x?.['@tile_id'];
+                            const resourceId = getResourceId(x);
+                            const resourceUrl = resourceId ? `${arches.urls.resource}/${resourceId}` : undefined;
+                            return {file, resourceUrl, tileid};
+                        }));
+                    }       
+
+                    const associatedArtifacts = resource?.['Associated Heritage Assets, Areas and Artefacts'];
+                    if(associatedArtifacts?.length){
+                        this.associatedResources.artifacts(associatedArtifacts.map(x => {
+                            const resourceName = self.getNameTileNodeValue(x, 'Associated Heritage Asset, Area or Artefact');
+                            const association = self.getNameTileNodeValue(x, 'Association Type'); 
+                            const tileid = x?.['@tile_id'];
+                            const resourceId = getResourceId(x?.['Associated Heritage Asset, Area or Artefact']);
+                            const resourceUrl = resourceId ? `${arches.urls.resource}/${resourceId}` : undefined;
+                            return {resourceName, resourceUrl, association, tileid};
+                        }));
+                    }
+
                 }
 
 
@@ -510,16 +847,23 @@ define([
 
                 //Set default Nav tab
                 this.activeSection = ko.observable('name');
-                
+                this.activeSection.subscribe(() => {
+                    if(this.activeSection() == 'location') {
+                        self.prepareMap('app-area-map-data', self.locationMapData);
+                    } else if (this.activeSection() == 'designation') {
+                        self.prepareMap('app-area-map-data', self.designationMapData);
+                    }
+                });
 
                 //toggle display of a div
-                this.blockVisiblity = ko.observable(true);
                 this.blockVisible = {
                     assetNames: ko.observable(true),
                     externalCrossReferences: ko.observable(true),
                     systemReferenceNumbers: ko.observable(true),
                     descriptions: ko.observable(true),
                     locations: {
+                        geometryMetadata: ko.observable(true),
+                        locality: ko.observable(true),
                         coordinates: ko.observable(true),
                         addresses: ko.observable(true),
                         descriptions: ko.observable(true),
@@ -528,22 +872,33 @@ define([
                         areaAssignment: ko.observable(true),
                         landUse: ko.observable(true),
                     },
-                    designation: ko.observable(true),
+                    designation: {
+                        designation: ko.observable(true),
+                        files: ko.observable(true),
+                        extent: ko.observable(true)
+                    },
                     phases: {
                         constructionPhases: ko.observable(true),
                         constructionComponents: ko.observable(true),
                         usePhase: ko.observable(true)
                     }, 
-                    photos: ko.observable(true)
+                    photos: ko.observable(true),
+                    bibliography: ko.observable(true),
+                    scientificDate: ko.observable(true),
+                    associatedResources: {
+                        activities: ko.observable(true),
+                        actors: ko.observable(true),
+                        consultations: ko.observable(true),
+                        files: ko.observable(true),
+                        artifacts: ko.observable(true),
+                    },
+                    json: ko.observable(true)
+                    
+
                 }
                 this.toggleBlockVisibility = (block) => {
                     block(!block());
                 }
-
-                this.toggleVis =  function(){
-                     this.blockVisiblity(!this.blockVisiblity());
-                };
-
 
                 //Names table configuration
                 this.nameTableConfig = {
