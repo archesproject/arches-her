@@ -44,7 +44,6 @@ define([
                     {'id': 'location', 'title': 'Locations'},
                     {'id': 'designation', 'title': 'Designation/Protection'},
                     {'id': 'phase', 'title': 'Phases/Components'},
-                    {'id': 'prod', 'title': 'Production'},
                     {'id': 'biblio', 'title': 'Bibliography'},
                     {'id': 'photos', 'title': 'Photos'},
                     {'id': 'sci', 'title': 'Scientific Dates'},
