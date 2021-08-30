@@ -30,8 +30,8 @@ define([
             
             this.reportVals = {
                 consultationName: {'name': 'Related Consultation', 'value': this.getResourceValue(val, ['displayname'])},
-                letterType: {'name': 'Letter Type', 'value': this.getResourceValue(currentCorrespondence, ['Letter Type', '@value'])},
-                letter: {'name': 'Letter', 'value': this.getResourceValue(currentCorrespondence, ['Letter', '@value'])},
+                letterType: {'name': 'Letter Type', 'value': this.getResourceValue(currentCorrespondence, ['Letter Type', '@display_value'])},
+                letter: {'name': 'Letter', 'value': this.getResourceValue(currentCorrespondence, ['Letter', '@display_value'])},
             }
             this.resourceLoading(false);
             this.loading(false);

@@ -31,14 +31,14 @@ define([
             }
             this.reportVals = {
                 consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
-                subject: {'name': 'Subject', 'value': this.getResourceValue(currentCommunication, ['Subjects', 'Subject', '@value'])},
-                type: {'name': 'Type', 'value': this.getResourceValue(currentCommunication, ['Communication Type', '@value'])},
-                date: {'name': 'Date', 'value': this.getResourceValue(currentCommunication, ['Dates', 'Date', '@value'])},
-                participants: {'name': 'Participants', 'value': this.getResourceValue(currentCommunication, ['Attendees', '@value'])},
-                relatedCondition: {'name': 'Related Condition', 'value': this.getResourceValue(currentCommunication, ['Related Condition', '@value'])},
-                notes: {'name': 'Notes', 'value': this.getResourceValue(currentCommunication, ['Communication Notes', 'Communication Description', '@value'])},
-                followOnActions: {'name': 'Follow-on Actions', 'value': this.getResourceValue(currentCommunication, ['Follow on Actions', 'Follow-On Actions', '@value'])},
-                uploadedFiles: {'name': 'Uploaded Files', 'value': this.getResourceValue(currentCommunication, ['Digital File(s)', '@value'])},
+                subject: {'name': 'Subject', 'value': this.getResourceValue(currentCommunication, ['Subjects', 'Subject', '@display_value'])},
+                type: {'name': 'Type', 'value': this.getResourceValue(currentCommunication, ['Communication Type', '@display_value'])},
+                date: {'name': 'Date', 'value': this.getResourceValue(currentCommunication, ['Dates', 'Date', '@display_value'])},
+                participants: {'name': 'Participants', 'value': this.getResourceValue(currentCommunication, ['Attendees', '@display_value'])},
+                relatedCondition: {'name': 'Related Condition', 'value': this.getResourceValue(currentCommunication, ['Related Condition', '@display_value'])},
+                notes: {'name': 'Notes', 'value': this.getResourceValue(currentCommunication, ['Communication Notes', 'Communication Description', '@display_value'])},
+                followOnActions: {'name': 'Follow-on Actions', 'value': this.getResourceValue(currentCommunication, ['Follow on Actions', 'Follow-On Actions', '@display_value'])},
+                uploadedFiles: {'name': 'Uploaded Files', 'value': this.getResourceValue(currentCommunication, ['Digital File(s)', '@display_value'])},
             }
             this.resourceLoading(false);
             if (!this.relatedResourceLoading()){
