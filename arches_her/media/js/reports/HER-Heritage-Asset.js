@@ -55,7 +55,7 @@ define([
                 this.cards = {};
 
                 const self = this;
-                this.summary = ko.observable(params.summary);
+                this.summary = params.summary;
                 
                 if(params.report.configState){
                      ReportViewModel.apply(this, [params]);
