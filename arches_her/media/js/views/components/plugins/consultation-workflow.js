@@ -8,11 +8,9 @@ define([
 ], function(ko, $, arches, Workflow) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
+            this.componentName = 'consultation-workflow';
 
-            var self = this;
-            this.resourceId = ko.observable();
-
-            params.steps = [
+            this.stepConfig = [
                 {
                     title: 'Consultation GeoJSON',
                     name: 'consultation-location',
@@ -25,7 +23,6 @@ define([
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
                     required: true,
-                    shouldtrackresource: true,
                     workflowstepclass: 'consultation-map-step',
                     wastebin: {resourceid: null, description: 'a consultation instance'},
                     layoutSections: [
@@ -205,11 +202,6 @@ define([
             ];
 
             Workflow.apply(this, [params]);
-            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            self.getJSON('consultation-workflow');
-
-
-            self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/consultation-workflow.htm' }
     });

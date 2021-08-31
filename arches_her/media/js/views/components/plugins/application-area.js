@@ -3,22 +3,17 @@ define([
     'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step',
-    'views/components/workflows/new-tile-step',
     'views/components/workflows/application-area/app-area-address-step',
     'views/components/workflows/application-area/app-area-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('application-area', {
         viewModel: function(params) {
-            var self = this;
-            this.resourceId = ko.observable();
+            this.componentName = 'application-area';
 
-            params.steps = [
+            this.stepConfig = [
                 {
                     title: 'Assign Address',
                     name: 'assign-address',
-                    description: 'Assign an address to your application area. Use the address as the default name',
-                    component: 'views/components/workflows/component-based-step',
-                    componentname: 'component-based-step',
                     graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                     nodegroupid: 'c7ec6efa-28c8-11eb-9ed1-f875a44e0e11',
                     targetnodegroup: '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11',
@@ -30,7 +25,6 @@ define([
                     icon: 'fa-envelope',
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
-                    shouldtrackresource: true,
                     informationboxdata: {
                         heading: 'Assign an address',
                         text: 'Assign an address to your application area. Use the address as the default name',
@@ -55,11 +49,6 @@ define([
                 {
                     title: 'Area Map',
                     name: 'area-map',
-                    description: 'Draw (or select from the Development Area Overlay) the extent of...',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                    nodegroupid: '19096dc5-3a3b-11eb-b4cf-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -68,16 +57,26 @@ define([
                     informationboxdata: {
                         heading: 'Application Area Map',
                         text: 'Draw (or select from the development area overlay) the extent of the area',
-                    }
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                {
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'area-map', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
+                                        nodegroupid: '19096dc5-3a3b-11eb-b4cf-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Related Heritage Resources',
                     name: 'related-heritage-resource',
-                    description: 'Select the other Heritage Sites or Artifacts related to the current Consulation',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                    nodegroupid: 'a93c73b4-83d4-11ea-80e6-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -86,16 +85,26 @@ define([
                     informationboxdata: {
                         heading: 'Related Heritage Resources',
                         text: 'Select the other heritage sites or artifacts related to the current Consulation',
-                    }
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                {
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'related-heritage-resource', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
+                                        nodegroupid: 'a93c73b4-83d4-11ea-80e6-f875a44e0e11',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],                    
                 },
                 {
                     title: 'Area Description',
                     name: 'area-description',
-                    description: 'Describe the Application Area',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                    nodegroupid: '7a76715d-94fd-11ea-8481-f875a44e0e11',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -104,16 +113,26 @@ define([
                     informationboxdata: {
                         heading: 'Area Description',
                         text: 'Describe the application area',
-                    }
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                {
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'area-description', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
+                                        nodegroupid: '7a76715d-94fd-11ea-8481-f875a44e0e11',                    
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Area Designations',
                     name: 'area-designations',
-                    description: 'Select the Application Area designations',
-                    component: 'views/components/workflows/new-tile-step',
-                    componentname: 'new-tile-step',
-                    graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                    nodegroupid: '48f51523-efde-11eb-8285-a87eeabdefba',
                     resourceid: null,
                     tileid: null,
                     parenttileid: null,
@@ -122,14 +141,27 @@ define([
                     informationboxdata: {
                         heading: 'Area Designations',
                         text: 'Select the application Area designations',
-                    }
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                {
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'project-name', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
+                                        nodegroupid: '5c970269-8eca-11ea-8f53-f875a44e0e11',                    
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Application Area Complete',
                     name: 'application-area-complete',
                     description: 'Choose an option below',
-                    component: 'views/components/workflows/component-based-step',
-                    componentname: 'component-based-step',
                     layoutSections: [
                         {
                             componentConfigs: [
@@ -155,10 +187,6 @@ define([
             ];
 
             Workflow.apply(this, [params]);
-            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            self.getJSON('application-area');
-            
-            self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/application-area.htm' }
     });

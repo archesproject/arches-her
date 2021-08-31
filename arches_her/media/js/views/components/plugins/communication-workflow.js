@@ -9,10 +9,9 @@ define([
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('communication-workflow', {
         viewModel: function(params) {
-            var self = this;
-            this.resourceId = ko.observable();
+            this.componentName = 'application-area';
             
-            params.steps = [
+            this.stepConfig = [
                 {
                     title: 'Related Consultation / Details',
                     name: 'related-consultation',
@@ -136,10 +135,6 @@ define([
             ];
             
             Workflow.apply(this, [params]);
-            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            self.getJSON('communication-workflow');
-
-            self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/communication-workflow.htm' }
     });

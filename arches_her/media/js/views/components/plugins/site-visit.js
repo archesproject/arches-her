@@ -9,13 +9,9 @@ define([
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
-            /*if (!params.resourceid) {
-                params.resourceid = ko.observable();
-            }*/
-            var self = this;
-            this.resourceId = ko.observable()
+            this.componentName = 'application-area';
 
-            params.steps = [
+            this.stepConfig = [
                 {
                     title: 'Site Visit Details',
                     name: 'site-visit-details',
@@ -193,10 +189,6 @@ define([
             ];
 
             Workflow.apply(this, [params]);
-            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            self.getJSON('site-visit');
-            
-            self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/site-visit.htm' }
     });
