@@ -53,16 +53,16 @@
                 <!-- Names section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.assetNames)}" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Names" %}</h2>
-                    <a class="her-report-a" data-bind="{event:{ mousedown:function(d, e){addNewTile(assetNameCard, e)}}}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.assetName, event:{ mousedown:function(d, e){addNewTile(cards.assetName, e)}}}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.assetNames" class="her-report-collapsible-container pad-lft">
 
-                        <!-- Show this block if there's NO data -->
+                        <!-- ko ifnot: names.assetNames().length -->
                         <div class="her-nodata-note" style="display: none;">No names for this resource</div>
+                        <!-- /ko -->
 
-
-                        <!-- Show this block if there is resource tile content -->
+                        <!-- ko if: names.assetNames().length -->
                         <div class="her-report-subsection" >
                             <div class="firstchild-container">
                                 <div class="her-table">
@@ -81,12 +81,14 @@
                                                 <td data-bind="text: type"></td>
                                                 <td data-bind="text: currency"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.assetNameCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.assetNameCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.assetName">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, cards.assetName)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: function() {$parent.deleteTile(tileid, cards.assetName)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -94,21 +96,22 @@
                                 </div>
                             </div>
                         </div>
+                        <!-- /ko -->
                     </div>
                 </div>
 
                 <!-- External Reference -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.externalCrossReferences)}" class="fa fa-angle-double-right toggle"></i> {% trans "External Cross References" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(externalCrossReferencesCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
+                    <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.externalCrossReferences" class="her-report-collapsible-container pad-lft">
-                        <!-- ko ifnot: externalCrossReferencesCard.tiles().length -->
+                        <!-- ko ifnot: names.externalCrossReferences().length -->
                         <div class="her-nodata-note">No references for this resource</div>
                         <!-- /ko -->
                         
-                        <!-- ko if: externalCrossReferencesCard.tiles().length -->
+                        <!-- ko if: names.externalCrossReferences().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table">
@@ -127,12 +130,14 @@
                                                 <td data-bind="text: source"></td>
                                                 <td data-bind="text: description"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function(){$parent.editTile(tileid, $parent.externalCrossReferencesCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.externalCrossReferencesCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.externalCrossReferences">
+                                                        <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.cards.externalCrossReferences)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -147,16 +152,16 @@
                 <!-- System Reference Numbers section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.systemReferenceNumbers)}" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(systemReferenceNumbersCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> <span data-bind="if: systemReferenceNumbersCard.tiles().length">{% trans "Edit Identifier" %}</span><span data-bind="ifnot: systemReferenceNumbersCard.tiles().length">{% trans "Add Identifier" %}</span></a>
+                    <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="her-report-a"><i class="fa fa-mail-reply"></i> <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span><span data-bind="ifnot: cards.systemReferenceNumbers.length">{% trans "Add Identifier" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.systemReferenceNumbers" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: systemReferenceNumbersCard.tiles().length -->
+                        <!-- ko ifnot: !names.systemReferenceNumbers.tileid -->
                         <div class="her-nodata-note">No references for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: systemReferenceNumbersCard.tiles().length -->
+                        <!-- ko if: names.systemReferenceNumbers.tileid -->
                         <div class="her-report-subsection">
 
                             <div class="firstchild-container">
@@ -188,16 +193,15 @@
                 <!-- Description section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.descriptions)}" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Descriptions" %}</h2>
-                    <a class="her-report-a" data-bind="click: function(){addNewTile(assetDescriptionCard)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+                    <a class="her-report-a" data-bind="if: cards.assetDescriptions, click: function(){addNewTile(cards.assetDescriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.descriptions" class="her-report-collapsible-container pad-lft">
-
-                        <!-- ko ifnot: assetDescriptionCard.tiles().length -->
+                        <!-- ko ifnot: descriptions().length -->
                         <div class="her-nodata-note">{% trans "No descriptions for this resource" %}</div>
                         <!-- /ko -->
 
-                        <!-- ko if: assetDescriptionCard.tiles().length -->
+                        <!-- ko if: descriptions().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table">
@@ -214,12 +218,14 @@
                                                 <td data-bind="text: type"></td>
                                                 <td data-bind="text: description" class="her-table-descrip-col"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function(){$parent.editTile(tileid, $parent.assetDescriptionCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.assetDescriptionCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.assetDescriptions">
+                                                        <a data-bind="click: function(){$parent.editTile(tileid, cards.assetDescriptions)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.cards.assetDescriptions)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -239,25 +245,22 @@
                 <!-- Geometry/Map -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.coordinates)}" class="fa fa-angle-double-right toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(locationGeometryCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.coordinates" class="her-report-collapsible-container pad-lft">
 
                         <div class="her-report-subsection">
                             <h3><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.locality)}" class="fa fa-angle-double-right toggle"></i> {% trans "Geometry " %}  <span>(Shape type: Locality)</span></h3>
-                            <a class="her-report-a" data-bind="{click: function(){addNewTile(locationGeometryCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+                            <a class="her-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
                             <div data-bind="visible: blockVisible.locations.locality">
-                                <!-- ko ifnot: locationGeometryCard.tiles().length -->
+                                <!-- ko ifnot: locationMapData -->
                                 <div class="her-nodata-note her-top-card">No geometry for this resource</div>
                                 <!-- /ko --> 
                         
-                                <!-- ko if: locationGeometryCard.tiles().length -->
+                                <!-- ko if: locationMapData -->
                                 <div class="her-report-subsection-container no-flex">
-                                    
-                                    <!-- Show this block if there's data -->
                                     <div class="firstchild-container">
-
                                         <div class="her-report-map">
                                             <div class="map-container" style="height:475px">
                                                 <div class="map" style="height:475px" data-bind="component: {
@@ -397,16 +400,16 @@
                 <!-- Addresses -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.addresses)}" class="fa fa-angle-double-right toggle"></i> {% trans "Addresses" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(addressesCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.addresses, click: function(){addNewTile(cards.addresses)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.addresses" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: addressesCard.tiles().length -->
+                        <!-- ko ifnot: location.addresses().length -->
                         <div class="her-nodata-note">No addresses for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: addressesCard.tiles().length -->
+                        <!-- ko if: location.addresses().length -->
                         <div class="her-report-subsection">
                             
                             <div class="firstchild-container">
@@ -447,12 +450,14 @@
                                                 <td data-bind="text: fullAddress"></td>
                                                 <td data-bind="text: currency"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.addressesCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.addressesCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.addresses">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.addresses)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.addresses)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -467,16 +472,17 @@
                 <!-- Location Description -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.descriptions)}" class="fa fa-angle-double-right toggle"></i> {% trans "Location Descriptions" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(locationDescriptionsCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.locationDescriptions, click: function(){addNewTile(cards.locationDescriptions)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.descriptions" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: locationDescriptionsCard.tiles().length -->
+                        <!-- ko ifnot: location.descriptions().length -->
                         <div class="her-nodata-note">No location description for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: locationDescriptionsCard.tiles().length -->
+                        <!-- ko if: location.descriptions().length -->
+                        
                         <div class="her-report-subsection">
                             
                             <div class="firstchild-container">
@@ -495,10 +501,11 @@
                                                 <td data-bind="text: type"></td>
                                                 <td data-bind="text: description" class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;">Take a right at the light. Then go straight until night.  Look for the big red barn, then turn left. Go another few miles and you're almost there.</td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.locationDescriptionsCard)}">
+                                                    <div data-bind="if: $parent.cards.locationDescriptions">
+                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.locationDescriptions)}">
                                                         <i class="fa fa-mail-reply"></i>
                                                     </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.locationDescriptionsCard)}">
+                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cardslocationDescriptions)}">
                                                         <i class="fa fa-trash"></i>
                                                     </a>
                                                 </td>
@@ -515,7 +522,7 @@
                 <!-- Admin Areas -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.administrativeAreas)}" class="fa fa-angle-double-right toggle"></i> {% trans "Administrative Areas" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(administrativeAreasCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.administrativeAreas, click: function(){addNewTile(cards.administrativeAreas)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.administrativeAreas" class="her-report-collapsible-container pad-lft">
@@ -545,12 +552,14 @@
                                                 <td data-bind="text: type"></td>
                                                 <td data-bind="text: currency"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.administrativeAreasCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.administrativeAreasCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.administrativeAreas">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.administrativeAreas)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.administrativeAreas)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -565,7 +574,7 @@
                 <!-- National Grid References -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.nationalGrid)}" class="fa fa-angle-double-right toggle"></i> {% trans "National Grid References" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(nationalGridReferencesCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.nationalGridReferences, click: function(){addNewTile(cards.nationalGridReferences)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.nationalGrid" class="her-report-collapsible-container pad-lft">
@@ -591,12 +600,14 @@
                                             <tr>
                                                 <td data-bind="text: reference"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.nationalGridReferencesCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.nationalGridReferencesCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.nationalGridReferences">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.nationalGridReferences)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.nationalGridReferences)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -611,7 +622,7 @@
                 <!-- Area Assignments -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.areaAssignment)}" class="fa fa-angle-double-right toggle"></i> {% trans "Area Assignment" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(areaAssignmentCard)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: location.areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: location.areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
+                    <a class="her-report-a" data-bind="{if: cards.areaAssignment, click: function(){addNewTile(cards.areaAssignment)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: location.areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: location.areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.areaAssignment" class="her-report-collapsible-container pad-lft">
@@ -649,12 +660,15 @@
                                                 <td data-bind="text: shineSignificance"></td>
                                                 <td data-bind="text: reference"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.areaAssignmentCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.areaAssignmentCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a></td>
+                                                    <div data-bind="if: $parent.cards.areaAssignment">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.areaAssignment)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.areaAssignment)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -668,16 +682,16 @@
                 <!-- Land Use Classification -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.landUse)}" class="fa fa-angle-double-right toggle"></i> {% trans "Land Use Classification" %}</h2>
-                    <a class="her-report-a" data-bind="{event:{ mousedown:function(d, e){addNewTile(landUseCard, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: landUseCard.tiles().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: landUseCard.tiles().length">{% trans "Add Classification" %}</span></a>
+                    <a class="her-report-a" data-bind="{if: cards.landUse, event:{ mousedown:function(d, e){addNewTile(cards.landUse, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: location.landUseClassification().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: location.landUseClassification().length">{% trans "Add Classification" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.landUse" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: landUseCard.tiles().length -->
+                        <!-- ko ifnot: location.landUseClassification().length -->
                         <div class="her-nodata-note">No land use classes for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: landUseCard.tiles().length -->
+                        <!-- ko if: location.landUseClassification().length -->
                         <div class="her-report-subsection">
                             
                             <div class="firstchild-container">
@@ -704,12 +718,14 @@
                                                 <td data-bind="text: subSoil"></td>
                                                 <td data-bind="text: reference"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.landUseCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.landUseCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.landUse">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.landUse)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.landUse)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -738,11 +754,11 @@
                         <div class="her-report-subsection">
                             <h3><i data-bind="click: function() {toggleBlockVisibility(blockVisible.designation.extent)}" class="fa fa-angle-double-right toggle"></i> {% trans "Designation Extent " %}</h3>
 
-                            <!-- ko ifnot: designationsCard.tiles().length -->
+                            <!-- ko ifnot: designations().length -->
                             <div class="her-nodata-note her-top-card">No extent for this resource</div>
                             <!-- /ko -->
                    
-                            <!-- ko if: designationsCard.tiles().length --> 
+                            <!-- ko if: designations().length --> 
                             <div class="her-report-subsection-container no-flex">
 
                                 <!-- Show this block if there's data -->
@@ -774,11 +790,11 @@
                                     <div class="her-report-subsection-firstchild">
                                         <h5>Designation/Protection Details</h5>
                                         
-                                        <!-- ko ifnot: designationsCard.tiles().length -->
+                                        <!-- ko ifnot: designations().length -->
                                         <div class="her-nodata-note">No designation information for this resource</div>
                                         <!-- /ko -->
 
-                                        <!-- ko if: designationsCard.tiles().length -->
+                                        <!-- ko if: designations().length -->
                                         <div class="firstchild-container">
                                             <!-- designation table  -->
                                             <div class="her-table" style="max-width: 100%">
@@ -811,12 +827,14 @@
                                                             <td data-bind="text: dateQualifier"></td>
                                                             <td data-bind="text: reference"></td>
                                                             <td class="her-table-control">
-                                                                <a data-bind="click: function() {$parent.editTile(tileid, $parent.designationsCard)}">
-                                                                    <i class="fa fa-mail-reply"></i>
-                                                                </a>
-                                                                <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.designationsCard)}">
-                                                                    <i class="fa fa-trash"></i>
-                                                                </a>
+                                                                <div data-bind="if: $parent.cards.designations">
+                                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.designations)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.designations)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
                                                                 <a data-bind="click: function(){$parent.currentDesignation(tileid); $parent.jumpToDesignationGeometry($data)}">
                                                                     <i class="fa fa-globe"></i>
                                                                 </a>
@@ -844,11 +862,11 @@
                     <div data-bind="visible: blockVisible.designation.files" class="her-report-collapsible-container pad-lft">
 
 
-                        <!-- ko ifnot: designationFiles.length -->
-                        <div class="her-nodata-note" style="display: none;">No files for this resource</div>
+                        <!-- ko ifnot: designationFiles().length -->
+                        <div class="her-nodata-note">No files for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko ifnot: designationFiles.length -->
+                        <!-- ko if: designationFiles().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -865,9 +883,11 @@
                                                 <td data-bind="text: designation"></td>
                                                 <td data-bind="text: file"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.designationsCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.designations">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.designations)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -887,16 +907,16 @@
                 <!-- Construction Phases -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionPhases)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
-                    <a class="her-report-a" data-bind="click: function(){addNewTile(constructionPhasesCard)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+                    <a class="her-report-a" data-bind="if: cards.constructionPhases, click: function(){addNewTile(cards.constructionPhases)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.phases.constructionPhases" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: constructionPhasesCard.tiles().length -->
+                        <!-- ko ifnot: phase.constructionPhases().length -->
                         <div class="her-nodata-note">No construction phases for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: constructionPhasesCard.tiles().length -->
+                        <!-- ko if: phase.constructionPhases().length -->
                         <div class="her-report-subsection">
                             
                             <div class="firstchild-container">
@@ -941,12 +961,14 @@
                                                 <td data-bind="text: constructionTechnique"></td>
                                                 <td data-bind="text: phaseDescription"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.constructionPhasesCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.constructionPhasesCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.constructionPhases">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.constructionPhases)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.constructionPhases)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -962,16 +984,16 @@
                 <!-- Components -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionComponents)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Components" %}</h2>
-                    <a class="her-report-a"  data-bind="click: function(){addNewTile(constructionComponentsCard)}"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
+                    <a class="her-report-a" data-bind="if: cards.constructionComponents, click: function(){addNewTile(cards.constructionComponents)}"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.phases.constructionComponents" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: constructionComponentsCard.tiles().length -->
+                        <!-- ko ifnot: phase.constructionComponents().length -->
                         <div class="her-nodata-note">No components for this resource</div>
                         <!-- /ko -->
                         
-                        <!-- ko if: constructionComponentsCard.tiles().length -->
+                        <!-- ko if: phase.constructionComponents().length -->
                         <div class="her-report-subsection">
                             
                             <div class="firstchild-container">
@@ -995,12 +1017,14 @@
                                                 <td data-bind="text: material"></td>
                                                 <td data-bind="text: evidence"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.constructionComponentsCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.constructionComponentsCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.constructionComponents">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.constructionComponents)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.constructionComponents)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1015,16 +1039,16 @@
                 <!-- Use Phases -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
-                    <a class="her-report-a" data-bind="click: function(){addNewTile(usePhaseCard)}"></a><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
+                    <a class="her-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}"><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.phases.usePhase" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: usePhaseCard.tiles().length -->
-                        <div class="her-nodata-note" style="display: none;">No uses for this resource</div>
+                        <!-- ko ifnot: phase.usePhase().length -->
+                        <div class="her-nodata-note">No uses for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: usePhaseCard.tiles().length -->
+                        <!-- ko if: phase.usePhase().length -->
                         <div class="her-report-subsection">
                             
                             <div class="firstchild-container">
@@ -1056,12 +1080,15 @@
                                                 <td data-bind="text: descriptionType"></td>
                                                 <td data-bind="text: description"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.usePhaseCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                    </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.usePhaseCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a></td>
+                                                    <div data-bind="if: $parent.cards.usePhase">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.usePhase)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.usePhase)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -1086,13 +1113,11 @@
                     <!-- Show this div if there are event data -->
                     <!-- Production Event Block (one for each production event) -->
                     <div class="her-report-subsection">
-                        <h3><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Production Event: " %} <span>Statue Carving</span></h3>
+                        <h3><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionPhases)}"" class="fa fa-angle-double-right toggle"></i> {% trans "Production Event: " %} <span>Statue Carving</span></h3>
                         <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit this Event" %}</a>
 
-                        <!-- Show this block if there's NO data -->
                         <div class="her-nodata-note her-top-card" style="display: none;">No information for this event</div>
 
-                        <!-- Show this if there is Event data (Top Card) -->
                         <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container">
                             <div class="her-report-subsection-container">
                                 <div class="her-report-subsection-item">
@@ -1435,16 +1460,16 @@
                 <!-- Biblio section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.bibliography)}" class="fa fa-angle-double-right toggle"></i> {% trans "Bibliographic Citation" %}</h2>
-                    <a class="her-report-a" data-bind="{click: function(){addNewTile(bibliographyCard)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.bibliography, click: function(){addNewTile(cards.bibliography)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.bibliography" class="her-report-collapsible-container pad-lft">
                         
-                        <!-- ko ifnot: bibliographyCard.tiles().length --> 
+                        <!-- ko ifnot: bibliography().length --> 
                         <div class="her-nodata-note">{% trans "No citations for this resource" %}</div>
                         <!-- /ko -->
 
-                        <!-- ko if: bibliographyCard.tiles().length --> 
+                        <!-- ko if: bibliography().length --> 
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1469,12 +1494,14 @@
                                                 <td data-bind="text: plates"></td>
                                                 <td data-bind="text: comment"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.bibliographyCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.bibliographyCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.bibliography">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.bibliography)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.bibliography)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1493,22 +1520,22 @@
 
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.photos)}"  class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(photosCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+                    <a data-bind="{if: cards.photos, click: function(){addNewTile(cards.photos)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.photos" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: photosCard.tiles().length -->
+                        <!-- ko ifnot: photos().length -->
                         <div class="her-nodata-note">No photos for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: photosCard.tiles().length -->
+                        <!-- ko if: photos().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-report-photo-container">
                                     <!-- ko foreach: {data: photos} -->
                                     <div class="her-report-photo-block">
-                                        <div class="her-report-photo" data-bind="click: function(){$parent.editTile(tileid, $parent.photosCard)}">
+                                        <div class="her-report-photo" data-bind="click: function(){$parent.editTile(tileid, $parent.cards.photos)}">
                                             <img data-bind="attr: {src: path}" />
                                         </div>
                                         <div class="her-report-photo-caption">
@@ -1548,16 +1575,16 @@
                 <!-- Scientific date section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.scientificDate)}" class="fa fa-angle-double-right toggle"></i> {% trans "Scientific Date Determination" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(scientificDateCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+                    <a data-bind="{if: cards.scientificDate, click: function(){addNewTile(cards.scientificDate)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.scientificDate" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: scientificDateCard.tiles().length -->
+                        <!-- ko ifnot: scientificDate().length -->
                         <div class="her-nodata-note">{% trans "No dates for this resource" %}</div>
                         <!-- /ko -->
 
-                        <!-- ko if: scientificDateCard.tiles().length -->
+                        <!-- ko if: scientificDate().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1594,12 +1621,14 @@
                                                 <td data-bind="text: endDateOfDetermination"></td>
                                                 <td data-bind="text: dateDeterminationQualifier"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.scientificDateCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.scientificDateCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.scientificDate">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.scientificDate)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.scientificDate)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1619,16 +1648,16 @@
                 <!-- Associated Activities section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.activities)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Activities" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(associatedActivitiesCard)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Activity" %}</a>
+                    <a data-bind="{if: cards.associatedActivities, click: function(){addNewTile(cards.associatedActivities)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Activity" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.associatedResources.activities" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: associatedActivitiesCard.tiles().length -->
+                        <!-- ko ifnot: associatedResources.activities().length -->
                         <div class="her-nodata-note">No activities for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: associatedActivitiesCard.tiles().length -->
+                        <!-- ko if: associatedResources.activities().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1651,12 +1680,14 @@
                                                 
                                                 </td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedActivitiesCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedActivitiesCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.associatedActivities">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.associatedActivities)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.associatedActivities)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1671,16 +1702,16 @@
                 <!-- Associated Actors -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.actors)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Actors" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(associatedActorsCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Actor" %}</a>
+                    <a data-bind="{if: cards.associatedActors, click: function(){addNewTile(cards.associatedActors)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Actor" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.associatedResources.actors" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: associatedActorsCard.tiles().length -->
+                        <!-- ko ifnot: associatedResources.actors().length -->
                         <div class="her-nodata-note">No actors for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: associatedActorsCard.tiles().length -->
+                        <!-- ko if: associatedResources.actors().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1707,12 +1738,14 @@
                                                 <td data-bind="text: dateQualifier"></td>
                                                 <td data-bind="text: roleType"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedActorsCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedActorsCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.associatedActors">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.associatedActors)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.associatedActors)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1727,16 +1760,16 @@
                 <!-- Associated Consultations section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.consultations)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Consultations" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(associatedConsultationsCard)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Consultation" %}</a>
+                    <a data-bind="{if: cards.associatedConsultations, click: function(){addNewTile(cards.associatedConsultations)}}" class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Consultation" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.associatedResources.consultations" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: associatedConsultationsCard.tiles().length -->
+                        <!-- ko ifnot: associatedResources.consultations().length -->
                         <div class="her-nodata-note">No consultations for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: associatedConsultationsCard.tiles().length -->
+                        <!-- ko if: associatedResources.consultations().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1758,12 +1791,14 @@
                                                     <!-- /ko -->
                                                 </td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedConsultationsCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedConsultationsCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.associatedConsultations">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.associatedConsultations)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.associatedConsultations)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1778,16 +1813,16 @@
                 <!-- Associated Digital Files section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.files)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Files" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(associatedFilesCard)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add File" %}</a>
+                    <a data-bind="{if: cards.associatedFiles, click: function(){addNewTile(cards.associatedFiles)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add File" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.associatedResources.files" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: associatedFilesCard.tiles().length -->
+                        <!-- ko ifnot: associatedResources.files().length -->
                         <div class="her-nodata-note">No files for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: associatedFilesCard.tiles().length -->
+                        <!-- ko if: associatedResources.files().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1809,12 +1844,14 @@
                                                     <!-- /ko -->
                                                 </td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedFilesCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.associatedFilesCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.associatedFiles">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.associatedFiles)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.associatedFiles)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1829,16 +1866,16 @@
                 <!-- Associated Heritage Assets section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.associatedResources.artifacts)}" class="fa fa-angle-double-right toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
-                    <a data-bind="{click: function(){addNewTile(associatedArtifactsCard)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add resource" %}</a>
+                    <a data-bind="{if: cards.associatedArtifacts, click: function(){addNewTile(cards.associatedArtifacts)}}"  class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add resource" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.associatedResources.artifacts" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: associatedArtifactsCard.tiles().length -->
+                        <!-- ko ifnot: associatedResources.artifacts().length -->
                         <div class="her-nodata-note">No hertiage/area/artifacts for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: associatedArtifactsCard.tiles().length -->
+                        <!-- ko if: associatedResources.artifacts().length -->
                         <div class="her-report-subsection">
                             <div class="firstchild-container">
                                 <div class="her-table" data-bind="">
@@ -1862,12 +1899,14 @@
                                                 </td>
                                                 <td data-bind="text: association"></td>
                                                 <td class="her-table-control">
-                                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.associatedArtifactsCard)}">
-                                                        <i class="fa fa-mail-reply"></i>
-                                                   </a>
-                                                    <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.associatedArtifactsCard)}">
-                                                        <i class="fa fa-trash"></i>
-                                                    </a>
+                                                    <div data-bind="if: $parent.cards.associatedArtifacts">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.associatedArtifacts)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.cards.associatedArtifacts)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
                                                 </td>
                                             </tr>
                                         </tbody>
@@ -1891,12 +1930,12 @@
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.json" class="her-report-collapsible-container pad-lft">
-
+                        <span data-bind="text: console.log(resource);"></span>
                         <!-- Show this block if there is resource tile content -->
                         <div class="her-report-subsection">
                             <div class="her-codemirror">
                                 <div class="geojson-editor" data-bind="codemirror: {
-                                    value: JSON.stringify(report.report_json, null, 2),
+                                    value: JSON.stringify(resource(), null, 2),
                                     mode: { name: 'javascript', json: true },
                                     lineNumbers: true
                                 }"></div>
@@ -1930,7 +1969,7 @@
     <div class="her-summary-block">
         <div class="her-title-block">
             <h1 data-bind="text: displayname">Instance Name Goes Here</h1>
-            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "edit resource" %}</a>
+            <a class="her-report-a" data-bind="attr: {href: resourceUrl}"><i class="fa fa-mail-reply"></i> {% trans "Edit Resource" %}</a>
         </div>
         <div class="her-block-attributes">
             <div class="her-block-key">Resource Type:</div>
@@ -1938,11 +1977,11 @@
         </div>
         <div class="her-block-attributes">
             <div class="her-block-key">Address:</div>
-            <div class="her-block-value">Carlisle House, 12 Dalgity Mews, Cakebread Lane, Shoreditch, London, MEW 123</div>
+            <div data-bind="text: fullAddress" class="her-block-value"></div>
         </div>
         <div class="her-block-attributes">
             <div class="her-block-key">Protection:</div>
-            <div class="her-block-value">Grade I</div>
+            <div data-bind="text: protection" class="her-block-value"></div>
         </div>
     </div>
 
@@ -1950,153 +1989,51 @@
     <div class="her-report-page">
 
         <div class="her-report-section" style="padding-top: 10px;">
-            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
-            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+            <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.photos)}" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Photos" %}</h2>
+            <a class="her-report-a" data-bind="{if: cards.photos, click: function(){addNewTile(cards.photos)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
 
             <!-- Collapsible content -->
-            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+            <div data-bind="visible: blockVisible.photos" class="her-report-collapsible-container pad-lft">
 
-                <!-- Show this block if there's NO data -->
-                <div class="her-nodata-note" style="display: none;">No photos for this resource</div>
+                <!-- ko ifnot: photos().length -->
+                <div class="her-nodata-note">No photos for this resource</div>
+                <!-- /ko -->
 
-
-                <!-- Show this block if there is resource tile content -->
+                <!-- ko if: photos().length -->
                 <div class="her-report-subsection">
                     <div class="firstchild-container">
-                        
                         <div class="her-report-photo-container">
+                            <!-- ko foreach: {data: photos} -->
                             <div class="her-report-photo-block">
-                                <div class="her-report-photo">
-                                    photo goes here
+                                <div class="her-report-photo" data-bind="click: function(){$parent.editTile(tileid, $parent.cards.photos)}">
+                                    <img data-bind="attr: {src: path}" />
                                 </div>
                                 <div class="her-report-photo-caption">
                                     <div class="her-report-subsection-item flex column-order pad-top pad-btm">
                                         <div class="her-block-attributes">
                                             <h6 class="her-block-key">Caption: </h6>
-                                            <div class="her-block-value">View of resource from the west</div>
+                                            <div class="her-block-value" data-bind="text: caption"></div>
                                         </div>
                                         <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright Holder: </h6>
-                                            <div class="her-block-value">Historic England</div>
+                                            <h6 class="her-block-key">Copyright holder: </h6>
+                                            <div class="her-block-value" data-bind="text: copyrightHolder"></div>
                                         </div>
                                         <div class="her-block-attributes">
                                             <h6 class="her-block-key">Copyright type: </h6>
-                                            <div class="her-block-value">Copyright: All rights reserved</div>
+                                            <div class="her-block-value" data-bind="text: copyrightType"></div>
                                         </div>
                                         <div class="her-block-attributes">
                                             <h6 class="her-block-key">Copyright note: </h6>
-                                            <div class="her-block-value">Actual work days required to create statue</div>
+                                            <div class="her-block-value" data-bind="text: copyrightNote"></div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="her-report-photo-block">
-                                <div class="her-report-photo">
-                                    photo goes here
-                                </div>
-                                <div class="her-report-photo-caption">
-                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Caption: </h6>
-                                            <div class="her-block-value">View of resource from the west</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright Holder: </h6>
-                                            <div class="her-block-value">Historic England</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright type: </h6>
-                                            <div class="her-block-value">Copyright: All rights reserved</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright note: </h6>
-                                            <div class="her-block-value">Actual work days required to create statue</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="her-report-photo-block">
-                                <div class="her-report-photo">
-                                    photo goes here
-                                </div>
-                                <div class="her-report-photo-caption">
-                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Caption: </h6>
-                                            <div class="her-block-value">View of resource from the west</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright Holder: </h6>
-                                            <div class="her-block-value">Historic England</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright type: </h6>
-                                            <div class="her-block-value">Copyright: All rights reserved</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright note: </h6>
-                                            <div class="her-block-value">Actual work days required to create statue</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="her-report-photo-block">
-                                <div class="her-report-photo">
-                                    photo goes here
-                                </div>
-                                <div class="her-report-photo-caption">
-                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Caption: </h6>
-                                            <div class="her-block-value">View of resource from the west</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright Holder: </h6>
-                                            <div class="her-block-value">Historic England</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright type: </h6>
-                                            <div class="her-block-value">Copyright: All rights reserved</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright note: </h6>
-                                            <div class="her-block-value">Actual work days required to create statue</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="her-report-photo-block">
-                                <div class="her-report-photo">
-                                    photo goes here
-                                </div>
-                                <div class="her-report-photo-caption">
-                                    <div class="her-report-subsection-item flex column-order pad-top pad-btm">
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Caption: </h6>
-                                            <div class="her-block-value">View of resource from the west</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright Holder: </h6>
-                                            <div class="her-block-value">Historic England</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright type: </h6>
-                                            <div class="her-block-value">Copyright: All rights reserved</div>
-                                        </div>
-                                        <div class="her-block-attributes">
-                                            <h6 class="her-block-key">Copyright note: </h6>
-                                            <div class="her-block-value">Actual work days required to create statue</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            <!-- /ko -->
                         </div>
                     </div>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
     </div>
@@ -2108,21 +2045,20 @@
 
         <!-- Description section -->
         <div class="her-report-section">
-            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Descriptions" %}</h2>
-            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Desription" %}</a>
+            <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.descriptions)}" class="fa fa-angle-double-right toggle"></i> {% trans "Asset Descriptions" %}</h2>
+            <a class="her-report-a" data-bind="if: cards.assetDescriptions, click: function(){addNewTile(cards.assetDescriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
 
             <!-- Collapsible content -->
-            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+            <div data-bind="visible: blockVisible.descriptions" class="her-report-collapsible-container pad-lft">
+                <!-- ko ifnot: descriptions().length -->
+                <div class="her-nodata-note">{% trans "No descriptions for this resource" %}</div>
+                <!-- /ko -->
 
-                <!-- Show this block if there's NO data -->
-                <div class="her-nodata-note" style="display: none;">{% trans "No descriptions for this resource" %}</div>
-
-
-                <!-- Show this block if there is resource tile content -->
+                <!-- ko if: descriptions().length -->
                 <div class="her-report-subsection">
                     <div class="firstchild-container">
-                        <div class="her-table" data-bind="">
-                            <table data-bind="datatable: descriptionTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                        <div class="her-table">
+                            <table class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr class="her-table-header">
                                         <th>{% trans "Type" %}</th>
@@ -2130,22 +2066,27 @@
                                         <th class="her-table-control all"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody data-bind="dataTablesForEach: {data: descriptions, dataTableOptions: descriptionTableConfig}">
                                     <tr>
-                                        <td>Abstract</td>
-                                        <td class="her-table-descrip-col">An example of a very long abstract using a convenient snippet of text: Flights and Last Known Flights – Place of Departure. How do we manually as locations?  For example, would like to add RAF Tangmere, but can only currently add West Sussex.  Would create a very unwieldy list if we could add anything, but perhaps could need a note field?</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Full</td>
-                                        <td class="her-table-descrip-col">Another convenient bit of text: Historic Map – Can only add ‘Archive Sources’.  Some of the maps will not be from Archives, or we don’t know where they have originated from.  I think this needs to be ‘Bibliographic Source’ which is then linked to an Archive Source, or is it possible to add from both Source Resource Models?</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                        <td data-bind="text: type"></td>
+                                        <td data-bind="text: description" class="her-table-descrip-col"></td>
+                                        <td class="her-table-control">
+                                            <div data-bind="if: $parent.cards.assetDescriptions">
+                                                <a data-bind="click: function(){$parent.editTile(tileid, cards.assetDescriptions)}">
+                                                    <i class="fa fa-mail-reply"></i>
+                                                </a>
+                                                <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.cards.assetDescriptions)}">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
     </div>
@@ -2157,22 +2098,21 @@
         
         <!-- Construction Phases -->
         <div class="her-report-section">
-            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
-            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+            <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionPhases)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
+            <a class="her-report-a" data-bind="if: cards.constructionPhases, click: function(){addNewTile(cards.constructionPhases)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
 
             <!-- Collapsible content -->
-            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+            <div data-bind="visible: blockVisible.phases.constructionPhases" class="her-report-collapsible-container pad-lft">
 
-                <!-- Show this block if there's NO data -->
+                <!-- ko ifnot: phase.constructionPhases().length -->
                 <div class="her-nodata-note" style="display: none;">No construction phases for this resource</div>
+                <!-- /ko -->
 
-                <!-- Show this block if there's IS data -->
+                <!-- ko if: phase.constructionPhases().length -->
                 <div class="her-report-subsection">
-                    
                     <div class="firstchild-container">
-                        
                         <div class="her-table pad-btm">
-                            <table data-bind="datatable: conPhasesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                            <table class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr class="her-table-header">
                                         <th>{% trans "Type" %}</th>
@@ -2192,43 +2132,34 @@
                                         <th class="none">{% trans "Phase Description" %}</th>
                                         <th class="her-table-control all"></th>
                                     </tr>
-                                </thead>
-                                <tbody>
+                                </thead><span data-bind="text: console.log(phase.constructionPhases())"></span>
+                                <tbody data-bind="dataTablesForEach: {data: phase.constructionPhases, dataTableOptions: conPhasesTableConfig}">
                                     <tr>
-                                        <td>Church Hall</td>
-                                        <td>--</td>
-                                        <td>1602</td>
-                                        <td>1637</td>
-                                        <td>Handbuilt</td>
-                                        <td>Initial build</td>
-                                        <td>Throughout</td>
-                                        <td>1602-1637</td>
-                                        <td>Probable</td>
-                                        <td>Extant Structure</td>
-                                        <td>Certain</td>
-                                        <td>Pulhamite Stone</td>
-                                        <td>Pulhamite Stone</td>
-                                        <td>Brickwork</td>
-                                        <td>A very nice church, really.  Lovely building, lovely setting.  You can see why they built it here.  Excellent architecture.  Just wish that they had added a bit of paint to the outside.  A touch up on the inside wouldn't hurt either</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Dovecote</td>
-                                        <td>Edwarian</td>
-                                        <td>1899</td>
-                                        <td>1900</td>
-                                        <td>Handbuilt</td>
-                                        <td>--</td>
-                                        <td>Throughout</td>
-                                        <td>--</td>
-                                        <td>Possible</td>
-                                        <td>Extant Structure</td>
-                                        <td>Certain</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>--</td>
-                                        <td>Nicest dovecote you'll ever see</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                        <td data-bind="text: assetType"></td>
+                                        <td data-bind="text: period"></td>
+                                        <td data-bind="text: startDate"></td>
+                                        <td data-bind="text: endDate"></td>
+                                        <td data-bind="text: method"></td>
+                                        <td data-bind="text: phase"></td>
+                                        <td data-bind="text: dateQualifier"></td>
+                                        <td data-bind="text: displayDate"></td>
+                                        <td data-bind="text: dateConfidence"></td>
+                                        <td data-bind="text: phaseEvidence"></td>
+                                        <td data-bind="text: interpretationConfidence"></td>
+                                        <td data-bind="text: constructionMaterial"></td>
+                                        <td data-bind="text: coveringMaterial"></td>
+                                        <td data-bind="text: constructionTechnique"></td>
+                                        <td data-bind="text: phaseDescription"></td>
+                                        <td class="her-table-control">
+                                            <div data-bind="if: $parent.cards.constructionPhases">
+                                                <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.constructionPhases)}">
+                                                    <i class="fa fa-mail-reply"></i>
+                                                </a>
+                                                <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.constructionPhases)}">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -2236,26 +2167,28 @@
                     </div>
 
                 </div>
+                <!--/ko-->
             </div>
         </div>
 
         <!-- Components -->
         <div class="her-report-section">
-            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Components" %}</h2>
-            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
+            <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.constructionComponents)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Components" %}</h2>
+            <a class="her-report-a" data-bind="if: cards.constructionComponents, click: function(){addNewTile(cards.constructionComponents)}"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
 
             <!-- Collapsible content -->
-            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+            <div data-bind="visible: blockVisible.phases.constructionComponents" class="her-report-collapsible-container pad-lft">
 
-                <!-- Show this block if there's NO data -->
-                <div class="her-nodata-note" style="display: none;">No components for this resource</div>
+                <!-- ko ifnot: phase.constructionComponents().length -->
+                <div class="her-nodata-note">No components for this resource</div>
+                <!-- /ko -->
 
-                <!-- Show this block if there's IS data -->
+                <!-- ko if: phase.constructionComponents().length -->
                 <div class="her-report-subsection">
                     
                     <div class="firstchild-container">
                         <div class="her-table pad-btm">
-                            <table data-bind="datatable: componentsTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                            <table class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr class="her-table-header">
                                         <th>{% trans "Construction Phase" %}</th>
@@ -2266,48 +2199,51 @@
                                         <th class="her-table-control all"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody data-bind="dataTablesForEach: {data: phase.constructionComponents, dataTableOptions: componentsTableConfig}">
                                     <tr>
-                                        <td>Church Hall</td>
-                                        <td>Chapel</td>
-                                        <td>Brickwork</td>
-                                        <td>Flint stone</td>
-                                        <td>Conjectural</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
-                                    </tr>
-                                    <tr>
-                                        <td>Church Hall</td>
-                                        <td>Apse</td>
-                                        <td>Brickwork</td>
-                                        <td>Stone</td>
-                                        <td>Conjectural</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                        <td data-bind="text: constructionPhase"></td>
+                                        <td data-bind="text: component"></td>
+                                        <td data-bind="text: technique"></td>
+                                        <td data-bind="text: material"></td>
+                                        <td data-bind="text: evidence"></td>
+                                        <td class="her-table-control">
+                                            <div data-bind="if: $parent.cards.constructionComponents">
+                                                <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.constructionComponents)}">
+                                                    <i class="fa fa-mail-reply"></i>
+                                                </a>
+                                                <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.constructionComponents)}">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
 
         <!-- Use Phases -->
         <div class="her-report-section">
-            <h2 class="her-report-section-title"><i data-bind="click: toggleVis" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
-            <a class="her-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
+            <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
+            <a class="her-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}"><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
 
             <!-- Collapsible content -->
-            <div data-bind="visible: blockVisiblity" class="her-report-collapsible-container pad-lft">
+            <div data-bind="visible: blockVisible.phases.usePhase" class="her-report-collapsible-container pad-lft">
 
-                <!-- Show this block if there's NO data -->
-                <div class="her-nodata-note" style="display: none;">No uses for this resource</div>
+                <!-- ko ifnot: phase.usePhase().length -->
+                <div class="her-nodata-note">No uses for this resource</div>
+                <!-- /ko -->
 
-                <!-- Show this block if there's IS data -->
+                <!-- ko if: phase.usePhase().length -->
                 <div class="her-report-subsection">
                     
                     <div class="firstchild-container">
                         <div class="her-table pad-btm">
-                            <table data-bind="datatable: usePhasesTableConfig" class="table table-striped" cellspacing="0" width="100%">
+                            <table class="table table-striped" cellspacing="0" width="100%">
                                 <thead>
                                     <tr class="her-table-header">
                                         <th>{% trans "Type" %}</th>
@@ -2322,24 +2258,34 @@
                                         <th class="her-table-control all"></th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody data-bind="dataTablesForEach: {data: phase.usePhase, dataTableOptions: usePhasesTableConfig}">
                                     <tr>
-                                        <td>Pub</td>
-                                        <td>Edwardian</td>
-                                        <td>Spring 1918</td>
-                                        <td>--</td>
-                                        <td>Throughout</td>
-                                        <td>Spring 1918 - present</td>
-                                        <td>Documentary Evidence</td>
-                                        <td>Abstract</td>
-                                        <td>A very nice pub in an old chuch.  Lovely building, lovely setting.  You can see why they built it here.  Excellent architecture.  Just wish that they had added a bit of paint to the outside.  A touch up on the inside wouldn't hurt either</td>
-                                        <td class="her-table-control"><a><i class="fa fa-mail-reply"></i></a><a><i class="fa fa-trash"></i></a></td>
+                                        <td data-bind="text: type"></td>
+                                        <td data-bind="text: period"></td>
+                                        <td data-bind="text: startDate"></td>
+                                        <td data-bind="text: endDate"></td>
+                                        <td data-bind="text: dateQualifier"></td>
+                                        <td data-bind="text: displayDate"></td>
+                                        <td data-bind="text: useEvidence"></td>
+                                        <td data-bind="text: descriptionType"></td>
+                                        <td data-bind="text: description"></td>
+                                        <td class="her-table-control">
+                                            <div data-bind="if: $parent.cards.usePhase">
+                                                <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.usePhase)}">
+                                                    <i class="fa fa-mail-reply"></i>
+                                                </a>
+                                                <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.usePhase)}">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </div>
+                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
                         </div>            
                     </div>
                 </div>
+                <!-- /ko -->
             </div>
         </div>
     </div>

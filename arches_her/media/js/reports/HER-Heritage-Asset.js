@@ -5,10 +5,11 @@ define([
     'views/components/map',
     'geojson-extent',
     'views/components/cards/select-feature-layers',
+    'reports/default',
     'bindings/datatable',
     'bindings/codemirror'
     ], 
-    (ko, ReportViewModel, arches, MapComponentViewModel, geojsonExtent, selectFeatureLayersFactory) => {
+    (ko, ReportViewModel, arches, MapComponentViewModel, geojsonExtent, selectFeatureLayersFactory, defaultReport) => {
         return ko.components.register('HER-Heritage-Asset', {
             viewModel: function (params) {
                 params.configKeys = [];
@@ -35,7 +36,7 @@ define([
                         orderable: false,
                         targets: -1
                     }]
-                }
+                };
 
                 //Set-up nav sections
                 this.sections = [
@@ -51,40 +52,46 @@ define([
                     {'id': 'json', 'title': 'JSON'}
                 ];
 
-
-                ReportViewModel.apply(this, [params]);
+                this.cards = {};
 
                 const self = this;
+                this.summary = ko.observable(params.summary);
                 
-                // Get cards for interactivity
-                this.assetNameCard = this.report.cards.find(x => x.nodegroupid == "676d47f9-9c1c-11ea-9aa0-f875a44e0e11");
-                this.assetDescriptionCard = this.report.cards.find(x => x.nodegroupid == "ba342e69-b554-11ea-a027-f875a44e0e11");
-                this.externalCrossReferencesCard = this.report.cards.find(x => x.nodegroupid == "7b247f82-9c2b-11ea-84bf-f875a44e0e11");
-                this.systemReferenceNumbersCard = this.report.cards.find(x => x.nodegroupid == "85336e1b-9c2d-11ea-a287-f875a44e0e11");
-                this.constructionPhasesCard = this.report.cards.find(x => x.nodegroupid == '4a24d890-7bd5-11e9-9de9-80000b44d1d9')
-                this.constructionComponentsCard = this.report.cards.find(x => x.nodegroupid == '55d6a53e-049c-11eb-8618-f875a44e0e11');
-                this.usePhaseCard = this.report.cards.find(x => x.nodegroupid == 'c01aa119-8a25-11ea-8dd6-f875a44e0e11');
-                this.bibliographyCard = this.report.cards.find(x => x.nodegroupid == 'c4230739-28ce-11eb-8b35-f875a44e0e11');
-                this.designationsCard = this.report.cards.find(x => x.nodegroupid == '8fc1a099-b61f-11ea-8121-f875a44e0e11')
-                this.photosCard = this.report.cards.find(x => x.nodegroupid == '46f25cd9-b6c7-11ea-8651-f875a44e0e11');
-                this.scientificDateCard = this.report.cards.find(x => x.nodegroupid == "c0d8a80a-04ba-11eb-b44b-f875a44e0e11");
-                this.associatedActivitiesCard = this.report.cards.find(x => x.nodegroupid == "6300b212-9801-11e9-b99f-00224800b26d");
-                this.associatedActorsCard = this.report.cards.find(x => x.nodegroupid == "9682621d-0262-11eb-ab33-f875a44e0e11");
-                this.associatedConsultationsCard = this.report.cards.find(x => x.nodegroupid == "e0991c1b-51b4-11eb-b7ef-f875a44e0e11");
-                this.associatedFilesCard = this.report.cards.find(x => x.nodegroupid == "fc6b6b0b-5118-11eb-b342-f875a44e0e11");
-                this.associatedArtifactsCard = this.report.cards.find(x => x.nodegroupid == "055b3e3f-04c7-11eb-8d64-f875a44e0e11");
-                this.locationDataCard = this.report.cards.find(x => x.nodegroupid == "ca05bc7e-28cf-11eb-95f4-f875a44e0e11");
-                const locationDataCardBase = this.locationDataCard.tiles()?.[0]?.cards ? this.locationDataCard.tiles()[0].cards : this.locationDataCard.cards()
+                if(params.report.configState){
+                     ReportViewModel.apply(this, [params]);
 
-                this.locationDescriptionsCard = locationDataCardBase.find(x => x.nodegroupid == "ca05bc6f-28cf-11eb-b549-f875a44e0e11");
-                this.administrativeAreasCard = locationDataCardBase.find(x => x.nodegroupid == "ca05bc7b-28cf-11eb-87fa-f875a44e0e11");
-                this.addressesCard = locationDataCardBase.find(x => x.nodegroupid == "ca05e365-28cf-11eb-8f65-f875a44e0e11");
-                this.nationalGridReferencesCard = locationDataCardBase.find(x => x.nodegroupid == "ca05bc75-28cf-11eb-9c74-f875a44e0e11");
-                this.areaAssignmentCard = locationDataCardBase.find(x => x.nodegroupid == "ca05bc78-28cf-11eb-92c7-f875a44e0e11");
-                this.locationGeometryCard = locationDataCardBase.find(x => x.nodegroupid == "ca05bc72-28cf-11eb-9105-f875a44e0e11");
-                this.landUseCard = locationDataCardBase.find(x => x.nodegroupid == "ca05e362-28cf-11eb-a619-f875a44e0e11");
-                
-                this.displayname = ko.observable(this.report.attributes.displayname);
+                     const cards = self.report.cards;
+
+                     // Get cards for interactivity within the editor
+                     this.cards.assetName = cards.find(x => x.nodegroupid == "676d47f9-9c1c-11ea-9aa0-f875a44e0e11");
+                     this.cards.assetDescriptions = cards.find(x => x.nodegroupid == "ba342e69-b554-11ea-a027-f875a44e0e11");
+                     this.cards.externalCrossReferences = cards.find(x => x.nodegroupid == "7b247f82-9c2b-11ea-84bf-f875a44e0e11");
+                     this.cards.systemReferenceNumbers = cards.find(x => x.nodegroupid == "85336e1b-9c2d-11ea-a287-f875a44e0e11");
+                     this.cards.constructionPhases= cards.find(x => x.nodegroupid == '4a24d890-7bd5-11e9-9de9-80000b44d1d9')
+                     this.cards.constructionComponents= cards.find(x => x.nodegroupid == '55d6a53e-049c-11eb-8618-f875a44e0e11');
+                     this.cards.usePhase= cards.find(x => x.nodegroupid == 'c01aa119-8a25-11ea-8dd6-f875a44e0e11');
+                     this.cards.bibliography= cards.find(x => x.nodegroupid == 'c4230739-28ce-11eb-8b35-f875a44e0e11');
+                     this.cards.designations= cards.find(x => x.nodegroupid == '8fc1a099-b61f-11ea-8121-f875a44e0e11')
+                     this.cards.photos= cards.find(x => x.nodegroupid == '46f25cd9-b6c7-11ea-8651-f875a44e0e11');
+                     this.cards.scientificDate= cards.find(x => x.nodegroupid == "c0d8a80a-04ba-11eb-b44b-f875a44e0e11");
+                     this.cards.associatedActivities= cards.find(x => x.nodegroupid == "6300b212-9801-11e9-b99f-00224800b26d");
+                     this.cards.associatedActors= cards.find(x => x.nodegroupid == "9682621d-0262-11eb-ab33-f875a44e0e11");
+                     this.cards.associatedConsultations= cards.find(x => x.nodegroupid == "e0991c1b-51b4-11eb-b7ef-f875a44e0e11");
+                     this.cards.associatedFiles= cards.find(x => x.nodegroupid == "fc6b6b0b-5118-11eb-b342-f875a44e0e11");
+                     this.cards.associatedArtifacts= cards.find(x => x.nodegroupid == "055b3e3f-04c7-11eb-8d64-f875a44e0e11");
+                     this.cards.locationData = cards.find(x => x.nodegroupid == "ca05bc7e-28cf-11eb-95f4-f875a44e0e11");
+                     const locationDataCardBase = this.cards.locationData.tiles()?.[0]?.cards ? this.cards.locationData.tiles()[0].cards : this.locationDataCard.cards()
+     
+                     this.cards.locationDescriptions = locationDataCardBase.find(x => x.nodegroupid == "ca05bc6f-28cf-11eb-b549-f875a44e0e11");
+                     this.cards.administrativeAreas = locationDataCardBase.find(x => x.nodegroupid == "ca05bc7b-28cf-11eb-87fa-f875a44e0e11");
+                     this.cards.addresses = locationDataCardBase.find(x => x.nodegroupid == "ca05e365-28cf-11eb-8f65-f875a44e0e11");
+                     this.cards.nationalGridReferences = locationDataCardBase.find(x => x.nodegroupid == "ca05bc75-28cf-11eb-9c74-f875a44e0e11");
+                     this.cards.areaAssignment = locationDataCardBase.find(x => x.nodegroupid == "ca05bc78-28cf-11eb-92c7-f875a44e0e11");
+                     this.cards.locationGeometry = locationDataCardBase.find(x => x.nodegroupid == "ca05bc72-28cf-11eb-9105-f875a44e0e11");
+                     this.cards.landUse = locationDataCardBase.find(x => x.nodegroupid == "ca05e362-28cf-11eb-a619-f875a44e0e11");
+                }
+
+
 
                 const createUnselectedLayers = (source) => {
                     const color = '#A020F0';
@@ -193,6 +200,9 @@ define([
                 }
 
                 this.prepareMap = (sourceId, geojson) => {
+                    if(!geojson){
+                        return;
+                    }
                     var mapParams = {};
                     if (geojson.features.length > 0) {
                         mapParams.bounds = geojsonExtent(geojson);
@@ -264,9 +274,11 @@ define([
                 }
 
                 this.editTile = function(tileid, card){
-                    const tile = card.tiles().find(y => tileid == y.tileid)
-                    if(tile){
-                        tile.selected(true);
+                    if(card){
+                        const tile = card.tiles().find(y => tileid == y.tileid)
+                        if(tile){
+                            tile.selected(true);
+                        }
                     }
                 }
 
@@ -303,7 +315,7 @@ define([
                     return resource?.resourceId || resource?.instance_details?.[0]?.resourceId;
                 }
 
-                // utitility function - checks whether at least one observable
+                // utitility function - checks whether at least one observable (or array object)
                 // has a set value (used to determine whether a section is visible)
                 const observableValueSet = (...observables) => {
                     for(observable of observables) {
@@ -316,28 +328,19 @@ define([
                 }
 
                 this.hasGeometryMetadata = (geometry) => {
-                    if(!self.locationDataCard.tiles().length) {
-                        return false;
-                    }
                     return observableValueSet(geometry.reviewer, geometry.compiler, geometry.lastUpdateName, geometry.accuracy, geometry.basemap, geometry.captureScale, geometry.coordinateSystem, geometry.description);
                 }
 
                 this.hasGeometryAuthorization = (geometry) => {
-                    if(!self.locationDataCard.tiles().length) {
-                        return false;
-                    }
                     return observableValueSet(geometry.reviewer, geometry.compiler, geometry.lastUpdateName);
                 }
 
                 this.hasGeometrySourcesScale = (geometry) => {
-                    if(!self.locationDataCard.tiles().length) {
-                        return false;
-                    }
                     return observableValueSet(geometry.accuracy, geometry.basemap, geometry.captureScale, geometry.coordinateSystem);
                 }
 
-                this.resource = ko.observable(params.report?.report_json);
-
+                this.resource = ko.observable(params.report?.report_json?.resource);
+                this.reportMetadata = ko.observable(params.report?.report_json)
                 this.descriptions = ko.observableArray();
                 this.bibliography = ko.observableArray();
 
@@ -352,6 +355,9 @@ define([
                         tileid: ko.observable()
                     }
                 }
+                this.fullAddress = ko.observable();
+                this.protection = ko.observable();
+                this.resourceUrl = ko.observable();
 
                 this.location = {
                     administrativeAreas: ko.observableArray(),
@@ -375,7 +381,7 @@ define([
                     descriptions: ko.observableArray(),
                     nationalGridReferences: ko.observableArray(),
                 };
-
+                this.locationMapData = undefined;
                 this.designations = ko.observableArray();
                 this.designationFiles = ko.observableArray();
                 this.phase = {
@@ -401,6 +407,9 @@ define([
                     const location = self.location;
                     const descriptions = self.descriptions;
 
+                    self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
+                    const primaryResourceId = self.reportMetadata().resoureinstanceId;
+                    self.resourceUrl(primaryResourceId ? `${arches.urls.resource}/${primaryResourceId}` : undefined);
                     names.assetNames(resource?.["Heritage Asset Names"]?.map(x => {
                         const currency = self.getNameTileNodeValue(x, 'Asset Name Currency');
                         const name = self.getNameTileNodeValue(x, 'Asset Name');
@@ -464,6 +473,8 @@ define([
                             const town = self.getNameTileNodeValue(x, 'Town or City', 'Town or City Value');
                             return { buildingName, buildingNumber, buildingNumberSubStreet, county, currency, fullAddress, locality, postcode, status, street, subStreet, tileid, town };
                         }));
+
+                        self.fullAddress(location.addresses()[0].fullAddress);
                     }
 
                     const areaAssignment = resource?.['Location Data']?.['Area']?.['Area Assignments'];
@@ -476,7 +487,9 @@ define([
                         const startDate = self.getNameTileNodeValue(areaAssignment, 'Area Status Timespan', 'Area Status Start Date');
                         const status = self.getNameTileNodeValue(areaAssignment, 'Area Status');
                         const tileid = areaAssignment?.['@tile_id'];
-                        location.areaAssignment([{endDate, ownership, reference, shineForm, shineSignificance, startDate, status, tileid}]);
+                        if(observableValueSet(endDate, ownership, reference, shineForm, shineSignificance, startDate, status)){
+                            location.areaAssignment([{endDate, ownership, reference, shineForm, shineSignificance, startDate, status, tileid}]);
+                        }
                     }
 
                     const landUseClassification = resource?.['Location Data']?.['Land Use Classification Assignment'];
@@ -488,7 +501,9 @@ define([
                         const startDate = self.getNameTileNodeValue(landUseClassification, 'Land Use Assessment Timespan', 'Land Use Assessment Start Date');
                         const subSoil = self.getNameTileNodeValue(landUseClassification, 'Sub-Soil');
                         const tileid = landUseClassification?.['@tile_id'];
-                        location.landUseClassification([{classification, endDate, geology, reference, startDate, subSoil, tileid}]);
+                        if(observableValueSet(classification, endDate, geology, reference, startDate, subSoil)){
+                            location.landUseClassification([{classification, endDate, geology, reference, startDate, subSoil, tileid}]);
+                        }
                     }
 
                     const locationDescriptions = resource?.['Location Data']?.['Location Descriptions'];
@@ -542,8 +557,8 @@ define([
                     );
 
                     const locationDataGeometry = self.getNameTileNodeValue(resource, 'Location Data', 'Geometry', 'Geospatial Coordinates');
-                    if (locationDataGeometry) {
-                        this.locationMapData = locationDataGeometry;
+                    if (locationDataGeometry && locationDataGeometry != '--') {
+                        self.locationMapData = locationDataGeometry;
                     };   
                               
                     const designations = resource?.['Designation and Protection Assignment']; 
@@ -581,6 +596,8 @@ define([
                                 tileid
                             };
                         }));
+
+                        self.protection(self.designations()[0].grade);
 
                         this.designationFiles(designations.map(x => {
                             const file = self.getNameTileNodeValue(x, 'Digital File(s)');

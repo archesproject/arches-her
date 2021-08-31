@@ -1,5 +1,16 @@
 /*CSS specifically for Arches-HER custom reports*/
 
+.resource-component-abstract {
+    height: auto;
+    display: flex;
+    flex: 1;
+}
+
+.her-table-control div
+{
+    display: inline;
+}
+
 .resource-report {
     display: table;
     height: 100%;
@@ -114,13 +125,12 @@ li, .her-report-a.active:hover {
 
 .her-tabbed-report{
     width: calc(100% - 1px);
-    height: calc(100% - 132px);
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow: auto;
     display: flex;
     flex-direction: column;
     margin-top: 85px;
-    margin-bottom: 100px;
+    flex: 1;
+    flex-direction: column
 }
 
 .her-report-page .her-report-section:last-child {
@@ -170,7 +180,9 @@ li, .her-report-a.active:hover {
 .her-tabbed-report-content {
     background: #fff;
     padding: 20px 25px;
-    height: 100%;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
 }
 
 .her-report-section {
