@@ -169,6 +169,7 @@ MOBILE_DEFAULT_ONLINE_BASEMAP = {"default": "mapbox://styles/mapbox/streets-v9"}
 APP_TITLE = "Arches-HER"
 COPYRIGHT_TEXT = "All Rights Reserved."
 COPYRIGHT_YEAR = "2020"
+DOCKER = False
 
 try:
     from .package_settings import *
@@ -180,7 +181,8 @@ try:
 except ImportError:
     pass
 
-try:
-    from .settings_docker import *
-except ImportError:
-    pass
+if DOCKER:
+    try:
+        from .settings_docker import *
+    except ImportError:
+        pass
