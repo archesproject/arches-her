@@ -80,7 +80,7 @@ define([
                      this.cards.associatedFiles= cards.find(x => x.nodegroupid == "fc6b6b0b-5118-11eb-b342-f875a44e0e11");
                      this.cards.associatedArtifacts= cards.find(x => x.nodegroupid == "055b3e3f-04c7-11eb-8d64-f875a44e0e11");
                      this.cards.locationData = cards.find(x => x.nodegroupid == "ca05bc7e-28cf-11eb-95f4-f875a44e0e11");
-                     const locationDataCardBase = this.cards.locationData.tiles()?.[0]?.cards ? this.cards.locationData.tiles()[0].cards : this.locationDataCard.cards()
+                     const locationDataCardBase = this.cards.locationData.tiles()?.[0]?.cards ? this.cards.locationData.tiles()[0].cards : this.cards.locationData.cards()
      
                      this.cards.locationDescriptions = locationDataCardBase.find(x => x.nodegroupid == "ca05bc6f-28cf-11eb-b549-f875a44e0e11");
                      this.cards.administrativeAreas = locationDataCardBase.find(x => x.nodegroupid == "ca05bc7b-28cf-11eb-87fa-f875a44e0e11");
