@@ -233,14 +233,18 @@ i.toggle:hover {
 }
 
 .her-codemirror {
-    width: 100%;
+    display: flex;
     position: relative;
+    flex-direction: column;
     flex: 1 1 auto;
+    height: 100%;
+    flex-shrink: 0;
 }
 
 .her-codemirror .geojson-editor {
     position: absolute;
     width: 100%;
+    height: auto;
 }
 
 .her-table thead th {

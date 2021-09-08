@@ -8,7 +8,11 @@
 
         <!-- Title Block -->
         <div class="her-report-toolbar">
-            <h1 class="her-report-toolbar-title"><span class="her-report-name">{% trans "Heritage Asset Report" %}:</span><span data-bind="text: displayname" class="her-report-instance-name"></span></h1>
+            <h1 class="her-report-toolbar-title">
+                <span class="her-report-name">{% trans "Heritage Asset Report" %}:</span>
+                <span data-bind="text: displayname" class="her-report-instance-name"></span> 
+                <a class="her-report-a" data-bind="if: !cards.assetName, attr: {href: resourceUrl}"><i class="fa fa-mail-reply"></i> {% trans "Edit Resource" %}</a>
+            </h1>
         </div>
 
         <!-- Altenative Nav and Content -->
@@ -82,10 +86,10 @@
                                                 <td data-bind="text: currency"></td>
                                                 <td class="her-table-control">
                                                     <div data-bind="if: $parent.cards.assetName">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, cards.assetName)}">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.assetName)}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: function() {$parent.deleteTile(tileid, cards.assetName)}">
+                                                        <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.cards.assetName)}">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -152,12 +156,16 @@
                 <!-- System Reference Numbers section -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.systemReferenceNumbers)}" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
-                    <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="her-report-a"><i class="fa fa-mail-reply"></i> <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span><span data-bind="ifnot: cards.systemReferenceNumbers.length">{% trans "Add Identifier" %}</span></a>
+                    <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="her-report-a">
+                        <i class="fa fa-mail-reply"></i>
+                        <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span>
+                        <span data-bind="ifnot: cards.systemReferenceNumbers.tiles().length">{% trans "Add Identifier" %}</span>
+                    </a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.systemReferenceNumbers" class="her-report-collapsible-container pad-lft">
 
-                        <!-- ko ifnot: !names.systemReferenceNumbers.tileid -->
+                        <!-- ko ifnot: names.systemReferenceNumbers.tileid -->
                         <div class="her-nodata-note">No references for this resource</div>
                         <!-- /ko -->
 
@@ -219,7 +227,7 @@
                                                 <td data-bind="text: description" class="her-table-descrip-col"></td>
                                                 <td class="her-table-control">
                                                     <div data-bind="if: $parent.cards.assetDescriptions">
-                                                        <a data-bind="click: function(){$parent.editTile(tileid, cards.assetDescriptions)}">
+                                                        <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.assetDescriptions)}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
                                                         <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.cards.assetDescriptions)}">
@@ -245,7 +253,9 @@
                 <!-- Geometry/Map -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.locations.coordinates)}" class="fa fa-angle-double-right toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
-                    <a class="her-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}</a>
+                    <a class="her-report-a" data-bind="{if: cards.locationGeometry && !locationMapData, click: function(){addNewTile(cards.locationGeometry)}}">
+                        <i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}
+                    </a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.locations.coordinates" class="her-report-collapsible-container pad-lft">
@@ -299,7 +309,7 @@
                                         <!-- /ko -->
 
                                         <!-- ko if: hasGeometryAuthorization(location.geometry) -->   
-                                        <span data-bind="text: console.log(location.geometry)"></span><div class="firstchild-container" data-bind="{with: location.geometry}">
+                                        <div class="firstchild-container" data-bind="{with: location.geometry}">
                                             <div class="her-report-subsection-item flex">
                                                 <div class="her-block-attributes actor-name">
                                                     <h6 class="her-block-key compressed">Record Reviewer: </h6>
@@ -942,7 +952,7 @@
                                                 <th class="none">{% trans "Phase Description" %}</th>
                                                 <th class="her-table-control all"></th>
                                             </tr>
-                                        </thead><span data-bind="text: console.log(phase.constructionPhases())"></span>
+                                        </thead>
                                         <tbody data-bind="dataTablesForEach: {data: phase.constructionPhases, dataTableOptions: conPhasesTableConfig}">
                                             <tr>
                                                 <td data-bind="text: assetType"></td>
@@ -1039,7 +1049,11 @@
                 <!-- Use Phases -->
                 <div class="her-report-section">
                     <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
-                    <a class="her-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}"><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
+                    <a class="her-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}">
+                        <i class="fa fa-mail-reply"></i> 
+                        <span data-bind="ifnot: cards.usePhase.tiles().length">{% trans "Add Use" %}</span>
+                        <span data-bind="if: cards.usePhase.tiles().length">{% trans "Edit Use" %}</span>
+                    </a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.phases.usePhase" class="her-report-collapsible-container pad-lft">
@@ -1930,13 +1944,31 @@
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.json" class="her-report-collapsible-container pad-lft">
-                        <span data-bind="text: console.log(resource);"></span>
+                        <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('json')}">
+                            <!-- ko if: selectedFormat() == 'json' -->
+                            <i class="fa fa-arrow-down"></i> 
+                            <!-- /ko -->
+                            {% trans "JSON" %}
+                        </a>
+                        <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('arches-json')}">
+                            <!-- ko if: selectedFormat() == 'arches-json' -->
+                            <i class="fa fa-arrow-down"></i> 
+                            <!-- /ko -->
+                            {% trans "Arches JSON" %}
+                        </a>
+                        <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('json-ld')}">
+                            <!-- ko if: selectedFormat() == 'json-ld' -->
+                            <i data-bind="if: (selectedFormat() == 'json-ld')" class="fa fa-arrow-down"></i> 
+                            <!-- /ko -->
+                            {% trans "JSON-LD" %}
+                        </a>
+                        
                         <!-- Show this block if there is resource tile content -->
                         <div class="her-report-subsection">
                             <div class="her-codemirror">
                                 <div class="geojson-editor" data-bind="codemirror: {
-                                    value: JSON.stringify(resource(), null, 2),
-                                    mode: { name: 'javascript', json: true },
+                                    value: selectedJSON,
+                                    mode: { name: 'javascript', json: codeMirrorJsonMode, jsonld: codeMirrorJsonLDMode },
                                     lineNumbers: true
                                 }"></div>
                             </div>
@@ -1968,7 +2000,7 @@
 <div class="her-summary-report">
     <div class="her-summary-block">
         <div class="her-title-block">
-            <h1 data-bind="text: displayname">Instance Name Goes Here</h1>
+            <h1 data-bind="text: displayname"></h1>
             <a class="her-report-a" data-bind="attr: {href: resourceUrl}"><i class="fa fa-mail-reply"></i> {% trans "Edit Resource" %}</a>
         </div>
         <div class="her-block-attributes">
@@ -2132,7 +2164,7 @@
                                         <th class="none">{% trans "Phase Description" %}</th>
                                         <th class="her-table-control all"></th>
                                     </tr>
-                                </thead><span data-bind="text: console.log(phase.constructionPhases())"></span>
+                                </thead>
                                 <tbody data-bind="dataTablesForEach: {data: phase.constructionPhases, dataTableOptions: conPhasesTableConfig}">
                                     <tr>
                                         <td data-bind="text: assetType"></td>
@@ -2229,7 +2261,11 @@
         <!-- Use Phases -->
         <div class="her-report-section">
             <h2 class="her-report-section-title"><i data-bind="click: function() {toggleBlockVisibility(blockVisible.phases.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
-            <a class="her-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}"><i class="fa fa-mail-reply"></i> {% trans "Add Use" %}</a>
+            <a class="her-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}">
+                <i class="fa fa-mail-reply"></i> 
+                <span data-bind="ifnot: cards.usePhase.tiles().length">{% trans "Add Use" %}</span>
+                <span data-bind="if: cards.usePhase.tiles().length">{% trans "Edit Use" %}</span>
+            </a>
 
             <!-- Collapsible content -->
             <div data-bind="visible: blockVisible.phases.usePhase" class="her-report-collapsible-container pad-lft">

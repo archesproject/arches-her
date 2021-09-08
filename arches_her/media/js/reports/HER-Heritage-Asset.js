@@ -6,12 +6,13 @@ define([
     'geojson-extent',
     'views/components/cards/select-feature-layers',
     'reports/default',
-    'bindings/datatable',
-    'bindings/codemirror'
+    'bindings/codemirror',
+    'bindings/datatable'
     ], 
-    (ko, ReportViewModel, arches, MapComponentViewModel, geojsonExtent, selectFeatureLayersFactory, defaultReport) => {
+    (ko, ReportViewModel, arches, MapComponentViewModel, geojsonExtent, selectFeatureLayersFactory, defaultReport, codemirror) => {
         return ko.components.register('HER-Heritage-Asset', {
             viewModel: function (params) {
+                const self = this;
                 params.configKeys = [];
                 this.currentDesignation = ko.observable();
                 this.defaultTableConfig = {
@@ -52,9 +53,13 @@ define([
                     {'id': 'json', 'title': 'JSON'}
                 ];
 
-                this.cards = {};
+                this.json = {}
 
-                const self = this;
+                this.cards = {};
+                this.selectedJSON = ko.observable();
+                this.selectedFormat = ko.observable();
+                this.codeMirrorJsonLDMode = ko.observable();
+                this.codeMirrorJsonMode = ko.observable();
                 this.summary = params.summary;
                 
                 if(params.report.configState){
@@ -402,13 +407,13 @@ define([
                     artifacts: ko.observableArray()
                 }
 
-                this.loadData = (resource) => {
+                this.loadData = async (resource) => {
                     const names = self.names;
                     const location = self.location;
                     const descriptions = self.descriptions;
 
                     self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
-                    const primaryResourceId = self.reportMetadata().resoureinstanceId;
+                    const primaryResourceId = self.reportMetadata().resourceinstanceid;
                     self.resourceUrl(primaryResourceId ? `${arches.urls.resource}/${primaryResourceId}` : undefined);
                     names.assetNames(resource?.["Heritage Asset Names"]?.map(x => {
                         const currency = self.getNameTileNodeValue(x, 'Asset Name Currency');
@@ -858,8 +863,24 @@ define([
 
                 }
 
+                this.setSelectedJson = async (format) => {
+                    if(!self.json[format]){
+                        const response = await fetch(`${arches.urls.api_resources(self.reportMetadata().resourceinstanceid)}?format=${format}`);
+                        self.json[format] = await response.json();
+                    }
+                    self.selectedJSON(JSON.stringify(self.json[format], null, 2));
+                    self.selectedFormat(format);
+                    (format == 'json-ld' ? self.codeMirrorJsonLDMode(true) && self.codeMirrorJsonMode(false) : self.codeMirrorJsonLDMode(false) && self.codeMirrorJsonMode(true));
+                }
+                this.setSelectedJson('json');
 
-                this.loadData(this.resource())
+                this.loadData(this.resource());
+                
+                
+                
+
+
+
 
                 //Set default Nav tab
                 this.activeSection = ko.observable('name');
