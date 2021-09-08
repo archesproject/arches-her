@@ -1944,25 +1944,34 @@
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: blockVisible.json" class="her-report-collapsible-container pad-lft">
-                        <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('json')}">
-                            <!-- ko if: selectedFormat() == 'json' -->
-                            <i class="fa fa-arrow-down"></i> 
-                            <!-- /ko -->
-                            {% trans "JSON" %}
-                        </a>
-                        <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('arches-json')}">
-                            <!-- ko if: selectedFormat() == 'arches-json' -->
-                            <i class="fa fa-arrow-down"></i> 
-                            <!-- /ko -->
-                            {% trans "Arches JSON" %}
-                        </a>
-                        <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('json-ld')}">
-                            <!-- ko if: selectedFormat() == 'json-ld' -->
-                            <i data-bind="if: (selectedFormat() == 'json-ld')" class="fa fa-arrow-down"></i> 
-                            <!-- /ko -->
-                            {% trans "JSON-LD" %}
-                        </a>
-                        
+                            <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('json')}">
+                                <!-- ko if: selectedFormat() == 'json' -->
+                                <i class="fa fa-arrow-down"></i> 
+                                <!-- /ko -->
+                                <!-- ko ifnot: selectedFormat() == 'json' -->
+                                <i style="display:inline-block;width: 12px"></i> 
+                                <!-- /ko -->
+                                {% trans "JSON" %}
+                            </a>
+                            <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('arches-json')}">
+                                <!-- ko if: selectedFormat() == 'arches-json' -->
+                                <i class="fa fa-arrow-down"></i> 
+                                <!-- /ko -->
+                                <!-- ko ifnot: selectedFormat() == 'arches-json' -->
+                                <i style="display:inline-block;width: 12px"></i> 
+                                <!-- /ko -->
+                                {% trans "Arches JSON" %}
+                            </a>
+                            <a href="#" class="her-report-a" data-bind="click: function(){setSelectedJson('json-ld')}">
+                                <!-- ko if: selectedFormat() == 'json-ld' -->
+                                <i data-bind="if: (selectedFormat() == 'json-ld')" class="fa fa-arrow-down"></i> 
+                                <!-- /ko -->
+                                <!-- ko ifnot: selectedFormat() == 'json-ld' -->
+                                <i style="display:inline-block;width: 12px"></i> 
+                                <!-- /ko -->
+                                {% trans "JSON-LD" %}
+                            </a>
+                        </div>
                         <!-- Show this block if there is resource tile content -->
                         <div class="her-report-subsection">
                             <div class="her-codemirror">
@@ -2001,7 +2010,7 @@
     <div class="her-summary-block">
         <div class="her-title-block">
             <h1 data-bind="text: displayname"></h1>
-            <a class="her-report-a" data-bind="attr: {href: resourceUrl}"><i class="fa fa-mail-reply"></i> {% trans "Edit Resource" %}</a>
+            <a class="her-report-a" data-bind="click: function() {return true;}, clickBubble: false, attr: {href: resourceUrl}"><i class="fa fa-mail-reply"></i> {% trans "Edit Resource" %}</a>
         </div>
         <div class="her-block-attributes">
             <div class="her-block-key">Resource Type:</div>
