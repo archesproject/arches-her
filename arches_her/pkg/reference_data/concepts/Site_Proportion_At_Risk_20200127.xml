@@ -1,36 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 <rdf:RDF
   xmlns:skos="http://www.w3.org/2004/02/skos/core#"
-  xmlns:dcterms="http://purl.org/dc/terms/"
   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
 >
-  <skos:Concept rdf:about="http://localhost:8000/6e70cb3a-4993-4ac8-b413-7575159f5e73">
-    <skos:inScheme>
-      <skos:ConceptScheme rdf:about="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0">
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/0903c487-9555-4d5f-998d-9ce34abace81"/>
-        <dcterms:identifier xml:lang="en">{"id": "b999991c-f14e-4d3d-92a3-ccd3c6dd1e3b", "value": "http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"}</dcterms:identifier>
-        <dcterms:title xml:lang="en">{"id": "a30e45df-77e9-486e-ad69-50808edaedbc", "value": "Site Proportion At Risk"}</dcterms:title>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/6e70cb3a-4993-4ac8-b413-7575159f5e73"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/97935a3d-25b5-4290-b927-c71b2fc28296"/>
-        <skos:hasTopConcept rdf:resource="http://localhost:8000/c5d06fdd-e735-4a90-94ed-b909a9147bac"/>
-      </skos:ConceptScheme>
-    </skos:inScheme>
-    <skos:prefLabel xml:lang="en">{"id": "35e1f560-9bad-4097-8440-d2d44c6fa927", "value": "10-50%"}</skos:prefLabel>
-    <dcterms:identifier xml:lang="en">{"id": "01d1d4d2-6a23-43e4-85c2-1e3611b00ccf", "value": "http://localhost:8000/6e70cb3a-4993-4ac8-b413-7575159f5e73"}</dcterms:identifier>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/c5d06fdd-e735-4a90-94ed-b909a9147bac">
-    <skos:prefLabel xml:lang="en">{"id": "90b38889-af1d-4677-aa12-d300414908fb", "value": "&lt;10%"}</skos:prefLabel>
-    <dcterms:identifier xml:lang="en">{"id": "7ec5e699-cf00-417c-a941-970fe271d72f", "value": "http://localhost:8000/c5d06fdd-e735-4a90-94ed-b909a9147bac"}</dcterms:identifier>
-    <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/0903c487-9555-4d5f-998d-9ce34abace81">
-    <dcterms:identifier xml:lang="en">{"id": "70286935-1e92-46e4-9de8-32e1aeb34c55", "value": "http://localhost:8000/0903c487-9555-4d5f-998d-9ce34abace81"}</dcterms:identifier>
-    <skos:prefLabel xml:lang="en">{"id": "e63b41dc-b7c7-443e-b70b-21870ea08e19", "value": "50-75%"}</skos:prefLabel>
-    <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
-  </skos:Concept>
-  <skos:Concept rdf:about="http://localhost:8000/97935a3d-25b5-4290-b927-c71b2fc28296">
-    <skos:prefLabel xml:lang="en">{"id": "355d0f8b-86d1-4d96-91f1-88d3ab6de386", "value": "75-100%"}</skos:prefLabel>
-    <dcterms:identifier xml:lang="en">{"id": "fc50dfa9-7a94-4a69-98de-bb3eef5ab84b", "value": "http://localhost:8000/97935a3d-25b5-4290-b927-c71b2fc28296"}</dcterms:identifier>
-    <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
-  </skos:Concept>
+  <skos:ConceptScheme rdf:about="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0">
+    <dcterms:title xml:lang="en">{"id": "a30e45df-77e9-486e-ad69-50808edaedbc", "value": "Site Proportion At Risk"}</dcterms:title>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/97935a3d-25b5-4290-b927-c71b2fc28296">
+        <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
+        <dcterms:identifier xml:lang="en">{"id": "fc50dfa9-7a94-4a69-98de-bb3eef5ab84b", "value": "http://localhost:8000/97935a3d-25b5-4290-b927-c71b2fc28296"}</dcterms:identifier>
+        <skos:prefLabel xml:lang="en">{"id": "355d0f8b-86d1-4d96-91f1-88d3ab6de386", "value": "75-100%"}</skos:prefLabel>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/c5d06fdd-e735-4a90-94ed-b909a9147bac">
+        <dcterms:identifier xml:lang="en">{"id": "7ec5e699-cf00-417c-a941-970fe271d72f", "value": "http://localhost:8000/c5d06fdd-e735-4a90-94ed-b909a9147bac"}</dcterms:identifier>
+        <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
+        <skos:prefLabel xml:lang="en">{"id": "90b38889-af1d-4677-aa12-d300414908fb", "value": "&lt;10%"}</skos:prefLabel>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <dcterms:identifier xml:lang="en">{"id": "b999991c-f14e-4d3d-92a3-ccd3c6dd1e3b", "value": "http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"}</dcterms:identifier>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/6e70cb3a-4993-4ac8-b413-7575159f5e73">
+        <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
+        <dcterms:identifier xml:lang="en">{"id": "01d1d4d2-6a23-43e4-85c2-1e3611b00ccf", "value": "http://localhost:8000/6e70cb3a-4993-4ac8-b413-7575159f5e73"}</dcterms:identifier>
+        <skos:prefLabel xml:lang="en">{"id": "35e1f560-9bad-4097-8440-d2d44c6fa927", "value": "10-50%"}</skos:prefLabel>
+      </skos:Concept>
+    </skos:hasTopConcept>
+    <skos:hasTopConcept>
+      <skos:Concept rdf:about="http://localhost:8000/0903c487-9555-4d5f-998d-9ce34abace81">
+        <skos:inScheme rdf:resource="http://localhost:8000/43c5c55b-22ce-411a-8aa9-2a090a4764a0"/>
+        <dcterms:identifier xml:lang="en">{"id": "70286935-1e92-46e4-9de8-32e1aeb34c55", "value": "http://localhost:8000/0903c487-9555-4d5f-998d-9ce34abace81"}</dcterms:identifier>
+        <skos:prefLabel xml:lang="en">{"id": "e63b41dc-b7c7-443e-b70b-21870ea08e19", "value": "50-75%"}</skos:prefLabel>
+      </skos:Concept>
+    </skos:hasTopConcept>
+  </skos:ConceptScheme>
 </rdf:RDF>
