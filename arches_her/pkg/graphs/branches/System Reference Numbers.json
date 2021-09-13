@@ -27,22 +27,6 @@
                 {
                     "card_id": "c3cb4d29-19bc-11eb-97ec-f875a44e0e11",
                     "config": {
-                        "defaultValue": null,
-                        "label": "ResourceID",
-                        "maxLength": null,
-                        "placeholder": null,
-                        "width": "100%"
-                    },
-                    "id": "c3cb9b70-19bc-11eb-8798-f875a44e0e11",
-                    "label": "ResourceID",
-                    "node_id": "c3cb7429-19bc-11eb-bf8f-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "c3cb4d29-19bc-11eb-97ec-f875a44e0e11",
-                    "config": {
                         "defaultValue": "7346be23-bff6-42dc-91d0-7c5182aa0031",
                         "label": "Primary Reference Number Metatype",
                         "options": [],
@@ -68,6 +52,7 @@
                         "prefix": "",
                         "step": "",
                         "suffix": "",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "c3cb9b72-19bc-11eb-bebe-f875a44e0e11",
@@ -129,6 +114,7 @@
                         "label": "LegacyID",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "c3cbc266-19bc-11eb-baa9-f875a44e0e11",
@@ -151,6 +137,7 @@
                         "prefix": "",
                         "step": "",
                         "suffix": "",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "c3cbc267-19bc-11eb-8ae6-f875a44e0e11",
@@ -179,9 +166,44 @@
                     "card_id": "c3cb4d29-19bc-11eb-97ec-f875a44e0e11",
                     "config": {
                         "defaultValue": "",
+                        "label": "ResourceID",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
+                    },
+                    "id": "c3cbc26b-19bc-11eb-81ec-f875a44e0e11",
+                    "label": "ResourceID",
+                    "node_id": "c3cb7427-19bc-11eb-b3a1-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "c3cb4d29-19bc-11eb-97ec-f875a44e0e11",
+                    "config": {
+                        "defaultValue": null,
+                        "label": "ResourceID",
+                        "maxLength": null,
+                        "placeholder": null,
+                        "uneditable": false,
+                        "width": "100%"
+                    },
+                    "id": "c3cb9b70-19bc-11eb-8798-f875a44e0e11",
+                    "label": "ResourceID",
+                    "node_id": "c3cb7429-19bc-11eb-bf8f-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "c3cb4d29-19bc-11eb-97ec-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
                         "label": "Legacy ID",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "c3cbc269-19bc-11eb-b639-f875a44e0e11",
@@ -205,22 +227,6 @@
                     "sortorder": 5,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "c3cb4d29-19bc-11eb-97ec-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "ResourceID",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "c3cbc26b-19bc-11eb-81ec-f875a44e0e11",
-                    "label": "ResourceID",
-                    "node_id": "c3cb7427-19bc-11eb-b3a1-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
                 }
             ],
             "color": null,
@@ -412,8 +418,8 @@
                     "config": null,
                     "datatype": "number",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "PRN",
                     "graph_id": "c3cb4d26-19bc-11eb-aee7-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
@@ -437,7 +443,7 @@
                     "graph_id": "c3cb4d26-19bc-11eb-aee7-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Primary Reference Number Metatype",
                     "nodegroup_id": "c3cb4d27-19bc-11eb-b948-f875a44e0e11",
@@ -488,8 +494,8 @@
                     "config": null,
                     "datatype": "string",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "ResourceID",
                     "graph_id": "c3cb4d26-19bc-11eb-aee7-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
@@ -513,7 +519,7 @@
                     "graph_id": "c3cb4d26-19bc-11eb-aee7-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "ResourceID Metatype",
                     "nodegroup_id": "c3cb4d27-19bc-11eb-b948-f875a44e0e11",
@@ -551,7 +557,7 @@
                     "graph_id": "c3cb4d26-19bc-11eb-aee7-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Legacy ID Metatype",
                     "nodegroup_id": "c3cb4d27-19bc-11eb-b948-f875a44e0e11",
@@ -604,8 +610,8 @@
                     "config": null,
                     "datatype": "string",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "LegacyID",
                     "graph_id": "c3cb4d26-19bc-11eb-aee7-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
@@ -666,5 +672,11 @@
             "template_id": "50000000-0000-0000-0000-000000000002",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "10"
+    }
 }
