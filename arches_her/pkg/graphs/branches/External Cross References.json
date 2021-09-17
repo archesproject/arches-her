@@ -8,7 +8,14 @@
                     "cardid": "a7bde773-992f-11ea-b269-f875a44e0e11",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "a7bde773-992f-11ea-b269-f875a44e0e11",
+                            "constraintid": "c240a142-4253-4438-8099-18f36ba1b977",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
@@ -24,22 +31,6 @@
                 }
             ],
             "cards_x_nodes_x_widgets": [
-                {
-                    "card_id": "a7bde773-992f-11ea-b269-f875a44e0e11",
-                    "config": {
-                        "defaultValue": null,
-                        "label": "Cross Reference Note",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "a7bde77a-992f-11ea-a9dd-f875a44e0e11",
-                    "label": "Cross Reference Note",
-                    "node_id": "a7bde777-992f-11ea-a088-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
                 {
                     "card_id": "a7bde773-992f-11ea-b269-f875a44e0e11",
                     "config": {
@@ -62,6 +53,7 @@
                         "label": "Cross Reference",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "a7bde77c-992f-11ea-ae4c-f875a44e0e11",
@@ -70,6 +62,38 @@
                     "sortorder": 0,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "a7bde773-992f-11ea-b269-f875a44e0e11",
+                    "config": {
+                        "defaultValue": null,
+                        "label": "Cross Reference Note",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
+                    },
+                    "id": "a7bde77a-992f-11ea-a9dd-f875a44e0e11",
+                    "label": "Cross Reference Note",
+                    "node_id": "a7bde777-992f-11ea-a088-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000005"
+                },
+                {
+                    "card_id": "a7bde773-992f-11ea-b269-f875a44e0e11",
+                    "config": {
+                        "label": "URl",
+                        "link_color": "#0055a0",
+                        "url_label_placeholder": "Enter URL Label... ",
+                        "url_placeholder": "Enter URL... "
+                    },
+                    "id": "3f0493c7-edf8-11eb-b070-a87eeabdefba",
+                    "label": "URl",
+                    "node_id": "0b791cd4-edf7-11eb-957e-a87eeabdefba",
+                    "sortorder": 5,
+                    "visible": true,
+                    "widget_id": "ca0c43ff-af73-4349-bafd-53ff9f22eebd"
                 },
                 {
                     "card_id": "a7bde773-992f-11ea-b269-f875a44e0e11",
@@ -161,6 +185,15 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
                     "rangenode_id": "a7bde775-992f-11ea-aaf3-f875a44e0e11"
+                },
+                {
+                    "description": null,
+                    "domainnode_id": "a7bde771-992f-11ea-823f-f875a44e0e11",
+                    "edgeid": "0b791cd5-edf7-11eb-8d00-a87eeabdefba",
+                    "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "rangenode_id": "0b791cd4-edf7-11eb-957e-a87eeabdefba"
                 }
             ],
             "functions_x_graphs": [],
@@ -184,8 +217,8 @@
                     "config": null,
                     "datatype": "string",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "ExRef",
                     "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
@@ -209,7 +242,7 @@
                     "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "External Cross Reference Description Type",
                     "nodegroup_id": "a7bde771-992f-11ea-823f-f875a44e0e11",
@@ -240,8 +273,8 @@
                     "config": null,
                     "datatype": "string",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "ExRefNote",
                     "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
@@ -256,26 +289,6 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "8d56a538-5a37-4311-9c0b-b5a4f0afa1a5"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "External Cross Reference Source",
-                    "nodegroup_id": "a7bde771-992f-11ea-823f-f875a44e0e11",
-                    "nodeid": "a7bde778-992f-11ea-9cc2-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E32_Authority_Document",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P71i_is_listed_in",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
                     "datatype": "concept",
@@ -285,7 +298,7 @@
                     "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "External Cross Reference Description Metatype",
                     "nodegroup_id": "a7bde771-992f-11ea-823f-f875a44e0e11",
@@ -310,6 +323,44 @@
                     "nodeid": "a7bde771-992f-11ea-823f-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "url",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "URL",
+                    "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "URL",
+                    "nodegroup_id": "a7bde771-992f-11ea-823f-f875a44e0e11",
+                    "nodeid": "0b791cd4-edf7-11eb-957e-a87eeabdefba",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "06bbe5d2-93e8-43df-a4f4-5667648fd2ef"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "XRefSource",
+                    "graph_id": "a7bde770-992f-11ea-929a-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "External Cross Reference Source",
+                    "nodegroup_id": "a7bde771-992f-11ea-823f-f875a44e0e11",
+                    "nodeid": "a7bde778-992f-11ea-9cc2-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E32_Authority_Document",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P71i_is_listed_in",
                     "sortorder": 0
                 }
             ],
@@ -338,5 +389,11 @@
             "template_id": "50000000-0000-0000-0000-000000000001",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "10"
+    }
 }
