@@ -8,7 +8,14 @@
                     "cardid": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
+                            "constraintid": "7140762f-a9fa-42d3-a8c1-33567ddacc3c",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
@@ -27,17 +34,37 @@
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "config": {
-                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
-                        "label": "Death Place Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
+                        "defaultValue": "",
+                        "label": "Place of Death",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
                     },
-                    "id": "048d19ab-9924-11ea-beda-f875a44e0e11",
-                    "label": "Death Place Metatype",
-                    "node_id": "048d19a5-9924-11ea-a846-f875a44e0e11",
-                    "sortorder": null,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "id": "048d19a9-9924-11ea-9567-f875a44e0e11",
+                    "label": "Place of Death",
+                    "node_id": "048d19a7-9924-11ea-b6a6-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Date of Death",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "048d19a8-9924-11ea-9658-f875a44e0e11",
+                    "label": "Date of Death",
+                    "node_id": "048d19a1-9924-11ea-bf3a-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
                 },
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
@@ -59,41 +86,6 @@
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": "",
-                        "label": "Date of Death",
-                        "maxDate": false,
-                        "minDate": false,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "048d19a8-9924-11ea-9658-f875a44e0e11",
-                    "label": "Date of Death",
-                    "node_id": "048d19a1-9924-11ea-bf3a-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Place of Death",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "uneditable": false,
-                        "width": "100%"
-                    },
-                    "id": "048d19a9-9924-11ea-9567-f875a44e0e11",
-                    "label": "Place of Death",
-                    "node_id": "048d19a7-9924-11ea-b6a6-f875a44e0e11",
-                    "sortorder": 1,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
-                    "config": {
                         "defaultValue": "0a14ef3e-9dd1-4f62-a3a1-7fd762f591d4",
                         "label": "Death Place Type",
                         "options": [],
@@ -102,6 +94,21 @@
                     "id": "048d19aa-9924-11ea-99d3-f875a44e0e11",
                     "label": "Death Place Type",
                     "node_id": "048d19a4-9924-11ea-abdc-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
+                        "label": "Death Place Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "048d19ab-9924-11ea-beda-f875a44e0e11",
+                    "label": "Death Place Metatype",
+                    "node_id": "048d19a5-9924-11ea-a846-f875a44e0e11",
                     "sortorder": null,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
@@ -384,5 +391,11 @@
             "template_id": "50000000-0000-0000-0000-000000000003",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "10"
+    }
 }
