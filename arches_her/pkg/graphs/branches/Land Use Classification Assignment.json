@@ -8,7 +8,14 @@
                     "cardid": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
+                            "constraintid": "587c4d21-62f5-4ee6-a793-2fa2eeb3c665",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "fc0a29e8-28c3-11eb-a8cf-f875a44e0e11",
@@ -28,16 +35,17 @@
                     "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
                     "config": {
                         "defaultValue": null,
-                        "label": "Geology",
-                        "options": [],
-                        "placeholder": "Select an option"
+                        "label": "Land Use Note",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
                     },
-                    "id": "fc0a4bd0-28c3-11eb-8dab-f875a44e0e11",
-                    "label": "Geology",
-                    "node_id": "fc0a29f6-28c3-11eb-ab4f-f875a44e0e11",
-                    "sortorder": 9,
+                    "id": "fc0a4bd2-28c3-11eb-90d3-f875a44e0e11",
+                    "label": "Land Use Note",
+                    "node_id": "fc0a29fa-28c3-11eb-b9b5-f875a44e0e11",
+                    "sortorder": 2,
                     "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "10000000-0000-0000-0000-000000000005"
                 },
                 {
                     "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
@@ -78,7 +86,7 @@
                 {
                     "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
                     "config": {
-                        "defaultValue": "b022dbc0-b722-4e12-a675-12fca24ddffa",
+                        "defaultValue": "f1a24b1f-7a72-4718-b54d-604644cc9e99",
                         "label": "Geology Metatype",
                         "options": [],
                         "placeholder": "Select an option"
@@ -93,22 +101,7 @@
                 {
                     "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Land Use Classification",
-                        "options": [],
-                        "placeholder": "Use to record a particular status associated with the Asset."
-                    },
-                    "id": "fc0a4bce-28c3-11eb-85c6-f875a44e0e11",
-                    "label": "Land Use Classification",
-                    "node_id": "fc0a29f7-28c3-11eb-986c-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "b022dbc0-b722-4e12-a675-12fca24ddffa",
+                        "defaultValue": "7a518871-4949-4e57-908e-eb17751a404a",
                         "label": "Sub-Soil Metatype",
                         "options": [],
                         "placeholder": "Select an option"
@@ -119,37 +112,6 @@
                     "sortorder": 12,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Sub-Soil",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "fc0a4bd1-28c3-11eb-ba70-f875a44e0e11",
-                    "label": "Sub-Soil",
-                    "node_id": "fc0a29f5-28c3-11eb-910d-f875a44e0e11",
-                    "sortorder": 11,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
-                    "config": {
-                        "defaultValue": null,
-                        "label": "Land Use Note",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "fc0a4bd2-28c3-11eb-90d3-f875a44e0e11",
-                    "label": "Land Use Note",
-                    "node_id": "fc0a29fa-28c3-11eb-b9b5-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000005"
                 },
                 {
                     "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
@@ -214,7 +176,7 @@
                 {
                     "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
                     "config": {
-                        "defaultValue": "b022dbc0-b722-4e12-a675-12fca24ddffa",
+                        "defaultValue": "d079f49f-13ed-480c-87bb-e5c77ee901e2",
                         "label": "Land Use Metatype",
                         "options": [],
                         "placeholder": "Select an option"
@@ -223,8 +185,53 @@
                     "label": "Land Use Metatype",
                     "node_id": "fc0a29ed-28c3-11eb-99ec-f875a44e0e11",
                     "sortorder": 1,
-                    "visible": false,
+                    "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Land Use Classification",
+                        "options": [],
+                        "placeholder": "Use to record a particular status associated with the Asset."
+                    },
+                    "id": "fc0a4bce-28c3-11eb-85c6-f875a44e0e11",
+                    "label": "Land Use Classification",
+                    "node_id": "fc0a29f7-28c3-11eb-986c-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000012"
+                },
+                {
+                    "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
+                    "config": {
+                        "defaultValue": null,
+                        "label": "Geology",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "fc0a4bd0-28c3-11eb-8dab-f875a44e0e11",
+                    "label": "Geology",
+                    "node_id": "fc0a29f6-28c3-11eb-ab4f-f875a44e0e11",
+                    "sortorder": 9,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000012"
+                },
+                {
+                    "card_id": "fc0a29eb-28c3-11eb-b85c-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Sub-Soil",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "fc0a4bd1-28c3-11eb-ba70-f875a44e0e11",
+                    "label": "Sub-Soil",
+                    "node_id": "fc0a29f5-28c3-11eb-910d-f875a44e0e11",
+                    "sortorder": 11,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000012"
                 }
             ],
             "color": null,
@@ -619,7 +626,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": null
+                        "rdmCollection": "dcab7c77-02ab-4c21-9afd-ca5a5fcc1bad"
                     },
                     "datatype": "concept-list",
                     "description": null,
@@ -759,11 +766,5 @@
             "template_id": "50000000-0000-0000-0000-000000000002",
             "version": ""
         }
-    ],
-    "metadata": {
-        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
-        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
-        "os": "Windows",
-        "os version": "10"
-    }
+    ]
 }
