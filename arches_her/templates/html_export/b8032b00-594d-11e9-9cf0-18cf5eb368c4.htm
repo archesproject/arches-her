@@ -3,7 +3,6 @@
 <html lang="en">
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-      <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Keystone - Historic Aircraft</title><style>
 			/* Milligram css */
@@ -34,7 +33,7 @@
 
          {# System Ref #}
          {% if resource_data|has_key:"System Reference Numbers" %}
-         <section class="">
+         <section>
             <div class="container">
                <div class="row">
                   <div class="column">
@@ -54,7 +53,7 @@
 
          {# Asset Names #}
          {% if resource_data|has_key:"Names" %}
-         <section class="">
+         <section >
             <div class="container">
                <h3>Heritage Asset Names</h3>
                <div class="row">
@@ -90,7 +89,7 @@
          
          {# Designation and Protection Assignment #}
          {% if resource_data|has_key:"Designation and Protection Assignment" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Designation and Protection Assignment</h3>
                <div class="row">
@@ -126,7 +125,7 @@
 
          {# Location Data #}
          {% if resource_data|has_key:"Location Data" %}
-         <section class="">
+         <section>
             <div class="container location-details">
                <h3>Location Information</h3>
                <div class="row">
@@ -185,7 +184,7 @@
 
          {# Descriptions #}
          {% if resource_data|has_key:"Descriptions" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Descriptions</h3>
                <div class="row">
@@ -193,25 +192,25 @@
                      <div class="keeptogether">
                         {% for desc in resource_data|val_from_key:"Descriptions" %}
                            {% ifequal desc|val_from_key:"Description Type"|val_from_key:"@value" "Summary" %}
-                           <p>
-                              <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}<br/>
+                           <div>
+                              <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}<br>
                               {{ desc|val_from_key:"Description"|safe }}
-                           </p>
+                           </div>
                            {% endifequal %}
                         {% endfor %}
                         {% for desc in resource_data|val_from_key:"Descriptions" %}
                            {% ifequal desc|val_from_key:"Description Type"|val_from_key:"@value" "Full" %}
-                           <p>
-                              <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}<br/>
+                           <div>
+                              <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}<br>
                               {{ desc|val_from_key:"Description"|safe }}
-                           </p>
+                           </div>
                            {% endifequal %}
                         {% endfor %}
                         {% for desc in resource_data|val_from_key:"Descriptions" %}
                            {% ifnotequal desc|val_from_key:"Description Type"|val_from_key:"@value" "Summary" %}
                            {% ifnotequal desc|val_from_key:"Description Type"|val_from_key:"@value" "Full" %}
                            <p>
-                              <strong>Description Type: </strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}<br/>
+                              <strong>Description Type: </strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@value" }}<br>
                               {{ desc|val_from_key:"Description"|safe }}
                            </p>
                            {% endifnotequal %}
@@ -227,7 +226,7 @@
 
          {# Bibliographic Source Citation #}
          {% if resource_data|has_key:"Bibliographic Source Citation" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Bibliographic Source Citations</h3>
                <div class="row">
@@ -259,7 +258,7 @@
 
          {# Aircraft_Construction Phase #}
          {% if resource_data|has_key:"Aircraft_Construction_Phase" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Aircraft Construction Phases</h3>
                <div class="row">
@@ -304,13 +303,13 @@
 
          {# Crash Event #}
          {% if resource_data|has_key:"Crash_Event" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Crash Event</h3>
                <div class="row">
                   <div class="column">
-                     <strong>Manner of Loss: </strong>{{ resource_data|val_from_key:"Crash_Event"|val_from_key:"Manner of Loss"|val_from_key:"@value" }}<br/>
-                     <strong>Use Phase Period: </strong>****MISSING****<br/>
+                     <strong>Manner of Loss: </strong>{{ resource_data|val_from_key:"Crash_Event"|val_from_key:"Manner of Loss"|val_from_key:"@value" }}<br>
+                     <strong>Use Phase Period: </strong>****MISSING****<br>
                      <strong>Date of Loss: </strong>{{ resource_data|val_from_key:"Crash_Event"|val_from_key:"Last Flight Timespan"|val_from_key:"Date of Loss" }}
                   </div>
                </div>
@@ -321,7 +320,7 @@
          
          {# Associated Heritage Assets/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
          {% if resource_data|has_key:"Associated Heritage Assets, Areas and Artefacts" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Associated Heritage Assets, Areas and Artefacts</h3>
                <div class="row">
@@ -342,7 +341,7 @@
 
          {# Associated Activities #}
          {% if resource_data|has_key:"Location Data" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>Associated Activities</h3>
                <div class="row">
@@ -363,7 +362,7 @@
          
          {# External Cross References #}
          {% if resource_data|has_key:"External Cross References" %}
-         <section class="">
+         <section>
             <div class="container">
                <h3>External Cross References</h3>
                <div class="row">
