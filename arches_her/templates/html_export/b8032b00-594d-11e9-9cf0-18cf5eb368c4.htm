@@ -146,7 +146,12 @@
                            <p>
                               {% if resource_data|val_from_key:"Location Data"|has_key:"Localities/Administrative Areas" %}
                               {% for area in resource_data|val_from_key:"Location Data"|val_from_key:"Localities/Administrative Areas" %}
+                              
+                              {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
+                              {% if area|has_key:"Area Type" %}
                               <strong>{{ area|val_from_key:"Area Type"|val_from_key:"@value" }}:</strong> {{ area|val_from_key:"Area Names"|val_from_key:"Area Name" }}</br/>
+                              {% endif %}
+                              
                               {% endfor %}
                               {% endif %}
                            </p>
@@ -164,6 +169,8 @@
                               <div class="rcell">Locality</div>
                            </div>
                            {% for address in resource_data|val_from_key:"Location Data"|val_from_key:"Addresses" %}
+                           {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
+                           {% if address|has_key:"Full Address" %}
                            <div class="rrow">
                               <div class="rcell" data-title="Full Address">
                                     {{ address|val_from_key:"Full Address" }}
@@ -172,6 +179,7 @@
                                  {{ address|val_from_key:"Locality"|val_from_key:"Locality Value" }}
                               </div>
                            </div>
+                           {% endif %}
                            {% endfor %}
                         </div>
                      </div>
@@ -340,7 +348,7 @@
          {% endif %}
 
          {# Associated Activities #}
-         {% if resource_data|has_key:"Location Data" %}
+         {% if resource_data|has_key:"Associated Activities" %}
          <section>
             <div class="container">
                <h3>Associated Activities</h3>
