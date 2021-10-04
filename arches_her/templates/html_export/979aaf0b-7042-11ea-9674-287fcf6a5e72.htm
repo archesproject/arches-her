@@ -129,35 +129,31 @@
             <div class="container location-details">
                <h3>Location Information</h3>
                <div class="row">
+                  {% if resource_data|val_from_key:"Location Data"|has_key:"National Grid References" %}
                   <div class="column">
                      <h4>National Grid References</h4>
-                     <p>{% if resource_data|val_from_key:"Location Data"|has_key:"National Grid References" %}
-                        {% for ngr in resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References" %}
-                        {{ ngr|val_from_key:"National Grid Reference" }}
-                        {% endfor %}
-                        {% endif %}
+                     <p>
+                        {{ resource_data|val_from_key:"Location Data"|has_key:"National Grid References"|val_from_key:"National Grid Reference" }}
                      </p>
                   </div>
+                  {% endif %}
+                  {% if resource_data|val_from_key:"Location Data"|has_key:"Localities/Administrative Areas" %}
                   <div class="column">
-                     <div class="keeptogether"></div>
                      <div class="keeptogether">
                         <div>
                            <h4>Localities/Administrative Areas</h4>
                            <p>
-                              {% if resource_data|val_from_key:"Location Data"|has_key:"Localities/Administrative Areas" %}
                               {% for area in resource_data|val_from_key:"Location Data"|val_from_key:"Localities/Administrative Areas" %}
-                              
                               {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
                               {% if area|has_key:"Area Type" %}
                               <strong>{{ area|val_from_key:"Area Type"|val_from_key:"@value" }}:</strong> {{ area|val_from_key:"Area Names"|val_from_key:"Area Name" }}</br/>
                               {% endif %}
-                              
                               {% endfor %}
-                              {% endif %}
                            </p>
                         </div>
                      </div>
                   </div>
+                  {% endif %}
                </div>
                {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
                {% with address_check=resource_data|val_from_key:"Location Data"|val_from_key:"Addresses" %}
