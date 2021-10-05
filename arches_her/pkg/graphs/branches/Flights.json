@@ -5,6 +5,25 @@
             "cards": [
                 {
                     "active": true,
+                    "cardid": "beabc9b9-59db-11e9-8a38-18cf5eb368c4",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "Represents a single node in a graph",
+                    "graph_id": "beabc9b0-59db-11e9-bad6-18cf5eb368c4",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Crew Members",
+                    "nodegroup_id": "beabc9b7-59db-11e9-a785-18cf5eb368c4",
+                    "sortorder": null,
+                    "visible": true
+                },
+                {
+                    "active": true,
                     "cardid": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
@@ -26,25 +45,6 @@
                     "is_editable": true,
                     "name": "Flights",
                     "nodegroup_id": "beabc9b1-59db-11e9-994e-18cf5eb368c4",
-                    "sortorder": null,
-                    "visible": true
-                },
-                {
-                    "active": true,
-                    "cardid": "beabc9b9-59db-11e9-8a38-18cf5eb368c4",
-                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
-                    "config": null,
-                    "constraints": [],
-                    "cssclass": null,
-                    "description": "Represents a single node in a graph",
-                    "graph_id": "beabc9b0-59db-11e9-bad6-18cf5eb368c4",
-                    "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
-                    "instructions": null,
-                    "is_editable": true,
-                    "name": "Crew Members",
-                    "nodegroup_id": "beabc9b7-59db-11e9-a785-18cf5eb368c4",
                     "sortorder": null,
                     "visible": true
                 }
@@ -86,36 +86,6 @@
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "config": {
                         "defaultValue": "",
-                        "label": "Place of Departure",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "3d28bd90-59df-11e9-8294-18cf5eb368c4",
-                    "label": "Place of Departure",
-                    "node_id": "beabf0c1-59db-11e9-8a52-18cf5eb368c4",
-                    "sortorder": 12,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000012"
-                },
-                {
-                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Place of Destination",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "3d231841-59df-11e9-8cad-18cf5eb368c4",
-                    "label": "Place of Destination",
-                    "node_id": "beabf0c2-59db-11e9-b375-18cf5eb368c4",
-                    "sortorder": 13,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000012"
-                },
-                {
-                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
-                    "config": {
-                        "defaultValue": "",
                         "label": "Flight Type",
                         "options": [],
                         "placeholder": "Select an option"
@@ -126,21 +96,6 @@
                     "sortorder": 0,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Cargo Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "3d28214f-59df-11e9-aff4-18cf5eb368c4",
-                    "label": "Cargo Type",
-                    "node_id": "beabf0c0-59db-11e9-a799-18cf5eb368c4",
-                    "sortorder": 14,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000012"
                 },
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
@@ -160,17 +115,19 @@
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "config": {
-                        "defaultValue": "d5366899-09ec-4db1-8a49-a32b7e4784e3",
-                        "label": "Flight Description Language Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
+                        "defaultValue": "",
+                        "label": "Flight Description",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
                     },
-                    "id": "2203bc9f-eff2-11eb-afdb-a87eeabdefba",
-                    "label": "Flight Description Language Metatype",
-                    "node_id": "dad27610-eff0-11eb-a045-a87eeabdefba",
-                    "sortorder": 6,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "id": "2207603b-eff2-11eb-8e39-a87eeabdefba",
+                    "label": "Flight Description",
+                    "node_id": "dad2760c-eff0-11eb-9fa2-a87eeabdefba",
+                    "sortorder": 2,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000005"
                 },
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
@@ -205,23 +162,6 @@
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Flight Description",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "uneditable": false,
-                        "width": "100%"
-                    },
-                    "id": "2207603b-eff2-11eb-8e39-a87eeabdefba",
-                    "label": "Flight Description",
-                    "node_id": "dad2760c-eff0-11eb-9fa2-a87eeabdefba",
-                    "sortorder": 2,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000005"
-                },
-                {
-                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
-                    "config": {
                         "defaultValue": "b5f1ff2d-d667-4c4e-86a1-c17fa4b9447b",
                         "label": "Flight Description Language",
                         "options": [],
@@ -237,34 +177,31 @@
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Display Date",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "uneditable": false,
-                        "width": "100%"
+                        "defaultValue": "d5366899-09ec-4db1-8a49-a32b7e4784e3",
+                        "label": "Flight Description Language Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
                     },
-                    "id": "22087299-eff2-11eb-a4f8-a87eeabdefba",
-                    "label": "Display Date",
-                    "node_id": "66ae53fb-eff1-11eb-8486-a87eeabdefba",
-                    "sortorder": 11,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                    "id": "2203bc9f-eff2-11eb-afdb-a87eeabdefba",
+                    "label": "Flight Description Language Metatype",
+                    "node_id": "dad27610-eff0-11eb-a045-a87eeabdefba",
+                    "sortorder": 6,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "config": {
-                        "defaultValue": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
-                        "label": "Flight Date Qualifier Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
+                        "defaultValue": "",
+                        "label": "Date of Departure",
+                        "placeholder": ""
                     },
-                    "id": "2209adaf-eff2-11eb-bbea-a87eeabdefba",
-                    "label": "Flight Date Qualifier Metatype",
-                    "node_id": "66ae53fa-eff1-11eb-9592-a87eeabdefba",
-                    "sortorder": 10,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "id": "220d0bd9-eff2-11eb-9a22-a87eeabdefba",
+                    "label": "Date of Departure",
+                    "node_id": "66ae53fc-eff1-11eb-bc69-a87eeabdefba",
+                    "sortorder": 7,
+                    "visible": true,
+                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
                 },
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
@@ -298,16 +235,79 @@
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
                     "config": {
-                        "defaultValue": "",
-                        "label": "Date of Departure",
-                        "placeholder": ""
+                        "defaultValue": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
+                        "label": "Flight Date Qualifier Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
                     },
-                    "id": "220d0bd9-eff2-11eb-9a22-a87eeabdefba",
-                    "label": "Date of Departure",
-                    "node_id": "66ae53fc-eff1-11eb-bc69-a87eeabdefba",
-                    "sortorder": 7,
+                    "id": "2209adaf-eff2-11eb-bbea-a87eeabdefba",
+                    "label": "Flight Date Qualifier Metatype",
+                    "node_id": "66ae53fa-eff1-11eb-9592-a87eeabdefba",
+                    "sortorder": 10,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Display Date",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
+                    },
+                    "id": "22087299-eff2-11eb-a4f8-a87eeabdefba",
+                    "label": "Display Date",
+                    "node_id": "66ae53fb-eff1-11eb-8486-a87eeabdefba",
+                    "sortorder": 11,
                     "visible": true,
-                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Place of Departure",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "3d28bd90-59df-11e9-8294-18cf5eb368c4",
+                    "label": "Place of Departure",
+                    "node_id": "beabf0c1-59db-11e9-8a52-18cf5eb368c4",
+                    "sortorder": 12,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000012"
+                },
+                {
+                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Place of Destination",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "3d231841-59df-11e9-8cad-18cf5eb368c4",
+                    "label": "Place of Destination",
+                    "node_id": "beabf0c2-59db-11e9-b375-18cf5eb368c4",
+                    "sortorder": 13,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000012"
+                },
+                {
+                    "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Cargo Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "3d28214f-59df-11e9-aff4-18cf5eb368c4",
+                    "label": "Cargo Type",
+                    "node_id": "beabf0c0-59db-11e9-a799-18cf5eb368c4",
+                    "sortorder": 14,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000012"
                 },
                 {
                     "card_id": "beabc9b3-59db-11e9-a572-18cf5eb368c4",
@@ -963,33 +963,6 @@
                     "sortorder": 0
                 },
                 {
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "fuzzy_day_padding": 1,
-                        "fuzzy_month_padding": 1,
-                        "fuzzy_season_padding": 12,
-                        "fuzzy_year_padding": 1,
-                        "multiplier_if_approximate": 1,
-                        "multiplier_if_both": 1,
-                        "multiplier_if_uncertain": 1
-                    },
-                    "datatype": "edtf",
-                    "description": null,
-                    "exportable": true,
-                    "fieldname": "FlightEnd",
-                    "graph_id": "beabc9b0-59db-11e9-bad6-18cf5eb368c4",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Flight Date of Arrival",
-                    "nodegroup_id": "beabc9b1-59db-11e9-994e-18cf5eb368c4",
-                    "nodeid": "66ae53fd-eff1-11eb-b217-a87eeabdefba",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
-                    "sortorder": 0
-                },
-                {
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -1049,7 +1022,52 @@
                 },
                 {
                     "config": {
-                        "dateFormat": "YYYY-MM-DD",
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "beabc9b0-59db-11e9-bad6-18cf5eb368c4",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Cargo Metatype",
+                    "nodegroup_id": "beabc9b1-59db-11e9-994e-18cf5eb368c4",
+                    "nodeid": "a09bfeec-eff2-11eb-aac8-a87eeabdefba",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "fuzzy_day_padding": 1,
+                        "fuzzy_month_padding": 1,
+                        "fuzzy_season_padding": 12,
+                        "fuzzy_year_padding": 1,
+                        "multiplier_if_approximate": 1,
+                        "multiplier_if_both": 1,
+                        "multiplier_if_uncertain": 1
+                    },
+                    "datatype": "edtf",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "FlightEnd",
+                    "graph_id": "beabc9b0-59db-11e9-bad6-18cf5eb368c4",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Flight Date of Arrival",
+                    "nodegroup_id": "beabc9b1-59db-11e9-994e-18cf5eb368c4",
+                    "nodeid": "66ae53fd-eff1-11eb-b217-a87eeabdefba",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
                         "fuzzy_season_padding": 12,
@@ -1072,26 +1090,6 @@
                     "nodeid": "66ae53fc-eff1-11eb-bc69-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "beabc9b0-59db-11e9-bad6-18cf5eb368c4",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Cargo Metatype",
-                    "nodegroup_id": "beabc9b1-59db-11e9-994e-18cf5eb368c4",
-                    "nodeid": "a09bfeec-eff2-11eb-aac8-a87eeabdefba",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],
