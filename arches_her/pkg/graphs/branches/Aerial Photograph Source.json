@@ -51,6 +51,7 @@
                         "label": "Film Number",
                         "maxLength": null,
                         "placeholder": "Enter the number of the Film Roll associated with the Aerial Photograph",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "37c2a23a-5539-11e9-8a2b-000d3ab1e588",
@@ -67,6 +68,7 @@
                         "label": "Frame Number",
                         "maxLength": null,
                         "placeholder": "Enter the number of the Frame associated with the Aerial Photograph",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "37c2a23b-5539-11e9-b53e-000d3ab1e588",
@@ -83,6 +85,7 @@
                         "label": "Source Number",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "37c2a23d-5539-11e9-8cd7-000d3ab1e588",
@@ -112,6 +115,7 @@
                         "label": "Frame No.",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "f6eacb77-27f4-11eb-90c9-f875a44e0e11",
@@ -158,6 +162,7 @@
                         "label": "Film No.",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "06c42a4b-28b8-11eb-be49-f875a44e0e11",
@@ -189,6 +194,7 @@
                         "label": "Display Date",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "06c7376d-28b8-11eb-a8d2-f875a44e0e11",
@@ -692,31 +698,6 @@
                     "sortorder": 0
                 },
                 {
-                    "config": {
-                        "graphs": [
-                            {
-                                "graphid": "b07cfa6f-894d-11ea-82aa-f875a44e0e11",
-                                "name": "Archive_Source"
-                            }
-                        ]
-                    },
-                    "datatype": "resource-instance",
-                    "description": "",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "37c2a230-5539-11e9-89ef-000d3ab1e588",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Aerial Photograph Source",
-                    "nodegroup_id": "37c2a231-5539-11e9-a01e-000d3ab1e588",
-                    "nodeid": "37c2a231-5539-11e9-a01e-000d3ab1e588",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object",
-                    "parentproperty": "",
-                    "sortorder": 0
-                },
-                {
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -792,7 +773,7 @@
                     "nodeid": "caa7640b-28b7-11eb-abb4-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -812,7 +793,7 @@
                     "nodeid": "caa7640c-28b7-11eb-bc7f-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
-                    "sortorder": 2
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -832,7 +813,7 @@
                     "nodeid": "caa7640d-28b7-11eb-9f61-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
-                    "sortorder": 3
+                    "sortorder": 0
                 },
                 {
                     "config": {
@@ -891,6 +872,33 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P17_was_motivated_by",
                     "sortorder": 0
+                },
+                {
+                    "config": {
+                        "graphs": [
+                            {
+                                "graphid": "b07cfa6f-894d-11ea-82aa-f875a44e0e11",
+                                "name": "Archive_Source"
+                            }
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
+                    },
+                    "datatype": "resource-instance",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "37c2a230-5539-11e9-89ef-000d3ab1e588",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Aerial Photograph Source",
+                    "nodegroup_id": "37c2a231-5539-11e9-a01e-000d3ab1e588",
+                    "nodeid": "37c2a231-5539-11e9-a01e-000d3ab1e588",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object",
+                    "parentproperty": "",
+                    "sortorder": 0
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
@@ -903,7 +911,9 @@
                             "graphid": "b07cfa6f-894d-11ea-82aa-f875a44e0e11",
                             "name": "Archive_Source"
                         }
-                    ]
+                    ],
+                    "searchDsl": "",
+                    "searchString": ""
                 },
                 "datatype": "resource-instance",
                 "description": "",

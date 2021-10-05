@@ -1024,6 +1024,26 @@
             "nodes": [
                 {
                     "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Final Place of Departure Name Metatype",
+                    "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
+                    "nodeid": "f1ff868a-29ba-11eb-9065-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
                         "rdmCollection": "f8ff8b9b-d6ae-4b98-9cd9-6d065b7fa220"
                     },
                     "datatype": "concept",
@@ -1201,23 +1221,21 @@
                     "sortorder": 0
                 },
                 {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "",
                     "exportable": false,
-                    "fieldname": null,
+                    "fieldname": "",
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
-                    "is_collector": false,
+                    "is_collector": true,
                     "isrequired": false,
                     "issearchable": true,
-                    "istopnode": false,
-                    "name": "Final Place of Departure Name Metatype",
+                    "istopnode": true,
+                    "name": "Crash_Event",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
-                    "nodeid": "f1ff868a-29ba-11eb-9065-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "nodeid": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E81_Transformation",
+                    "parentproperty": "",
                     "sortorder": 0
                 },
                 {
@@ -1614,35 +1632,6 @@
                 },
                 {
                     "config": {
-                        "graphs": [
-                            {
-                                "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                                "name": "Heritage Asset"
-                            },
-                            {
-                                "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
-                                "name": "Heritage Area"
-                            }
-                        ]
-                    },
-                    "datatype": "resource-instance-list",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Crash Site",
-                    "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
-                    "nodeid": "f1ffd488-29ba-11eb-bbc9-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
                     "datatype": "concept",
@@ -1874,21 +1863,34 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "",
+                    "config": {
+                        "graphs": [
+                            {
+                                "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
+                                "name": "Heritage Asset"
+                            },
+                            {
+                                "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
+                                "name": "Heritage Area"
+                            }
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
+                    },
+                    "datatype": "resource-instance-list",
+                    "description": null,
                     "exportable": false,
                     "fieldname": "",
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
-                    "is_collector": true,
+                    "is_collector": false,
                     "isrequired": false,
                     "issearchable": true,
-                    "istopnode": true,
-                    "name": "Crash_Event",
+                    "istopnode": false,
+                    "name": "Crash Site",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
-                    "nodeid": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E81_Transformation",
-                    "parentproperty": "",
+                    "nodeid": "f1ffd488-29ba-11eb-bbc9-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P92_brought_into_existence",
                     "sortorder": 0
                 }
             ],

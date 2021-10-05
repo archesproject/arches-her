@@ -5,6 +5,32 @@
             "cards": [
                 {
                     "active": true,
+                    "cardid": "277e27a4-413f-11eb-bee5-f875a44e0e11",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [
+                        {
+                            "card_id": "277e27a4-413f-11eb-bee5-f875a44e0e11",
+                            "constraintid": "6624352a-d3ec-433c-9b59-4b6dd0a10f8e",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
+                    "cssclass": null,
+                    "description": "",
+                    "graph_id": "a3570880-9b5c-11ea-af46-f875a44e0e11",
+                    "helpenabled": false,
+                    "helptext": null,
+                    "helptitle": null,
+                    "instructions": null,
+                    "is_editable": true,
+                    "name": "Copyright",
+                    "nodegroup_id": "1fed0114-413d-11eb-94c4-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": true
+                },
+                {
+                    "active": true,
                     "cardid": "a8a60969-413e-11eb-9172-f875a44e0e11",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
@@ -52,32 +78,6 @@
                     "is_editable": true,
                     "name": "Images",
                     "nodegroup_id": "a3570881-9b5c-11ea-914d-f875a44e0e11",
-                    "sortorder": null,
-                    "visible": true
-                },
-                {
-                    "active": true,
-                    "cardid": "277e27a4-413f-11eb-bee5-f875a44e0e11",
-                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
-                    "config": null,
-                    "constraints": [
-                        {
-                            "card_id": "277e27a4-413f-11eb-bee5-f875a44e0e11",
-                            "constraintid": "6624352a-d3ec-433c-9b59-4b6dd0a10f8e",
-                            "nodes": [],
-                            "uniquetoallinstances": false
-                        }
-                    ],
-                    "cssclass": null,
-                    "description": "",
-                    "graph_id": "a3570880-9b5c-11ea-af46-f875a44e0e11",
-                    "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
-                    "instructions": null,
-                    "is_editable": true,
-                    "name": "Copyright",
-                    "nodegroup_id": "1fed0114-413d-11eb-94c4-f875a44e0e11",
                     "sortorder": null,
                     "visible": true
                 }
@@ -135,6 +135,7 @@
                         "label": "Copyright Note Text",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "64b0b0a3-413d-11eb-8db2-f875a44e0e11",
@@ -254,6 +255,7 @@
                         "label": "Caption Note",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "a8a60972-413e-11eb-ae77-f875a44e0e11",
@@ -328,6 +330,7 @@
                         "label": "Copyright Note Text",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "30df488d-413f-11eb-a54b-f875a44e0e11",
@@ -679,39 +682,6 @@
                 },
                 {
                     "config": {
-                        "graphid": [
-                            "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                            "22477f01-1a44-11e9-b0a9-000d3ab1e588"
-                        ],
-                        "graphs": [
-                            {
-                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
-                                "name": "Person"
-                            },
-                            {
-                                "graphid": "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                                "name": "Organization"
-                            }
-                        ]
-                    },
-                    "datatype": "resource-instance-list",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "a3570880-9b5c-11ea-af46-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Copyright Holder",
-                    "nodegroup_id": "1fed0114-413d-11eb-94c4-f875a44e0e11",
-                    "nodeid": "1fed011a-413d-11eb-80ed-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P75i_is_possessed_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
                     "datatype": "concept",
@@ -824,6 +794,41 @@
                     "nodeid": "a8a6096a-413e-11eb-9440-f875a44e0e11",
                     "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "graphid": [
+                            "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                            "22477f01-1a44-11e9-b0a9-000d3ab1e588"
+                        ],
+                        "graphs": [
+                            {
+                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
+                                "name": "Person"
+                            },
+                            {
+                                "graphid": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                                "name": "Organization"
+                            }
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
+                    },
+                    "datatype": "resource-instance-list",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "a3570880-9b5c-11ea-af46-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Copyright Holder",
+                    "nodegroup_id": "1fed0114-413d-11eb-94c4-f875a44e0e11",
+                    "nodeid": "1fed011a-413d-11eb-80ed-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P75i_is_possessed_by",
                     "sortorder": 0
                 }
             ],
