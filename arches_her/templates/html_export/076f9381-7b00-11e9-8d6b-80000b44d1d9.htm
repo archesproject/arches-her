@@ -444,11 +444,17 @@
                                  {{ exref|val_from_key:"External Cross Reference Source" }}
                               </div>
                               <div class="rcell" data-title="URL">
-                                 {% if 'url_label' in exref|val_from_key:"URL" %}
-                                    {{ exref|val_from_key:"URL"|cut:"{\"url_label\": \""|cut:"\"}" }}
-                                 {% else %}
-                                    {{ exref|val_from_key:"URL"|cut:"{\"url\": \""|cut:"\"}" }}
-                                 {% endif %}
+                                 {% with exref|val_from_key:"URL"|string_to_json as URL_Dict %}
+                                    {% if URL_Dict|has_key:"url" and URL_Dict|has_key:"url_label" %}
+                                       <a href="{{URL_Dict|val_from_key:'url'}}">{{URL_Dict|val_from_key:'url_label'}}</a>
+                                    {% elif URL_Dict|has_key:"url_label" %}
+                                       {{URL_Dict|val_from_key:'url_label'}}
+                                    {% elif URL_Dict|has_key:"url" %}
+                                       {{URL_Dict|val_from_key:'url'}}
+                                    {% else %}
+                                       <br />
+                                    {% endif %}
+                                 {% endwith %}
                               </div>
                            </div>
                            {% endfor %}
@@ -460,7 +466,7 @@
          </section>
          <hr/>
          {% endif %}
-  
+
          {% endwith%}
          {% endfor %}
       </main>
