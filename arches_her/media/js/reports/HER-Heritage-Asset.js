@@ -70,30 +70,30 @@ define([
                      // Get cards for interactivity within the editor
                      this.cards.assetName = cards.find(x => x.nodegroupid == "676d47f9-9c1c-11ea-9aa0-f875a44e0e11");
                      this.cards.assetDescriptions = cards.find(x => x.nodegroupid == "ba342e69-b554-11ea-a027-f875a44e0e11");
-                     this.cards.externalCrossReferences = cards.find(x => x.nodegroupid == "7b247f82-9c2b-11ea-84bf-f875a44e0e11");
-                     this.cards.systemReferenceNumbers = cards.find(x => x.nodegroupid == "85336e1b-9c2d-11ea-a287-f875a44e0e11");
-                     this.cards.constructionPhases= cards.find(x => x.nodegroupid == '4a24d890-7bd5-11e9-9de9-80000b44d1d9')
+                     this.cards.externalCrossReferences = cards.find(x => x.nodegroupid == "f17f6581-efc7-11eb-b09f-a87eeabdefba");
+                     this.cards.systemReferenceNumbers = cards.find(x => x.nodegroupid == "325a2f2f-efe4-11eb-9b0c-a87eeabdefba");
+                     this.cards.constructionPhases= cards.find(x => x.nodegroupid == '77e8f287-efdc-11eb-a790-a87eeabdefba')
                      this.cards.constructionComponents= cards.find(x => x.nodegroupid == '55d6a53e-049c-11eb-8618-f875a44e0e11');
-                     this.cards.usePhase= cards.find(x => x.nodegroupid == 'c01aa119-8a25-11ea-8dd6-f875a44e0e11');
-                     this.cards.bibliography= cards.find(x => x.nodegroupid == 'c4230739-28ce-11eb-8b35-f875a44e0e11');
-                     this.cards.designations= cards.find(x => x.nodegroupid == '8fc1a099-b61f-11ea-8121-f875a44e0e11')
+                     this.cards.usePhase= cards.find(x => x.nodegroupid == 'b2133dda-efdc-11eb-ab07-a87eeabdefba');
+                     this.cards.bibliography= cards.find(x => x.nodegroupid == 'a1d4ee93-efc5-11eb-b117-a87eeabdefba');
+                     this.cards.designations= cards.find(x => x.nodegroupid == '6af2a0cb-efc5-11eb-8436-a87eeabdefba')
                      this.cards.photos= cards.find(x => x.nodegroupid == '46f25cd9-b6c7-11ea-8651-f875a44e0e11');
-                     this.cards.scientificDate= cards.find(x => x.nodegroupid == "c0d8a80a-04ba-11eb-b44b-f875a44e0e11");
+                     this.cards.scientificDate= cards.find(x => x.nodegroupid == "64f4f793-f11b-11eb-9a99-a87eeabdefba");
                      this.cards.associatedActivities= cards.find(x => x.nodegroupid == "6300b212-9801-11e9-b99f-00224800b26d");
                      this.cards.associatedActors= cards.find(x => x.nodegroupid == "9682621d-0262-11eb-ab33-f875a44e0e11");
                      this.cards.associatedConsultations= cards.find(x => x.nodegroupid == "e0991c1b-51b4-11eb-b7ef-f875a44e0e11");
                      this.cards.associatedFiles= cards.find(x => x.nodegroupid == "fc6b6b0b-5118-11eb-b342-f875a44e0e11");
                      this.cards.associatedArtifacts= cards.find(x => x.nodegroupid == "055b3e3f-04c7-11eb-8d64-f875a44e0e11");
-                     this.cards.locationData = cards.find(x => x.nodegroupid == "ca05bc7e-28cf-11eb-95f4-f875a44e0e11");
+                     this.cards.locationData = cards.find(x => x.nodegroupid == "87d39b2e-f44f-11eb-9a4a-a87eeabdefba");
                      const locationDataCardBase = this.cards.locationData.tiles()?.[0]?.cards ? this.cards.locationData.tiles()[0].cards : this.cards.locationData.cards()
      
-                     this.cards.locationDescriptions = locationDataCardBase.find(x => x.nodegroupid == "ca05bc6f-28cf-11eb-b549-f875a44e0e11");
-                     this.cards.administrativeAreas = locationDataCardBase.find(x => x.nodegroupid == "ca05bc7b-28cf-11eb-87fa-f875a44e0e11");
-                     this.cards.addresses = locationDataCardBase.find(x => x.nodegroupid == "ca05e365-28cf-11eb-8f65-f875a44e0e11");
-                     this.cards.nationalGridReferences = locationDataCardBase.find(x => x.nodegroupid == "ca05bc75-28cf-11eb-9c74-f875a44e0e11");
-                     this.cards.areaAssignment = locationDataCardBase.find(x => x.nodegroupid == "ca05bc78-28cf-11eb-92c7-f875a44e0e11");
-                     this.cards.locationGeometry = locationDataCardBase.find(x => x.nodegroupid == "ca05bc72-28cf-11eb-9105-f875a44e0e11");
-                     this.cards.landUse = locationDataCardBase.find(x => x.nodegroupid == "ca05e362-28cf-11eb-a619-f875a44e0e11");
+                     this.cards.locationDescriptions = locationDataCardBase.find(x => x.nodegroupid == "87d39b28-f44f-11eb-a8b6-a87eeabdefba");
+                     this.cards.administrativeAreas = locationDataCardBase.find(x => x.nodegroupid == "87d38725-f44f-11eb-8d4b-a87eeabdefba");
+                     this.cards.addresses = locationDataCardBase.find(x => x.nodegroupid == "87d39b25-f44f-11eb-95e5-a87eeabdefba");
+                     this.cards.nationalGridReferences = locationDataCardBase.find(x => x.nodegroupid == "87d39b2b-f44f-11eb-af5e-a87eeabdefba");
+                     this.cards.areaAssignment = locationDataCardBase.find(x => x.nodegroupid == "87d39b22-f44f-11eb-887e-a87eeabdefba");
+                     this.cards.locationGeometry = locationDataCardBase.find(x => x.nodegroupid == "87d3872b-f44f-11eb-bd0c-a87eeabdefba");
+                     this.cards.landUse = locationDataCardBase.find(x => x.nodegroupid == "87d38728-f44f-11eb-900d-a87eeabdefba");
                 }
 
 
