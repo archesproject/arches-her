@@ -98,6 +98,7 @@
                         "label": "Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "9dacd447-7263-11ea-8450-287fcf6a5e72",
@@ -114,6 +115,7 @@
                         "label": "Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "d6507834-7e58-11ea-95eb-f875a44e0e11",
@@ -247,8 +249,8 @@
                     },
                     "datatype": "concept",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "Use_Type",
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "is_collector": false,
                     "isrequired": false,
@@ -267,8 +269,8 @@
                     },
                     "datatype": "concept",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "NameCurr",
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "is_collector": false,
                     "isrequired": false,
@@ -303,8 +305,8 @@
                     "config": null,
                     "datatype": "string",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "Name",
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "is_collector": false,
                     "isrequired": false,
@@ -328,27 +330,7 @@
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Name Metatype",
-                    "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
-                    "nodeid": "ce311cee-9937-11ea-aa37-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Name Use Metatype",
                     "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
@@ -368,7 +350,7 @@
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Name Currency Metatype",
                     "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
@@ -383,8 +365,8 @@
                     },
                     "datatype": "concept",
                     "description": null,
-                    "exportable": false,
-                    "fieldname": null,
+                    "exportable": true,
+                    "fieldname": "Name_Type",
                     "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
                     "is_collector": false,
                     "isrequired": false,
@@ -393,6 +375,26 @@
                     "name": "Name Type",
                     "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
                     "nodeid": "b0852c9c-7b43-11ea-b346-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "bbd0d023-955d-11e6-b664-024f9e178154",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Name Metatype",
+                    "nodegroup_id": "bbd0d022-955d-11e6-b664-024f9e178154",
+                    "nodeid": "ce311cee-9937-11ea-aa37-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
@@ -423,5 +425,11 @@
             "template_id": "50000000-0000-0000-0000-000000000001",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "10"
+    }
 }
