@@ -113,6 +113,7 @@
                         "label": "Storage Building Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "bf1d2166-28bd-11eb-ab96-f875a44e0e11",
@@ -157,6 +158,7 @@
                         "label": "Storage Area Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "bf1d2160-28bd-11eb-94fa-f875a44e0e11",
@@ -551,39 +553,6 @@
                 },
                 {
                     "config": {
-                        "graphid": [
-                            "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                            "22477f01-1a44-11e9-b0a9-000d3ab1e588"
-                        ],
-                        "graphs": [
-                            {
-                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
-                                "name": "Person"
-                            },
-                            {
-                                "graphid": "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                                "name": "Organization"
-                            }
-                        ]
-                    },
-                    "datatype": "resource-instance-list",
-                    "description": null,
-                    "exportable": true,
-                    "fieldname": "Owner",
-                    "graph_id": "bf1d2148-28bd-11eb-b0b8-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Repository owner",
-                    "nodegroup_id": "bf1d2149-28bd-11eb-ace0-f875a44e0e11",
-                    "nodeid": "bf1d215a-28bd-11eb-9e9e-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P74i_is_current_or_former_residence_of",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
                     "datatype": "semantic",
@@ -796,6 +765,41 @@
                     "nodeid": "bf1d2157-28bd-11eb-8de4-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "graphid": [
+                            "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                            "22477f01-1a44-11e9-b0a9-000d3ab1e588"
+                        ],
+                        "graphs": [
+                            {
+                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
+                                "name": "Person"
+                            },
+                            {
+                                "graphid": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                                "name": "Organization"
+                            }
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
+                    },
+                    "datatype": "resource-instance-list",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "Owner",
+                    "graph_id": "bf1d2148-28bd-11eb-b0b8-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Repository owner",
+                    "nodegroup_id": "bf1d2149-28bd-11eb-ace0-f875a44e0e11",
+                    "nodeid": "bf1d215a-28bd-11eb-9e9e-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P74i_is_current_or_former_residence_of",
                     "sortorder": 0
                 }
             ],
