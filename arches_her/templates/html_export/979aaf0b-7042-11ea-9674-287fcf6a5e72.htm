@@ -133,7 +133,7 @@
                   <div class="column">
                      <h4>National Grid References</h4>
                      <p>
-                        {{ resource_data|val_from_key:"Location Data"|has_key:"National Grid References"|val_from_key:"National Grid Reference" }}
+                        {{ resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References"|val_from_key:"National Grid Reference" }}
                      </p>
                   </div>
                   {% endif %}
