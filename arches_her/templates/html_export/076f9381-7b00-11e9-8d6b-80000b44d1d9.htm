@@ -126,11 +126,17 @@
                   <div class="column">
                      <h4>National Grid References</h4>
                      <p>{% if resource_data|val_from_key:"Location Data"|has_key:"National Grid References" %}
-                        {% for ngr in resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References" %}
-                        {{ ngr|val_from_key:"National Grid Reference" }}
-                        {% endfor %}
-                        {% endif %}
-                     </p>
+                        {% with ngr_check=resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References" %}
+                           {% if ngr_check.0|has_key:"National Grid Reference" %}
+                              {% for ngr in resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References" %}
+                                 {{ ngr|val_from_key:"National Grid Reference"|val_from_key:"@display_value" }}
+                              {% endfor %}
+                           {% else %}
+                              {{ resource_data|val_from_key:"Location Data"|val_from_key:"National Grid References"|val_from_key:"National Grid Reference"|val_from_key:"@display_value" }}
+                           {% endif %}
+                              {% endwith %}
+                     {% endif %}
+                  </p>
                   </div>
                   <div class="column">
                      <div class="keeptogether"></div>
@@ -143,10 +149,10 @@
 
                               {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
                               {% if area|val_from_key:"Area Type"|has_key:"@display_value" %}
-                                    <strong>{{ area|val_from_key:"Area Type"|val_from_key:"@display_value" }}:</strong> {{ area|val_from_key:"Area Names"|val_from_key:"Area Name"|val_from_key:"@display_value" }}</br/>
-                                 {% else %}
-                                    {{ area|val_from_key:"Area Names"|val_from_key:"Area Name"|val_from_key:"@display_value" }}</br/>
-                                 {% endif %}
+                                 <strong>{{ area|val_from_key:"Area Type"|val_from_key:"@display_value" }}:</strong> {{ area|val_from_key:"Area Names"|val_from_key:"Area Name"|val_from_key:"@display_value" }}</br/>
+                              {% else %}
+                                 {{ area|val_from_key:"Area Names"|val_from_key:"Area Name"|val_from_key:"@display_value" }}</br/>
+                              {% endif %}
 
                               {% endfor %}
                               {% endif %}
