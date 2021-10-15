@@ -62,36 +62,6 @@
                 {
                     "card_id": "00231837-51c1-11eb-a963-f875a44e0e11",
                     "config": {
-                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
-                        "label": "Archive Object Title Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "00240360-51c1-11eb-96ca-f875a44e0e11",
-                    "label": "Archive Object Title Metatype",
-                    "node_id": "0023183d-51c1-11eb-a5c6-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "00231837-51c1-11eb-a963-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
-                        "label": "Archive Object Reference Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "00240361-51c1-11eb-b6f2-f875a44e0e11",
-                    "label": "Archive Object Reference Metatype",
-                    "node_id": "0024035f-51c1-11eb-bbfc-f875a44e0e11",
-                    "sortorder": 5,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "00231837-51c1-11eb-a963-f875a44e0e11",
-                    "config": {
                         "defaultValue": "44e9801c-deee-4d6f-b737-657b356a2b89",
                         "label": "Archive Object Title Type",
                         "options": [],
@@ -156,6 +126,21 @@
                 {
                     "card_id": "00231837-51c1-11eb-a963-f875a44e0e11",
                     "config": {
+                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
+                        "label": "Archive Object Title Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "00240360-51c1-11eb-96ca-f875a44e0e11",
+                    "label": "Archive Object Title Metatype",
+                    "node_id": "0023183d-51c1-11eb-a5c6-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "00231837-51c1-11eb-a963-f875a44e0e11",
+                    "config": {
                         "defaultValue": "d3b75e3a-638e-490e-8d1b-bbb5c504ce94",
                         "label": "Association Metatype",
                         "options": [],
@@ -165,6 +150,21 @@
                     "label": "Association Metatype",
                     "node_id": "30465174-51c2-11eb-9ed3-f875a44e0e11",
                     "sortorder": 8,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "00231837-51c1-11eb-a963-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
+                        "label": "Archive Object Reference Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "00240361-51c1-11eb-b6f2-f875a44e0e11",
+                    "label": "Archive Object Reference Metatype",
+                    "node_id": "0024035f-51c1-11eb-bbfc-f875a44e0e11",
+                    "sortorder": 5,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
@@ -349,7 +349,7 @@
                     "graph_id": "00231834-51c1-11eb-84cf-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Archive Object Title Type",
                     "nodegroup_id": "00231835-51c1-11eb-bf5b-f875a44e0e11",
@@ -387,7 +387,7 @@
                     "graph_id": "00231834-51c1-11eb-84cf-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Archive Object Title Metatype",
                     "nodegroup_id": "00231835-51c1-11eb-bf5b-f875a44e0e11",
@@ -407,7 +407,7 @@
                     "graph_id": "00231834-51c1-11eb-84cf-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Archive Object Reference Type",
                     "nodegroup_id": "00231835-51c1-11eb-bf5b-f875a44e0e11",
@@ -432,26 +432,6 @@
                     "nodeid": "0024035e-51c1-11eb-a290-f875a44e0e11",
                     "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "00231834-51c1-11eb-84cf-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Archive Object Reference Metatype",
-                    "nodegroup_id": "00231835-51c1-11eb-bf5b-f875a44e0e11",
-                    "nodeid": "0024035f-51c1-11eb-bbfc-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 },
                 {
@@ -539,7 +519,7 @@
                     "graph_id": "00231834-51c1-11eb-84cf-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Association Metatype",
                     "nodegroup_id": "00231835-51c1-11eb-bf5b-f875a44e0e11",
@@ -581,6 +561,26 @@
                     "nodeid": "00233fe6-51c1-11eb-961d-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P49_has_former_or_current_keeper",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "00231834-51c1-11eb-84cf-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Archive Object Reference Metatype",
+                    "nodegroup_id": "00231835-51c1-11eb-bf5b-f875a44e0e11",
+                    "nodeid": "0024035f-51c1-11eb-bbfc-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],
