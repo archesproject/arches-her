@@ -133,10 +133,18 @@
                <div class="row">
                   <div class="column">
                      <h4>National Grid References</h4>
-                     <p>{% if resource_data|val_from_key:"National Grid References" %}
-                        {{ resource_data|val_from_key:"National Grid References"|val_from_key:"National Grid Reference"|val_from_key:"@display_value" }}
-                        {% endif %}
-                     </p>
+                     <p>{% if resource_data|has_key:"National Grid References" %}
+                        {% with ngr_check=resource_data|val_from_key:"National Grid References" %}
+                           {% if ngr_check.0|has_key:"National Grid Reference" %}
+                              {% for ngr in resource_data|val_from_key:"National Grid References" %}
+                                 {{ ngr|val_from_key:"National Grid Reference"|val_from_key:"@display_value" }}
+                              {% endfor %}
+                           {% else %}
+                              {{ resource_data|val_from_key:"National Grid References"|val_from_key:"National Grid Reference"|val_from_key:"@display_value" }}
+                           {% endif %}
+                              {% endwith %}
+                     {% endif %}
+                  </p>
                   </div>
                   <div class="column">
                      <div class="keeptogether"></div>
