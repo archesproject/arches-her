@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y make software-properties-common
 # Get the pre-built python wheels from the build environment
 RUN mkdir ${WEB_ROOT}
 
+RUN mkdir ${WEB_ROOT}/keystone-data
+
 # Install packages required to run Arches
 # Note that the ubuntu/debian package for libgdal1-dev pulls in libgdal1i, which is built
 # with everything enabled, and so, it has a huge amount of dependancies (everything that GDAL
