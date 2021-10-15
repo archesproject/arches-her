@@ -36,21 +36,6 @@
                 {
                     "card_id": "7e987d1f-992d-11ea-94cb-f875a44e0e11",
                     "config": {
-                        "defaultValue": "7346be23-bff6-42dc-91d0-7c5182aa0031",
-                        "label": "Reference Number Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "7e98a442-992d-11ea-9419-f875a44e0e11",
-                    "label": "Reference Number Metatype",
-                    "node_id": "7e98a441-992d-11ea-a507-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "7e987d1f-992d-11ea-94cb-f875a44e0e11",
-                    "config": {
                         "defaultValue": "",
                         "label": "Reference Number",
                         "maxLength": null,
@@ -77,7 +62,22 @@
                     "label": "Reference Number Type",
                     "node_id": "7e98a440-992d-11ea-9ced-f875a44e0e11",
                     "sortorder": 1,
-                    "visible": true,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "7e987d1f-992d-11ea-94cb-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "7346be23-bff6-42dc-91d0-7c5182aa0031",
+                        "label": "Reference Number Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "7e98a442-992d-11ea-9419-f875a44e0e11",
+                    "label": "Reference Number Metatype",
+                    "node_id": "7e98a441-992d-11ea-a507-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
             ],
@@ -151,6 +151,24 @@
                     "sortorder": 0
                 },
                 {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "7e987d1c-992d-11ea-8117-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "References",
+                    "nodegroup_id": "7e987d1d-992d-11ea-a956-f875a44e0e11",
+                    "nodeid": "7e987d1d-992d-11ea-a956-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
                     "config": {
                         "options": [],
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
@@ -162,7 +180,7 @@
                     "graph_id": "7e987d1c-992d-11ea-8117-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Reference Number Type",
                     "nodegroup_id": "7e987d1d-992d-11ea-a956-f875a44e0e11",
@@ -182,31 +200,13 @@
                     "graph_id": "7e987d1c-992d-11ea-8117-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Reference Number Metatype",
                     "nodegroup_id": "7e987d1d-992d-11ea-a956-f875a44e0e11",
                     "nodeid": "7e98a441-992d-11ea-a507-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "7e987d1c-992d-11ea-8117-f875a44e0e11",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "References",
-                    "nodegroup_id": "7e987d1d-992d-11ea-a956-f875a44e0e11",
-                    "nodeid": "7e987d1d-992d-11ea-a956-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
-                    "parentproperty": "",
                     "sortorder": 0
                 }
             ],
