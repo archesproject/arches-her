@@ -498,7 +498,7 @@
                     "helpenabled": false,
                     "helptext": null,
                     "helptitle": null,
-                    "instructions": "Summary of the geospatial data describing the resource location",
+                    "instructions": "Summary of the data relating to the creation and amendment of the record.",
                     "is_editable": true,
                     "name": "Audit Metadata",
                     "nodegroup_id": "6c21885d-ee13-11eb-9060-a87eeabdefba",
@@ -2770,6 +2770,57 @@
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "defaultValue": null,
+                        "label": "Creation Date",
+                        "maxDate": null,
+                        "minDate": null,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "6c219cdb-ee13-11eb-ad35-a87eeabdefba",
+                    "label": "Creation Date",
+                    "node_id": "6c218866-ee13-11eb-9911-a87eeabdefba",
+                    "sortorder": 12,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "defaultValue": null,
+                        "label": "Creation End Date",
+                        "maxDate": null,
+                        "minDate": null,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "6c219cd4-ee13-11eb-93a8-a87eeabdefba",
+                    "label": "Creation End Date",
+                    "node_id": "6c218862-ee13-11eb-aca3-a87eeabdefba",
+                    "sortorder": 13,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
+                        "label": "Creation Date Qualifier",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6c219cca-ee13-11eb-9905-a87eeabdefba",
+                    "label": "Creation Date Qualifier",
+                    "node_id": "6c219cba-ee13-11eb-a59f-a87eeabdefba",
+                    "sortorder": 14,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
                     "card_id": "a5416b36-f121-11eb-be10-a87eeabdefba",
                     "config": {
                         "defaultValue": "",
@@ -2829,6 +2880,86 @@
                     "sortorder": 6,
                     "visible": true,
                     "widget_id": "ff3c400a-76ec-11e7-a793-784f435179ea"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Updater Name",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
+                    },
+                    "id": "6c219cd9-ee13-11eb-9ee1-a87eeabdefba",
+                    "label": "Updater Name",
+                    "node_id": "6c219cbd-ee13-11eb-9e97-a87eeabdefba",
+                    "sortorder": 16,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "e5739feb-21d0-430a-968f-caadd8e4ccf7",
+                        "label": "Updater Name Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6c219cc7-ee13-11eb-a823-a87eeabdefba",
+                    "label": "Updater Name Type",
+                    "node_id": "6c218867-ee13-11eb-bc9f-a87eeabdefba",
+                    "sortorder": 17,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f",
+                        "label": "Updater Name Use Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6c219cd2-ee13-11eb-9037-a87eeabdefba",
+                    "label": "Updater Name Use Type",
+                    "node_id": "6c219cb6-ee13-11eb-9d6c-a87eeabdefba",
+                    "sortorder": 19,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "c2051d53-40e7-4a2d-a4b4-02a31da37fd1",
+                        "label": "Updater Name Currency",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6c219cd1-ee13-11eb-8551-a87eeabdefba",
+                    "label": "Updater Name Currency",
+                    "node_id": "6c218876-ee13-11eb-83ea-a87eeabdefba",
+                    "sortorder": 21,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Date of Last Update",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "6c219cd5-ee13-11eb-9466-a87eeabdefba",
+                    "label": "Date of Last Update",
+                    "node_id": "6c218875-ee13-11eb-a51c-a87eeabdefba",
+                    "sortorder": 23,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
                 },
                 {
                     "card_id": "4136bad7-27f1-11eb-81ac-f875a44e0e11",
@@ -2963,21 +3094,6 @@
                 {
                     "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
                     "config": {
-                        "defaultValue": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
-                        "label": "Update Date Qualifier Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "6c219cd3-ee13-11eb-8870-a87eeabdefba",
-                    "label": "Update Date Qualifier Metatype",
-                    "node_id": "6c218869-ee13-11eb-a23c-a87eeabdefba",
-                    "sortorder": 26,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
                         "defaultValue": "",
                         "label": "Audit Note",
                         "maxLength": null,
@@ -3023,21 +3139,6 @@
                     "sortorder": 24,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
-                        "label": "Update Date Qualifier",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "6c219cd6-ee13-11eb-9e53-a87eeabdefba",
-                    "label": "Update Date Qualifier",
-                    "node_id": "6c219cbc-ee13-11eb-adab-a87eeabdefba",
-                    "sortorder": 25,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
@@ -3100,137 +3201,6 @@
                     "sortorder": 2,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "c2051d53-40e7-4a2d-a4b4-02a31da37fd1",
-                        "label": "Updater Name Currency",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "6c219cd1-ee13-11eb-8551-a87eeabdefba",
-                    "label": "Updater Name Currency",
-                    "node_id": "6c218876-ee13-11eb-83ea-a87eeabdefba",
-                    "sortorder": 21,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": "",
-                        "label": "Date of Last Update",
-                        "maxDate": false,
-                        "minDate": false,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "6c219cd5-ee13-11eb-9466-a87eeabdefba",
-                    "label": "Date of Last Update",
-                    "node_id": "6c218875-ee13-11eb-a51c-a87eeabdefba",
-                    "sortorder": 23,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Updater Name",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "uneditable": false,
-                        "width": "100%"
-                    },
-                    "id": "6c219cd9-ee13-11eb-9ee1-a87eeabdefba",
-                    "label": "Updater Name",
-                    "node_id": "6c219cbd-ee13-11eb-9e97-a87eeabdefba",
-                    "sortorder": 16,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "e5739feb-21d0-430a-968f-caadd8e4ccf7",
-                        "label": "Updater Name Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "6c219cc7-ee13-11eb-a823-a87eeabdefba",
-                    "label": "Updater Name Type",
-                    "node_id": "6c218867-ee13-11eb-bc9f-a87eeabdefba",
-                    "sortorder": 17,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
-                        "defaultValue": null,
-                        "label": "Creation End Date",
-                        "maxDate": null,
-                        "minDate": null,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "6c219cd4-ee13-11eb-93a8-a87eeabdefba",
-                    "label": "Creation End Date",
-                    "node_id": "6c218862-ee13-11eb-aca3-a87eeabdefba",
-                    "sortorder": 13,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
-                        "label": "Creation Date Qualifier",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "6c219cca-ee13-11eb-9905-a87eeabdefba",
-                    "label": "Creation Date Qualifier",
-                    "node_id": "6c219cba-ee13-11eb-a59f-a87eeabdefba",
-                    "sortorder": 14,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f",
-                        "label": "Updater Name Use Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "6c219cd2-ee13-11eb-9037-a87eeabdefba",
-                    "label": "Updater Name Use Type",
-                    "node_id": "6c219cb6-ee13-11eb-9d6c-a87eeabdefba",
-                    "sortorder": 19,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
-                        "defaultValue": null,
-                        "label": "Creation Date",
-                        "maxDate": null,
-                        "minDate": null,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "6c219cdb-ee13-11eb-ad35-a87eeabdefba",
-                    "label": "Creation Date",
-                    "node_id": "6c218866-ee13-11eb-9911-a87eeabdefba",
-                    "sortorder": 12,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
                 },
                 {
                     "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
@@ -3526,6 +3496,36 @@
                     "sortorder": 4,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
+                        "label": "Update Date Qualifier",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6c219cd6-ee13-11eb-9e53-a87eeabdefba",
+                    "label": "Update Date Qualifier",
+                    "node_id": "6c219cbc-ee13-11eb-adab-a87eeabdefba",
+                    "sortorder": 25,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "6c21885f-ee13-11eb-ab73-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
+                        "label": "Update Date Qualifier Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "6c219cd3-ee13-11eb-8870-a87eeabdefba",
+                    "label": "Update Date Qualifier Metatype",
+                    "node_id": "6c218869-ee13-11eb-a23c-a87eeabdefba",
+                    "sortorder": 26,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "4136bad7-27f1-11eb-81ac-f875a44e0e11",
