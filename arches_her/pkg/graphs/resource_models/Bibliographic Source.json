@@ -390,14 +390,21 @@
                     "cardid": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                            "constraintid": "7c2ac85c-9dda-4c7a-a768-a750c19d5e2e",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
                     "helpenabled": false,
                     "helptext": null,
                     "helptitle": null,
-                    "instructions": "Summary of the geospatial data describing the resource location",
+                    "instructions": "Summary of the data relating to the creation and amendment of the record.",
                     "is_editable": true,
                     "name": "Audit Metadata",
                     "nodegroup_id": "eb6a4c81-eeca-11eb-a970-a87eeabdefba",
@@ -1314,21 +1321,6 @@
                 {
                     "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
                     "config": {
-                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
-                        "label": "Update Date Qualifier",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "eb6a75c5-eeca-11eb-a843-a87eeabdefba",
-                    "label": "Update Date Qualifier",
-                    "node_id": "eb6a617a-eeca-11eb-8411-a87eeabdefba",
-                    "sortorder": 20,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
-                    "config": {
                         "defaultValue": "c2051d53-40e7-4a2d-a4b4-02a31da37fd1",
                         "label": "Creator Name Currency",
                         "options": [],
@@ -1389,41 +1381,6 @@
                 {
                     "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
-                        "defaultValue": null,
-                        "label": "Update End Date",
-                        "maxDate": null,
-                        "minDate": null,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "eb6a6189-eeca-11eb-8c4c-a87eeabdefba",
-                    "label": "Update End Date",
-                    "node_id": "eb6a616f-eeca-11eb-bfd9-a87eeabdefba",
-                    "sortorder": 19,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Updater Name",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "uneditable": false,
-                        "width": "100%"
-                    },
-                    "id": "eb6a75c8-eeca-11eb-bca8-a87eeabdefba",
-                    "label": "Updater Name",
-                    "node_id": "eb6a617b-eeca-11eb-bf4d-a87eeabdefba",
-                    "sortorder": 11,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
-                    "config": {
                         "defaultValue": "",
                         "label": "Creator Name",
                         "maxLength": null,
@@ -1459,21 +1416,6 @@
                 {
                     "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
                     "config": {
-                        "defaultValue": "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f",
-                        "label": "Updater Name Use Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "eb6a75c1-eeca-11eb-818a-a87eeabdefba",
-                    "label": "Updater Name Use Type",
-                    "node_id": "eb6a6174-eeca-11eb-b398-a87eeabdefba",
-                    "sortorder": 14,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
-                    "config": {
                         "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
                         "defaultValue": null,
                         "label": "Creation End Date",
@@ -1487,24 +1429,6 @@
                     "node_id": "eb6a4c86-eeca-11eb-9b8c-a87eeabdefba",
                     "sortorder": 8,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": "",
-                        "label": "Date of Last Update",
-                        "maxDate": false,
-                        "minDate": false,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "eb6a75c4-eeca-11eb-8619-a87eeabdefba",
-                    "label": "Date of Last Update",
-                    "node_id": "eb6a6170-eeca-11eb-b25f-a87eeabdefba",
-                    "sortorder": 18,
-                    "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000004"
                 },
                 {
@@ -2039,21 +1963,6 @@
                 {
                     "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
                     "config": {
-                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
-                        "label": "Creator Name Currency Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "eb6a6187-eeca-11eb-b97e-a87eeabdefba",
-                    "label": "Creator Name Currency Metatype",
-                    "node_id": "eb6a6175-eeca-11eb-8a47-a87eeabdefba",
-                    "sortorder": 6,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
-                    "config": {
                         "defaultValue": "ae5d0ae4-4db5-4674-9af5-0e35801449b3",
                         "label": "Validation Metatype",
                         "options": [],
@@ -2078,6 +1987,104 @@
                     "label": "Cross Reference Note Metatype",
                     "node_id": "c747550e-eeca-11eb-ba2e-a87eeabdefba",
                     "sortorder": 4,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
+                        "label": "Creator Name Currency Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "eb6a6187-eeca-11eb-b97e-a87eeabdefba",
+                    "label": "Creator Name Currency Metatype",
+                    "node_id": "eb6a6175-eeca-11eb-8a47-a87eeabdefba",
+                    "sortorder": 6,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Updater Name",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "uneditable": false,
+                        "width": "100%"
+                    },
+                    "id": "eb6a75c8-eeca-11eb-bca8-a87eeabdefba",
+                    "label": "Updater Name",
+                    "node_id": "eb6a617b-eeca-11eb-bf4d-a87eeabdefba",
+                    "sortorder": 11,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f",
+                        "label": "Updater Name Use Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "eb6a75c1-eeca-11eb-818a-a87eeabdefba",
+                    "label": "Updater Name Use Type",
+                    "node_id": "eb6a6174-eeca-11eb-b398-a87eeabdefba",
+                    "sortorder": 14,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Date of Last Update",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "eb6a75c4-eeca-11eb-8619-a87eeabdefba",
+                    "label": "Date of Last Update",
+                    "node_id": "eb6a6170-eeca-11eb-b25f-a87eeabdefba",
+                    "sortorder": 18,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
+                },
+                {
+                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "defaultValue": null,
+                        "label": "Update End Date",
+                        "maxDate": null,
+                        "minDate": null,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "eb6a6189-eeca-11eb-8c4c-a87eeabdefba",
+                    "label": "Update End Date",
+                    "node_id": "eb6a616f-eeca-11eb-bfd9-a87eeabdefba",
+                    "sortorder": 19,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
+                },
+                {
+                    "card_id": "eb6a4c83-eeca-11eb-831c-a87eeabdefba",
+                    "config": {
+                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
+                        "label": "Update Date Qualifier",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "eb6a75c5-eeca-11eb-a843-a87eeabdefba",
+                    "label": "Update Date Qualifier",
+                    "node_id": "eb6a617a-eeca-11eb-8411-a87eeabdefba",
+                    "sortorder": 20,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -2148,6 +2155,15 @@
             "deploymentfile": null,
             "description": "Describes how to document the sources used in the compilation or enhancement of heritage assets. This information provides authority for the entries without which the entries have no substantiating evidence. The information also allows future users to trace the origin of a given entry and to avoid the inefficiency of re-examining sources that have already been checked.",
             "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "24d7b584-5464-11e9-8e43-000d3ab1e588",
+                    "edgeid": "eb6adb3c-eeca-11eb-bc2e-a87eeabdefba",
+                    "graph_id": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
+                    "rangenode_id": "eb6a4c81-eeca-11eb-a970-a87eeabdefba"
+                },
                 {
                     "description": null,
                     "domainnode_id": "46fbf794-95ce-11ea-9a86-f875a44e0e11",
@@ -2822,15 +2838,6 @@
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
                     "rangenode_id": "eb6a616d-eeca-11eb-b2e6-a87eeabdefba"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "24d7b584-5464-11e9-8e43-000d3ab1e588",
-                    "edgeid": "eb6adb3c-eeca-11eb-bc2e-a87eeabdefba",
-                    "graph_id": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
-                    "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "rangenode_id": "eb6a4c81-eeca-11eb-a970-a87eeabdefba"
                 },
                 {
                     "description": null,
