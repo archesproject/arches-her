@@ -203,26 +203,32 @@
                         {% for desc in resource_data|val_from_key:"Descriptions" %}
                            {% ifequal desc|val_from_key:"Description Type"|val_from_key:"@display_value" "Summary" %}
                            <div>
-                              <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}<br>
-                              {{ desc|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
+                              <p>
+                                 <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}<br>
+                                 {{ desc|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
+                              </p>
                            </div>
                            {% endifequal %}
                         {% endfor %}
                         {% for desc in resource_data|val_from_key:"Descriptions" %}
                            {% ifequal desc|val_from_key:"Description Type"|val_from_key:"@display_value" "Full" %}
                            <div>
-                              <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}<br>
-                              {{ desc|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
+                              <p>
+                                 <strong>Description Type :</strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}<br>
+                                 {{ desc|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
+                              </p>
                            </div>
                            {% endifequal %}
                         {% endfor %}
                         {% for desc in resource_data|val_from_key:"Descriptions" %}
                            {% ifnotequal desc|val_from_key:"Description Type"|val_from_key:"@display_value" "Summary" %}
                            {% ifnotequal desc|val_from_key:"Description Type"|val_from_key:"@display_value" "Full" %}
-                           <p>
-                              <strong>Description Type: </strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}<br>
-                              {{ desc|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
-                           </p>
+                           <div>
+                              <p>
+                                 <strong>Description Type: </strong>{{ desc|val_from_key:"Description Type"|val_from_key:"@display_value" }}<br>
+                                 {{ desc|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
+                              </p>
+                           </div>
                            {% endifnotequal %}
                            {% endifnotequal %}
                         {% endfor %}
