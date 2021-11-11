@@ -1,4 +1,4 @@
-define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable'], function(_, ko, arches, reportUtils) {
+define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable', 'views/components/reports/scenes/table'], function(_, ko, arches, reportUtils) {
     return ko.components.register('views/components/reports/scenes/name', {
         viewModel: function(params) {
             var self = this;
@@ -15,9 +15,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             };
 
             self.dataConfig = {
-                name: 'Name',
-                nameUseType: 'Name Use Type',
-                nameCurrency: 'Name Currency'
+                name: 'names'
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -26,7 +24,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.add = params.addTile || self.addNewTile;
             self.names = ko.observableArray();
             self.identifiers = ko.observableArray();
-            self.exactMatch = ko.observableArray();
             self.type = ko.observable();
             self.summary = params.summary || false;
             self.visible = {
@@ -40,33 +37,39 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             if(params?.compiled){
                 self.names(params.data.names);
                 self.identifiers(params.data.identifiers);
-                self.exactMatch(params.data.exactMatch);
                 self.type(params.data.type);
             } else {
-                let nameData = params.data()[self.dataConfig.name];
-                if(nameData?.length === undefined){
-                    nameData = [nameData]
-                } 
+                const rawNameData = self.getRawNodeValue(params.data(), {
+                    testPaths: [
+                        ["names"],
+                        [self.dataConfig.name], 
+                        [`${self.dataConfig.name} names`]
+                    ]
+                });
+                const nameData = Array.isArray(rawNameData) ? rawNameData : [rawNameData]
 
                 self.names(nameData.map(x => {
-                    const type = self.getNodeValue(x, {
+                    const nameUseType = self.getNodeValue(x, {
                         testPaths: [
-                            [`${self.dataConfig.name.toLowerCase()}_type`], 
-                            ['type']
+                            ['name use type'],
+                            [`${self.dataConfig.name} name use type`],
+                            [`${self.dataConfig.nameChildren} name use type`]
                         ]});
-                    const content = self.getNodeValue(x, {
+                    const name = self.getNodeValue(x, {
                         testPaths: [
-                            [`${self.dataConfig.name.toLowerCase()}_content`], 
-                            ['content']
+                            ['name'],
+                            [`${self.dataConfig.name} name`],
+                            [`${self.dataConfig.nameChildren} name`]
                         ]});
-                    const language = self.getNodeValue(x, {
+                    const currency = self.getNodeValue(x, {
                         testPaths: [
-                            [`${self.dataConfig.name.toLowerCase()}_language`],
-                            ['language']
+                            ['name currency'],
+                            [`${self.dataConfig.name} name currency`],
+                            [`${self.dataConfig.nameChildren} name currency`]
                         ]});
 
                     const tileid = self.getTileId(x);
-                    return { type, content, language, tileid }
+                    return { name, nameUseType, currency, tileid }
                 }));
 
                 let identifierData = params.data()[self.dataConfig.identifier];
@@ -90,14 +93,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const tileid = self.getTileId(x);
                         return { type, content, tileid }
                     }));
-                }
-
-                let exactMatchData = self.getRawNodeValue(params.data(), self.dataConfig.exactMatch);
-                if(exactMatchData) {
-                    if(exactMatchData.length === undefined){
-                        exactMatchData = [exactMatchData]
-                    }
-                    self.exactMatch(exactMatchData.map(x => self.getNodeValue(x)))
                 }
 
                 self.type(self.getNodeValue(params.data(), self.dataConfig.type));
