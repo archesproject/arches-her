@@ -14,8 +14,8 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
-                {id: 'name', title: 'Names and Classifications'},
-                {id: 'description', title: 'Description'},
+                {id: 'name', title: 'Names/Identifiers'},
+                {id: 'description', title: 'Descriptions'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -24,42 +24,8 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: {
-                    graph: 'names',
-                    metadata: [{
-                        key: 'Name',
-                        path: 'placename'
-                    }, {
-                        key: 'Name Currency',
-                        path: 'placename'
-                    }, {
-                        key: 'Name Use Type',
-                        path: 'placename'
-                    }]
-                }
-            };
-            const nameData = self.getRawNodeValue(self.resource(), 'names');
-            
-            self.compiled = {
-                names: nameData.map(x => {
-                    const currency = self.getNodeValue(x, {
-                        testPaths: [
-                            ['placename currency']
-                        ]});
-                    const name = self.getNodeValue(x, {
-                        testPaths: [
-                            ['placename']
-                        ]});
-                    const nameUseType = self.getNodeValue(x, {
-                        testPaths: [
-                            ['placename use type']
-                        ]});
-
-                    const tileid = self.getTileId(x);
-                    return { name, nameUseType, currency, tileid }
-                }),
-                identifiers: [],
-                type: []
+                name: 'names',
+                nameChildren: 'placename'
             };
 
             self.nameCards = {};
@@ -74,8 +40,8 @@ define([
 
                 self.nameCards = {
                     name: self.cards?.['placenames'],
-                    identifier: self.cards?.['identifier for person'],
-                    exactMatch: self.cards?.['external uri for person'],
+                    externalCrossReferences: self.cards?.['external cross references'],
+                    systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
 
                 self.descriptionCards = {

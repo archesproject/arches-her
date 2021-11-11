@@ -9,13 +9,15 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 columns: Array(4).fill(null)
             };
 
-            self.identifierTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
+            this.crossReferenceTableConfig = {
+                ...this.defaultTableConfig,
+                "columns": Array(4).fill(null)
             };
 
             self.dataConfig = {
-                name: 'names'
+                name: 'names',
+                xref: 'external cross references',
+                systemRef: 'system reference numbers'
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -23,21 +25,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.names = ko.observableArray();
-            self.identifiers = ko.observableArray();
+            self.crossReferences = ko.observableArray();
+            self.systemReferenceNumbers = ko.observable();
             self.type = ko.observable();
             self.summary = params.summary || false;
             self.visible = {
                 names: ko.observable(true),
-                identifiers: ko.observable(true),
-                classifications: ko.observable(true)
+                crossReferences: ko.observable(true),
+                systemReferenceNumbers: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
                 self.names(params.data.names);
-                self.identifiers(params.data.identifiers);
-                self.type(params.data.type);
+                self.crossReferences(params.data.crossReferences);
+                self.systemReferenceNumbers(params.data.referenceNumbers);
             } else {
                 const rawNameData = self.getRawNodeValue(params.data(), {
                     testPaths: [
@@ -53,50 +56,76 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         testPaths: [
                             ['name use type'],
                             [`${self.dataConfig.name} name use type`],
-                            [`${self.dataConfig.nameChildren} name use type`]
+                            [`${self.dataConfig.nameChildren} name use type`],
+                            [`${self.dataConfig.nameChildren} use type`]
                         ]});
                     const name = self.getNodeValue(x, {
                         testPaths: [
                             ['name'],
                             [`${self.dataConfig.name} name`],
-                            [`${self.dataConfig.nameChildren} name`]
+                            [`${self.dataConfig.nameChildren} name`],
+                            [`${self.dataConfig.nameChildren}`]
                         ]});
                     const currency = self.getNodeValue(x, {
                         testPaths: [
                             ['name currency'],
                             [`${self.dataConfig.name} name currency`],
-                            [`${self.dataConfig.nameChildren} name currency`]
+                            [`${self.dataConfig.nameChildren} name currency`],
+                            [`${self.dataConfig.nameChildren} currency`]
                         ]});
 
                     const tileid = self.getTileId(x);
                     return { name, nameUseType, currency, tileid }
                 }));
 
-                let identifierData = params.data()[self.dataConfig.identifier];
-                if(identifierData) {
-                    if(identifierData.length === undefined){
-                        identifierData = [identifierData]
-                    } 
+                const rawXrefData = self.getRawNodeValue(params.data(), {
+                    testPaths: [
+                        ["external cross references"]
+                    ]
+                });
+                const xrefData = rawXrefData ? Array.isArray(rawXrefData) ? rawXrefData : [rawXrefData] : undefined;
 
-                    self.identifiers(identifierData.map(x => {
-                        const type = self.getNodeValue(x,{
+                if(xrefData) {
+                    self.crossReferences(xrefData.map(x => {
+                        const name = self.getNodeValue(x,{
                             testPaths: [
-                                [`${self.dataConfig.identifier.toLowerCase()}_type`], 
-                                ['type']
+                                ['external cross reference']
                             ]});
-                        const content = self.getNodeValue(x, {
+                        const description = self.getNodeValue(x, {
                             testPaths: [
-                                [`${self.dataConfig.identifier.toLowerCase()}_content`], 
-                                ['content']
+                                ['external cross reference notes', 'external cross reference description']
                             ]});
+                        
+                        const source = self.getNodeValue(x, {
+                            testPaths: [['external cross reference source']]
+                        });
+
+                        const urlJson = self.getNodeValue(x, {
+                            testPaths: [['url']]
+                        });
+
+                        const url = urlJson && urlJson != '--' ? JSON.parse(urlJson) : undefined;
 
                         const tileid = self.getTileId(x);
-                        return { type, content, tileid }
+                        return { name, description, source, url, tileid }
                     }));
                 }
-
-                self.type(self.getNodeValue(params.data(), self.dataConfig.type));
             } 
+
+            const systemRefData = self.getRawNodeValue(params.data(), {
+                testPaths: [
+                    ["system reference numbers"]
+                ]
+            });
+
+            if(systemRefData) {
+                const systemRef = {};
+                systemRef.resourceId = self.getNodeValue(systemRefData, 'uuid', 'resourceid');
+                systemRef.legacyId = self.getNodeValue(systemRefData, 'legacyid', 'legacy id');
+                systemRef.primaryReferenceNumber = self.getNodeValue(systemRefData, 'primaryreferencenumber', 'primary reference number');
+                systemRef.tileid = self.getTileId(systemRefData);
+                self.systemReferenceNumbers(systemRef);
+            }
 
         },
         template: { require: 'text!templates/views/components/reports/scenes/name.htm' }

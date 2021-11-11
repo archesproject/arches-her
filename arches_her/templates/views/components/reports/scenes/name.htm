@@ -25,7 +25,7 @@
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
                                 <th class="min-tabletl">{% trans "Name Use Type" %}</th>
-                                <th class="none">{% trans "Name Currency" %}</th>
+                                <th class="min-medium">{% trans "Name Currency" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
@@ -53,42 +53,42 @@
         <!-- /ko -->
     </div>
 </div>
+
+<!-- External Reference -->
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.identifiers)}, css: {'fa-angle-double-right': visible.identifiers(), 'fa-angle-double-up': !visible.identifiers()}" class="fa toggle"></i> {% trans "Identifiers" %}</h2>
-    <span data-bind="if: cards.identifier && (!identifiers().length || cards.identifier.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.identifier)}"><i class="fa fa-mail-reply"></i> {% trans "Add Identifier" %}</a>
-    </span>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}" class="fa fa-angle-double-right toggle"></i> {% trans "External Cross References" %}</h2>
+    <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
 
     <!-- Collapsible content -->
-    <div data-bind="visible: visible.identifiers" class="aher-report-collapsible-container pad-lft">
-
-        <!-- ko ifnot: identifiers().length -->
-        <div class="aher-nodata-note">No identifiers for this resource</div>
+    <div data-bind="visible: visible.crossReferences" class="aher-report-collapsible-container pad-lft">
+        <!-- ko ifnot: crossReferences().length -->
+        <div class="aher-nodata-note">No references for this resource</div>
         <!-- /ko -->
-
-        <!-- ko if: identifiers().length -->
         
-        <div class="aher-report-subsection" >
-            <div>
+        <!-- ko if: crossReferences().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
                 <div class="aher-table">
                     <table class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
-                                <th class="min-tabletl">{% trans "Type" %}</th>
+                                <th class="min-tabletl">{% trans "Source" %}</th>
+                                <th class="min-medium">{% trans "Note" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
-                        <tbody data-bind="dataTablesForEach: { data: identifiers, dataTableOptions: identifierTableConfig }">
+                        <tbody data-bind="dataTablesForEach: {data: crossReferences, dataTableOptions: crossReferenceTableConfig}">
                             <tr>
-                                <td data-bind="text: content"></td>
-                                <td data-bind="text: type"></td>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: source"></td>
+                                <td data-bind="text: description"></td>
                                 <td class="aher-table-control">
-                                    <div data-bind="if: $parent.cards.identifier">
-                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.identifier)}">
+                                    <div data-bind="if: $parent.cards.externalCrossReferences">
+                                        <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: function() {$parent.delete(tileid, $parent.cards.identifier)}">
+                                        <a data-bind="click: function(){$parent.deleteTile(tileid, $parent.cards.externalCrossReferences)}">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -103,30 +103,37 @@
     </div>
 </div>
 
+<!-- System Reference Numbers section -->
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.classifications)}, css: {'fa-angle-double-right': visible.classifications(), 'fa-angle-double-up': !visible.classifications()}" class="fa toggle"></i> {% trans "Classification" %}</h2>
-    
-    <!-- Collapsible content -->
-    <div data-bind="visible: visible.classifications" class="aher-report-collapsible-container pad-lft">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferenceNumbers)}" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
+    <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="aher-report-a">
+        <i class="fa fa-mail-reply"></i>
+        <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span>
+        <span data-bind="ifnot: cards.systemReferenceNumbers.tiles().length">{% trans "Add Identifier" %}</span>
+    </a>
 
-        <!-- ko if: type || exactMatch().length -->
-        <div class="aher-report-subsection" >
-            <div>
-                <div class="aher-report-subsection-item pad-btm-sm">
-                    <div data-bind="if: dataConfig.type">
-                        <div class="aher-block-attributes pad-btm-sm">
-                            <div>
-                                <h4 class="aher-block-key">Type: 
-                                    <div class="aher-block-value" data-bind="text: type"></div>
-                                </h4>
-                                <div class="aher-card-control" data-bind="if: cards.type && type() != '--'">
-                                    <a class="aher-report-a" data-bind="click: function(){add(cards.type)}"><i class="fa fa-mail-reply"></i> {% trans "Edit Type" %}</a>
-                                </div>
-                                <div class="aher-card-control" data-bind="if: cards.type && type() == '--'">
-                                    <a class="aher-report-a" data-bind="click: function(){add(cards.type)}"><i class="fa fa-mail-reply"></i> {% trans "Add Type" %}</a>
-                                </div>
-                            </div>
-                        </div>
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.systemReferenceNumbers" class="aher-report-collapsible-container pad-lft">
+        <!-- ko ifnot: systemReferenceNumbers() -->
+        <div class="aher-nodata-note">No references for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: systemReferenceNumbers() -->
+        <div class="aher-report-subsection" data-bind="with: systemReferenceNumbers, as: 'srn'">
+
+            <div class="firstchild-container">
+                <div class="aher-report-subsection-ite" style="padding-top: 10px;">
+                    <div class="aher-block-attributes">
+                        <h4 class="aher-block-key">Resource ID: </h4>
+                        <div class="aher-block-value" data-bind="text:srn.resourceId"></div>
+                    </div>
+                    <div class="aher-block-attributes">
+                        <h4 class="aher-block-key">Legacy ID: </h4>
+                        <div class="aher-block-value" data-bind="text:srn.legacyId"></div>
+                    </div>
+                    <div class="aher-block-attributes">
+                        <h4 class="aher-block-key">Primary Reference Number: </h4>
+                        <div class="aher-block-value" data-bind="text:srn.primaryReferenceNumber"></div>
                     </div>
                 </div>
             </div>
