@@ -43,6 +43,7 @@
                     name: 'views/components/reports/scenes/description',
                     params: {
                         data: resource,
+                        dataConfig: descriptionDataConfig,
                         cards: descriptionCards,
                     }
                 }"></div>
@@ -53,16 +54,6 @@
                     name: 'views/components/reports/scenes/json',
                     params: {
                         resourceInstanceId: reportMetadata().resourceinstanceid,
-                    }
-                }"></div>
-            </div>
-            <!-- Communication Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/communication',
-                    params: {
-                        data: resource,
-                        cards: communicationCards
                     }
                 }"></div>
             </div>

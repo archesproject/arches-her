@@ -1,0 +1,55 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Descriptions" %}</h2>
+    <span data-bind="if: cards.descriptions && (!descriptions().length || cards.descriptions.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.descriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.descriptions" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: descriptions().length -->
+        <div class="aher-nodata-note">No descriptions for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: descriptions().length -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Content" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: descriptions, dataTableOptions: descriptionTableConfig }">
+                            <tr>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: content"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.descriptions">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.descriptions)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: function() {$parent.delete(tileid, $parent.cards.descriptions)}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

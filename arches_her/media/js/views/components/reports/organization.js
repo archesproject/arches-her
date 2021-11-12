@@ -14,8 +14,8 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
-                {id: 'name', title: 'Names/Identifiers'},
-                {id: 'description', title: 'Descriptions'},
+                {id: 'name', title: 'Names and Classifications'},
+                {id: 'description', title: 'Description'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -24,7 +24,7 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'organization',
+                name: 'names',
                 type: undefined,
             };
 
@@ -40,12 +40,12 @@ define([
 
                 self.nameCards = {
                     name: self.cards?.['names'],
-                    externalCrossReferences: self.cards?.['external cross references'],
-                    systemReferenceNumbers: self.cards?.['system reference numbers'],
+                    identifier: self.cards?.['identifier for person'],
+                    exactMatch: self.cards?.['external uri for person'],
                 };
 
                 self.descriptionCards = {
-                    statement: self.cards?.['statement about person'],
+                    descriptions: self.cards?.['descriptions'],
                 };
             }
 

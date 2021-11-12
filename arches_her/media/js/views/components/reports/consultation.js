@@ -28,6 +28,10 @@ define([
                 type: undefined,
             };
 
+            self.descriptionDataConfig = {
+                descriptions: 'consultation descriptions',
+            };
+
             self.nameCards = {};
             self.descriptionCards = {};
             self.summary = params.summary;
@@ -45,7 +49,7 @@ define([
                 };
 
                 self.descriptionCards = {
-                    statement: self.cards?.['statement about person'],
+                    descriptions: self.cards?.['consultation descriptions'],
                 };
             }
 

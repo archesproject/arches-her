@@ -6,11 +6,12 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/description',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('activity-report', {
         viewModel: function(params) {
-            var self = this;
+            const self = this;
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
@@ -22,6 +23,10 @@ define([
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+
+            self.descriptionDataConfig = {
+                descriptions: 'activity descriptions'
+            }
 
             self.nameDataConfig = {
                 name: 'activity',
@@ -45,7 +50,7 @@ define([
                 };
 
                 self.descriptionCards = {
-                    statement: self.cards?.['statement about person'],
+                    descriptions: self.cards?.['activity descriptions'],
                 };
             }
 

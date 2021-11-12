@@ -27,6 +27,9 @@ define([
                 name: 'period',
                 type: undefined,
             };
+            self.descriptionDataConfig = {
+                descriptions: 'period descriptions',
+            };
 
             self.nameCards = {};
             self.descriptionCards = {};
@@ -45,7 +48,7 @@ define([
                 };
 
                 self.descriptionCards = {
-                    statement: self.cards?.['statement about person'],
+                    descriptions: self.cards?.['period descriptions'],
                 };
             }
 

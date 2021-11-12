@@ -45,7 +45,7 @@ define([
                 };
 
                 self.descriptionCards = {
-                    statement: self.cards?.['statement about person'],
+                    descriptions: self.cards?.['descriptions'],
                 };
             }
 

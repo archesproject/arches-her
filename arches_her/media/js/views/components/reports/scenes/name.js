@@ -1,4 +1,4 @@
-define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable', 'views/components/reports/scenes/table'], function(_, ko, arches, reportUtils) {
+define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable'], function(_, ko, arches, reportUtils) {
     return ko.components.register('views/components/reports/scenes/name', {
         viewModel: function(params) {
             var self = this;
