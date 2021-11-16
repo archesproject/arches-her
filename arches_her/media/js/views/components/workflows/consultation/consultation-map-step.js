@@ -9,13 +9,17 @@ define([
     function viewModel(params) {
         var self = this;
 
-        Object.assign(self, params.form);
+        _.extend(this, params.form);
         this.applicationAreaBounds = ko.observable();
         var color = 'rgb(102, 195, 91)';
         var strokecolor = '#fff';
         params.form.save = function() {
             self.tile().save().then(
                 function(){
+                    params.form.savedData({
+                        data: koMapping.toJS(self.tile().data),
+                        resourceid: self.tile().resourceinstance_id,
+                    });
                     params.form.complete(true);
                     params.form.saving(false);
                 }
