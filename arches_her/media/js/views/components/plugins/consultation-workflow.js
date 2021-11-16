@@ -46,17 +46,18 @@ define([
                         heading: 'Consultation Dates',
                         text: 'The target date is automatically set 21 days from log date',
                     },
-                    workflowstepclass: 'hide-completion-date',
                     layoutSections: [
                         {
                             componentConfigs: [
                                 {
                                     componentName: 'consultation-dates-step',
                                     uniqueInstanceName: 'consultation-dates-step',
+                                    tilesManaged: 'one',
                                     parameters: {
                                         graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                                         nodegroupid: '40eff4c9-893a-11ea-ac3a-f875a44e0e11',
-                                    }
+                                        resourceid: "['consultation-location']['consultation-map-step'][0]['resourceid']",
+                                    },
                                 }
                             ]
                         }
