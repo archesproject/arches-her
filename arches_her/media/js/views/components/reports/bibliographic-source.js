@@ -6,6 +6,8 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/audit',
+    'views/components/reports/scenes/default',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('bibliographic-source-report', {
@@ -14,8 +16,9 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
-                {id: 'name', title: 'Names/Identifiers'},
-                {id: 'description', title: 'Descriptions'},
+                {id: 'bib-source', title: 'Bibliographic Source Details'},
+                {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -29,6 +32,7 @@ define([
             };
 
             self.nameCards = {};
+            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -43,7 +47,9 @@ define([
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
-
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata']
+                }
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                 };

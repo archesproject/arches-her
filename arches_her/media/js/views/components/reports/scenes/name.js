@@ -17,7 +17,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.dataConfig = {
                 name: 'names',
                 xref: 'external cross references',
-                systemRef: 'system reference numbers'
+                systemRef: 'system reference numbers',
+                parent: undefined,
+                recordStatus: undefined
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -27,7 +29,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.names = ko.observableArray();
             self.crossReferences = ko.observableArray();
             self.systemReferenceNumbers = ko.observable();
-            self.type = ko.observable();
+            self.parentData = ko.observable();
+            self.recordStatusData = ko.observable();
             self.summary = params.summary || false;
             self.visible = {
                 names: ko.observable(true),
@@ -125,6 +128,38 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 systemRef.primaryReferenceNumber = self.getNodeValue(systemRefData, 'primaryreferencenumber', 'primary reference number');
                 systemRef.tileid = self.getTileId(systemRefData);
                 self.systemReferenceNumbers(systemRef);
+            }
+
+            if(self.dataConfig.parent){
+                self.parentData = ko.observable({
+                    sections:
+                        [
+                            {
+                                title: 'Relationships',
+                                data: [{
+                                    key: 'Parent Resource',
+                                    value: self.getRawNodeValue(params.data(), self.dataConfig.parent),
+                                    type: 'resource'
+                                }]
+                            }
+                        ]
+                });
+            }
+
+            if(self.dataConfig.recordStatus){
+                self.recordStatusData = ko.observable({
+                    sections:
+                        [
+                            {
+                                title: 'Record Status',
+                                data: [{
+                                    key: 'Status',
+                                    value: self.getNodeValue(params.data(), self.dataConfig.recordStatus, 'record status'),
+                                    type: 'kv'
+                                }]
+                            }
+                        ]
+                });
             }
 
         },

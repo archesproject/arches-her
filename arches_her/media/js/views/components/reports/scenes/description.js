@@ -9,17 +9,25 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 columns: Array(3).fill(null)
             };
 
+            self.citationTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(7).fill(null)
+            };
+
             self.dataConfig = {
                 descriptions: 'descriptions',
+                citation: undefined,
             }
 
             self.cards = Object.assign({}, params.cards);
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
+            self.citations = ko.observableArray();
             self.descriptions = ko.observableArray();
             self.visible = {
                 descriptions: ko.observable(true),
+                citation: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
@@ -42,6 +50,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
 
                         const tileid = self.getTileId(x);
                         return { type, content, tileid };
+                    }));
+                }
+
+                const rawCitationData = self.getRawNodeValue(params.data(), self.dataConfig.citation);
+                const citationData = rawCitationData ? Array.isArray(rawCitationData) ? rawCitationData : [rawCitationData] : undefined; 
+                if(citationData) {
+                    self.citations(descriptionData.map(x => {
+                        const link = self.getResourceLink(x);
+                        const linkText = self.getNodeValue(x);
+                        const sourceNumber = self.getNodeValue(x, 'source number', 'source number value');
+                        const pages = self.getNodeValue(x, 'pages', 'page(s)');
+                        const figures = self.getNodeValue(x, 'figures', 'figs.');
+                        const plates = self.getNodeValue(x, 'plates', 'plate(s)');
+                        const comment = self.getNodeValue(x, 'source comment', 'comment')
+                        const tileid = self.getTileId(x);
+                        return { link, linkText, sourceNumber, pages, figures, plates, comment, tileid };
                     }));
                 }
 

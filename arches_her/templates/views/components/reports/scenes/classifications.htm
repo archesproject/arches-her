@@ -1,0 +1,19 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div data-bind="visible: !!dataConfig.type, component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: typeData,
+    }
+}"></div>
+<div data-bind="visible: !!dataConfig.activityTimespan, component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: activityTimespan,
+    }
+}"></div>
+{% endblock body %}
+{% endblock report %}

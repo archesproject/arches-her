@@ -16,6 +16,7 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Classifications'},
                 {id: 'description', title: 'Description'},
+                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -29,6 +30,7 @@ define([
             };
 
             self.nameCards = {};
+self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};

@@ -51,5 +51,61 @@
         <!-- /ko -->
     </div>
 </div>
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.citation)}, css: {'fa-angle-double-right': visible.citation(), 'fa-angle-double-up': !visible.citation()}" class="fa toggle"></i> {% trans "Citations" %}</h2>
+    <span data-bind="if: cards.citation && (!citations() || cards.citation.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.citation)}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.citation" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: citations().length -->
+        <div class="aher-nodata-note">No citation for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: citations().length -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Source" %}</th>
+                                <th>{% trans "Source Number" %}</th>
+                                <th>{% trans "Pages" %}</th>
+                                <th>{% trans "Figures" %}</th>
+                                <th>{% trans "Plates" %}</th>
+                                <th>{% trans "Comment" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: citations, dataTableOptions: citationTableConfig }">
+                            <tr>
+                                <td><a data-bind="attr: {href: link}, text: linkText"></a></td>
+                                <td data-bind="text: sourceNumber"></td>
+                                <td data-bind="text: pages"></td>
+                                <td data-bind="text: figures"></td>
+                                <td data-bind="text: plates"></td>
+                                <td data-bind="text: comment"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.citation">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.citation)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: function() {$parent.delete(tileid, $parent.cards.citation)}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
 {% endblock body %}
 {% endblock report %}
