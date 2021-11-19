@@ -106,7 +106,6 @@ define([
                                     uniqueInstanceName: 'app-ref-numbers', /* unique to step */
                                     tilesManaged: 'many',
                                     parameters: {
-                                        title: 'cats',
                                         graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                                         nodegroupid: '8d41e4a2-a250-11e9-82f1-00224800b26d',
                                         resourceid: "['consultation-location']['consultation-map-step'][0]['resourceid']",
