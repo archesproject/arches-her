@@ -1,19 +1,34 @@
 define([
     'jquery',
+    'underscore',
     'arches',
     'knockout',
     'knockout-mapping',
     'geojson-extent',
-    'views/components/workflows/new-tile-step'
-], function($, arches, ko, koMapping, geojsonExtent, NewTileStep) {
+], function($, _, arches, ko, koMapping, geojsonExtent) {
     function viewModel(params) {
         var self = this;
 
-        Object.assign(self, params.form);
-
+        _.extend(this, params.form);
         this.applicationAreaBounds = ko.observable();
         var color = 'rgb(102, 195, 91)';
         var strokecolor = '#fff';
+        this.tile().transactionId = this.workflowId;
+        params.form.save = function() {
+            self.tile().save().then(
+                function(){
+                    params.form.savedData({
+                        tileData: koMapping.toJSON(self.tile().data),
+                        resourceInstanceId: self.tile().resourceinstance_id,
+                        resourceid: self.tile().resourceinstance_id,
+                        tileId: self.tile().tileid,
+                        nodegroupId: self.tile().nodegroup_id,
+                    });
+                    params.form.complete(true);
+                    params.form.saving(false);
+                }
+            )
+        };
         this.sources = {
             "related-application-area": {
                 "type": "geojson",
@@ -160,7 +175,7 @@ define([
     ko.components.register('consultation-map-step', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/consultation-map-step.htm'
+            require: 'text!templates/views/components/workflows/consultation/consultation-map-step.htm'
         }
     });
 
