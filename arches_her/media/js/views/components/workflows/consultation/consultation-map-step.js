@@ -13,6 +13,7 @@ define([
         this.applicationAreaBounds = ko.observable();
         var color = 'rgb(102, 195, 91)';
         var strokecolor = '#fff';
+        this.tile().transactionId = this.workflowId;
         params.form.save = function() {
             self.tile().save().then(
                 function(){

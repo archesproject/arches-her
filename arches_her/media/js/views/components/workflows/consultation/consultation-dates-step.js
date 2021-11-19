@@ -20,7 +20,7 @@ define([
         this.consultationLocationNodegroupId = '152aa058-936d-11ea-b517-f875a44e0e11';
         this.logDateNodeId = "40eff4cd-893a-11ea-b0cc-f875a44e0e11";
         this.targetDateNodeId = "7224417b-893a-11ea-b383-f875a44e0e11";
-        this.tile.transactionId = this.workflowId;
+        this.tile().transactionId = this.workflowId;
 
         this.getResourceDisplayName = function(resourceids) {
             var retStr = '';
