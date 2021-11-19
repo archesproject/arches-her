@@ -7,8 +7,6 @@ define([
     function viewModel(params) {
 
         var self = this;
-        params.form.title = 'cats and dogs';
-        params.title = 'catdogs';
         $.extend(this, params.form);
         self.resourceid = params.resourceid;
 
@@ -22,6 +20,7 @@ define([
         this.consultationLocationNodegroupId = '152aa058-936d-11ea-b517-f875a44e0e11';
         this.logDateNodeId = "40eff4cd-893a-11ea-b0cc-f875a44e0e11";
         this.targetDateNodeId = "7224417b-893a-11ea-b383-f875a44e0e11";
+        this.tile.transactionId = this.workflowId;
 
         this.getResourceDisplayName = function(resourceids) {
             var retStr = '';
@@ -37,11 +36,17 @@ define([
         };
 
         this.saveConsultationNameTile = function() {
-            var nameCard = self.topCards.find(function(topCard) {
+            let nameCardTile;
+            const nameCard = self.topCards.find(function(topCard) {
                 return topCard.nodegroupid == self.consultationNameNodegroupId;
             });
-            var nameCardTile = nameCard.getNewTile();
-            nameCardTile.data[self.consultationNameNodeId] = self.concatName();
+            if (!nameCard.tiles().length) {
+                nameCardTile = nameCard.getNewTile();
+            } else {
+                nameCardTile = nameCard.tiles()[0];
+            }
+            nameCardTile.data[self.consultationNameNodeId](self.concatName());
+            nameCardTile.transactionId = self.workflowId;
             return nameCardTile.save();
         };
 
@@ -79,7 +84,7 @@ define([
                 self.tile().data[self.logDateNodeId].subscribe(function(val) {
                     logDateVal = new Date(val);
                     if (logDateVal != 'Invalid Date') {
-                        self.concatName('Consultation for '+self.displayName()+' on '+logDateVal.toLocaleDateString());
+                        self.concatName(`Consultation for ${self.displayName()} on ${logDateVal.toLocaleDateString()}`);
                         targetDateVal = self.addDays(logDateVal, DefaultTargetDateLeadTime);
                         self.tile().data[self.targetDateNodeId](targetDateVal);
                     }
@@ -89,17 +94,21 @@ define([
 
         params.form.save = function() {
             self.tile().save()
-                .then(self.saveConsultationNameTile())
                 .then(
-                    function(){
-                        params.form.savedData({
-                            data: koMapping.toJS(self.tile().data),
-                            tileid: self.tile().tileid,
-                            resourceid: self.tile().resourceinstance_id,
-                        });
-                        params.form.complete(true);
-                        params.form.saving(false);
+                    function(data){
+                        self.tile().tileid = data.tileid;
+                        return self.saveConsultationNameTile();
+                    })
+                .then(function(){
+                    params.form.savedData({
+                        tileData: koMapping.toJSON(self.tile().data),
+                        tileId: self.tile().tileid,
+                        resourceInstanceId: self.tile().resourceinstance_id,
+                        nodegroupId: self.tile().nodegroup_id
                     });
+                    params.form.complete(true);
+                    params.form.saving(false);
+                });
         };
 
         self.tile().dirty.subscribe(function(dirty) {

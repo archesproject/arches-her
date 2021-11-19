@@ -17,8 +17,11 @@ define([
             self.tile().save().then(
                 function(){
                     params.form.savedData({
-                        data: koMapping.toJS(self.tile().data),
+                        tileData: koMapping.toJSON(self.tile().data),
+                        resourceInstanceId: self.tile().resourceinstance_id,
                         resourceid: self.tile().resourceinstance_id,
+                        tileId: self.tile().tileid,
+                        nodegroupId: self.tile().nodegroup_id,
                     });
                     params.form.complete(true);
                     params.form.saving(false);
