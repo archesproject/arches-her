@@ -57,6 +57,7 @@ define([
                                         graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                                         nodegroupid: '40eff4c9-893a-11ea-ac3a-f875a44e0e11',
                                         resourceid: "['consultation-location']['consultation-map-step'][0]['resourceid']",
+                                        hiddenNodes: "[40eff4ce-893a-11ea-ae2e-f875a44e0e11]",
                                     },
                                 }
                             ]
