@@ -4,6 +4,15 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             const self = this;
             Object.assign(self, reportUtils);
 
+            //Related Resource 2 column table configuration
+            self.relatedResourceTwoColumnTableConfig = {
+                ...self.defaultTableConfig,
+                "paging": true,
+                "searching": true,
+                "scrollY": "250px",
+                "columns": Array(2).fill(null)
+            };
+
             self.descriptionTableConfig = {
                 ...self.defaultTableConfig,
                 columns: Array(3).fill(null)
@@ -15,8 +24,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             };
 
             self.dataConfig = {
-                descriptions: 'descriptions',
-                citation: undefined,
+                descriptions: 'descriptions'
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -25,9 +33,12 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.add = params.addTile || self.addNewTile;
             self.citations = ko.observableArray();
             self.descriptions = ko.observableArray();
+            self.audience = ko.observableArray();
+            self.subjectData = ko.observable();
             self.visible = {
                 descriptions: ko.observable(true),
-                citation: ko.observable(true)
+                citation: ko.observable(true),
+                audience: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
@@ -56,7 +67,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 const rawCitationData = self.getRawNodeValue(params.data(), self.dataConfig.citation);
                 const citationData = rawCitationData ? Array.isArray(rawCitationData) ? rawCitationData : [rawCitationData] : undefined; 
                 if(citationData) {
-                    self.citations(descriptionData.map(x => {
+                    self.citations(citationData.map(x => {
                         const link = self.getResourceLink(x);
                         const linkText = self.getNodeValue(x);
                         const sourceNumber = self.getNodeValue(x, 'source number', 'source number value');
@@ -69,6 +80,30 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
+                const audienceTypeNode = self.getRawNodeValue(params.data(), self.dataConfig.audience);
+                if(Array.isArray(audienceTypeNode)){
+                    self.audience(audienceTypeNode.map(x => {
+                        const audienceType = self.getNodeValue(x);
+                        const tileid = self.getTileId(x);
+                        return {audienceType, tileid};
+                    }));
+                }
+
+                if(self.dataConfig.subject){
+                    self.subjectData = ko.observable({
+                        sections:
+                            [
+                                {
+                                    title: 'Archive Subject',
+                                    data: [{
+                                        key: 'Subject',
+                                        value: self.getRawNodeValue(params.data(), self.dataConfig.subject),
+                                        type: 'kv'
+                                    }]
+                                }
+                            ]
+                    });
+                }
             } 
 
         },

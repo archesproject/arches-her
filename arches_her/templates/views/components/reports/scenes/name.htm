@@ -56,7 +56,7 @@
 
 <!-- External Reference -->
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}" class="fa fa-angle-double-right toggle"></i> {% trans "External Cross References" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}" class="fa toggle"></i> {% trans "External Cross References" %}</h2>
     <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
 
     <!-- Collapsible content -->
@@ -105,7 +105,7 @@
 
 <!-- System Reference Numbers section -->
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferenceNumbers)}" class="fa fa-angle-double-right toggle"></i> {% trans "System Reference Numbers" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferenceNumbers)}, css: {'fa-angle-double-right': visible.systemReferenceNumbers(), 'fa-angle-double-up': !visible.systemReferenceNumbers()}" class="fa toggle"></i> {% trans "System Reference Numbers" %}</h2>
     <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="aher-report-a">
         <i class="fa fa-mail-reply"></i>
         <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span>

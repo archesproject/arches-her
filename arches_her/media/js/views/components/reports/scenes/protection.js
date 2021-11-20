@@ -6,6 +6,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             self.dataConfig = {
                 location: 'location data',
+                protection: 'designation and protection assignment'
             }
 
             self.cards = {};
@@ -14,42 +15,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.visible = {
-                geometryMetadata: ko.observable(true),
-                locality: ko.observable(true),
-                coordinates: ko.observable(true),
-                addresses: ko.observable(true),
-                descriptions: ko.observable(true),
-                administrativeAreas: ko.observable(true),
-                nationalGrid: ko.observable(true),
+                geospatial: ko.observable(true),
+                designations: ko.observable(true),
+                map: ko.observable(true),
                 areaAssignment: ko.observable(true),
                 landUse: ko.observable(true),
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
-
-            self.locationTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(6).fill(null)
-            };
-
-            self.addressTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(14).fill(null)
-            };
-
-            self.locDescriptionsTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
-            };
-
-            self.adminAreasTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(4).fill(null)
-            };
-
-            self.gridReferencesTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(2).fill(null)
-            };
 
             self.areaAssignmentsTableConfig = {
                 ...self.defaultTableConfig,
@@ -61,29 +33,20 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 columns: Array(7).fill(null)
             };
 
+            self.designationTableConfig = {
+                ...this.defaultTableConfig,
+                columns: Array(11).fill(null)
+            };
+
+            self.currentDesignation = ko.observable();
+            self.selectedGeometry = ko.observable();
+
             self.coordinateData = ko.observable();
-            self.geometryMetadata = {
-                compilerName: ko.observable(),
-                compileDate: ko.observable(),
-                updateDate: ko.observable(),
-                updaterName: ko.observable(),
-                authorizerName: ko.observable(),
-                authorizationDate: ko.observable(),
-                typeOfAuthorization: ko.observable()
-            };
-            self.geometryScale = {
-                captureScale: ko.observable(),
-                coordinateSystem: ko.observable(),
-                basemap: ko.observable(),
-                accuracy: ko.observable()
-            };
-            self.geometryShape = ko.observable();
-            self.geometryNotes = ko.observable();
-            self.recordEditExists = ko.observable(false);
-            self.geometryScaleExists = ko.observable(false);
+
+            self.geojson = ko.observable();
             self.areaAssignment = ko.observableArray();
             self.landUseClassification = ko.observableArray();
-
+            self.designations = ko.observableArray();
 
             // utitility function - checks whether at least one observable (or array object)
             // has a set value (used to determine whether a section is visible)
@@ -108,14 +71,58 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 return false;
             }
 
+            self.jumpToDesignationGeometry = (row) => {
+                self.selectedGeometry(row.geometry);
+            };
+
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
             } else {
+                const protectionNode = self.getRawNodeValue(params.data(), self.dataConfig.protection); 
+                if (protectionNode?.length) {
+                    this.designations(protectionNode.map(x => {
+                        const name = self.getNodeValue(x, 'designation names', 'designation name');
+                        const protectionType = self.getNodeValue(x, 'designation or protection type');
+                        const startDate = self.getNodeValue(x, 'designation and protection timespan', 'designation start date');
+                        const endDate = self.getNodeValue(x, 'designation and protection timespan', 'designation end date');
+                        const grade = self.getNodeValue(x, 'grade');
+                        const risk = self.getNodeValue(x, 'risk status');
+                        const amendmentDate = self.getNodeValue(x, 'designation and protection timespan', 'designation amendment date');
+                        const displayDate = self.getNodeValue(x, 'designation and protection timespan', 'display date');
+                        const dateQualifier = self.getNodeValue(x, 'designation and protection timespan', 'date qualifier');
+                        const reference = self.getNodeValue(x, 'references', 'reference');
+                        const tileid = self.getTileId(x);
+                        const geometry = self.getNodeValue(x, 'designation mapping', 'designation geometry');;
+                        return {
+                            amendmentDate,
+                            dateQualifier,
+                            displayDate,
+                            endDate,
+                            geometry,
+                            grade, 
+                            name,
+                            protectionType,
+                            reference,
+                            risk,
+                            startDate,
+                            tileid
+                        };
+                    }));
+
+                    self.geojson(self.designations().reduce((geojson, currentJson) => {
+                            const tileId = currentJson.tileid;
+                            const jsonWithTileId = currentJson.geometry.features.map(x => {
+                                x.properties.tileId = tileId;
+                                return x;
+                            });
+                            geojson.features = [...geojson.features, ...jsonWithTileId];
+                            return geojson;
+                        }, {features: [], type: 'FeatureCollection'}));
+                }
                 const locationNode = self.getRawNodeValue(params.data(), self.dataConfig.location);
 
-
                 const areaAssignmentsNode = self.getRawNodeValue(locationNode, 'area', 'area assignments');
-                if(areaAssignmentsNode){
+                if(Array.isArray(areaAssignmentsNode)){
                     self.areaAssignment(areaAssignmentsNode.map(x => {
                         const endDate = self.getNodeValue(x, 'area status timespan', 'area status end date');
                         const ownership = self.getNodeValue(x, 'ownership');
@@ -142,9 +149,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         self.landUseClassification([{classification, endDate, geology, reference, startDate, subSoil, tileid}]);
                     }
                 }
-
-
-
             }
         },
         template: { require: 'text!templates/views/components/reports/scenes/protection.htm' }

@@ -16,6 +16,14 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'location', title: 'Location Data'},
+                {id: 'protection', title: 'Designation and Protection Status'},
+                {id: 'assessments', title: 'Assessments'},
+                {id: 'status', title: 'Status and Ownership'},
+                {id: 'journey', title: 'Journey Details'},
+                {id: 'people', title: 'Associated People and Organizations'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -24,13 +32,30 @@ define([
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
 
-            self.nameDataConfig = {
-                type: undefined,
+            self.classificationDataConfig = {
+                maritimeProduction: 'construction phases',
+                components: undefined,
+                dimensions: 'dimensions'
             };
 
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation'
+            };
+
+            self.resourceDataConfig = {
+                files: 'digital file(s)'
+            }
+
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {}
             self.descriptionCards = {};
+            self.classificationCards = {};
+            self.scientificDateCards = {};
+            self.imagesCards = {};
+            self.peopleCards = {};
+            self.locationCards = {};
+            self.protectionCards = {};
+            self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
 

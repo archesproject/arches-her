@@ -6,6 +6,11 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/assessments',
+    'views/components/reports/scenes/images',
+    'views/components/reports/scenes/people',
+    'views/components/reports/scenes/people',
+    'views/components/reports/scenes/resources',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('heritage-area-report', {
@@ -33,12 +38,33 @@ define([
 
             self.nameDataConfig = {
                 name: 'heritage area',
-                type: undefined,
+                parent: 'parent area'
             };
+
+            self.classificationDataConfig = {
+                production: 'construction phases',
+                components: 'components',
+                usePhase: 'use phases'
+            };
+
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation'
+            };
+
+            self.resourceDataConfig = {
+                files: 'digital file(s)'
+            }
 
             self.nameCards = {};
             self.auditCards = {}
             self.descriptionCards = {};
+            self.classificationCards = {};
+            self.scientificDateCards = {};
+            self.imagesCards = {};
+            self.peopleCards = {};
+            self.locationCards = {};
+            self.protectionCards = {};
+            self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
 
@@ -55,6 +81,32 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
+                };
+
+                self.classificationCards = {
+                    production: self.cards?.['construction phases'],
+                    components: self.cards?.['components'],
+                    usePhase: self.cards?.['use phases']
+                };
+
+                self.assessmentCards = {
+                    scientificDate: self.cards?.['scientific date assignment']
+                };
+
+                self.imagesCards = {
+                    images: self.cards?.['images']
+                }
+
+                self.peopleCards = {
+                    people: self.cards?.['associated people and organizations']
+                };
+
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    consultations: self.cards?.['associated consultations'],
+                    files: self.cards?.['associated digital file(s)'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
             }
 

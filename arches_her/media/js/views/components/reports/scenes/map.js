@@ -122,27 +122,27 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'geojson-extent','vi
                 })
             };
 
-            self.jumpToDesignationGeometry = (row) => {
-                self.map().
-                    fitBounds(geojsonExtent(row.geometry));
-                const source = self.map().getSource('selected-designation')
+            self.selectedGeometry.subscribe(x => {
+                self.map().fitBounds(geojsonExtent(x));
+                const source = self.map().getSource('selected-geometry')
                 if(source) {
-                    data = row.geometry;
+                    data = x;
                 } else {
-                    self.map().addSource('selected-designation', {
+                    self.map().addSource('selected-geometry', {
                         type: 'geojson', 
-                        data: row.geometry
+                        data: x
                     });
                 }
-                changeSelectedSource(self.layers, 'selected-designation');
-            };
+                changeSelectedSource(self.layers, 'selected-geometry');
+            });
+;
 
             self.prepareMap = (sourceId, geojson) => {
                 if(!geojson){
                     return;
                 }
                 const mapParams = {};
-                if (geojson.features.length > 0) {
+                if (geojson.features?.length > 0) {
                     mapParams.bounds = geojsonExtent(geojson);
                     mapParams.fitBoundsOptions = { padding: 20 };
                 }
@@ -173,7 +173,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'geojson-extent','vi
                 self.map = ko.observable();
             };
 
-            self.geojson = params.geojson;
+            self.geojson = ko.unwrap(params.geojson);
             self.prepareMap('app-area-map-data', self.geojson);
         },
         template: { require: 'text!templates/views/components/reports/scenes/map.htm' }

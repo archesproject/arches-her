@@ -70,6 +70,7 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['activity descriptions'],
+                    citation: self.cards?.['associated bibliographic sources'],
                 };
             }
 

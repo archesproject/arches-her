@@ -16,6 +16,14 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'location', title: 'Location Data'},
+                {id: 'protection', title: 'Designation and Protection Status'},
+                {id: 'assessments', title: 'Assessments'},
+                {id: 'status', title: 'Status and Ownership'},
+                {id: 'journey', title: 'Journey Details'},
+                {id: 'people', title: 'Associated People and Organizations'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -24,13 +32,29 @@ define([
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
 
-            self.nameDataConfig = {
-                type: undefined,
+            self.classificationDataConfig = {
+                aircraftProduction: 'aircraft_construction_phase',
+                dimensions: 'aircraft dimensions'
             };
 
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation'
+            };
+
+            self.resourceDataConfig = {
+                files: 'digital file(s)'
+            }
+
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {}
             self.descriptionCards = {};
+            self.classificationCards = {};
+            self.scientificDateCards = {};
+            self.imagesCards = {};
+            self.peopleCards = {};
+            self.locationCards = {};
+            self.protectionCards = {};
+            self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
 
@@ -44,12 +68,31 @@ self.auditCards = {}
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
-
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
+                };
+
+                self.classificationCards = {
+                    production: self.cards?.['construction phase(s)'],
+                    dimensions: self.cards?.['aircraft dimensions']
+                };
+
+                self.assessmentCards = {
+                    scientificDate: self.cards?.['scientific date assignment']
+                };
+
+                self.peopleCards = {
+                    people: self.cards?.['associated people and organizations']
+                };
+
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    consultations: self.cards?.['associated consultations'],
+                    files: self.cards?.['associated digital file(s)'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
             }
-
         },
         template: { require: 'text!templates/views/components/reports/historic-aircraft.htm' }
     });

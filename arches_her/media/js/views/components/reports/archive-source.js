@@ -16,6 +16,9 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'images', title: 'Images'},
+                {id: 'archive', title: 'Archive Holding'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -26,11 +29,30 @@ define([
 
             self.nameDataConfig = {
                 name: 'archive source',
-                type: undefined,
+            };
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation', 
+                subject: 'subjects'
             };
 
+            self.resourceDataConfig = {
+                files: 'digital file(s)',
+                activities: undefined,
+                consultations: undefined,
+                assets: undefined,
+                period: 'periods'
+            };
+            
+            self.archiveDataConfig = {
+
+            }
+
             self.nameCards = {};
-self.auditCards = {}
+            self.imagesCards = {};
+            self.archiveCards = {};
+            self.resourcesCards = {};
+            self.classificationCards = {};
+            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -48,6 +70,7 @@ self.auditCards = {}
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['associated bibliographic sources']
                 };
             }
 

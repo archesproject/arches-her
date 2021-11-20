@@ -47,7 +47,39 @@
                         cards: descriptionCards,
                     }
                 }"></div>
-            </div>   
+            </div>
+
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/classifications',
+                    params: {
+                        data: resource,
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards
+                    }
+                }"></div>
+            </div>
+            <!-- Period Names Tab --> 
+            <div class="afs-report-page" data-bind="if: activeSection() === 'period'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: periodNameData,
+                    }
+                }"></div>
+            </div>     
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                        dataConfig: locationDataConfig
+                    }
+                }"></div>
+            </div>
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {
@@ -67,7 +99,6 @@
                     }
                 }"></div>
             </div>
-
         </div>
     </div>            
     {% endblock body %}

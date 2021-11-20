@@ -44,16 +44,28 @@
                     params: {
                         data: resource,
                         cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
                     }
                 }"></div>
-            </div>   
-             <!-- Audit Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
                 <div data-bind="component: {
-                    name: 'views/components/reports/scenes/audit',
+                    name: 'views/components/reports/scenes/location',
                     params: {
                         data: resource,
-                        cards: auditCards
+                        cards: locationCards
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
                     }
                 }"></div>
             </div>
@@ -63,16 +75,6 @@
                     name: 'views/components/reports/scenes/json',
                     params: {
                         resourceInstanceId: reportMetadata().resourceinstanceid,
-                    }
-                }"></div>
-            </div>
-            <!-- Communication Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/communication',
-                    params: {
-                        data: resource,
-                        cards: communicationCards
                     }
                 }"></div>
             </div>

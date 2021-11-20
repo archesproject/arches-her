@@ -160,7 +160,7 @@ define([
 
         getResourceLink: (node) => {
             if(node) {
-                const resourceId = node.resourceId;
+                const resourceId = node?.resourceId || node?.instance_details?.[0]?.resourceId;
                 if(resourceId){
                     return `${arches.urls.resource}\\${resourceId}`;
                 }

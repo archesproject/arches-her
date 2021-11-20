@@ -16,6 +16,8 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'location', title: 'Location Data'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -29,9 +31,18 @@ define([
                 nameChildren: 'placename'
             };
 
+            self.classificationDataConfig = {
+                type: 'place type'
+            };
+            self.locationDataConfig = {
+                location: []
+            }
+
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {}
             self.descriptionCards = {};
+            self.classificationCards = {};
+            self.locationCards = {};
             self.summary = params.summary;
             self.cards = {};
 

@@ -115,7 +115,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
             } else {
-                const locationNode = self.getRawNodeValue(params.data(), self.dataConfig.location);
+                const locationNode = self.getRawNodeValue(params.data(), ...self.dataConfig.location);
                 if(!locationNode) {
                     return;
                 }
@@ -168,7 +168,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 }
 
                 const administrativeAreasNode = self.getRawNodeValue(locationNode, 'localities/administrative areas');
-                if(administrativeAreasNode?.length){
+                if(Array.isArray(administrativeAreasNode)) {
                     self.administrativeAreas(administrativeAreasNode.map(x => {
                         const currency = self.getNodeValue(x, 'area currency type');
                         const name = self.getNodeValue(x, 'area names', 'area name');
@@ -179,7 +179,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 }
 
                 const areaAssignmentsNode = self.getRawNodeValue(locationNode, 'area', 'area assignments');
-                if(areaAssignmentsNode){
+                if(Array.isArray(areaAssignmentsNode)) {
                     self.areaAssignment(areaAssignmentsNode.map(x => {
                         const endDate = self.getNodeValue(x, 'area status timespan', 'area status end date');
                         const ownership = self.getNodeValue(x, 'ownership');

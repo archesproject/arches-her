@@ -58,39 +58,6 @@
                     }
                 }"></div>
             </div>
-            <!-- Existence Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'existence'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/existence',
-                    params: {
-                        data: resource,
-                        cards: existenceCards,
-                        events: existenceEvents,
-                        dataConfig: existenceDataConfig,
-                    }
-                }"></div>
-            </div>
-            <!-- Existence Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'events'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/existence',
-                    params: {
-                        data: resource,
-                        cards: eventCards,
-                        events: eventEvents,
-                        dataConfig: eventDataConfig,
-                    }
-                }"></div>
-            </div>
-            <!-- Parthood Tab --> 
-            <div class="aher-report-page" data-bind="if: activeSection() === 'parthood'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/default',
-                    params: {
-                        data: parthoodData,
-                    }
-                }"></div>
-            </div>          
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {
@@ -107,16 +74,6 @@
                     name: 'views/components/reports/scenes/json',
                     params: {
                         resourceInstanceId: reportMetadata().resourceinstanceid,
-                    }
-                }"></div>
-            </div>
-            <!-- Communication Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/communication',
-                    params: {
-                        data: resource,
-                        cards: communicationCards
                     }
                 }"></div>
             </div>

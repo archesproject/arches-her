@@ -44,9 +44,53 @@
                     params: {
                         data: resource,
                         cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
                     }
                 }"></div>
-            </div>   
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/classifications',
+                    params: {
+                        data: resource,
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Archive Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/archive',
+                    params: {
+                        data: resource,
+                        cards: archiveCards,
+                        dataConfig: archiveDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Images Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'images'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/images',
+                    params: {
+                        data: resource,
+                        cards: imagesCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {

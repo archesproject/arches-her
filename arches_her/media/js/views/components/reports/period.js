@@ -16,6 +16,8 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'location', title: 'Location Data'},
                 {id: 'period', title: 'Period Names'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -33,11 +35,36 @@ define([
                 descriptions: 'period descriptions',
             };
 
+            self.locationDataConfig = {
+                location: []
+            }
+
+            self.classificationDataConfig = {
+                dates: 'period dates',
+                type: 'period type'
+            };
+
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {};
+            self.locationCards = {};
             self.descriptionCards = {};
+            self.classificationCards = {};
             self.summary = params.summary;
             self.cards = {};
+
+            self.periodNameData = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Period Names',
+                            data: [{
+                                key: 'Name',
+                                value: self.getNodeValue(self.resource(), 'period names', 'period name'),
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
 
             if(params.report.cards){
                 const cards = params.report.cards;

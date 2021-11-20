@@ -6,7 +6,8 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
-    'views/components/reports/scenes/json'
+    'views/components/reports/scenes/json',
+    'views/components/reports/scenes/archive'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('artefact-report', {
         viewModel: function(params) {
@@ -16,6 +17,13 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'location', title: 'Location Data'},
+                {id: 'discovery', title: 'Discovery'},
+                {id: 'protection', title: 'Designation and Protection Status'},
+                {id: 'assessments', title: 'Assessments'},
+                {id: 'archive', title: 'Archive Holding'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -29,9 +37,42 @@ define([
                 type: undefined,
             };
 
+            self.classificationDataConfig = {
+                production: 'production',
+                dimensions: 'measurement event'
+            };
+
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation'
+            };
+
+            self.locationDataConfig = {
+                location: ['discovery', 'location data']
+            };
+
+            self.assessmentsDataConfig = {
+                artefactCondition: 'condition assessment'
+            };
+
+            self.archiveDataConfig = {
+                repositoryStorage: 'repository storage location'
+            };
+
+            self.resourceDataConfig = {
+                files: 'digital file(s)'
+            };
+
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {};
+            self.assessmentCards = {};
+            self.archiveCards = {};
             self.descriptionCards = {};
+            self.classificationCards = {};
+            self.scientificDateCards = {};
+            self.peopleCards = {};
+            self.locationCards = {};
+            self.protectionCards = {};
+            self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
 

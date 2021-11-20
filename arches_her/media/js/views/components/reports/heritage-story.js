@@ -16,7 +16,8 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
-                {id: 'audit', title: 'Audit Data'},
+                {id: 'location', title: 'Location Data'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -25,12 +26,28 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                type: undefined,
+                parent: 'parent story'
             };
 
+            self.descriptionDataConfig = {
+                audience: 'audience type',
+                citation: undefined
+            };
+
+            self.resourceDataConfig = {
+                activities: undefined,
+                consultations: undefined,
+                files: undefined,
+                assets: undefined,
+                translation: 'translation',
+                period: 'temporal coverage'
+
+            }
+
             self.nameCards = {};
-self.auditCards = {}
             self.descriptionCards = {};
+            self.resourcesCards = {};
+            self.locationCards = {};
             self.summary = params.summary;
             self.cards = {};
 
@@ -47,6 +64,7 @@ self.auditCards = {}
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    subjects: self.cards?.['subjects'],
                 };
             }
 
