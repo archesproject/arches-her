@@ -5,8 +5,7 @@ define([
     'knockout',
     'knockout-mapping',
     'uuid',
-    'views/components/workflows/new-tile-step'
-], function(_, $, arches, ko, koMapping, uuid, NewTileStep) {
+], function(_, $, arches, ko, koMapping, uuid) {
     function viewModel(params) {
         var self = this;
 
@@ -15,7 +14,7 @@ define([
 
         var getValue = function(key) {
             return ko.unwrap(params.value) ? params.value()[key] : null; 
-        }
+        };
 
         this.buildingName = ko.observable(getValue('buildingName'));
         this.buildingNumber = ko.observable(getValue('buildingNumber'));
