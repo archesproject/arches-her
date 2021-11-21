@@ -12,9 +12,6 @@ define([
                 {
                     title: 'Assign Address',
                     name: 'assign-address',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
                     required: true,
                     nameheading: 'Application Area Name',
                     namelabel: 'Make the Area Name the same as the Area Address',
@@ -69,7 +66,6 @@ define([
                     title: 'Related Heritage Resources',
                     name: 'related-heritage-resource',
                     required: false,
-                    icon: 'fa-bank',
                     informationboxdata: {
                         heading: 'Related Heritage Resources',
                         text: 'Select the other heritage sites or artifacts related to the current Consulation',
