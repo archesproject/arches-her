@@ -41,6 +41,7 @@ define([
                     name: 'area-map',
                     description: 'Draw (or select from the Development Area Overlay) the extent of...',
                     required: true,
+                    workflowstepclass: 'consultation-map-step',
                     informationboxdata: {
                         heading: 'Application Area Map',
                         text: 'Draw (or select from the development area overlay) the extent of the area',
@@ -49,7 +50,7 @@ define([
                         {
                             componentConfigs: [
                                 { 
-                                    componentName: 'default-card',
+                                    componentName: 'map-card',
                                     uniqueInstanceName: 'area-map', /* unique to step */
                                     tilesManaged: 'one',
                                     parameters: {
@@ -116,6 +117,7 @@ define([
                     title: 'Area Designations',
                     name: 'area-designations',
                     required: false,
+                    workflowstepclass: 'consultation-map-step',
                     informationboxdata: {
                         heading: 'Area Designations',
                         text: 'Select the application Area designations',
@@ -124,7 +126,7 @@ define([
                         {
                             componentConfigs: [
                                 { 
-                                    componentName: 'default-card',
+                                    componentName: 'map-card',
                                     uniqueInstanceName: 'related-heritage-resource', /* unique to step */
                                     tilesManaged: 'one',
                                     parameters: {
