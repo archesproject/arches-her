@@ -206,7 +206,7 @@ define([
                     self.addressTileid(data.tileid);
                     params.form.complete(true);
                     params.form.savedData({
-                        resourceid: self.resourceInstanceId()
+                        resourceid: self.resourceInstanceId(), ...self.updatedValue()
                     });
                 });
         };
