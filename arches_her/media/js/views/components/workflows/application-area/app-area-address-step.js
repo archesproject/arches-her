@@ -170,7 +170,8 @@ define([
                 "resourceinstance_id": resourceid,
                 "sortorder": 0,
                 "tiles": {},
-                "data": {}
+                "data": {},
+                "transaction_id": params.form.workflowId
             };
             for (const key in tileDataObj){
                 res.data[key] = tileDataObj[key];
