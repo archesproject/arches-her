@@ -51,7 +51,23 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         storageBuilding,
                         tileid
                     }]);
-                }                
+                }
+                
+                const sourceCreationNode = self.getRawNodeValue(params.data(), self.dataConfig.sourceCreation) 
+                if(sourceCreationNode){
+                    const author = self.getNodeValue(repositoryStorageNode, 'author');
+                    const editor = self.getNodeValue(repositoryStorageNode, 'editor ');
+                    const contributor = self.getNodeValue(repositoryStorageNode, 'contributor');
+                    const statement = self.getNodeValue(repositoryStorageNode, 'statement of reponsibility');
+                    const tileid = self.getTileId(repositoryStorageNode);
+                    this.repositoryStorage([{
+                        repositoryOwner,
+                        repositoryOwnerLink,
+                        storageAreaName,
+                        storageBuilding,
+                        tileid
+                    }]);
+                }              
             } 
         },
         template: { require: 'text!templates/views/components/reports/scenes/archive.htm' }

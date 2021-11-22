@@ -35,6 +35,10 @@ define([
                 subject: 'subjects'
             };
 
+            self.imagesDataConfig = {
+                copyright: 'copyright_details'
+            };
+
             self.resourceDataConfig = {
                 files: 'digital file(s)',
                 activities: undefined,

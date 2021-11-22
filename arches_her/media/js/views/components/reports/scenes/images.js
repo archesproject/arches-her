@@ -4,14 +4,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             const self = this;
             Object.assign(self, reportUtils);
 
-            // Scientific Dates table configuration
-            self.scientificDatesTableConfig = {
-                ...this.defaultTableConfig,
-                "columns": Array(13).fill(null)
+            self.copyrightTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(3).fill(null)
             };
 
             self.dataConfig = {
-                images: 'images',
+                images: 'images'
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -19,8 +18,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.images = ko.observableArray();
+            self.copyright = ko.observableArray();
             self.visible = {
-                images: ko.observable(true),
+                copyright: ko.observable(true),
+                images: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
@@ -48,6 +49,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             copyrightNote,
                             copyrightType,
                             path,
+                            tileid
+                        };
+                    }));
+                }
+
+
+                const copyrightNode = self.getRawNodeValue(params.data(), self.dataConfig.copyright); 
+                if(copyrightNode?.length) {
+                    self.copyright(copyrightNode.map(x => {
+                        const copyrightStatement = self.getNodeValue(x, 'copyright statement');
+                        const copyrightType = self.getNodeValue(x, 'copyright type');
+                        const tileid = self.getTileId(x);
+
+                        return { 
+                            copyrightStatement,
+                            copyrightType,
                             tileid
                         };
                     }));

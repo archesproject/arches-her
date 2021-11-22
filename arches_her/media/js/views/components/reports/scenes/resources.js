@@ -7,19 +7,19 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             //Related Resource 2 column table configuration
             self.relatedResourceTwoColumnTableConfig = {
                 ...self.defaultTableConfig,
-                "paging": true,
-                "searching": true,
-                "scrollY": "250px",
-                "columns": Array(2).fill(null)
+                paging: true,
+                searching: true,
+                scrollY: "250px",
+                columns: Array(2).fill(null)
             };
 
             //Related Resource 3 column table configuration
             self.relatedResourceThreeColumnTableConfig = {
                 ...self.defaultTableConfig,
-                "paging": true,
-                "searching": true,
-                "scrollY": "250px",
-                "columns": Array(3).fill(null)
+                paging: true,
+                searching: true,
+                scrollY: "250px",
+                columns: Array(3).fill(null)
             };
 
             self.dataConfig = {
