@@ -11,13 +11,11 @@ define([
         this.attendees = ko.observableArray();
         this.photographs = ko.observableArray();
 
-        var currentTileId = ko.unwrap(params.form.externalStepData.sitevisitedetailsstep.data.tileid);
-
         this.resourceData.subscribe(function(val){
             var currentSiteVisit;
             if (Array.isArray(val.resource['Site Visits'])){
                 val.resource['Site Visits'].forEach(function(visit) {
-                    if (visit['@tile_id'] === currentTileId){
+                    if (visit['@tile_id'] === ko.unwrap(params.parenttileid)){
                         currentSiteVisit = visit;
                     }
                 });
