@@ -117,6 +117,7 @@ define([
                     title: 'Site Photos (Upload)',
                     name: 'site-photos-upload',
                     required: false,
+                    workflowstepclass: 'consultation-map-step',
                     layoutSections: [
                         {
                             componentConfigs: [
