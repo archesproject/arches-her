@@ -57,6 +57,58 @@
     </div>
 </div>
 
+<!-- Associated Archive section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.archive">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.archive)}, css: {'fa-angle-double-right': visible.archive(), 'fa-angle-double-up': !visible.archive()}" class="fa toggle"></i> {% trans "Associated Archive Objects" %}</h2>
+    <a data-bind="{if: cards.archive, click: function(){addNewTile(cards.archive)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Object" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.archive" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: archive().length -->
+        <div class="aher-nodata-note">No archives for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: archive().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Archive Holder" %}</th>
+                                <th>{% trans "Title" %}</th>
+                                <th>{% trans "References" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: archive, dataTableOptions: archiveHolderTableConfig}">
+                            <tr>
+                                <td>
+                                    <a data-bind="text: holder, attr: {href: holderLink}" class="aher-table-link"></a>
+                                </td>
+                                <td data-bind="text:title"></td>
+                                <td data-bind="text:reference"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.archive">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.archive)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.archive)}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
 <!-- Associated Consultations section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.consultations">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.consultations)}, css: {'fa-angle-double-right': visible.consultations(), 'fa-angle-double-up': !visible.consultations()}" class="fa toggle"></i> {% trans "Associated Consultations" %}</h2>

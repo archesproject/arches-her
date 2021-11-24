@@ -13,6 +13,16 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 columns: Array(2).fill(null)
             };
 
+
+            //Related Resource 2 column table configuration
+            self.archiveHolderTableConfig = {
+                ...self.defaultTableConfig,
+                paging: true,
+                searching: true,
+                scrollY: "250px",
+                columns: Array(4).fill(null)
+            };
+
             //Related Resource 3 column table configuration
             self.relatedResourceThreeColumnTableConfig = {
                 ...self.defaultTableConfig,
@@ -36,11 +46,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.activities = ko.observableArray();
             self.consultations = ko.observableArray();
             self.files = ko.observableArray();
+            self.archive = ko.observableArray();
             self.assets = ko.observableArray();
             self.translation = ko.observableArray();
             self.period = ko.observableArray();
             self.visible = {
                 period: ko.observable(true),
+                archive: ko.observable(true),
                 activities: ko.observable(true),
                 consultations: ko.observable(true),
                 files: ko.observable(true),
@@ -72,6 +84,19 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
+
+                const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive)
+                if(Array.isArray(associatedArchiveNode)){
+                    self.archive(associatedArchiveNode.map(x => {
+                        const holder = self.getNodeValue(x, 'archive holder');
+                        const holderLink = self.getResourceLink(self.getRawNodeValue(x, 'archive holder'));
+                        const reference = self.getNodeValue(x, 'archive object references', 'archive object reference');
+                        const title = self.getNodeValue(x, 'archive object titles', 'archive object title');
+                        const tileid = self.getTileId(x);
+                        return {holder, holderLink, reference, title, tileid};
+                    }));
+                }
+
                 const associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files);
                 if(Array.isArray(associatedFilesNode)){
                     self.files(associatedFilesNode.map(x => {
@@ -85,10 +110,14 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
                 if(Array.isArray(associatedArtifactsNode)){
                     self.assets(associatedArtifactsNode.map(x => {
-                        const resourceName = self.getNodeValue(x, 'associated heritage asset, area or artefact');
+                        const resourceName = self.getNodeValue(x, {
+                            testPaths: [['associated heritage asset, area or artefact'],['heritage asset, area or artefact'], []]
+                         });
                         const association = self.getNodeValue(x, 'association type'); 
                         const tileid = self.getTileId(x);
-                        const resourceUrl = self.getResourceLink(self.getRawNodeValue(x, 'associated heritage asset, area or artefact'));
+                        const resourceUrl = self.getResourceLink(self.getRawNodeValue(x, {
+                            testPaths: [['associated heritage asset, area or artefact'],['heritage asset, area or artefact'], []]
+                         }));
                         return {resourceName, resourceUrl, association, tileid};
                     }));
                 }

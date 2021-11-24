@@ -31,7 +31,6 @@ define([
 
             self.descriptionDataConfig = {
                 audience: 'audience type',
-                citation: undefined
             };
 
             self.resourceDataConfig = {

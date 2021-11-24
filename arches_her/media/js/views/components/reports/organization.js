@@ -16,6 +16,10 @@ define([
             self.sections = [
                 {id: 'name', title: 'Names and Classifications'},
                 {id: 'description', title: 'Description'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'location', title: 'Location Data'},
+                {id: 'people', title: 'Associated People and Organizations'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -26,14 +30,32 @@ define([
 
             self.nameDataConfig = {
                 name: 'names',
-                type: undefined,
+                nameChildren: 'organization',
+                parent: 'parent organization'
+            };
+
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation'
+            };
+
+            self.classificationDataConfig = {
+                organizationFormation: 'organization formation'
+            };
+
+            self.resourceDataConfig = {
+                consultations: undefined,
+                files: undefined
             };
 
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {};
+            self.classificationCards = {};
             self.descriptionCards = {};
+            self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
+
+            self.currencyData = {}
 
             if(params.report.cards){
                 const cards = params.report.cards;
@@ -42,14 +64,36 @@ self.auditCards = {}
 
                 self.nameCards = {
                     name: self.cards?.['names'],
-                    identifier: self.cards?.['identifier for person'],
-                    exactMatch: self.cards?.['external uri for person'],
+                    externalCrossReferences: self.cards?.['external cross references'],
+                    systemReferenceNumbers: self.cards?.['system reference numbers'],
+                    parent: self.cards?.['parent organization']
                 };
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
+                };
+
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
             }
+
+            self.currencyData = ko.observable({
+                sections: 
+                    [
+                        {
+                            title: "Organization Currency", 
+                            data: [{
+                                key: 'Currency Type', 
+                                value: self.getNodeValue(self.resource(), 'organization currency type'), 
+                                card: self.cards?.['organization currency'],
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
 
         },
         template: { require: 'text!templates/views/components/reports/organization.htm' }

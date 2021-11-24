@@ -13,8 +13,13 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
+                {id: 'name', title: 'Names and Classifications'},
                 {id: 'person-name', title: 'Person Name and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'location', title: 'Location Data'},
+                {id: 'images', title: 'Images'},
+                {id: 'people', title: 'Associated People and Organizations'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -44,117 +49,37 @@ define([
             });
 
             self.nameDataConfig = {
-                type: undefined,
+                name: undefined,
             };
             self.documentationDataConfig = {
                 subjectOf: undefined
             };
 
-            self.existenceEvents = ['birth', 'death'];
-            self.existenceDataConfig = {
-                birth: {
-                    graph: 'birth',
-                    metadata: [],
-                    children: {
-                        names: true,
-                        statements: true,
-                        identifiers: false,
-                        timespan: true,
-                        location: true
-                    }
-                },
-                death: {
-                    graph: 'death',
-                    metadata: [],
-                    children: {
-                        names: true,
-                        statements: true,
-                        identifiers: false,
-                        timespan: true,
-                        location: true
-                    }
-                },
+            self.locationDataConfig = {
+                nationalGrid: undefined,
+                locationDescription: undefined,
+                administrativeAreas: undefined,
+                geometry: undefined
             };
 
-            self.eventEvents = ['professional activity', 'group joining', 'group leaving'];
-            self.eventDataConfig = {
-                'professional activity': {
-                    graph: 'profession activity',
-                    metadata: [{
-                        key: 'professional activity type',
-                        path: 'profession activity_type',
-                        type: 'kv'
-                    },{
-                        key: 'particular professional activity technique',
-                        path: 'profession activity_technique',
-                        type: 'kv'
-                    },{
-                        key: 'location of professional activity',
-                        path: 'profession activity_location',
-                        type: 'resource'
-                    }],
-                    children: {
-                        names: true,
-                        statements: true,
-                        identifiers: false,
-                        timespan: true,
-                        location: false
-                    }
-                },
-                'group joining': {
-                    graph: 'joined group',
-                    metadata: [{
-                        key: 'group joined',
-                        path: 'joined group_joined to',
-                        type: 'resource'
-                    },{
-                        key: 'group role',
-                        path: 'joined group_type',
-                        type: 'kv'
-                    },{
-                        key: 'location of group joining event',
-                        path: 'joined group_location',
-                        type: 'resource'
-                    }],
-                    children: {
-                        names: true,
-                        statements: true,
-                        identifiers: false,
-                        timespan: true,
-                        location: false
-                    }
-                },
-                'group leaving': {
-                    graph: 'left group',
-                    metadata: [{
-                        key: 'group left',
-                        path: 'left group_left group',
-                        type: 'resource'
-                    },{
-                        key: 'group leaving event type',
-                        path: 'left group_type',
-                        type: 'kv'
-                    },{
-                        key: 'location of group leaving event',
-                        path: 'left group_location',
-                        type: 'resource'
-                    }],
-                    children: {
-                        names: true,
-                        statements: true,
-                        identifiers: false,
-                        timespan: true,
-                        location: false
-                    }
-                },
+            self.descriptionDataConfig = {
+                citation: 'bibliographic source citation'
+            };
+
+            self.resourceDataConfig = {
+                files: 'digital file(s)'
             };
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {}
             self.descriptionCards = {};
+            self.locationCards = {};
             self.documentationCards = {};
             self.existenceCards = {};
+            self.resourcesCards = {};
             self.communicationCards = {};
             self.eventCards = {};
+            self.imagesCards = {};
+            self.peopleCards = {};
             self.summary = params.summary;
             self.cards = {};
 
@@ -171,6 +96,7 @@ self.auditCards = {}
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
                 };
 
                 self.documentationCards = {
@@ -181,69 +107,15 @@ self.auditCards = {}
                     contactPoints: self.cards?.['contact information for person'],
                 };
 
-                self.existenceCards = {
-                    birth: { 
-                        card: self.cards?.['birth event of person'],
-                        subCards: {
-                            name: 'name for birth event',
-                            timespan: 'timespan of birth event',
-                            statement: 'statement about birth event',
-                            location: 'location of birth event',
-                        }
-                    },
-                    death: {
-                        card:  self.cards?.['death event of person'],
-                        subCards: {
-                            name: 'name for death event',
-                            timespan: 'timespan of death event',
-                            statement: 'statement about death event',
-                            location: 'location of death event'
-                        }
-                    },
-                };
-                
-                self.eventCards = {
-                    'professional activity': {
-                        card: self.cards?.['professional activity of person'],
-                        subCards: {
-                            name: 'name for professional activity',
-                            timespan: 'timespan of professional activity',
-                            statement: 'statement about professional activity',
-                        }
-                    },
-                    'group joining': {
-                        card: self.cards?.['group joining event of person'],
-                        subCards: {
-                            name: 'name for group joining event',
-                            timespan: 'timespan of group joining event',
-                            statement: 'statement about group joining event',
-                        }
-                    },
-                    'group leaving': {
-                        card: self.cards?.['group leaving event of person'],
-                        subCards: {
-                            name: 'name for group leaving event',
-                            timespan: 'timespan of group leaving event',
-                            statement: 'statement about group leaving event',
-                        }
-                    }
-                };
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    consultations: self.cards?.['associated consultations'],
+                    files: self.cards?.['associated digital file(s)'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                }
+
             }
 
-            self.parthoodData = ko.observable({
-                sections: 
-                    [
-                        {
-                            title: 'Parthood', 
-                            data: [{
-                                key: 'member of group', 
-                                value: self.getRawNodeValue(self.resource(), 'member of'), 
-                                card: self.cards?.['group person is member of'],
-                                type: 'resource'
-                            }]
-                        }
-                    ]
-            });
         },
         template: { require: 'text!templates/views/components/reports/person.htm' }
     });

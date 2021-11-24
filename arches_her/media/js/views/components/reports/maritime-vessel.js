@@ -72,6 +72,7 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
                 };
             }
 

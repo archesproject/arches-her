@@ -39,6 +39,12 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 ...self.defaultTableConfig,
                 columns: Array(3).fill(null)
             };
+            
+            // Organization Formation Table
+            self.organizationFormationTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(5).fill(null)
+            };
 
             // Use phases Table
             self.usePhasesTableConfig = {
@@ -72,6 +78,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.dimensions = ko.observableArray();
             self.usePhases = ko.observableArray();
             self.typeData = ko.observable();
+            self.organizationFormation = ko.observableArray();
             self.dates = ko.observableArray();
             self.activityTimespan = ko.observable();
             self.visible = {
@@ -79,7 +86,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 components: ko.observable(true),
                 usePhase: ko.observable(true),
                 dimensions: ko.observable(true),
-                dates: ko.observable(true)
+                dates: ko.observable(true),
+                organizationFormation: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
@@ -96,7 +104,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                                     data: [{
                                         key: 'Type',
                                         value: Array.isArray(typeValue) ? typeValue : [typeValue],
-                                        type: 'kv'
+                                        type: 'kv',
+                                        card: self.cards?.type
                                     }]
                                 }
                             ]
@@ -341,6 +350,23 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
+                const organizationFormationNode = self.getRawNodeValue(params.data(), self.dataConfig.organizationFormation); 
+                if(Array.isArray(organizationFormationNode)) {
+                    self.organizationFormation(organizationFormationNode.map(x => {
+                        const startDate = self.getNodeValue(x,'timespan', 'start date');
+                        const endDate = self.getNodeValue(x, 'timespan', 'end date');
+                        const dateQualifier = self.getNodeValue(x, 'timespan', 'date qualifier');
+                        const organizationType = self.getNodeValue(x, 'organization type');
+                        const tileid = self.getTileId(x);
+                        return {
+                            startDate,
+                            endDate, 
+                            tileid, 
+                            organizationType, 
+                            dateQualifier
+                        }
+                    }));
+                }
 
                 const datesNode = self.getRawNodeValue(params.data(), self.dataConfig.dates); 
                 if(datesNode) {

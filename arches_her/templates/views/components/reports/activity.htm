@@ -65,8 +65,7 @@
                     name: 'views/components/reports/scenes/location',
                     params: {
                         data: resource,
-                        dataConfig: classificationDataConfig,
-                        cards: classificationCards,
+                        cards: locationCards,
                     }
                 }"></div>
             </div>
@@ -76,10 +75,82 @@
                     name: 'views/components/reports/scenes/protection',
                     params: {
                         data: resource,
-                        dataConfig: classificationDataConfig,
-                        cards: classificationCards,
+                        dataConfig: protectionDataConfig,
+                        cards: protectionCards,
                     }
                 }"></div>
+            </div>
+            <!-- People Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'people'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/people',
+                    params: {
+                        data: resource,
+                        cards: peopleCards,
+                    }
+                }"></div>
+            </div>
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+            <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.activityArchive)}, css: {'fa-angle-double-right': visible.activityArchive(), 'fa-angle-double-up': !visible.activityArchive()}"  class="fa toggle"></i> {% trans "Activity Archive Material" %}</h2>
+                    <a data-bind="{if: cards.activityArchive, click: function(){addNewTile(cards.activityArchive)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Material" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.activityArchive" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: activityArchive() -->
+                        <div class="aher-nodata-note">{% trans "No activity archive material for this resource" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: activityArchive() -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Source Type" %}</th>
+                                                <th>{% trans "Owner" %}</th>
+                                                <th>{% trans "Building Name" %}</th>
+                                                <th>{% trans "Storage Area" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: activityArchive, dataTableOptions: activityArchiveConfig}">
+                                            <tr>
+                                                <td data-bind="text: type"></td>
+                                                <td><a data-bind="text: repositoryOwner, attr: {href: repositoryOwnerLink}"></a></td>
+                                                <td data-bind="text: storageBuilding"></td>
+                                                <td data-bind="text: storageAreaName"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.activityArchive">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.activityArchive)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.activityArchive)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
             </div>
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">

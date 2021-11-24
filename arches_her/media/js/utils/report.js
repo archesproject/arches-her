@@ -97,7 +97,7 @@ define([
             info: false,
             columnDefs: [{
                 orderable: false,
-                targets: -1
+                targets: -1,
             }],
         },
 

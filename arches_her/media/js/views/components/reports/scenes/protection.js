@@ -9,7 +9,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 protection: 'designation and protection assignment'
             }
 
-            self.cards = {};
+            self.cards = params.cards || {};
             self.selectedGeometry = params.selectedGeometry || ko.observable();
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
@@ -75,6 +75,19 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 self.selectedGeometry(row.geometry);
             };
 
+            const setupCards = (tileid) => {
+                if(self.cards.location){
+                    const subCards = self.cards.location.subCards;
+                    const rootCard = self.cards.location.card;
+                    const tileCards = self.createCardDictionary(rootCard.tiles().find(rootTile => rootTile.tileid == tileid)?.cards);
+                    if(tileCards){
+                        tileCards.landUse = tileCards?.[subCards.landUse];
+                        tileCards.areaAssignment = tileCards?.[subCards.areaAssignment];
+                        Object.assign(self.cards, tileCards);
+                    }
+                }
+            }
+
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
             } else {
@@ -120,6 +133,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         }, {features: [], type: 'FeatureCollection'}));
                 }
                 const locationNode = self.getRawNodeValue(params.data(), self.dataConfig.location);
+
+                if(locationNode){
+                    setupCards(self.getTileId(locationNode))
+                }
 
                 const areaAssignmentsNode = self.getRawNodeValue(locationNode, 'area', 'area assignments');
                 if(Array.isArray(areaAssignmentsNode)){

@@ -433,6 +433,62 @@
     </div>
 </div>
 
+<!-- Dates -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.organizationFormation">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.organizationFormation)}" class="fa fa-angle-double-right toggle"></i> {% trans "Organization Formation" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.organizationFormation, click: function(){addNewTile(cards.organizationFormation)}">
+        <i class="fa fa-mail-reply"></i> 
+        <span data-bind="ifnot: cards.organizationFormation.tiles().length">{% trans "Add Dates" %}</span>
+        <span data-bind="if: cards.organizationFormation.tiles().length">{% trans "Edit Dates" %}</span>
+    </a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.organizationFormation" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: organizationFormation().length -->
+        <div class="aher-nodata-note">No organization formation data for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: organizationFormation().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Organization Type" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Date Qualifier" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: organizationFormation, dataTableOptions: organizationFormationTableConfig}">
+                            <tr>
+                                <td data-bind="text: organizationType"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.organizationFormation">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.organizationFormation)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.organizationFormation)}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
 
 <!-- Dates -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.dates">

@@ -46,14 +46,15 @@
                         cards: descriptionCards,
                     }
                 }"></div>
-            </div>   
-            <!-- Audit Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
                 <div data-bind="component: {
-                    name: 'views/components/reports/scenes/audit',
+                    name: 'views/components/reports/scenes/classifications',
                     params: {
                         data: resource,
-                        cards: auditCards
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards,
                     }
                 }"></div>
             </div>
@@ -67,6 +68,28 @@
                     }
                 }"></div>
             </div>
+            <!-- Archive Tab -->
+           <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
+               <div data-bind="component: {
+                   name: 'views/components/reports/scenes/archive',
+                   params: {
+                       data: resource,
+                       cards: archiveCards,
+                       dataConfig: archiveDataConfig
+                   }
+               }"></div>
+           </div>
+           <!-- Resources Tab -->
+           <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+               <div data-bind="component: {
+                   name: 'views/components/reports/scenes/resources',
+                   params: {
+                       data: resource,
+                       dataConfig: resourceDataConfig,
+                       cards: resourceCards,
+                   }
+               }"></div>
+           </div>
              <!-- JSON Tab -->
             <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
                 <div class="aher-flex-col" data-bind="component: {

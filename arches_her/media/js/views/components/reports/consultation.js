@@ -34,7 +34,7 @@ define([
             };
 
             self.nameCards = {};
-self.auditCards = {}
+            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};

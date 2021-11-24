@@ -5,17 +5,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             Object.assign(self, reportUtils);
 
             self.dataConfig = {
-                location: 'location data',
+                location: ['location data'],
+                addresses: 'addresses',
+                nationalGrid: 'national grid references',
+                locationDescription: 'location descriptions',
+                administrativeAreas: 'localities/administrative areas',
+                geometry: 'geometry'
             }
 
-            self.cards = {};
+            self.cards = params.cards || {};
             self.selectedGeometry = params.selectedGeometry || ko.observable();
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.visible = {
                 geometryMetadata: ko.observable(true),
-                locality: ko.observable(true),
+                geometry: ko.observable(true),
                 coordinates: ko.observable(true),
                 addresses: ko.observable(true),
                 descriptions: ko.observable(true),
@@ -112,15 +117,33 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 return false;
             }
 
+            const setupCards = (tileid) => {
+                if(self.cards.location){
+                    const subCards = self.cards.location.subCards;
+                    const rootCard = self.cards.location.card;
+                    const tileCards = self.createCardDictionary(rootCard.tiles().find(rootTile => rootTile.tileid == tileid)?.cards);
+                    if(tileCards){
+                        tileCards.addresses = tileCards?.[subCards.addresses];
+                        tileCards.nationalGridReferences = tileCards?.[subCards.nationalGrid];
+                        tileCards.administrativeAreas = tileCards?.[subCards.administrativeAreas];
+                        tileCards.locationDescriptions = tileCards?.[subCards.locationDescriptions];
+                        Object.assign(self.cards, tileCards);
+                    }
+                }
+            }
+
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
             } else {
                 const locationNode = self.getRawNodeValue(params.data(), ...self.dataConfig.location);
+                
                 if(!locationNode) {
                     return;
                 }
-                
-                const geometryNode = self.getRawNodeValue(locationNode, 'geometry')
+
+                setupCards(self.getTileId(locationNode));
+
+                const geometryNode = self.getRawNodeValue(locationNode, self.dataConfig.geometry)
                 if(geometryNode) {
                     const locationDataCoordinates = self.getNodeValue(geometryNode, 'geospatial coordinates');
                     if (locationDataCoordinates && locationDataCoordinates != '--') {
@@ -145,8 +168,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
                 }
 
-                const addressesNode = self.getRawNodeValue(locationNode, 'addresses');
-                if(addressesNode) {
+                const rawAddressesNode = self.getRawNodeValue(locationNode, self.dataConfig.addresses);
+                if(rawAddressesNode || Array.isArray(locationNode)) {
+                    const addressesNode = rawAddressesNode || locationNode.map(locationNode => self.getRawNodeValue(locationNode, self.dataConfig.addresses))
                     if(addressesNode?.length){
                         self.addresses(addressesNode.map(x => {
                             const buildingName = self.getNodeValue(x, 'building name', 'building name value');
@@ -167,7 +191,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     }
                 }
 
-                const administrativeAreasNode = self.getRawNodeValue(locationNode, 'localities/administrative areas');
+                const administrativeAreasNode = self.getRawNodeValue(locationNode, self.dataConfig.administrativeAreas);
                 if(Array.isArray(administrativeAreasNode)) {
                     self.administrativeAreas(administrativeAreasNode.map(x => {
                         const currency = self.getNodeValue(x, 'area currency type');
@@ -178,36 +202,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     }));
                 }
 
-                const areaAssignmentsNode = self.getRawNodeValue(locationNode, 'area', 'area assignments');
-                if(Array.isArray(areaAssignmentsNode)) {
-                    self.areaAssignment(areaAssignmentsNode.map(x => {
-                        const endDate = self.getNodeValue(x, 'area status timespan', 'area status end date');
-                        const ownership = self.getNodeValue(x, 'ownership');
-                        const reference = self.getNodeValue(x, 'area reference', 'area reference value');
-                        const shineForm = self.getNodeValue(x, 'shine - form');
-                        const shineSignificance = self.getNodeValue(x, 'shine - significance');
-                        const startDate = self.getNodeValue(x, 'area status timespan', 'area status start date');
-                        const status = self.getNodeValue(x, 'area status');
-                        const tileid = self.getTileId(x);
-                        return {endDate, ownership, reference, shineForm, shineSignificance, startDate, status, tileid};
-                    }));
-                }
-
-                const landUseClassificationNode = self.getRawNodeValue(locationNode, 'land use classification assignment');
-                if(landUseClassificationNode) {
-                    const classification = self.getNodeValue(landUseClassificationNode, 'land use classification');
-                    const endDate = self.getNodeValue(landUseClassificationNode, 'land use assessment timespan', 'land use assessment end date');
-                    const geology = self.getNodeValue(landUseClassificationNode, 'geology');
-                    const reference = self.getNodeValue(landUseClassificationNode, 'land use notes', 'land use notes value');
-                    const startDate = self.getNodeValue(landUseClassificationNode, 'land use assessment timespan', 'land use assessment start date');
-                    const subSoil = self.getNodeValue(landUseClassificationNode, 'sub-soil');
-                    const tileid = self.getTileId(landUseClassificationNode);
-                    if(self.observableValueSet(classification, endDate, geology, reference, startDate, subSoil)){
-                        self.landUseClassification([{classification, endDate, geology, reference, startDate, subSoil, tileid}]);
-                    }
-                }
-
-                const locationDescriptionsNode = self.getRawNodeValue(locationNode, 'location descriptions');
+                const locationDescriptionsNode = self.getRawNodeValue(locationNode, self.dataConfig.locationDescription);
                 if(locationDescriptionsNode?.length){
                     self.descriptions(locationDescriptionsNode.map(x => {
                         const type = self.getNodeValue(x, 'location description type');
@@ -217,7 +212,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     }));
                 }
 
-                const nationalGridReferencesNode = self.getRawNodeValue(locationNode, 'national grid references');
+                const nationalGridReferencesNode = self.getRawNodeValue(locationNode, self.dataConfig.nationalGrid);
                 if(nationalGridReferencesNode?.length){
                     self.nationalGridReferences(nationalGridReferencesNode.map(x => {
                         const reference = self.getNodeValue(x, 'national grid reference');

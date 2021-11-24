@@ -139,7 +139,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                                 data: [{
                                     key: 'Parent Resource',
                                     value: self.getRawNodeValue(params.data(), self.dataConfig.parent),
-                                    type: 'resource'
+                                    type: 'resource',
+                                    card: self.cards?.parent
                                 }]
                             }
                         ]
@@ -155,7 +156,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                                 data: [{
                                     key: 'Status',
                                     value: self.getNodeValue(params.data(), self.dataConfig.recordStatus, 'record status'),
-                                    type: 'kv'
+                                    type: 'kv',
+                                    card: self.cards?.recordStatus
                                 }]
                             }
                         ]

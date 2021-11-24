@@ -16,8 +16,12 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
-                {id: 'bib-source', title: 'Bibliographic Source Details'},
+                {id: 'name', title: 'Bibliographic Source Details'},
                 {id: 'description', title: 'Descriptions and Citations'},
+                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'archive', title: 'Archive Holding'},
+                {id: 'bib-source', title: 'Bibliographic Source Details'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -27,12 +31,30 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'bibliographic source',
-                type: undefined,
+                name: undefined,
+            };
+
+            self.classificationDataConfig = {
+                type: 'bibliographic source type'
+            };
+
+            self.resourceDataConfig = {
+                activities: undefined,
+                consultations: undefined,
+                assets: undefined,
+                files: 'digital file(s)'
+            };
+            
+            
+            self.archiveDataConfig = {
+                sourceCreation: 'bibliographic source creation'
             };
 
             self.nameCards = {};
-            self.auditCards = {}
+            self.auditCards = {};
+            self.archiveCards = {};
+            self.classificationCards = {};
+            self.resourceCards = {};
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -47,12 +69,27 @@ define([
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
+                
+                self.classificationCards = {
+                    type: self.cards?.['bibliographic source types']
+                };
+
                 self.auditCards = {
                     audit: self.cards?.['audit metadata']
-                }
+                };
+
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
                 };
+
+                self.resourceCards = {
+                    files: self.cards?.['associated digital files']
+                };
+
+                self.archiveCards = {
+                    sourceCreation: self.cards?.['bibliographic source creation']
+                }
             }
 
         },

@@ -31,8 +31,14 @@ define([
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
+            self.activityArchive = ko.observableArray();
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+
+            self.activityArchiveConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(5).fill(null)
+            }
 
             self.descriptionDataConfig = {
                 descriptions: 'activity descriptions',
@@ -50,28 +56,96 @@ define([
                 activityTimespan: 'activity timespan'
             };
 
+            self.protectionDataConfig = {
+                protection: undefined
+            };
+
+            self.resourceDataConfig = {
+                archive: 'associated archive objects',
+                files: 'digital file(s)'
+            }
+
             self.nameCards = {};
             self.auditCards = {};
-            self.classificationCards = {}
+            self.resourcesCards = {};
+            self.classificationCards = {};
+            self.protectionCards = {};
             self.descriptionCards = {};
+            self.peopleCards = {};
             self.summary = params.summary;
-            self.cards = {};
+            self.visible = {
+                activityArchive: ko.observable(true)
+            }
+
+            const activityArchiveNode = self.getRawNodeValue(self.resource(), 'activity archive material') 
+            if(Array.isArray(activityArchiveNode)){
+                self.activityArchive(activityArchiveNode.map(node => {
+                    const type = self.getNodeValue(node, 'archive material', 'archive source type');
+                    const repositoryOwner = self.getNodeValue(node, 'archive material', 'repository storage location', 'repository owner');
+                    const repositoryOwnerLink = self.getResourceLink(self.getRawNodeValue(node, 'archive material', 'repository storage location', 'repository owner'));
+                    const storageAreaName = self.getNodeValue(node, 'archive material', 'repository storage location', 'storage area names', 'storage area name');
+                    const storageBuilding = self.getNodeValue(node, 'archive material', 'repository storage location', 'storage building', 'storage building name');
+                    const tileid = self.getTileId(node);
+                    return {
+                        type,
+                        repositoryOwner,
+                        repositoryOwnerLink,
+                        storageAreaName,
+                        storageBuilding,
+                        tileid
+                    };
+                }));
+            }
 
             if(params.report.cards){
                 const cards = params.report.cards;
                 
                 self.cards = self.createCardDictionary(cards)
 
+                Object.assign(self.cards, {
+                    activityArchive: self.cards?.['activity archive material']
+                });
+
                 self.nameCards = {
                     name: self.cards?.['activity names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
+                    parent: self.cards?.['parent activities'],
+                    recordStatus: self.cards?.['record status']
                 };
+
+                self.locationCards = {
+                    location: {
+                        card: self.cards?.['location data'],
+                        subCards: {
+                            addresses: 'addresses',
+                            nationalGrid: 'national grid references',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationDescriptions: 'location descriptions',
+                            areaAssignment: 'area assignments',
+                            landUse: 'land use classification assignment'
+                        }
+                    }
+                }
+
+                Object.assign(self.protectionCards, self.locationCards);
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['activity descriptions'],
                     citation: self.cards?.['associated bibliographic sources'],
                 };
+
+                self.peopleCards = {
+                    people: self.cards?.['associated people and organizations']
+                };
+
+                self.resourcesCards = {
+                    consultations: self.cards?.['associated consultations'],
+                    activities: self.cards?.['associated activities'],
+                    archive: self.cards?.['associated archive objects'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts'],
+                    files: self.cards?.['associated digital files'],
+                }
             }
 
         },

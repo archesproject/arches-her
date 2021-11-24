@@ -11,26 +11,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             }
 
             // repository storage table configuration
-            self.archiveHoldingConfig = {
+            self.sourceCreationConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(10).fill(null)
+                columns: Array(5).fill(null)
             }
 
-            self.dataConfig = {
-                repositoryStorage: undefined,
-                archiveCreation: undefined,
-                extent: undefined,
-                activityArchive: undefined,
-                archiveHolding: undefined
-            }
+            self.dataConfig = {}
 
             self.cards = Object.assign({}, params.cards);
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.repositoryStorage = ko.observableArray();
+            self.sourceCreation = ko.observableArray();
             self.visible = {
                 repositoryStorage: ko.observable(true),
+                sourceCreation: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
@@ -54,19 +50,21 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
                 
                 const sourceCreationNode = self.getRawNodeValue(params.data(), self.dataConfig.sourceCreation) 
-                if(sourceCreationNode){
-                    const author = self.getNodeValue(repositoryStorageNode, 'author');
-                    const editor = self.getNodeValue(repositoryStorageNode, 'editor ');
-                    const contributor = self.getNodeValue(repositoryStorageNode, 'contributor');
-                    const statement = self.getNodeValue(repositoryStorageNode, 'statement of reponsibility');
-                    const tileid = self.getTileId(repositoryStorageNode);
-                    this.repositoryStorage([{
-                        repositoryOwner,
-                        repositoryOwnerLink,
-                        storageAreaName,
-                        storageBuilding,
-                        tileid
-                    }]);
+                if(Array.isArray(sourceCreationNode)) {
+                    this.sourceCreation(sourceCreationNode.map(x => {
+                        const author = self.getNodeValue(x, 'authorship', 'author', 'author names', 'author name');
+                        const editor = self.getNodeValue(x, 'editorship', 'editor', 'editor names', 'editor name');
+                        const contributor = self.getNodeValue(x, 'contribution', 'contributors', 'contributor names', 'contributor name');
+                        const statement = self.getNodeValue(x, 'creation statement of responsibility', 'statement of responsibility');
+                        const tileid = self.getTileId(x);
+                        return {
+                            author,
+                            editor,
+                            contributor,
+                            statement,
+                            tileid
+                        };
+                    }));
                 }              
             } 
         },

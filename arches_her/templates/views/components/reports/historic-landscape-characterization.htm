@@ -44,9 +44,104 @@
                     params: {
                         data: resource,
                         cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
                     }
                 }"></div>
-            </div>   
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                        dataConfig: locationDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <!-- HLC Phase section -->
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}" class="fa toggle"></i> {% trans "HLC Phase" %}</h2>
+                    <a data-bind="{if: cards.historicLandscapeClassificationPhase, click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.historicLandscapeClassificationPhase" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: historicLandscapeClassificationPhase().length -->
+                        <div class="aher-nodata-note">No historic landscape classification phase for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: historicLandscapeClassificationPhase().length -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Period" %}</th>
+                                                <th>{% trans "Historic Map" %}</th>
+                                                <th>{% trans "Broad Type" %}</th>
+                                                <th>{% trans "Confidence of Interpretation" %}</th>
+                                                <th>{% trans "Description" %}</th>
+                                                <th>{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Start Date" %}</th>
+                                                <th class="none">{% trans "End Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Confidence of Dating" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: historicLandscapeClassificationPhase, dataTableOptions: hlcPhaseTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: hlcType"></td>
+                                                <td>
+                                                    <a data-bind="text: period, attr: {href: periodLink}" class="aher-table-link"></a>
+                                                </td>
+                                                <td>
+                                                    <a data-bind="text: historicMap, attr: {href: historicMapLink}" class="aher-table-link"></a>
+                                                </td>
+                                                <td data-bind="text: broadType"></td>
+                                                <td data-bind="text: interpretationConfidence"></td>
+                                                <td data-bind="text: description"></td>
+                                                <td data-bind="text: displayDate"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: dateConfidence"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.historicLandscapeClassificationPhase">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.historicLandscapeClassificationPhase)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: function() {$parent.deleteTile(tileid, $parent.cards.historicLandscapeClassificationPhase)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {
