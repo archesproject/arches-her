@@ -74,6 +74,7 @@ class FileTemplateView(View):
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
         resourceinstance_id = request.POST.get('resourceinstance_id', None)
+        transaction_id = request.POST.get('transaction_id')
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
 
@@ -132,6 +133,7 @@ class FileTemplateView(View):
         new_req.method = 'POST'
         new_req.user = request.user
         new_req.POST['data'] = tile
+        new_req.POST['transaction_id'] = transaction_id
         new_req.FILES['file-list_' + file_list_node_id] = file_data
         new_tile = TileData()
         new_tile.action = "update_tile"
