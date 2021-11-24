@@ -27,6 +27,36 @@
                 {
                     "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
                     "config": {
+                        "defaultValue": "561dc137-3557-4e2f-986e-a8855cad74cf",
+                        "label": "Copyright Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "fb14ac13-992e-11ea-9a8e-f875a44e0e11",
+                    "label": "Copyright Metatype",
+                    "node_id": "fb14ac0a-992e-11ea-90a2-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
+                        "label": "Copyright Note Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "fb14ac14-992e-11ea-a531-f875a44e0e11",
+                    "label": "Copyright Note Metatype",
+                    "node_id": "fb14ac0b-992e-11ea-97fa-f875a44e0e11",
+                    "sortorder": 5,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
+                    "config": {
                         "defaultValue": null,
                         "label": "Copyright Holder",
                         "maxLength": null,
@@ -54,6 +84,22 @@
                     "sortorder": 3,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Copyright Note Text",
+                        "maxLength": null,
+                        "placeholder": "Enter text",
+                        "width": "100%"
+                    },
+                    "id": "fb14ac15-992e-11ea-ac30-f875a44e0e11",
+                    "label": "Copyright Note Text",
+                    "node_id": "fb14ac0f-992e-11ea-9981-f875a44e0e11",
+                    "sortorder": 4,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000005"
                 },
                 {
                     "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
@@ -111,52 +157,6 @@
                     "sortorder": 1,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "561dc137-3557-4e2f-986e-a8855cad74cf",
-                        "label": "Copyright Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "fb14ac13-992e-11ea-9a8e-f875a44e0e11",
-                    "label": "Copyright Metatype",
-                    "node_id": "fb14ac0a-992e-11ea-90a2-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
-                        "label": "Copyright Note Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "fb14ac14-992e-11ea-a531-f875a44e0e11",
-                    "label": "Copyright Note Metatype",
-                    "node_id": "fb14ac0b-992e-11ea-97fa-f875a44e0e11",
-                    "sortorder": 5,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "fb1484f9-992e-11ea-8e3c-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Copyright Note Text",
-                        "maxLength": null,
-                        "placeholder": "Enter text",
-                        "width": "100%"
-                    },
-                    "id": "fb14ac15-992e-11ea-ac30-f875a44e0e11",
-                    "label": "Copyright Note Text",
-                    "node_id": "fb14ac0f-992e-11ea-9981-f875a44e0e11",
-                    "sortorder": 4,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000005"
                 }
             ],
             "color": null,
@@ -248,6 +248,39 @@
             "nodes": [
                 {
                     "config": {
+                        "graphid": [
+                            "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                            "22477f01-1a44-11e9-b0a9-000d3ab1e588"
+                        ],
+                        "graphs": [
+                            {
+                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
+                                "name": "Person"
+                            },
+                            {
+                                "graphid": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                                "name": "Organization"
+                            }
+                        ]
+                    },
+                    "datatype": "resource-instance-list",
+                    "description": "Represents a single node in a graph",
+                    "exportable": true,
+                    "fieldname": "CopyHolder",
+                    "graph_id": "fb1484f6-992e-11ea-9d18-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Copyright Holder",
+                    "nodegroup_id": "fb1484f7-992e-11ea-a732-f875a44e0e11",
+                    "nodeid": "fb14ac0c-992e-11ea-90df-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P75i_is_possessed_by",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
                     "datatype": "concept",
@@ -308,36 +341,12 @@
                 },
                 {
                     "config": {
-                        "graphid": [
-                            "d4a88461-5463-11e9-90d9-000d3ab1e588",
-                            "22477f01-1a44-11e9-b0a9-000d3ab1e588"
-                        ],
-                        "graphs": []
-                    },
-                    "datatype": "resource-instance-list",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "fb1484f6-992e-11ea-9d18-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Copyright Holder",
-                    "nodegroup_id": "fb1484f7-992e-11ea-a732-f875a44e0e11",
-                    "nodeid": "fb14ac0c-992e-11ea-90df-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E39_Actor",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P75i_is_possessed_by",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
                         "rdmCollection": "c73164aa-acbd-4d7b-878b-1e8b723d0e57"
                     },
                     "datatype": "concept",
                     "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
+                    "exportable": true,
+                    "fieldname": "Copy_type",
                     "graph_id": "fb1484f6-992e-11ea-9d18-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
@@ -369,24 +378,6 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "fb1484f6-992e-11ea-9d18-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Copyright Note Text",
-                    "nodegroup_id": "fb1484f7-992e-11ea-a732-f875a44e0e11",
-                    "nodeid": "fb14ac0f-992e-11ea-9981-f875a44e0e11",
-                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -404,6 +395,24 @@
                     "nodeid": "fb1484f7-992e-11ea-a732-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E30_Right",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "Copy_note",
+                    "graph_id": "fb1484f6-992e-11ea-9d18-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Copyright Note Text",
+                    "nodegroup_id": "fb1484f7-992e-11ea-a732-f875a44e0e11",
+                    "nodeid": "fb14ac0f-992e-11ea-9981-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
                     "sortorder": 0
                 }
             ],
@@ -434,5 +443,11 @@
             "template_id": "50000000-0000-0000-0000-000000000001",
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 12.2 (Debian 12.2-1.pgdg100+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 8.3.0-6) 8.3.0, 64-bit",
+        "git hash": "fatal: ambiguous argument '%ai'': unknown revision or path not in the working tree.",
+        "os": "Windows",
+        "os version": "10"
+    }
 }

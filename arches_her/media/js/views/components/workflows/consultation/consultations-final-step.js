@@ -7,6 +7,7 @@ define([
 
     function viewModel(params) {
         var self = this;
+        this.resourceid || params.resourceid;
         SummaryStep.apply(this, [params]);
 
         this.resourceData.subscribe(function(val){
@@ -81,7 +82,7 @@ define([
 
     ko.components.register('consultations-final-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/consultations-final-step.htm' }
+        template: { require: 'text!templates/views/components/workflows/consultation/consultations-final-step.htm' }
     });
     return viewModel;
 });

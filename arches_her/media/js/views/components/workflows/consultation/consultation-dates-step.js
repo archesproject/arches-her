@@ -3,30 +3,14 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/new-tile-step'
-], function($, arches, ko, koMapping, NewTileStep) {
+], function($, arches, ko, koMapping) {
     function viewModel(params) {
 
-        NewTileStep.apply(this, [params]);
         var self = this;
+        $.extend(this, params.form);
+        self.resourceid = params.resourceid;
 
-        if (!params.resourceid()) { 
-            if (ko.unwrap(params.workflow.resourceId)) {
-                params.resourceid(ko.unwrap(params.workflow.resourceId));
-            }
-        }
-
-        params.tile = self.tile;
         this.relatedAppAreaTile = ko.observable();
-
-        params.defineStateProperties = function(){
-            return {
-                resourceid: ko.unwrap(params.resourceid),
-                tile: !!(params.tile) ? koMapping.toJS(params.tile().data) : undefined,
-                tileid: !!(params.tile) ? ko.unwrap(params.tile().tileid): undefined
-            }
-        };
-
         this.displayName = ko.observable();
         this.concatName = ko.observable('Consultation for [Application Area] on [Log Date]');
         this.consultationNameNodegroupId = '4ad66f55-951f-11ea-b2e2-f875a44e0e11';
@@ -36,8 +20,7 @@ define([
         this.consultationLocationNodegroupId = '152aa058-936d-11ea-b517-f875a44e0e11';
         this.logDateNodeId = "40eff4cd-893a-11ea-b0cc-f875a44e0e11";
         this.targetDateNodeId = "7224417b-893a-11ea-b383-f875a44e0e11";
-
-        this.workflowStepClass = ko.unwrap(params.class());
+        this.tile().transactionId = this.workflowId;
 
         this.getResourceDisplayName = function(resourceids) {
             var retStr = '';
@@ -52,13 +35,19 @@ define([
             });
         };
 
-        this.saveConsNameTile = function() {
-            var nameCard = self.topCards.find(function(topCard) {
+        this.saveConsultationNameTile = function() {
+            let nameCardTile;
+            const nameCard = self.topCards.find(function(topCard) {
                 return topCard.nodegroupid == self.consultationNameNodegroupId;
             });
-            var nameCardTile = nameCard.getNewTile();
-            nameCardTile.data[self.consultationNameNodeId] = self.concatName();
-            nameCardTile.save();
+            if (!nameCard.tiles().length) {
+                nameCardTile = nameCard.getNewTile();
+            } else {
+                nameCardTile = nameCard.tiles()[0];
+            }
+            nameCardTile.data[self.consultationNameNodeId](self.concatName());
+            nameCardTile.transactionId = self.workflowId;
+            return nameCardTile.save();
         };
 
         this.formatDate = function(date) {
@@ -72,23 +61,30 @@ define([
             return self.formatDate(copy);
         };
 
-        self.tile.subscribe(function(val) {
+        self.init = function() {
             var resourceids = [];
             var appAreas;
-            var logDateVal, targetDateVal;
-            var DefaultTargetDateLeadTime = 22, relatedAppAreaTile = self.getTiles(self.consultationAppAreaNodegroupId)[0];
-            if(!ko.unwrap(self.displayName) && !ko.unwrap(val.data[self.targetDateNodeId])) {
-                appAreas = relatedAppAreaTile && relatedAppAreaTile.data[self.appAreaNodeId]()
+            var relatedAppAreaTile = self.getTiles(self.consultationAppAreaNodegroupId)[0];
+            if(!ko.unwrap(self.displayName) && !ko.unwrap(self.tile().data[self.targetDateNodeId])) {
+                appAreas = relatedAppAreaTile && relatedAppAreaTile.data[self.appAreaNodeId]();
                 if (appAreas) {
                     resourceids = appAreas.map(function(obj){return obj.resourceId();});
                 }
                 self.getResourceDisplayName(resourceids);
+                self.loading(false);
+                self.saving(false);
             }
+        };
+
+        self.tile().data[self.logDateNodeId].subscribe(function(val) {
+            var logDateVal;
+            var targetDateVal;
+            var DefaultTargetDateLeadTime = 22;
             if(val) {
                 self.tile().data[self.logDateNodeId].subscribe(function(val) {
                     logDateVal = new Date(val);
                     if (logDateVal != 'Invalid Date') {
-                        self.concatName('Consultation for '+self.displayName()+' on '+logDateVal.toLocaleDateString());
+                        self.concatName(`Consultation for ${self.displayName()} on ${logDateVal.toLocaleDateString()}`);
                         targetDateVal = self.addDays(logDateVal, DefaultTargetDateLeadTime);
                         self.tile().data[self.targetDateNodeId](targetDateVal);
                     }
@@ -96,24 +92,36 @@ define([
             }
         });
 
-        self.onSaveSuccess = function(tiles) {
-            var tile;
-            self.saveConsNameTile();
-            if (tiles.length > 0 || typeof tiles == 'object') {
-                tile = tiles[0] || tiles;
-                params.resourceid(tile.resourceinstance_id);
-                params.tileid(tile.tileid);
-                self.resourceId(tile.resourceinstance_id);
-            }
-            params.value(params.defineStateProperties());
-            if (self.completeOnSave === true) { self.complete(true); }
+        params.form.save = function() {
+            self.tile().save()
+                .then(
+                    function(data){
+                        self.tile().tileid = data.tileid;
+                        return self.saveConsultationNameTile();
+                    })
+                .then(function(){
+                    params.form.savedData({
+                        tileData: koMapping.toJSON(self.tile().data),
+                        tileId: self.tile().tileid,
+                        resourceInstanceId: self.tile().resourceinstance_id,
+                        nodegroupId: self.tile().nodegroup_id
+                    });
+                    params.form.complete(true);
+                    params.form.saving(false);
+                });
         };
-    };
+
+        self.tile().dirty.subscribe(function(dirty) {
+            params.dirty(dirty);
+        });
+
+        self.init();
+    }
 
     return ko.components.register('consultation-dates-step', {
         viewModel: viewModel,
         template: {
-            require: 'text!templates/views/components/workflows/hide-card-step.htm'
+            require: 'text!templates/views/components/workflows/consultation/consultation-dates-step.htm'
         }
     });
 });

@@ -7,9 +7,9 @@ define([
     'views/components/workflows/new-tile-step'
 ], function(_, $, arches, ko, koMapping, NewTileStep) {
     function viewModel(params) {
+        _.extend(this, params.form);
+
         var self = this;
-        params.parenttileid = params.externalStepData.sitevisitedetailsstep.data.tileid;
-        NewTileStep.apply(this, [params]);
         this.card.subscribe(function(val){
             if (val.tiles() && val.tiles().length === 0) {
                 self.complete(false);
