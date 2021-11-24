@@ -51,7 +51,6 @@ define([
 
         this.retrieveFile = function(tile) { //correspondence tile of consultation resource
             const templateId = ko.mapping.toJS(tile.data)[self.letterTypeNodeId];
-            console.log(tile)
             $.ajax({ //save the file and create digital resource
                 type: "POST",
                 url: arches.urls.root + 'filetemplate',
@@ -62,7 +61,6 @@ define([
                 }
             })
             .done(function(data){ //getting digital object resource
-                console.log(data)
                 self.dataURL(data.tile.data[self.digitalObjectFileNodeId][0].url);
                 self.digitalObjectResourceId(data.tile.resourceinstance_id);
 
@@ -72,8 +70,6 @@ define([
                     'inverseOntologyProperty':'',
                     'resourceXresourceId':''
                 }];
-
-                console.log(relateDocuNodeTemplate)
 
                 $.ajax({ //saving the realted resource (digital object) to the Letter node (consultation)
                     url: arches.urls.api_node_value,
@@ -117,7 +113,6 @@ define([
                     }).done(function(response) {
                         self.saveValues();
                         self.loading(false);
-                        console.log(self.workflowId)
                         if (self.completeOnSave === true) { self.complete(true); }    
                     })
                     .fail(function(response){
