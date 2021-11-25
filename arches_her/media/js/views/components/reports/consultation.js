@@ -14,7 +14,8 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
-                {id: 'name', title: 'Names and Identifiers'},
+                {id: 'name', title: 'Consultation Details'},
+                {id: 'location', title: 'Location Data'},
                 {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -33,7 +34,16 @@ define([
                 descriptions: 'consultation descriptions',
             };
 
+            self.locationDataConfig = {
+                location: ['Consultation Area'],
+                addresses: undefined,
+                locationDescription: undefined,
+                administrativeAreas: undefined,
+                nationalGrid: undefined,
+            }
+
             self.nameCards = {};
+            self.locationCards = {};
             self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
@@ -44,6 +54,9 @@ define([
                 
                 self.cards = self.createCardDictionary(cards)
 
+                console.log(self.cards)
+                console.log(self.resource())
+
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
                     externalCrossReferences: self.cards?.['external cross references'],
@@ -52,6 +65,19 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['consultation descriptions'],
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            addresses: 'addresses',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationGeometry: 'mapped location',
+                            locationDescriptions: 'location descriptions',
+                        }
+                    }
                 };
             }
 
