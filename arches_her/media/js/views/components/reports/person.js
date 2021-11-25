@@ -107,12 +107,35 @@ define([
                     contactPoints: self.cards?.['contact information for person'],
                 };
 
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+
+                self.imagesCards = {
+                    images: self.cards?.['images']
+                }
+
+                self.peopleCards = {
+                    people: self.cards?.['associated people and organizations']
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            addresses: 'addresses'
+                        }
+                    }
+                };
+
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
-                }
+                };
 
             }
 

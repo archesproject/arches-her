@@ -40,7 +40,12 @@ define([
                 assets: undefined,
                 translation: 'translation',
                 period: 'temporal coverage'
+            }
 
+            self.locationDataConfig = {
+                addresses: undefined,
+                locationDescription: undefined,
+                nationalGrid: undefined
             }
 
             self.nameCards = {};
@@ -59,12 +64,35 @@ define([
                     name: self.cards?.['names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
+                    parent: self.cards?.['parent story']
                 };
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                     subjects: self.cards?.['subjects'],
+                    audience: self.cards?.['audience type']
                 };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            locationGeometry: ['geographic coverage', 'geometry'],
+                            administrativeAreas: 'localities/administrative areas',
+                        }
+                    }
+                }
+
+                self.resourcesCards = {
+                    translation: self.cards?.['translation'],
+                    period: self.cards?.['temporal coverage']
+                }
             }
 
         },

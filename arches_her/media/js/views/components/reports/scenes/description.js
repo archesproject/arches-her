@@ -98,7 +98,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                                     data: [{
                                         key: 'Subject',
                                         value: self.getRawNodeValue(params.data(), self.dataConfig.subject),
-                                        type: 'kv'
+                                        type: 'kv',
+                                        card: self.cards?.subject
                                     }]
                                 }
                             ]

@@ -74,8 +74,24 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
-                    citation: self.cards?.['associated bibliographic sources']
+                    citation: self.cards?.['associated bibliographic sources'],
+                    subject: self.cards?.['subjects']
                 };
+
+                self.imagesCards = {
+                    copyright: self.cards?.['copyright details'],
+                    images: self.cards?.['images']
+                };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+                
+                self.resourcesCards = {
+                    files: self.cards?.['associated digital files'],
+                    period: self.cards?.['associated periods']
+                }
             }
 
         },

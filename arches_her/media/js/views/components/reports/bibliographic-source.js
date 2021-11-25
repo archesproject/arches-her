@@ -75,7 +75,8 @@ define([
                 };
 
                 self.auditCards = {
-                    audit: self.cards?.['audit metadata']
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
                 };
 
                 self.descriptionCards = {

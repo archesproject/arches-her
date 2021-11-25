@@ -6,7 +6,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             self.dataConfig = {
                 location: 'location data',
-                protection: 'designation and protection assignment'
+                protection: 'designation and protection assignment',
+                landUse: 'land use',
+                areaAssignment: ['area', 'area assignments']
             }
 
             self.cards = params.cards || {};
@@ -40,7 +42,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             self.currentDesignation = ko.observable();
             self.selectedGeometry = ko.observable();
-
+            self.locationRoot = undefined;
             self.coordinateData = ko.observable();
 
             self.geojson = ko.observable();
@@ -78,7 +80,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             const setupCards = (tileid) => {
                 if(self.cards.location){
                     const subCards = self.cards.location.subCards;
-                    const rootCard = self.cards.location.card;
+                    const rootCard = self.locationRoot;
                     const tileCards = self.createCardDictionary(rootCard.tiles().find(rootTile => rootTile.tileid == tileid)?.cards);
                     if(tileCards){
                         tileCards.landUse = tileCards?.[subCards.landUse];
@@ -134,26 +136,32 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 }
                 const locationNode = self.getRawNodeValue(params.data(), self.dataConfig.location);
 
+                if(self.cards?.location?.card){
+                    self.locationRoot = self.cards?.location?.card;
+                }
+
                 if(locationNode){
                     setupCards(self.getTileId(locationNode))
                 }
 
-                const areaAssignmentsNode = self.getRawNodeValue(locationNode, 'area', 'area assignments');
-                if(Array.isArray(areaAssignmentsNode)){
-                    self.areaAssignment(areaAssignmentsNode.map(x => {
-                        const endDate = self.getNodeValue(x, 'area status timespan', 'area status end date');
-                        const ownership = self.getNodeValue(x, 'ownership');
-                        const reference = self.getNodeValue(x, 'area reference', 'area reference value');
-                        const shineForm = self.getNodeValue(x, 'shine - form');
-                        const shineSignificance = self.getNodeValue(x, 'shine - significance');
-                        const startDate = self.getNodeValue(x, 'area status timespan', 'area status start date');
-                        const status = self.getNodeValue(x, 'area status');
-                        const tileid = self.getTileId(x);
-                        return {endDate, ownership, reference, shineForm, shineSignificance, startDate, status, tileid};
-                    }));
+                if(self.dataConfig.areaAssignment){
+                    const areaAssignmentsNode = self.getRawNodeValue(locationNode, ...self.dataConfig.areaAssignment);
+                    if(Array.isArray(areaAssignmentsNode)){
+                        self.areaAssignment(areaAssignmentsNode.map(x => {
+                            const endDate = self.getNodeValue(x, 'area status timespan', 'area status end date');
+                            const ownership = self.getNodeValue(x, 'ownership');
+                            const reference = self.getNodeValue(x, 'area reference', 'area reference value');
+                            const shineForm = self.getNodeValue(x, 'shine - form');
+                            const shineSignificance = self.getNodeValue(x, 'shine - significance');
+                            const startDate = self.getNodeValue(x, 'area status timespan', 'area status start date');
+                            const status = self.getNodeValue(x, 'area status');
+                            const tileid = self.getTileId(x);
+                            return {endDate, ownership, reference, shineForm, shineSignificance, startDate, status, tileid};
+                        }));
+                    }
                 }
 
-                const landUseClassificationNode = self.getRawNodeValue(locationNode, 'land use classification assignment');
+                const landUseClassificationNode = self.getRawNodeValue(locationNode, self.dataConfig.landUse);
                 if(landUseClassificationNode) {
                     const classification = self.getNodeValue(landUseClassificationNode, 'land use classification');
                     const endDate = self.getNodeValue(landUseClassificationNode, 'land use assessment timespan', 'land use assessment end date');

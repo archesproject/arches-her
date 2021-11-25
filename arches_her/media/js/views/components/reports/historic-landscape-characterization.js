@@ -45,7 +45,7 @@ define([
             self.locationDataConfig = {
                 location: [],
                 addresses: undefined,
-                locationDescription: undefined
+                locationDescription: undefined,
             };
 
             self.descriptionDataConfig = {
@@ -108,6 +108,10 @@ define([
                 
                 self.cards = self.createCardDictionary(cards)
 
+                Object.assign(self.cards, {
+                    historicLandscapeClassificationPhase: self.cards?.['hlc phase']
+                })
+
                 self.nameCards = {
                     name: self.cards?.['names'],
                     externalCrossReferences: self.cards?.['external cross references'],
@@ -116,9 +120,30 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                    citation: self.cards?.['bibliographic source citation']
+                };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+
+                self.resourcesCards = {
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                }
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            administrativeAreas: 'localities/administrative areas',
+                            nationalGrid: 'national grid references',
+                            locationGeometry: 'location'
+                        }
+                    }
                 };
             }
-
         },
         template: { require: 'text!templates/views/components/reports/historic-landscape-characterization.htm' }
     });

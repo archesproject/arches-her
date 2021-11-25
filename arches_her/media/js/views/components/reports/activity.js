@@ -146,6 +146,11 @@ define([
                     assets: self.cards?.['associated heritage assets, areas and artefacts'],
                     files: self.cards?.['associated digital files'],
                 }
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
             }
 
         },

@@ -24,9 +24,7 @@ define([
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
 
-            self.nameDataConfig = {
-                type: undefined,
-            };
+            self.nameDataConfig = {};
 
             self.nameCards = {};
             self.auditCards = {}
@@ -43,6 +41,11 @@ define([
                     name: self.cards?.['names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
+                };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
                 };
 
                 self.descriptionCards = {

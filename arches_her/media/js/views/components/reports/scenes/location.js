@@ -13,7 +13,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 geometry: 'geometry'
             }
 
-            self.cards = params.cards || {};
+            self.cards = Object.assign({}, params.cards);
+            self.cardConfig = Object.assign({}, params.cards);
             self.selectedGeometry = params.selectedGeometry || ko.observable();
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
@@ -92,7 +93,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             self.nationalGridReferences = ko.observableArray();
             self.areaAssignment = ko.observableArray();
             self.landUseClassification = ko.observableArray();
-
+            self.locationRoot = undefined;
 
             // utitility function - checks whether at least one observable (or array object)
             // has a set value (used to determine whether a section is visible)
@@ -119,14 +120,27 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             const setupCards = (tileid) => {
                 if(self.cards.location){
-                    const subCards = self.cards.location.subCards;
-                    const rootCard = self.cards.location.card;
-                    const tileCards = self.createCardDictionary(rootCard.tiles().find(rootTile => rootTile.tileid == tileid)?.cards);
+                    const subCards = self.cardConfig.location.subCards;
+                    const rootCard = self.locationRoot;
+
+                    const tileCards = rootCard === null ? self.cards?.cards : self.createCardDictionary(rootCard.tiles().find(rootTile => rootTile.tileid == tileid)?.cards);
+                    
                     if(tileCards){
                         tileCards.addresses = tileCards?.[subCards.addresses];
                         tileCards.nationalGridReferences = tileCards?.[subCards.nationalGrid];
                         tileCards.administrativeAreas = tileCards?.[subCards.administrativeAreas];
                         tileCards.locationDescriptions = tileCards?.[subCards.locationDescriptions];
+                        if(Array.isArray(subCards.locationGeometry)) {
+                            let currentTileCards = tileCards;
+                            for(let i = 0; i < subCards.locationGeometry.length; ++i){
+                                const nestedCard = currentTileCards?.[subCards.locationGeometry[i]];
+                                const nestedTile = nestedCard.tiles()?.[0];
+                                currentTileCards = self.createCardDictionary(nestedTile?.cards);
+                                tileCards.locationGeometry = nestedCard;
+                            }
+                        } else {
+                            tileCards.locationGeometry = tileCards?.[subCards.locationGeometry];
+                        }
                         Object.assign(self.cards, tileCards);
                     }
                 }
@@ -136,12 +150,14 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             if(params?.compiled){
             } else {
                 const locationNode = self.getRawNodeValue(params.data(), ...self.dataConfig.location);
-                
+
+                self.locationRoot = self.cardConfig?.location?.card
+
+                setupCards(self.getTileId(locationNode));
+
                 if(!locationNode) {
                     return;
                 }
-
-                setupCards(self.getTileId(locationNode));
 
                 const geometryNode = self.getRawNodeValue(locationNode, self.dataConfig.geometry)
                 if(geometryNode) {
@@ -170,7 +186,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
                 const rawAddressesNode = self.getRawNodeValue(locationNode, self.dataConfig.addresses);
                 if(rawAddressesNode || Array.isArray(locationNode)) {
-                    const addressesNode = rawAddressesNode || locationNode.map(locationNode => self.getRawNodeValue(locationNode, self.dataConfig.addresses))
+                    const addressesNode = rawAddressesNode ? Array.isArray(rawAddressesNode) ? rawAddressesNode : [rawAddressesNode] : locationNode.map(locationNode => self.getRawNodeValue(locationNode, self.dataConfig.addresses))
                     if(addressesNode?.length){
                         self.addresses(addressesNode.map(x => {
                             const buildingName = self.getNodeValue(x, 'building name', 'building name value');

@@ -49,6 +49,7 @@ define([
             self.nameCards = {};
             self.auditCards = {}
             self.descriptionCards = {};
+            self.assessmentCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
             self.imagesCards = {};
@@ -74,6 +75,51 @@ define([
                     descriptions: self.cards?.['descriptions'],
                     citation: self.cards?.['bibliographic source citation']
                 };
+
+                self.classificationCards = {
+                    production: self.cards?.['construction phases'],
+                    dimensions: self.cards?.['asset dimensions']
+                };
+
+                self.assessmentCards = {
+                    scientificDate: self.cards?.['scientific date assignment']
+                };
+
+                self.peopleCards = {
+                    people: self.cards?.['associated people and organizations']
+                };
+
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    consultations: self.cards?.['associated consultations'],
+                    files: self.cards?.['associated digital file(s)'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+                
+                self.locationCards = {
+                    location: {
+                        card: self.cards?.['location data'],
+                        subCards: {
+                            addresses: 'addresses',
+                            nationalGrid: 'national grid references',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationDescriptions: 'location descriptions',
+                            areaAssignment: 'area assignments',
+                            landUse: 'land use classification assignment'
+                        }
+                    }
+                }
+
+                self.protectionCards = {
+                    designations: self.cards?.['designation and protection assignment']
+                };
+
+                Object.assign(self.protectionCards, self.locationCards);
             }
 
         },

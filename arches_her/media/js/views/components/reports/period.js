@@ -36,7 +36,11 @@ define([
             };
 
             self.locationDataConfig = {
-                location: []
+                location: [],
+                addresses: undefined,
+                nationalGrid: undefined,
+                locationDescription: undefined,
+                administrativeAreas: undefined
             }
 
             self.classificationDataConfig = {
@@ -52,20 +56,6 @@ define([
             self.summary = params.summary;
             self.cards = {};
 
-            self.periodNameData = ko.observable({
-                sections:
-                    [
-                        {
-                            title: 'Period Names',
-                            data: [{
-                                key: 'Name',
-                                value: self.getNodeValue(self.resource(), 'period names', 'period name'),
-                                type: 'kv'
-                            }]
-                        }
-                    ]
-            });
-
             if(params.report.cards){
                 const cards = params.report.cards;
                 
@@ -75,12 +65,48 @@ define([
                     name: self.cards?.['preferred period names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
+                    parent: self.cards?.['parent period']
                 };
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['period descriptions'],
                 };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+                
+                self.classificationCards = {
+                    type: self.cards?.['period types'],
+                    dates: self.cards?.['dates']
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            locationGeometry: 'spatial extent'
+                        }
+                    }
+                }
             }
+
+            self.periodNameData = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Period Names',
+                            data: [{
+                                key: 'Name',
+                                value: self.getNodeValue(self.resource(), 'period names', 'period name'),
+                                type: 'kv',
+                                card: self.cards?.['preferred period names']
+                            }]
+                        }
+                    ]
+            });
 
         },
         template: { require: 'text!templates/views/components/reports/period.htm' }

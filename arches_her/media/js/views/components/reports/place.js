@@ -35,7 +35,10 @@ define([
                 type: 'place type'
             };
             self.locationDataConfig = {
-                location: []
+                location: [],
+                locationDescription: undefined,
+                nationalGrid: undefined,
+                administrativeAreas: 'localities/administrative area types'
             }
 
             self.nameCards = {};
@@ -57,9 +60,30 @@ define([
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
 
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+                
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                 };
+
+                self.classificationCards = {
+                    type: self.cards?.['place type'],
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            locationGeometry: 'mapped location',
+                            administrativeAreas: 'localities/administrative area types',
+                            addresses: 'addresses',
+                        }
+                    }
+                }
             }
 
         },

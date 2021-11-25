@@ -100,11 +100,32 @@ define([
                 };
 
                 self.resourcesCards = {
-                    activities: self.cards?.['associated activities'],
+                    activities: self.cards?.['associated_activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
+
+                self.locationCards = {
+                    location: {
+                        card: self.cards?.['location data'],
+                        subCards: {
+                            addresses: 'addresses',
+                            nationalGrid: 'national grid references',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationDescriptions: 'location descriptions',
+                            areaAssignment: 'area assignments',
+                            landUse: 'land use classification assignment',
+                            locationGeometry: 'geometry'
+                        }
+                    }
+                }
+
+                self.protectionCards = {
+                    designations: self.cards?.['designation and protection assignment']
+                };
+
+                Object.assign(self.protectionCards, self.locationCards);
             }
 
         },

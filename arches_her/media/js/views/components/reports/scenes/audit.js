@@ -49,7 +49,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                                 data: [{
                                     key: 'Resource Model Type',
                                     value: self.getNodeValue(params.data(), self.dataConfig.resource),
-                                    type: 'kv'
+                                    type: 'kv',
+                                    card: self.cards?.['type']
                                 }]
                             }
                         ]

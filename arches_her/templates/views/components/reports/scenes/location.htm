@@ -6,7 +6,7 @@
 <!-- Geometry/Map -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.geometry">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.coordinates)}, css: {'fa-angle-double-right': visible.coordinates(), 'fa-angle-double-up': !visible.coordinates()}" class="fa toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.locationGeometry && !coordinateData, click: function(){addNewTile(cards.locationGeometry)}}">
+    <a class="aher-report-a" data-bind="{if: cards.locationGeometry && !coordinateData || locationRoot, click: function(){addNewTile(cards.locationGeometry || locationRoot)}}">
         <i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}
     </a>
 
@@ -135,7 +135,7 @@
 <!-- Addresses -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.addresses">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.addresses)}, css: {'fa-angle-double-right': visible.addresses(), 'fa-angle-double-up': !visible.addresses()}" class="fa toggle"></i> {% trans "Addresses" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.addresses, click: function(){addNewTile(cards.addresses)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
+    <a class="aher-report-a" data-bind="{if: cards.addresses || locationRoot, click: function(){addNewTile(cards.addresses || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.addresses" class="aher-report-collapsible-container pad-lft">
@@ -207,7 +207,7 @@
 <!-- Location Description -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.locationDescription">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Location Descriptions" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.locationDescriptions, click: function(){addNewTile(cards.locationDescriptions)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+    <a class="aher-report-a" data-bind="{if: cards.locationDescriptions || locationRoot, click: function(){addNewTile(cards.locationDescriptions || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.descriptions" class="aher-report-collapsible-container pad-lft">
@@ -257,7 +257,7 @@
 <!-- Admin Areas -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.administrativeAreas">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.administrativeAreas)}, css: {'fa-angle-double-right': visible.administrativeAreas(), 'fa-angle-double-up': !visible.administrativeAreas()}" class="fa toggle"></i> {% trans "Administrative Areas" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.administrativeAreas, click: function(){addNewTile(cards.administrativeAreas)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
+    <a class="aher-report-a" data-bind="{if: cards.administrativeAreas || locationRoot, click: function(){addNewTile(cards.administrativeAreas || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.administrativeAreas" class="aher-report-collapsible-container pad-lft">
@@ -309,7 +309,7 @@
 <!-- National Grid References -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.nationalGrid">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.nationalGrid)}, css: {'fa-angle-double-right': visible.nationalGrid(), 'fa-angle-double-up': !visible.nationalGrid()}" class="fa toggle"></i> {% trans "National Grid References" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.nationalGridReferences, click: function(){addNewTile(cards.nationalGridReferences)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
+    <a class="aher-report-a" data-bind="{if: cards.nationalGridReferences || locationRoot, click: function(){addNewTile(cards.nationalGridReferences || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.nationalGrid" class="aher-report-collapsible-container pad-lft">

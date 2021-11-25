@@ -50,6 +50,10 @@ define([
                 location: ['discovery', 'location data']
             };
 
+            self.protectionDataConfig = {
+                protection: undefined
+            };
+
             self.assessmentsDataConfig = {
                 artefactCondition: 'condition assessment'
             };
@@ -59,7 +63,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                consultations: undefined
             };
 
             self.nameCards = {};
@@ -84,13 +89,66 @@ define([
                 self.nameCards = {
                     name: self.cards?.['artefact names'],
                     externalCrossReferences: self.cards?.['external cross references'],
-                    systemReferenceNumbers: self.cards?.['system reference numbers'],
+                    systemReferenceNumbers: self.cards?.['system reference numbers']
                 };
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                     citation: self.cards?.['bibliographic source citation']
                 };
+
+                self.classificationCards = {
+                    production: self.cards?.['artefact production'],
+                    dimensions: self.cards?.['artefact dimensions']
+                };
+
+                self.assessmentCards = {
+                    scientificDate: self.cards?.['scientific date assignment'],
+                    artefactCondition: self.cards?.['artefact condition assessment']
+                };
+
+                self.peopleCards = {
+                    people: self.cards?.['associated people and organizations']
+                };
+
+                self.archiveCards = {
+                    repositoryStorage: self.cards?.['repository storage location']
+                };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+                
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    files: self.cards?.['associated digital files'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                };
+
+                self.discoveryCards = {
+                    discovery: self.cards?.['discovery']
+                }
+
+                const discoveryTile = self.discoveryCards.discovery?.tiles()?.[0];
+
+                const discoveryChildCards = self.createCardDictionary(discoveryTile?.cards);
+
+                self.locationCards = {
+                    location: {
+                        card: discoveryChildCards?.['location data'] || self.discoveryCards?.discovery,
+                        subCards: {
+                            addresses: 'addresses',
+                            nationalGrid: 'national grid references',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationDescriptions: 'location descriptions',
+                            areaAssignment: 'area assignments',
+                            landUse: 'land use classification assignment'
+                        }
+                    }
+                }
+
+                Object.assign(self.protectionCards, self.locationCards);
             }
 
         },

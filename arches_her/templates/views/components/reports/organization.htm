@@ -78,6 +78,27 @@
                     }
                 }"></div>
             </div>
+            <!-- People Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'people'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/people',
+                    params: {
+                        data: resource,
+                        cards: peopleCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                        dataConfig: locationDataConfig
+                    }
+                }"></div>
+            </div>
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {

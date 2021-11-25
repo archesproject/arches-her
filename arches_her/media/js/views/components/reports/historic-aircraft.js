@@ -68,6 +68,12 @@ define([
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                     citation: self.cards?.['bibliographic source citation']
@@ -92,6 +98,26 @@ define([
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
+
+                self.locationCards = {
+                    location: {
+                        card: self.cards?.['location data'],
+                        subCards: {
+                            addresses: 'addresses',
+                            nationalGrid: 'national grid references',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationDescriptions: 'location descriptions',
+                            areaAssignment: 'area assignments',
+                            landUse: 'land use classification assignment'
+                        }
+                    }
+                }
+
+                self.protectionCards = {
+                    designations: self.cards?.['designation and protection assignment']
+                };
+
+                Object.assign(self.protectionCards, self.locationCards);
             }
         },
         template: { require: 'text!templates/views/components/reports/historic-aircraft.htm' }

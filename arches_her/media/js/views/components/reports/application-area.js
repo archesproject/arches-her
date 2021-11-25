@@ -28,7 +28,8 @@ define([
                 searching: true,
                 scrollY: "250px",
                 columns: Array(2).fill(null)
-            }
+            };
+
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
@@ -48,8 +49,14 @@ define([
             };
 
             self.locationDataConfig = {
-                location: []
+                location: [],
+                nationalGrid: undefined
             }
+
+            self.protectionDataConfig = {
+                landUse: undefined,
+                areaAssignment: undefined
+            };
 
             self.nameCards = {};
             self.auditCards = {};
@@ -83,6 +90,28 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
+                };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            addresses: 'addresses',
+                            administrativeAreas: 'localities/administrative areas',
+                            locationGeometry: 'mapped location',
+                            locationDescriptions: 'location descriptions',
+                        }
+                    }
+                };
+
+                self.protectionCards = {
+                    designations: self.cards?.['designation and protection assignment']
                 };
             }
 

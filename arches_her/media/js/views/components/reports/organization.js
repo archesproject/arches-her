@@ -42,6 +42,13 @@ define([
                 organizationFormation: 'organization formation'
             };
 
+            self.locationDataConfig = {
+                administrativeAreas: undefined,
+                nationalGrid: undefined, 
+                locationDescription: undefined,
+                geometry: undefined
+            };
+
             self.resourceDataConfig = {
                 consultations: undefined,
                 files: undefined
@@ -50,12 +57,13 @@ define([
             self.nameCards = {};
             self.auditCards = {};
             self.classificationCards = {};
+            self.locationCards = {};
             self.descriptionCards = {};
             self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
-
-            self.currencyData = {}
+            self.peopleCards = {};
+            self.currencyData = {};
 
             if(params.report.cards){
                 const cards = params.report.cards;
@@ -78,6 +86,30 @@ define([
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
+
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
+
+                self.classificationCards = {
+                    organizationFormation: self.cards?.['organization formation']
+                };
+
+                self.peopleCards = {
+                    people: 'associated people and organizations'
+                };
+
+                self.locationCards = {
+                    cards: self.cards,
+                    location: {
+                        card: null,
+                        subCards: {
+                            addresses: 'addresses'
+                        }
+                    }
+                };
+
             }
 
             self.currencyData = ko.observable({
