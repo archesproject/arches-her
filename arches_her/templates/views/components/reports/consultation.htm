@@ -48,6 +48,55 @@
                     }
                 }"></div>
             </div>
+            <!-- Correspondence Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'correspondence'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.correspondence)}, css: {'fa-angle-double-right': visible.correspondence(), 'fa-angle-double-up': !visible.correspondence()}"  class="fa toggle"></i> {% trans "Correspondence" %}</h2>
+                    <a data-bind="{if: cards.correspondence, click: function(){addNewTile(cards.correspondence)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Correspondence" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.correspondence" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: correspondence() -->
+                        <div class="aher-nodata-note">{% trans "No correspondence for this resource" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: correspondence() -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Letter" %}</th>
+                                                <th>{% trans "Letter Type" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: correspondence, dataTableOptions: correspondenceTableConfig}">
+                                            <tr>
+                                                <td><a data-bind="text: letter, attr: {href: letterLink}"></a></td>
+                                                <td data-bind="text: letterType"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.correspondence">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.correspondence)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.correspondence)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
             <!-- Description Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
                 <div data-bind="component: {

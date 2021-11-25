@@ -16,6 +16,7 @@ define([
             self.sections = [
                 {id: 'name', title: 'Consultation Details'},
                 {id: 'location', title: 'Location Data'},
+                {id: 'correspondence', title: 'Correspondence'},
                 {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -49,13 +50,32 @@ define([
             self.summary = params.summary;
             self.cards = {};
 
+            self.visible = {
+                correspondence: ko.observable(true)
+            }
+
+            self.correspondenceTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(3).fill(null)
+            }
+
+            self.correspondence = ko.observableArray();
+
+            const correspondenceNode = self.getRawNodeValue(self.resource(), 'correspondence');
+            if(Array.isArray(correspondenceNode)){
+                self.correspondence(correspondenceNode.map(node => {
+                    const letter = self.getNodeValue(node, 'letter');
+                    const letterLink = self.getResourceLink(self.getRawNodeValue(node, 'letter'));
+                    const letterType = self.getNodeValue(node, 'letter type');
+                    const tileid = self.getTileId(node);
+                    return {letter, letterLink, letterType, tileid};
+                }));
+            };
+
             if(params.report.cards){
                 const cards = params.report.cards;
                 
                 self.cards = self.createCardDictionary(cards)
-
-                console.log(self.cards)
-                console.log(self.resource())
 
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
@@ -80,7 +100,6 @@ define([
                     }
                 };
             }
-
         },
         template: { require: 'text!templates/views/components/reports/consultation.htm' }
     });
