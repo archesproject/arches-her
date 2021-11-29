@@ -12,15 +12,15 @@ define([
         var self = this;
         SelectResourceStep.apply(this, [params]);
 
-        this.workflowStepClass = ko.unwrap(params.class());
-
         this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
         this.digitalObjectFileNodeId = "96f8830a-8490-11ea-9aba-f875a44e0e11";
-        this.dataURL = ko.observable(null);
-        this.digitalObjectResourceId = ko.observable(null)
+        this.dataURL = ko.observable();
+        this.digitalObjectResourceId = ko.observable();
+        this.digitalObjectTileId = ko.observable();
+        this.tile().transactionid = self.worfklowId;
 
         var nameTemplate = {
-            "tileid": null,
+            "tileid": '',
             "data": {
                 "c61ab166-9513-11ea-a44c-f875a44e0e11": null,
                 "c61ab167-9513-11ea-9d50-f875a44e0e11": null,
@@ -36,23 +36,34 @@ define([
             "sortorder": 0
         };
 
-        this.retrieveFile = function(tile) {
-            var templateId = ko.mapping.toJS(tile.data)[self.letterTypeNodeId];
+        this.saveValues = function(){ //save the savedData and finalize the step
+            params.form.savedData({
+                tileData: koMapping.toJSON(self.tile().data),
+                resourceInstanceId: self.tile().resourceinstance_id,
+                tileId: self.tile().tileid,
+                nodegroupId: self.tile().nodegroup_id,
+                dataURL: ko.unwrap(self.dataURL),
+            });
+            self.locked(true);
+            params.form.complete(true);
+            params.form.saving(false);
+        };
 
-            $.ajax({
+        this.retrieveFile = function(tile) { //correspondence tile of consultation resource
+            const templateId = ko.mapping.toJS(tile.data)[self.letterTypeNodeId];
+            $.ajax({ //save the file and create digital resource
                 type: "POST",
                 url: arches.urls.root + 'filetemplate',
                 data: {
                     "template_id": templateId,
-                    "resourceinstance_id": tile.resourceinstance_id
+                    "resourceinstance_id": tile.resourceinstance_id,
+                    "transaction_id": self.workflowId,
                 }
             })
-            .done(function(data){
+            .done(function(data){ //getting digital object resource
                 self.dataURL(data.tile.data[self.digitalObjectFileNodeId][0].url);
                 self.digitalObjectResourceId(data.tile.resourceinstance_id);
-                nameTemplate["resourceinstance_id"] = data.tile.resourceinstance_id;
-                nameTemplate["nodegroup_id"] = 'c61ab163-9513-11ea-9bb6-f875a44e0e11'
-    
+
                 var relateDocuNodeTemplate = [{
                     'resourceId': data.tile.resourceinstance_id,
                     'ontologyProperty': '',
@@ -60,16 +71,17 @@ define([
                     'resourceXresourceId':''
                 }];
 
-                $.ajax({
+                $.ajax({ //saving the realted resource (digital object) to the Letter node (consultation)
                     url: arches.urls.api_node_value,
                     type: 'POST',
                     dataType: 'json',
                     data: {
-                        'resourceinstanceid': ko.unwrap(params.resourceid),
+                        'resourceinstanceid': ko.unwrap(self.tile().resourceinstance_id),
                         'nodeid': '87e0b839-9391-11ea-8a85-f875a44e0e11', // Correspondence Related Node
                         'data': JSON.stringify(relateDocuNodeTemplate),
-                        'tileid': ko.unwrap(params.tileid)
-                    }
+                        'tileid': ko.unwrap(self.tile().tileid),
+                        'transaction_id': self.workflowId,
+                    },
                 }).done(function(response) {
                     console.log("Digital related resource updated")
                 })
@@ -77,8 +89,10 @@ define([
                     console.log("Updating digital related resource failed: \n", response)
                 });
 
-                $.ajax({
-                    url: arches.urls.api_resources(ko.unwrap(params.resourceid)),
+                nameTemplate["resourceinstance_id"] = data.tile.resourceinstance_id;
+                nameTemplate["nodegroup_id"] = 'c61ab163-9513-11ea-9bb6-f875a44e0e11';
+                $.ajax({ //get consultation name
+                    url: arches.urls.api_resources(ko.unwrap(self.tile().resourceinstance_id)),
                     type: 'GET',
                     dataType: 'json',
                     data: {
@@ -88,20 +102,22 @@ define([
                     let today = new Date().toLocaleDateString()
                     nameTemplate.data["c61ab16c-9513-11ea-89a4-f875a44e0e11"] = today + " Letter for " + data.displayname;
 
-                    $.ajax({
+                    $.ajax({ //saving the digital resource name
                         url: arches.urls.api_tiles(uuid.generate()),
                         type: 'POST',
                         dataType: 'json',
-                        data: JSON.stringify(nameTemplate),
+                        data: {
+                            "data": JSON.stringify(nameTemplate),
+                            'transaction_id': self.workflowId
+                        },
                     }).done(function(response) {
-                        if (params.value) {
-                            params.value(params.defineStateProperties());
-                        }
+                        self.saveValues();
                         self.loading(false);
                         if (self.completeOnSave === true) { self.complete(true); }    
                     })
                     .fail(function(response){
                         console.log("Adding the digital object name failed: \n", response)
+                        self.loading(false);
                     });
                 })
                 .fail(function(response) {
@@ -115,35 +131,12 @@ define([
             });
         };
 
-        params.defineStateProperties = function(){
-            var wastebin = !!(ko.unwrap(params.wastebin)) ? koMapping.toJS(params.wastebin) : undefined;
-            if (wastebin && ko.unwrap(wastebin.hasOwnProperty('resourceid'))) {
-                wastebin.resourceid = ko.unwrap(self.digitalObjectResourceId);                
-            }
-            ko.mapping.fromJS(wastebin, {}, params.wastebin);
-            return {
-                resourceid: ko.unwrap(params.resourceid),
-                tile: !!(ko.unwrap(params.tile)) ? koMapping.toJS(params.tile().data) : undefined,
-                tileid: !!(ko.unwrap(params.tile)) ? ko.unwrap(params.tile().tileid): undefined,
-                dataURL: ko.unwrap(self.dataURL),
-                wastebin: wastebin
-            };
-        };
-
-        self.onSaveSuccess = function(tiles) {
-            var tile;
-            
-            if (tiles.length > 0 || typeof tiles == 'object') {
-                tile = tiles[0] || tiles;
-                params.resourceid(tile.resourceinstance_id);
-                params.tileid(tile.tileid);
-
-                self.resourceId(tile.resourceinstance_id);
-
+        params.form.save = function() {
+            self.tile().save().then(function(tile) {
                 self.retrieveFile(tile);
-            }
+            });
         };
-    }
+    };
 
     ko.components.register('correspondence-select-resource', {
         viewModel: viewModel,
