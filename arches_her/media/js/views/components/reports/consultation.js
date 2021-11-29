@@ -15,9 +15,9 @@ define([
             Object.assign(self, reportUtils);
             self.sections = [
                 {id: 'name', title: 'Consultation Details'},
+                {id: 'description', title: 'Descriptions'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'correspondence', title: 'Correspondence'},
-                {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -51,7 +51,8 @@ define([
             self.cards = {};
 
             self.visible = {
-                correspondence: ko.observable(true)
+                correspondence: ko.observable(true),
+                communications: ko.observable(true)
             }
 
             self.correspondenceTableConfig = {
@@ -59,7 +60,13 @@ define([
                 columns: Array(3).fill(null)
             }
 
+            self.communicationsTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(9).fill(null)
+            }
+
             self.correspondence = ko.observableArray();
+            self.communications = ko.observableArray();
 
             const correspondenceNode = self.getRawNodeValue(self.resource(), 'correspondence');
             if(Array.isArray(correspondenceNode)){
@@ -69,6 +76,27 @@ define([
                     const letterType = self.getNodeValue(node, 'letter type');
                     const tileid = self.getTileId(node);
                     return {letter, letterLink, letterType, tileid};
+                }));
+            };
+
+            const communicationsNode = self.getRawNodeValue(self.resource(), 'communications');
+            if(Array.isArray(communicationsNode)){
+                self.communications(communicationsNode.map(node => {
+                    const subject = self.getNodeValue(node, 'subjects', 'subject');
+                    const subjectDescType = self.getNodeValue(node, 'subjects', 'subject description type');
+                    const type = self.getNodeValue(node, 'communication type');
+                    const date = self.getNodeValue(node, 'dates', 'date');
+                    // const endDate = self.getNodeValue(node, 'dates', 'end date');
+                    const attendees = self.getNodeValue(node, 'attendees');
+                    const relatedCondition = self.getNodeValue(node, 'related condition');
+                    const note = self.getNodeValue(node, 'communication notes', 'communication description');
+                    // const noteDescType = self.getNodeValue(node, 'communication notes', 'communication description type');
+                    const followOnAction = self.getNodeValue(node, 'follow on actions', 'follow-on actions');
+                    // const followOnActionDescType = self.getNodeValue(node, 'follow on actions', 'follow-on actions description type');
+                    const digitalFile = self.getNodeValue(node, 'digital file(s)');
+                    const digitalFileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
+                    const tileid = self.getTileId(node);
+                    return {subject, subjectDescType, type, date, attendees, note, followOnAction, relatedCondition, digitalFile, digitalFileLink, tileid};
                 }));
             };
 

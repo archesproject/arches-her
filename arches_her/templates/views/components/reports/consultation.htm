@@ -96,6 +96,64 @@
                         <!-- /ko -->
                     </div>
                 </div>
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.communications)}, css: {'fa-angle-double-right': visible.communications(), 'fa-angle-double-up': !visible.communications()}"  class="fa toggle"></i> {% trans "Communications" %}</h2>
+                    <a data-bind="{if: cards.communications, click: function(){addNewTile(cards.communications)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add communications" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.communications" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: communications() -->
+                        <div class="aher-nodata-note">{% trans "No communications for this resource" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: communications() -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Subject" %}</th>
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Date" %}</th>
+                                                <th>{% trans "Participants" %}</th>
+                                                <th>{% trans "Related Condition" %}</th>
+                                                <th>{% trans "Note" %}</th>
+                                                <th>{% trans "Follow-On Action" %}</th>
+                                                <th>{% trans "Related Digital File" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: communications, dataTableOptions: communicationsTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: `${subject} (${subjectDescType})`"></td>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: date"></td>
+                                                <td data-bind="text: attendees"></td>
+                                                <td data-bind="text: relatedCondition"></td>
+                                                <td data-bind="text: note"></td>
+                                                <td data-bind="text: followOnAction"></td>
+                                                <td><a data-bind="text: digitalFile, attr: {href: digitalFileLink}"></a></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.communications">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.communications)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.communications)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
             </div>
             <!-- Description Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
