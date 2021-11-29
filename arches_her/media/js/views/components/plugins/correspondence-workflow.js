@@ -3,46 +3,45 @@ define([
     'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step',
-    'views/components/workflows/new-tile-step',
-    'views/components/workflows/select-resource-step',
+    'views/components/workflows/correspondence-select-resource',
     'views/components/workflows/correspondence-final-step'
 ], function(ko, arches, Workflow, Step) {
     return ko.components.register('correspondence-workflow', {
         viewModel: function(params) {
-            var self = this;
-            this.resourceId = ko.observable();
-            params.steps = [
+            this.componentName = 'correspondence-workflow';
+
+            this.stepConfig = [
                 {
                     title: 'Select Related Consultation',
                     name: 'select-related-consultation',
-                    description: 'New Correspondence',
-                    component: 'views/components/workflows/correspondence-select-resource',
-                    componentname: 'correspondence-select-resource',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    required: true,
-                    class: 'hide-letter-resource',
-                    icon: 'fa-tag',
-                    shouldtrackresource: true,
                     informationboxdata: {
                         heading: 'Select Related Consultation',
                         text: 'Select a consultation and a letter type to create a Letter',
                     },
-                    wastebin: {resourceid: null, description: 'a digital object instance'}
+                    required: false,
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                {
+                                    componentName: 'correspondence-select-resource',
+                                    uniqueInstanceName: 'correspondence-select-resource',
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '8d41e4b4-a250-11e9-993d-00224800b26d',
+                                        hiddenNodes: "[87e0b839-9391-11ea-8a85-f875a44e0e11]",
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
                 },
                 {
                     title: 'Correspondence Workflow Complete',
                     name: 'correspondence-complete',
-                    description: '',
-                    component: 'views/components/workflows/component-based-step',
-                    componentname: 'component-based-step',
-                    graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
-                    nodegroupid: '8d41e4d1-a250-11e9-9a12-00224800b26d',
-                    externalstepdata: { 
-                        relatedconsultationstep: 'select-related-consultation',
+                    informationboxdata: {
+                        heading: 'Correspondence Workflow Complete',
+                        text: 'A letter has been created. click Download to review the letter',
                     },
                     layoutSections: [
                         {
@@ -52,30 +51,21 @@ define([
                                     uniqueInstanceName: 'correspondence-final',
                                     tilesManaged: 'none',
                                     parameters: {
+                                        graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
+                                        nodegroupid: '8d41e4d1-a250-11e9-9a12-00224800b26d',
+                                        correspondenceData: "['select-related-consultation']['correspondence-select-resource']",
+                                        resourceid: "['select-related-consultation']['correspondence-select-resource']['resourceInstanceId']",
+                                        tileid: "['select-related-consultation']['correspondence-select-resource']['tileId']",
+                                        dataURL: "['select-related-consultation']['correspondence-select-resource']['dataURL']",
                                     },
                                 },
                             ], 
                         },
                     ],
-                    resourceid: null,
-                    tileid: null,
-                    parenttileid: null,
-                    icon: 'fa-cloud-upload',
-                    nameheading: 'New Correspondence',
-                    namelabel: '[no label]',
-                    informationboxdata: {
-                        heading: 'Correspondence Workflow Complete',
-                        text: 'A letter has been created. click Download to review the letter',
-                    },
-                    wastebin: {tile: null, description: 'a correspondence tile'}
                 }
             ];
 
             Workflow.apply(this, [params]);
-            this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            self.getJSON('correspondence-workflow');
-
-            self.ready(true);
         },
         template: { require: 'text!templates/views/components/plugins/correspondence-workflow.htm' }
     });
