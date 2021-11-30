@@ -268,7 +268,18 @@
                         dataConfig: descriptionDataConfig
                     }
                 }"></div>
-            </div>   
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourcesDataConfig
+                    }
+                }"></div>
+            </div>
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {

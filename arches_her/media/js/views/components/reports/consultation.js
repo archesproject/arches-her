@@ -20,6 +20,7 @@ define([
                 {id: 'references', title: 'Planning References'},
                 {id: 'contacts', title: 'Contacts'},
                 {id: 'correspondence', title: 'Correspondence'},
+                {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -45,8 +46,15 @@ define([
                 nationalGrid: undefined,
             }
 
+            self.resourcesDataConfig = {
+                assets: 'related heritage assets and areas',
+                files: 'file(s)'
+            };
+            
             self.nameCards = {};
             self.locationCards = {};
+            self.resourcesCards = {};
+
             self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
@@ -144,6 +152,9 @@ define([
                 
                 self.cards = self.createCardDictionary(cards)
 
+console.log(self.resource())
+console.log(self.cards)
+
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
                     externalCrossReferences: self.cards?.['external cross references'],
@@ -166,7 +177,13 @@ define([
                         }
                     }
                 };
-            }
+                self.resourcesCards = {
+                    consultations: self.cards?.['associated consultations'],
+                    activities: self.cards?.['associated activities'],
+                    assets: self.cards?.['associated heritage assets and areas'],
+                    files: self.cards?.['associated digital files'],
+                };
+            };
         },
         template: { require: 'text!templates/views/components/reports/consultation.htm' }
     });
