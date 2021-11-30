@@ -48,6 +48,56 @@
                     }
                 }"></div>
             </div>
+            <!-- Contacts Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'contacts'">
+                <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
+                <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
+                    <i class="fa fa-mail-reply"></i>
+                    <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
+                    <span data-bind="ifnot: cards.contacts.tiles().length">{% trans "Add Contacts" %}</span>
+                </a>
+
+                <!-- Collapsible content -->
+                <div data-bind="visible: visible.contacts" class="aher-report-collapsible-container pad-lft">
+                    <!-- ko ifnot: contacts() -->
+                    <div class="aher-nodata-note">No contact for this resource</div>
+                    <!-- /ko -->
+
+                    <!-- ko if: contacts() -->
+                    <div class="aher-report-subsection">
+
+                        <div class="firstchild-container">
+                            <div class="aher-report-subsection-ite" style="padding-top: 10px;">
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Consulting Contact: </h4>
+                                    <div class="aher-block-value" data-bind="text: contacts().consultingContact"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Planning Officer: </h4>
+                                    <div class="aher-block-value" data-bind="text: contacts().planningOfficer"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Casework Officer: </h4>
+                                    <div class="aher-block-value" data-bind="text: contacts().caseworkOfficer"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Agent: </h4>
+                                    <div class="aher-block-value" data-bind="text: contacts().agent"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Owner: </h4>
+                                    <div class="aher-block-value" data-bind="text: contacts().owner"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Applicant: </h4>
+                                    <div class="aher-block-value" data-bind="text: contacts().applicant"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
             <!-- Correspondence Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'correspondence'">
                 <div class="aher-report-section">

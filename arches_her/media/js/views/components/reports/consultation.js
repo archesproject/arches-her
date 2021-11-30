@@ -17,6 +17,7 @@ define([
                 {id: 'name', title: 'Consultation Details'},
                 {id: 'description', title: 'Descriptions'},
                 {id: 'location', title: 'Location Data'},
+                {id: 'contacts', title: 'Contacts'},
                 {id: 'correspondence', title: 'Correspondence'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -51,6 +52,7 @@ define([
             self.cards = {};
 
             self.visible = {
+                contacts: ko.observable(true),
                 correspondence: ko.observable(true),
                 communications: ko.observable(true)
             }
@@ -65,8 +67,23 @@ define([
                 columns: Array(9).fill(null)
             }
 
+            self.contacts = ko.observable();
             self.correspondence = ko.observableArray();
             self.communications = ko.observableArray();
+
+            const contactNode = self.getRawNodeValue(self.resource(), 'contacts');
+            if(contactNode){
+                const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
+                const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
+                const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
+                const agent = self.getNodeValue(contactNode, 'agents', 'agent');
+                const owner = self.getNodeValue(contactNode, 'owners', 'owner');
+                const applicant = self.getNodeValue(contactNode, 'applicants', 'applicant');
+                const tileid = self.getTileId(contactNode);
+                self.contacts(
+                    {consultingContact, planningOfficer, caseworkOfficer, agent, owner, applicant, tileid}
+                )
+            };
 
             const correspondenceNode = self.getRawNodeValue(self.resource(), 'correspondence');
             if(Array.isArray(correspondenceNode)){
