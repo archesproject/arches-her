@@ -17,6 +17,7 @@ define([
                 {id: 'name', title: 'Consultation Details'},
                 {id: 'description', title: 'Descriptions'},
                 {id: 'location', title: 'Location Data'},
+                {id: 'references', title: 'Planning References'},
                 {id: 'contacts', title: 'Contacts'},
                 {id: 'correspondence', title: 'Correspondence'},
                 {id: 'audit', title: 'Audit Data'},
@@ -52,6 +53,7 @@ define([
             self.cards = {};
 
             self.visible = {
+                references: ko.observable(true),
                 contacts: ko.observable(true),
                 correspondence: ko.observable(true),
                 communications: ko.observable(true)
@@ -67,9 +69,29 @@ define([
                 columns: Array(9).fill(null)
             }
 
+            self.referencesTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(5).fill(null)
+            }
+
             self.contacts = ko.observable();
+            self.references = ko.observableArray();
             self.correspondence = ko.observableArray();
             self.communications = ko.observableArray();
+
+            const referencesNode = self.getRawNodeValue(self.resource(), 'external cross references');
+            if(Array.isArray(referencesNode)){
+                self.references(referencesNode.map(node => {
+                    const reference = self.getNodeValue(node, 'external cross reference');
+                    const source = self.getNodeValue(node, 'external cross reference source');
+                    const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
+                    const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
+                    const url = JSON.parse(self.getNodeValue(node, 'url')).url;
+                    const urlLabel = JSON.parse(self.getNodeValue(node, 'url')).url_label;
+                    const tileid = self.getTileId(node);
+                    return {reference, source, note, noteDescType, url, urlLabel, tileid};
+                }));
+            };
 
             const contactNode = self.getRawNodeValue(self.resource(), 'contacts');
             if(contactNode){

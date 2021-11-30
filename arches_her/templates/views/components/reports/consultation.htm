@@ -48,6 +48,59 @@
                     }
                 }"></div>
             </div>
+            <!-- Planning Reference Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'references'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.references)}, css: {'fa-angle-double-right': visible.references(), 'fa-angle-double-up': !visible.references()}"  class="fa toggle"></i> {% trans "External Cross References" %}</h2>
+                    <a data-bind="{if: cards.references, click: function(){addNewTile(cards.references)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external cross references" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.references" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: references() -->
+                        <div class="aher-nodata-note">{% trans "No external cross references for this resource" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: references() -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Cross Reference" %}</th>
+                                                <th>{% trans "Cross Reference Source" %}</th>
+                                                <th>{% trans "Cross Reference Note" %}</th>
+                                                <th>{% trans "URI" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: references, dataTableOptions: referencesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: reference"></td>
+                                                <td data-bind="text: source"></td>
+                                                <td data-bind="text: note"></td>
+                                                <td><a data-bind="text: urlLabel, attr: {href: url}"></a></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.references">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.references)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.references)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
             <!-- Contacts Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'contacts'">
                 <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
