@@ -38,6 +38,8 @@ ELASTICSEARCH_PREFIX = "arches_her"
 SEARCH_EXPORT_IMMEDIATE_DOWNLOAD_THRESHOLD = 2000  # The maximum number of instances a user can download from search export without celery
 SEARCH_EXPORT_LIMIT = 15000  # The maximum documents ElasticSearch will return in an export - **System Settings**
 
+BYPASS_CARDINALITY_TILE_VALIDATION = False
+
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_ACCEPT_CONTENT = ["json"]
 CELERY_RESULT_BACKEND = "django-db"
