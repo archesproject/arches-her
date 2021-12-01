@@ -26,11 +26,18 @@ define([
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+            self.names = ko.observableArray();
+
+            self.nameTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(3).fill(null)
+            };
 
             self.nameDataConfig = {
                 name: undefined,
                 parent: 'parent period'
             };
+
             self.descriptionDataConfig = {
                 descriptions: 'period descriptions',
             };
@@ -56,6 +63,10 @@ define([
             self.summary = params.summary;
             self.cards = {};
 
+            self.visible = {
+                names: ko.observable(true)
+            };
+
             if(params.report.cards){
                 const cards = params.report.cards;
                 
@@ -72,6 +83,10 @@ define([
                     descriptions: self.cards?.['period descriptions'],
                 };
 
+                Object.assign(self.cards, {
+                    name: self.cards?.['alternative names']
+                });
+
                 self.auditCards = {
                     audit: self.cards?.['audit metadata'],
                     type: self.cards?.['resource model type']
@@ -79,7 +94,7 @@ define([
                 
                 self.classificationCards = {
                     type: self.cards?.['period types'],
-                    dates: self.cards?.['dates']
+                    dates: self.cards?.dates
                 };
 
                 self.locationCards = {
@@ -91,6 +106,17 @@ define([
                         }
                     }
                 }
+            }
+
+            const alternativeNameNode = self.getRawNodeValue(self.resource(), 'alternative names');
+
+            if(Array.isArray(alternativeNameNode)) {
+                self.names(alternativeNameNode.map(node => {
+                    const name = self.getNodeValue(node, 'alternative name');
+                    const currency = self.getNodeValue(node, 'alternative name currency type');
+                    const tileid = self.getTileId(node);
+                    return { name, currency, tileid }
+                }));
             }
 
             self.periodNameData = ko.observable({

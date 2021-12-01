@@ -6,6 +6,7 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/copyright',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('digital-object-report', {
@@ -15,7 +16,8 @@ define([
             Object.assign(self, reportUtils);
             self.sections = [
                 {id: 'name', title: 'Names and Identifiers'},
-                //{id: 'description', title: 'Descriptions and Citations'},
+                {id: 'publication', title: 'Publication Details'},
+                {id: 'file', title: 'File Details'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
@@ -31,6 +33,7 @@ define([
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
+            self.copyrightCards = {};
 
             if(params.report.cards){
                 const cards = params.report.cards;
@@ -51,9 +54,42 @@ define([
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                 };
+
+                self.copyrightCards = {
+                    copyright: self.cards?.['copyright']
+                }
             }
 
+            self.fileData = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'File Details',
+                            data: [{
+                                key: 'File',
+                                value: self.getFileName(self.getRawNodeValue(self.resource(), 'file content', 'file')),
+                                type: 'kv',
+                                card: self.cards?.file
+                            },{
+                                key: 'Format',
+                                value: self.getNodeValue(self.resource(), 'file format type'),
+                                type: 'kv',
+                                card: self.cards?.['file format']
+                            },{
+                                key: 'Creator',
+                                value: self.getRawNodeValue(self.resource(), 'creation', 'creator'),
+                                type: 'resource',
+                                card: self.cards?.creation
+                            },{
+                                key: 'Created Date',
+                                value: self.getNodeValue(self.resource(), 'creation', 'creation timespan', 'start date'),
+                                type: 'kv',
+                                card: self.cards?.creation
+                            }]
+                        }
+                    ]
+            });
         },
-        template: { require: 'text!templates/views/components/reports/person.htm' }
+        template: { require: 'text!templates/views/components/reports/digital-object.htm' }
     });
 });

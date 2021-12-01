@@ -167,6 +167,12 @@ define([
             }
         },        
         
+        getFileName: (node) => {
+            if(node) {
+                return node?.file_details?.[0].name;
+            }
+        },  
+
         getTileId: (node) => {
             if(node){
                 return node?.['@tile_id'];

@@ -6,6 +6,7 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/contact',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('organization-report', {
@@ -19,6 +20,7 @@ define([
                 {id: 'classifications', title: 'Classifications and Dating'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'people', title: 'Associated People and Organizations'},
+                {id: 'contact', title: 'Biography and Contact Details'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -60,6 +62,7 @@ define([
             self.locationCards = {};
             self.descriptionCards = {};
             self.resourcesCards = {};
+            self.contactCards = {};
             self.summary = params.summary;
             self.cards = {};
             self.peopleCards = {};
@@ -71,14 +74,14 @@ define([
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
-                    name: self.cards?.['names'],
+                    name: self.cards?.names,
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                     parent: self.cards?.['parent organization']
                 };
 
                 self.descriptionCards = {
-                    descriptions: self.cards?.['descriptions'],
+                    descriptions: self.cards?.descriptions,
                     citation: self.cards?.['bibliographic source citation']
                 };
 
@@ -98,6 +101,10 @@ define([
 
                 self.peopleCards = {
                     people: 'associated people and organizations'
+                };
+
+                self.contactCards = {
+                    contact: self.cards?.['contact details']
                 };
 
                 self.locationCards = {

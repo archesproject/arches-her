@@ -88,6 +88,16 @@
                     }
                 }"></div>
             </div>
+            <!-- Contact Details Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'contact'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/contact',
+                    params: {
+                        data: resource,
+                        cards: contactCards,
+                    }
+                }"></div>
+            </div>
             <!-- Location Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
                 <div data-bind="component: {

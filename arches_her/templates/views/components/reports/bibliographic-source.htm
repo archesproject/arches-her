@@ -26,16 +26,67 @@
     </div>
     <div class="aher-tabbed-report">
         <div class="aher-tabbed-report-content">
-            <!-- Names Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/name',
-                    params: {
-                        data: resource,
-                        cards: nameCards,
-                        dataConfig: nameDataConfig
-                    }
-                }"></div>
+            <div class="aher-report-page" data-bind="if: activeSection() === 'source'">
+
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}" class="fa toggle"></i> {% trans "Bibliographic Source Names" %}</h2>
+                    <span data-bind="if: cards.sourceNames && (!sourceNames().length || cards.sourceNames.cardinality == 'n')">
+                        <a class="aher-report-a" data-bind="click: function(){add(cards.sourceNames)}"><i class="fa fa-mail-reply"></i> {% trans "Add Bibliographic Source Name" %}</a>
+                    </span>
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.sourceNames" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: sourceNames().length -->
+                        <div class="aher-nodata-note">No bibliographic source name data for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: sourceNames().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Bibliographic Source Names Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th>{% trans "Volume" %}</th>
+                                                <th>{% trans "Part" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: sourceNames, dataTableOptions: sourceNamesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: volume"></td>
+                                                <td data-bind="text: part"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.sourceNames">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceNames)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.sourceNames)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div>
+                    <div data-bind="component: {
+                        name: 'views/components/reports/scenes/default',
+                        params: {
+                            data: bibliographicSourceData,
+                        }
+                    }"></div>
+                </div>  
             </div>
             <!-- Description Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
@@ -65,6 +116,67 @@
                     params: {
                         data: resource,
                         cards: auditCards
+                    }
+                }"></div>
+            </div>
+            <!-- Publication Details Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'publication'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.publication)}, css: {'fa-angle-double-right': visible.publication(), 'fa-angle-double-up': !visible.publication()}" class="fa toggle"></i> {% trans "Publication" %}</h2>
+                    <span data-bind="if: cards.publication && (!publication().length || cards.publication.cardinality == 'n')">
+                        <a class="aher-report-a" data-bind="click: function(){add(cards.publication)}"><i class="fa fa-mail-reply"></i> {% trans "Add Publication" %}</a>
+                    </span>
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.publication" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: publication().length -->
+                        <div class="aher-nodata-note">No publication data for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: publication().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Publication Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Publisher" %}</th>
+                                                <th>{% trans "Place of Publication" %}</th>
+                                                <th>{% trans "Date" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: publication, dataTableOptions: publicationTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: place"></td>
+                                                <td data-bind="text: date"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.publication">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.publication)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.publication)}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/copyright',
+                    params: {
+                        data: resource,
+                        cards: copyrightCards,
                     }
                 }"></div>
             </div>

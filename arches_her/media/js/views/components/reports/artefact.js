@@ -22,11 +22,23 @@ define([
                 {id: 'discovery', title: 'Discovery'},
                 {id: 'protection', title: 'Designation and Protection Status'},
                 {id: 'assessments', title: 'Assessments'},
+                {id: 'publication', title: 'Publication Details'},
                 {id: 'archive', title: 'Archive Holding'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
+
+            self.discoveryTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(4).fill(null)
+            };
+
+            self.findersTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(4).fill(null)
+            };
+
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
@@ -78,13 +90,26 @@ define([
             self.locationCards = {};
             self.protectionCards = {};
             self.resourcesCards = {};
+            self.copyrightCards = {};
             self.summary = params.summary;
             self.cards = {};
+            self.discovery = ko.observableArray();
+            self.finders = ko.observableArray();
+            self.visible = {
+                discovery: ko.observable(true),
+                finders: ko.observable(true),
+            }
 
             if(params.report.cards){
                 const cards = params.report.cards;
                 
                 self.cards = self.createCardDictionary(cards)
+
+                const tileCards = self.cards?.['discovery']?.tiles()?.[0]?.cards;
+                if(tileCards){
+                    const tileCardDictionary = self.createCardDictionary(tileCards);
+                    Object.assign(self.cards, {finders: tileCardDictionary?.['finder']});
+                }
 
                 self.nameCards = {
                     name: self.cards?.['artefact names'],
@@ -119,7 +144,7 @@ define([
                     audit: self.cards?.['audit metadata'],
                     type: self.cards?.['resource model type']
                 };
-                
+
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
                     files: self.cards?.['associated digital files'],
@@ -149,8 +174,43 @@ define([
                 }
 
                 Object.assign(self.protectionCards, self.locationCards);
+
+                self.copyrightCards = {
+                    copyright: self.cards?.copyright
+                }
             }
 
+            const discoveryNode = self.getRawNodeValue(self.resource(), 'discovery'); 
+            
+            if(discoveryNode){
+                const method = self.getNodeValue(discoveryNode, 'discovery method');
+                const note = self.getNodeValue(discoveryNode, 'discovery notes', 'discovery note');
+                const technique = self.getNodeValue(discoveryNode, 'recovery technique');
+    
+                const finderNode = self.getRawNodeValue(discoveryNode, 'finder');
+
+                if(Array.isArray(finderNode))
+                {
+                    self.finders(finderNode.map(finderNode => {
+                        const name = self.getNodeValue(finderNode, 'finder names', 'finder name');
+                        const currency = self.getNodeValue(finderNode, 'finder names', 'finder name currency');
+                        const nameUseType = self.getNodeValue(finderNode, 'finder names', 'finder name use type');
+                        const tileid = self.getTileId(finderNode);
+                        return { 
+                            name,
+                            currency,
+                            nameUseType,
+                            tileid
+                        };
+                    }));
+                }
+
+                self.discovery([{
+                    method,
+                    note,
+                    technique,
+                }]);
+            }
         },
         template: { require: 'text!templates/views/components/reports/artefact.htm' }
     });
