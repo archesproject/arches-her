@@ -58,7 +58,7 @@
                     <div data-bind="visible: visible.references" class="aher-report-collapsible-container pad-lft">
 
                         <!-- ko ifnot: references() -->
-                        <div class="aher-nodata-note">{% trans "No external cross references for this resource" %}</div>
+                        <div class="aher-nodata-note">{% trans "No external cross references for this consultation" %}</div>
                         <!-- /ko -->
 
                         <!-- ko if: references() -->
@@ -113,7 +113,7 @@
                 <!-- Collapsible content -->
                 <div data-bind="visible: visible.contacts" class="aher-report-collapsible-container pad-lft">
                     <!-- ko ifnot: contacts() -->
-                    <div class="aher-nodata-note">No contact for this resource</div>
+                    <div class="aher-nodata-note">No contact for this consultation</div>
                     <!-- /ko -->
 
                     <!-- ko if: contacts() -->
@@ -161,7 +161,7 @@
                     <div data-bind="visible: visible.correspondence" class="aher-report-collapsible-container pad-lft">
 
                         <!-- ko ifnot: correspondence() -->
-                        <div class="aher-nodata-note">{% trans "No correspondence for this resource" %}</div>
+                        <div class="aher-nodata-note">{% trans "No correspondence for this consultation" %}</div>
                         <!-- /ko -->
 
                         <!-- ko if: correspondence() -->
@@ -207,7 +207,7 @@
                     <div data-bind="visible: visible.communications" class="aher-report-collapsible-container pad-lft">
 
                         <!-- ko ifnot: communications() -->
-                        <div class="aher-nodata-note">{% trans "No communications for this resource" %}</div>
+                        <div class="aher-nodata-note">{% trans "No communications for this consultation" %}</div>
                         <!-- /ko -->
 
                         <!-- ko if: communications() -->
@@ -269,6 +269,125 @@
                     }
                 }"></div>
             </div>
+            <!-- Contacts Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'sitevisits'">
+                <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.siteVisits)}, css: {'fa-angle-double-right': visible.siteVisits(), 'fa-angle-double-up': !visible.siteVisits()}" class="fa toggle"></i> {% trans "Site Visits" %}</h2>
+                <a data-bind="{if: cards.siteVisits, click: function(){ addNewTile(cards.siteVisits) }}" class="aher-report-a">
+                    <i class="fa fa-mail-reply"></i>
+                    <span data-bind="if: cards.siteVisits.tiles().length">{% trans "Edit Site Visits" %}</span>
+                    <span data-bind="ifnot: cards.siteVisits.tiles().length">{% trans "Add Site Visits" %}</span>
+                </a>
+
+                <!-- Collapsible content -->
+                <div data-bind="visible: visible.siteVisits" class="aher-report-collapsible-container pad-lft">
+                    <!-- ko ifnot: siteVisits() -->
+                    <div class="aher-nodata-note">No site visit for this consultation</div>
+                    <!-- /ko -->
+
+                    <!-- ko if: siteVisits() -->
+                    <!-- ko foreach: {data: siteVisits, as: 'visit'} -->
+                    <div class="aher-report-subsection">
+
+                        <div class="firstchild-container">
+                            <div class="aher-report-subsection-ite" style="padding-top: 10px;">
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Date of Visit: </h4>
+                                    <div class="aher-block-value" data-bind="text: visit.dateOfVisit"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Location Description: </h4>
+                                    <div class="aher-block-value" data-bind="text: visit.location"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Attndees: </h4>
+                                    <!-- ko if: visit.attendees -->
+                                    <div class="aher-report-subsection">
+                                        <div class="firstchild-container">
+                                            <div class="aher-table" data-bind="">
+                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>{% trans "Attendee" %}</th>
+                                                            <th>{% trans "Attendee Type" %}</th>
+                                                            <th class="aher-table-control all"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: siteVisitAttendeeTableConfig}">
+                                                        <tr>
+                                                            <td data-bind="text: attendee"></td>
+                                                            <td data-bind="text: attendeeType"></td>
+                                                            <td class="aher-table-control">
+                                                                <div data-bind="if: $parents[1].cards['site visits']">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].cards['site visits'])}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].cards['site visits'])}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Observations: </h4>
+                                    <!-- ko foreach: {data: visit.observations, as: 'obs'} -->
+                                    <div class="aher-block-value" data-bind="text: obs.observation"></div>
+                                    <!-- /ko -->
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Recommendations: </h4>
+                                    <!-- ko foreach: {data: visit.recommendations, as: 'rec'} -->
+                                    <div class="aher-block-value" data-bind="text: rec.recommendation"></div>
+                                    <!-- /ko -->
+                                </div>
+                            
+                                <h4 class="aher-block-key">Photographs</h4>
+                                <div class="aher-report-photo-container">
+                                    <!-- ko ifnot: visit.photographs.length -->
+                                    <div class="aher-nodata-note">No images for this resource</div>
+                                    <!-- /ko -->
+
+                                    <!-- ko if: visit.photographs.length -->
+                                    <!-- ko foreach: {data: visit.photographs, as: 'photo'} -->
+                                    <div class="aher-report-photo-block">
+                                        <div class="aher-report-photo" data-bind="click: function(){$parents[1].editTile(tileid, $parents[1].cards.photographs)}">
+                                            <img class="img-responsive" alt="Image" data-bind="attr: {src: photo.fileUrl}" />
+                                        </div>
+                                        <div class="aher-report-photo-caption">
+                                            <div class="aher-block-attributes">
+                                                <div class="aher-block-key">Caption: </div>
+                                                <div class="aher-block-value" data-bind="text: photo.caption"></div>
+                                            </div>
+                                            <div class="aher-block-attributes">
+                                                <div class="aher-block-key">Copyright Holder: </div>
+                                                <div class="aher-block-value" data-bind="text: photo.copyrightHolder"></div>
+                                            </div>
+                                            <div class="aher-block-attributes">
+                                                <div class="aher-block-key">Copyright Type: </div>
+                                                <div class="aher-block-value" data-bind="text: photo.copyrightType"></div>
+                                            </div>
+                                            <div class="aher-block-attributes">
+                                                <div class="aher-block-key">Copyright Note: </div>
+                                                <div class="aher-block-value" data-bind="text: photo.copyrightNote"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                    <!-- /ko -->
+                </div>
+            </div>            
             <!-- Resources Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
                 <div data-bind="component: {

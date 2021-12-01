@@ -20,6 +20,7 @@ define([
                 {id: 'references', title: 'Planning References'},
                 {id: 'contacts', title: 'Contacts'},
                 {id: 'correspondence', title: 'Correspondence'},
+                {id: 'sitevisits', title: 'Site Visits'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -38,6 +39,10 @@ define([
                 descriptions: 'consultation descriptions',
             };
 
+            self.photographsDataConfig = {
+                images: 'photographs'
+            };
+
             self.locationDataConfig = {
                 location: ['Consultation Area'],
                 addresses: undefined,
@@ -54,6 +59,7 @@ define([
             self.nameCards = {};
             self.locationCards = {};
             self.resourcesCards = {};
+            self.photographsCards = {};
 
             self.auditCards = {}
             self.descriptionCards = {};
@@ -64,7 +70,8 @@ define([
                 references: ko.observable(true),
                 contacts: ko.observable(true),
                 correspondence: ko.observable(true),
-                communications: ko.observable(true)
+                communications: ko.observable(true),
+                siteVisits: ko.observable(true),
             }
 
             self.correspondenceTableConfig = {
@@ -77,6 +84,11 @@ define([
                 columns: Array(9).fill(null)
             }
 
+            siteVisitAttendeeTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(3).fill(null)
+            }
+
             self.referencesTableConfig = {
                 ...self.defaultTableConfig,
                 columns: Array(5).fill(null)
@@ -86,6 +98,7 @@ define([
             self.references = ko.observableArray();
             self.correspondence = ko.observableArray();
             self.communications = ko.observableArray();
+            self.siteVisits = ko.observableArray();
 
             const referencesNode = self.getRawNodeValue(self.resource(), 'external cross references');
             if(Array.isArray(referencesNode)){
@@ -147,13 +160,47 @@ define([
                 }));
             };
 
+            const siteVisitsNode = self.getRawNodeValue(self.resource(), 'site visits');
+            if(Array.isArray(siteVisitsNode)){
+                self.siteVisits(siteVisitsNode.map(node => {
+                    const dateOfVisit = self.getNodeValue(node, 'timespan of visit', 'date of visit');
+                    const location = self.getNodeValue(node, 'location', 'location descriptions', 'location description');
+                    const locationDescType = self.getNodeValue(node, 'location', 'location descriptions', 'location description type');
+                    const attendees = self.getRawNodeValue(node, 'attendees').map(attendeeNode => {
+                        const attendee = self.getNodeValue(attendeeNode, 'attendee');
+                        const attendeeType = self.getNodeValue(attendeeNode, 'attendee type');
+                        const tileid = self.getTileId(attendeeNode);
+                        return {attendee, attendeeType, tileid};
+                    });
+                    const observations = self.getRawNodeValue(node, 'observations').map(observationNode => {
+                        const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
+                        const tileid = self.getTileId(observationNode);
+                        return {observation, tileid};
+                    });
+                    const recommendations = self.getRawNodeValue(node, 'recommendations').map(recommendationNode => {
+                        const recommendation = self.getNodeValue(recommendationNode, 'Recommendation', 'Recommendation value');
+                        const tileid = self.getTileId(recommendationNode);
+                        return {recommendation, tileid};
+                    });
+                    const photographs = self.getRawNodeValue(node, 'photographs').map(photographNode => {
+                        const file = self.getNodeValue(photographNode, 'file_details', [0], 'name');
+                        const fileUrl = self.getNodeValue(photographNode, 'file_details', [0], 'url');
+                        const caption = self.getNodeValue(photographNode, 'caption notes', 'caption note');
+                        const copyrightHolder = self.getNodeValue(photographNode, 'Copyright', 'copyright holder');
+                        const copyrightNote = self.getNodeValue(photographNode, 'copyright', 'copyright note', 'copyright note text');
+                        const copyrightType = self.getNodeValue(photographNode, 'copyright', 'copyright type');
+                        const tileid = self.getTileId(photographNode);
+                        return {file, fileUrl, caption, copyrightHolder, copyrightType, copyrightNote, tileid};
+                    });
+                    const tileid = self.getTileId(node);
+                    return {dateOfVisit, location, attendees, observations, recommendations, photographs, tileid};
+                }));
+            };
+
             if(params.report.cards){
                 const cards = params.report.cards;
                 
                 self.cards = self.createCardDictionary(cards)
-
-console.log(self.resource())
-console.log(self.cards)
 
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
@@ -164,7 +211,6 @@ console.log(self.cards)
                 self.descriptionCards = {
                     descriptions: self.cards?.['consultation descriptions'],
                 };
-
                 self.locationCards = {
                     cards: self.cards,
                     location: {
@@ -183,6 +229,10 @@ console.log(self.cards)
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
                 };
+                self.photographsCards = {
+
+                };
+
             };
         },
         template: { require: 'text!templates/views/components/reports/consultation.htm' }
