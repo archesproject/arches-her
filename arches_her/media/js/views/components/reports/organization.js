@@ -134,6 +134,21 @@ define([
                     ]
             });
 
+            self.peopleData = ko.observable({
+                sections: 
+                    [
+                        {
+                            title: "Associated People and Organizations", 
+                            data: [{
+                                key: 'Associates', 
+                                value: self.getRawNodeValue(self.resource(), 'associated actors'), 
+                                card: self.cards?.['associated people and organizations'],
+                                type: 'resource'
+                            }]
+                        }
+                    ]
+            });
+
         },
         template: { require: 'text!templates/views/components/reports/organization.htm' }
     });

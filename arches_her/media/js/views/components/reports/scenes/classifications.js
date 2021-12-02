@@ -22,6 +22,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 columns: Array(21).fill(null)
             };
 
+            self.artefactProdTableConfiguration= {
+                ...self.defaultTableConfig,
+                columns: Array(13).fill(null)
+            };
             // Components Table
             self.componentsTableConfig = {
                 ...self.defaultTableConfig,
@@ -54,6 +58,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
 
             self.dataConfig = {
                 production: undefined,
+                artefactProduction: undefined,
                 aircraftProduction: undefined,
                 maritimeProduction: undefined,
                 type: undefined,
@@ -140,11 +145,52 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     });
                 }
 
+                const artefactProductionNode = self.getRawNodeValue(params.data(), self.dataConfig.artefactProduction);
+                if(Array.isArray(artefactProductionNode)){
+                    self.production(artefactProductionNode.map(node => {
+                        const material = self.getNodeValue(node, 'material');
+                        const productionTechnique = self.getNodeValue(node, 'production technique');
+                        const dateQualifier = self.getNodeValue(node, 'production time span', 'production time span date qualifier');
+                        const endDate = self.getNodeValue(node, 'production time span', 'to date');
+                        const interpretationConfidence = self.getNodeValue(node, 'phase classification', 'phase certainty');
+                        const method = self.getNodeValue(node, 'production method');
+                        const period = self.getNodeValue(node, 'cultural period');
+                        const periodLink = self.getResourceLink(self.getRawNodeValue(node, 'cultural period'));
+                        const producer = self.getNodeValue(node, 'producer');
+                        const producerLink = self.getResourceLink(self.getRawNodeValue(node, 'producer'));
+                        const artefactType = self.getNodeValue(node, 'phase classification', 'artefact type');
+                        const phaseCertainty = self.getNodeValue(node, 'phase classification', 'phase certainty');
+                        const phaseDescription = self.getNodeValue(node, 'phase classification', 'phase classification description', 'phase description');
+                        const phaseEvidence = self.getNodeValue(node, 'phase classification', 'phase evidence type');
+                        const startDate = self.getNodeValue(node, 'production time span', 'from date');
+                        const tileid = self.getTileId(node);
+
+                        return { 
+                            artefactType,
+                            dateQualifier, 
+                            endDate, 
+                            interpretationConfidence,
+                            material,
+                            method,
+                            producer,
+                            producerLink,
+                            period,
+                            periodLink,
+                            phaseCertainty,
+                            phaseDescription, 
+                            phaseEvidence,
+                            productionTechnique,
+                            startDate, 
+                            tileid
+                        };
+                    }))
+                }
+
                 const constructionPhasesNode = self.getRawNodeValue(params.data(), self.dataConfig.production); 
                 if(Array.isArray(constructionPhasesNode)) {
                     self.production(constructionPhasesNode.map(x => {
-                        const constructionMaterial = self.getNodeValue(x, 'main construction material');
-                        const constructionTechnique = self.getNodeValue(x, 'construction technique');
+                        const constructionMaterial = self.getNodeValue(x, {testPaths: [['main construction material'], ['material']]});
+                        const constructionTechnique = self.getNodeValue(x, {testPaths: [['construction technique'], ['production technique']]});
                         const coveringMaterial = self.getNodeValue(x, 'covering material');
                         const dateConfidence = self.getNodeValue(x, 'construction phase timespan', 'confidence of dating');
                         const dateQualifier = self.getNodeValue(x, 'construction phase timespan', 'construction phase date qualifier');
@@ -153,6 +199,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const interpretationConfidence = self.getNodeValue(x, 'phase classification', 'phase certainty');
                         const method = self.getNodeValue(x, 'construction method');
                         const period = self.getNodeValue(x, 'cultural period');
+                        const periodLink = self.getResourceLink(self.getRawNodeValue(x, 'cultural period'));
                         const phase = self.getNodeValue(x, 'construction phase type');
                         const phaseDescription = self.getNodeValue(x, 'phase classification', 'phase classification description', 'phase description');
                         const phaseEvidence = self.getNodeValue(x, 'phase classification', 'construction phase evidence type');
@@ -171,7 +218,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             endDate, 
                             interpretationConfidence,
                             method, 
-                            period, 
+                            period,
+                            periodLink,
                             phase, 
                             phaseDescription, 
                             phaseEvidence, 

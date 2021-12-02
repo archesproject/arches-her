@@ -136,6 +136,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         [
                             {
                                 title: 'Relationships',
+                                tileid: self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.parent)),
                                 data: [{
                                     key: 'Parent Resource',
                                     value: self.getRawNodeValue(params.data(), self.dataConfig.parent),

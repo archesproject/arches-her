@@ -81,10 +81,9 @@
             <!-- People Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'people'">
                 <div data-bind="component: {
-                    name: 'views/components/reports/scenes/people',
+                    name: 'views/components/reports/scenes/default',
                     params: {
-                        data: resource,
-                        cards: peopleCards,
+                        data: peopleData,
                     }
                 }"></div>
             </div>

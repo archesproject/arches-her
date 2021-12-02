@@ -50,7 +50,7 @@ define([
             };
 
             self.classificationDataConfig = {
-                production: 'production',
+                artefactProduction: 'production',
                 dimensions: 'measurement event'
             };
 

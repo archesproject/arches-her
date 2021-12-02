@@ -47,9 +47,10 @@ define([
                 period: 'periods'
             };
             
-            self.archiveDataConfig = {
-
+            self.visible = {
+                archiveHolding: ko.observable(true)
             }
+            self.archiveHolding = ko.observableArray();
 
             self.nameCards = {};
             self.imagesCards = {};
@@ -92,6 +93,73 @@ define([
                     files: self.cards?.['associated digital files'],
                     period: self.cards?.['associated periods']
                 }
+            }
+
+            const archiveHoldingNode = self.getRawNodeValue(self.resource(), 'archive holding');
+
+            if(Array.isArray(archiveHoldingNode)) {
+                self.archiveHolding(archiveHoldingNode.map(node => {
+                    const tileid = self.getTileId(node);
+
+                    return {
+                        tileid, 
+                        visible: ko.observable(true),
+                        data: 
+                        {   
+                            section: [{ 
+                                visible: ko.observable(true),
+                                tileid: self.getTileId(self.getRawNodeValue(node, 'archive source creation')),
+                                title: 'Archive Source Creation',
+                                data: [{
+                                    key: 'Author',
+                                    value: self.getNodeValue(node, 'archive source creation', 'authorship', 'author', 'author names', 'author name'),
+                                    type: 'kv'
+                                },{
+                                    key: 'Editor',
+                                    value: self.getNodeValue(node, 'archive source creation', 'editorship', 'editor', 'editor names', 'editor name'),
+                                    type: 'kv'
+                                },{
+                                    key: 'Contribution',
+                                    value: self.getNodeValue(node, 'archive source creation', 'contribution', 'contributors', 'contributor names', 'contributor name'),
+                                    type: 'kv'
+                                },{
+                                    key: 'Statement of Responsibility',
+                                    value: self.getNodeValue(node, 'archive source creation', 'creation statement of responsibility', 'statement of responsibility'),
+                                    type: 'kv'
+                                }]
+                            }, {
+                                visible: ko.observable(true),
+                                tileid: self.getTileId(self.getRawNodeValue(node, 'repository storage location')),
+                                title: 'Repository Storage Location',
+                                data: [{
+                                    key: 'Owner',
+                                    value: self.getRawNodeValue(node, 'repository storage location', 'repository owner'),
+                                    type: 'resource'
+                                },{
+                                    key: 'Storage Area Name',
+                                    value: self.getNodeValue(node, 'repository storage location', 'storage area names', 'storage area name'),
+                                    type: 'kv'
+                                },{
+                                    key: 'Storage Building',
+                                    value: self.getNodeValue(node, 'repository storage location', 'storage building', 'storage building name'),
+                                    type: 'kv'
+                                }]
+                            }, {
+                                visible: ko.observable(true),
+                                tileid: self.getTileId(self.getRawNodeValue(node, 'extent')),
+                                title: 'Extent',
+                                data: [{
+                                    key: 'Measurement Unit',
+                                    value: self.getNodeValue(node, 'extent', 'extent measurement unit'),
+                                    type: 'kv'
+                                },{
+                                    key: 'Quantity',
+                                    value: self.getNodeValue(node, 'extent', 'quantity'),
+                                    type: 'kv'
+                                }]
+                            }]
+                        }
+                }}))
             }
 
         },

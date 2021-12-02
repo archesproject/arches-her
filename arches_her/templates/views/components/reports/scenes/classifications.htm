@@ -15,9 +15,77 @@
         data: activityTimespan,
     }
 }"></div>
+<!-- Construction Phases -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.artefactProduction">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Production Phases" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.production" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: production().length -->
+        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: production().length && !!dataConfig.artefactProduction -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Artefact Type" %}</th>
+                                <th>{% trans "Period" %}</th>
+                                <th>{% trans "Producer" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Method" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Phase Evidence" %}</th>
+                                <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                <th class="none">{% trans "Material" %}</th>
+                                <th class="none">{% trans "Production Technique" %}</th>
+                                <th class="none">{% trans "Phase Description" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: artefactProdTableConfiguration}">
+                            <tr>
+                                <td data-bind="text: artefactType"></td>
+                                <td><a class="aher-table-link" data-bind="text: period, attr: {href: periodLink}"></a></td>
+                                <td><a class="aher-table-link" data-bind="text: producer, attr: {href: producerLink}"></a></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: method"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: phaseEvidence"></td>
+                                <td data-bind="text: interpretationConfidence"></td>
+                                <td data-bind="text: material"></td>
+                                <td data-bind="text: productionTechnique"></td>
+                                <td data-bind="text: phaseDescription"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.production">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.production)}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
 
 <!-- Construction Phases -->
-<div class="aher-report-section" data-bind="visible: !!dataConfig.production">
+<div class="aher-report-section" data-bind="if: !!dataConfig.production">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
     <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
 
@@ -93,7 +161,7 @@
 </div>
 
 <!-- Construction Phases -->
-<div class="aher-report-section" data-bind="visible: !!dataConfig.aircraftProduction">
+<div class="aher-report-section" data-bind="if: !!dataConfig.aircraftProduction">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
     <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
 
@@ -174,7 +242,7 @@
 </div>
 
 <!-- Maritime Construction Phases -->
-<div class="aher-report-section" data-bind="visible: !!dataConfig.maritimeProduction">
+<div class="aher-report-section" data-bind="if: !!dataConfig.maritimeProduction">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
     <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
 
