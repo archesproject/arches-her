@@ -100,7 +100,8 @@ define([
             if(Array.isArray(archiveHoldingNode)) {
                 self.archiveHolding(archiveHoldingNode.map(node => {
                     const tileid = self.getTileId(node);
-
+                    const archiveHoldingTile = self.cards?.['archive holding'].tiles().find(tile => tile.tileid === tileid);
+                    const archiveHoldingCards = self.createCardDictionary(archiveHoldingTile.cards);
                     return {
                         tileid, 
                         visible: ko.observable(true),
@@ -108,6 +109,7 @@ define([
                         {   
                             section: [{ 
                                 visible: ko.observable(true),
+                                card: archiveHoldingCards?.['archive source creation'],
                                 tileid: self.getTileId(self.getRawNodeValue(node, 'archive source creation')),
                                 title: 'Archive Source Creation',
                                 data: [{
@@ -129,6 +131,7 @@ define([
                                 }]
                             }, {
                                 visible: ko.observable(true),
+                                card: archiveHoldingCards?.['repository storage location'],
                                 tileid: self.getTileId(self.getRawNodeValue(node, 'repository storage location')),
                                 title: 'Repository Storage Location',
                                 data: [{
@@ -146,6 +149,7 @@ define([
                                 }]
                             }, {
                                 visible: ko.observable(true),
+                                card: archiveHoldingCards?.['extent'],
                                 tileid: self.getTileId(self.getRawNodeValue(node, 'extent')),
                                 title: 'Extent',
                                 data: [{
