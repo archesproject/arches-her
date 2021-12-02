@@ -537,10 +537,10 @@
             <!-- Site Visit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'sitevisits'">
                 <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.siteVisits)}, css: {'fa-angle-double-right': visible.siteVisits(), 'fa-angle-double-up': !visible.siteVisits()}" class="fa toggle"></i> {% trans "Site Visits" %}</h2>
-                <a data-bind="{if: cards.siteVisits, click: function(){ addNewTile(cards.siteVisits) }}" class="aher-report-a">
+                <a data-bind="{if: cards['site visits'], click: function(){ addNewTile(cards['site visits']) }}" class="aher-report-a">
                     <i class="fa fa-mail-reply"></i>
-                    <span data-bind="if: cards.siteVisits.tiles().length">{% trans "Edit Site Visits" %}</span>
-                    <span data-bind="ifnot: cards.siteVisits.tiles().length">{% trans "Add Site Visits" %}</span>
+                    <span data-bind="if: cards['site visits'].tiles().length">{% trans "Edit Site Visits" %}</span>
+                    <span data-bind="ifnot: cards['site visits'].tiles().length">{% trans "Add Site Visits" %}</span>
                 </a>
 
                 <!-- Collapsible content -->
@@ -574,23 +574,12 @@
                                                         <tr>
                                                             <th>{% trans "Attendee" %}</th>
                                                             <th>{% trans "Attendee Type" %}</th>
-                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(3)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(2)}">
                                                         <tr>
                                                             <td data-bind="text: attendee"></td>
                                                             <td data-bind="text: attendeeType"></td>
-                                                            <td class="aher-table-control">
-                                                                <div data-bind="if: $parents[1].cards['site visits']">
-                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].cards['site visits'])}">
-                                                                        <i class="fa fa-mail-reply"></i>
-                                                                    </a>
-                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].cards['site visits'])}">
-                                                                        <i class="fa fa-trash"></i>
-                                                                    </a>
-                                                                </div>
-                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -621,7 +610,7 @@
                                     <!-- ko if: visit.photographs.length -->
                                     <!-- ko foreach: {data: visit.photographs, as: 'photo'} -->
                                     <div class="aher-report-photo-block">
-                                        <div class="aher-report-photo" data-bind="click: function(){$parents[1].editTile(tileid, $parents[1].cards.photographs)}">
+                                        <div class="aher-report-photo" data-bind="click: photo.fileUrl">
                                             <img class="img-responsive" alt="Image" data-bind="attr: {src: photo.fileUrl}" />
                                         </div>
                                         <div class="aher-report-photo-caption">

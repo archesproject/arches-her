@@ -263,15 +263,11 @@ define([
                 
                 self.cards = self.createCardDictionary(cards)
 
-                console.log(self.resource())
-                console.log(self.cards)
-
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
-
                 self.descriptionCards = {
                     descriptions: self.cards?.['consultation descriptions'],
                 };
@@ -289,9 +285,6 @@ define([
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
-                };
-                self.photographsCards = {
-
                 };
                 self.auditCards = {
                     audit: self.cards?.['audit metadata'],
