@@ -44,6 +44,18 @@
                         dataConfig: descriptionDataConfig
                     }
                 }"></div>
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: consultationDetails,
+                    }
+                }"></div>
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: consultationDates,
+                    }
+                }"></div>
             </div>
             <!-- Location Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'location'">

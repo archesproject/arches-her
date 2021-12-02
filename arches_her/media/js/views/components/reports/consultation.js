@@ -291,6 +291,66 @@ define([
                     type: self.cards?.['resource model type']
                 };
             };
+
+            self.consultationDetails = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Consultation Details',
+                            data: [{
+                                key: 'Consultation Type',
+                                value: self.getNodeValue(self.resource(), 'consultation type'),
+                                card: self.cards?.['consultation type'],
+                                type: 'kv'
+                            },{
+                                key: 'Development Type',
+                                value: self.getNodeValue(self.resource(), 'development type'),
+                                card: self.cards?.['consultation type'],
+                                type: 'kv'
+                            },{
+                                key: 'Application Type',
+                                value: self.getNodeValue(self.resource(), 'application type'),
+                                card: self.cards?.['consultation type'],
+                                type: 'kv'
+                            },{
+                                key: 'Contested Heritage Assignment',
+                                value: self.getNodeValue(self.resource(), 'contested heritage assignment', 'contested heritage'),
+                                card: self.cards?.['consultation type'],
+                                type: 'kv'
+                            },{
+                                key: 'Consultation Status',
+                                value: self.getNodeValue(self.resource(), 'status'),
+                                card: self.cards?.['consultation status'],
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
+
+            self.consultationDates = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Consultation Dates',
+                            data: [{
+                                key: 'Log Date',
+                                value: self.getNodeValue(self.resource(), 'consultation dates', 'log date'),
+                                card: self.cards?.['consultation dates'],
+                                type: 'kv'
+                            },{
+                                key: 'Target Date',
+                                value: self.getNodeValue(self.resource(), 'consultation dates', 'target date', 'target date start'),
+                                card: self.cards?.['consultation dates'],
+                                type: 'kv'
+                            },{
+                                key: 'Completion Date',
+                                value: self.getNodeValue(self.resource(), 'consultation dates', 'completion date'),
+                                card: self.cards?.['consultation dates'],
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
         },
         template: { require: 'text!templates/views/components/reports/consultation.htm' }
     });
