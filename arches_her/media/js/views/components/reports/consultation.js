@@ -14,8 +14,7 @@ define([
             params.configKeys = ['tabs', 'activeTabIndex'];
             Object.assign(self, reportUtils);
             self.sections = [
-                {id: 'name', title: 'Consultation Details'},
-                {id: 'description', title: 'Descriptions'},
+                {id: 'details', title: 'Consultation Details'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'references', title: 'Planning References'},
                 {id: 'contacts', title: 'Contacts'},
@@ -29,10 +28,11 @@ define([
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
-            self.activeSection = ko.observable('name');
+            self.activeSection = ko.observable('details');
 
             self.nameDataConfig = {
                 name: 'consultation',
+                xref: undefined,
                 type: undefined,
             };
 
@@ -69,6 +69,7 @@ define([
 
             self.visible = {
                 references: ko.observable(true),
+                systemReferences: ko.observable(true),
                 contacts: ko.observable(true),
                 correspondence: ko.observable(true),
                 communications: ko.observable(true),
@@ -89,6 +90,7 @@ define([
 
             self.contacts = ko.observable();
             self.references = ko.observableArray();
+            self.systemReferences = ko.observableArray();
             self.correspondence = ko.observableArray();
             self.communications = ko.observableArray();
             self.siteVisits = ko.observableArray();
@@ -110,6 +112,17 @@ define([
                     const urlLabel = JSON.parse(self.getNodeValue(node, 'url')).url_label;
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
+                }));
+            };
+
+            const systemReferencesNode = self.getRawNodeValue(self.resource(), 'references');
+            if(Array.isArray(systemReferencesNode)){
+                self.systemReferences(systemReferencesNode.map(node => {
+                    const reference = self.getNodeValue(node, 'agency identifier', 'reference');
+                    const referenceType = self.getNodeValue(node, 'agency identifier', 'reference type');
+                    const agency = self.getNodeValue(node, 'agency');
+                    const tileid = self.getTileId(node);
+                    return {reference, referenceType, agency, tileid};
                 }));
             };
 

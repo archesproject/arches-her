@@ -26,14 +26,22 @@
     </div>
     <div class="aher-tabbed-report">
         <div class="aher-tabbed-report-content">
-            <!-- Names Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+            <!-- Consultation Details Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'details'">
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/name',
                     params: {
                         data: resource,
                         cards: nameCards,
                         dataConfig: nameDataConfig
+                    }
+                }"></div>
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/description',
+                    params: {
+                        data: resource,
+                        cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
                     }
                 }"></div>
             </div>
@@ -52,7 +60,7 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'references'">
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.references)}, css: {'fa-angle-double-right': visible.references(), 'fa-angle-double-up': !visible.references()}"  class="fa toggle"></i> {% trans "External Cross References" %}</h2>
-                    <a data-bind="{if: cards.references, click: function(){addNewTile(cards.references)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external cross references" %}</a>
+                    <a data-bind="{if: cards['external cross references'], click: function(){addNewTile(cards['external cross references'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external cross references" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.references" class="aher-report-collapsible-container pad-lft">
@@ -82,11 +90,59 @@
                                                 <td data-bind="text: note"></td>
                                                 <td><a class="aher-table-link" data-bind="text: urlLabel, attr: {href: url}"></a></td>
                                                 <td class="aher-table-control">
-                                                    <div data-bind="if: $parent.cards.references">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.references)}">
+                                                    <div data-bind="if: $parent.cards['external cross references']">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external cross references'])}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.references)}">
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards['external cross references'])}">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferences)}, css: {'fa-angle-double-right': visible.systemReferences(), 'fa-angle-double-up': !visible.systemReferences()}"  class="fa toggle"></i> {% trans "External System References" %}</h2>
+                    <a data-bind="{if: cards['external system references'], click: function(){addNewTile(cards['external system references'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external system references" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.systemReferences" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: systemReferences() -->
+                        <div class="aher-nodata-note">{% trans "No external system references for this consultation" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: systemReferences() -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Reference" %}</th>
+                                                <th>{% trans "Reference Type" %}</th>
+                                                <th>{% trans "Agency" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: systemReferences, dataTableOptions: createTableConfig(5)}">
+                                            <tr>
+                                                <td data-bind="text: reference"></td>
+                                                <td data-bind="text: referenceType"></td>
+                                                <td data-bind="text: agency"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards['external system references']">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external system references'])}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards['external system references'])}">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -477,17 +533,6 @@
                         <!-- /ko -->
                     </div>
                 </div>
-            </div>
-            <!-- Description Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/description',
-                    params: {
-                        data: resource,
-                        cards: descriptionCards,
-                        dataConfig: descriptionDataConfig
-                    }
-                }"></div>
             </div>
             <!-- Site Visit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'sitevisits'">
