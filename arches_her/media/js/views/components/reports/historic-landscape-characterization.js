@@ -17,6 +17,7 @@ define([
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'hlc-attributes', title: 'HLC Attributes'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
@@ -144,6 +145,37 @@ define([
                     }
                 };
             }
+
+
+            self.hlcAttributes = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Historic Land Use Character Attributes',
+                            data: [{
+                                key: 'Street Pattern',
+                                value: self.getNodeValue(self.resource(), 'historic land use character attributes', 'street pattern'),
+                                type: 'kv',
+                                card: self.cards?.['historic land use character attributes']
+                            },{
+                                key: 'Street Frontage',
+                                value: self.getNodeValue(self.resource(), 'historic land use character attributes', 'street frontage'),
+                                type: 'kv',
+                                card: self.cards?.['historic land use character attributes']
+                            },{
+                                key: 'Average Height',
+                                value: self.getNodeValue(self.resource(), 'historic land use character attributes', 'average height'),
+                                type: 'kv',
+                                card: self.cards?.['historic land use character attributes']
+                            },{
+                                key: 'Rear Gardens',
+                                value: self.getNodeValue(self.resource(), 'historic land use character attributes', 'rear gardens'),
+                                type: 'kv',
+                                card: self.cards?.['historic land use character attributes']
+                            }]
+                        }
+                    ]
+            });
         },
         template: { require: 'text!templates/views/components/reports/historic-landscape-characterization.htm' }
     });

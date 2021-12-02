@@ -70,6 +70,14 @@
                     }
                 }"></div>
             </div>
+            <div class="aher-report-page" data-bind="if: activeSection() === 'hlc-attributes'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: hlcAttributes,
+                    }
+                }"></div>
+            </div>
             <!-- Classification Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
                 <!-- HLC Phase section -->

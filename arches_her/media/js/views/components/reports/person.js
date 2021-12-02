@@ -19,6 +19,7 @@ define([
                 {id: 'location', title: 'Location Data'},
                 {id: 'images', title: 'Images'},
                 {id: 'people', title: 'Associated People and Organizations'},
+                {id: 'contact', title: 'Biography and Contact Details'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
@@ -27,12 +28,21 @@ define([
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+            self.names = ko.observableArray();
+
             self.contactPointsTable = {
                 ...self.defaultTableConfig,
                 columns: Array(3).fill(null)
             };
+
+            self.nameTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(8).fill(null)
+            };
+
             self.visible = {
-                contactPoints: ko.observable(true)
+                contactPoints: ko.observable(true),
+                names: ko.observable(true)
             }
             self.sourceData = ko.observable({
                 sections:
@@ -78,6 +88,7 @@ define([
             self.resourcesCards = {};
             self.communicationCards = {};
             self.eventCards = {};
+            self.contactCards = {};
             self.imagesCards = {};
             self.peopleCards = {};
             self.summary = params.summary;
@@ -86,7 +97,7 @@ define([
             if(params.report.cards){
                 const cards = params.report.cards;
                 
-                self.cards = self.createCardDictionary(cards)
+                self.cards = self.createCardDictionary(cards);
 
                 self.nameCards = {
                     name: self.cards?.['name of person'],
@@ -130,14 +141,76 @@ define([
                     }
                 };
 
+                self.contactCards = {
+                    contact: self.cards?.['contact details']
+                };
+
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
-
             }
+
+            const nameNode = self.getRawNodeValue(self.resource(), 'name');
+            if(Array.isArray(nameNode)){
+                self.names(nameNode.map(node => {
+                    const name = self.getNodeValue(node, 'full name');
+                    const nameUseType = self.getNodeValue(node, 'name use type');
+                    const initials = self.getNodeValue(node, 'initials', 'initial(s)');
+                    const forename = self.getNodeValue(node, 'forenames', 'forename');
+                    const title = self.getNodeValue(node, 'titles', 'title');
+                    const surname = self.getNodeValue(node, 'surnames', 'surname');
+                    const epithet = self.getNodeValue(node, 'epithets', 'epithet');
+                    const tileid = self.getTileId(node);
+                    return { name, nameUseType, initials, forename, title, epithet, surname, tileid };
+                }))
+            }
+
+            self.lifeData = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Birth',
+                            data: [{
+                                key: 'Date',
+                                value: self.getNodeValue(self.resource(), 'birth', 'birth time span', 'date of birth'),
+                                type: 'kv',
+                                card: self.cards?.birth
+                            },{
+                                key: 'Mother',
+                                value: self.getRawNodeValue(self.resource(), 'birth', 'mother'),
+                                type: 'resource',
+                                card: self.cards?.birth
+                            },{
+                                key: 'Father',
+                                value: self.getRawNodeValue(self.resource(), 'birth', 'father'),
+                                type: 'resource',
+                                card: self.cards?.birth
+                            },{
+                                key: 'Place',
+                                value: self.getNodeValue(self.resource(), 'birth', 'place of birth', 'birthplace', 'birth place'),
+                                type: 'kv',
+                                card: self.cards?.birth
+                            }]
+                        },
+                        {
+                            title: 'Death',
+                            data: [{
+                                key: 'Date',
+                                value: self.getNodeValue(self.resource(), 'death', 'death time span', 'date of death'),
+                                type: 'kv',
+                                card: self.cards?.birth
+                            },{
+                                key: 'Place',
+                                value: self.getNodeValue(self.resource(), 'death', 'place of death', 'deathplace', 'death place'),
+                                type: 'kv',
+                                card: self.cards?.birth
+                            }]
+                        }
+                    ]
+            });
 
         },
         template: { require: 'text!templates/views/components/reports/person.htm' }

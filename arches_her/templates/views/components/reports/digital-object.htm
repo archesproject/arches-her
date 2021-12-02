@@ -46,7 +46,27 @@
                         cards: descriptionCards,
                     }
                 }"></div>
-            </div>   
+            </div>
+            <!-- Publication Details Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'publication'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/copyright',
+                    params: {
+                        data: resource,
+                        cards: copyrightCards,
+                    }
+                }"></div>
+            </div>
+            <!-- File Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'file'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: fileData,
+                    }
+                }"></div>
+            </div>
+            
              <!-- Audit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
                 <div data-bind="component: {
@@ -63,16 +83,6 @@
                     name: 'views/components/reports/scenes/json',
                     params: {
                         resourceInstanceId: reportMetadata().resourceinstanceid,
-                    }
-                }"></div>
-            </div>
-            <!-- Communication Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/communication',
-                    params: {
-                        data: resource,
-                        cards: communicationCards
                     }
                 }"></div>
             </div>
