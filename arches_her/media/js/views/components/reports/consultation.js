@@ -280,10 +280,7 @@ define([
                     location: {
                         card: null,
                         subCards: {
-                            addresses: 'addresses',
-                            administrativeAreas: 'localities/administrative areas',
-                            locationGeometry: 'mapped location',
-                            locationDescriptions: 'location descriptions',
+                            locationGeometry: 'consultation location',
                         }
                     }
                 };
@@ -296,7 +293,10 @@ define([
                 self.photographsCards = {
 
                 };
-
+                self.auditCards = {
+                    audit: self.cards?.['audit metadata'],
+                    type: self.cards?.['resource model type']
+                };
             };
         },
         template: { require: 'text!templates/views/components/reports/consultation.htm' }

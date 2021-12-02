@@ -384,7 +384,7 @@
                 </div>
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assessmentOfSignificance)}, css: {'fa-angle-double-right': visible.assessmentOfSignificance(), 'fa-angle-double-up': !visible.assessmentOfSignificance()}"  class="fa toggle"></i> {% trans "Assessment of Significance" %}</h2>
-                    <a data-bind="{if: cards.assessmentOfSignificance, click: function(){addNewTile(cards.assessmentOfSignificance)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add assessment of significance" %}</a>
+                    <a data-bind="{if: cards['assessment of significance'], click: function(){addNewTile(cards['assessment of significance'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add assessment of significance" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.assessmentOfSignificance" class="aher-report-collapsible-container pad-lft">
