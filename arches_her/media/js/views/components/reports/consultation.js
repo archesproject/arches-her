@@ -19,6 +19,7 @@ define([
                 {id: 'location', title: 'Location Data'},
                 {id: 'references', title: 'Planning References'},
                 {id: 'contacts', title: 'Contacts'},
+                {id: 'progression', title: 'Consultation Progression'},
                 {id: 'correspondence', title: 'Correspondence'},
                 {id: 'sitevisits', title: 'Site Visits'},
                 {id: 'resources', title: 'Associated Resources'},
@@ -72,26 +73,18 @@ define([
                 correspondence: ko.observable(true),
                 communications: ko.observable(true),
                 siteVisits: ko.observable(true),
+                proposal: ko.observable(true),
+                advice: ko.observable(true),
+                action: ko.observable(true),
+                outcomes: ko.observable(true),
+                assessmentOfSignificance: ko.observable(true),
             }
 
-            self.correspondenceTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
-            }
-
-            self.communicationsTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(9).fill(null)
-            }
-
-            siteVisitAttendeeTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
-            }
-
-            self.referencesTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(5).fill(null)
+            self.createTableConfig = function(col) {
+                return {
+                    ...self.defaultTableConfig,
+                    columns: Array(col).fill(null)
+                };
             }
 
             self.contacts = ko.observable();
@@ -99,6 +92,12 @@ define([
             self.correspondence = ko.observableArray();
             self.communications = ko.observableArray();
             self.siteVisits = ko.observableArray();
+            self.proposal = ko.observableArray();
+            self.advice = ko.observableArray();
+            self.action = ko.observableArray();
+            self.outcomes = ko.observableArray();
+            self.assessmentOfSignificance = ko.observableArray();
+
 
             const referencesNode = self.getRawNodeValue(self.resource(), 'external cross references');
             if(Array.isArray(referencesNode)){
@@ -136,6 +135,55 @@ define([
                     const letterType = self.getNodeValue(node, 'letter type');
                     const tileid = self.getTileId(node);
                     return {letter, letterLink, letterType, tileid};
+                }));
+            };
+
+            const proposalNode = self.getRawNodeValue(self.resource(), 'proposal');
+            if(Array.isArray(proposalNode)){
+                self.proposal(proposalNode.map(node => {
+                    const proposal = self.getNodeValue(node, 'proposal text');
+                    const file = self.getNodeValue(node, 'digital file(s)');
+                    const fileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
+                    const tileid = self.getTileId(node);
+                    return {proposal, file, fileLink, tileid};
+                }));
+            };
+
+            const adviceNode = self.getRawNodeValue(self.resource(), 'advice');
+            if(Array.isArray(adviceNode)){
+                self.advice(adviceNode.map(node => {
+                    const advice = self.getNodeValue(node, 'advice text');
+                    const adviceType = self.getNodeValue(node, 'advice type');
+                    const tileid = self.getTileId(node);
+                    return {advice, adviceType, tileid};
+                }));
+            };
+
+            const actionNode = self.getRawNodeValue(self.resource(), 'action');
+            if(Array.isArray(actionNode)){
+                self.action(actionNode.map(node => {
+                    const action = self.getNodeValue(node, 'action text');
+                    const actionType = self.getNodeValue(node, 'action type');
+                    const relatedAdvice = self.getNodeValue(node, 'related advice');
+                    const tileid = self.getTileId(node);
+                    return {action, actionType, relatedAdvice, tileid};
+                }));
+            };
+
+            const outcomesNode = self.getRawNodeValue(self.resource(), 'outcomes');
+            if(outcomesNode){
+                const planningOutcome = self.getNodeValue(outcomesNode, 'planning outcome');
+                const auditOutcome = self.getNodeValue(outcomesNode, 'audit outcome');
+                const tileid = self.getTileId(outcomesNode);
+                self.outcomes({planningOutcome, auditOutcome, tileid});
+            };
+
+            const assessmentOfSignificanceNode = self.getRawNodeValue(self.resource(), 'assessment of significance');
+            if(Array.isArray(assessmentOfSignificanceNode)){
+                self.assessmentOfSignificance(assessmentOfSignificanceNode.map(node => {
+                    const notes = self.getNodeValue(node, 'notes');
+                    const tileid = self.getTileId(node);
+                    return {notes, tileid};
                 }));
             };
 
@@ -201,6 +249,9 @@ define([
                 const cards = params.report.cards;
                 
                 self.cards = self.createCardDictionary(cards)
+
+                console.log(self.resource())
+                console.log(self.cards)
 
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
