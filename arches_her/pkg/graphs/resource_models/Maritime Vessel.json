@@ -1354,6 +1354,34 @@
                     "widget_id": "31f3728c-7613-11e7-a139-784f435179ea"
                 },
                 {
+                    "card_id": "656c41ab-3ec0-11eb-8060-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Construction Phase Start Date",
+                        "placeholder": ""
+                    },
+                    "id": "37bb07e7-535d-11ec-88e1-a87eeabdefba",
+                    "label": "Construction Phase Start Date",
+                    "node_id": "dcd1a180-535c-11ec-8227-a87eeabdefba",
+                    "sortorder": 11,
+                    "visible": true,
+                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
+                },
+                {
+                    "card_id": "656c41ab-3ec0-11eb-8060-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Construction Phase End Date",
+                        "placeholder": ""
+                    },
+                    "id": "37bc6d59-535d-11ec-9af8-a87eeabdefba",
+                    "label": "Construction Phase End Date",
+                    "node_id": "0557783e-535d-11ec-b437-a87eeabdefba",
+                    "sortorder": 12,
+                    "visible": true,
+                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
+                },
+                {
                     "card_id": "3fb2264b-f008-11eb-8179-a87eeabdefba",
                     "config": {
                         "defaultValue": null,
@@ -2131,7 +2159,8 @@
                                 "text": "Uncertain"
                             }
                         ],
-                        "placeholder": "Select an option"
+                        "placeholder": "Select an option",
+                        "url": "/concepts/dropdown?conceptid=2b0f86cc-6d4a-483b-973e-9000c9d8b34d"
                     },
                     "id": "656c68de-3ec0-11eb-b60e-f875a44e0e11",
                     "label": "Confidence of Interpretation",
@@ -7261,24 +7290,6 @@
                 {
                     "card_id": "656c41ab-3ec0-11eb-8060-f875a44e0e11",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": null,
-                        "label": "Construction Phase End Date",
-                        "maxDate": null,
-                        "minDate": null,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "ef609267-50ef-11eb-a9dc-f875a44e0e11",
-                    "label": "Construction Phase End Date",
-                    "node_id": "cf98efef-50ee-11eb-9eaa-f875a44e0e11",
-                    "sortorder": 12,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
-                    "card_id": "656c41ab-3ec0-11eb-8060-f875a44e0e11",
-                    "config": {
                         "defaultValue": "",
                         "label": "Construction Phase Display Date",
                         "maxLength": null,
@@ -7322,24 +7333,6 @@
                     "sortorder": 15,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "656c41ab-3ec0-11eb-8060-f875a44e0e11",
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": null,
-                        "label": "Construction Phase Start Date",
-                        "maxDate": null,
-                        "minDate": null,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "ef6bdca9-50ef-11eb-9504-f875a44e0e11",
-                    "label": "Construction Phase Start Date",
-                    "node_id": "cf98efee-50ee-11eb-8eb6-f875a44e0e11",
-                    "sortorder": 11,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
                 },
                 {
                     "card_id": "f1cbd895-f007-11eb-bf80-a87eeabdefba",
@@ -7922,6 +7915,15 @@
             "deploymentfile": null,
             "description": "",
             "edges": [
+                {
+                    "description": null,
+                    "domainnode_id": "cf98efe8-50ee-11eb-83c4-f875a44e0e11",
+                    "edgeid": "0557905e-535d-11ec-b097-a87eeabdefba",
+                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
+                    "rangenode_id": "0557783e-535d-11ec-b437-a87eeabdefba"
+                },
                 {
                     "description": null,
                     "domainnode_id": "0d2464db-501d-11eb-be94-f875a44e0e11",
@@ -11543,24 +11545,6 @@
                 {
                     "description": null,
                     "domainnode_id": "cf98efe8-50ee-11eb-83c4-f875a44e0e11",
-                    "edgeid": "cf98eff5-50ee-11eb-8b7a-f875a44e0e11",
-                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
-                    "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
-                    "rangenode_id": "cf98efee-50ee-11eb-8eb6-f875a44e0e11"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "cf98efe8-50ee-11eb-83c4-f875a44e0e11",
-                    "edgeid": "cf98eff6-50ee-11eb-b1dd-f875a44e0e11",
-                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
-                    "name": null,
-                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
-                    "rangenode_id": "cf98efef-50ee-11eb-9eaa-f875a44e0e11"
-                },
-                {
-                    "description": null,
-                    "domainnode_id": "cf98efe8-50ee-11eb-83c4-f875a44e0e11",
                     "edgeid": "cf98eff7-50ee-11eb-abc8-f875a44e0e11",
                     "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
                     "name": null,
@@ -12010,6 +11994,15 @@
                 },
                 {
                     "description": null,
+                    "domainnode_id": "cf98efe8-50ee-11eb-83c4-f875a44e0e11",
+                    "edgeid": "dcd1a181-535c-11ec-bd8a-a87eeabdefba",
+                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
+                    "rangenode_id": "dcd1a180-535c-11ec-8227-a87eeabdefba"
+                },
+                {
+                    "description": null,
                     "domainnode_id": "ed3c32e3-29a1-11eb-a399-f875a44e0e11",
                     "edgeid": "ed3c59f8-29a1-11eb-8e25-f875a44e0e11",
                     "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
@@ -12271,7 +12264,7 @@
                     },
                     "function_id": "60000000-0000-0000-0000-000000000001",
                     "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
-                    "id": "e10914f6-4947-11ec-8bf3-a87eeabdefba"
+                    "id": "b96e650a-52fa-11ec-ae14-a87eeabdefba"
                 }
             ],
             "graphid": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
@@ -12524,6 +12517,33 @@
                 }
             ],
             "nodes": [
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "fuzzy_day_padding": 1,
+                        "fuzzy_month_padding": 1,
+                        "fuzzy_season_padding": 12,
+                        "fuzzy_year_padding": 1,
+                        "multiplier_if_approximate": 1,
+                        "multiplier_if_both": 1,
+                        "multiplier_if_uncertain": 1
+                    },
+                    "datatype": "edtf",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "End_date",
+                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Construction Phase End Date",
+                    "nodegroup_id": "656c41a9-3ec0-11eb-a444-f875a44e0e11",
+                    "nodeid": "0557783e-535d-11ec-b437-a87eeabdefba",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
+                    "sortorder": 0
+                },
                 {
                     "config": null,
                     "datatype": "semantic",
@@ -13658,7 +13678,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "0ae5b0d3-4812-4ad2-9cc2-d8377c7462b7"
+                        "rdmCollection": "31587299-ea4d-4f3a-a7d3-5cd977cb0de0"
                     },
                     "datatype": "concept",
                     "description": "Allows a concept collection to be typed. Useful for data sharing.",
@@ -14449,7 +14469,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": null
+                        "rdmCollection": "8860d3cd-582c-442b-8a73-1aea8694be53"
                     },
                     "datatype": "concept-list",
                     "description": null,
@@ -14829,7 +14849,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": null
+                        "rdmCollection": "8860d3cd-582c-442b-8a73-1aea8694be53"
                     },
                     "datatype": "concept-list",
                     "description": null,
@@ -19896,7 +19916,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "00b56c5d-d960-4682-a254-5de15426a264"
+                        "rdmCollection": "6c13cd00-16c1-486d-92fc-9c69be4fc3f9"
                     },
                     "datatype": "concept-list",
                     "description": "Allows a concept collection to be typed. Useful for data sharing.",
@@ -20679,46 +20699,6 @@
                     "nodeid": "cf98efed-50ee-11eb-9e4f-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD"
-                    },
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": true,
-                    "fieldname": "PhaseStart",
-                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Construction Phase Start Date",
-                    "nodegroup_id": "656c41a9-3ec0-11eb-a444-f875a44e0e11",
-                    "nodeid": "cf98efee-50ee-11eb-8eb6-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD"
-                    },
-                    "datatype": "date",
-                    "description": null,
-                    "exportable": true,
-                    "fieldname": "PhaseEnd",
-                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Construction Phase End Date",
-                    "nodegroup_id": "656c41a9-3ec0-11eb-a444-f875a44e0e11",
-                    "nodeid": "cf98efef-50ee-11eb-9eaa-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
                     "sortorder": 0
                 },
                 {
@@ -21607,6 +21587,33 @@
                     "nodeid": "d7efa340-501c-11eb-bef5-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E7_Activity",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P11i_participated_in",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "fuzzy_day_padding": 1,
+                        "fuzzy_month_padding": 1,
+                        "fuzzy_season_padding": 12,
+                        "fuzzy_year_padding": 1,
+                        "multiplier_if_approximate": 1,
+                        "multiplier_if_both": 1,
+                        "multiplier_if_uncertain": 1
+                    },
+                    "datatype": "edtf",
+                    "description": null,
+                    "exportable": true,
+                    "fieldname": "Start_date",
+                    "graph_id": "49bac32e-5464-11e9-a6e2-000d3ab1e588",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Construction Phase Start Date",
+                    "nodegroup_id": "656c41a9-3ec0-11eb-a444-f875a44e0e11",
+                    "nodeid": "dcd1a180-535c-11ec-8227-a87eeabdefba",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
                     "sortorder": 0
                 },
                 {
