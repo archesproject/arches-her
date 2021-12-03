@@ -47,6 +47,12 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_SEARCH_EXPORT_EXPIRES = 60 * 3  # seconds
 CELERY_SEARCH_EXPORT_CHECK = 15  # seconds
 
+# By setting DISABLE_EXPORT_FOR_ANONYMOUS_USER to True, if the user is attempting
+# to export search results and is not signed in with a user account then the request
+# will not be allowed.
+
+DISABLE_EXPORT_FOR_ANONYMOUS_USER = False
+
 CELERY_BEAT_SCHEDULE = {
     "delete-expired-search-export": {
         "task": "arches.app.tasks.delete_file",
