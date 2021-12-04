@@ -250,7 +250,47 @@ define([
                     return {dateOfVisit, location, attendees, observations, recommendations, photographs, tileid};
                 }));
             };
+
+            const contactNode = self.getRawNodeValue(self.resource(), 'contacts');
+            if(contactNode){
+                const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
+                const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
+                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
+                const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
+                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
+                const agentsNodes = self.getRawNodeValue(contactNode, 'agents', 'agent', 'instance_details');
+                const ownersNodes = self.getRawNodeValue(contactNode, 'owners', 'owner', 'instance_details');
+                const applicantsNodes = self.getRawNodeValue(contactNode, 'applicants', 'applicant', 'instance_details');
+                const agents = (Array.isArray(agentsNodes)) ? (
+                    agentsNodes.map(agentsNode => {
+                        const agent = self.getNodeValue(agentsNode);
+                        const agentLink = self.getResourceLink(agentsNode);
+                        const tileid = self.getTileId(agentsNode);
+                        return {agent, agentLink, tileid};
+                    })) : [];
+                const owners = (Array.isArray(ownersNodes)) ? (
+                    ownersNodes.map(ownersNode => {
+                        const owner = self.getNodeValue(ownersNode);
+                        const ownerLink = self.getResourceLink(ownersNode);
+                        const tileid = self.getTileId(ownersNode);
+                        return {owner, ownerLink, tileid};
+                    })) : [];
+                const applicants = (Array.isArray(applicantsNodes)) ? (
+                    applicantsNodes.map(applicantsNode => {
+                        const applicant = self.getNodeValue(applicantsNode);
+                        const applicantLink = self.getResourceLink(applicantsNode);
+                        const tileid = self.getTileId(applicantsNode);
+                        return {applicant, applicantLink, tileid};
+                    })) : [];
+                const tileid = self.getTileId(contactNode);
+                console.log(agentsNodes,ownersNodes,applicantsNodes,agents,owners,applicants)
+
+                self.contacts(
+                    { consultingContact, planningOfficer, planningOfficerLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
+                )
+            };
 console.log(self.resource())
+console.log(self.contacts())
             if(params.report.cards){
                 const cards = params.report.cards;
                 
@@ -339,46 +379,6 @@ console.log(self.resource())
                                 key: 'Completion Date',
                                 value: self.getNodeValue(self.resource(), 'consultation dates', 'completion date'),
                                 card: self.cards?.['consultation dates'],
-                                type: 'kv'
-                            }]
-                        }
-                    ]
-            });
-
-            self.contacts = ko.observable({
-                sections:
-                    [
-                        {
-                            title: 'Contacts',
-                            data: [{
-                                key: 'Consulting Contact',
-                                value: self.getNodeValue(self.resource(), 'contacts', 'consulting contact'),
-                                card: self.cards?.['contacts'],
-                                type: 'kv'
-                            },{
-                                key: 'Planning Officer',
-                                value: self.getNodeValue(self.resource(), 'contacts', 'planning officers', 'planning officer'),
-                                card: self.cards?.['contacts'],
-                                type: 'kv'
-                            },{
-                                key: 'Casework Officer',
-                                value: self.getNodeValue(self.resource(), 'contacts', 'casework officers', 'casework officer'),
-                                card: self.cards?.['contacts'],
-                                type: 'kv'
-                            },{
-                                key: 'Agent',
-                                value: self.getNodeValue(self.resource(), 'contacts', 'agents', 'agent'),
-                                card: self.cards?.['contacts'],
-                                type: 'kv'
-                            },{
-                                key: 'Owner',
-                                value: self.getNodeValue(self.resource(), 'contacts', 'owners', 'owner'),
-                                card: self.cards?.['contacts'],
-                                type: 'kv'
-                            },{
-                                key: 'Applicant',
-                                value: self.getNodeValue(self.resource(), 'contacts', 'applicants', 'applicant'),
-                                card: self.cards?.['contacts'],
                                 type: 'kv'
                             }]
                         }
