@@ -97,7 +97,7 @@ define([
             self.proposal = ko.observableArray();
             self.advice = ko.observableArray();
             self.action = ko.observableArray();
-            self.outcomes = ko.observableArray();
+            self.outcomes = ko.observable();
             self.assessmentOfSignificance = ko.observableArray();
 
 
