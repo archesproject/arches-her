@@ -121,23 +121,10 @@ define([
                     const reference = self.getNodeValue(node, 'agency identifier', 'reference');
                     const referenceType = self.getNodeValue(node, 'agency identifier', 'reference type');
                     const agency = self.getNodeValue(node, 'agency');
+                    const agencyLink = self.getResourceLink(self.getRawNodeValue(node, 'agency'));
                     const tileid = self.getTileId(node);
-                    return {reference, referenceType, agency, tileid};
+                    return {reference, referenceType, agency, agencyLink, tileid};
                 }));
-            };
-
-            const contactNode = self.getRawNodeValue(self.resource(), 'contacts');
-            if(contactNode){
-                const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
-                const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
-                const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
-                const agent = self.getNodeValue(contactNode, 'agents', 'agent');
-                const owner = self.getNodeValue(contactNode, 'owners', 'owner');
-                const applicant = self.getNodeValue(contactNode, 'applicants', 'applicant');
-                const tileid = self.getTileId(contactNode);
-                self.contacts(
-                    {consultingContact, planningOfficer, caseworkOfficer, agent, owner, applicant, tileid}
-                )
             };
 
             const correspondenceNode = self.getRawNodeValue(self.resource(), 'correspondence');
@@ -207,13 +194,10 @@ define([
                     const subjectDescType = self.getNodeValue(node, 'subjects', 'subject description type');
                     const type = self.getNodeValue(node, 'communication type');
                     const date = self.getNodeValue(node, 'dates', 'date');
-                    // const endDate = self.getNodeValue(node, 'dates', 'end date');
                     const attendees = self.getNodeValue(node, 'attendees');
                     const relatedCondition = self.getNodeValue(node, 'related condition');
                     const note = self.getNodeValue(node, 'communication notes', 'communication description');
-                    // const noteDescType = self.getNodeValue(node, 'communication notes', 'communication description type');
                     const followOnAction = self.getNodeValue(node, 'follow on actions', 'follow-on actions');
-                    // const followOnActionDescType = self.getNodeValue(node, 'follow on actions', 'follow-on actions description type');
                     const digitalFile = self.getNodeValue(node, 'digital file(s)');
                     const digitalFileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
                     const tileid = self.getTileId(node);
@@ -226,38 +210,47 @@ define([
                 self.siteVisits(siteVisitsNode.map(node => {
                     const dateOfVisit = self.getNodeValue(node, 'timespan of visit', 'date of visit');
                     const location = self.getNodeValue(node, 'location', 'location descriptions', 'location description');
-                    const locationDescType = self.getNodeValue(node, 'location', 'location descriptions', 'location description type');
-                    const attendees = self.getRawNodeValue(node, 'attendees').map(attendeeNode => {
-                        const attendee = self.getNodeValue(attendeeNode, 'attendee');
-                        const attendeeType = self.getNodeValue(attendeeNode, 'attendee type');
-                        const tileid = self.getTileId(attendeeNode);
-                        return {attendee, attendeeType, tileid};
-                    });
-                    const observations = self.getRawNodeValue(node, 'observations').map(observationNode => {
-                        const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
-                        const tileid = self.getTileId(observationNode);
-                        return {observation, tileid};
-                    });
-                    const recommendations = self.getRawNodeValue(node, 'recommendations').map(recommendationNode => {
-                        const recommendation = self.getNodeValue(recommendationNode, 'Recommendation', 'Recommendation value');
-                        const tileid = self.getTileId(recommendationNode);
-                        return {recommendation, tileid};
-                    });
-                    const photographs = self.getRawNodeValue(node, 'photographs').map(photographNode => {
-                        const file = self.getNodeValue(photographNode, 'file_details', [0], 'name');
-                        const fileUrl = self.getNodeValue(photographNode, 'file_details', [0], 'url');
-                        const caption = self.getNodeValue(photographNode, 'caption notes', 'caption note');
-                        const copyrightHolder = self.getNodeValue(photographNode, 'Copyright', 'copyright holder');
-                        const copyrightNote = self.getNodeValue(photographNode, 'copyright', 'copyright note', 'copyright note text');
-                        const copyrightType = self.getNodeValue(photographNode, 'copyright', 'copyright type');
-                        const tileid = self.getTileId(photographNode);
-                        return {file, fileUrl, caption, copyrightHolder, copyrightType, copyrightNote, tileid};
-                    });
+
+                    const attendeesNodes = self.getRawNodeValue(node, 'attendees');
+                    const observationsNodes = self.getRawNodeValue(node, 'observations');
+                    const recommendationsNodes = self.getRawNodeValue(node, 'recommendations');
+                    const photographsNodes = self.getRawNodeValue(node, 'photographs');
+
+                    const attendees = Array.isArray(attendeesNodes) ? (
+                        attendeesNodes.map(attendeeNode => {
+                            const attendee = self.getNodeValue(attendeeNode, 'attendee');
+                            const attendeeType = self.getNodeValue(attendeeNode, 'attendee type');
+                            const tileid = self.getTileId(attendeeNode);
+                            return {attendee, attendeeType, tileid};
+                        })) : [];
+                    const observations = Array.isArray(observationsNodes) ? (
+                        observationsNodes.map(observationNode => {
+                            const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
+                            const tileid = self.getTileId(observationNode);
+                            return {observation, tileid};
+                        })) : [];
+                    const recommendations = Array.isArray(recommendationsNodes) ? (
+                        recommendationsNodes.map(recommendationNode => {
+                            const recommendation = self.getNodeValue(recommendationNode, 'recommendation', 'recommendation value');
+                            const tileid = self.getTileId(recommendationNode);
+                            return {recommendation, tileid};
+                        })) : [];
+                    const photographs = Array.isArray(photographsNodes) ? (
+                        photographsNodes.map(photographNode => {
+                            const file = self.getNodeValue(photographNode, 'file_details', [0], 'name');
+                            const fileUrl = self.getNodeValue(photographNode, 'file_details', [0], 'url');
+                            const caption = self.getNodeValue(photographNode, 'caption notes', 'caption note');
+                            const copyrightHolder = self.getNodeValue(photographNode, 'copyright', 'copyright holder');
+                            const copyrightNote = self.getNodeValue(photographNode, 'copyright', 'copyright note', 'copyright note text');
+                            const copyrightType = self.getNodeValue(photographNode, 'copyright', 'copyright type');
+                            const tileid = self.getTileId(photographNode);
+                            return {file, fileUrl, caption, copyrightHolder, copyrightType, copyrightNote, tileid};
+                        })) : [];
                     const tileid = self.getTileId(node);
                     return {dateOfVisit, location, attendees, observations, recommendations, photographs, tileid};
                 }));
             };
-
+console.log(self.resource())
             if(params.report.cards){
                 const cards = params.report.cards;
                 
@@ -346,6 +339,46 @@ define([
                                 key: 'Completion Date',
                                 value: self.getNodeValue(self.resource(), 'consultation dates', 'completion date'),
                                 card: self.cards?.['consultation dates'],
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
+
+            self.contacts = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Contacts',
+                            data: [{
+                                key: 'Consulting Contact',
+                                value: self.getNodeValue(self.resource(), 'contacts', 'consulting contact'),
+                                card: self.cards?.['contacts'],
+                                type: 'kv'
+                            },{
+                                key: 'Planning Officer',
+                                value: self.getNodeValue(self.resource(), 'contacts', 'planning officers', 'planning officer'),
+                                card: self.cards?.['contacts'],
+                                type: 'kv'
+                            },{
+                                key: 'Casework Officer',
+                                value: self.getNodeValue(self.resource(), 'contacts', 'casework officers', 'casework officer'),
+                                card: self.cards?.['contacts'],
+                                type: 'kv'
+                            },{
+                                key: 'Agent',
+                                value: self.getNodeValue(self.resource(), 'contacts', 'agents', 'agent'),
+                                card: self.cards?.['contacts'],
+                                type: 'kv'
+                            },{
+                                key: 'Owner',
+                                value: self.getNodeValue(self.resource(), 'contacts', 'owners', 'owner'),
+                                card: self.cards?.['contacts'],
+                                type: 'kv'
+                            },{
+                                key: 'Applicant',
+                                value: self.getNodeValue(self.resource(), 'contacts', 'applicants', 'applicant'),
+                                card: self.cards?.['contacts'],
                                 type: 'kv'
                             }]
                         }
