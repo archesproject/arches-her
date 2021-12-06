@@ -1,6 +1,7 @@
 define([
-    'arches'
-], function(arches) {
+    'arches',
+    'knockout'
+], function(arches, ko) {
     const standardizeNode = (obj) => {
         if(obj){
             const keys = Object.keys(obj);
