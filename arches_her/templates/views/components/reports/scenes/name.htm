@@ -55,7 +55,7 @@
 </div>
 
 <!-- External Reference -->
-<div class="aher-report-section">
+<div class="aher-report-section" data-bind="visible: !!dataConfig.xref" >
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}" class="fa toggle"></i> {% trans "External Cross References" %}</h2>
     <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
 
