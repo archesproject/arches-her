@@ -109,7 +109,7 @@
                                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.nationalities)}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.nationalities)}">
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.nationalities)">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -165,7 +165,7 @@
                                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.owners)}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.owners)}">
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.owners)">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -249,7 +249,7 @@
                                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.voyages)}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.voyages)}">
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.voyages)">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>

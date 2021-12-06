@@ -71,7 +71,7 @@
                                             <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.designations)}">
                                                 <i class="fa fa-mail-reply"></i>
                                             </a>
-                                            <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.designations)}">
+                                            <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.designations)">
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
@@ -136,7 +136,7 @@
                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.areaAssignment)}">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.areaAssignment)}">
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.areaAssignment)">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -194,7 +194,7 @@
                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.landUse)}">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.landUse)}">
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.landUse)">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
