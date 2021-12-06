@@ -5,17 +5,14 @@ define([
 
     function viewModel(params) {
         var self = this;
-        params.form.resourceId = params.form.externalStepData.relatedconsultationstep.data.resourceid;
+        params.form.resourceId = ko.observable(params.consultationResourceid);
         SummaryStep.apply(this, [params]);
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
-        this.digitalObjectResourceId = ko.observable();
-        if (params.form.externalStepData.uploaddocumentstep.data) {
-            this.digitalObjectResourceId(params.form.externalStepData.uploaddocumentstep.data.resourceid);
-        };
+        this.digitalObjectResourceId = ko.observable(params.digitalObjectResourceId);
 
-        var currentTileId = ko.unwrap(params.form.externalStepData.relatedconsultationstep.data.tileid);
+        const currentTileId = params.consultationTileid;
 
         this.resourceData.subscribe(function(val){
             var currentCommunication;

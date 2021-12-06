@@ -151,10 +151,6 @@ define([
                     description: 'Choose an option below',
                     component: 'views/components/workflows/component-based-step',
                     componentname: 'component-based-step',
-                    externalstepdata: { 
-                        relatedconsultationstep: 'related-consultation',
-                        uploaddocumentstep: 'upload-documents',
-                    },
                     layoutSections: [
                         {
                             componentConfigs: [
@@ -163,6 +159,9 @@ define([
                                     uniqueInstanceName: 'communication-final',
                                     tilesManaged: 'none',
                                     parameters: {
+                                        digitalObjectResourceId: "['upload-documents']['upload-documents-step']['digitalResourceNameTileId']",
+                                        consultationTileid: "['related-consultation']['communication-select-resource']['tileid']",
+                                        consultationResourceid: "['related-consultation']['communication-select-resource']['resourceid']",
                                     },
                                 },
                             ], 
