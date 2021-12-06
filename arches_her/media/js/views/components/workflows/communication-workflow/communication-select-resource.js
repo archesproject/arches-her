@@ -22,13 +22,11 @@ define([
         this.tileid = ko.observable(getValue('tileid'));
 
         this.resValue.subscribe(function(val){
-            console.log(val);
             const resourceid = Array.isArray(val) && val.length ? val[0].resourceId : val;
             self.resourceid(ko.unwrap(resourceid));
         }, this);
 
         this.resourceid.subscribe(function(val){
-            console.log(val);
             if (val) {
                 self.resValue([{
                     resourceId: val,
