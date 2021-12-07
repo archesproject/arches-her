@@ -29,9 +29,10 @@ define([
         this.resourceid.subscribe(function(val){
             if (val) {
                 self.resValue([{
-                    resourceId: val,
-                    ontologyProperty: "",
-                    inverseOntologyProperty: ""
+                    resourceId: ko.observable(val),
+                    ontologyProperty: ko.observable(""),
+                    inverseOntologyProperty: ko.observable(""),
+                    resourceXresourceId: ""
                 }]);
             }
         })
