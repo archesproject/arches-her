@@ -1,0 +1,168 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div data-bind="visible: !!dataConfig.name" class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}" class="fa toggle"></i> {% trans "Names" %}</h2>
+    <span data-bind="if: cards.name && (!names().length || cards.name.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.name)}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.names" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: names().length -->
+        <div class="aher-nodata-note">No names for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: names().length -->
+        <div class="aher-report-subsection" >
+            <div>
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Name" %}</th>
+                                <th class="min-tabletl">{% trans "Name Use Type" %}</th>
+                                <th class="min-medium">{% trans "Name Currency" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: names, dataTableOptions: nameTableConfig }">
+                            <tr>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: nameUseType"></td>
+                                <td data-bind="text: currency"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.name">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.name)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.name)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- External Reference -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.xref" >
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}" class="fa toggle"></i> {% trans "External Cross References" %}</h2>
+    <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.crossReferences" class="aher-report-collapsible-container pad-lft">
+        <!-- ko ifnot: crossReferences().length -->
+        <div class="aher-nodata-note">No references for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: crossReferences().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Name" %}</th>
+                                <th class="min-tabletl">{% trans "Source" %}</th>
+                                <th class="min-medium">{% trans "Note" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: crossReferences, dataTableOptions: crossReferenceTableConfig}">
+                            <tr>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: source"></td>
+                                <td data-bind="text: description"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.externalCrossReferences">
+                                        <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.externalCrossReferences)}">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- System Reference Numbers section -->
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferenceNumbers)}, css: {'fa-angle-double-right': visible.systemReferenceNumbers(), 'fa-angle-double-up': !visible.systemReferenceNumbers()}" class="fa toggle"></i> {% trans "System Reference Numbers" %}</h2>
+    <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="aher-report-a">
+        <i class="fa fa-mail-reply"></i>
+        <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span>
+        <span data-bind="ifnot: cards.systemReferenceNumbers.tiles().length">{% trans "Add Identifier" %}</span>
+    </a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.systemReferenceNumbers" class="aher-report-collapsible-container pad-lft">
+        <!-- ko ifnot: systemReferenceNumbers() -->
+        <div class="aher-nodata-note">No references for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: systemReferenceNumbers() -->
+        <div class="aher-report-subsection" data-bind="with: systemReferenceNumbers, as: 'srn'">
+
+            <div class="firstchild-container">
+                <div class="aher-report-subsection-ite" style="padding-top: 10px;">
+                    <div class="aher-block-attributes">
+                        <h4 class="aher-block-key">Resource ID: </h4>
+                        <div class="aher-block-value" data-bind="text:srn.resourceId"></div>
+                    </div>
+                    <div class="aher-block-attributes">
+                        <h4 class="aher-block-key">Legacy ID: </h4>
+                        <div class="aher-block-value" data-bind="text:srn.legacyId"></div>
+                    </div>
+                    <div class="aher-block-attributes">
+                        <h4 class="aher-block-key">Primary Reference Number: </h4>
+                        <div class="aher-block-value" data-bind="text:srn.primaryReferenceNumber"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div data-bind="visible: !!dataConfig.parent, component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: parentData
+    }
+}"></div>
+
+
+<div data-bind="visible: !!dataConfig.recordStatus, component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: recordStatusData,
+    }
+}"></div>
+
+{% endblock body %}
+{% endblock report %}
+{% block summary %}
+
+<div class="model-summary-report">
+Do not use - yet.
+</div>
+
+{% endblock summary %}
