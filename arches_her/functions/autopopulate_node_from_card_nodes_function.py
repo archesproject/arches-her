@@ -11,9 +11,9 @@ from datetime import datetime
 
 
 details = {
-    "name": "Autopopulate Node From Card Nodes",
+    "name": "Auto-populate Node From Card Nodes",
     "type": "node",
-    "description": "Autopopulates a Node in a Card with the values from other Nodes within that Card",
+    "description": "Auto-populates a Node in a Card with the values from other Nodes within that Card",
     "defaultconfig": {"autopopulate_configs": [], "triggering_nodegroups": []},
     "classname": "AutopopulateNodeFromCardNodes",
     "component": "views/components/functions/autopopulate-node-from-card-nodes-function",
