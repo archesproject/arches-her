@@ -1,0 +1,59 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contact)}, css: {'fa-angle-double-right': visible.contact(), 'fa-angle-double-up': !visible.contact()}" class="fa toggle"></i> {% trans "Contact Details" %}</h2>
+    <span data-bind="if: cards.contact && (!contact().length || cards.contact.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.contact)}"><i class="fa fa-mail-reply"></i> {% trans "Add Contact Details" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.contact" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: contact().length -->
+        <div class="aher-nodata-note">No contact details for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: contact().length -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Contact Point" %}</th>
+                                <th>{% trans "Contact Point Type" %}</th>
+                                <th>{% trans "Contact Name for Correspondence" %}</th>
+                                <th>{% trans "Contact Name Currency" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: contact, dataTableOptions: contactTableConfig }">
+                            <tr>
+                                <td data-bind="text: point"></td>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: currency"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.contact">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.contact)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.contact)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

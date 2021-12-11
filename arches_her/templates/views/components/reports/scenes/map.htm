@@ -1,0 +1,32 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<!-- ko ifnot: geojson -->
+<div class="aher-nodata-note her-top-card">No geometry for this resource</div>
+<!-- /ko --> 
+
+<!-- ko if: geojson -->
+<div class="firstchild-container">
+    <div class="aher-report-map">
+        <div class="map-container">
+            <div class="map" style="height:600px" data-bind="component: {
+                name: 'arches-map',
+                params: $data
+            }">
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /ko -->
+
+{% endblock body %}
+{% endblock report %}
+{% block summary %}
+
+<div class="model-summary-report">
+Do not use - yet.
+</div>
+
+{% endblock summary %}

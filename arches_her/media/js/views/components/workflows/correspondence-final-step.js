@@ -7,20 +7,17 @@ define([
     'viewmodels/alert'
 ], function($, arches, ko, koMapping, SummaryStep, AlertViewModel) {
     function viewModel(params) {
-
-
         var self = this;
-        params.form.resourceId = params.form.externalStepData.relatedconsultationstep.data.resourceid;
         SummaryStep.apply(this, [params]);
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
-        this.dataURL = ko.observable(params.form.externalStepData.relatedconsultationstep.data.dataURL);
+        this.dataURL = params.dataURL;
 
         this.resourceData.subscribe(function(val){
             var currentCorrespondence;
             if (Array.isArray(val.resource.Correspondence)){
                 val.resource.Correspondence.forEach(function(comm) {
-                    if (comm['@tile_id'] === currentTileId){
+                    if (comm['@tile_id'] === ko.unwrap(params.tileid)){
                         currentCorrespondence = comm;
                     }
                 });
@@ -38,11 +35,6 @@ define([
             this.loading(false);
 
         }, this); 
-
-        var currentTileId = ko.unwrap(params.form.externalStepData.relatedconsultationstep.data.tileid)
-        
-        self.requirements = params.requirements;
-        params.tile = self.tile;
     }
 
     return ko.components.register('correspondence-final-step', {
