@@ -10,14 +10,7 @@ define([
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
-        this.digitalObjectResourceId = ko.observable();
-
-        if (params.form.externalStepData.uploaddocumentstep.data) {
-            this.digitalObjectResourceId(params.form.externalStepData.uploaddocumentstep.data.resourceid);
-            this.digitalObjectResourceName = params.form.externalStepData.uploaddocumentstep.data.digitalObjectResourceInstanceName;
-        };
         this.digitalObjectResourceId = ko.observable(params.digitalObjectResourceId);
-
         const currentTileId = params.consultationTileid;
 
         this.resourceData.subscribe(function(val){
@@ -33,6 +26,7 @@ define([
             }
 
             this.displayName = val['displayname'] || 'Unnamed';
+            this.digitalObjectResourceName = "Communication for " + this.displayName;
             this.reportVals = {
                 consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 subject: {'name': 'Subject', 'value': this.getResourceValue(currentCommunication, ['Subjects', 'Subject', '@value'])},
