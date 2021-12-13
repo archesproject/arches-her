@@ -1,0 +1,103 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<!-- Copyright section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.copyright">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.copyright)}, css: {'fa-angle-double-right': visible.copyright(), 'fa-angle-double-up': !visible.copyright()}" class="fa toggle"></i> {% trans "Copyrights" %}</h2>
+    <a data-bind="{if: cards.copyright, click: function(){addNewTile(cards.copyright)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Copyright" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.copyright" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: copyright().length -->
+        <div class="aher-nodata-note">No copyright for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: copyright().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Statement" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: copyright, dataTableOptions: copyrightTableConfig}">
+                            <tr>
+                                <td data-bind="text: copyrightType"></td>
+                                <td data-bind="text: copyrightStatement"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.copyright">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.copyright)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.copyright)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.images)}, css: {'fa-angle-double-right': visible.images(), 'fa-angle-double-up': !visible.images()}"  class="fa toggle"></i> {% trans "Images" %}</h2>
+    <a data-bind="{if: cards.images, click: function(){addNewTile(cards.images)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.images" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: images().length -->
+        <div class="aher-nodata-note">No images for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: images().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-report-photo-container">
+                    <!-- ko foreach: {data: images} -->
+                    <div class="aher-report-photo-block">
+                        <div class="aher-report-photo" data-bind="click: function(){$parent.editTile(tileid, $parent.cards.images)}">
+                            <img data-bind="attr: {src: path}" />
+                        </div>
+                        <div class="aher-report-photo-caption">
+                            <div class="aher-report-subsection-item flex column-order pad-top pad-btm">
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key">Caption: </h6>
+                                    <div class="aher-block-value" data-bind="text: caption"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key">Copyright holder: </h6>
+                                    <div class="aher-block-value" data-bind="text: copyrightHolder"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key">Copyright type: </h6>
+                                    <div class="aher-block-value" data-bind="text: copyrightType"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key">Copyright note: </h6>
+                                    <div class="aher-block-value" data-bind="text: copyrightNote"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}
