@@ -53,8 +53,8 @@ class ActiveConsultationsView(View):
         filtered_consultations = Resource.objects.filter(graph_id=self.consultation_graphid, resourceinstanceid__in=include_list)
 
         order_config = { # if this is not up-to-date sorting will break
-            "Log Date: Newest to Oldest":("Log Date",False),
-            "Log Date: Oldest to Newest":("Log Date",True),
+            "Log Date: Newest to Oldest":("Log Date",True),
+            "Log Date: Oldest to Newest":("Log Date",False),
             "Casework Officer: A to Z":("Casework Officer",False),
             "Casework Officer: Z to A":("Casework Officer",True),
             "Consultation Type: A to Z":("Consultation Type",False),
