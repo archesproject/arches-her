@@ -1,0 +1,70 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.audit)}, css: {'fa-angle-double-right': visible.audit(), 'fa-angle-double-up': !visible.audit()}" class="fa toggle"></i> {% trans "Audit Metadata" %}</h2>
+    <span data-bind="if: cards.audit && (!audit() || cards.audit.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.audit)}"><i class="fa fa-mail-reply"></i> {% trans "Add Audit" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.audit" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: audit() -->
+        <div class="aher-nodata-note">No audit for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: audit() -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Note" %}</th>
+                                <th>{% trans "Creation Date" %}</th>
+                                <th>{% trans "Creator" %}</th>
+                                <th>{% trans "Update Date" %}</th>
+                                <th>{% trans "Updater" %}</th>
+                                <th>{% trans "Validation" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: audit, dataTableOptions: auditTableConfig }">
+                            <tr>
+                                <td data-bind="text: note"></td>
+                                <td data-bind="text: creationDate"></td>
+                                <td data-bind="text: creator"></td>
+                                <td data-bind="text: updateDate"></td>
+                                <td data-bind="text: updater"></td>
+                                <td data-bind="text: validation"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.audit">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.audit)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.audit)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+ 
+    </div>
+</div>
+<div data-bind="component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: resourceData,
+    }
+}"></div>
+{% endblock body %}
+{% endblock report %}

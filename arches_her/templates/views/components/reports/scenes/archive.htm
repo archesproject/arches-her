@@ -1,0 +1,109 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+
+<!-- Bibliographic Source Creation section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.sourceCreation">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}"  class="fa toggle"></i> {% trans "Source Creation" %}</h2>
+    <a data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.sourceCreation" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: sourceCreation() -->
+        <div class="aher-nodata-note">{% trans "No source creation for this resource" %}</div>
+        <!-- /ko -->
+
+        <!-- ko if: sourceCreation() -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Author" %}</th>
+                                <th>{% trans "Editor" %}</th>
+                                <th>{% trans "Contributor" %}</th>
+                                <th>{% trans "Statement of Responsibility" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: sourceCreation, dataTableOptions: sourceCreationConfig}">
+                            <tr>
+                                <td data-bind="text: author"></td>
+                                <td data-bind="text: editor"></td>
+                                <td data-bind="text: contributor"></td>
+                                <td data-bind="text: statement"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.sourceCreation">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceCreation)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceCreation)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Repository Storage section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.repositoryStorage">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.repositoryStorage)}, css: {'fa-angle-double-right': visible.repositoryStorage(), 'fa-angle-double-up': !visible.repositoryStorage()}"  class="fa toggle"></i> {% trans "Repository Storage Location" %}</h2>
+    <a data-bind="{if: cards.repositoryStorage, click: function(){addNewTile(cards.repositoryStorage)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.repositoryStorage" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: repositoryStorage() -->
+        <div class="aher-nodata-note">{% trans "No repository storage location for this resource" %}</div>
+        <!-- /ko -->
+
+        <!-- ko if: repositoryStorage() -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Owner" %}</th>
+                                <th>{% trans "Building Name" %}</th>
+                                <th>{% trans "Storage Area" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: repositoryStorage, dataTableOptions: repositoryStorageConfig}">
+                            <tr>
+                                <td><a class="aher-table-link" data-bind="text: repositoryOwner, attr: {href: repositoryOwnerLink}"></a></td>
+                                <td data-bind="text: storageBuilding"></td>
+                                <td data-bind="text: storageAreaName"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.repositoryStorage">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.repositoryStorage)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.repositoryStorage)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}
