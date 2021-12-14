@@ -82,9 +82,9 @@ define([
             var DefaultTargetDateLeadTime = 22;
             if(val) {
                 self.tile().data[self.logDateNodeId].subscribe(function(val) {
-                    logDateVal = new Date(val);
+                    logDateVal = new Date(`${val} 00:00`);
                     if (logDateVal != 'Invalid Date') {
-                        self.concatName(`Consultation for ${self.displayName()} on ${logDateVal.toLocaleDateString()}`);
+                        self.concatName(`Consultation for ${self.displayName()} on ${self.formatDate(logDateVal)}`);
                         targetDateVal = self.addDays(logDateVal, DefaultTargetDateLeadTime);
                         self.tile().data[self.targetDateNodeId](targetDateVal);
                     }
