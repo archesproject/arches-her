@@ -33,7 +33,7 @@ define([
             try {
                 this.reportVals.references = val.resource['References'].map(function(ref){
                     return {
-                        referenceName: {'name': 'Reference', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference', '@value'])},
+                        referenceNumber: {'name': 'Reference', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference', '@value'])},
                         referenceType: {'name': 'Reference Type', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference Type', '@value'])},
                         agency: {'name': 'Agency', 'value': self.getResourceValue(ref, ['Agency', '@value'])}
                     };
