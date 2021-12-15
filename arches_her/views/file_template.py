@@ -229,12 +229,12 @@ class FileTemplateView(View):
             contactPointNodeId = "2547c133-9505-11ea-8e49-f875a44e0e11"
             contactPointTypeNodeId = "2547c132-9505-11ea-b22f-f875a44e0e11"
             addressDict = {
-                "Building Name": "e157f10c-3af6-11eb-9ad2-f875a44e0e11",
-                "Building Number": "e157f10e-3af6-11eb-9c5e-f875a44e0e11",
-                "Street": "e157f110-3af6-11eb-80dc-f875a44e0e11",
-                "Locality": "e157f127-3af6-11eb-9394-f875a44e0e11",
-                "Town or City": "e157c9ff-3af6-11eb-9162-f875a44e0e11",
-                "Postcode": "e157ca01-3af6-11eb-bb2d-f875a44e0e11"
+                "Building Name": "b3a2761d-effb-11eb-9867-a87eeabdefba",
+                "Building Number": "b3a2761f-effb-11eb-9059-a87eeabdefba",
+                "Street": "b3a27621-effb-11eb-83e6-a87eeabdefba",
+                "Locality": "b3a28c1a-effb-11eb-a811-a87eeabdefba",
+                "Town or City": "b3a27617-effb-11eb-a80f-a87eeabdefba",
+                "Postcode": "b3a27619-effb-11eb-a66d-a87eeabdefba",
             }
 
             if contactNodeId in tile.data:
