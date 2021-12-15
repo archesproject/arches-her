@@ -115,7 +115,6 @@ LOGGING = {
 }
 
 MIDDLEWARE = [
-    "arches_her.utils.consultations_middleware.RedirectToConsultations",
     #'debug_toolbar.middleware.DebugToolbarMiddleware',
     "corsheaders.middleware.CorsMiddleware",
     "django.middleware.security.SecurityMiddleware",
