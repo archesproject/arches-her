@@ -84,7 +84,7 @@ define([
                 logDateVal = new Date(`${val} 00:00`);
                 if (logDateVal != 'Invalid Date') {
                     self.concatName(`Consultation for ${self.displayName()} on ${self.formatDate(logDateVal)}`);
-                    targetDateVal = self.addDays(logDateVal, DefaultTargetDateLeadTime);                    console.log(targetDateVal)
+                    targetDateVal = self.addDays(logDateVal, DefaultTargetDateLeadTime);
                     self.tile().data[self.targetDateNodeId](targetDateVal);
                 }
             }
