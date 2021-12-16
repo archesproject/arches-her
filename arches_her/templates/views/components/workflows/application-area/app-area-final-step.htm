@@ -6,8 +6,8 @@
         <div class="final-step-section-block">
             <div class="final-step-section-block-item">
                 <a data-bind="attr: { href: urls.resource + '/' + resourceid}" target="_blank">
-                    <div class="summary-value">
-                        {% trans 'Application Area Resource Instance' %}
+                    <div class="summary-value" 
+                        data-bind = "text: displayName + ' ({% trans 'Application Area Resource Instance' %})'">
                     </div>
                 </a>
             </div>

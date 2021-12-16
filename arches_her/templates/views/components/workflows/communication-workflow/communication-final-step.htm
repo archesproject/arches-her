@@ -6,14 +6,14 @@
         <div class="final-step-section-block">
             <div class="final-step-section-block-item">
                 <a data-bind="attr: { href: urls.resource + '/' + resourceid}" target="_blank">
-                    <div class="summary-value">
-                        {% trans 'Consultation Resource Instance' %}
+                    <div class="summary-value" 
+                        data-bind = "text: displayName + ' ({% trans 'Consultation Resource Instance' %})'">
                     </div>
                 </a>
                 <!-- ko if: digitalObjectResourceId -->
                 <a data-bind="attr: { href: urls.resource + '/' + digitalObjectResourceId()}" target="_blank">
-                    <div class="summary-value">
-                        {% trans 'Digital Object Resource Instance' %}
+                    <div class="summary-value" 
+                        data-bind = "text: digitalObjectResourceName + ' ({% trans 'Digital Object Resource Instance' %})'">
                     </div>
                 </a>
                 <!-- /ko -->
