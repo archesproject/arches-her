@@ -1,6 +1,3 @@
-SET CLIENT_ENCODING TO UTF8;
-SET STANDARD_CONFORMING_STRINGS TO ON;
-BEGIN;
 INSERT INTO map_layers(maplayerid, name, layerdefinitions, isoverlay, icon, activated, addtomap, searchonly)
    VALUES (public.uuid_generate_v1mc(), 'Search Results Heat Map', '[
         {
