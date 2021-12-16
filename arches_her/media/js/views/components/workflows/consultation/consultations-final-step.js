@@ -7,8 +7,11 @@ define([
 
     function viewModel(params) {
         var self = this;
-        this.resourceid || params.resourceid;
+        this.resourceid = params.resourceid;
         SummaryStep.apply(this, [params]);
+
+        this.resourceLoading = ko.observable(true);
+        this.relatedResourceLoading = ko.observable(true);
 
         this.resourceData.subscribe(function(val){
             this.displayName = val['displayname'] || 'Unnamed';
@@ -19,14 +22,13 @@ define([
                 consultationType: {'name': 'Consultation Type', 'value': this.getResourceValue(val.resource, ['Consultation Type','@value'])},
                 applicationType: {'name': 'Application Type', 'value': this.getResourceValue(val.resource, ['Application Type','@value'])},
                 developmentType: {'name': 'Development Type', 'value': this.getResourceValue(val.resource, ['Development Type','@value'])},
-                proposalDescription: {'name': 'Proposal Description', 'value': this.getResourceValue(val.resource, ['Proposal','Proposal Text','@value'])},
+                proposalDescription: {'name': 'Proposal Description', 'value': this.getResourceValue(val.resource, ['Proposal',[0],'Proposal Text','@value'])},
                 planningOfficer: {'name': 'Planning Officer', 'value': this.getResourceValue(val.resource, ['Contacts','Planning Officers','Planning Officer','@value'])},
                 consultingContact: {'name': 'Consulting Contact', 'value': this.getResourceValue(val.resource, ['Contacts','Consulting Contact','@value'])},
                 caseworkOfficer: {'name': 'Casework Officer', 'value': this.getResourceValue(val.resource, ['Contacts','Casework Officers','Casework Officer','@value'])},
                 agent: {'name': 'Agent', 'value': this.getResourceValue(val.resource, ['Contacts','Agents','Agent','@value'])},
                 owner: {'name': 'Owner', 'value': this.getResourceValue(val.resource, ['Contacts','Owners','Owner','@value'])},
                 applicant: {'name': 'Applicant', 'value': this.getResourceValue(val.resource, ['Contacts','Applicants','Applicant','@value'])},
-                relatedFiles:  {'name': 'Related Files', 'value': this.getResourceValue(val.resource, ['Proposal','Digital File(s)','@value'])},
                 relatedApplicationAreas:  {'name': 'Related Application Areas', 'value': this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Related Application Area', '@value'])},
             };
 
@@ -47,7 +49,10 @@ define([
                 var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
                 this.prepareMap(geojson, 'app-area-map-data');
             };
-            this.loading(false);
+            this.resourceLoading(false);
+            if (!self.relatedResourceLoading()) {
+                self.loading(false);
+            };
             
             if (!val.resource['Status']) {
                 var statusNodegroupId = '6a773228-db20-11e9-b6dd-784f435179ea';
@@ -78,6 +83,18 @@ define([
                 });        
             }
         }, this);
+
+        this.relatedResources.subscribe(function(val){
+            const digitalObjectGraphId = 'a535a235-8481-11ea-a6b9-f875a44e0e11';
+            const digitalResource = val.related_resources.find(function(resource){
+                return resource.graph_id == digitalObjectGraphId;
+            });
+            self.relatedFile = {'name': 'Related Files', 'value': digitalResource.displayname, 'link': `${arches.urls.resource}\\${digitalResource.resourceinstanceid}`};
+            self.relatedResourceLoading(false);
+            if (!self.resourceLoading()) {
+                self.loading(false);
+            };
+        })
     }
 
     ko.components.register('consultations-final-step', {
