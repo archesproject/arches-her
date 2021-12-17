@@ -27,7 +27,6 @@ from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
 from html.parser import HTMLParser
 from html.entities import name2codepoint
-from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
@@ -37,7 +36,6 @@ from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.system_settings import settings
 from arches.app.models.tile import Tile
-from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
 from arches.app.views.tile import TileData
 
@@ -69,7 +67,6 @@ class FileTemplateView(View):
     
     
     def post(self, request): 
-        # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
@@ -263,10 +260,8 @@ class FileTemplateView(View):
                 for caseAgentTile in caseAgentResource.tiles:
                     if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                         if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                            print("email: " + caseAgentTile.data[contactPointNodeId])
                             mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
                         elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                            print("phone number: " + caseAgentTile.data[contactPointNodeId])
                             mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
 
                 if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4":
@@ -301,7 +296,6 @@ class FileTemplateView(View):
                         mapping_dict["Address of consulting organisation"] = addressString
         for key in mapping_dict:
             html = False
-            print(key, mapping_dict[key])
             if '<' in mapping_dict[key]: # look for html tag, not ideal
                 html = True
             self.replace_string(self.doc, key, mapping_dict[key], html)
@@ -438,7 +432,6 @@ class DocumentHTMLParser(HTMLParser):
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
-        # print(tag,attrs)
         self.run = self.paragraph.add_run()
         if tag == "i" or tag == "em":
             self.run.italic = True
