@@ -224,7 +224,7 @@ class FileTemplateView(View):
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
                     try:
-                        mapping_dict[key] = lookup_val
+                        mapping_dict[key] = "" if lookup_val is None else lookup_val
                     except TypeError:
                         pass
 
@@ -301,6 +301,7 @@ class FileTemplateView(View):
                         mapping_dict["Address of consulting organisation"] = addressString
         for key in mapping_dict:
             html = False
+            print(key, mapping_dict[key])
             if '<' in mapping_dict[key]: # look for html tag, not ideal
                 html = True
             self.replace_string(self.doc, key, mapping_dict[key], html)
