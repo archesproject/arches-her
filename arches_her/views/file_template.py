@@ -27,7 +27,6 @@ from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
 from html.parser import HTMLParser
 from html.entities import name2codepoint
-from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
@@ -37,7 +36,6 @@ from arches.app.models import models
 from arches.app.models.resource import Resource
 from arches.app.models.system_settings import settings
 from arches.app.models.tile import Tile
-from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
 from arches.app.views.tile import TileData
 
@@ -69,7 +67,6 @@ class FileTemplateView(View):
     
     
     def post(self, request): 
-        # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
@@ -196,17 +193,35 @@ class FileTemplateView(View):
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)    
 
     def replace_in_letter(self, tiles, template_dict, datatype_factory):
+        mapping_dict = {
+            "Reference": "",
+            "Primary Reference Number": "",
+            "Casework Officer": "",
+            "Completion Date": "",
+            "Consultation Name": "",
+            "Proposal Description": "",
+            "Log Date": "",
+            "Signature": "",
+            "Archaeological Priority Area": "",
+            "Assessment of Significance": "",
+            "Condition Type": "",
+            "Condition": "",
+            "Mitigation Type": "",
+            "Mitigation": "",
+            "Casework Officer Email": "",
+            "Casework Officer Number": "",
+            "Contact Name": "",
+            "Address of consulting organisation": "",
+            "Name of person consulting": "",
+        }
         for tile in tiles:
             for key, value in list(template_dict.items()):
-                html = False
                 if value in tile.data:
                     my_node = models.Node.objects.get(nodeid=value)
                     datatype = datatype_factory.get_instance(my_node.datatype)
                     lookup_val = datatype.get_display_value(tile, my_node)
                     try:
-                        if '<' in lookup_val: # look for html tag, not ideal
-                            html = True
-                        self.replace_string(self.doc, key, lookup_val, html)
+                        mapping_dict[key] = "" if lookup_val is None else lookup_val
                     except TypeError:
                         pass
 
@@ -222,19 +237,20 @@ class FileTemplateView(View):
             addressNodegroupId = "5f93048e-80a9-11ea-b0da-f875a44e0e11"
             nameNodegroupId = "4110f741-1a44-11e9-885e-000d3ab1e588"
             contactDetailsNodegroupId = "2547c12f-9505-11ea-a507-f875a44e0e11"
-            contactNamesNodegroupId = "2beefb51-4084-11eb-9b2b-f875a44e0e11"
 
             fullnameNodeId = "5f8ded26-7ef9-11ea-8e29-f875a44e0e11"
-            contactNameforCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
+            nameUseTypeNodeId = "4110f747-1a44-11e9-96b7-000d3ab1e588"
+            forCorrespondenceNameValueId = "85c26c81-e356-4454-a2ba-67e7ad9b95cd"
+            primaryNameValueId = "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f"
             contactPointNodeId = "2547c133-9505-11ea-8e49-f875a44e0e11"
             contactPointTypeNodeId = "2547c132-9505-11ea-b22f-f875a44e0e11"
             addressDict = {
-                "Building Name": "e157f10c-3af6-11eb-9ad2-f875a44e0e11",
-                "Building Number": "e157f10e-3af6-11eb-9c5e-f875a44e0e11",
-                "Street": "e157f110-3af6-11eb-80dc-f875a44e0e11",
-                "Locality": "e157f127-3af6-11eb-9394-f875a44e0e11",
-                "Town or City": "e157c9ff-3af6-11eb-9162-f875a44e0e11",
-                "Postcode": "e157ca01-3af6-11eb-bb2d-f875a44e0e11"
+                "Building Name": "b3a2761d-effb-11eb-9867-a87eeabdefba",
+                "Building Number": "b3a2761f-effb-11eb-9059-a87eeabdefba",
+                "Street": "b3a27621-effb-11eb-83e6-a87eeabdefba",
+                "Locality": "b3a28c1a-effb-11eb-a811-a87eeabdefba",
+                "Town or City": "b3a27617-effb-11eb-a80f-a87eeabdefba",
+                "Postcode": "b3a27619-effb-11eb-a66d-a87eeabdefba",
             }
 
             if contactNodeId in tile.data:
@@ -244,11 +260,9 @@ class FileTemplateView(View):
                 for caseAgentTile in caseAgentResource.tiles:
                     if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                         if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                            print("email: " + caseAgentTile.data[contactPointNodeId])
-                            self.replace_string(self.doc, "Casework Officer Email", caseAgentTile.data[contactPointNodeId], False)
+                            mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
                         elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                            print("phone number: " + caseAgentTile.data[contactPointNodeId])
-                            self.replace_string(self.doc, "Casework Officer Number", caseAgentTile.data[contactPointNodeId], False)
+                            mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
 
                 if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4":
                     contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
@@ -261,21 +275,31 @@ class FileTemplateView(View):
 
                 for contactTile in contactResource.tiles:
                     if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
-                        self.replace_string(self.doc, "Name of person consulting", contactTile.data[fullnameNodeId], False)
-                    if contactTile.nodegroup.nodegroupid == uuid.UUID(contactNamesNodegroupId):
-                        self.replace_string(self.doc, "Contact Name", contactTile.data[contactNameforCorrespondenceNodeId], False)
+                        if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
+                            mapping_dict["Name of person consulting"] = contactTile.data[fullnameNodeId]
+                        if mapping_dict["Contact Name"] == "" or contactTile.data[nameUseTypeNodeId] == forCorrespondenceNameValueId:
+                            mapping_dict["Contact Name"] = contactTile.data[fullnameNodeId]
                     if contactTile.nodegroup.nodegroupid == uuid.UUID(addressNodegroupId):
+                        def xstr(s):
+                            if s is None:
+                                return ""
+                            else:
+                                return str(s)
                         addressString = "{}, {}\n{}, {}\n{}\n{}".format(
-                            contactTile.data[addressDict["Building Name"]],
-                            contactTile.data[addressDict["Building Number"]],
-                            contactTile.data[addressDict["Street"]],
-                            contactTile.data[addressDict["Locality"]],
-                            contactTile.data[addressDict["Town or City"]],
-                            contactTile.data[addressDict["Postcode"]]
+                            xstr(contactTile.data[addressDict["Building Name"]]),
+                            xstr(contactTile.data[addressDict["Building Number"]]),
+                            xstr(contactTile.data[addressDict["Street"]]),
+                            xstr(contactTile.data[addressDict["Locality"]]),
+                            xstr(contactTile.data[addressDict["Town or City"]]),
+                            xstr(contactTile.data[addressDict["Postcode"]])
                         )
-                        print("Address of consulting organisation" + addressString)
-                        self.replace_string(self.doc, "Address of consulting organisation", addressString, False)
-    
+                        mapping_dict["Address of consulting organisation"] = addressString
+        for key in mapping_dict:
+            html = False
+            if '<' in mapping_dict[key]: # look for html tag, not ideal
+                html = True
+            self.replace_string(self.doc, key, mapping_dict[key], html)
+
     def replace_string(self, document, key, v, html=False):
         # Note that the intent here is to preserve how things are styled in the docx
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
@@ -408,7 +432,6 @@ class DocumentHTMLParser(HTMLParser):
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
-        # print(tag,attrs)
         self.run = self.paragraph.add_run()
         if tag == "i" or tag == "em":
             self.run.italic = True

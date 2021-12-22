@@ -95,12 +95,16 @@
         </div>
     </div>
     <div class="her-final-step-section">
-        <h5 class="summary-value">{% trans 'Proposal Description' %}</h5>
+        <h5 class="summary-value">{% trans 'Proposal' %}</h5>
         <div class="final-step-section-block">
             <div class="final-step-section-block-item">
                 <div class="block-item">
                     <div class="summary-label" data-bind="text: reportVals.proposalDescription.name + ':'"></div>
                     <div class="summary-value" data-bind="html: reportVals.proposalDescription.value"></div>
+                </div>
+                <div class="block-item">
+                    <div class="summary-label" data-bind="text: relatedFile.name + ':'"></div>
+                    <div class="summary-value"><a data-bind="attr: {href: relatedFile.link}, text: relatedFile.value"></a></div>
                 </div>
             </div>
         </div>
@@ -132,17 +136,6 @@
                 <div class="block-item">
                     <div class="summary-label" data-bind="text: reportVals.applicant.name + ':'"></div>
                     <div class="summary-value" data-bind="text: reportVals.applicant.value"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="her-final-step-section">
-        <h5 class="summary-value">{% trans 'Related Files' %}</h5>
-        <div class="final-step-section-block">
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.relatedFiles.name + ':'"></div>
-                    <div class="summary-value" data-bind="html: reportVals.relatedFiles.value"></div>
                 </div>
             </div>
         </div>
