@@ -81,7 +81,11 @@ class FileTemplateView(View):
         if os.path.exists(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx')) is False:
             os.mkdir(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx'))
 
-        self.doc = Document(template_path)
+        try:
+            self.doc = Document(template_path)
+        except:
+            return HttpResponseNotFound("No Template Found")
+
         self.edit_letter(self.resource, datatype_factory)
 
         date = datetime.today()

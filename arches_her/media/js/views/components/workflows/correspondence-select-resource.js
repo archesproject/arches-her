@@ -116,17 +116,20 @@ define([
                         if (self.completeOnSave === true) { self.complete(true); }    
                     })
                     .fail(function(response){
-                        console.log("Adding the digital object name failed: \n", response)
+                        console.log("Adding the digital object name failed: \n", response);
                         self.loading(false);
                     });
                 })
                 .fail(function(response) {
-                    console.log("Getting consultation name failed: \n", response)
+                    console.log("Getting consultation name failed: \n", response);
+                    self.loading(false);
                 });
             })
             .fail(function(response) {
                 if(response.statusText !== 'abort'){
-                    self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                    console.log("Creating a Letter failed: \n", response.responseText);
+                    params.pageVm.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                    self.loading(false);
                 }
             });
         };
