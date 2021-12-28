@@ -254,15 +254,18 @@ class FileTemplateView(View):
             }
 
             if contactNodeId in tile.data:
-                caseAgentResourceiId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
-                caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceiId)
-                caseAgentResource.load_tiles()
-                for caseAgentTile in caseAgentResource.tiles:
-                    if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
-                        if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                            mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
-                        elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                            mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
+                caseAgentResourceId = None
+                if tile.data[contacts["Casework Officer"]]:
+                    caseAgentResourceId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
+                if caseAgentResourceId:
+                    caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceId)
+                    caseAgentResource.load_tiles()
+                    for caseAgentTile in caseAgentResource.tiles:
+                        if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
+                            if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
+                                mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
+                            elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
+                                mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
 
                 if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4":
                     contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
