@@ -89,7 +89,11 @@ define([
             const digitalResource = val.related_resources.find(function(resource){
                 return resource.graph_id == digitalObjectGraphId;
             });
-            self.relatedFile = {'name': 'Related Files', 'value': digitalResource.displayname, 'link': `${arches.urls.resource}\\${digitalResource.resourceinstanceid}`};
+            if (digitalResource) {
+                self.relatedFile = {'name': 'Related Files', 'value': digitalResource.displayname, 'link': `${arches.urls.resource}\\${digitalResource.resourceinstanceid}`};
+            } else {
+                self.relatedFile = {'name': 'Related Files', 'value': 'none', 'link': null};                
+            }
             self.relatedResourceLoading(false);
             if (!self.resourceLoading()) {
                 self.loading(false);
