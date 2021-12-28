@@ -590,7 +590,7 @@
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: communications, dataTableOptions: createTableConfig(9)}">
                                             <tr>
-                                                <td data-bind="text: `${subject} (${subjectDescType})`"></td>
+                                                <td data-bind="text: subject"></td>
                                                 <td data-bind="text: type"></td>
                                                 <td data-bind="text: date"></td>
                                                 <td data-bind="text: attendees"></td>
@@ -780,16 +780,6 @@
                         data: resource,
                         cards: resourcesCards,
                         dataConfig: resourcesDataConfig
-                    }
-                }"></div>
-            </div>
-             <!-- Audit Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/audit',
-                    params: {
-                        data: resource,
-                        cards: auditCards
                     }
                 }"></div>
             </div>

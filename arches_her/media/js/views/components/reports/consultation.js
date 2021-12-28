@@ -22,7 +22,6 @@ define([
                 {id: 'correspondence', title: 'Correspondence'},
                 {id: 'sitevisits', title: 'Site Visits'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -62,7 +61,6 @@ define([
             self.resourcesCards = {};
             self.photographsCards = {};
 
-            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -191,7 +189,6 @@ define([
             if(Array.isArray(communicationsNode)){
                 self.communications(communicationsNode.map(node => {
                     const subject = self.getNodeValue(node, 'subjects', 'subject');
-                    const subjectDescType = self.getNodeValue(node, 'subjects', 'subject description type');
                     const type = self.getNodeValue(node, 'communication type');
                     const date = self.getNodeValue(node, 'dates', 'date');
                     const attendees = self.getNodeValue(node, 'attendees');
@@ -201,7 +198,7 @@ define([
                     const digitalFile = self.getNodeValue(node, 'digital file(s)');
                     const digitalFileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
                     const tileid = self.getTileId(node);
-                    return {subject, subjectDescType, type, date, attendees, note, followOnAction, relatedCondition, digitalFile, digitalFileLink, tileid};
+                    return {subject, type, date, attendees, note, followOnAction, relatedCondition, digitalFile, digitalFileLink, tileid};
                 }));
             };
 
@@ -318,10 +315,6 @@ console.log(self.contacts())
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
-                };
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
             };
 
