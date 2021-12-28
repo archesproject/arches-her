@@ -124,7 +124,7 @@ define([
             })
             .fail(function(response) {
                 if(response.statusText !== 'abort'){
-                    console.log("Creating a Letter failed: \n", response.responseText);
+                    params.form.error(new Error(response.responseText));
                     params.pageVm.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
                 }
             });
