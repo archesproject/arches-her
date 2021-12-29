@@ -216,13 +216,13 @@ define([
                     const recommendationsNodes = self.getRawNodeValue(node, 'recommendations');
                     const photographsNodes = self.getRawNodeValue(node, 'photographs');
 
-                    const attendees = Array.isArray(attendeesNodes) ? (
+                    const attendees = ko.observable(Array.isArray(attendeesNodes) ? (
                         attendeesNodes.map(attendeeNode => {
                             const attendee = self.getNodeValue(attendeeNode, 'attendee');
                             const attendeeType = self.getNodeValue(attendeeNode, 'attendee type');
                             const tileid = self.getTileId(attendeeNode);
                             return {attendee, attendeeType, tileid};
-                        })) : [];
+                        })) : []);
                     const observations = Array.isArray(observationsNodes) ? (
                         observationsNodes.map(observationNode => {
                             const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
@@ -283,14 +283,12 @@ define([
                         return {applicant, applicantLink, tileid};
                     })) : [];
                 const tileid = self.getTileId(contactNode);
-                console.log(agentsNodes,ownersNodes,applicantsNodes,agents,owners,applicants)
 
                 self.contacts(
                     { consultingContact, planningOfficer, planningOfficerLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
                 )
             };
-console.log(self.resource())
-console.log(self.contacts())
+
             if(params.report.cards){
                 const cards = params.report.cards;
                 
