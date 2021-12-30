@@ -20,7 +20,6 @@ define([
                 {id: 'hlc-attributes', title: 'HLC Attributes'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);

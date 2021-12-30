@@ -25,7 +25,6 @@ define([
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'archive', title: 'Archive Holding'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
 

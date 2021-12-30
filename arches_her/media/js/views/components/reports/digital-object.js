@@ -18,7 +18,6 @@ define([
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'file', title: 'File Details'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
