@@ -79,7 +79,6 @@ define([
                 files: 'digital file(s)'
             };
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.locationCards = {};
             self.documentationCards = {};
@@ -115,11 +114,6 @@ define([
 
                 self.communicationCards = {
                     contactPoints: self.cards?.['contact information for person'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.imagesCards = {

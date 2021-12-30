@@ -28,7 +28,6 @@ define([
             self.nameDataConfig = {};
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -43,11 +42,6 @@ define([
                     name: self.cards?.['names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.descriptionCards = {

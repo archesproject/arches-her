@@ -51,7 +51,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};

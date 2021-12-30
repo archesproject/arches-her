@@ -55,7 +55,6 @@ define([
             };
 
             self.nameCards = {};
-            self.auditCards = {};
             self.locationCards = {};
             self.descriptionCards = {};
             self.classificationCards = {};
@@ -86,11 +85,6 @@ define([
                     name: self.cards?.['alternative names']
                 });
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-                
                 self.classificationCards = {
                     type: self.cards?.['period types'],
                     dates: self.cards?.dates

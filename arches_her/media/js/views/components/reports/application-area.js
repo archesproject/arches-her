@@ -58,7 +58,6 @@ define([
             };
 
             self.nameCards = {};
-            self.auditCards = {};
             self.resourcesCards = {};
             self.descriptionCards = {};
             self.locationCards = {};
@@ -89,11 +88,6 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.locationCards = {

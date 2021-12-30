@@ -65,7 +65,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.assessmentCards = {};
             self.classificationCards = {};
@@ -118,11 +117,6 @@ define([
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.locationCards = {

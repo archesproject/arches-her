@@ -58,7 +58,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {};
             self.classificationCards = {};
             self.descriptionCards = {};
             self.resourcesCards = {};
@@ -121,11 +120,6 @@ define([
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                     citation: self.cards?.['bibliographic source citation']
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.resourcesCards = {

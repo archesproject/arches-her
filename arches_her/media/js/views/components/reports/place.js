@@ -41,7 +41,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.classificationCards = {};
             self.locationCards = {};
@@ -59,11 +58,6 @@ define([
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-                
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
                 };
