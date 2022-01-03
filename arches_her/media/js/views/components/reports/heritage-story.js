@@ -73,11 +73,6 @@ define([
                     audience: self.cards?.['audience type']
                 };
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-
                 self.locationCards = {
                     cards: self.cards,
                     location: {

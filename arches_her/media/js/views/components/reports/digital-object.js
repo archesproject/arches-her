@@ -18,7 +18,6 @@ define([
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'file', title: 'File Details'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -29,7 +28,6 @@ define([
             self.nameDataConfig = {};
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -44,11 +42,6 @@ define([
                     name: self.cards?.['names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.descriptionCards = {

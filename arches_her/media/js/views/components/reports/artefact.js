@@ -25,7 +25,6 @@ define([
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'archive', title: 'Archive Holding'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
 
@@ -80,7 +79,6 @@ define([
             };
 
             self.nameCards = {};
-            self.auditCards = {};
             self.assessmentCards = {};
             self.archiveCards = {};
             self.descriptionCards = {};
@@ -138,11 +136,6 @@ define([
 
                 self.archiveCards = {
                     repositoryStorage: self.cards?.['repository storage location']
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.resourcesCards = {

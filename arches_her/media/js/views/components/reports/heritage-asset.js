@@ -23,7 +23,6 @@ define([
                 {id: 'images', title: 'Images'},
                 {id: 'people', title: 'Associated People and Organizations'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -52,7 +51,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
