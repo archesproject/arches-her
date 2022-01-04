@@ -5,9 +5,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             Object.assign(self, reportUtils);
 
             self.dataConfig = {
-                location: 'location data',
+                location: ['location data'],
                 protection: 'designation and protection assignment',
-                landUse: 'land use',
+                landUse: 'land use classification assignment',
                 areaAssignment: ['area', 'area assignments']
             }
 
@@ -136,7 +136,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         return geojson;
                     }, {features: [], type: 'FeatureCollection'}));
                 }
-                const locationNode = self.getRawNodeValue(params.data(), self.dataConfig.location);
+                const locationNode = self.getRawNodeValue(params.data(), ...self.dataConfig.location);
 
                 if(self.cards?.location?.card){
                     self.locationRoot = self.cards?.location?.card;
@@ -163,18 +163,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     }
                 }
 
-                const landUseClassificationNode = self.getRawNodeValue(locationNode, self.dataConfig.landUse);
+                let landUseClassificationNode = self.getRawNodeValue(locationNode, self.dataConfig.landUse);
                 if(landUseClassificationNode) {
-                    const classification = self.getNodeValue(landUseClassificationNode, 'land use classification');
-                    const endDate = self.getNodeValue(landUseClassificationNode, 'land use assessment timespan', 'land use assessment end date');
-                    const geology = self.getNodeValue(landUseClassificationNode, 'geology');
-                    const reference = self.getNodeValue(landUseClassificationNode, 'land use notes', 'land use notes value');
-                    const startDate = self.getNodeValue(landUseClassificationNode, 'land use assessment timespan', 'land use assessment start date');
-                    const subSoil = self.getNodeValue(landUseClassificationNode, 'sub-soil');
-                    const tileid = self.getTileId(landUseClassificationNode);
-                    if(self.observableValueSet(classification, endDate, geology, reference, startDate, subSoil)){
-                        self.landUseClassification([{classification, endDate, geology, reference, startDate, subSoil, tileid}]);
+                    if (!Array.isArray(landUseClassificationNode)){
+                        landUseClassificationNode = [ landUseClassificationNode ];
                     }
+                    self.landUseClassification(landUseClassificationNode.map(x => {
+                        const classification = self.getNodeValue(x, 'land use classification');
+                        const endDate = self.getNodeValue(x, 'land use assessment timespan', 'land use assessment end date');
+                        const geology = self.getNodeValue(x, 'geology');
+                        const reference = self.getNodeValue(x, 'land use notes', 'land use notes value');
+                        const startDate = self.getNodeValue(x, 'land use assessment timespan', 'land use assessment start date');
+                        const subSoil = self.getNodeValue(x, 'sub-soil');
+                        const tileid = self.getTileId(x);
+                        return {classification, endDate, geology, reference, startDate, subSoil, tileid};
+                        })
+                    )
                 }
             }
         },
