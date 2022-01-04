@@ -40,9 +40,10 @@ define([
                 assets: undefined,
                 translation: 'translation',
                 period: 'temporal coverage'
-            }
+            };
 
             self.locationDataConfig = {
+                location: ['geographic coverage'],
                 addresses: undefined,
                 locationDescription: undefined,
                 nationalGrid: undefined
