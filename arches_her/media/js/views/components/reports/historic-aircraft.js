@@ -146,7 +146,7 @@ define([
                                 type: 'kv'
                             }, {
                                 key: 'Nationality', 
-                                value: self.getRawNodeValue(self.resource(), 'nationalities').map(node => 
+                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node => 
                                     self.getNodeValue(node, 'aircraft nationality')
                                 ), 
                                 card: self.cards?.['nationality'],
