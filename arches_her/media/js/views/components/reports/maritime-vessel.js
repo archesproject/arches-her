@@ -166,7 +166,8 @@ define([
                 self.nationalities(nationalityNode.map(node => {
                     const nationality = self.getNodeValue(node, 'craft nationality');
                     const placeOfRegistration = self.getNodeValue(node, 'place of registration')
-                    return { nationality, placeOfRegistration };
+                    const tileid = self.getTileId(node);
+                    return { nationality, placeOfRegistration, tileid };
                 }));
             }
 
