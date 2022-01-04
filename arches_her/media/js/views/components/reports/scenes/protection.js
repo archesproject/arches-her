@@ -107,7 +107,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         const dateQualifier = self.getNodeValue(x, 'designation and protection timespan', 'date qualifier');
                         const reference = self.getNodeValue(x, 'references', 'reference');
                         const tileid = self.getTileId(x);
-                        const geometry = self.getNodeValue(x, 'designation mapping', 'designation geometry');;
+                        const geometry = self.getNodeValue(x, 'designation mapping', 'designation geometry');
                         return {
                             amendmentDate,
                             dateQualifier,
@@ -125,14 +125,16 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     }));
 
                     self.geojson(self.designations().reduce((geojson, currentJson) => {
-                            const tileId = currentJson.tileid;
+                        const tileId = currentJson.tileid;
+                        if (currentJson.geometry.features) {
                             const jsonWithTileId = currentJson.geometry.features.map(x => {
                                 x.properties.tileId = tileId;
                                 return x;
                             });
                             geojson.features = [...geojson.features, ...jsonWithTileId];
-                            return geojson;
-                        }, {features: [], type: 'FeatureCollection'}));
+                        }
+                        return geojson;
+                    }, {features: [], type: 'FeatureCollection'}));
                 }
                 const locationNode = self.getRawNodeValue(params.data(), self.dataConfig.location);
 
