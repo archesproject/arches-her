@@ -617,12 +617,24 @@
                                                         <tr>
                                                             <th>{% trans "Attendee" %}</th>
                                                             <th>{% trans "Attendee Type" %}</th>
+                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(2)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(3)}">
                                                         <tr>
                                                             <td data-bind="text: attendee"></td>
                                                             <td data-bind="text: attendeeType"></td>
+                                                            <td class="aher-table-control">
+                                                                <span data-bind="text: console.log($parents[1].cards)"></span>
+                                                                <div data-bind="if: $parents[1].siteVisitSubCards.attendees">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -646,12 +658,23 @@
                                                         <tr>
                                                             <th>{% trans "Observation" %}</th>
                                                             <th>{% trans "Observed by" %}</th>
+                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.createTableConfig(2)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.createTableConfig(3)}">
                                                         <tr>
                                                             <td data-bind="text: observation"></td>
                                                             <td data-bind="text: observedBy"></td>
+                                                            <td class="aher-table-control">
+                                                                <div data-bind="if: $parents[1].siteVisitSubCards.observations">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.observations)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.observations)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -675,12 +698,23 @@
                                                         <tr>
                                                             <th>{% trans "Recommendation" %}</th>
                                                             <th>{% trans "Recommended by" %}</th>
+                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.createTableConfig(2)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.createTableConfig(3)}">
                                                         <tr>
                                                             <td data-bind="text: recommendation"></td>
                                                             <td data-bind="text: recommendedBy"></td>
+                                                            <td class="aher-table-control">
+                                                                <div data-bind="if: $parents[1].siteVisitSubCards.recommendations">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>

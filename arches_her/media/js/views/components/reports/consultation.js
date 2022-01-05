@@ -290,8 +290,10 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
+
+                self.siteVisitSubCards = self.createCardDictionary(self.cards['site visits'].cards());
 
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
