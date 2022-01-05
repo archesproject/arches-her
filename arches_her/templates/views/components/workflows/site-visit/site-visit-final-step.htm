@@ -58,22 +58,44 @@
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Observations' %}</h5>
         <div class="final-step-section-block">
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-value" data-bind="html: reportVals.observation.value"></div>
-                </div>
-            </div>
+            <table class="table table-striped attendee-table">
+                <thead class="">
+                    <tr>
+                        <th class="">{% trans 'Observation' %}</th>
+                        <th class="">{% trans 'Observed by' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: reportVals.observations -->
+                    <tr>
+                        <td class="" data-bind="html: $data.observation.value"></td>
+                        <td class="" data-bind="text: $data.observedBy.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Recommendations' %}</h5>
         <div class="final-step-section-block">
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-value" data-bind="html: reportVals.recommendations.value"></div>
-                </div>
-            </div>
+            <table class="table table-striped attendee-table">
+                <thead class="">
+                    <tr>
+                        <th class="">{% trans 'Recommendation' %}</th>
+                        <th class="">{% trans 'Recommended by' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: reportVals.recommendations -->
+                    <tr>
+                        <td class="" data-bind="html: $data.recommendation.value"></td>
+                        <td class="" data-bind="text: $data.recommendedBy.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
     </div>
 
