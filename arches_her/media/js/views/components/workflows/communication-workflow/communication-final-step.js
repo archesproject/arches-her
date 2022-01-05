@@ -10,7 +10,7 @@ define([
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
-        this.digitalObjectResourceId = ko.observable(params.digitalObjectResourceId);
+        this.digitalObjectResourceId = ko.observable(params.digitalObject?.['resourceInstanceId']);
         const currentTileId = params.consultationTileid;
 
         this.resourceData.subscribe(function(val){
