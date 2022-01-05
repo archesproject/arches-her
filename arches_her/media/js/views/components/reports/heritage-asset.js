@@ -47,6 +47,7 @@ define([
             };
 
             self.resourceDataConfig = {
+                activities: 'associated_activities',
                 files: 'digital file(s)'
             }
 
