@@ -220,18 +220,20 @@ define([
                             const tileid = self.getTileId(attendeeNode);
                             return {attendee, attendeeType, tileid};
                         })) : []);
-                    const observations = Array.isArray(observationsNodes) ? (
+                    const observations = ko.observable(Array.isArray(observationsNodes) ? (
                         observationsNodes.map(observationNode => {
                             const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
+                            const observedBy = self.getNodeValue(observationNode, 'observed by');
                             const tileid = self.getTileId(observationNode);
-                            return {observation, tileid};
-                        })) : [];
-                    const recommendations = Array.isArray(recommendationsNodes) ? (
+                            return {observation, observedBy, tileid};
+                        })) : []);
+                    const recommendations = ko.observable(Array.isArray(recommendationsNodes) ? (
                         recommendationsNodes.map(recommendationNode => {
                             const recommendation = self.getNodeValue(recommendationNode, 'recommendation', 'recommendation value');
+                            const recommendedBy = self.getNodeValue(recommendationNode, 'recommended by');
                             const tileid = self.getTileId(recommendationNode);
-                            return {recommendation, tileid};
-                        })) : [];
+                            return {recommendation, recommendedBy, tileid};
+                        })) : []);
                     const photographs = Array.isArray(photographsNodes) ? (
                         photographsNodes.map(photographNode => {
                             const file = self.getNodeValue(photographNode, 'file_details', [0], 'name');
