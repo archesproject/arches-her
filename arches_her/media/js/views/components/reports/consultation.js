@@ -106,8 +106,9 @@ define([
                     const source = self.getNodeValue(node, 'external cross reference source');
                     const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
                     const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
-                    const url = JSON.parse(self.getNodeValue(node, 'url')).url;
-                    const urlLabel = JSON.parse(self.getNodeValue(node, 'url')).url_label;
+                    const urlNodeValue = self.getRawNodeValue(node, 'url');
+                    const url = urlNodeValue.url;
+                    const urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
                 }));
