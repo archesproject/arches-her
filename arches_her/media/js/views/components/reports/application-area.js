@@ -49,7 +49,8 @@ define([
 
             self.locationDataConfig = {
                 location: [],
-                nationalGrid: undefined
+                nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.protectionDataConfig = {

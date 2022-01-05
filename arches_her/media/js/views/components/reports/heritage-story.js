@@ -45,7 +45,8 @@ define([
             self.locationDataConfig = {
                 addresses: undefined,
                 locationDescription: undefined,
-                nationalGrid: undefined
+                nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.nameCards = {};

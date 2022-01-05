@@ -49,6 +49,7 @@ define([
                 locationDescription: undefined,
                 administrativeAreas: undefined,
                 nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.resourcesDataConfig = {
