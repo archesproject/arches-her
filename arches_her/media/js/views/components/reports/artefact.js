@@ -161,7 +161,8 @@ define([
                             administrativeAreas: 'localities/administrative areas',
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment'
+                            landUse: 'land use classification assignment',
+                            namedLocations: 'named locations'
                         }
                     }
                 }
