@@ -115,7 +115,8 @@ define([
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
                             landUse: 'land use classification assignment',
-                            locationGeometry: 'geometry'
+                            locationGeometry: 'geometry',
+                            namedLocations: 'named locations'
                         }
                     }
                 }

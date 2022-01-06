@@ -10,7 +10,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 nationalGrid: 'national grid references',
                 locationDescription: 'location descriptions',
                 administrativeAreas: 'localities/administrative areas',
-                geometry: 'geometry'
+                geometry: 'geometry',
+                namedLocations: 'named locations',
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -29,6 +30,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 nationalGrid: ko.observable(true),
                 areaAssignment: ko.observable(true),
                 landUse: ko.observable(true),
+                namedLocations: ko.observable(true),
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
 
@@ -67,6 +69,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 columns: Array(7).fill(null)
             };
 
+            self.namedLocationsTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(2).fill(null)
+            };
+
             self.coordinateData = ko.observable();
             self.geometryMetadata = {
                 compilerName: ko.observable(),
@@ -93,6 +100,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             self.nationalGridReferences = ko.observableArray();
             self.areaAssignment = ko.observableArray();
             self.landUseClassification = ko.observableArray();
+            self.namedLocations = ko.observableArray();
             self.locationRoot = undefined;
 
             // utitility function - checks whether at least one observable (or array object)
@@ -130,6 +138,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         tileCards.nationalGridReferences = tileCards?.[subCards.nationalGrid];
                         tileCards.administrativeAreas = tileCards?.[subCards.administrativeAreas];
                         tileCards.locationDescriptions = tileCards?.[subCards.locationDescriptions];
+                        tileCards.namedLocations = tileCards?.[subCards.namedLocations];
                         if(Array.isArray(subCards.locationGeometry)) {
                             let currentTileCards = tileCards;
                             for(let i = 0; i < subCards.locationGeometry.length; ++i){
@@ -238,6 +247,14 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         const tileid = self.getTileId(x);
                         return {reference, tileid};
                     }));
+                }
+
+                const namedLocationsNode = self.getRawNodeValue(locationNode, self.dataConfig.namedLocations);
+                console.log(namedLocationsNode)
+                const placename = self.getNodeValue(namedLocationsNode, 'named location');
+                const tileid = self.getTileId(namedLocationsNode); 
+                if(placename && placename !== '--') {
+                    self.namedLocations([{ placename, tileid }]);
                 }
 
             }

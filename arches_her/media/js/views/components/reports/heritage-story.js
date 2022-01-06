@@ -46,7 +46,8 @@ define([
                 location: ['geographic coverage'],
                 addresses: undefined,
                 locationDescription: undefined,
-                nationalGrid: undefined
+                nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.nameCards = {};

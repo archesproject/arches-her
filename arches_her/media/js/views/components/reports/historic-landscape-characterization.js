@@ -46,6 +46,7 @@ define([
                 location: [],
                 addresses: undefined,
                 locationDescription: undefined,
+                namedLocations: undefined
             };
 
             self.descriptionDataConfig = {

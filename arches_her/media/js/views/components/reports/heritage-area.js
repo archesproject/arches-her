@@ -52,6 +52,10 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)'
+            };
+
+            self.locationDataConfig = {
+                namedLocations: undefined
             }
 
             self.nameCards = {};
