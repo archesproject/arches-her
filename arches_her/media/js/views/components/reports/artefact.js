@@ -62,6 +62,7 @@ define([
             };
 
             self.protectionDataConfig = {
+                location: ['discovery', 'location data'],
                 protection: undefined
             };
 
