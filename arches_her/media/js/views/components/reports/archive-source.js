@@ -90,7 +90,7 @@ define([
 
             const archiveHoldingNode = self.getRawNodeValue(self.resource(), 'archive holding');
 
-            if(Array.isArray(archiveHoldingNode)) {
+            if(Array.isArray(archiveHoldingNode) && self.cards?.['archive holding']) {
                 self.archiveHolding(archiveHoldingNode.map(node => {
                     const tileid = self.getTileId(node);
                     const archiveHoldingTile = self.cards?.['archive holding'].tiles().find(tile => tile.tileid === tileid);
