@@ -37,7 +37,7 @@
         <h5 class="summary-value">{% trans 'Visit Attendees' %}</h5>
         <div class="final-step-section-block"> 
             <table class="table table-striped attendee-table">
-                <thead class="">
+                <thead>
                     <tr>
                         <th class="attendee-name">{% trans 'Attendee' %}</th>
                         <th class="attendee-type">{% trans 'Type' %}</th>
@@ -46,8 +46,8 @@
                 <tbody>
                     <!-- ko foreach: reportVals.attendees -->
                     <tr>
-                        <td class="" data-bind="text: $data.attendee.value"></td>
-                        <td class="" data-bind="text: $data.attendeeType.value"></td>
+                        <td data-bind="text: $data.attendee.value"></td>
+                        <td data-bind="text: $data.attendeeType.value"></td>
                     </tr>
                     <!-- /ko -->
                 </tbody>
@@ -58,28 +58,50 @@
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Observations' %}</h5>
         <div class="final-step-section-block">
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-value" data-bind="html: reportVals.observation.value"></div>
-                </div>
-            </div>
+            <table class="table table-striped attendee-table">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Observation' %}</th>
+                        <th>{% trans 'Observed by' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: reportVals.observations -->
+                    <tr>
+                        <td data-bind="text: $data.observation.value.replace(/<\/?[^>]+(>|$)/g, '')"></td>
+                        <td data-bind="text: $data.observedBy.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Recommendations' %}</h5>
         <div class="final-step-section-block">
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-value" data-bind="html: reportVals.recommendations.value"></div>
-                </div>
-            </div>
+            <table class="table table-striped attendee-table">
+                <thead>
+                    <tr>
+                        <th>{% trans 'Recommendation' %}</th>
+                        <th>{% trans 'Recommended by' %}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- ko foreach: reportVals.recommendations -->
+                    <tr>
+                        <td data-bind="text: $data.recommendation.value.replace(/<\/?[^>]+(>|$)/g, '')"></td>
+                        <td data-bind="text: $data.recommendedBy.value"></td>
+                    </tr>
+                    <!-- /ko -->
+                </tbody>
+            </table>
         </div>
     </div>
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Photographs' %}</h5>
-        <div class="" style="flex-direction: unset; flex-wrap: wrap;">
+        <div style="flex-direction: unset; flex-wrap: wrap;">
             <!-- ko foreach: reportVals.photographs -->
             <div class="summary-image-container">
                 <img class="summary-image" alt="Image" data-bind="attr: {src: $data.photo.value}">
