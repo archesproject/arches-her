@@ -52,34 +52,36 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         [`${self.dataConfig.name} names`]
                     ]
                 });
-                const nameData = Array.isArray(rawNameData) ? rawNameData : [rawNameData]
+                const nameData = rawNameData ? Array.isArray(rawNameData) ? rawNameData : [rawNameData] : undefined;
 
-                self.names(nameData.map(x => {
-                    const nameUseType = self.getNodeValue(x, {
-                        testPaths: [
-                            ['name use type'],
-                            [`${self.dataConfig.name} name use type`],
-                            [`${self.dataConfig.nameChildren} name use type`],
-                            [`${self.dataConfig.nameChildren} use type`]
-                        ]});
-                    const name = self.getNodeValue(x, {
-                        testPaths: [
-                            ['name'],
-                            [`${self.dataConfig.name} name`],
-                            [`${self.dataConfig.nameChildren} name`],
-                            [`${self.dataConfig.nameChildren}`]
-                        ]});
-                    const currency = self.getNodeValue(x, {
-                        testPaths: [
-                            ['name currency'],
-                            [`${self.dataConfig.name} name currency`],
-                            [`${self.dataConfig.nameChildren} name currency`],
-                            [`${self.dataConfig.nameChildren} currency`]
-                        ]});
+                if (nameData) {
+                    self.names(nameData.map(x => {
+                        const nameUseType = self.getNodeValue(x, {
+                            testPaths: [
+                                ['name use type'],
+                                [`${self.dataConfig.name} name use type`],
+                                [`${self.dataConfig.nameChildren} name use type`],
+                                [`${self.dataConfig.nameChildren} use type`]
+                            ]});
+                        const name = self.getNodeValue(x, {
+                            testPaths: [
+                                ['name'],
+                                [`${self.dataConfig.name} name`],
+                                [`${self.dataConfig.nameChildren} name`],
+                                [`${self.dataConfig.nameChildren}`]
+                            ]});
+                        const currency = self.getNodeValue(x, {
+                            testPaths: [
+                                ['name currency'],
+                                [`${self.dataConfig.name} name currency`],
+                                [`${self.dataConfig.nameChildren} name currency`],
+                                [`${self.dataConfig.nameChildren} currency`]
+                            ]});
 
-                    const tileid = self.getTileId(x);
-                    return { name, nameUseType, currency, tileid }
-                }));
+                        const tileid = self.getTileId(x);
+                        return { name, nameUseType, currency, tileid }
+                    }));
+                }
 
                 const rawXrefData = self.getRawNodeValue(params.data(), {
                     testPaths: [
