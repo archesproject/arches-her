@@ -106,8 +106,9 @@ define([
                     const source = self.getNodeValue(node, 'external cross reference source');
                     const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
                     const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
-                    const url = JSON.parse(self.getNodeValue(node, 'url')).url;
-                    const urlLabel = JSON.parse(self.getNodeValue(node, 'url')).url_label;
+                    const urlNodeValue = self.getRawNodeValue(node, 'url');
+                    const url = urlNodeValue.url;
+                    const urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
                 }));
@@ -220,18 +221,20 @@ define([
                             const tileid = self.getTileId(attendeeNode);
                             return {attendee, attendeeType, tileid};
                         })) : []);
-                    const observations = Array.isArray(observationsNodes) ? (
+                    const observations = ko.observable(Array.isArray(observationsNodes) ? (
                         observationsNodes.map(observationNode => {
                             const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
+                            const observedBy = self.getNodeValue(observationNode, 'observed by');
                             const tileid = self.getTileId(observationNode);
-                            return {observation, tileid};
-                        })) : [];
-                    const recommendations = Array.isArray(recommendationsNodes) ? (
+                            return {observation, observedBy, tileid};
+                        })) : []);
+                    const recommendations = ko.observable(Array.isArray(recommendationsNodes) ? (
                         recommendationsNodes.map(recommendationNode => {
                             const recommendation = self.getNodeValue(recommendationNode, 'recommendation', 'recommendation value');
+                            const recommendedBy = self.getNodeValue(recommendationNode, 'recommended by');
                             const tileid = self.getTileId(recommendationNode);
-                            return {recommendation, tileid};
-                        })) : [];
+                            return {recommendation, recommendedBy, tileid};
+                        })) : []);
                     const photographs = Array.isArray(photographsNodes) ? (
                         photographsNodes.map(photographNode => {
                             const file = self.getNodeValue(photographNode, 'file_details', [0], 'name');
@@ -288,8 +291,10 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
+
+                self.siteVisitSubCards = self.createCardDictionary(self.cards['site visits'].cards());
 
                 self.nameCards = {
                     name: self.cards?.['consultation names'],

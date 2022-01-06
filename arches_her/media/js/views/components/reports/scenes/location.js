@@ -207,7 +207,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     }
                 }
 
-                const administrativeAreasNode = self.getRawNodeValue(locationNode, self.dataConfig.administrativeAreas);
+                let administrativeAreasNode = self.getRawNodeValue(locationNode, self.dataConfig.administrativeAreas);
+                if (!administrativeAreasNode) {
+                    administrativeAreasNode = self.getRawNodeValue(params.data(), self.dataConfig.administrativeAreas);
+                }
                 if(Array.isArray(administrativeAreasNode)) {
                     self.administrativeAreas(administrativeAreasNode.map(x => {
                         const currency = self.getNodeValue(x, 'area currency type');
