@@ -27,7 +27,7 @@
                 </div>
                     <div class="summary-label" data-bind="text: reportVals.locatinDescription.name + ':'"></div>
                 <div class="block-item">
-                    <div class="summary-value" data-bind="html: reportVals.locatinDescription.value"></div>
+                    <div class="summary-value" data-bind="text: reportVals.locatinDescription.value.replace(/<\/?[^>]+(>|$)/g, '')"></div>
                 </div>
             </div>
         </div>
@@ -68,7 +68,7 @@
                 <tbody>
                     <!-- ko foreach: reportVals.observations -->
                     <tr>
-                        <td class="" data-bind="html: $data.observation.value"></td>
+                        <td class="" data-bind="text: $data.observation.value.replace(/<\/?[^>]+(>|$)/g, '')"></td>
                         <td class="" data-bind="text: $data.observedBy.value"></td>
                     </tr>
                     <!-- /ko -->
@@ -90,7 +90,7 @@
                 <tbody>
                     <!-- ko foreach: reportVals.recommendations -->
                     <tr>
-                        <td class="" data-bind="html: $data.recommendation.value"></td>
+                        <td class="" data-bind="text: $data.recommendation.value.replace(/<\/?[^>]+(>|$)/g, '')"></td>
                         <td class="" data-bind="text: $data.recommendedBy.value"></td>
                     </tr>
                     <!-- /ko -->
