@@ -12,6 +12,9 @@ define([
         viewModel: function(params) {
             var self = this;
             params.configKeys = ['tabs', 'activeTabIndex'];
+            this.configForm = params.configForm || false;
+            this.configType = params.configType || 'header';
+
             Object.assign(self, reportUtils);
             self.sections = [
                 {id: 'details', title: 'Consultation Details'},
