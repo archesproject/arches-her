@@ -327,30 +327,26 @@ define([
                     [
                         {
                             title: 'Consultation Details',
+                            card: self.cards?.['consultation type'],
                             data: [{
                                 key: 'Consultation Type',
                                 value: self.getNodeValue(self.resource(), 'consultation type'),
-                                card: self.cards?.['consultation type'],
                                 type: 'kv'
                             },{
                                 key: 'Development Type',
                                 value: self.getNodeValue(self.resource(), 'development type'),
-                                card: self.cards?.['consultation type'],
                                 type: 'kv'
                             },{
                                 key: 'Application Type',
                                 value: self.getNodeValue(self.resource(), 'application type'),
-                                card: self.cards?.['consultation type'],
                                 type: 'kv'
                             },{
                                 key: 'Contested Heritage Assignment',
                                 value: self.getNodeValue(self.resource(), 'contested heritage assignment', 'contested heritage'),
-                                card: self.cards?.['consultation type'],
                                 type: 'kv'
                             },{
                                 key: 'Consultation Status',
                                 value: self.getNodeValue(self.resource(), 'status'),
-                                card: self.cards?.['consultation status'],
                                 type: 'kv'
                             }]
                         }
@@ -362,20 +358,18 @@ define([
                     [
                         {
                             title: 'Consultation Dates',
+                            card: self.cards?.['consultation dates'],
                             data: [{
                                 key: 'Log Date',
                                 value: self.getNodeValue(self.resource(), 'consultation dates', 'log date'),
-                                card: self.cards?.['consultation dates'],
                                 type: 'kv'
                             },{
                                 key: 'Target Date',
                                 value: self.getNodeValue(self.resource(), 'consultation dates', 'target date', 'target date start'),
-                                card: self.cards?.['consultation dates'],
                                 type: 'kv'
                             },{
                                 key: 'Completion Date',
                                 value: self.getNodeValue(self.resource(), 'consultation dates', 'completion date'),
-                                card: self.cards?.['consultation dates'],
                                 type: 'kv'
                             }]
                         }
