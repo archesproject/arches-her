@@ -625,8 +625,7 @@
                                                             <td data-bind="text: attendee"></td>
                                                             <td data-bind="text: attendeeType"></td>
                                                             <td class="aher-table-control">
-                                                                <span data-bind="text: console.log($parents[1].cards)"></span>
-                                                                <div data-bind="if: $parents[1].siteVisitSubCards.attendees">
+                                                                <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.attendees">
                                                                     <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
                                                                         <i class="fa fa-mail-reply"></i>
                                                                     </a>
@@ -666,7 +665,7 @@
                                                             <td data-bind="text: observation"></td>
                                                             <td data-bind="text: observedBy"></td>
                                                             <td class="aher-table-control">
-                                                                <div data-bind="if: $parents[1].siteVisitSubCards.observations">
+                                                                <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.observations">
                                                                     <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.observations)}">
                                                                         <i class="fa fa-mail-reply"></i>
                                                                     </a>
@@ -685,7 +684,7 @@
                                 </div>
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Recommendations</h4>
-                                    <!-- ko ifnot: recommendations().length -->
+                                    <!-- ko ifnot: visit.recommendations().length -->
                                     <div class="aher-nodata-note">No recommendation for this visit</div>
                                     <!-- /ko -->
     
@@ -706,7 +705,7 @@
                                                             <td data-bind="text: recommendation"></td>
                                                             <td data-bind="text: recommendedBy"></td>
                                                             <td class="aher-table-control">
-                                                                <div data-bind="if: $parents[1].siteVisitSubCards.recommendations">
+                                                                <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.recommendations">
                                                                     <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
                                                                         <i class="fa fa-mail-reply"></i>
                                                                     </a>
