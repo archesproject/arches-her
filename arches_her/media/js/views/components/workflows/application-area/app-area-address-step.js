@@ -11,7 +11,7 @@ define([
         var nameNodegroupId = '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11';
 
         var getValue = function(key) {
-            return ko.unwrap(params.value) ? params.value()[key] : null; 
+            return ko.unwrap(params.form.savedData) ? params.form.savedData()[key] : null; 
         };
 
         this.buildingName = ko.observable(getValue('buildingName'));
@@ -27,7 +27,7 @@ define([
         this.addressCurrency = ko.observable(getValue('addressCurrency'));
         this.addressTileid = ko.observable(getValue('addressTileid'));
         this.nameTileid = ko.observable(getValue('nameTileid'));
-        this.resourceInstanceId = ko.observable(getValue('resourceInstanceId'));
+        this.resourceid = ko.observable(getValue('resourceid'));
         this.applicationAreaName = ko.observable(getValue('applicationAreaName'));
 
         this.showName = ko.observable(false);
@@ -91,52 +91,6 @@ define([
             }
         });
 
-
-        // // "7ee45be3-eeb5-11eb-ab4a-a87eeabdefba"	"Address Currency"
-        // "7ee432fd-eeb5-11eb-82b0-a87eeabdefba"	"Address Currency Metatype"
-        // // "7ee45be2-eeb5-11eb-9b39-a87eeabdefba"	"Address Status"
-        // "7ee432fe-eeb5-11eb-b609-a87eeabdefba"	"Address Status Metatype"
-        // "7ee432f9-eeb5-11eb-a673-a87eeabdefba"	"Addresses"
-        // // "7ee4330a-eeb5-11eb-bf81-a87eeabdefba"	"Building Name"
-        // "7ee43316-eeb5-11eb-8a94-a87eeabdefba"	"Building Name Metatype"
-        // "7ee43317-eeb5-11eb-b721-a87eeabdefba"	"Building Name Type"
-        // "7ee4330b-eeb5-11eb-a398-a87eeabdefba"	"Building Name Value"
-        // // "7ee4330c-eeb5-11eb-b7a2-a87eeabdefba"	"Building Number"
-        // "7ee43318-eeb5-11eb-97cf-a87eeabdefba"	"Building Number Metatype"
-        // // "7ee45be9-eeb5-11eb-b69e-a87eeabdefba"	"Building Number Sub-Street"
-        // "7ee43311-eeb5-11eb-9361-a87eeabdefba"	"Building Number Sub-Street Metatype"
-        // "7ee43302-eeb5-11eb-945f-a87eeabdefba"	"Building Number Sub-Street Type"
-        // "7ee43303-eeb5-11eb-ba5a-a87eeabdefba"	"Building Number Sub-Street Value"
-        // "7ee43301-eeb5-11eb-9b7a-a87eeabdefba"	"Building Number Type"
-        // "7ee4330d-eeb5-11eb-9766-a87eeabdefba"	"Building Number Value"
-        // // "7ee459ee-eeb5-11eb-8963-a87eeabdefba"	"County"
-        // "7ee43315-eeb5-11eb-a592-a87eeabdefba"	"County Metatype"
-        // "7ee43313-eeb5-11eb-950d-a87eeabdefba"	"County Type"
-        // "7ee45beb-eeb5-11eb-8679-a87eeabdefba"	"County Value"
-        // // "7ee432ff-eeb5-11eb-8299-a87eeabdefba"	"Full Address"
-        // "7ee45bea-eeb5-11eb-83d2-a87eeabdefba"	"Full Address Metatype"
-        // "7ee459ef-eeb5-11eb-bb3b-a87eeabdefba"	"Full Address Type"
-        // // "7ee45be7-eeb5-11eb-8022-a87eeabdefba"	"Locality"
-        // "7ee43310-eeb5-11eb-a25b-a87eeabdefba"	"Locality Metatype"
-        // "7ee43300-eeb5-11eb-863d-a87eeabdefba"	"Locality Type"
-        // "7ee45be8-eeb5-11eb-a9b4-a87eeabdefba"	"Locality Value"
-        // // "7ee43306-eeb5-11eb-95d5-a87eeabdefba"	"Postcode"
-        // "7ee432fc-eeb5-11eb-a423-a87eeabdefba"	"Postcode Metatype"
-        // "7ee45be6-eeb5-11eb-b8a9-a87eeabdefba"	"Postcode Type"
-        // "7ee43307-eeb5-11eb-99c7-a87eeabdefba"	"Postcode Value"
-        // // "7ee4330e-eeb5-11eb-b68a-a87eeabdefba"	"Street"
-        // "7ee45bec-eeb5-11eb-9c10-a87eeabdefba"	"Street Metatype"
-        // "7ee45be5-eeb5-11eb-8e1b-a87eeabdefba"	"Street Type"
-        // "7ee4330f-eeb5-11eb-aa82-a87eeabdefba"	"Street Value"
-        // // "7ee43308-eeb5-11eb-9d03-a87eeabdefba"	"Sub-Street "
-        // "7ee43319-eeb5-11eb-a279-a87eeabdefba"	"Sub-Street Metatype"
-        // "7ee43314-eeb5-11eb-84b8-a87eeabdefba"	"Sub-Street Type"
-        // "7ee43309-eeb5-11eb-b0ce-a87eeabdefba"	"Sub-Street Value"
-        // // "7ee43304-eeb5-11eb-a788-a87eeabdefba"	"Town or City"
-        // "7ee43312-eeb5-11eb-8eb3-a87eeabdefba"	"Town or City Metatype"
-        // "7ee45be4-eeb5-11eb-b1c4-a87eeabdefba"	"Town or City Type"
-        // "7ee43305-eeb5-11eb-8af3-a87eeabdefba"	"Town or City Value"
-
         this.updatedValue = ko.pureComputed(function(){
             return {
                 fullAddress: self.fullAddress(),
@@ -153,7 +107,7 @@ define([
                 addressCurrency: self.addressCurrency(),
                 addressTileid: self.addressTileid(),
                 nameTileid: self.nameTileid(),
-                resourceInstanceId: self.resourceInstanceId(),
+                resourceid: self.resourceid(),
                 applicationAreaName: self.applicationAreaName()
             };
         });
@@ -196,19 +150,36 @@ define([
             });
         };
 
+        params.form.reset = function() {
+            self.buildingName(getValue('buildingName'));
+            self.buildingNumber(getValue('buildingNumber'));
+            self.buildingNumberSub(getValue('buildingNumberSub'));
+            self.subStreet(getValue('subStreet'));
+            self.street(getValue('street'));
+            self.locality(getValue('locality'));
+            self.townCity(getValue('townCity'));
+            self.county(getValue('county'));
+            self.postcode(getValue('postcode'));
+            self.addressStatus(getValue('addressStatus'));
+            self.addressCurrency(getValue('addressCurrency'));
+            self.addressTileid(getValue('addressTileid'));
+            self.nameTileid(getValue('nameTileid'));
+            self.resourceid(getValue('resourceid'));
+            self.applicationAreaName(getValue('applicationAreaName'));
+            params.value(params.form.savedData());
+        };
+
         params.form.save = function() {
-            self.saveTile(nameTileDataObj(), nameNodegroupId, self.resourceInstanceId(), self.nameTileid())
+            self.saveTile(nameTileDataObj(), nameNodegroupId, self.resourceid(), self.nameTileid())
                 .then(function(data) {
-                    self.resourceInstanceId(data.resourceinstance_id);
+                    self.resourceid(data.resourceinstance_id);
                     self.nameTileid(data.tileid);
                     return self.saveTile(addressTileDataObj(), addressNodegroupId, data.resourceinstance_id, self.addressTileid());
                 })
                 .then(function(data) {
                     self.addressTileid(data.tileid);
                     params.form.complete(true);
-                    params.form.savedData({
-                        resourceid: self.resourceInstanceId(), ...self.updatedValue()
-                    });
+                    params.form.savedData(self.updatedValue());
                 });
         };
     };
