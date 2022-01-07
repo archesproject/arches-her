@@ -106,11 +106,12 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             [
                                 {
                                     title: 'Type',
+                                    card: self.cards?.type,
                                     data: [{
                                         key: 'Type',
                                         value: Array.isArray(typeValue) ? typeValue : [typeValue],
+                                        card: self.cards?.type,
                                         type: 'kv',
-                                        card: self.cards?.type
                                     }]
                                 }
                             ]
@@ -123,6 +124,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             [
                                 {
                                     title: 'Activity Timespan',
+                                    card: self.cards?.activityTimespan,
                                     data: [{
                                         key: 'Display Date',
                                         value: self.getNodeValue(params.data(), self.dataConfig.activityTimespan, 'Display Date'),
