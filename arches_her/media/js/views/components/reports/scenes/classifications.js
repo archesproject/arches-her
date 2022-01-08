@@ -110,7 +110,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                                     data: [{
                                         key: 'Type',
                                         value: Array.isArray(typeValue) ? typeValue : [typeValue],
-                                        card: self.cards?.type,
                                         type: 'kv',
                                     }]
                                 }
