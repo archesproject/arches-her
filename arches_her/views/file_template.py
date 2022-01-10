@@ -81,7 +81,11 @@ class FileTemplateView(View):
         if os.path.exists(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx')) is False:
             os.mkdir(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx'))
 
-        self.doc = Document(template_path)
+        try:
+            self.doc = Document(template_path)
+        except:
+            return HttpResponseNotFound("No Template Found")
+
         self.edit_letter(self.resource, datatype_factory)
 
         date = datetime.today()
@@ -252,48 +256,53 @@ class FileTemplateView(View):
                 "Town or City": "b3a27617-effb-11eb-a80f-a87eeabdefba",
                 "Postcode": "b3a27619-effb-11eb-a66d-a87eeabdefba",
             }
-
             if contactNodeId in tile.data:
-                caseAgentResourceiId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
-                caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceiId)
-                caseAgentResource.load_tiles()
-                for caseAgentTile in caseAgentResource.tiles:
-                    if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
-                        if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                            mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
-                        elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                            mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
+                caseAgentResourceId = None
+                contactResourceiId = None
+                if tile.data[contacts["Casework Officer"]]:
+                    caseAgentResourceId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
+                if caseAgentResourceId:
+                    caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceId)
+                    caseAgentResource.load_tiles()
+                    for caseAgentTile in caseAgentResource.tiles:
+                        if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
+                            if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
+                                mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
+                            elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
+                                mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
 
-                if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4":
+                if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4" and tile.data[contacts["Planning Officer"]]:
                     contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
-                elif tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912":
+                elif tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912" and tile.data[contacts["Owner"]]:
                     contactResourceiId = tile.data[contacts["Owner"]][0]["resourceId"]
-                elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b":
+                elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b" and tile.data[contacts["Agent"]]:
                     contactResourceiId = tile.data[contacts["Agent"]][0]["resourceId"]
-                contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
-                contactResource.load_tiles()
+                
+                if contactResourceiId:
+                    contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
+                    contactResource.load_tiles()
 
-                for contactTile in contactResource.tiles:
-                    if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
-                        if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
-                            mapping_dict["Name of person consulting"] = contactTile.data[fullnameNodeId]
-                        if mapping_dict["Contact Name"] == "" or contactTile.data[nameUseTypeNodeId] == forCorrespondenceNameValueId:
-                            mapping_dict["Contact Name"] = contactTile.data[fullnameNodeId]
-                    if contactTile.nodegroup.nodegroupid == uuid.UUID(addressNodegroupId):
-                        def xstr(s):
-                            if s is None:
-                                return ""
-                            else:
-                                return str(s)
-                        addressString = "{}, {}\n{}, {}\n{}\n{}".format(
-                            xstr(contactTile.data[addressDict["Building Name"]]),
-                            xstr(contactTile.data[addressDict["Building Number"]]),
-                            xstr(contactTile.data[addressDict["Street"]]),
-                            xstr(contactTile.data[addressDict["Locality"]]),
-                            xstr(contactTile.data[addressDict["Town or City"]]),
-                            xstr(contactTile.data[addressDict["Postcode"]])
-                        )
-                        mapping_dict["Address of consulting organisation"] = addressString
+                    for contactTile in contactResource.tiles:
+                        if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
+                            if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
+                                mapping_dict["Name of person consulting"] = contactTile.data[fullnameNodeId]
+                            if mapping_dict["Contact Name"] == "" or contactTile.data[nameUseTypeNodeId] == forCorrespondenceNameValueId:
+                                mapping_dict["Contact Name"] = contactTile.data[fullnameNodeId]
+                        if contactTile.nodegroup.nodegroupid == uuid.UUID(addressNodegroupId):
+                            def xstr(s):
+                                if s is None:
+                                    return ""
+                                else:
+                                    return str(s)
+                            addressString = "{}, {}\n{}, {}\n{}\n{}".format(
+                                xstr(contactTile.data[addressDict["Building Name"]]),
+                                xstr(contactTile.data[addressDict["Building Number"]]),
+                                xstr(contactTile.data[addressDict["Street"]]),
+                                xstr(contactTile.data[addressDict["Locality"]]),
+                                xstr(contactTile.data[addressDict["Town or City"]]),
+                                xstr(contactTile.data[addressDict["Postcode"]])
+                            )
+                            mapping_dict["Address of consulting organisation"] = addressString
         for key in mapping_dict:
             html = False
             if '<' in mapping_dict[key]: # look for html tag, not ideal

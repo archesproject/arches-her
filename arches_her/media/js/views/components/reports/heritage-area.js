@@ -28,7 +28,6 @@ define([
                 {id: 'images', title: 'Images'},
                 {id: 'people', title: 'Associated People and Organizations'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -53,10 +52,13 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)'
+            };
+
+            self.locationDataConfig = {
+                namedLocations: undefined
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
@@ -110,11 +112,6 @@ define([
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-                
                 self.locationCards = {
                     location: {
                         card: self.cards?.['location data'],

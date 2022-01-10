@@ -34,21 +34,6 @@
                 {
                     "card_id": "c3cea10b-9b68-11ea-be2f-f875a44e0e11",
                     "config": {
-                        "defaultValue": "495ecc6a-a265-434b-8708-d6b76bd9a30e",
-                        "label": "Extent Measurement Unit Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "15a45024-9b69-11ea-8338-f875a44e0e11",
-                    "label": "Extent Measurement Unit Metatype",
-                    "node_id": "c3cea10c-9b68-11ea-8081-f875a44e0e11",
-                    "sortorder": 1,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "c3cea10b-9b68-11ea-be2f-f875a44e0e11",
-                    "config": {
                         "defaultValue": "",
                         "label": "Extent Measurement Unit",
                         "options": [],
@@ -74,6 +59,7 @@
                         "prefix": "",
                         "step": "",
                         "suffix": "",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "15a78465-9b69-11ea-872d-f875a44e0e11",
@@ -82,6 +68,21 @@
                     "sortorder": 2,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000008"
+                },
+                {
+                    "card_id": "c3cea10b-9b68-11ea-be2f-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "495ecc6a-a265-434b-8708-d6b76bd9a30e",
+                        "label": "Extent Measurement Unit Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "15a45024-9b69-11ea-8338-f875a44e0e11",
+                    "label": "Extent Measurement Unit Metatype",
+                    "node_id": "c3cea10c-9b68-11ea-8081-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
             ],
             "color": null,
@@ -136,26 +137,6 @@
             ],
             "nodes": [
                 {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "c3cea108-9b68-11ea-85fa-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Extent Measurement Unit Metatype",
-                    "nodegroup_id": "c3cea109-9b68-11ea-9ab0-f875a44e0e11",
-                    "nodeid": "c3cea10c-9b68-11ea-8081-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
                     "config": null,
                     "datatype": "number",
                     "description": "Represents a single node in a graph",
@@ -209,6 +190,26 @@
                     "nodeid": "c3cea109-9b68-11ea-9ab0-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E54_Dimension",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "c3cea108-9b68-11ea-85fa-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Extent Measurement Unit Metatype",
+                    "nodegroup_id": "c3cea109-9b68-11ea-9ab0-f875a44e0e11",
+                    "nodeid": "c3cea10c-9b68-11ea-8081-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],

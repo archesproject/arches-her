@@ -40,12 +40,14 @@ define([
                 assets: undefined,
                 translation: 'translation',
                 period: 'temporal coverage'
-            }
+            };
 
             self.locationDataConfig = {
+                location: ['geographic coverage'],
                 addresses: undefined,
                 locationDescription: undefined,
-                nationalGrid: undefined
+                nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.nameCards = {};
@@ -71,11 +73,6 @@ define([
                     descriptions: self.cards?.['descriptions'],
                     subjects: self.cards?.['subjects'],
                     audience: self.cards?.['audience type']
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.locationCards = {

@@ -14,7 +14,7 @@ define([
 
         this.letterTypeNodeId = "8d41e4df-a250-11e9-af01-00224800b26d";
         this.digitalObjectFileNodeId = "96f8830a-8490-11ea-9aba-f875a44e0e11";
-        this.dataURL = ko.observable();
+        this.fileTileData = ko.observable();
         this.digitalObjectResourceId = ko.observable();
         this.digitalObjectTileId = ko.observable();
         this.tile().transactionid = self.worfklowId;
@@ -42,7 +42,7 @@ define([
                 resourceInstanceId: self.tile().resourceinstance_id,
                 tileId: self.tile().tileid,
                 nodegroupId: self.tile().nodegroup_id,
-                dataURL: ko.unwrap(self.dataURL),
+                fileTileData: ko.unwrap(self.fileTileData),
             });
             self.locked(true);
             params.form.complete(true);
@@ -61,7 +61,7 @@ define([
                 }
             })
             .done(function(data){ //getting digital object resource
-                self.dataURL(data.tile.data[self.digitalObjectFileNodeId][0].url);
+                self.fileTileData(data.tile.data[self.digitalObjectFileNodeId][0]);
                 self.digitalObjectResourceId(data.tile.resourceinstance_id);
 
                 var relateDocuNodeTemplate = [{
@@ -112,21 +112,20 @@ define([
                         },
                     }).done(function(response) {
                         self.saveValues();
-                        self.loading(false);
                         if (self.completeOnSave === true) { self.complete(true); }    
                     })
                     .fail(function(response){
-                        console.log("Adding the digital object name failed: \n", response)
-                        self.loading(false);
+                        console.log("Adding the digital object name failed: \n", response);
                     });
                 })
                 .fail(function(response) {
-                    console.log("Getting consultation name failed: \n", response)
+                    console.log("Getting consultation name failed: \n", response);
                 });
             })
             .fail(function(response) {
                 if(response.statusText !== 'abort'){
-                    self.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
+                    params.form.error(new Error(response.responseText));
+                    params.pageVm.alert(new AlertViewModel('ep-alert-red', arches.requestFailed.title, response.responseText));
                 }
             });
         };

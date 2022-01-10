@@ -159,7 +159,7 @@ define([
                                     uniqueInstanceName: 'communication-final',
                                     tilesManaged: 'none',
                                     parameters: {
-                                        digitalObjectResourceId: "['upload-documents']['upload-documents-step']['resourceInstanceId']",
+                                        digitalObject: "['upload-documents']['upload-documents-step']",
                                         consultationTileid: "['related-consultation']['communication-select-resource']['tileid']",
                                         consultationResourceid: "['related-consultation']['communication-select-resource']['resourceid']",
                                     },

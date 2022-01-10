@@ -70,60 +70,13 @@
             ],
             "cards_x_nodes_x_widgets": [
                 {
-                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Place of Destination Name",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "80117d84-5aae-11e9-a3fe-000d3ab1e588",
-                    "label": "Place of Destination Name",
-                    "node_id": "80117d7b-5aae-11e9-94b6-000d3ab1e588",
-                    "sortorder": 7,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Place of Departure Name",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "80117d83-5aae-11e9-94c8-000d3ab1e588",
-                    "label": "Place of Departure Name",
-                    "node_id": "80117d7c-5aae-11e9-860d-000d3ab1e588",
-                    "sortorder": 6,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
-                    "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": "",
-                        "label": "Expected Date of Arrival",
-                        "maxDate": false,
-                        "minDate": false,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "80117d85-5aae-11e9-a4a2-000d3ab1e588",
-                    "label": "Expected Date of Arrival",
-                    "node_id": "80117d75-5aae-11e9-8d87-000d3ab1e588",
-                    "sortorder": 3,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000004"
-                },
-                {
                     "card_id": "3ad627b3-5ab3-11e9-83c9-000d3ab1e588",
                     "config": {
                         "defaultValue": "",
                         "label": "Description",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "3ad627b6-5ab3-11e9-b8b5-000d3ab1e588",
@@ -132,21 +85,6 @@
                     "sortorder": 0,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "3ad627b3-5ab3-11e9-83c9-000d3ab1e588",
-                    "config": {
-                        "defaultValue": "",
-                        "label": "Description Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "3ad627b7-5ab3-11e9-b9f7-000d3ab1e588",
-                    "label": "Description Type",
-                    "node_id": "3ad627b5-5ab3-11e9-b263-000d3ab1e588",
-                    "sortorder": 1,
-                    "visible": true,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "acfaeae1-5ab0-11e9-8547-000d3ab1e588",
@@ -251,6 +189,7 @@
                         "label": "Crew Member Name",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "ccb1455f-7298-11ea-a926-287fcf6a5e72",
@@ -274,6 +213,69 @@
                     "sortorder": 5,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "3ad627b3-5ab3-11e9-83c9-000d3ab1e588",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Description Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "3ad627b7-5ab3-11e9-b9f7-000d3ab1e588",
+                    "label": "Description Type",
+                    "node_id": "3ad627b5-5ab3-11e9-b263-000d3ab1e588",
+                    "sortorder": 1,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Place of Destination Name",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "80117d84-5aae-11e9-a3fe-000d3ab1e588",
+                    "label": "Place of Destination Name",
+                    "node_id": "80117d7b-5aae-11e9-94b6-000d3ab1e588",
+                    "sortorder": 7,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
+                    "config": {
+                        "defaultValue": "",
+                        "label": "Place of Departure Name",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "80117d83-5aae-11e9-94c8-000d3ab1e588",
+                    "label": "Place of Departure Name",
+                    "node_id": "80117d7c-5aae-11e9-860d-000d3ab1e588",
+                    "sortorder": 6,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "80117d73-5aae-11e9-bfd3-000d3ab1e588",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Expected Date of Arrival",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "80117d85-5aae-11e9-a4a2-000d3ab1e588",
+                    "label": "Expected Date of Arrival",
+                    "node_id": "80117d75-5aae-11e9-8d87-000d3ab1e588",
+                    "sortorder": 3,
+                    "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000004"
                 }
             ],
             "color": null,

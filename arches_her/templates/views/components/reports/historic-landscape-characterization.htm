@@ -150,16 +150,6 @@
                     </div>
                 </div>
             </div>
-             <!-- Audit Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/audit',
-                    params: {
-                        data: resource,
-                        cards: auditCards
-                    }
-                }"></div>
-            </div>
              <!-- JSON Tab -->
             <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
                 <div class="aher-flex-col" data-bind="component: {
@@ -195,7 +185,8 @@
             name: 'views/components/reports/scenes/name',
             params: {
                 data: resource,
-                cards: nameCards
+                cards: nameCards,
+                dataConfig: nameDataConfig
             }
         }"></div>
         <!-- Description -->
@@ -204,6 +195,7 @@
             params: {
                 data: resource,
                 cards: descriptionCards,
+                dataConfig: descriptionDataConfig
             }
         }"></div>
     </div>

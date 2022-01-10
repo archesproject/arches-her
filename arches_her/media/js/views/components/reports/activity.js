@@ -26,7 +26,6 @@ define([
                 {id: 'archive', title: 'Archive Holding'},
                 {id: 'people', title: 'Associated People and Organizations'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -66,7 +65,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {};
             self.resourcesCards = {};
             self.classificationCards = {};
             self.protectionCards = {};
@@ -123,7 +121,8 @@ define([
                             administrativeAreas: 'localities/administrative areas',
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment'
+                            landUse: 'land use classification assignment',
+                            namedLocations: 'named locations'
                         }
                     }
                 }
@@ -146,11 +145,6 @@ define([
                     assets: self.cards?.['associated heritage assets, areas and artefacts'],
                     files: self.cards?.['associated digital files'],
                 }
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
             }
 
         },

@@ -19,7 +19,6 @@ define([
                 {id: 'location', title: 'Location Data'},
                 {id: 'protection', title: 'Designation and Protection Status'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.associatedApplicationAreaTableConfig = {
@@ -50,7 +49,8 @@ define([
 
             self.locationDataConfig = {
                 location: [],
-                nationalGrid: undefined
+                nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.protectionDataConfig = {
@@ -59,7 +59,6 @@ define([
             };
 
             self.nameCards = {};
-            self.auditCards = {};
             self.resourcesCards = {};
             self.descriptionCards = {};
             self.locationCards = {};
@@ -90,11 +89,6 @@ define([
 
                 self.descriptionCards = {
                     descriptions: self.cards?.['descriptions'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.locationCards = {

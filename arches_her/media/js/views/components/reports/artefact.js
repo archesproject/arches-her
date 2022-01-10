@@ -25,7 +25,6 @@ define([
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'archive', title: 'Archive Holding'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
 
@@ -63,6 +62,7 @@ define([
             };
 
             self.protectionDataConfig = {
+                location: ['discovery', 'location data'],
                 protection: undefined
             };
 
@@ -80,7 +80,6 @@ define([
             };
 
             self.nameCards = {};
-            self.auditCards = {};
             self.assessmentCards = {};
             self.archiveCards = {};
             self.descriptionCards = {};
@@ -140,11 +139,6 @@ define([
                     repositoryStorage: self.cards?.['repository storage location']
                 };
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
                     files: self.cards?.['associated digital files'],
@@ -168,7 +162,8 @@ define([
                             administrativeAreas: 'localities/administrative areas',
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment'
+                            landUse: 'land use classification assignment',
+                            namedLocations: 'named locations'
                         }
                     }
                 }

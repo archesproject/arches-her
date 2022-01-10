@@ -202,84 +202,39 @@
                                     <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficer}"></a>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Agents</h4>
+                                    <h4 class="aher-block-key">Agents: </h4>
                                     <!-- ko ifnot: contacts().agents.length -->
                                     <div class="aher-nodata-note">No agent for this consultation</div>
                                     <!-- /ko -->
 
                                     <!-- ko if: contacts().agents.length -->
-                                    <div class="aher-report-subsection">
-                                        <div class="firstchild-container">
-                                            <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>{% trans "Agent" %}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: contacts().agents, dataTableOptions: createTableConfig(1)}">
-                                                        <tr>
-                                                            <td><a class="aher-table-link" data-bind="text: agent, attr: {href: agentLink}"></a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- ko foreach: contacts().agents -->
+                                    <span><a class="aher-table-link" data-bind="text: $data.agent, attr: {href: $data.agentLink}"></a></span>
+                                    <!-- /ko -->
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Owners</h4>
+                                    <h4 class="aher-block-key">Owners: </h4>
                                     <!-- ko ifnot: contacts().owners.length -->
                                     <div class="aher-nodata-note">No owner for this consultation</div>
                                     <!-- /ko -->
 
                                     <!-- ko if: contacts().owners.length -->
-                                    <div class="aher-report-subsection">
-                                        <div class="firstchild-container">
-                                            <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>{% trans "Owner" %}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: contacts().owners, dataTableOptions: createTableConfig(1)}">
-                                                        <tr>
-                                                            <td><a class="aher-table-link" data-bind="text: owner, attr: {href: ownerLink}"></a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- ko foreach: contacts().owners -->
+                                    <span><a class="aher-table-link" data-bind="text: $data.owner, attr: {href: $data.ownerLink}"></a></span>
+                                    <!-- /ko -->
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Applicants</h4>
+                                    <h4 class="aher-block-key">Applicants: </h4>
                                     <!-- ko ifnot: contacts().applicants.length -->
                                     <div class="aher-nodata-note">No applicant for this consultation</div>
                                     <!-- /ko -->
 
                                     <!-- ko if: contacts().applicants.length -->
-                                    <div class="aher-report-subsection">
-                                        <div class="firstchild-container">
-                                            <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
-                                                    <thead>
-                                                        <tr>
-                                                            <th>{% trans "Applicant" %}</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: contacts().applicants, dataTableOptions: createTableConfig(1)}">
-                                                        <tr>
-                                                            <td><a class="aher-table-link" data-bind="text: applicant, attr: {href: applicantLink}"></a></td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                    </div>
+                                    <!-- ko foreach: contacts().applicants -->
+                                    <span><a class="aher-table-link" data-bind="text: $data.applicant, attr: {href: $data.applicantLink}"></a></span>
+                                    <!-- /ko -->
                                     <!-- /ko -->
                                 </div>
 
@@ -590,7 +545,7 @@
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: communications, dataTableOptions: createTableConfig(9)}">
                                             <tr>
-                                                <td data-bind="text: `${subject} (${subjectDescType})`"></td>
+                                                <td data-bind="text: subject"></td>
                                                 <td data-bind="text: type"></td>
                                                 <td data-bind="text: date"></td>
                                                 <td data-bind="text: attendees"></td>
@@ -649,11 +604,11 @@
                                 </div>
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Attendees</h4>
-                                    <!-- ko ifnot: visit.attendees.length -->
+                                    <!-- ko ifnot: visit.attendees().length -->
                                     <div class="aher-nodata-note">No attendee for this visit</div>
                                     <!-- /ko -->
 
-                                    <!-- ko if: visit.attendees.length -->
+                                    <!-- ko if: visit.attendees().length -->
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
@@ -662,12 +617,23 @@
                                                         <tr>
                                                             <th>{% trans "Attendee" %}</th>
                                                             <th>{% trans "Attendee Type" %}</th>
+                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(2)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(3)}">
                                                         <tr>
                                                             <td data-bind="text: attendee"></td>
                                                             <td data-bind="text: attendeeType"></td>
+                                                            <td class="aher-table-control">
+                                                                <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.attendees">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -678,11 +644,11 @@
                                 </div>
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Observations</h4>
-                                    <!-- ko ifnot: visit.observations.length -->
+                                    <!-- ko ifnot: visit.observations().length -->
                                     <div class="aher-nodata-note">No observation for this visit</div>
                                     <!-- /ko -->
 
-                                    <!-- ko if: visit.observations.length -->
+                                    <!-- ko if: visit.observations().length -->
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
@@ -690,11 +656,24 @@
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Observation" %}</th>
+                                                            <th>{% trans "Observed by" %}</th>
+                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.createTableConfig(1)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.createTableConfig(3)}">
                                                         <tr>
                                                             <td data-bind="text: observation"></td>
+                                                            <td data-bind="text: observedBy"></td>
+                                                            <td class="aher-table-control">
+                                                                <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.observations">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.observations)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.observations)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -705,11 +684,11 @@
                                 </div>
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Recommendations</h4>
-                                    <!-- ko ifnot: recommendations.length -->
+                                    <!-- ko ifnot: visit.recommendations().length -->
                                     <div class="aher-nodata-note">No recommendation for this visit</div>
                                     <!-- /ko -->
     
-                                    <!-- ko if: visit.recommendations.length -->
+                                    <!-- ko if: visit.recommendations().length -->
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
@@ -717,11 +696,24 @@
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Recommendation" %}</th>
+                                                            <th>{% trans "Recommended by" %}</th>
+                                                            <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.createTableConfig(1)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.createTableConfig(3)}">
                                                         <tr>
                                                             <td data-bind="text: recommendation"></td>
+                                                            <td data-bind="text: recommendedBy"></td>
+                                                            <td class="aher-table-control">
+                                                                <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.recommendations">
+                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
+                                                                        <i class="fa fa-mail-reply"></i>
+                                                                    </a>
+                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
+                                                                        <i class="fa fa-trash"></i>
+                                                                    </a>
+                                                                </div>
+                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
@@ -783,16 +775,6 @@
                     }
                 }"></div>
             </div>
-             <!-- Audit Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'audit'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/audit',
-                    params: {
-                        data: resource,
-                        cards: auditCards
-                    }
-                }"></div>
-            </div>
              <!-- JSON Tab -->
             <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
                 <div class="aher-flex-col" data-bind="component: {
@@ -818,7 +800,8 @@
             name: 'views/components/reports/scenes/name',
             params: {
                 data: resource,
-                cards: nameCards
+                cards: nameCards,
+                dataConfig: nameDataConfig
             }
         }"></div>
         <!-- Description -->
@@ -827,6 +810,7 @@
             params: {
                 data: resource,
                 cards: descriptionCards,
+                dataConfig: descriptionDataConfig
             }
         }"></div>
     </div>

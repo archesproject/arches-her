@@ -12,6 +12,7 @@ define([
         this.documents = ko.observableArray();
         this.resourceLoading = ko.observable(true);
         this.dataURL = params.dataURL;
+        this.fileName = params.fileName;
 
         this.resourceData.subscribe(function(val){
             var currentCorrespondence;
@@ -29,8 +30,8 @@ define([
             this.reportVals = {
                 consultationName: {'name': 'Related Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 letterType: {'name': 'Letter Type', 'value': this.getResourceValue(currentCorrespondence, ['Letter Type', '@value'])},
-                letter: {'name': 'Letter', 'value': this.getResourceValue(currentCorrespondence, ['Letter', '@value'])},
-            }
+                letter: {'name': 'Letter', 'value': self.fileName },
+            };
             this.resourceLoading(false);
             this.loading(false);
 
