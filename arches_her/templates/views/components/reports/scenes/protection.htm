@@ -5,7 +5,7 @@
 {% block body %}
 <!-- Geometry/Map -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.protection">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.geospatial)}, css: {'fa-angle-double-right': visible.geospatial(), 'fa-angle-double-up': !visible.geospatial()}" class="fa toggle"></i> {% trans "Geospatial Data" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.geospatial)}, css: {'fa-angle-double-right': visible.geospatial(), 'fa-angle-double-up': !visible.geospatial()}" class="fa toggle"></i> {% trans "Designation/Protection " %}</h2>
     <a class="aher-report-a" data-bind="{if: cards.designations, click: function(){addNewTile(cards.designations)}}">
         <i class="fa fa-mail-reply"></i> {% trans "Add Designation" %}
     </a>
@@ -13,7 +13,7 @@
     <!-- Collapsible content -->
     <div data-bind="visible: visible.geospatial" class="aher-report-collapsible-container pad-lft">
 
-        <div class="aher-report-subsection">
+        <div class="aher-report-subsection" data-bind="if: geojson() && geojson().features.length">
             <h3><i data-bind="click: function() {toggleVisibility(visible.map)}, css: {'fa-angle-double-right': visible.map(), 'fa-angle-double-up': !visible.map()}" class="fa toggle"></i> {% trans "Geometry " %}</h3> 
             <a class="aher-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
             <div data-bind="visible: visible.map">

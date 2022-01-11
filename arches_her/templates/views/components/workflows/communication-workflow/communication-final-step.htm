@@ -77,7 +77,7 @@
 
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Uploaded Files' %}</h5>
-        <div class="final-step-section-block">
+        <div class="final-step-section-block" data-bind="if: documents().length">
             <div class="final-step-section-block-item file-list">
                 <!-- ko foreach: documents -->
                 <div class="file-upload-card" data-bind="style: {'border-width': $index() === ($parent.documents().length - 1) ? '0px' : '1px'}">

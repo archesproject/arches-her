@@ -24,7 +24,6 @@ define([
                 {id: 'journey', title: 'Journey Details'},
                 {id: 'people', title: 'Associated People and Organizations'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -58,7 +57,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
@@ -83,11 +81,6 @@ define([
                     name: self.cards?.['names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.descriptionCards = {
@@ -129,7 +122,8 @@ define([
                             administrativeAreas: 'localities/administrative areas',
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment'
+                            landUse: 'land use classification assignment',
+                            namedLocations: 'named locations'
                         }
                     }
                 }
@@ -153,7 +147,7 @@ define([
                                 type: 'kv'
                             }, {
                                 key: 'Nationality', 
-                                value: self.getRawNodeValue(self.resource(), 'nationalities').map(node => 
+                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node => 
                                     self.getNodeValue(node, 'aircraft nationality')
                                 ), 
                                 card: self.cards?.['nationality'],

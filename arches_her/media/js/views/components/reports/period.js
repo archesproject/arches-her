@@ -19,7 +19,6 @@ define([
                 {id: 'classifications', title: 'Classifications and Dating'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'period', title: 'Period Names'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -56,7 +55,6 @@ define([
             };
 
             self.nameCards = {};
-            self.auditCards = {};
             self.locationCards = {};
             self.descriptionCards = {};
             self.classificationCards = {};
@@ -87,11 +85,6 @@ define([
                     name: self.cards?.['alternative names']
                 });
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-                
                 self.classificationCards = {
                     type: self.cards?.['period types'],
                     dates: self.cards?.dates

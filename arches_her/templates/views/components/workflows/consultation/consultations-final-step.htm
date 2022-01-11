@@ -104,7 +104,12 @@
                 </div>
                 <div class="block-item">
                     <div class="summary-label" data-bind="text: relatedFile.name + ':'"></div>
+                    <!-- ko if: relatedFile.link -->
                     <div class="summary-value"><a data-bind="attr: {href: relatedFile.link}, text: relatedFile.value"></a></div>
+                    <!-- /ko -->
+                    <!-- ko ifnot: relatedFile.link -->
+                    <div class="summary-value" data-bind="text: relatedFile.value"></div>
+                    <!-- /ko -->
                 </div>
             </div>
         </div>

@@ -97,7 +97,7 @@ define([
                         heading: 'Application Reference Numbers',
                         text: 'Save one or more reference numbers before moving to the next step',
                     },
-                    required: true,
+                    required: false,
                     layoutSections: [
                         {
                             componentConfigs: [

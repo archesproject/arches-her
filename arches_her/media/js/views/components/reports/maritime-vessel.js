@@ -24,7 +24,6 @@ define([
                 {id: 'journey', title: 'Journey Details'},
                 {id: 'people', title: 'Associated People and Organizations'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
 
@@ -66,7 +65,6 @@ define([
             }
 
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.assessmentCards = {};
             self.classificationCards = {};
@@ -121,11 +119,6 @@ define([
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
 
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
-                };
-
                 self.locationCards = {
                     location: {
                         card: self.cards?.['location data'],
@@ -135,7 +128,8 @@ define([
                             administrativeAreas: 'localities/administrative areas',
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment'
+                            landUse: 'land use classification assignment',
+                            namedLocations: 'named locations'
                         }
                     }
                 };
@@ -173,7 +167,8 @@ define([
                 self.nationalities(nationalityNode.map(node => {
                     const nationality = self.getNodeValue(node, 'craft nationality');
                     const placeOfRegistration = self.getNodeValue(node, 'place of registration')
-                    return { nationality, placeOfRegistration };
+                    const tileid = self.getTileId(node);
+                    return { nationality, placeOfRegistration, tileid };
                 }));
             }
 

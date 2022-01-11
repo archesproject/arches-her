@@ -22,7 +22,6 @@ define([
                 {id: 'correspondence', title: 'Correspondence'},
                 {id: 'sitevisits', title: 'Site Visits'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -50,6 +49,7 @@ define([
                 locationDescription: undefined,
                 administrativeAreas: undefined,
                 nationalGrid: undefined,
+                namedLocations: undefined
             }
 
             self.resourcesDataConfig = {
@@ -62,7 +62,6 @@ define([
             self.resourcesCards = {};
             self.photographsCards = {};
 
-            self.auditCards = {}
             self.descriptionCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -108,8 +107,9 @@ define([
                     const source = self.getNodeValue(node, 'external cross reference source');
                     const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
                     const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
-                    const url = JSON.parse(self.getNodeValue(node, 'url')).url;
-                    const urlLabel = JSON.parse(self.getNodeValue(node, 'url')).url_label;
+                    const urlNodeValue = self.getRawNodeValue(node, 'url');
+                    const url = urlNodeValue.url;
+                    const urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
                 }));
@@ -191,7 +191,6 @@ define([
             if(Array.isArray(communicationsNode)){
                 self.communications(communicationsNode.map(node => {
                     const subject = self.getNodeValue(node, 'subjects', 'subject');
-                    const subjectDescType = self.getNodeValue(node, 'subjects', 'subject description type');
                     const type = self.getNodeValue(node, 'communication type');
                     const date = self.getNodeValue(node, 'dates', 'date');
                     const attendees = self.getNodeValue(node, 'attendees');
@@ -201,7 +200,7 @@ define([
                     const digitalFile = self.getNodeValue(node, 'digital file(s)');
                     const digitalFileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
                     const tileid = self.getTileId(node);
-                    return {subject, subjectDescType, type, date, attendees, note, followOnAction, relatedCondition, digitalFile, digitalFileLink, tileid};
+                    return {subject, type, date, attendees, note, followOnAction, relatedCondition, digitalFile, digitalFileLink, tileid};
                 }));
             };
 
@@ -216,25 +215,27 @@ define([
                     const recommendationsNodes = self.getRawNodeValue(node, 'recommendations');
                     const photographsNodes = self.getRawNodeValue(node, 'photographs');
 
-                    const attendees = Array.isArray(attendeesNodes) ? (
+                    const attendees = ko.observable(Array.isArray(attendeesNodes) ? (
                         attendeesNodes.map(attendeeNode => {
                             const attendee = self.getNodeValue(attendeeNode, 'attendee');
                             const attendeeType = self.getNodeValue(attendeeNode, 'attendee type');
                             const tileid = self.getTileId(attendeeNode);
                             return {attendee, attendeeType, tileid};
-                        })) : [];
-                    const observations = Array.isArray(observationsNodes) ? (
+                        })) : []);
+                    const observations = ko.observable(Array.isArray(observationsNodes) ? (
                         observationsNodes.map(observationNode => {
                             const observation = self.getNodeValue(observationNode, 'observation', 'observation notes');
+                            const observedBy = self.getNodeValue(observationNode, 'observed by');
                             const tileid = self.getTileId(observationNode);
-                            return {observation, tileid};
-                        })) : [];
-                    const recommendations = Array.isArray(recommendationsNodes) ? (
+                            return {observation, observedBy, tileid};
+                        })) : []);
+                    const recommendations = ko.observable(Array.isArray(recommendationsNodes) ? (
                         recommendationsNodes.map(recommendationNode => {
                             const recommendation = self.getNodeValue(recommendationNode, 'recommendation', 'recommendation value');
+                            const recommendedBy = self.getNodeValue(recommendationNode, 'recommended by');
                             const tileid = self.getTileId(recommendationNode);
-                            return {recommendation, tileid};
-                        })) : [];
+                            return {recommendation, recommendedBy, tileid};
+                        })) : []);
                     const photographs = Array.isArray(photographsNodes) ? (
                         photographsNodes.map(photographNode => {
                             const file = self.getNodeValue(photographNode, 'file_details', [0], 'name');
@@ -283,18 +284,18 @@ define([
                         return {applicant, applicantLink, tileid};
                     })) : [];
                 const tileid = self.getTileId(contactNode);
-                console.log(agentsNodes,ownersNodes,applicantsNodes,agents,owners,applicants)
 
                 self.contacts(
                     { consultingContact, planningOfficer, planningOfficerLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
                 )
             };
-console.log(self.resource())
-console.log(self.contacts())
+
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
+
+                self.siteVisitSubCards = self.createCardDictionary(self.cards['site visits'].cards());
 
                 self.nameCards = {
                     name: self.cards?.['consultation names'],
@@ -318,10 +319,6 @@ console.log(self.contacts())
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
-                };
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
             };
 

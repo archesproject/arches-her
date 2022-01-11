@@ -21,7 +21,6 @@ define([
                 {id: 'people', title: 'Associated People and Organizations'},
                 {id: 'contact', title: 'Biography and Contact Details'},
                 {id: 'resources', title: 'Associated Resources'},
-                {id: 'audit', title: 'Audit Data'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
@@ -80,7 +79,6 @@ define([
                 files: 'digital file(s)'
             };
             self.nameCards = {};
-            self.auditCards = {}
             self.descriptionCards = {};
             self.locationCards = {};
             self.documentationCards = {};
@@ -116,11 +114,6 @@ define([
 
                 self.communicationCards = {
                     contactPoints: self.cards?.['contact information for person'],
-                };
-
-                self.auditCards = {
-                    audit: self.cards?.['audit metadata'],
-                    type: self.cards?.['resource model type']
                 };
 
                 self.imagesCards = {
