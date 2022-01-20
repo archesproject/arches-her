@@ -134,6 +134,11 @@ define([
                     citation: self.cards?.['associated bibliographic sources'],
                 };
 
+                self.classificationCards = {
+                    type: self.cards?.['activity type'],
+                    activityTimespan: self.cards?.['activity timespan'],
+                };
+
                 self.peopleCards = {
                     people: self.cards?.['associated people and organizations']
                 };
