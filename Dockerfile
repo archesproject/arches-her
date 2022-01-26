@@ -67,6 +67,8 @@ COPY /arches_her/docker/entrypoint.sh ${WEB_ROOT}/entrypoint.sh
 RUN chmod -R 700 ${WEB_ROOT}/entrypoint.sh &&\
   dos2unix ${WEB_ROOT}/entrypoint.sh
 
+RUN pip install supervisor
+
 RUN mkdir /var/log/supervisor
 RUN mkdir /var/log/celery
 
