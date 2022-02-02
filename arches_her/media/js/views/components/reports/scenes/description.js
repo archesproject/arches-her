@@ -15,7 +15,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
 
             self.descriptionTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
             };
 
             self.citationTableConfig = {

@@ -10,7 +10,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     { "width": "50%" },
                     { "width": "20%" },
                     { "width": "20%" },
-                   { "width": "100px" },
+                   null,
                 ]
             };
 
