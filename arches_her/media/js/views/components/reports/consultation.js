@@ -87,6 +87,15 @@ define([
                 };
             }
 
+            self.adviceTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
+            };
+
             self.contacts = ko.observable();
             self.references = ko.observableArray();
             self.systemReferences = ko.observableArray();

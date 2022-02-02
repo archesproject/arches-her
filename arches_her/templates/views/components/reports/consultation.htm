@@ -90,7 +90,7 @@
                                             <tr>
                                                 <th>{% trans "Cross Reference" %}</th>
                                                 <th>{% trans "Cross Reference Source" %}</th>
-                                                <th>{% trans "Cross Reference Note" %}</th>
+                                                <th class="none">{% trans "Cross Reference Note" %}</th>
                                                 <th>{% trans "URI" %}</th>
                                                 <th class="aher-table-control all"></th>
                                             </tr>
@@ -201,7 +201,7 @@
                                     <h4 class="aher-block-key">Casework Officer: </h4>
                                     <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficer}"></a>
                                 </div>
-                                <div class="aher-block-attributes">
+                                <div class="aher-block-attributes pad-top">
                                     <h4 class="aher-block-key">Agents: </h4>
                                     <!-- ko ifnot: contacts().agents.length -->
                                     <div class="aher-nodata-note">No agent for this consultation</div>
@@ -262,7 +262,7 @@
                         <!-- ko if: proposal().length -->
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
-                                <div class="aher-table">
+                                <div class="aher-table pad-btm">
                                     <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -308,7 +308,7 @@
                         <!-- ko if: advice().length -->
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
-                                <div class="aher-table">
+                                <div class="aher-table pad-btm">
                                     <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -317,7 +317,8 @@
                                                 <th class="aher-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}">
+                                        <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
+                                        <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: adviceTableConfig}">
                                             <tr>
                                                 <td data-bind="text: advice"></td>
                                                 <td data-bind="text: adviceType"></td>
@@ -354,7 +355,7 @@
                         <!-- ko if: action().length -->
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
-                                <div class="aher-table">
+                                <div class="aher-table pad-btm">
                                     <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -404,9 +405,8 @@
     
                         <!-- ko if: outcomes() -->
                         <div class="aher-report-subsection">
-    
-                            <div class="firstchild-container">
-                                <div class="aher-report-subsection-ite" style="padding-top: 10px;">
+                            <div class="firstchild-container pad-btm">
+                                <div class="aher-report-subsection-item">
                                     <div class="aher-block-attributes">
                                         <h4 class="aher-block-key">Planning Outcome: </h4>
                                         <div class="aher-block-value" data-bind="text: outcomes().planningOutcome"></div>
@@ -435,7 +435,7 @@
                         <!-- ko if: assessmentOfSignificance().length -->
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
-                                <div class="aher-table">
+                                <div class="aher-table pad-btm">
                                     <table class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
@@ -534,12 +534,12 @@
                                             <tr>
                                                 <th>{% trans "Subject" %}</th>
                                                 <th>{% trans "Type" %}</th>
-                                                <th>{% trans "Date" %}</th>
-                                                <th>{% trans "Participants" %}</th>
-                                                <th>{% trans "Related Condition" %}</th>
-                                                <th>{% trans "Note" %}</th>
-                                                <th>{% trans "Follow-On Action" %}</th>
-                                                <th>{% trans "Related Digital File" %}</th>
+                                                <th class="none">{% trans "Date" %}</th>
+                                                <th class="none"{% trans "Participants" %}</th>
+                                                <th class="none">{% trans "Related Condition" %}</th>
+                                                <th class="none">{% trans "Note" %}</th>
+                                                <th class="none">{% trans "Follow-On Action" %}</th>
+                                                <th class="none">{% trans "Related Digital File" %}</th>
                                                 <th class="aher-table-control all"></th>
                                             </tr>
                                         </thead>

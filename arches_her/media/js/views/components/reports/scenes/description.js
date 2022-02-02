@@ -18,13 +18,21 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 "columns": [
                     { "width": "70%" },
                     { "width": "20%" },
-                   null,
+                    null,
                 ]
             };
 
             self.citationTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(7).fill(null)
+                "columns": [
+                    { "width": "90%" },
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
+                ]
             };
 
             self.dataConfig = {
