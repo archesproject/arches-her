@@ -21,7 +21,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.visible = {
-                geometryMetadata: ko.observable(true),
+                geometryMetadata: ko.observable(false),
                 geometry: ko.observable(true),
                 coordinates: ko.observable(true),
                 addresses: ko.observable(true),
