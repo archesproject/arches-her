@@ -87,10 +87,30 @@ define([
                 };
             }
 
+            self.proposalTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "50%" },
+                    { "width": "40%" },
+                   null,
+                ]
+            };
+
             self.adviceTableConfig = {
                 ...self.defaultTableConfig,
                 "columns": [
                     { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
+            };
+
+
+            self.actionTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "50%" },
+                    { "width": "20%" },
                     { "width": "20%" },
                    null,
                 ]

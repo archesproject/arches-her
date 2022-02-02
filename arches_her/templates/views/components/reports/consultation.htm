@@ -271,7 +271,7 @@
                                                 <th class="aher-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody data-bind="dataTablesForEach: { data: proposal, dataTableOptions: createTableConfig(3)}">
+                                        <tbody data-bind="dataTablesForEach: { data: proposal, dataTableOptions: proposalTableConfig}">
                                             <tr>
                                                 <td data-bind="text: proposal"></td>
                                                 <td><a class="aher-table-link" data-bind="text: file, attr: {href: fileLink}"></a></td>
@@ -365,7 +365,7 @@
                                                 <th class="aher-table-control all"></th>
                                             </tr>
                                         </thead>
-                                        <tbody data-bind="dataTablesForEach: { data: action, dataTableOptions: createTableConfig(4)}">
+                                        <tbody data-bind="dataTablesForEach: { data: action, dataTableOptions: actionTableConfig}">
                                             <tr>
                                                 <td data-bind="text: action"></td>
                                                 <td data-bind="text: actionType"></td>
@@ -795,25 +795,98 @@
 </div>
 <div class="model-summary-report">
     <div class="aher-report-page">
-        <!-- Names -->
         <div data-bind="component: {
-            name: 'views/components/reports/scenes/name',
+            name: 'views/components/reports/scenes/default',
             params: {
-                data: resource,
-                cards: nameCards,
-                dataConfig: nameDataConfig
+                data: consultationDetails,
             }
         }"></div>
-        <!-- Description -->
         <div data-bind="component: {
-            name: 'views/components/reports/scenes/description',
+            name: 'views/components/reports/scenes/default',
             params: {
-                data: resource,
-                cards: descriptionCards,
-                dataConfig: descriptionDataConfig
+                data: consultationDates,
             }
         }"></div>
     </div>
+
+
+
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
+        <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
+            <i class="fa fa-mail-reply"></i>
+            <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
+            <span data-bind="ifnot: cards.contacts.tiles().length">{% trans "Add Contacts" %}</span>
+        </a>
+
+        <!-- Collapsible content -->
+        <div data-bind="visible: visible.contacts" class="aher-report-collapsible-container pad-lft">
+            <!-- ko ifnot: contacts() -->
+            <div class="aher-nodata-note">No contact for this consultation</div>
+            <!-- /ko -->
+
+            <!-- ko if: contacts() -->
+            <div class="aher-report-subsection">
+
+                <div class="firstchild-container">
+                    <div class="aher-report-subsection-ite">
+                        <div class="aher-block-attributes">
+                            <h4 class="aher-block-key">Consulting Contact: </h4>
+                            <div class="aher-block-value" data-bind="text: contacts().consultingContact"></div>
+                        </div>
+                        <div class="aher-block-attributes">
+                            <h4 class="aher-block-key">Planning Officer: </h4>
+                            <a class="aher-table-link" data-bind="text: contacts().planningOfficer, attr: {href: contacts().planningOfficerLink}"></a>
+                        </div>
+                        <div class="aher-block-attributes">
+                            <h4 class="aher-block-key">Casework Officer: </h4>
+                            <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficer}"></a>
+                        </div>
+                        <div class="aher-block-attributes pad-top">
+                            <h4 class="aher-block-key">Agents: </h4>
+                            <!-- ko ifnot: contacts().agents.length -->
+                            <div class="aher-nodata-note">No agent for this consultation</div>
+                            <!-- /ko -->
+
+                            <!-- ko if: contacts().agents.length -->
+                            <!-- ko foreach: contacts().agents -->
+                            <span><a class="aher-table-link" data-bind="text: $data.agent, attr: {href: $data.agentLink}"></a></span>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                        <div class="aher-block-attributes">
+                            <h4 class="aher-block-key">Owners: </h4>
+                            <!-- ko ifnot: contacts().owners.length -->
+                            <div class="aher-nodata-note">No owner for this consultation</div>
+                            <!-- /ko -->
+
+                            <!-- ko if: contacts().owners.length -->
+                            <!-- ko foreach: contacts().owners -->
+                            <span><a class="aher-table-link" data-bind="text: $data.owner, attr: {href: $data.ownerLink}"></a></span>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+                        <div class="aher-block-attributes">
+                            <h4 class="aher-block-key">Applicants: </h4>
+                            <!-- ko ifnot: contacts().applicants.length -->
+                            <div class="aher-nodata-note">No applicant for this consultation</div>
+                            <!-- /ko -->
+
+                            <!-- ko if: contacts().applicants.length -->
+                            <!-- ko foreach: contacts().applicants -->
+                            <span><a class="aher-table-link" data-bind="text: $data.applicant, attr: {href: $data.applicantLink}"></a></span>
+                            <!-- /ko -->
+                            <!-- /ko -->
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
+
+
+
 </div>
 
 {% endblock summary %}

@@ -41,17 +41,41 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             self.addressTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(14).fill(null)
+                "columns": [
+                    { "width": "10%" },
+                    { "width": "23%" },
+                    { "width": "23%" },
+                    { "width": "24%" },
+                    { "width": "10%" },
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null
+                ]
             };
 
             self.locDescriptionsTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
             };
 
             self.adminAreasTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(4).fill(null)
+                "columns": [
+                    { "width": "50%" },
+                    { "width": "20%" },
+                    { "width": "20%" },
+                   null,
+                ]
             };
 
             self.gridReferencesTableConfig = {
