@@ -620,7 +620,7 @@
                                                             <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.createTableConfig(3)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.attendeesTableConfig}">
                                                         <tr>
                                                             <td data-bind="text: attendee"></td>
                                                             <td data-bind="text: attendeeType"></td>
@@ -660,7 +660,7 @@
                                                             <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.createTableConfig(3)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.observationsTableConfig}">
                                                         <tr>
                                                             <td data-bind="text: observation"></td>
                                                             <td data-bind="text: observedBy"></td>
@@ -700,7 +700,7 @@
                                                             <th class="aher-table-control all"></th>
                                                         </tr>
                                                     </thead>
-                                                    <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.createTableConfig(3)}">
+                                                    <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.recommendationsTableConfig}">
                                                         <tr>
                                                             <td data-bind="text: recommendation"></td>
                                                             <td data-bind="text: recommendedBy"></td>
