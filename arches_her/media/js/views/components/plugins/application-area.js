@@ -1,10 +1,11 @@
 define([
     'knockout',
+    'arches',
     'viewmodels/workflow',
     'views/components/workflows/new-tile-step',
     'views/components/workflows/application-area/app-area-address-step',
     'views/components/workflows/application-area/app-area-final-step'
-], function(ko, Workflow) {
+], function(ko, arches, Workflow) {
     return ko.components.register('application-area', {
         viewModel: function(params) {
             this.componentName = 'application-area';
@@ -165,6 +166,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
+            this.quitUrl = arches.urls.plugin('init-workflow');
         },
         template: { require: 'text!templates/views/components/plugins/application-area.htm' }
     });

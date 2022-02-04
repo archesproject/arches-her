@@ -1,10 +1,11 @@
 define([
     'knockout',
+    'arches',
     'viewmodels/workflow',
     'views/components/workflows/communication-workflow/communication-select-resource',
     'views/components/workflows/communication-workflow/upload-document-step',
     'views/components/workflows/communication-workflow/communication-final-step'
-], function(ko, Workflow) {
+], function(ko, arches, Workflow) {
     return ko.components.register('communication-workflow', {
         viewModel: function(params) {
             this.componentName = 'communication-workflow';
@@ -181,6 +182,7 @@ define([
             ];
             
             Workflow.apply(this, [params]);
+            this.quitUrl = arches.urls.plugin('init-workflow');
         },
         template: { require: 'text!templates/views/components/plugins/communication-workflow.htm' }
     });
