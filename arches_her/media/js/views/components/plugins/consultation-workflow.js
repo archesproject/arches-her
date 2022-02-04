@@ -191,11 +191,7 @@ define([
             ];
 
             Workflow.apply(this, [params]);
-            // this.quitUrl = "/arches-her" + arches.urls.plugin('init-workflow');
-            // self.getJSON('consultation-workflow');
-
-
-            // self.ready(true);
+            this.quitUrl = arches.urls.plugin('init-workflow');
         },
         template: { require: 'text!templates/views/components/plugins/consultation-workflow.htm' }
     });
