@@ -27,21 +27,6 @@
                 {
                     "card_id": "118feab7-025c-11eb-b44d-f875a44e0e11",
                     "config": {
-                        "defaultValue": "b9ffd5fa-c512-44a6-b1c2-87fd1e3cd519",
-                        "label": "Planning Outcome Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "118feabd-025c-11eb-bc47-f875a44e0e11",
-                    "label": "Planning Outcome Metatype",
-                    "node_id": "118feab8-025c-11eb-9289-f875a44e0e11",
-                    "sortorder": 1,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "118feab7-025c-11eb-b44d-f875a44e0e11",
-                    "config": {
                         "defaultValue": "",
                         "label": "Audit Outcome",
                         "options": [],
@@ -52,6 +37,21 @@
                     "node_id": "118feaba-025c-11eb-98c0-f875a44e0e11",
                     "sortorder": 2,
                     "visible": true,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "118feab7-025c-11eb-b44d-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "b9ffd5fa-c512-44a6-b1c2-87fd1e3cd519",
+                        "label": "Planning Outcome Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "118feabd-025c-11eb-bc47-f875a44e0e11",
+                    "label": "Planning Outcome Metatype",
+                    "node_id": "118feab8-025c-11eb-9289-f875a44e0e11",
+                    "sortorder": 1,
+                    "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
@@ -194,6 +194,44 @@
             ],
             "nodes": [
                 {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "118feab4-025c-11eb-b7e6-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Outcomes",
+                    "nodegroup_id": "118feab5-025c-11eb-b821-f875a44e0e11",
+                    "nodeid": "118feab5-025c-11eb-b821-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "118feab4-025c-11eb-b7e6-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Planning Outcome Metatype",
+                    "nodegroup_id": "118feab5-025c-11eb-b821-f875a44e0e11",
+                    "nodeid": "118feab8-025c-11eb-9289-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
                     "config": {
                         "rdmCollection": "07dbb73c-a977-4861-af4f-47c077be0f38"
                     },
@@ -249,44 +287,6 @@
                     "name": "Audit Outcome metatype",
                     "nodegroup_id": "118feab5-025c-11eb-b821-f875a44e0e11",
                     "nodeid": "118feabb-025c-11eb-8dd8-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "118feab4-025c-11eb-b7e6-f875a44e0e11",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Outcomes",
-                    "nodegroup_id": "118feab5-025c-11eb-b821-f875a44e0e11",
-                    "nodeid": "118feab5-025c-11eb-b821-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
-                    "parentproperty": "",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "118feab4-025c-11eb-b7e6-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Planning Outcome Metatype",
-                    "nodegroup_id": "118feab5-025c-11eb-b821-f875a44e0e11",
-                    "nodeid": "118feab8-025c-11eb-9289-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0

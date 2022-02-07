@@ -27,15 +27,17 @@
                 {
                     "card_id": "c8e413a9-025b-11eb-b901-f875a44e0e11",
                     "config": {
-                        "label": "Proposal File(s)",
-                        "placeholder": null
+                        "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
+                        "label": "Proposal Description Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
                     },
-                    "id": "c8e413b0-025b-11eb-bd86-f875a44e0e11",
-                    "label": "Proposal File(s)",
-                    "node_id": "c8e413ab-025b-11eb-badc-f875a44e0e11",
-                    "sortorder": 3,
-                    "visible": true,
-                    "widget_id": "31f3728c-7613-11e7-a139-784f435179ea"
+                    "id": "c8e413ae-025b-11eb-9fbd-f875a44e0e11",
+                    "label": "Proposal Description Metatype",
+                    "node_id": "c8e413aa-025b-11eb-be31-f875a44e0e11",
+                    "sortorder": 2,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "c8e413a9-025b-11eb-b901-f875a44e0e11",
@@ -56,6 +58,20 @@
                 {
                     "card_id": "c8e413a9-025b-11eb-b901-f875a44e0e11",
                     "config": {
+                        "defaultResourceInstance": [],
+                        "label": "Proposal File(s)",
+                        "placeholder": null
+                    },
+                    "id": "c8e413b0-025b-11eb-bd86-f875a44e0e11",
+                    "label": "Proposal File(s)",
+                    "node_id": "c8e413ab-025b-11eb-badc-f875a44e0e11",
+                    "sortorder": 3,
+                    "visible": true,
+                    "widget_id": "31f3728c-7613-11e7-a139-784f435179ea"
+                },
+                {
+                    "card_id": "c8e413a9-025b-11eb-b901-f875a44e0e11",
+                    "config": {
                         "defaultValue": "39a21ebf-7dd6-4a7f-a211-9453202f60aa",
                         "label": "Proposal Description Type",
                         "options": [],
@@ -65,21 +81,6 @@
                     "label": "Proposal Description Type",
                     "node_id": "c8e413ad-025b-11eb-870d-f875a44e0e11",
                     "sortorder": 1,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "c8e413a9-025b-11eb-b901-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "6fbe3775-e51d-4f90-af53-5695dd204c9a",
-                        "label": "Proposal Description Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "c8e413ae-025b-11eb-9fbd-f875a44e0e11",
-                    "label": "Proposal Description Metatype",
-                    "node_id": "c8e413aa-025b-11eb-be31-f875a44e0e11",
-                    "sortorder": 2,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
@@ -194,24 +195,6 @@
             "nodes": [
                 {
                     "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "c8e413a6-025b-11eb-9a3a-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Proposal Text",
-                    "nodegroup_id": "c8e413a7-025b-11eb-8180-f875a44e0e11",
-                    "nodeid": "c8e413ac-025b-11eb-8292-f875a44e0e11",
-                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
                     "datatype": "semantic",
                     "description": null,
                     "exportable": false,
@@ -226,6 +209,26 @@
                     "nodeid": "c8e413a7-025b-11eb-8180-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "c8e413a6-025b-11eb-9a3a-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Proposal Description Metatype",
+                    "nodegroup_id": "c8e413a7-025b-11eb-8180-f875a44e0e11",
+                    "nodeid": "c8e413aa-025b-11eb-be31-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 },
                 {
@@ -259,6 +262,24 @@
                     "sortorder": 0
                 },
                 {
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "c8e413a6-025b-11eb-9a3a-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Proposal Text",
+                    "nodegroup_id": "c8e413a7-025b-11eb-8180-f875a44e0e11",
+                    "nodeid": "c8e413ac-025b-11eb-8292-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -274,26 +295,6 @@
                     "name": "Proposal Description Type",
                     "nodegroup_id": "c8e413a7-025b-11eb-8180-f875a44e0e11",
                     "nodeid": "c8e413ad-025b-11eb-870d-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "c8e413a6-025b-11eb-9a3a-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Proposal Description Metatype",
-                    "nodegroup_id": "c8e413a7-025b-11eb-8180-f875a44e0e11",
-                    "nodeid": "c8e413aa-025b-11eb-be31-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0

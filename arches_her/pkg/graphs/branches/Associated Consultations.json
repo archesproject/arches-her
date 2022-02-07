@@ -8,7 +8,14 @@
                     "cardid": "80af9af7-51ab-11eb-a16b-f875a44e0e11",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "80af9af7-51ab-11eb-a16b-f875a44e0e11",
+                            "constraintid": "94528274-1c1c-4a37-897a-e9a99e26387f",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "80af9af4-51ab-11eb-b3f9-f875a44e0e11",
@@ -27,6 +34,7 @@
                 {
                     "card_id": "80af9af7-51ab-11eb-a16b-f875a44e0e11",
                     "config": {
+                        "defaultResourceInstance": [],
                         "label": "Consultation",
                         "placeholder": ""
                     },
@@ -87,7 +95,7 @@
             "name": "Associated Consultations",
             "nodegroups": [
                 {
-                    "cardinality": "n",
+                    "cardinality": "1",
                     "legacygroupid": null,
                     "nodegroupid": "80af9af5-51ab-11eb-83d7-f875a44e0e11",
                     "parentnodegroup_id": null
@@ -108,7 +116,7 @@
                         "searchDsl": "",
                         "searchString": ""
                     },
-                    "datatype": "resource-instance",
+                    "datatype": "resource-instance-list",
                     "description": null,
                     "exportable": true,
                     "fieldname": "Assoc_Cons",
@@ -142,7 +150,7 @@
                     "searchDsl": "",
                     "searchString": ""
                 },
-                "datatype": "resource-instance",
+                "datatype": "resource-instance-list",
                 "description": null,
                 "exportable": true,
                 "fieldname": "Assoc_Cons",

@@ -34,16 +34,16 @@
                 {
                     "card_id": "dea0a418-2999-11eb-8fee-f875a44e0e11",
                     "config": {
-                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
-                        "label": "Place of Departure Name Metatype",
+                        "defaultValue": null,
+                        "label": "Place of Departure",
                         "options": [],
                         "placeholder": "Select an option"
                     },
-                    "id": "ec0ceb99-299c-11eb-b006-f875a44e0e11",
-                    "label": "Place of Departure Name Metatype",
-                    "node_id": "dea0a41b-2999-11eb-ae03-f875a44e0e11",
-                    "sortorder": 2,
-                    "visible": false,
+                    "id": "ec0682bb-299c-11eb-ac1a-f875a44e0e11",
+                    "label": "Place of Departure",
+                    "node_id": "dea0a419-2999-11eb-a835-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
@@ -59,21 +59,6 @@
                     "node_id": "dea0a41a-2999-11eb-b154-f875a44e0e11",
                     "sortorder": 1,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "dea0a418-2999-11eb-8fee-f875a44e0e11",
-                    "config": {
-                        "defaultValue": null,
-                        "label": "Place of Departure",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "ec0682bb-299c-11eb-ac1a-f875a44e0e11",
-                    "label": "Place of Departure",
-                    "node_id": "dea0a419-2999-11eb-a835-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
@@ -109,15 +94,15 @@
                 {
                     "card_id": "dea0a418-2999-11eb-8fee-f875a44e0e11",
                     "config": {
-                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
-                        "label": "Place of Departure Name Currency Metatype",
+                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
+                        "label": "Place of Departure Name Metatype",
                         "options": [],
                         "placeholder": "Select an option"
                     },
-                    "id": "ec0ff893-299c-11eb-aa3c-f875a44e0e11",
-                    "label": "Place of Departure Name Currency Metatype",
-                    "node_id": "dea0a41f-2999-11eb-a7c4-f875a44e0e11",
-                    "sortorder": 6,
+                    "id": "ec0ceb99-299c-11eb-b006-f875a44e0e11",
+                    "label": "Place of Departure Name Metatype",
+                    "node_id": "dea0a41b-2999-11eb-ae03-f875a44e0e11",
+                    "sortorder": 2,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -133,6 +118,21 @@
                     "label": "Place of Departure Name Use Metatype",
                     "node_id": "dea0a41d-2999-11eb-abab-f875a44e0e11",
                     "sortorder": 4,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "dea0a418-2999-11eb-8fee-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "5a88136a-bf3a-4b48-a830-a7f42000dd24",
+                        "label": "Place of Departure Name Currency Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "ec0ff893-299c-11eb-aa3c-f875a44e0e11",
+                    "label": "Place of Departure Name Currency Metatype",
+                    "node_id": "dea0a41f-2999-11eb-a7c4-f875a44e0e11",
+                    "sortorder": 6,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
@@ -251,6 +251,24 @@
             ],
             "nodes": [
                 {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "dea0a412-2999-11eb-92fe-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Departure Placenames",
+                    "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
+                    "nodeid": "dea0a413-2999-11eb-8187-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
+                },
+                {
                     "config": {},
                     "datatype": "semantic",
                     "description": null,
@@ -290,7 +308,7 @@
                 },
                 {
                     "config": {
-                        "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
+                        "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
                     "datatype": "concept",
                     "description": null,
@@ -299,31 +317,13 @@
                     "graph_id": "dea0a412-2999-11eb-92fe-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
-                    "name": "Place of Departure Name Currency",
+                    "name": "Place of Departure Name Type",
                     "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
-                    "nodeid": "dea0a41e-2999-11eb-9f0b-f875a44e0e11",
+                    "nodeid": "dea0a41a-2999-11eb-b154-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "dea0a412-2999-11eb-92fe-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Departure Placenames",
-                    "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
-                    "nodeid": "dea0a413-2999-11eb-8187-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0
                 },
                 {
@@ -342,26 +342,6 @@
                     "name": "Place of Departure Name Metatype",
                     "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
                     "nodeid": "dea0a41b-2999-11eb-ae03-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "dea0a412-2999-11eb-92fe-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Place of Departure Name Type",
-                    "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
-                    "nodeid": "dea0a41a-2999-11eb-b154-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
@@ -399,9 +379,29 @@
                     "isrequired": false,
                     "issearchable": false,
                     "istopnode": false,
-                    "name": "Place of Departure Name Currency Metatype",
+                    "name": "Place of Departure Name Use Metatype",
                     "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
-                    "nodeid": "dea0a41f-2999-11eb-a7c4-f875a44e0e11",
+                    "nodeid": "dea0a41d-2999-11eb-abab-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "dea0a412-2999-11eb-92fe-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Place of Departure Name Currency",
+                    "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
+                    "nodeid": "dea0a41e-2999-11eb-9f0b-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
@@ -419,9 +419,9 @@
                     "isrequired": false,
                     "issearchable": false,
                     "istopnode": false,
-                    "name": "Place of Departure Name Use Metatype",
+                    "name": "Place of Departure Name Currency Metatype",
                     "nodegroup_id": "dea0a416-2999-11eb-8665-f875a44e0e11",
-                    "nodeid": "dea0a41d-2999-11eb-abab-f875a44e0e11",
+                    "nodeid": "dea0a41f-2999-11eb-a7c4-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
