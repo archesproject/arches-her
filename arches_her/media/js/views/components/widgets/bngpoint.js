@@ -169,12 +169,9 @@ define(['knockout', 'proj4', 'underscore', 'viewmodels/widget'], function (ko, p
             }
 
             this.lat_long_six_figs = function (lat_long_coord) {
-                var lat_long_coord_string = Math.round(lat_long_coord).toString()
-                if (lat_long_coord_string.length < 6) {
-                    lat_long_coord_string = 0 + lat_long_coord_string
-                }
-                return lat_long_coord_string
+                return String(Math.round(lat_long_coord)).padStart(6, '0');
             }
+
 
             this.validateInput = function (finalBNG, gridSquareValues) {
                 // CS - Checks that the value to be added is a valid Alphanumeric BNG reference with length 12.
