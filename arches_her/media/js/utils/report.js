@@ -169,6 +169,7 @@ define([
 
         // builds an object-based dictionary for cards
         createCardDictionary: (cards) => {
+            cards = ko.unwrap(cards);
             if(!cards){
                 return;
             }
