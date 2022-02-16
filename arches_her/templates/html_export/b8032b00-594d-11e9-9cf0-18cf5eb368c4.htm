@@ -5,12 +5,12 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Keystone - Historic Aircraft</title>
-		{% include 'html_export\milligram.htm' %}
-      {% include 'html_export\custom_style.htm' %}
+		{% include 'html_export/milligram.htm' %}
+      {% include 'html_export/custom_style.htm' %}
    </head>
    <body>
       <header>
-         {% include 'html_export\custom_header.htm' %}
+         {% include 'html_export/custom_header.htm' %}
          <h1>Historic Aircraft</h1>
       </header>
       <main>
@@ -326,7 +326,6 @@
                <div class="row">
                   <div class="column">
                      <strong>Manner of Loss: </strong>{{ resource_data|val_from_key:"Crash_Event"|val_from_key:"Manner of Loss"|val_from_key:"@display_value" }}<br>
-                     <strong>Use Phase Period: </strong>****MISSING****<br>
                      <strong>Date of Loss: </strong>{{ resource_data|val_from_key:"Crash_Event"|val_from_key:"Last Flight Timespan"|val_from_key:"Date of Loss"|val_from_key:"@display_value" }}
                   </div>
                </div>
@@ -402,10 +401,10 @@
                               <div class="rcell">External Cross Reference Source</div>
                               <div class="rcell">URL</div>
                            </div>
-                           {% for exref in resource_data|val_from_key:"External Cross References"|val_from_key:"@display_value" %}
+                           {% for exref in resource_data|val_from_key:"External Cross References" %}
                            <div class="rrow">
                               <div class="rcell" data-title="External Cross Reference">
-                                 {{ exref|val_from_key:"External Cross Reference" }}
+                                 {{ exref|val_from_key:"External Cross Reference"|val_from_key:"@display_value" }}
                               </div>
 
                               <div class="rcell" data-title="External Cross Reference Source">
