@@ -365,7 +365,14 @@
                     "cardid": "78dc0725-f000-11eb-b700-a87eeabdefba",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "78dc0725-f000-11eb-b700-a87eeabdefba",
+                            "constraintid": "542adcc9-c25c-46a8-a22b-526518485a41",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "934cd7f0-480a-11ea-9240-c4d9877d154e",
@@ -705,6 +712,13 @@
                         "options": [
                             {
                                 "children": [],
+                                "collector": "collector",
+                                "conceptid": "8330ef66-140e-4901-900b-931aba60f8db",
+                                "sortorder": "",
+                                "text": "Ten or more storeys"
+                            },
+                            {
+                                "children": [],
                                 "collector": "",
                                 "conceptid": "fbab569f-f57a-465d-9021-f0dec9207b9a",
                                 "id": "05f3a954-4bfd-4e0f-9092-d4ff64de4310",
@@ -734,14 +748,6 @@
                                 "id": "9f629a66-be04-497a-9b7a-bba0670f6422",
                                 "sortorder": "4",
                                 "text": "Four to ten storey"
-                            },
-                            {
-                                "children": [],
-                                "collector": "",
-                                "conceptid": "8330ef66-140e-4901-900b-931aba60f8db",
-                                "id": "36ec7ee6-74e6-4bc1-97b3-ab771a36ccc2",
-                                "sortorder": "5",
-                                "text": "Ten or more storeys"
                             }
                         ],
                         "placeholder": "Select an option",
@@ -763,33 +769,9 @@
                             {
                                 "children": [],
                                 "collector": "",
-                                "conceptid": "54e17850-7f59-4dfb-8655-1ad6ab6ee3b4",
-                                "id": "f08e5c20-3d3d-4ed3-b55d-e06dfcaac195",
-                                "sortorder": "",
-                                "text": "Communal"
-                            },
-                            {
-                                "children": [],
-                                "collector": "",
-                                "conceptid": "f2e7f33b-4e00-481e-b5bc-fdfd9dec2a1b",
-                                "id": "492f5a14-4a0d-449f-8657-b68e8b0de135",
-                                "sortorder": "",
-                                "text": "Large gardens"
-                            },
-                            {
-                                "children": [],
-                                "collector": "",
-                                "conceptid": "1f1c1cfe-c1a0-4b4f-b6a7-c60d10d596a5",
-                                "id": "bc5fe34b-1019-4c49-8aa1-de9842274f5e",
-                                "sortorder": "",
-                                "text": "Medium gardens"
-                            },
-                            {
-                                "children": [],
-                                "collector": "",
                                 "conceptid": "c9d8e6d9-42ab-428b-a686-32fc30e205ec",
                                 "id": "50240c34-907f-4af2-98d4-79842a5d5dae",
-                                "sortorder": "",
+                                "sortorder": "1",
                                 "text": "None"
                             },
                             {
@@ -797,8 +779,32 @@
                                 "collector": "",
                                 "conceptid": "e8266c77-d1ec-41df-947a-7d74b9ec3c4e",
                                 "id": "f7002677-f08c-4c0b-a2d4-6534a102c59c",
-                                "sortorder": "",
+                                "sortorder": "2",
                                 "text": "Small gardens"
+                            },
+                            {
+                                "children": [],
+                                "collector": "",
+                                "conceptid": "1f1c1cfe-c1a0-4b4f-b6a7-c60d10d596a5",
+                                "id": "bc5fe34b-1019-4c49-8aa1-de9842274f5e",
+                                "sortorder": "3",
+                                "text": "Medium gardens"
+                            },
+                            {
+                                "children": [],
+                                "collector": "",
+                                "conceptid": "f2e7f33b-4e00-481e-b5bc-fdfd9dec2a1b",
+                                "id": "492f5a14-4a0d-449f-8657-b68e8b0de135",
+                                "sortorder": "4",
+                                "text": "Large gardens"
+                            },
+                            {
+                                "children": [],
+                                "collector": "",
+                                "conceptid": "54e17850-7f59-4dfb-8655-1ad6ab6ee3b4",
+                                "id": "f08e5c20-3d3d-4ed3-b55d-e06dfcaac195",
+                                "sortorder": "5",
+                                "text": "Communal"
                             }
                         ],
                         "placeholder": "Select an option",
@@ -841,7 +847,7 @@
                 {
                     "card_id": "3d22bf21-1aa8-11eb-b617-f875a44e0e11",
                     "config": {
-                        "defaultValue": "",
+                        "defaultValue": "b5f1ff2d-d667-4c4e-86a1-c17fa4b9447b",
                         "label": "Description Language",
                         "options": [],
                         "placeholder": "Select an option"
@@ -850,7 +856,7 @@
                     "label": "Description Language",
                     "node_id": "3d22bf25-1aa8-11eb-82b0-f875a44e0e11",
                     "sortorder": 3,
-                    "visible": true,
+                    "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
@@ -2413,7 +2419,7 @@
                 {
                     "card_id": "71e5be8e-f001-11eb-be45-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": null,
                         "label": "Update End Date",
                         "maxDate": null,
@@ -2552,7 +2558,7 @@
                 {
                     "card_id": "71e5be8e-f001-11eb-be45-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": null,
                         "label": "Creation End Date",
                         "maxDate": null,
@@ -2667,7 +2673,7 @@
                 {
                     "card_id": "71e5be8e-f001-11eb-be45-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": null,
                         "label": "Creation Date",
                         "maxDate": null,
@@ -2700,13 +2706,13 @@
                 {
                     "card_id": "78dc0725-f000-11eb-b700-a87eeabdefba",
                     "config": {
-                        "label": "URl",
+                        "label": "URL",
                         "link_color": "#0055a0",
                         "url_label_placeholder": "Enter URL Label... ",
                         "url_placeholder": "Enter URL... "
                     },
                     "id": "78dc1cab-f000-11eb-af90-a87eeabdefba",
-                    "label": "URl",
+                    "label": "URL",
                     "node_id": "78dc1ca8-f000-11eb-880c-a87eeabdefba",
                     "sortorder": 5,
                     "visible": true,
@@ -5752,7 +5758,7 @@
                     "nodeid": "02f036ba-482c-11ea-8e39-c4d9877d154e",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
-                    "sortorder": 0
+                    "sortorder": 4
                 },
                 {
                     "config": {
@@ -5890,7 +5896,7 @@
                     "nodeid": "3d22bf1f-1aa8-11eb-83d7-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "sortorder": 0
+                    "sortorder": 1
                 },
                 {
                     "config": null,
@@ -6008,7 +6014,7 @@
                     "nodeid": "4a1e68cd-f000-11eb-a1cc-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
-                    "sortorder": 0
+                    "sortorder": 10
                 },
                 {
                     "config": null,
@@ -6649,7 +6655,7 @@
                     "nodeid": "6677b647-3dff-11eb-bbd8-f875a44e0e11",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMgeo/SP6_Declarative_Place",
                     "parentproperty": "http://www.ics.forth.gr/isl/CRMgeo/Q11i_is_approximated_by",
-                    "sortorder": 0
+                    "sortorder": 5
                 },
                 {
                     "config": null,
@@ -8056,7 +8062,7 @@
                     "nodeid": "6eff45b8-ee0e-11eb-a895-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as",
-                    "sortorder": 0
+                    "sortorder": 12
                 },
                 {
                     "config": {
@@ -8094,7 +8100,7 @@
                     "nodeid": "71e5be8c-f001-11eb-94a2-a87eeabdefba",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "sortorder": 0
+                    "sortorder": 11
                 },
                 {
                     "config": {
@@ -8808,7 +8814,7 @@
                     "nodeid": "78dc0723-f000-11eb-979a-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
+                    "sortorder": 9
                 },
                 {
                     "config": null,
@@ -8978,7 +8984,7 @@
                     "nodeid": "86ce8acb-4eaa-11eb-8468-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P141i_was_assigned_by",
-                    "sortorder": 0
+                    "sortorder": 8
                 },
                 {
                     "config": {
@@ -9119,7 +9125,7 @@
                     "nodeid": "959b6e79-1acb-11eb-ad10-f875a44e0e11",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMgeo/SP6_Declarative_Place",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P121_overlaps_with",
-                    "sortorder": 0
+                    "sortorder": 7
                 },
                 {
                     "config": null,
@@ -9167,7 +9173,7 @@
                     "nodeid": "b188334d-f001-11eb-afc6-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "sortorder": 0
+                    "sortorder": 3
                 },
                 {
                     "config": {
@@ -9608,7 +9614,7 @@
                     "nodeid": "dd8a6c93-1d21-11eb-8678-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P89_falls_within",
-                    "sortorder": 0
+                    "sortorder": 2
                 },
                 {
                     "config": null,
@@ -9784,7 +9790,7 @@
                     "nodeid": "e354c5ac-07b8-11eb-8007-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E5_Event",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed",
-                    "sortorder": 0
+                    "sortorder": 6
                 },
                 {
                     "config": null,
