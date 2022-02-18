@@ -6,12 +6,12 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Keystone - Maritime Craft</title>
-		{% include 'html_export\milligram.htm' %}
-      {% include 'html_export\custom_style.htm' %}
+		{% include 'html_export/milligram.htm' %}
+      {% include 'html_export/custom_style.htm' %}
    </head>
    <body>
       <header>
-         {% include 'html_export\custom_header.htm' %}
+         {% include 'html_export/custom_header.htm' %}
          <h1>Maritime Craft</h1>
       </header>
       <main>
@@ -364,7 +364,7 @@
          {% endif %}
 
          {# Voyages #}
-         {% if resource_data|has_key:"Use Phase" %}
+         {% if resource_data|has_key:"Voyages" %}
          <section>
             <div class="container">
                <h3>Voyages</h3>
@@ -431,7 +431,7 @@
         {% endif %}
 
         {# Associated Activities #}
-        {% if resource_data|has_key:"Associated_Activities" %}
+        {% if resource_data|has_key:"Associated Activities" %}
         <section>
         <div class="container">
             <h3>Associated Activities</h3>
@@ -439,7 +439,7 @@
                 <div class="column">
                     <div class="keeptogether">
                     <ul>
-                        {% for assocAct in resource_data|val_from_key:"Associated_Activities" %}
+                        {% for assocAct in resource_data|val_from_key:"Associated Activities" %}
                         <li>{{ assocAct|val_from_key:"@display_value" }}</li>
                         {% endfor %}
                     </ul>
@@ -471,10 +471,10 @@
                             {{ assocArchive|val_from_key:"Associated Archive Objects"|val_from_key:"Archive Object References"|val_from_key:"Archive Object Reference"|val_from_key:"@display_value" }}
                         </div>
                         <div class="rcell" data-title="Archive Object Title">
-                            {{ assocArchive|val_from_key:"Associated Archive Objects"|val_from_key:"Archive Holder"|val_from_key:"@display_value" }}
+                            {{ assocArchive|val_from_key:"Associated Archive Objects"|val_from_key:"Archive Object Titles"|val_from_key:"Archive Object Title"|val_from_key:"@display_value" }}
                         </div>
                         <div class="rcell" data-title="Archive Holder">
-                            {{ assocArchive|val_from_key:"Associated Archive Objects"|val_from_key:"Archive Object Titles"|val_from_key:"Archive Object Title"|val_from_key:"@display_value" }}
+                            {{ assocArchive|val_from_key:"Associated Archive Objects"|val_from_key:"Archive Holder"|val_from_key:"@display_value" }}
                     </div>
                     </div>
                     {% endfor %}

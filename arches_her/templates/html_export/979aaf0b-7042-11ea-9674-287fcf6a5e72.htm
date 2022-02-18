@@ -5,12 +5,12 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Keystone - Heritage Area</title>
-		{% include 'html_export\milligram.htm' %}
-      {% include 'html_export\custom_style.htm' %}
+		{% include 'html_export/milligram.htm' %}
+      {% include 'html_export/custom_style.htm' %}
    </head>
    <body>
       <header>
-         {% include 'html_export\custom_header.htm' %}
+         {% include 'html_export/custom_header.htm' %}
          <h1>Heritage Areas</h1>
       </header>
       <main>
@@ -43,7 +43,7 @@
          {% endif %}
 
          {# Asset Names #}
-         {% if resource_data|has_key:"Names" %}
+         {% if resource_data|has_key:"Heritage Area Names" %}
          <section >
             <div class="container">
                <h3>Heritage Area Names</h3>
@@ -55,16 +55,16 @@
                               <div class="rcell">Name</div>
                               <div class="rcell">Name Type</div>
                            </div>
-                           {% for names in resource_data|val_from_key:"Names" %}
+                           {% for names in resource_data|val_from_key:"Heritage Area Names" %}
                            <div class="rrow">
                               <div class="rcell" data-title="Name">
-                                 {% if names|has_key:"Name" %}
-                                 {{ names|val_from_key:"Name"|val_from_key:"@display_value" }}
+                                 {% if names|has_key:"Heritage Area Name" %}
+                                 {{ names|val_from_key:"Heritage Area Name"|val_from_key:"@display_value" }}
                                  {% endif %}
                               </div>
                               <div class="rcell" data-title="Name Type">
-                                 {% if names|has_key:"Name Use Type" %}
-                                 {{ names|val_from_key:"Name Use Type"|val_from_key:"@display_value" }}
+                                 {% if names|has_key:"Heritage Area Name Use Type" %}
+                                 {{ names|val_from_key:"Heritage Area Name Use Type"|val_from_key:"@display_value" }}
                                  {% endif %}
                               </div>
                            </div>

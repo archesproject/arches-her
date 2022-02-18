@@ -6,12 +6,12 @@
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Keystone - Historic Landscape Characterization</title>
-		{% include 'html_export\milligram.htm' %}
-      {% include 'html_export\custom_style.htm' %}
+		{% include 'html_export/milligram.htm' %}
+      {% include 'html_export/custom_style.htm' %}
    </head>
    <body>
       <header>
-         {% include 'html_export\custom_header.htm' %}
+         {% include 'html_export/custom_header.htm' %}
          <h1>Historic Landscape Characterization</h1>
       </header>
       <main>
@@ -242,9 +242,9 @@
                        <h3>Historic Land Use Character Attributes</h3>
                        <p>
                           <strong>Street Frontage: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Street Frontage"|val_from_key:"@display_value" }}<br />
-                          <strong>Street Frontage: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Average Height"|val_from_key:"@display_value" }}<br />
-                          <strong>Street Frontage: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Rear Gardens"|val_from_key:"@display_value" }}<br />
-                          <strong>Street Frontage: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Street Pattern"|val_from_key:"@display_value" }}<br />
+                          <strong>Average Height: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Average Height"|val_from_key:"@display_value" }}<br />
+                          <strong>Rear Gardens: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Rear Gardens"|val_from_key:"@display_value" }}<br />
+                          <strong>Street Pattern: </strong>{{ resource_data|val_from_key:"Historic Land Use Character Attributes"|val_from_key:"Street Pattern"|val_from_key:"@display_value" }}<br />
                         </p>
                     </div>
                  </div>
