@@ -52,11 +52,17 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
                         self.sort_nodes(self.graph.nodes)
                         self.graph.nodes.forEach(function(node){
                             if (node.nodegroup_id == card){
-                                self.nodes_in_card.push(node);
-                                self.sort_nodes(self.nodes_in_card)
-                                if (node.datatype == 'string'){
-                                    self.string_nodes_in_card.push(node);
-                                    self.sort_nodes(self.string_nodes_in_card)
+                                var nodes_in_card_list = ko.unwrap(self.nodes_in_card)
+                                if (!(nodes_in_card_list.includes(node))){
+                                    self.nodes_in_card.push(node);
+                                    self.sort_nodes(self.nodes_in_card)
+                                    var string_nodes_in_card_list = ko.unwrap(self.string_nodes_in_card)
+                                    if (node.datatype == 'string'){
+                                        if (!(string_nodes_in_card_list.includes(node))){
+                                            self.string_nodes_in_card.push(node);
+                                            self.sort_nodes(self.string_nodes_in_card)
+                                        }
+                                    }
                                 }
                             }
                         }, self);
