@@ -15,6 +15,7 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
 
             this.cards_in_graph = ko.observableArray();
             this.nodes_in_card = ko.observableArray();
+            this.string_nodes_in_card = ko.observableArray();
             this.cards_nodegroups = ko.observableArray();
             this.chosen_card = ko.observable();
             this.target_node = ko.observable();
@@ -48,17 +49,25 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
                 self.nodes_in_card.removeAll();
                 _.each(self.cards_in_graph(),function(available_card){
                     if (card === available_card.nodegroup_id){
-                        self.graph.nodes.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0))
+                        self.sort_nodes(self.graph.nodes)
                         self.graph.nodes.forEach(function(node){
                             if (node.nodegroup_id == card){
+                                self.nodes_in_card.push(node);
+                                self.sort_nodes(self.nodes_in_card)
                                 if (node.datatype == 'string'){
-                                    self.nodes_in_card.push(node);
+                                    self.string_nodes_in_card.push(node);
+                                    self.sort_nodes(self.string_nodes_in_card)
                                 }
                             }
                         }, self);
                     }
                 })
             });
+
+            this.sort_nodes = function(nodes_to_sort){
+                sorted_nodes = nodes_to_sort.sort((a,b) => (a.name > b.name) ? 1 : ((b.name > a.name) ? -1 : 0));
+                return sorted_nodes
+            }
 
 
             this.target_node.subscribe(function(){
@@ -86,7 +95,8 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
                         if(stored_string == null){
                             _.each(self.nodes_in_card(),function(available_node){
                                 if (available_node.nodeid != self.target_node()){
-                                    if (!(available_node.datatype in ['semantic','geojson-feature-collection','file-list','annotation'])){
+                                    var invalid_datatypes = ['semantic','geojson-feature-collection','file-list','annotation']
+                                    if (!(invalid_datatypes.includes(available_node.datatype))){
                                         string_value = string_value + "<" + available_node.name + ">, "
                                     }
                                 }
