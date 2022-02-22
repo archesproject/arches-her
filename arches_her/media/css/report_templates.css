@@ -1,11 +1,14 @@
 /*CSS specifically for Arches-HER custom reports*/
-
 /* !important is evil, but necessary to override/revert to default the inline styles for resource-component-abstract */
 .resource-component-abstract {
     height: auto !important;
     display: flex;
     flex: 1;
     flex-direction: column;
+}
+
+.aher-tabbed-report .fa-angle-double-right {
+    padding-left: 1px;
 }
 
 .aher-table-control div
@@ -109,8 +112,8 @@
 
 .aher-report-anchors {
     margin-bottom: 0px;
-    padding-top: 9px;
-    padding-bottom: 9px;
+    padding-top: 14px;
+    padding-bottom: 14px;
     background: #fcfcfc;
     border-bottom: 1px solid #ddd;
     width: 100%;
@@ -160,7 +163,7 @@ li, .aher-report-a.active:hover {
     overflow: auto;
     display: flex;
     flex-direction: column;
-    margin-top: 85px;
+    margin-top: 95px;
     flex: 1;
     flex-direction: column
 }
@@ -261,7 +264,7 @@ i.toggle:hover {
 
 .aher-table {
     margin-right: 20px;
-    margin-top: -8px;
+    margin-top: -12px;
     margin-left: 8px;
     /*display: table;
     min-width: 50%;*/
@@ -429,8 +432,24 @@ i.toggle:hover {
 }
 
 .aher-report-subsection h3 span {
-    font-weight: 600;
+    font-weight: 500;
     color: #555;
+    font-size: 15px;
+}
+
+h3.highlight {
+    padding: 4px 8px;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 2px;
+}
+
+h3.shim {
+    padding: 5px 9px;
+}
+
+h3.shim:hover {
+    cursor: pointer;
 }
 
 .aher-report-collapsible-container {
@@ -439,18 +458,19 @@ i.toggle:hover {
 
 .aher-report-subsection-container {
     display: flex;
-    padding-left: 12px;
+    padding-left: 0px;
     margin-bottom: 15px;
     padding-top: 5px;
-    background: #f6f8fa;
     padding-bottom: 15px;
-    border: 1px solid #e9e9e9;
     border-top: none;
-    border-radius: 2px;
 }
 
 .aher-report-subsection-container.no-flex {
     display: block;
+}
+
+.aher-report-subsection-container.map-container h3 {
+    margin-bottom: 10px;
 }
 
 .aher-report-subsection-container.multi-cards {
@@ -487,7 +507,7 @@ i.toggle:hover {
 }
 
 .aher-block-attributes h4 {
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 400;
     margin: 2px 0px;
     display: inline-block;
@@ -506,6 +526,11 @@ i.toggle:hover {
     font-weight: 600;
     color: #555;
 }
+
+.aher-block-attributes .aher-nodata-note {
+    margin-bottom: 0px;
+}
+
 .aher-keyvalue > h4 {
     margin: 2px;
     font-weight: 400;
@@ -519,6 +544,11 @@ i.toggle:hover {
     width: 300px;
 }
 
+.aher-block-attributes.top-line {
+    border-top: 1px solid #ddd;
+    margin-top: 3px;
+}
+
 .aher-card-control{
     display: inline;
 }
@@ -529,7 +559,7 @@ i.toggle:hover {
 }
 
 .aher-report-subsection-firstchild {
-    padding: 0px 0px 25px 30px;;
+    padding: 10px 20px;
     min-height: 50px;
 }
 
@@ -538,8 +568,14 @@ i.toggle:hover {
     font-size: 14px;
     font-weight: 500;
     color: #454545;
-    padding-bottom: 6px;
+    padding-bottom: 3px;
+    margin-bottom: 8px;
     border-bottom: 1px solid #ddd;
+}
+
+.aher-report-subsection-firstchild.no-top-pad {
+    padding-top: 0px;
+    margin-top: -10px;
 }
 
 .aher-report-subsection-firstchild:last-child {
@@ -614,6 +650,7 @@ i.toggle:hover {
     color: #888;
     margin-bottom: 20px;
     margin-left: 10px;
+    display: inline-block;
 }
 
 .aher-report-subsection-firstchild .aher-nodata-note {
@@ -681,6 +718,18 @@ i.toggle:hover {
     line-height: 1.25;
 }
 
+.aher-block-attributes.highlighted {
+    padding: 4px 8px;
+    background: #f8f8f8;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+}
+
+.aher-block-attributes.highlighted h4 {
+    font-weight: 500;
+    color: #676767;
+}
+
 .aher-block-key {
     margin-right: 5px;
     color: #0d3b63;
@@ -690,7 +739,7 @@ i.toggle:hover {
 .aher-block-value {
     color: #777;
     display: inline-block;
-    font-size: 14px;
+    font-size: 15px;
 }
 
 .aher-block-value a {
@@ -766,7 +815,7 @@ a.aher-block-value-url {
 }
 
 .aher-report-photo-container {
-    padding: 15px 0px 40px 0px;
+    padding: 0px;
     display: flex;
     flex-wrap: wrap;
 }
@@ -776,8 +825,8 @@ a.aher-block-value-url {
     width: 350px;
     border: 1px solid #ddd;
     background: #f9f9f9;
-    margin: 0px 15px 0px 0px;
-    padding: 20px;
+    margin: 0px 15px 10px 0px;
+    padding: 3px;
     display: flex;
     justify-content: center;
 }
@@ -809,10 +858,6 @@ a.aher-block-value-url {
 
 .aher-report-photo-caption .aher-block-value {
     font-size: 12px;
-}
-
-.aher-report-photo:hover {
-    cursor: pointer;
 }
 
 .aher-report-json {
