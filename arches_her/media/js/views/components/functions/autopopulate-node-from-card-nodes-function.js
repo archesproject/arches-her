@@ -10,7 +10,6 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
             var self = this;
             this.triggering_nodegroups = params.config.triggering_nodegroups;
             this.autopopulate_configs = params.config.autopopulate_configs;
-            console.log(this.autopopulate_configs)
 
 
             this.cards_in_graph = ko.observableArray();
@@ -47,6 +46,7 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
 
             this.chosen_card.subscribe(function(card){
                 self.nodes_in_card.removeAll();
+                self.string_nodes_in_card.removeAll();
                 _.each(self.cards_in_graph(),function(available_card){
                     if (card === available_card.nodegroup_id){
                         self.sort_nodes(self.graph.nodes)
@@ -84,7 +84,6 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
 
             this.string_template_calc = ko.computed({
                 read: function (){
-                    console.log(self.target_node())
                     if (self.target_node()){
                         var string_value = ""
                         var stored_string = null
