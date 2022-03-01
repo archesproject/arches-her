@@ -168,7 +168,10 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
 
 
             this.trigger_string_template_reset = function(){
+                var target_node = ko.unwrap(self.target_node)
+                self.target_node(undefined);
                 self.reset_string_template(true);
+                self.target_node(target_node);
             }
 
 
