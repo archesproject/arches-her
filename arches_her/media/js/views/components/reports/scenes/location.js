@@ -21,7 +21,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.visible = {
-                geometryMetadata: ko.observable(true),
+                geometryMetadata: ko.observable(false),
                 geometry: ko.observable(true),
                 coordinates: ko.observable(true),
                 addresses: ko.observable(true),
@@ -41,17 +41,41 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             self.addressTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(14).fill(null)
+                "columns": [
+                    { "width": "15%" },
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "15%" },
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null,
+                   null
+                ]
             };
 
             self.locDescriptionsTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(3).fill(null)
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
             };
 
             self.adminAreasTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(4).fill(null)
+                "columns": [
+                    { "width": "50%" },
+                    { "width": "20%" },
+                    { "width": "20%" },
+                   null,
+                ]
             };
 
             self.gridReferencesTableConfig = {

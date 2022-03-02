@@ -90,6 +90,64 @@ define([
                 };
             }
 
+            self.proposalTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "50%" },
+                    { "width": "40%" },
+                   null,
+                ]
+            };
+
+            self.adviceTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
+            };
+
+
+            self.actionTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "50%" },
+                    { "width": "20%" },
+                    { "width": "20%" },
+                   null,
+                ]
+            };
+
+            self.attendeesTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "45%" },
+                    { "width": "45%" },
+                   null,
+                ]
+            };
+
+            self.observationsTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
+            };
+
+
+            self.recommendationsTableConfig = {
+                ...self.defaultTableConfig,
+                "columns": [
+                    { "width": "70%" },
+                    { "width": "20%" },
+                   null,
+                ]
+            };
+
+
             self.contacts = ko.observable();
             self.references = ko.observableArray();
             self.systemReferences = ko.observableArray();
