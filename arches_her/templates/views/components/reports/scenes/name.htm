@@ -24,8 +24,8 @@
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
-                                <th class="min-tabletl">{% trans "Name Use Type" %}</th>
-                                <th class="min-medium">{% trans "Name Currency" %}</th>
+                                <th class="">{% trans "Name Use Type" %}</th>
+                                <th class="">{% trans "Name Currency" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
@@ -122,7 +122,7 @@
         <div class="aher-report-subsection" data-bind="with: systemReferenceNumbers, as: 'srn'">
 
             <div class="firstchild-container">
-                <div class="aher-report-subsection-ite" style="padding-top: 10px;">
+                <div class="aher-report-subsection-ite">
                     <div class="aher-block-attributes">
                         <h4 class="aher-block-key">Resource ID: </h4>
                         <div class="aher-block-value" data-bind="text:srn.resourceId"></div>

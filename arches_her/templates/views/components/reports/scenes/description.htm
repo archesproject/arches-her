@@ -23,15 +23,15 @@
                     <table class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
-                                <th>{% trans "Type" %}</th>
                                 <th>{% trans "Content" %}</th>
+                                <th>{% trans "Type" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: descriptions, dataTableOptions: descriptionTableConfig }">
                             <tr>
-                                <td data-bind="text: type"></td>
                                 <td data-bind="text: content"></td>
+                                <td data-bind="text: type"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards && $parent.cards.descriptions">
                                         <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.descriptions)}">
@@ -72,11 +72,11 @@
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Source" %}</th>
-                                <th>{% trans "Source Number" %}</th>
-                                <th>{% trans "Pages" %}</th>
-                                <th>{% trans "Figures" %}</th>
-                                <th>{% trans "Plates" %}</th>
-                                <th>{% trans "Comment" %}</th>
+                                <th class="none">{% trans "Source Number" %}</th>
+                                <th class="none">{% trans "Pages" %}</th>
+                                <th class="none">{% trans "Figures" %}</th>
+                                <th class="none">{% trans "Plates" %}</th>
+                                <th class="none">{% trans "Comment" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
