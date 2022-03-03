@@ -172,6 +172,7 @@ function (ko, koMapping, FunctionViewModel, chosen, AlertViewModel) {
                 self.target_node(undefined);
                 self.reset_string_template(true);
                 self.target_node(target_node);
+                self.target_node.valueHasMutated();
             }
 
 
