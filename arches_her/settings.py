@@ -164,13 +164,13 @@ CACHES = {
 TIMEWHEEL_DATE_TIERS = {
     "name": "Millennium",
     "interval": 1000,
-    "range": {"min": -2000, "max": 2000},
+    "range": {"min": -2000, "max": 3000},
     "root": True,
     "child": {
         "name": "Cen",
         "interval": 100,
-        "range": {"min": 1500, "max": 2000},
-        "child": {"name": "Decade", "interval": 10, "range": {"min": 1750, "max": 2000}},
+        # "range": {"min": 1500, "max": 2000},
+        "child": {"name": "Decade", "interval": 10, "range": {"min": 1750, "max": 2100}},
     },
 }
 
