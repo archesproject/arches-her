@@ -27,21 +27,6 @@
                 {
                     "card_id": "e90c0ff9-992e-11ea-9cd6-f875a44e0e11",
                     "config": {
-                        "defaultValue": "495ecc6a-a265-434b-8708-d6b76bd9a30e",
-                        "label": "Measurement Unit Metatype",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "e90c0fff-992e-11ea-8e87-f875a44e0e11",
-                    "label": "Measurement Unit Metatype",
-                    "node_id": "e90c0ffc-992e-11ea-8444-f875a44e0e11",
-                    "sortorder": null,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "e90c0ff9-992e-11ea-9cd6-f875a44e0e11",
-                    "config": {
                         "defaultValue": "",
                         "label": "Number of Pages",
                         "maxLength": null,
@@ -67,6 +52,21 @@
                     "id": "e90c0ffe-992e-11ea-bc7b-f875a44e0e11",
                     "label": "Measurement Unit",
                     "node_id": "e90c0ffb-992e-11ea-a3fa-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "e90c0ff9-992e-11ea-9cd6-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "495ecc6a-a265-434b-8708-d6b76bd9a30e",
+                        "label": "Measurement Unit Metatype",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "e90c0fff-992e-11ea-8e87-f875a44e0e11",
+                    "label": "Measurement Unit Metatype",
+                    "node_id": "e90c0ffc-992e-11ea-8444-f875a44e0e11",
                     "sortorder": null,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
@@ -125,24 +125,6 @@
             "nodes": [
                 {
                     "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Number of Pages",
-                    "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
-                    "nodeid": "e90c0ffa-992e-11ea-aeb9-f875a44e0e11",
-                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P90_has_value",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
                     "datatype": "semantic",
                     "description": null,
                     "exportable": false,
@@ -160,23 +142,21 @@
                     "sortorder": 0
                 },
                 {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
+                    "config": null,
+                    "datatype": "string",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
                     "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": false,
+                    "issearchable": true,
                     "istopnode": false,
-                    "name": "Measurement Unit Metatype",
+                    "name": "Number of Pages",
                     "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
-                    "nodeid": "e90c0ffc-992e-11ea-8444-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "nodeid": "e90c0ffa-992e-11ea-aeb9-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P90_has_value",
                     "sortorder": 0
                 },
                 {
@@ -197,6 +177,26 @@
                     "nodeid": "e90c0ffb-992e-11ea-a3fa-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E58_Measurement_Unit",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P91_has_unit",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Measurement Unit Metatype",
+                    "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
+                    "nodeid": "e90c0ffc-992e-11ea-8444-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],
