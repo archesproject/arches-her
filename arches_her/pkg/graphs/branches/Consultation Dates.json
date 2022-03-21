@@ -263,6 +263,24 @@
             ],
             "nodes": [
                 {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Consultation Dates",
+                    "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
+                    "nodeid": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -283,62 +301,6 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Target Date",
-                    "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
-                    "nodeid": "1f29ee81-025c-11eb-8419-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P86i_contains",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Target Date Qualifier",
-                    "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
-                    "nodeid": "1f29ee84-025c-11eb-b736-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Consultation Dates",
-                    "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
-                    "nodeid": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
-                    "parentproperty": "",
-                    "sortorder": 0
-                },
-                {
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -351,9 +313,9 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Target Date End ",
+                    "name": "Completion Date",
                     "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
-                    "nodeid": "1f29ee83-025c-11eb-8029-f875a44e0e11",
+                    "nodeid": "1f29ee7f-025c-11eb-981f-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
                     "sortorder": 0
@@ -376,6 +338,24 @@
                     "nodeid": "1f29ee80-025c-11eb-a334-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82a_begin_of_the_begin",
+                    "sortorder": 0
+                },
+                {
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Target Date",
+                    "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
+                    "nodeid": "1f29ee81-025c-11eb-8419-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P86i_contains",
                     "sortorder": 0
                 },
                 {
@@ -411,11 +391,31 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Completion Date",
+                    "name": "Target Date End ",
                     "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
-                    "nodeid": "1f29ee7f-025c-11eb-981f-f875a44e0e11",
+                    "nodeid": "1f29ee83-025c-11eb-8029-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E61_Time_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P82b_end_of_the_end",
+                    "sortorder": 0
+                },
+                {
+                    "config": {
+                        "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Target Date Qualifier",
+                    "nodegroup_id": "1f29ee7b-025c-11eb-8f7a-f875a44e0e11",
+                    "nodeid": "1f29ee84-025c-11eb-b736-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
                 }
             ],
