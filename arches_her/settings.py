@@ -20,9 +20,7 @@ FUNCTION_LOCATIONS.append("arches_her.functions")
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "functions", "templates"))
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "widgets", "templates"))
 TEMPLATES[0]["DIRS"].insert(0, os.path.join(APP_ROOT, "templates"))
-TEMPLATES[0]["OPTIONS"]["context_processors"].append(
-    "arches_her.utils.context_processors.project_settings"
-)
+TEMPLATES[0]["OPTIONS"]["context_processors"].append("arches_her.utils.context_processors.project_settings")
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = "vwo1!nn5s0m)89@pn7^!4a^+_+7mdhk^=&$zrwi(n2lisgi0_w"
@@ -86,9 +84,7 @@ DATABASES = {
 
 ALLOWED_HOSTS = []
 
-SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(
-    APP_ROOT, "system_settings", "System_Settings.json"
-)
+SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, "system_settings", "System_Settings.json")
 WSGI_APPLICATION = "arches_her.wsgi.application"
 STATIC_ROOT = ""
 
@@ -115,9 +111,7 @@ LOGGING = {
             "formatter": "console",
         },
     },
-    "loggers": {
-        "arches": {"handlers": ["file", "console"], "level": "DEBUG", "propagate": True}
-    },
+    "loggers": {"arches": {"handlers": ["file", "console"], "level": "DEBUG", "propagate": True}},
 }
 
 MIDDLEWARE = [
@@ -164,6 +158,19 @@ CACHES = {
     },
 }
 
+TIMEWHEEL_DATE_TIERS = {
+    "name": "Millennium",
+    "interval": 1000,
+    "range": {"min": -2000, "max": 3000},
+    "root": True,
+    "child": {
+        "name": "Century",
+        "interval": 100,
+        # "range": {"min": 1500, "max": 2000},
+        "child": {"name": "Decade", "interval": 10, "range": {"min": 1750, "max": 2100}},
+    },
+}
+
 # Identify the usernames and duration (seconds) for which you want to cache the time wheel
 CACHE_BY_USER = {"anonymous": 3600 * 24}
 
@@ -171,8 +178,13 @@ MOBILE_OAUTH_CLIENT_ID = ""
 MOBILE_DEFAULT_ONLINE_BASEMAP = {"default": "mapbox://styles/mapbox/streets-v9"}
 
 PREFERRED_COORDINATE_SYSTEMS = (
-    {"name": "BNG","srid": "27700", "proj4": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs", "default": True},
-    {"name": "LatLong", "srid": "4326", "proj4": "+proj=longlat +datum=WGS84 +no_defs", "default": False},  #Required
+    {
+        "name": "BNG",
+        "srid": "27700",
+        "proj4": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs",
+        "default": True,
+    },
+    {"name": "LatLong", "srid": "4326", "proj4": "+proj=longlat +datum=WGS84 +no_defs", "default": False},  # Required
 )
 
 APP_TITLE = "Arches-HER"
