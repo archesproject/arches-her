@@ -232,7 +232,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                             const postcode = self.getNodeValue(x, 'postcode', 'postcode value');
                             const status = self.getNodeValue(x, 'address status');
                             const street = self.getNodeValue(x, 'street', 'street value');
-                            const subStreet = self.getNodeValue(x, 'sub-street ', 'sub-street value');
+                            const subStreet = self.getNodeValue(x, 'sub-street', 'sub-street value');
                             const tileid = self.getTileId(x);
                             const town = self.getNodeValue(x, 'town or city', 'town or city value');
                             return { buildingName, buildingNumber, buildingNumberSubStreet, county, currency, fullAddress, locality, postcode, status, street, subStreet, tileid, town };
