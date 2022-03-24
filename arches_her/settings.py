@@ -192,6 +192,8 @@ COPYRIGHT_TEXT = "All Rights Reserved."
 COPYRIGHT_YEAR = "2020"
 DOCKER = False
 
+ACCESSIBILITY_MODE = True
+
 try:
     from .package_settings import *
 except ImportError:
