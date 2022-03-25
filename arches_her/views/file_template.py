@@ -302,6 +302,12 @@ class FileTemplateView(View):
                                 xstr(contactTile.data[addressDict["Postcode"]])
                             )
                             mapping_dict["Address of consulting organisation"] = addressString
+        associate_heritage = mapping_dict["Archaeological Priority Area"]
+        if associate_heritage == "":
+            mapping_dict["Archaeological Priority Area"] = "The planning application is not in an area of archaeological interest."
+        else:
+            mapping_dict["Archaeological Priority Area"] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(associate_heritage)
+            
         for key in mapping_dict:
             html = False
             if '<' in mapping_dict[key]: # look for html tag, not ideal
