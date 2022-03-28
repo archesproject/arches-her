@@ -353,11 +353,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 const componentsNode = self.getRawNodeValue(params.data(), 'components');
                 if(Array.isArray(componentsNode)) {
                     self.components(componentsNode.map(x => {
-                        const constructionPhase = self.getNodeValue(x, 'associated asset construction phase');
+                        const constructionPhase = self.getNodeValue(x, 'associated area phase');
                         const component = self.getNodeValue(x, 'component', 'component type');
                         const material = self.getNodeValue(x, 'component', 'component material');
                         const technique = self.getNodeValue(x, 'construction technique');
-                        const evidence = self.getNodeValue(x, 'component attribute assignment', 'component evidence type');
+                        const evidence = self.getNodeValue(x, 'component attribute assignment', 'evidence type');
                         const tileid = self.getTileId(x);
 
                         return { 
