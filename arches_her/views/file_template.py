@@ -322,6 +322,7 @@ class FileTemplateView(View):
 
         for mitigation in mitigations:
             mapping_dict["Mitigation"] += "<p>{}</p>{}<br>".format(mitigation["type"], mitigation["content"])
+
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
             mapping_dict["Archaeological Priority Area"] = "The planning application is not in an area of archaeological interest."
