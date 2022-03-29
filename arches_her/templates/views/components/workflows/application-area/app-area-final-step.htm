@@ -95,11 +95,11 @@
         <h5 class="summary-value">{% trans 'Related Resources' %}</h5>
         <div class="final-step-section-block">
             <div class="final-step-section-block-item">
+                <!--ko foreach: relatedResources().related_resources -->
                 <div class="block-item">
-                    <!--ko foreach: relatedResources().related_resources -->
                     <div class="summary-value" data-bind="text: $data.displayname"></div>
-                    <!--/ko-->
                 </div>
+                <!--/ko-->
             </div>
         </div>
     </div>
