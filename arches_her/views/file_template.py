@@ -22,6 +22,7 @@ import os
 import uuid
 from datetime import datetime
 import docx
+import textwrap
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
@@ -218,16 +219,32 @@ class FileTemplateView(View):
             "Address of consulting organisation": "",
             "Name of person consulting": "",
         }
+
+        def get_value_from_tile(tile, node_id):
+            current_node = models.Node.objects.get(nodeid=node_id)
+            datatype = datatype_factory.get_instance(current_node.datatype)
+            return datatype.get_display_value(tile, current_node)
+
+        action_nodegroup_id = 'a5e15f5c-51a3-11eb-b240-f875a44e0e11'
+        action_node_id = 'bfd39106-51a3-11eb-9104-f875a44e0e11'
+        action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
+        mitigations = []
+
         for tile in tiles:
-            for key, value in list(template_dict.items()):
-                if value in tile.data:
-                    my_node = models.Node.objects.get(nodeid=value)
-                    datatype = datatype_factory.get_instance(my_node.datatype)
-                    lookup_val = datatype.get_display_value(tile, my_node)
-                    try:
-                        mapping_dict[key] = "" if lookup_val is None else lookup_val
-                    except TypeError:
-                        pass
+            mitigation = {}
+            if str(tile.nodegroup_id) == action_nodegroup_id:
+                mitigation["content"] = get_value_from_tile(tile, action_node_id)
+                mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
+            else:
+                for key, value in list(template_dict.items()):
+                    if value in tile.data:
+                        lookup_val = get_value_from_tile(tile, value)
+                        try:
+                            mapping_dict[key] = "" if lookup_val is None else lookup_val
+                        except TypeError:
+                            pass
+            if len(mitigation) > 0:
+                mitigations.append(mitigation)
 
             contactNodeId = "b7304f4c-3ace-11eb-8884-f875a44e0e11"
             contacts = {
@@ -303,6 +320,9 @@ class FileTemplateView(View):
                                 xstr(contactTile.data[addressDict["Postcode"]])
                             )
                             mapping_dict["Address of consulting organisation"] = addressString
+
+        for mitigation in mitigations:
+            mapping_dict["Mitigation"] += "<p>{}</p>{}<br>".format(mitigation["type"], mitigation["content"])
         for key in mapping_dict:
             html = False
             if '<' in mapping_dict[key]: # look for html tag, not ideal
