@@ -160,16 +160,15 @@ class FileTemplateView(View):
             "41f3d0bb-a94d-469f-80c8-85ab03283972":	"Condition Historic Building Recording Letter.docx", # Letter D3
             "7f1e7061-8bb0-4338-9342-118f1e9214aa":	"WSI Approval Letter.docx", # Letter F1
             "eaa8a075-50e6-4c3d-ac08-fbe84865f577":	"WSI Amend Letter.docx", # Letter F2
+            "8d605e5c-d0da-4b72-9ce3-2f7dac3381d1":	"Post Excavation Assessment Approval Letter.docx", # Letter G - PXA Approval
             "a31061ea-9b80-435f-82c8-94dc10afcbae":	"Condition Satisfied Letter.docx", # Letter H
+            "eed24dd2-85a0-4402-a6ba-bda426b5da89":	"Blank Adviser Letter.docx", # Letter I - Bespoke Letter
             # No template available yet
-            "8d605e5c-d0da-4b72-9ce3-2f7dac3381d1":	"", # Letter G - PXA Approval
-            "eed24dd2-85a0-4402-a6ba-bda426b5da89":	"", # Letter I - Bespoke Letter
             "a26c77ff-1d04-4b76-a45f-417f7ed24333": "", # Additional Condition Text
             "8c12a812-8000-4ec9-913d-c6fd516117f2": "", # Archaeological Recommendation Text
             # No concept selection available
             "missing 0": "Conditions Scope Notes.docx",
             "missing 1": "Mitigation Scope Notes.docx",
-            "missing 2": "Post Excavation Assessment Approval Letter.docx"
         }
         for key, value in list(template_dict.items()):
             if key == template_id:
@@ -323,6 +322,12 @@ class FileTemplateView(View):
 
         for mitigation in mitigations:
             mapping_dict["Mitigation"] += "<p>{}</p>{}<br>".format(mitigation["type"], mitigation["content"])
+        associate_heritage = mapping_dict["Archaeological Priority Area"]
+        if associate_heritage == "":
+            mapping_dict["Archaeological Priority Area"] = "The planning application is not in an area of archaeological interest."
+        else:
+            mapping_dict["Archaeological Priority Area"] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(associate_heritage)
+            
         for key in mapping_dict:
             html = False
             if '<' in mapping_dict[key]: # look for html tag, not ideal

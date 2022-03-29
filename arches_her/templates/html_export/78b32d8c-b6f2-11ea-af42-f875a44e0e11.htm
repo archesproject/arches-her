@@ -1,0 +1,238 @@
+{% load template_tags %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Place</title>
+      {% include 'html_export/milligram.htm' %}
+      {% include 'html_export/custom_style.htm' %}
+   </head>
+   <body>
+      <header>
+         {% include 'html_export/custom_header.htm' %}
+         <h1>Places</h1>
+      </header>
+      <main>
+         {% for resource in resources %}
+         {% with resource_data=resource.resource %}
+         <section class="section-title">
+            <blockquote>
+               <h2>{{ resource.displayname }}</h2>
+            </blockquote>
+         </section>
+
+         {# System Ref #}
+         {% if resource_data|has_key:"System Reference Numbers" %}
+         <section>
+            <div class="container">
+               <div class="row">
+                  <div class="column">
+                     <div>
+                        <h3>System Reference Numbers</h3>
+                        <p>
+                           <strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number"|val_from_key:"@display_value" }}<br>
+                           <strong>Legacy ID: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"LegacyID"|val_from_key:"Legacy ID"|val_from_key:"@display_value" }}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+
+         {# Place Names #}
+         {% if resource_data|has_key:"Names" %}
+         <section >
+            <div class="container">
+               <h3>Place Names</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <div class="rtable">
+                           <div class="rrow rheader">
+                              <div class="rcell">Name</div>
+                              <div class="rcell">Name Type</div>
+                           </div>
+
+                           {% for names in resource_data|val_from_key:"Names" %}
+                           <div class="rrow">
+                              <div class="rcell" data-title="Name">
+                                 {% if names|has_key:"Placename" %}
+                                 {{ names|val_from_key:"Placename"|val_from_key:"@display_value" }}
+                                 {% endif %}
+                              </div>
+                              <div class="rcell" data-title="Name Type">
+                                 {% if names|has_key:"Placename Use Type" %}
+                                 {{ names|val_from_key:"Placename Use Type"|val_from_key:"@display_value" }}
+                                 {% endif %}
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+         {# Place Type #}
+         {% if resource_data|has_key:"Place Type" %}
+         <section>
+            <div class="container">
+               <div class="row">
+                  <div class="column">
+                     <div>
+                        <h3>Place Type</h3>
+                        <p>
+                           {{ resource_data|val_from_key:"Place Type"|val_from_key:"@display_value" }}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+         {# Location Data #}
+         {% if resource_data|has_key:"Localities/Administrative Areas" or "Addresses" %}
+         <section>
+            <div class="container location-details">
+               <h3>Location Information</h3>
+               <div class="row">
+                  <div class="column">
+
+                     <div class="keeptogether">
+                        <div class="row">
+                            <div class="column">
+                                <h4>Localities/Administrative Area Types</h4>
+                                <p>
+                                    {% if resource_data|has_key:"Localities/Administrative Area Types" %}
+                                    {% for area in resource_data|val_from_key:"Localities/Administrative Area Types" %}
+
+                                    {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
+                                    {% if area|has_key:"Area Type" %}
+                                    {{ area|val_from_key:"Area Type"|val_from_key:"@display_value" }}</br/>
+                                    {% endif %}
+
+                                    {% endfor %}
+                                    {% endif %}
+                                </p>
+                            </div>
+                            <div class="column">
+                                {# there is a bug that passes a dict if there are no addresses in this branch... let's check for a key to stop this from causing odd artifacts #}
+                                {% with address_check=resource_data|val_from_key:"Addresses" %}
+                                {% if address_check.0|has_key:"Full Address" %}
+                                <div class="keeptogether">
+                                    <h4>Addresses</h4>
+                                    <div class="rtable">
+                                    <div class="rrow rheader">
+                                        <div class="rcell">Full Address</div>
+                                        <div class="rcell">Locality</div>
+                                    </div>
+                                    {% for address in resource_data|val_from_key:"Addresses" %}
+
+                                    <div class="rrow">
+                                        <div class="rcell" data-title="Full Address">
+                                                {{ address|val_from_key:"Full Address"|val_from_key:"@display_value" }}
+                                        </div>
+                                        <div class="rcell" data-title="Locality">
+                                            {{ address|val_from_key:"Locality"|val_from_key:"Locality Value"|val_from_key:"@display_value" }}
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                    </div>
+                                </div>
+                                {% endif %}
+                                {% endwith %}
+                            </div>
+                        </div>
+                    </div>
+               </div>
+            </div>
+        </section>
+        <hr/>
+        {% endif %}
+
+        {# Place Description #}
+        {% if resource_data|has_key:"Descriptions" %}
+        <section>
+           <div class="container">
+              <div class="row">
+                 <div class="column">
+                    <div>
+                       <h3>Place Description</h3>
+                       <p>
+                          {{ resource_data|val_from_key:"Descriptions"|val_from_key:"Description"|val_from_key:"@display_value"|safe }}
+                       </p>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </section>
+        <hr/>
+        {% endif %}
+
+
+        {# External Cross References #}
+        {% if resource_data|has_key:"External Cross References" %}
+        <section>
+           <div class="container">
+              <h3>External Cross References</h3>
+              <div class="row">
+                 <div class="column">
+                    <div class="keeptogether">
+                       <div class="rtable">
+                          <div class="rrow rheader">
+                             <div class="rcell">External Cross Reference</div>
+                             <div class="rcell">External Cross Reference Source</div>
+                             <div class="rcell">URL</div>
+                          </div>
+                          {% for exref in resource_data|val_from_key:"External Cross References" %}
+                          <div class="rrow">
+                             <div class="rcell" data-title="External Cross Reference">
+                                {{ exref|val_from_key:"External Cross Reference"|val_from_key:"@display_value" }}
+                             </div>
+
+                             <div class="rcell" data-title="External Cross Reference Source">
+                                {{ exref|val_from_key:"External Cross Reference Source"|val_from_key:"@display_value" }}
+                             </div>
+                             <div class="rcell" data-title="URL">
+                              {% with exref|val_from_key:"URL" as URL %}
+                                    {% if URL|has_key:"url" and URL|has_key:"url_label" %}
+                                        <a href="{{URL|val_from_key:'url'}}">{{URL|val_from_key:'url_label'}}</a>
+                                    {% elif URL|has_key:"url_label" %}
+                                        {{URL|val_from_key:"url_label"}}
+                                    {% elif URL|has_key:"url" %}
+                                       <a href="{{URL|val_from_key:'url'}}">{{URL|val_from_key:'url'}}</a>
+                                    {% else %}
+                                        <br />
+                                    {% endif %}
+                                {% endwith %}
+                             </div>
+                          </div>
+                          {% endfor %}
+                       </div>
+                    </div>
+                 </div>
+              </div>
+           </div>
+        </section>
+        <hr/>
+        {% endif %}
+
+         {% endwith%}
+         {% endfor %}
+      </main>
+   </body>
+</html>
+
