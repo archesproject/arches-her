@@ -127,9 +127,9 @@ define([
                         {
                             componentConfigs: [
                                 { 
-                                    componentName: 'map-card',
+                                    componentName: 'default-card',
                                     uniqueInstanceName: 'related-heritage-resource', /* unique to step */
-                                    tilesManaged: 'one',
+                                    tilesManaged: 'many',
                                     parameters: {
                                         graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                                         nodegroupid: '48f51523-efde-11eb-8285-a87eeabdefba',
