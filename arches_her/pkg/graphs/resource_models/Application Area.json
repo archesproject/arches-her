@@ -476,7 +476,7 @@
                     "helptext": "<p><strong>Full Address</strong></p>\n\n<p>Where it is convenient, this can be used to record the full address. This can be used to aid migration from legacy systems with less sophisticated recording practice</p>\n\n<p><strong>Address Parts</strong></p>\n\n<p>To better represent the complexity of addresses each constituent part has been modelled.</p>\n\n<p><strong>Building Name</strong></p>\n\n<p>Use to record the actual name of a building where known.</p>\n\n<p><strong>Building Number</strong></p>\n\n<p>Use to record the number(s) assigned to a building. This may be a single number (eg. 45) or a range separated by a &#39;-&#39;&nbsp;(eg. 13-21).</p>\n\n<p><strong>Building Number Sub-Street</strong></p>\n\n<p>&nbsp;</p>\n",
                     "helptitle": "Addresses",
                     "instructions": "Used to record the postal address relating to an Application Area.",
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Addresses",
                     "nodegroup_id": "7ee432f9-eeb5-11eb-a673-a87eeabdefba",
                     "sortorder": 6,
@@ -502,7 +502,7 @@
                     "helptext": null,
                     "helptitle": null,
                     "instructions": "Enter the name of the application area.",
-                    "is_editable": true,
+                    "is_editable": false,
                     "name": "Application Area Names",
                     "nodegroup_id": "9c9f9dbb-83bf-11ea-bca7-f875a44e0e11",
                     "sortorder": 0,
@@ -5662,28 +5662,30 @@
             "functions_x_graphs": [
                 {
                     "config": {
-                        "description": {
-                            "nodegroup_id": "7a76715d-94fd-11ea-8481-f875a44e0e11",
-                            "string_template": "<Description>"
-                        },
-                        "map_popup": {
-                            "nodegroup_id": "7a76715d-94fd-11ea-8481-f875a44e0e11",
-                            "string_template": "<Description>"
-                        },
-                        "name": {
-                            "nodegroup_id": "9c9f9dbb-83bf-11ea-bca7-f875a44e0e11",
-                            "string_template": "<Application Area Name>"
+                        "descriptor_types": {
+                            "description": {
+                                "nodegroup_id": "7a76715d-94fd-11ea-8481-f875a44e0e11",
+                                "string_template": "<Description>"
+                            },
+                            "map_popup": {
+                                "nodegroup_id": "7a76715d-94fd-11ea-8481-f875a44e0e11",
+                                "string_template": "<Description>"
+                            },
+                            "name": {
+                                "nodegroup_id": "9c9f9dbb-83bf-11ea-bca7-f875a44e0e11",
+                                "string_template": "<Application Area Name>"
+                            }
                         },
                         "triggering_nodegroups": []
                     },
                     "function_id": "60000000-0000-0000-0000-000000000001",
                     "graph_id": "42ce82f6-83bf-11ea-b1e8-f875a44e0e11",
-                    "id": "b9cffe3e-52f9-11ec-8516-a87eeabdefba"
+                    "id": "ac32fc0a-afd1-11ec-b01d-acde48001122"
                 }
             ],
             "graphid": "42ce82f6-83bf-11ea-b1e8-f875a44e0e11",
             "iconclass": "fa fa-square-o",
-            "is_editable": true,
+            "is_editable": false,
             "isactive": true,
             "isresource": true,
             "jsonldcontext": null,
@@ -5842,6 +5844,7 @@
             ],
             "nodes": [
                 {
+                    "alias": "digital_file_s_",
                     "config": {
                         "graphs": [
                             {
@@ -5866,9 +5869,10 @@
                     "nodeid": "0a5e6b91-860d-11ea-aa4f-f875a44e0e11",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of",
-                    "sortorder": 11
+                    "sortorder": 0
                 },
                 {
+                    "alias": "coordinate_system",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5887,6 +5891,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_authorization",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5905,6 +5910,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5923,6 +5929,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "capture_scale",
                     "config": {
                         "rdmCollection": "f5971049-5941-413c-ba55-cdf61448b15c"
                     },
@@ -5943,6 +5950,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5961,6 +5969,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "geometry",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5976,9 +5985,10 @@
                     "nodeid": "19096dc5-3a3b-11eb-b4cf-f875a44e0e11",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMgeo/SP6_Declarative_Place",
                     "parentproperty": "http://www.ics.forth.gr/isl/CRMgeo/Q11i_is_approximated_by",
-                    "sortorder": 3
+                    "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5997,6 +6007,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6015,6 +6026,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_accuracy_qualifier",
                     "config": {
                         "rdmCollection": "677b63d9-496b-48bb-a4ad-e7d7b3579abd"
                     },
@@ -6035,6 +6047,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -6055,6 +6068,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_language_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6075,6 +6089,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_language",
                     "config": {
                         "rdmCollection": "daacadea-1454-4cf4-8b14-9ade8069f4d7"
                     },
@@ -6095,6 +6110,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6115,6 +6131,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6135,6 +6152,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6155,6 +6173,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -6175,6 +6194,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation_type",
                     "config": {
                         "rdmCollection": "7be81f21-af24-4ec9-a73b-6187e83cb8c5"
                     },
@@ -6195,6 +6215,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6215,6 +6236,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_accuracy_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6235,6 +6257,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update_type",
                     "config": {
                         "rdmCollection": "7be81f21-af24-4ec9-a73b-6187e83cb8c5"
                     },
@@ -6255,6 +6278,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -6275,6 +6299,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "coordinate_system_value",
                     "config": {
                         "rdmCollection": "1e4c2f78-0357-4ccb-9005-da8fd5e040dd"
                     },
@@ -6295,6 +6320,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -6313,6 +6339,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -6333,6 +6360,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizations_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6353,6 +6381,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -6373,6 +6402,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -6393,6 +6423,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -6411,6 +6442,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6429,6 +6461,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6449,6 +6482,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6467,6 +6501,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6485,6 +6520,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6503,6 +6539,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6521,6 +6558,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6541,6 +6579,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_start_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6561,6 +6600,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -6581,6 +6621,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -6599,6 +6640,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6617,6 +6659,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "geospatial_coordinates",
                     "config": {
                         "addToMap": false,
                         "advancedStyle": "",
@@ -6658,6 +6701,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "capture_scale_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6678,6 +6722,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -6696,6 +6741,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -6716,6 +6762,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -6736,6 +6783,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6756,6 +6804,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -6776,6 +6825,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compiler",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6794,6 +6844,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6812,6 +6863,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6832,6 +6884,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6852,6 +6905,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_type",
                     "config": {
                         "rdmCollection": "7da5e4d6-3865-4931-bed5-2df4d5d52e46"
                     },
@@ -6872,6 +6926,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6892,6 +6947,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6912,6 +6968,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6932,6 +6989,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_start_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6952,6 +7010,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6972,6 +7031,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_authorization",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6992,6 +7052,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7012,6 +7073,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -7032,6 +7094,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "feature_shape",
                     "config": {
                         "rdmCollection": "3e698b1a-1462-486a-8cc5-666e676a4665"
                     },
@@ -7052,6 +7115,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7072,6 +7136,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -7092,6 +7157,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7110,6 +7176,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7128,6 +7195,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7148,6 +7216,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "feature_shape_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7168,6 +7237,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7188,6 +7258,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7208,6 +7279,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -7228,6 +7300,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7248,6 +7321,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -7268,6 +7342,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7288,6 +7363,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_updater",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7306,6 +7382,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7326,6 +7403,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -7346,6 +7424,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7366,6 +7445,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "localities_administrative_areas",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -7381,9 +7461,10 @@
                     "nodeid": "2107a235-94fb-11ea-a449-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P89_falls_within",
-                    "sortorder": 5
+                    "sortorder": 0
                 },
                 {
+                    "alias": "area_currency_type",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -7404,6 +7485,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7424,6 +7506,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_name",
                     "config": {
                         "rdmCollection": "acb5feaf-e491-4e53-bff2-2801167fd65a"
                     },
@@ -7444,6 +7527,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7462,6 +7546,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_type",
                     "config": {
                         "rdmCollection": "59a0a035-bbd0-4e5e-9528-862790edc610"
                     },
@@ -7482,6 +7567,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7502,6 +7588,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7522,6 +7609,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "area_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7542,6 +7630,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_metadata",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7557,9 +7646,10 @@
                     "nodeid": "24e2701f-f11c-11eb-923e-a87eeabdefba",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "sortorder": 15
+                    "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7580,6 +7670,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7600,6 +7691,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -7620,6 +7712,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7640,6 +7733,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_update",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7658,6 +7752,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7678,6 +7773,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -7698,6 +7794,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_type_n1",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7718,6 +7815,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7738,6 +7836,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_metatype_n1",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7758,6 +7857,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7776,6 +7876,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -7796,6 +7897,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -7816,6 +7918,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7836,6 +7939,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "validation",
                     "config": {
                         "rdmCollection": "98b8dd4b-81d3-4f82-8c9a-6da6ee5c4219"
                     },
@@ -7856,6 +7960,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_metatype_n1",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7876,6 +7981,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -7894,6 +8000,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_note",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7912,6 +8019,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7930,6 +8038,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -7950,6 +8059,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_end_date_n1",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -7970,6 +8080,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_last_update",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -7990,6 +8101,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_n1",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -8010,6 +8122,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -8028,6 +8141,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -8046,6 +8160,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_type_n1",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -8066,6 +8181,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8086,6 +8202,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -8104,6 +8221,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -8122,6 +8240,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -8142,6 +8261,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_names_n1",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -8160,6 +8280,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_n1",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -8180,6 +8301,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_n1",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -8198,6 +8320,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_metatype_n1",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8218,6 +8341,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "validation_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8238,6 +8362,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_creation",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -8256,6 +8381,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8276,6 +8402,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resource_model_type",
                     "config": {
                         "rdmCollection": "49b0d419-7425-4beb-8460-9b87e320ea05"
                     },
@@ -8293,9 +8420,10 @@
                     "nodeid": "285ddc8d-a1b4-11ea-bcf8-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 16
+                    "sortorder": 0
                 },
                 {
+                    "alias": "resource_model_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8316,6 +8444,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "reference_number_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8336,6 +8465,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -8354,6 +8484,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "references",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -8369,9 +8500,10 @@
                     "nodeid": "434c9f5b-83d0-11ea-b498-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 2
+                    "sortorder": 0
                 },
                 {
+                    "alias": "reference_number_type",
                     "config": {
                         "options": [],
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
@@ -8393,6 +8525,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "reference_number",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -8411,6 +8544,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8431,6 +8565,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "associated_consultations",
                     "config": {
                         "graphid": [
                             "8d41e49e-a250-11e9-9eab-00224800b26d"
@@ -8458,9 +8593,10 @@
                     "nodeid": "48509bd3-83d4-11ea-9923-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E7_Activity",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P17i_motivated",
-                    "sortorder": 10
+                    "sortorder": 0
                 },
                 {
+                    "alias": "designation_and_protection_assignment",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -8476,9 +8612,10 @@
                     "nodeid": "48f51523-efde-11eb-8285-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E17_Type_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
-                    "sortorder": 8
+                    "sortorder": 0
                 },
                 {
+                    "alias": "designation_or_protection_type",
                     "config": {
                         "rdmCollection": "08224567-338c-406b-91ae-6ce4b4ee3608"
                     },
@@ -8499,6 +8636,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -8519,6 +8657,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "grade_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8539,6 +8678,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8559,6 +8699,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8579,6 +8720,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "grade",
                     "config": {
                         "rdmCollection": "d67be3d7-4f88-4c0d-9a1b-e1ac0f0c7921"
                     },
@@ -8599,6 +8741,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -8619,6 +8762,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "risk_status",
                     "config": {
                         "rdmCollection": "32b0bb10-84bf-4fba-bbd0-4fcd1bfff2e3"
                     },
@@ -8639,6 +8783,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "digital_file_s__n1",
                     "config": {
                         "graphid": [
                             "a535a235-8481-11ea-a6b9-f875a44e0e11"
@@ -8669,6 +8814,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "risk_status_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8689,6 +8835,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_or_protection_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8709,6 +8856,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -8727,6 +8875,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "designation_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -8745,6 +8894,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "reference_url",
                     "config": null,
                     "datatype": "url",
                     "description": null,
@@ -8763,6 +8913,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "associated_activities",
                     "config": {
                         "graphs": [
                             {
@@ -8787,9 +8938,10 @@
                     "nodeid": "5f094dc7-83d4-11ea-822b-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E7_Activity",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P7i_witnessed",
-                    "sortorder": 7
+                    "sortorder": 0
                 },
                 {
+                    "alias": "descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -8805,9 +8957,10 @@
                     "nodeid": "7a76715d-94fd-11ea-8481-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
+                    "alias": "description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -8826,6 +8979,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -8846,6 +9000,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8866,6 +9021,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "addresses",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -8881,9 +9037,10 @@
                     "nodeid": "7ee432f9-eeb5-11eb-a673-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 6
+                    "sortorder": 0
                 },
                 {
+                    "alias": "postcode_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8904,6 +9061,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "address_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8924,6 +9082,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "address_status_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -8944,6 +9103,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "full_address",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -8962,6 +9122,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "locality_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -8982,6 +9143,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9002,6 +9164,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number_sub_street_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9022,6 +9185,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number_sub_street_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9040,6 +9204,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "town_or_city",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9055,9 +9220,10 @@
                     "nodeid": "7ee43304-eeb5-11eb-a788-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 8
+                    "sortorder": 0
                 },
                 {
+                    "alias": "town_or_city_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9076,6 +9242,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "postcode",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9091,9 +9258,10 @@
                     "nodeid": "7ee43306-eeb5-11eb-95d5-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 10
+                    "sortorder": 0
                 },
                 {
+                    "alias": "postcode_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9112,6 +9280,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "sub_street_",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9127,9 +9296,10 @@
                     "nodeid": "7ee43308-eeb5-11eb-9d03-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 4
+                    "sortorder": 0
                 },
                 {
+                    "alias": "sub_street_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9148,6 +9318,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_name",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9163,9 +9334,10 @@
                     "nodeid": "7ee4330a-eeb5-11eb-bf81-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 2
+                    "sortorder": 0
                 },
                 {
+                    "alias": "building_name_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9184,6 +9356,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9199,9 +9372,10 @@
                     "nodeid": "7ee4330c-eeb5-11eb-b7a2-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 5
+                    "sortorder": 0
                 },
                 {
+                    "alias": "building_number_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9220,6 +9394,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "street",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9235,9 +9410,10 @@
                     "nodeid": "7ee4330e-eeb5-11eb-b68a-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 6
+                    "sortorder": 0
                 },
                 {
+                    "alias": "street_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9256,6 +9432,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "locality_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9276,6 +9453,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number_sub_street_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9296,6 +9474,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "town_or_city_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9316,6 +9495,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "county_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9336,6 +9516,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "sub_street_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9356,6 +9537,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "county_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9376,6 +9558,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9396,6 +9579,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_name_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9416,6 +9600,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9436,6 +9621,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "sub_street_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9456,6 +9642,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "county",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9471,9 +9658,10 @@
                     "nodeid": "7ee459ee-eeb5-11eb-8963-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 9
+                    "sortorder": 0
                 },
                 {
+                    "alias": "full_address_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9491,9 +9679,10 @@
                     "nodeid": "7ee459ef-eeb5-11eb-bb3b-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
+                    "alias": "address_status",
                     "config": {
                         "rdmCollection": "46d6c3b3-fa78-48c0-8668-28362a608c70"
                     },
@@ -9511,9 +9700,10 @@
                     "nodeid": "7ee45be2-eeb5-11eb-9b39-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 11
+                    "sortorder": 0
                 },
                 {
+                    "alias": "address_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -9531,9 +9721,10 @@
                     "nodeid": "7ee45be3-eeb5-11eb-ab4a-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 12
+                    "sortorder": 0
                 },
                 {
+                    "alias": "town_or_city_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9554,6 +9745,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "street_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9574,6 +9766,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "postcode_type",
                     "config": {
                         "rdmCollection": "02458080-9b7a-4a02-b298-f7ea61f60dbb"
                     },
@@ -9594,6 +9787,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "locality",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9609,9 +9803,10 @@
                     "nodeid": "7ee45be7-eeb5-11eb-8022-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 7
+                    "sortorder": 0
                 },
                 {
+                    "alias": "locality_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9630,6 +9825,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "building_number_sub_street",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9645,9 +9841,10 @@
                     "nodeid": "7ee45be9-eeb5-11eb-b69e-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of",
-                    "sortorder": 3
+                    "sortorder": 0
                 },
                 {
+                    "alias": "full_address_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9668,6 +9865,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "county_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9686,6 +9884,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "street_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -9706,6 +9905,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -9724,6 +9924,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -9744,6 +9945,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -9764,6 +9966,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "application_area_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9782,6 +9985,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "associated_heritage_assets_areas_and_artefacts",
                     "config": {
                         "graphs": [
                             {
@@ -9825,6 +10029,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "associated_application_area",
                     "config": {
                         "graphs": [
                             {
@@ -9849,9 +10054,10 @@
                     "nodeid": "aa9be84a-83d0-11ea-853c-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P89i_contains",
-                    "sortorder": 9
+                    "sortorder": 0
                 },
                 {
+                    "alias": "system_reference_numbers",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -9869,9 +10075,10 @@
                     "nodeid": "d6734e3a-94fb-11ea-84df-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
-                    "sortorder": 14
+                    "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number",
                     "config": null,
                     "datatype": "number",
                     "description": null,
@@ -9890,6 +10097,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9908,6 +10116,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -9926,6 +10135,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primaryreferencenumber",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9944,6 +10154,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacyid",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -9962,6 +10173,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "uuid",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -9980,6 +10192,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -10000,6 +10213,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -10020,6 +10234,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -10040,6 +10255,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -10060,6 +10276,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -10080,6 +10297,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -10100,6 +10318,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_references",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -10115,9 +10334,10 @@
                     "nodeid": "ea46027f-ee0a-11eb-b4f5-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
                     "parentproperty": "http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as",
-                    "sortorder": 13
+                    "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -10136,6 +10356,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -10156,6 +10377,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_notes",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -10174,6 +10396,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -10192,6 +10415,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -10212,6 +10436,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "url",
                     "config": null,
                     "datatype": "url",
                     "description": null,
@@ -10230,6 +10455,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_source",
                     "config": {
                         "rdmCollection": "06bbe5d2-93e8-43df-a4f4-5667648fd2ef"
                     },
@@ -10250,6 +10476,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "location_descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -10265,9 +10492,10 @@
                     "nodeid": "faa0a425-94ff-11ea-8dea-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of",
-                    "sortorder": 4
+                    "sortorder": 0
                 },
                 {
+                    "alias": "location_description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -10286,6 +10514,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "location_description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -10306,6 +10535,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "location_description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -10330,6 +10560,7 @@
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "application_area",
                 "config": null,
                 "datatype": "semantic",
                 "description": "",
@@ -10348,7 +10579,7 @@
             },
             "slug": null,
             "subtitle": "An area of land which is subject to a planning application.",
-            "template_id": "50000000-0000-0000-0000-000000000002",
+            "template_id": "9ed340ba-88c6-4982-9487-c3aae4b14d16",
             "version": ""
         }
     ]
