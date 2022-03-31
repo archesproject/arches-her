@@ -18,7 +18,7 @@ define([
                         heading: 'Select Related Consultation',
                         text: 'Select a consultation and a letter type to create a Letter',
                     },
-                    required: false,
+                    required: true,
                     layoutSections: [
                         {
                             componentConfigs: [
