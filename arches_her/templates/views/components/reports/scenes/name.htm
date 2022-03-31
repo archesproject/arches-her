@@ -75,6 +75,7 @@
                                 <th>{% trans "Name" %}</th>
                                 <th class="min-tabletl">{% trans "Source" %}</th>
                                 <th class="min-medium">{% trans "Note" %}</th>
+                                <th>{% trans "URL" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
@@ -83,6 +84,13 @@
                                 <td data-bind="text: name"></td>
                                 <td data-bind="text: source"></td>
                                 <td data-bind="text: description"></td>
+                                <td>
+                                    <!-- ko with: url -->
+                                    <!-- ko if: url -->
+                                    <a data-bind="text: url, attr: {href: url, target: '_blank'}"></a>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.externalCrossReferences">
                                         <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
