@@ -28,7 +28,6 @@
                                 <th>{% trans "End of Role" %}</th>
                                 <th class="none">{% trans "Display Date" %}</th>
                                 <th class="none">{% trans "Date Qualifier" %}</th>
-                                <th class="none">{% trans "Role Type" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
@@ -40,7 +39,6 @@
                                 <td data-bind="text: endOfRole"></td>
                                 <td data-bind="text: displayDate"></td>
                                 <td data-bind="text: dateQualifier"></td>
-                                <td data-bind="text: roleType"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.people">
                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.people)}">

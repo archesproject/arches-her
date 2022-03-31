@@ -50,7 +50,8 @@ define([
                 administrativeAreas: undefined,
                 nationalGrid: undefined, 
                 locationDescription: undefined,
-                geometry: undefined
+                geometry: undefined,
+                namedLocations: undefined
             };
 
             self.resourceDataConfig = {
