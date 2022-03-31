@@ -11,16 +11,6 @@
         }"></div>
     </div>
     <div style="padding: 5px">
-        <div class="widget-input-label">{% trans "Building Number" %}</div>
-        <div style="margin: -10px -5px;" data-bind="component: {
-            name: 'text-widget',
-            params: {
-                renderContext: 'workflow', 
-                value: buildingNumber,
-            }
-        }"></div>
-    </div>
-    <div style="padding: 5px">
         <div class="widget-input-label">{% trans "Building Number Sub-Street" %}</div>
         <div style="margin: -10px -5px;" data-bind="component: {
             name: 'text-widget',
@@ -37,6 +27,16 @@
             params: {
                 renderContext: 'workflow', 
                 value: subStreet,
+            }
+        }"></div>
+    </div>
+    <div style="padding: 5px">
+        <div class="widget-input-label">{% trans "Building Number" %}</div>
+        <div style="margin: -10px -5px;" data-bind="component: {
+            name: 'text-widget',
+            params: {
+                renderContext: 'workflow', 
+                value: buildingNumber,
             }
         }"></div>
     </div>
