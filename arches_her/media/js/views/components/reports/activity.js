@@ -64,7 +64,7 @@ define([
 
             self.resourceDataConfig = {
                 archive: 'associated archive objects',
-                files: 'digital file(s)'
+                files: 'digital files'
             }
 
             self.locationCards = {};
