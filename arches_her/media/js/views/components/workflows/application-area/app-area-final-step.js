@@ -7,8 +7,9 @@ define([
         SummaryStep.apply(this, [params]);
 
         this.resourceData.subscribe(function(val){
+            const self = this;
+
             var address = val.resource['Addresses'] && val.resource['Addresses'].length ? val.resource['Addresses'][0] : {};
-            var designation = val.resource['Designation and Protection Assignment'] && val.resource['Designation and Protection Assignment'].length ? val.resource['Designation and Protection Assignment'][0] : {};
             var description = val.resource['Descriptions'] && val.resource['Descriptions'].length ? val.resource['Descriptions'][0] : {};
 
             this.displayName = val['displayname'] || 'Unnamed';
@@ -25,22 +26,28 @@ define([
                 status: {'name': 'Status', 'value': this.getResourceValue(address, ['Address Status','@value'])},
                 currency: {'name': 'Currency', 'value': this.getResourceValue(address, ['Address Currency','@value'])},
                 applicationAreaName: {'name': 'Name', 'value': this.getResourceValue(val.resource, ['Application Area Names', 'Application Area Name','@value'])},
-                applicationAreaDescription: {'name': '', 'value': this.getResourceValue(description, ['Description','@value'])}, 
-                designationType: {'name': 'Designation/Protection Type', 'value': this.getResourceValue(designation,['Designation or Protection Type','@value'])},
-                designationGrade: {'name': 'CanvasGradient', 'value': this.getResourceValue(designation,['Grade','@value'])},
-                designationReference: {'name': 'Reference', 'value': this.getResourceValue(designation,['References','Reference','@value'])},
+                applicationAreaDescription: {'name': '', 'value': this.getResourceValue(description, ['Description','@value'])},
             };
 
             try {
-                this.reportVals.references = val.resource['References'].map(function(ref){
+                this.reportVals.designations = val.resource['Designation and Protection Assignment'].map(function(designation){
+                    reference = self.getResourceValue(designation,['Reference URL','@value'])
+                    referenceUrl = (reference !== 'none') ? JSON.parse(reference).url : undefined
+                    referenceLabel = (reference !== 'none') && JSON.parse(reference).url_label !== '' ? JSON.parse(reference).url_label
+                                                            : referenceUrl ? referenceUrl
+                                                            : 'none'
                     return {
-                        referenceName: {'name': 'Reference', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference', '@value'])},
-                        referenceType: {'name': 'Reference Type', 'value': self.getResourceValue(ref, ['Agency Identifier', 'Reference Type', '@value'])},
-                        agency: {'name': 'Agency', 'value': self.getResourceValue(ref, ['Agency', '@value'])}
+                        designationName: {'name': 'Designation Name', 'value': self.getResourceValue(designation,['Designation Names', 'Designation Name','@value'])},
+                        designationNameUseType: {'name': 'Designation Name Use Type', 'value': self.getResourceValue(designation,['Designation Names', 'Designation Name Use Type','@value'])},
+                        designationType: {'name': 'Designation/Protection Type', 'value': self.getResourceValue(designation,['Designation or Protection Type','@value'])},
+                        designationGrade: {'name': 'Grade', 'value': self.getResourceValue(designation,['Grade','@value'])},
+                        designationRiskStatus: {'name': 'Risk Status', 'value': self.getResourceValue(designation,['Risk Status','@value'])},
+                        designationReference: {'name': 'Reference', 'value': referenceLabel, 'link': referenceUrl},
+                        designationDigitalFiles: {'name': 'Digital File(s)', 'value': self.getResourceValue(designation,['Digital File(s)','@value'])},
                     };
                 })
             } catch(e) {
-                this.reportVals.references = [];
+                this.reportVals.designations = [];
             }
 
             var geojsonStr = this.getResourceValue(val.resource, ['Geometry','Geospatial Coordinates','@value']);
