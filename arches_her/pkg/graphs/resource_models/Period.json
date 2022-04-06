@@ -397,7 +397,14 @@
                     "cardid": "d90cf6c9-eff5-11eb-84bd-a87eeabdefba",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [],
+                    "constraints": [
+                        {
+                            "card_id": "d90cf6c9-eff5-11eb-84bd-a87eeabdefba",
+                            "constraintid": "4d906062-4d56-405a-a9a3-77b490d1fb70",
+                            "nodes": [],
+                            "uniquetoallinstances": false
+                        }
+                    ],
                     "cssclass": null,
                     "description": "",
                     "graph_id": "f9045867-8861-11ea-b06f-f875a44e0e11",
@@ -2307,7 +2314,7 @@
                 {
                     "card_id": "baaf6c09-f45b-11eb-b3bd-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": null,
                         "label": "Update End Date",
                         "maxDate": null,
@@ -2446,7 +2453,7 @@
                 {
                     "card_id": "baaf6c09-f45b-11eb-b3bd-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": null,
                         "label": "Creation End Date",
                         "maxDate": null,
@@ -2561,7 +2568,7 @@
                 {
                     "card_id": "baaf6c09-f45b-11eb-b3bd-a87eeabdefba",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ",
+                        "dateFormat": "YYYY-MM-DD",
                         "defaultValue": null,
                         "label": "Creation Date",
                         "maxDate": null,
@@ -2639,13 +2646,13 @@
                 {
                     "card_id": "d90cf6c9-eff5-11eb-84bd-a87eeabdefba",
                     "config": {
-                        "label": "URl",
+                        "label": "URL",
                         "link_color": "#0055a0",
                         "url_label_placeholder": "Enter URL Label... ",
                         "url_placeholder": "Enter URL... "
                     },
                     "id": "d90d0a8a-eff5-11eb-a6f8-a87eeabdefba",
-                    "label": "URl",
+                    "label": "URL",
                     "node_id": "d90cf6cf-eff5-11eb-b14a-a87eeabdefba",
                     "sortorder": 5,
                     "visible": true,
@@ -4401,23 +4408,25 @@
             "functions_x_graphs": [
                 {
                     "config": {
-                        "description": {
-                            "nodegroup_id": "e5d0aaf1-8963-11ea-a35e-f875a44e0e11",
-                            "string_template": "<Description>"
-                        },
-                        "map_popup": {
-                            "nodegroup_id": "e5d0aaf1-8963-11ea-a35e-f875a44e0e11",
-                            "string_template": "<Period Description>"
-                        },
-                        "name": {
-                            "nodegroup_id": "2ce8001e-8862-11ea-a4b7-f875a44e0e11",
-                            "string_template": "<Period Name>"
+                        "descriptor_types": {
+                            "description": {
+                                "nodegroup_id": "e5d0aaf1-8963-11ea-a35e-f875a44e0e11",
+                                "string_template": "<Description>"
+                            },
+                            "map_popup": {
+                                "nodegroup_id": "e5d0aaf1-8963-11ea-a35e-f875a44e0e11",
+                                "string_template": "<Period Description>"
+                            },
+                            "name": {
+                                "nodegroup_id": "2ce8001e-8862-11ea-a4b7-f875a44e0e11",
+                                "string_template": "<Period Name>"
+                            }
                         },
                         "triggering_nodegroups": []
                     },
                     "function_id": "60000000-0000-0000-0000-000000000001",
                     "graph_id": "f9045867-8861-11ea-b06f-f875a44e0e11",
-                    "id": "06ed3e2c-52fb-11ec-bba5-a87eeabdefba"
+                    "id": "07bb3ffc-afd1-11ec-b01d-acde48001122"
                 }
             ],
             "graphid": "f9045867-8861-11ea-b06f-f875a44e0e11",
@@ -4495,7 +4504,7 @@
                     "parentnodegroup_id": "3e421025-3edf-11eb-9423-f875a44e0e11"
                 },
                 {
-                    "cardinality": "n",
+                    "cardinality": "1",
                     "legacygroupid": null,
                     "nodegroupid": "3fec47ae-8967-11ea-aa9b-f875a44e0e11",
                     "parentnodegroup_id": null
@@ -4545,12 +4554,22 @@
             ],
             "nodes": [
                 {
+                    "alias": "alternative_name_used_by",
                     "config": {
                         "graphid": [
                             "d4a88461-5463-11e9-90d9-000d3ab1e588",
                             "22477f01-1a44-11e9-b0a9-000d3ab1e588"
                         ],
-                        "graphs": [],
+                        "graphs": [
+                            {
+                                "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
+                                "name": "Person"
+                            },
+                            {
+                                "graphid": "d4a88461-5463-11e9-90d9-000d3ab1e588",
+                                "name": "Organization"
+                            }
+                        ],
                         "searchDsl": "",
                         "searchString": ""
                     },
@@ -4571,6 +4590,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4591,6 +4611,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "system_reference_numbers",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -4611,6 +4632,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacyid",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4629,6 +4651,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number",
                     "config": null,
                     "datatype": "number",
                     "description": null,
@@ -4647,6 +4670,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4667,6 +4691,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -4687,6 +4712,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primaryreferencenumber",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4705,6 +4731,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4723,6 +4750,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4743,6 +4771,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "uuid",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -4761,6 +4790,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4781,6 +4811,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -4801,6 +4832,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -4821,6 +4853,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4839,6 +4872,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_qualifier_metatype_",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4859,6 +4893,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -4877,6 +4912,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -4897,6 +4933,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name_currency_type",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -4917,6 +4954,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -4937,6 +4975,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4955,6 +4994,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4975,6 +5015,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_period_assignment",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4993,6 +5034,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5013,6 +5055,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "coordinate_system",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5031,6 +5074,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_authorization",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5049,6 +5093,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5067,6 +5112,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "capture_scale",
                     "config": {
                         "rdmCollection": "f5971049-5941-413c-ba55-cdf61448b15c"
                     },
@@ -5087,6 +5133,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5105,6 +5152,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "geometry",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5123,6 +5171,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5141,6 +5190,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5159,6 +5209,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_accuracy_qualifier",
                     "config": {
                         "rdmCollection": "677b63d9-496b-48bb-a4ad-e7d7b3579abd"
                     },
@@ -5179,6 +5230,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -5199,6 +5251,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_language_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5219,6 +5272,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_language",
                     "config": {
                         "rdmCollection": "daacadea-1454-4cf4-8b14-9ade8069f4d7"
                     },
@@ -5239,6 +5293,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5259,6 +5314,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5279,6 +5335,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5299,6 +5356,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -5319,6 +5377,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation_type",
                     "config": {
                         "rdmCollection": "7be81f21-af24-4ec9-a73b-6187e83cb8c5"
                     },
@@ -5339,6 +5398,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5359,6 +5419,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_accuracy_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5379,6 +5440,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update_type",
                     "config": {
                         "rdmCollection": "7be81f21-af24-4ec9-a73b-6187e83cb8c5"
                     },
@@ -5399,6 +5461,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -5419,6 +5482,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "coordinate_system_value",
                     "config": {
                         "rdmCollection": "1e4c2f78-0357-4ccb-9005-da8fd5e040dd"
                     },
@@ -5439,6 +5503,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -5457,6 +5522,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -5477,6 +5543,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizations_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5497,6 +5564,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -5517,6 +5585,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -5537,6 +5606,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -5555,6 +5625,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5573,6 +5644,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5593,6 +5665,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5611,6 +5684,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5629,6 +5703,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5647,6 +5722,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5665,6 +5741,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_metadata_notes_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5685,6 +5762,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_start_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -5705,6 +5783,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5725,6 +5804,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -5743,6 +5823,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5761,6 +5842,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "geospatial_coordinates",
                     "config": {
                         "addToMap": false,
                         "advancedStyle": "",
@@ -5802,6 +5884,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "capture_scale_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5822,6 +5905,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -5840,6 +5924,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -5860,6 +5945,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -5880,6 +5966,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5900,6 +5987,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5920,6 +6008,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compiler",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5938,6 +6027,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5956,6 +6046,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5976,6 +6067,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5996,6 +6088,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_type",
                     "config": {
                         "rdmCollection": "7da5e4d6-3865-4931-bed5-2df4d5d52e46"
                     },
@@ -6016,6 +6109,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6036,6 +6130,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6056,6 +6151,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6076,6 +6172,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_start_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6096,6 +6193,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6116,6 +6214,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_authorization",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6136,6 +6235,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6156,6 +6256,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -6176,6 +6277,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "feature_shape",
                     "config": {
                         "rdmCollection": "3e698b1a-1462-486a-8cc5-666e676a4665"
                     },
@@ -6196,6 +6298,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorizer_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6216,6 +6319,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6236,6 +6340,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6254,6 +6359,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_update_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6272,6 +6378,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -6292,6 +6399,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "feature_shape_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6312,6 +6420,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6332,6 +6441,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_compilation_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6352,6 +6462,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -6372,6 +6483,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compiler_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -6392,6 +6504,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -6412,6 +6525,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorization_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6432,6 +6546,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "spatial_record_updater",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6450,6 +6565,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6470,6 +6586,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "current_base_map_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -6490,6 +6607,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "compilation_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6510,6 +6628,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_type",
                     "config": {
                         "rdmCollection": "e562d4c7-bad8-4d98-b3f3-5e0aa8441e62"
                     },
@@ -6530,6 +6649,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6550,6 +6670,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_period",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6568,6 +6689,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "parent_period",
                     "config": {
                         "graphs": [
                             {
@@ -6595,6 +6717,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6615,6 +6738,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resource_model_type",
                     "config": {
                         "rdmCollection": "49b0d419-7425-4beb-8460-9b87e320ea05"
                     },
@@ -6635,6 +6759,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resource_model_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6655,6 +6780,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "earliest_possible_end_date",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -6681,6 +6807,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6701,6 +6828,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6719,6 +6847,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -6739,6 +6868,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_currency_type",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -6759,6 +6889,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -6779,6 +6910,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6797,6 +6929,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6817,6 +6950,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_period_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6835,6 +6969,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_period_earliest_date",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -6861,6 +6996,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_period_latest_date",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -6887,6 +7023,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "alternative_name_use_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -6907,6 +7044,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "latest_possible_end_date",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -6933,6 +7071,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "language_metatype_",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6953,6 +7092,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_metadata",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6971,6 +7111,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_metatype_n1",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6991,6 +7132,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7011,6 +7153,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7031,8 +7174,9 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_end_date",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ"
+                        "dateFormat": "YYYY-MM-DD"
                     },
                     "datatype": "date",
                     "description": null,
@@ -7051,6 +7195,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7071,6 +7216,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_update",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7089,6 +7235,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7109,8 +7256,9 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ"
+                        "dateFormat": "YYYY-MM-DD"
                     },
                     "datatype": "date",
                     "description": null,
@@ -7129,6 +7277,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_type_n1",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -7149,6 +7298,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7169,6 +7319,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_metatype_n1",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7189,6 +7340,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7207,6 +7359,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -7227,6 +7380,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -7247,6 +7401,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7267,6 +7422,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "validation",
                     "config": {
                         "rdmCollection": "98b8dd4b-81d3-4f82-8c9a-6da6ee5c4219"
                     },
@@ -7287,6 +7443,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_metatype_n1",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7307,6 +7464,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -7325,6 +7483,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_note",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7343,6 +7502,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7361,6 +7521,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -7381,8 +7542,9 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_end_date_n1",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD HH:mm:ssZ"
+                        "dateFormat": "YYYY-MM-DD"
                     },
                     "datatype": "date",
                     "description": null,
@@ -7401,6 +7563,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_last_update",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -7421,6 +7584,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_n1",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -7441,6 +7605,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7459,6 +7624,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7477,6 +7643,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_type_n1",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -7497,6 +7664,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7517,6 +7685,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7535,6 +7704,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7553,6 +7723,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -7573,6 +7744,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_names_n1",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -7591,6 +7763,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_n1",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -7611,6 +7784,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_n1",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7629,6 +7803,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "validation_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7649,6 +7824,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_creation",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7667,6 +7843,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_references",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -7685,6 +7862,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7703,6 +7881,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -7723,6 +7902,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_notes",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7741,6 +7921,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7759,6 +7940,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7779,6 +7961,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "url",
                     "config": null,
                     "datatype": "url",
                     "description": null,
@@ -7797,6 +7980,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_source",
                     "config": {
                         "rdmCollection": "06bbe5d2-93e8-43df-a4f4-5667648fd2ef"
                     },
@@ -7817,6 +8001,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7835,6 +8020,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -7853,6 +8039,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -7873,6 +8060,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_dates",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -7891,6 +8079,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "earliest_possible_start_date",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -7917,6 +8106,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "latest_possible_start_date",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -7943,6 +8133,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_description_language_type",
                     "config": {
                         "rdmCollection": "daacadea-1454-4cf4-8b14-9ade8069f4d7"
                     },
@@ -7963,6 +8154,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -7983,6 +8175,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "period",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -8005,6 +8198,7 @@
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "period",
                 "config": null,
                 "datatype": "semantic",
                 "description": "",
@@ -8023,7 +8217,7 @@
             },
             "slug": null,
             "subtitle": "Used to record the details of historic and cultural periods which a heritage resource may be associated with. A period is a spatio-temporal extent.",
-            "template_id": "50000000-0000-0000-0000-000000000002",
+            "template_id": "4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3",
             "version": ""
         }
     ]

@@ -34,6 +34,24 @@
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Date of Death",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "048d19a8-9924-11ea-9658-f875a44e0e11",
+                    "label": "Date of Death",
+                    "node_id": "048d19a1-9924-11ea-bf3a-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
+                },
+                {
+                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
+                    "config": {
                         "defaultValue": "",
                         "label": "Place of Death",
                         "maxLength": null,
@@ -47,6 +65,21 @@
                     "sortorder": 1,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
+                },
+                {
+                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
+                    "config": {
+                        "defaultValue": "0a14ef3e-9dd1-4f62-a3a1-7fd762f591d4",
+                        "label": "Death Place Type",
+                        "options": [],
+                        "placeholder": "Select an option"
+                    },
+                    "id": "048d19aa-9924-11ea-99d3-f875a44e0e11",
+                    "label": "Death Place Type",
+                    "node_id": "048d19a4-9924-11ea-abdc-f875a44e0e11",
+                    "sortorder": null,
+                    "visible": false,
+                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
@@ -66,24 +99,6 @@
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": "",
-                        "label": "Date of Death",
-                        "maxDate": false,
-                        "minDate": false,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "048d19a8-9924-11ea-9658-f875a44e0e11",
-                    "label": "Date of Death",
-                    "node_id": "048d19a1-9924-11ea-bf3a-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
-                },
-                {
-                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
-                    "config": {
                         "defaultValue": null,
                         "label": "Place of Death",
                         "maxLength": null,
@@ -97,21 +112,6 @@
                     "sortorder": null,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
-                },
-                {
-                    "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
-                    "config": {
-                        "defaultValue": "0a14ef3e-9dd1-4f62-a3a1-7fd762f591d4",
-                        "label": "Death Place Type",
-                        "options": [],
-                        "placeholder": "Select an option"
-                    },
-                    "id": "048d19aa-9924-11ea-99d3-f875a44e0e11",
-                    "label": "Death Place Type",
-                    "node_id": "048d19a4-9924-11ea-abdc-f875a44e0e11",
-                    "sortorder": null,
-                    "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
             ],
             "color": null,
@@ -206,78 +206,7 @@
             ],
             "nodes": [
                 {
-                    "config": null,
-                    "datatype": "string",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Death Place",
-                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
-                    "nodeid": "048d19a2-9924-11ea-9809-f875a44e0e11",
-                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Death Time Span",
-                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
-                    "nodeid": "048d19a3-9924-11ea-aa6f-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Place of Death",
-                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
-                    "nodeid": "048d19a6-9924-11ea-b3f5-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at",
-                    "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Deathplace",
-                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
-                    "nodeid": "048d19a7-9924-11ea-b6a6-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 0
-                },
-                {
+                    "alias": "death",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -298,26 +227,7 @@
                     "sortorder": 0
                 },
                 {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Death Place Metatype",
-                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
-                    "nodeid": "048d19a5-9924-11ea-a846-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
+                    "alias": "date_of_death",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -344,6 +254,45 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "death_place",
+                    "config": null,
+                    "datatype": "string",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Death Place",
+                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
+                    "nodeid": "048d19a2-9924-11ea-9809-f875a44e0e11",
+                    "ontologyclass": "http://www.w3.org/2000/01/rdf-schema#Literal",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P3_has_note",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "death_time_span",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Death Time Span",
+                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
+                    "nodeid": "048d19a3-9924-11ea-aa6f-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "death_place_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -362,12 +311,72 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
+                },
+                {
+                    "alias": "death_place_metatype",
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Death Place Metatype",
+                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
+                    "nodeid": "048d19a5-9924-11ea-a846-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "place_of_death",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Place of Death",
+                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
+                    "nodeid": "048d19a6-9924-11ea-b3f5-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P7_took_place_at",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "deathplace",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Deathplace",
+                    "nodegroup_id": "048d199e-9924-11ea-be3f-f875a44e0e11",
+                    "nodeid": "048d19a7-9924-11ea-b6a6-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
+                    "sortorder": 0
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "death",
                 "config": {
                     "fillColor": "rgba(233,112,111,0.8)"
                 },

@@ -34,6 +34,20 @@
                 {
                     "card_id": "8f6b220d-3e8f-11ea-8be4-c4d9877d154e",
                     "config": {
+                        "defaultResourceInstance": [],
+                        "label": "Crew member",
+                        "placeholder": ""
+                    },
+                    "id": "cc4cb159-3ed2-11eb-aad4-f875a44e0e11",
+                    "label": "Crew member",
+                    "node_id": "12a71603-29bc-11eb-8604-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "31f3728c-7613-11e7-a139-784f435179ea"
+                },
+                {
+                    "card_id": "8f6b220d-3e8f-11ea-8be4-c4d9877d154e",
+                    "config": {
                         "defaultValue": "",
                         "label": "Crew Role",
                         "options": [],
@@ -60,19 +74,6 @@
                     "sortorder": 2,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
-                },
-                {
-                    "card_id": "8f6b220d-3e8f-11ea-8be4-c4d9877d154e",
-                    "config": {
-                        "label": "Crew member",
-                        "placeholder": ""
-                    },
-                    "id": "cc4cb159-3ed2-11eb-aad4-f875a44e0e11",
-                    "label": "Crew member",
-                    "node_id": "12a71603-29bc-11eb-8604-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "31f3728c-7613-11e7-a139-784f435179ea"
                 }
             ],
             "color": null,
@@ -160,64 +161,7 @@
             ],
             "nodes": [
                 {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Crew",
-                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "nodeid": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
-                    "parentproperty": "",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
-                    },
-                    "datatype": "concept-list",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Crew Role",
-                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "nodeid": "12a7160d-29bc-11eb-afa7-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": false,
-                    "istopnode": false,
-                    "name": "Crew Role Metatype",
-                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
-                    "nodeid": "12a7160e-29bc-11eb-a561-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
+                    "alias": "crew_member",
                     "config": {
                         "graphs": [
                             {
@@ -243,12 +187,74 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E21_Person",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P107_has_current_or_former_member",
                     "sortorder": 0
+                },
+                {
+                    "alias": "crew_role",
+                    "config": {
+                        "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
+                    },
+                    "datatype": "concept-list",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Crew Role",
+                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "nodeid": "12a7160d-29bc-11eb-afa7-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "crew_role_metatype",
+                    "config": {
+                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Crew Role Metatype",
+                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "nodeid": "12a7160e-29bc-11eb-a561-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "crew",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "8f6b220a-3e8f-11ea-ae87-c4d9877d154e",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Crew",
+                    "nodegroup_id": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "nodeid": "8f6b220b-3e8f-11ea-ab49-c4d9877d154e",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E74_Group",
+                    "parentproperty": "",
+                    "sortorder": 0
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "crew",
                 "config": null,
                 "datatype": "semantic",
                 "description": "Represents a single node in a graph",
