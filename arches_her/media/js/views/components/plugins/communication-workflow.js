@@ -46,6 +46,7 @@ define([
                                     uniqueInstanceName: 'communication-notes-step', /* unique to step */
                                     tilesManaged: 'one',
                                     parameters: {
+                                        cardinality_override: '1',
                                         graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                                         nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
                                         resourceid: "['related-consultation']['communication-select-resource']['resourceid']",
@@ -89,6 +90,7 @@ define([
                                     uniqueInstanceName: 'communication-follow-on-actions-step', /* unique to step */
                                     tilesManaged: 'one',
                                     parameters: {
+                                        cardinality_override: '1',
                                         graphid: '8d41e49e-a250-11e9-9eab-00224800b26d',
                                         nodegroupid: 'caf5bff1-a3d7-11e9-aa28-00224800b26d',
                                         resourceid: "['related-consultation']['communication-select-resource']['resourceid']",
