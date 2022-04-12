@@ -74,7 +74,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
-                const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations)
+                var associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details')
                 if(Array.isArray(associatedConsultationsNode)){
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
