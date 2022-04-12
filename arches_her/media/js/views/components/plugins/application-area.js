@@ -70,7 +70,7 @@ define([
                     required: false,
                     informationboxdata: {
                         heading: 'Related Heritage Resources',
-                        text: 'Select the other heritage sites or artifacts related to the current Consulation',
+                        text: 'Select the other heritage assets, areas, or artefacts related to the current Application Area.',
                     },
                     layoutSections: [
                         {

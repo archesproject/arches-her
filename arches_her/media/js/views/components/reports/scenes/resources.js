@@ -1,9 +1,9 @@
-define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable'], function(_, ko, arches, reportUtils) {
+define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'], function (_, ko, arches, reportUtils) {
     return ko.components.register('views/components/reports/scenes/resources', {
-        viewModel: function(params) {
+        viewModel: function (params) {
             const self = this;
             Object.assign(self, reportUtils);
-            
+
             //Related Resource 2 column table configuration
             self.relatedResourceTwoColumnTableConfig = {
                 ...self.defaultTableConfig,
@@ -48,6 +48,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             self.files = ko.observableArray();
             self.archive = ko.observableArray();
             self.assets = ko.observableArray();
+            self.assets_rob = ko.observableArray();
             self.translation = ko.observableArray();
             self.period = ko.observableArray();
             self.visible = {
@@ -62,15 +63,15 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             Object.assign(self.dataConfig, params.dataConfig || {});
 
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
-            if(params?.compiled){
+            if (params?.compiled) {
             } else {
                 const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities)
-                if(Array.isArray(associatedActivitiesNode)){
+                if (Array.isArray(associatedActivitiesNode)) {
                     self.activities(associatedActivitiesNode.map(x => {
                         const activity = self.getNodeValue(x);
                         const tileid = self.getTileId(x);
                         const resourceUrl = self.getResourceLink(x);
-                        return {activity, resourceUrl, tileid};
+                        return { activity, resourceUrl, tileid };
                     }));
                 }
 
@@ -80,70 +81,73 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const consultation = self.getNodeValue(x);
                         const tileid = self.getTileId(x);
                         const resourceUrl = self.getResourceLink(x);
-                        return {consultation, resourceUrl, tileid};
+                        return { consultation, resourceUrl, tileid };
                     }));
                 }
 
 
                 const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive)
-                if(Array.isArray(associatedArchiveNode)){
+                if (Array.isArray(associatedArchiveNode)) {
                     self.archive(associatedArchiveNode.map(x => {
                         const holder = self.getNodeValue(x, 'archive holder');
                         const holderLink = self.getResourceLink(self.getRawNodeValue(x, 'archive holder'));
                         const reference = self.getNodeValue(x, 'archive object references', 'archive object reference');
                         const title = self.getNodeValue(x, 'archive object titles', 'archive object title');
                         const tileid = self.getTileId(x);
-                        return {holder, holderLink, reference, title, tileid};
+                        return { holder, holderLink, reference, title, tileid };
                     }));
                 }
 
-                const associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files);
-                if(Array.isArray(associatedFilesNode)){
+                var associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files, 'instance_details');
+                if (associatedFilesNode) {
+                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.files));
                     self.files(associatedFilesNode.map(x => {
                         const file = self.getNodeValue(x);
-                        const tileid = self.getTileId(x);
                         const resourceUrl = self.getResourceLink(x);
-                        return {file, resourceUrl, tileid};
+                        return { file, resourceUrl, tileid };
                     }));
-                }       
+                }
 
                 const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
-                if(Array.isArray(associatedArtifactsNode)){
+                if (Array.isArray(associatedArtifactsNode)) {
                     self.assets(associatedArtifactsNode.map(x => {
-                        const resourceName = self.getNodeValue(x, {
-                            testPaths: [['associated heritage asset, area or artefact'],['heritage asset, area or artefact'], []]
-                         });
-                        const association = self.getNodeValue(x, 'association type'); 
+                        var resource = [];
+                        for (const element of x?.['Associated Heritage Asset, Area or Artefact']?.['instance_details']) {
+                            if (element) {
+                                resource.push({
+                                    resourceName: self.getNodeValue(element),
+                                    resourceUrl: self.getResourceLink(element)
+                                });
+                            }
+                        }
+                        const association = self.getNodeValue(x, 'association type');
                         const tileid = self.getTileId(x);
-                        const resourceUrl = self.getResourceLink(self.getRawNodeValue(x, {
-                            testPaths: [['associated heritage asset, area or artefact'],['heritage asset, area or artefact'], []]
-                         }));
-                        return {resourceName, resourceUrl, association, tileid};
+                        return { resource, association, tileid };
                     }));
                 }
 
                 const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation);
-                if(Array.isArray(translationNode)){
+                if (Array.isArray(translationNode)) {
                     self.translation(translationNode.map(x => {
                         const resource = self.getNodeValue(x);
                         const resourceLink = self.getResourceLink(self.getRawNodeValue(x));
                         const tileid = self.getTileId(x);
-                        return {resource, resourceLink, tileid};
+                        return { resource, resourceLink, tileid };
                     }));
                 }
-                
-                if(self.dataConfig.period) {
+
+                if (self.dataConfig.period) {
                     const rawPeriodNode = self.getRawNodeValue(params.data(), self.dataConfig.period);
                     const periodNode = Array.isArray(rawPeriodNode) ? rawPeriodNode : [rawPeriodNode];
-                
+
                     self.period(periodNode.map(x => {
                         const resource = self.getNodeValue(x);
                         const resourceLink = self.getResourceLink(self.getRawNodeValue(x));
                         const tileid = self.getTileId(x);
-                        return {resource, resourceLink, tileid};
+                        return { resource, resourceLink, tileid };
                     }));
                 }
-            } 
+            }
         },
         template: { require: 'text!templates/views/components/reports/scenes/resources.htm' }
     });
