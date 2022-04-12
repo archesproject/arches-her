@@ -376,7 +376,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     self.usePhases(usePhaseNode.map(x => {
                         const type = self.getNodeValue(x, 'use phase classification', 'functional type');
                         const period = self.getNodeValue(x, 'use phase period');
-                        const startDate = self.getNodeValue(x, 'use phase timespan', 'use phase end date');
+                        const startDate = self.getNodeValue(x, 'use phase timespan', 'use phase start date');
                         const endDate = self.getNodeValue(x, 'use phase timespan', 'use phase end date');
                         const dateQualifier = self.getNodeValue(x, 'use phase timespan', 'use phase date qualifier');
                         const displayDate = self.getNodeValue(x, 'use phase display date');
