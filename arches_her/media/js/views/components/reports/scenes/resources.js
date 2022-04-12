@@ -75,8 +75,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations)
-                if (Array.isArray(associatedConsultationsNode)) {
+                var associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details')
+                if(Array.isArray(associatedConsultationsNode)){
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
                         const tileid = self.getTileId(x);
