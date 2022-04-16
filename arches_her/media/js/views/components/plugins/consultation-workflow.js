@@ -14,7 +14,7 @@ define([
             this.componentName = 'consultation-workflow';
             this.stepConfig = [
                 {
-                    title: 'Consultation GeoJSON',
+                    title: 'Consultation Location',
                     name: 'consultation-location',
                     informationboxdata: {
                         heading: 'Consultation GeoJSON',
