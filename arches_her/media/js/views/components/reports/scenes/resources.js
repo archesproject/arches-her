@@ -64,7 +64,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
             } else {
-                const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities)
+                var associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
                 if(Array.isArray(associatedActivitiesNode)){
                     self.activities(associatedActivitiesNode.map(x => {
                         const activity = self.getNodeValue(x);
@@ -74,7 +74,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
-                const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations)
+                var associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
                 if(Array.isArray(associatedConsultationsNode)){
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
@@ -85,7 +85,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
 
 
-                const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive)
+                const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive);
                 if(Array.isArray(associatedArchiveNode)){
                     self.archive(associatedArchiveNode.map(x => {
                         const holder = self.getNodeValue(x, 'archive holder');
@@ -97,7 +97,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
-                const associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files);
+                const associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files, 'instance_details');
                 if(Array.isArray(associatedFilesNode)){
                     self.files(associatedFilesNode.map(x => {
                         const file = self.getNodeValue(x);
@@ -107,7 +107,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }       
 
-                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
+                var associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets, 'instance_details');
                 if(Array.isArray(associatedArtifactsNode)){
                     self.assets(associatedArtifactsNode.map(x => {
                         const resourceName = self.getNodeValue(x, {

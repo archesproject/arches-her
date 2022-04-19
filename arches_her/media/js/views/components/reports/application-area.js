@@ -69,7 +69,7 @@ define([
             self.summary = params.summary;
             self.cards = {};
 
-            const associatedApplicationAreas = self.getRawNodeValue(self.resource(), 'associated application area');
+            const associatedApplicationAreas = self.getRawNodeValue(self.resource(), 'associated application area', 'instance_details');
             if(Array.isArray(associatedApplicationAreas)){
                 self.applicationAreas(associatedApplicationAreas.map(x => {
                     const resourceName = self.getNodeValue(x);
