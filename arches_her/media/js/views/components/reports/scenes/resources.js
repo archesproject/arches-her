@@ -77,7 +77,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if (params?.compiled) {
             } else {
-                var associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
+                const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
                 if (Array.isArray(associatedActivitiesNode)) {
                     self.activities(associatedActivitiesNode.map(x => {
                         const activity = self.getNodeValue(x);
@@ -86,7 +86,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                var associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
+                const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
                 if (Array.isArray(associatedConsultationsNode)) {
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
@@ -139,7 +139,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                var associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets, 'instance_details');
+                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets, 'instance_details');
                 if (Array.isArray(associatedArtifactsNode)) {
                     self.assets(associatedArtifactsNode.map(x => {
                         var resource = [];
