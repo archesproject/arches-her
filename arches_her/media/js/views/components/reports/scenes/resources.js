@@ -65,8 +65,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if (params?.compiled) {
             } else {
-                const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities)
-                if (Array.isArray(associatedActivitiesNode)) {
+                const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
+                if(Array.isArray(associatedActivitiesNode)){
                     self.activities(associatedActivitiesNode.map(x => {
                         const activity = self.getNodeValue(x);
                         const tileid = self.getTileId(x);
@@ -75,7 +75,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                var associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details')
+                const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
                 if(Array.isArray(associatedConsultationsNode)){
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
@@ -86,8 +86,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 }
 
 
-                const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive)
-                if (Array.isArray(associatedArchiveNode)) {
+                const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive);
+                if(Array.isArray(associatedArchiveNode)){
                     self.archive(associatedArchiveNode.map(x => {
                         const holder = self.getNodeValue(x, 'archive holder');
                         const holderLink = self.getResourceLink(self.getRawNodeValue(x, 'archive holder'));
@@ -98,9 +98,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                var associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files, 'instance_details');
-                if (associatedFilesNode) {
-                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.files));
+                const associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files, 'instance_details');
+                if(Array.isArray(associatedFilesNode)){
                     self.files(associatedFilesNode.map(x => {
                         const file = self.getNodeValue(x);
                         const resourceUrl = self.getResourceLink(x);
@@ -108,8 +107,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
-                if (Array.isArray(associatedArtifactsNode)) {
+                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets, 'instance_details');
+                if(Array.isArray(associatedArtifactsNode)){
                     self.assets(associatedArtifactsNode.map(x => {
                         var resource = [];
                         for (const element of x?.['Associated Heritage Asset, Area or Artefact']?.['instance_details']) {
