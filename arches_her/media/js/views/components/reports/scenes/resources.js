@@ -77,9 +77,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if (params?.compiled) {
             } else {
-                const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
-                if(Array.isArray(associatedActivitiesNode)){
-                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.activities));
+                var associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
+                if (Array.isArray(associatedActivitiesNode)) {
                     self.activities(associatedActivitiesNode.map(x => {
                         const activity = self.getNodeValue(x);
                         const resourceUrl = self.getResourceLink(x);
@@ -87,9 +86,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
-                if(Array.isArray(associatedConsultationsNode)){
-                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.consultations));
+                var associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
+                if (Array.isArray(associatedConsultationsNode)) {
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
                         const resourceUrl = self.getResourceLink(x);
@@ -141,12 +139,17 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
-                if (associatedArtifactsNode) {
-                    if(Array.isArray(associatedArtifactsNode)){
-                        let key = 'Monument, Area or Artefact';
-                        if (!(key in associatedArtifactsNode[0])) {
-                            key = 'Associated Monument, Area or Artefact';
+                var associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets, 'instance_details');
+                if (Array.isArray(associatedArtifactsNode)) {
+                    self.assets(associatedArtifactsNode.map(x => {
+                        var resource = [];
+                        for (const element of x?.['Associated Monument, Area or Artefact']?.['instance_details']) {
+                            if (element) {
+                                resource.push({
+                                    resourceName: self.getNodeValue(element),
+                                    resourceUrl: self.getResourceLink(element)
+                                });
+                            }
                         }
                         self.assets(associatedArtifactsNode.map(x => {
                             var resource = [];
