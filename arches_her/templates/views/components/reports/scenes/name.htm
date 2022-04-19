@@ -17,6 +17,7 @@
         <!-- /ko -->
         
         <!-- ko if: names().length -->
+        <!-- ko if: showCurrency() -->
         <div class="aher-report-subsection" >
             <div>
                 <div class="aher-table pad-btm">
@@ -51,6 +52,40 @@
             </div>
         </div>
         <!-- /ko -->
+        <!-- ko ifnot: showCurrency() -->
+        <div class="aher-report-subsection" >
+            <div>
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Name" %}</th>
+                                <th class="">{% trans "Name Use Type" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: names, dataTableOptions: nameTableConfig }">
+                            <tr>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: nameUseType"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.name">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.name)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.name)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+        <!-- /ko -->
     </div>
 </div>
 
@@ -75,6 +110,7 @@
                                 <th>{% trans "Name" %}</th>
                                 <th class="min-tabletl">{% trans "Source" %}</th>
                                 <th class="min-medium">{% trans "Note" %}</th>
+                                <th>{% trans "URL" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
@@ -83,6 +119,13 @@
                                 <td data-bind="text: name"></td>
                                 <td data-bind="text: source"></td>
                                 <td data-bind="text: description"></td>
+                                <td>
+                                    <!-- ko with: url -->
+                                    <!-- ko if: url -->
+                                    <a data-bind="text: url, attr: {href: url, target: '_blank'}"></a>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.externalCrossReferences">
                                         <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
