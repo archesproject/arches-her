@@ -3,8 +3,8 @@ define([
     'knockout',
     'uuid',
     'arches',
-    'knockout-mapping'
-], function(_, ko, uuid, arches, koMapping) {
+    'viewmodels/alert'
+], function(_, ko, uuid, arches, AlertViewModel) {
     function viewModel(params) {
         var self = this;
         this.resValue = ko.observable().extend({ deferred: true });
@@ -96,6 +96,12 @@ define([
             }).then(function(response) {
                 if (response.ok) {
                     return response.json();
+                } else {
+                    response.json().then(result => {
+                        params.form.error(new Error("Missing Required Value"));
+                        params.pageVm.alert(new AlertViewModel('ep-alert-red', result.title, result.message));
+                        return;
+                    })
                 }
             });
         };
@@ -103,13 +109,15 @@ define([
         params.form.save = function() {
             self.saveTile(communicationTileData(), communicationNodegroupId, self.resourceid(), self.tileid())
                 .then(function(data) {
-                    self.resourceid(data.resourceinstance_id);
-                    self.tileid(data.tileid);
-                    self.disableResourceSelection(true);
-                    params.form.complete(true);
-                    params.form.savedData({
-                        resourceid: self.resourceid(), ...self.updatedValue()
-                    });
+                    if (data?.resourceinstance_id) {
+                        self.resourceid(data.resourceinstance_id);
+                        self.tileid(data.tileid);
+                        self.disableResourceSelection(true);
+                        params.form.complete(true);
+                        params.form.savedData({
+                            resourceid: self.resourceid(), ...self.updatedValue()
+                        });
+                    }
                 })
         };
     }
