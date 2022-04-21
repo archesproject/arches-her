@@ -35,7 +35,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
             self.applicationAreaTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(2).fill(null)
+                columns: Array(1).fill(null)
             };
 
             self.dataConfig = {
