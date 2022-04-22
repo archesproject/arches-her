@@ -1,6 +1,6 @@
-define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable', 'views/components/reports/scenes/map'], function(_, ko, arches, reportUtils) {
+define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable', 'views/components/reports/scenes/map'], function (_, ko, arches, reportUtils) {
     return ko.components.register('views/components/reports/scenes/location', {
-        viewModel: function(params) {
+        viewModel: function (params) {
             const self = this;
             Object.assign(self, reportUtils);
 
@@ -47,15 +47,15 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     { "width": "20%" },
                     { "width": "20%" },
                     { "width": "15%" },
-                   null,
-                   null,
-                   null,
-                   null,
-                   null,
-                   null,
-                   null,
-                   null,
-                   null
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null,
+                    null
                 ]
             };
 
@@ -64,7 +64,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 "columns": [
                     { "width": "70%" },
                     { "width": "20%" },
-                   null,
+                    null,
                 ]
             };
 
@@ -74,7 +74,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                     { "width": "50%" },
                     { "width": "20%" },
                     { "width": "20%" },
-                   null,
+                    null,
                 ]
             };
 
@@ -130,17 +130,17 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             // utitility function - checks whether at least one observable (or array object)
             // has a set value (used to determine whether a section is visible)
             self.observableValueSet = (...observables) => {
-                for(observable of observables) {
-                    if(ko.isObservable(observable)){
+                for (observable of observables) {
+                    if (ko.isObservable(observable)) {
                         observableValue = ko.unwrap(observable);
-                        if (observableValue && observableValue != "--"){
+                        if (observableValue && observableValue != "--") {
                             return true;
                         }
-                    } else if (typeof observable === "object" && observable !== null){
-                        for(key of Object.keys(observable)){
-                            if(ko.isObservable(observable[key])){
+                    } else if (typeof observable === "object" && observable !== null) {
+                        for (key of Object.keys(observable)) {
+                            if (ko.isObservable(observable[key])) {
                                 observableValue = ko.unwrap(observable[key]);
-                                if (observableValue && observableValue != "--"){
+                                if (observableValue && observableValue != "--") {
                                     return true;
                                 }
                             }
@@ -151,21 +151,21 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             }
 
             const setupCards = (tileid) => {
-                if(self.cards.location){
+                if (self.cards.location) {
                     const subCards = self.cardConfig.location.subCards;
                     const rootCard = self.locationRoot;
 
                     const tileCards = rootCard === null ? self.cards?.cards : self.createCardDictionary(rootCard.tiles().find(rootTile => rootTile.tileid == tileid)?.cards);
-                    
-                    if(tileCards){
+
+                    if (tileCards) {
                         tileCards.addresses = tileCards?.[subCards.addresses];
                         tileCards.nationalGridReferences = tileCards?.[subCards.nationalGrid];
                         tileCards.administrativeAreas = tileCards?.[subCards.administrativeAreas];
                         tileCards.locationDescriptions = tileCards?.[subCards.locationDescriptions];
                         tileCards.namedLocations = tileCards?.[subCards.namedLocations];
-                        if(Array.isArray(subCards.locationGeometry)) {
+                        if (Array.isArray(subCards.locationGeometry)) {
                             let currentTileCards = tileCards;
-                            for(let i = 0; i < subCards.locationGeometry.length; ++i){
+                            for (let i = 0; i < subCards.locationGeometry.length; ++i) {
                                 const nestedCard = currentTileCards?.[subCards.locationGeometry[i]];
                                 const nestedTile = nestedCard.tiles()?.[0];
                                 currentTileCards = self.createCardDictionary(nestedTile?.cards);
@@ -180,7 +180,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             }
 
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
-            if(params?.compiled){
+            if (params?.compiled) {
             } else {
                 const locationNode = self.getRawNodeValue(params.data(), ...self.dataConfig.location);
 
@@ -188,12 +188,12 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
                 setupCards(self.getTileId(locationNode));
 
-                if(!locationNode) {
+                if (!locationNode) {
                     return;
                 }
 
                 const geometryNode = self.getRawNodeValue(locationNode, self.dataConfig.geometry)
-                if(geometryNode) {
+                if (geometryNode) {
                     const locationDataCoordinates = self.getNodeValue(geometryNode, 'geospatial coordinates');
                     if (locationDataCoordinates && locationDataCoordinates != '--') {
                         self.coordinateData = locationDataCoordinates;
@@ -218,9 +218,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 }
 
                 const rawAddressesNode = self.getRawNodeValue(locationNode, self.dataConfig.addresses);
-                if(rawAddressesNode || Array.isArray(locationNode)) {
+                if (rawAddressesNode || Array.isArray(locationNode)) {
                     const addressesNode = rawAddressesNode ? Array.isArray(rawAddressesNode) ? rawAddressesNode : [rawAddressesNode] : locationNode.map(locationNode => self.getRawNodeValue(locationNode, self.dataConfig.addresses))
-                    if(addressesNode?.length){
+                    if (addressesNode?.length) {
                         self.addresses(addressesNode.map(x => {
                             const buildingName = self.getNodeValue(x, 'building name', 'building name value');
                             const buildingNumber = self.getNodeValue(x, 'building number', 'building number value');
@@ -232,7 +232,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                             const postcode = self.getNodeValue(x, 'postcode', 'postcode value');
                             const status = self.getNodeValue(x, 'address status');
                             const street = self.getNodeValue(x, 'street', 'street value');
-                            const subStreet = self.getNodeValue(x, 'sub-street ', 'sub-street value');
+                            const subStreet = self.getNodeValue(x, 'sub-street', 'sub-street value');
                             const tileid = self.getTileId(x);
                             const town = self.getNodeValue(x, 'town or city', 'town or city value');
                             return { buildingName, buildingNumber, buildingNumberSubStreet, county, currency, fullAddress, locality, postcode, status, street, subStreet, tileid, town };
@@ -244,40 +244,48 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 if (!administrativeAreasNode) {
                     administrativeAreasNode = self.getRawNodeValue(params.data(), self.dataConfig.administrativeAreas);
                 }
-                if(Array.isArray(administrativeAreasNode)) {
+                if (Array.isArray(administrativeAreasNode)) {
                     self.administrativeAreas(administrativeAreasNode.map(x => {
                         const currency = self.getNodeValue(x, 'area currency type');
                         const name = self.getNodeValue(x, 'area names', 'area name');
-                        const tileid = self.getTileId(x); 
+                        const tileid = self.getTileId(x);
                         const type = self.getNodeValue(x, 'area type');
                         return { currency, name, tileid, type };
                     }));
                 }
 
                 const locationDescriptionsNode = self.getRawNodeValue(locationNode, self.dataConfig.locationDescription);
-                if(locationDescriptionsNode?.length){
+                if (locationDescriptionsNode?.length) {
                     self.descriptions(locationDescriptionsNode.map(x => {
                         const type = self.getNodeValue(x, 'location description type');
                         const description = self.getNodeValue(x, 'location description');
                         const tileid = self.getTileId(x);
-                        return {type, description, tileid};
+                        return { type, description, tileid };
                     }));
                 }
 
                 const nationalGridReferencesNode = self.getRawNodeValue(locationNode, self.dataConfig.nationalGrid);
-                if(nationalGridReferencesNode?.length){
-                    self.nationalGridReferences(nationalGridReferencesNode.map(x => {
-                        const reference = self.getNodeValue(x, 'national grid reference');
-                        const tileid = self.getTileId(x);
-                        return {reference, tileid};
-                    }));
+                if ((Array.isArray(nationalGridReferencesNode) && nationalGridReferencesNode?.length) || (nationalGridReferencesNode != undefined)) {
+                    if (Array.isArray(nationalGridReferencesNode)) {
+                        self.nationalGridReferences(nationalGridReferencesNode.map(x => {
+                            const reference = self.getNodeValue(x, 'national grid reference');
+                            const tileid = self.getTileId(x);
+                            return { reference, tileid };
+                        }));
+                    } else {
+                        const reference = self.getNodeValue(nationalGridReferencesNode, 'national grid reference');
+                        const tileid = self.getTileId(nationalGridReferencesNode);
+                        if (reference && reference !== '--') {
+                            self.nationalGridReferences([{ reference, tileid }]);
+                        }
+                    }
                 }
 
                 const namedLocationsNode = self.getRawNodeValue(locationNode, self.dataConfig.namedLocations);
                 console.log(namedLocationsNode)
                 const placename = self.getNodeValue(namedLocationsNode, 'named location');
-                const tileid = self.getTileId(namedLocationsNode); 
-                if(placename && placename !== '--') {
+                const tileid = self.getTileId(namedLocationsNode);
+                if (placename && placename !== '--') {
                     self.namedLocations([{ placename, tileid }]);
                 }
 
