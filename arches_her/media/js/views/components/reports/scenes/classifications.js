@@ -372,13 +372,12 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
                 if(self.dataConfig.usePhase) {
                     const usePhaseNode = self.getRawNodeValue(params.data(), 'use phase') || []; 
-
+                    
                     self.usePhases(usePhaseNode.map(x => {
-                        var usePhaseClassification = self.getRawNodeValue(x, 'use phase classification');
-                        var type = self.getNodeValue(usePhaseClassification, {
+                        var type = self.getNodeValue(x, {
                             testPaths: [
-                                ['functional type'],
-                                ['functional  craft type']
+                                ['use phase classification', 'functional type'],
+                                ['use phase classification', 'functional  craft type']
                             ]
                         });
                         const period = self.getNodeValue(x, 'use phase period');

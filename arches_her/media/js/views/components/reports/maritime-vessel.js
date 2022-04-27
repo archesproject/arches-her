@@ -56,7 +56,7 @@ define([
             self.classificationDataConfig = {
                 maritimeProduction: 'construction phases',
                 components: undefined,
-                dimensions: 'dimensions',
+                dimensions: 'asset dimensions',
                 usePhase: 'use phases'
             };
 
