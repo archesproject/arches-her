@@ -217,14 +217,14 @@
 
 <!-- Associated Heritage Assets section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.assets">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assets)}, css: {'fa-angle-double-right': visible.assets(), 'fa-angle-double-up': !visible.assets()}" class="fa toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assets)}, css: {'fa-angle-double-right': visible.assets(), 'fa-angle-double-up': !visible.assets()}" class="fa toggle"></i> {% trans "Associated Heritage/Areas/Artefacts" %}</h2>
     <a data-bind="{if: cards.assets, click: function(){addNewTile(cards.assets)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.assets" class="aher-report-collapsible-container pad-lft">
 
         <!-- ko ifnot: assets().length -->
-        <div class="aher-nodata-note">No hertiage/area/artifacts for this resource</div>
+        <div class="aher-nodata-note">No hertiage/area/artefacts for this resource</div>
         <!-- /ko -->
 
         <!-- ko if: assets().length -->
