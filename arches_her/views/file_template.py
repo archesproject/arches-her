@@ -34,6 +34,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import View
 from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.models import models
+from arches.app.models.concept import ConceptValue
 from arches.app.models.resource import Resource
 from arches.app.models.system_settings import settings
 from arches.app.models.tile import Tile
@@ -259,6 +260,7 @@ class FileTemplateView(View):
             contactDetailsNodegroupId = "2547c12f-9505-11ea-a507-f875a44e0e11"
             contactNameForCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
             fullnameNodeId = "5f8ded26-7ef9-11ea-8e29-f875a44e0e11"
+            nameTitleNodeId = "6da2f03b-7e55-11ea-8fe5-f875a44e0e11"
             nameUseTypeNodeId = "4110f747-1a44-11e9-96b7-000d3ab1e588"
             forCorrespondenceNameValueId = "85c26c81-e356-4454-a2ba-67e7ad9b95cd"
             primaryNameValueId = "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f"
@@ -302,7 +304,9 @@ class FileTemplateView(View):
                     for contactTile in contactResource.tiles:
                         if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
                             if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
-                                mapping_dict["Name of person consulting"] = contactTile.data[fullnameNodeId]
+                                nameTitle = contactTile.data[nameTitleNodeId]
+                                fullName = contactTile.data[fullnameNodeId]
+                                mapping_dict["Name of person consulting"] = "{0} {1}".format(nameTitle, fullName) if nameTitle else fullName
                         elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                             if contactTile.data[contactPointTypeNodeId] == contactPointTypeMailValueId:
                                 mapping_dict["Contact Name"] = contactTile.data[contactNameForCorrespondenceNodeId]
