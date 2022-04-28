@@ -14,6 +14,8 @@ RUN apt-get update && apt-get install -y make software-properties-common
 # Get the pre-built python wheels from the build environment
 RUN mkdir ${WEB_ROOT}
 
+RUN mkdir ${WEB_ROOT}/keystone-data
+
 # Install packages required to run Arches
 # Note that the ubuntu/debian package for libgdal1-dev pulls in libgdal1i, which is built
 # with everything enabled, and so, it has a huge amount of dependancies (everything that GDAL
@@ -59,11 +61,13 @@ COPY ./arches ${ARCHES_ROOT}
 # From here, run commands from ARCHES_ROOT
 WORKDIR ${ARCHES_ROOT}
 
-RUN pip install -e . --no-use-pep517 && pip install -r arches/install/requirements_dev.txt
+RUN pip install -e . --user --no-use-pep517 && pip install -r arches/install/requirements_dev.txt
 
 COPY /arches_her/docker/entrypoint.sh ${WEB_ROOT}/entrypoint.sh
 RUN chmod -R 700 ${WEB_ROOT}/entrypoint.sh &&\
   dos2unix ${WEB_ROOT}/entrypoint.sh
+
+RUN pip install supervisor
 
 RUN mkdir /var/log/supervisor
 RUN mkdir /var/log/celery

@@ -182,8 +182,9 @@ define([
             
             if(discoveryNode){
                 const method = self.getNodeValue(discoveryNode, 'discovery method');
-                const note = self.getNodeValue(discoveryNode, 'discovery notes', 'discovery note');
+                const note = self.getRawNodeValue(discoveryNode, 'discovery notes', 'discovery note', '@display_value');
                 const technique = self.getNodeValue(discoveryNode, 'recovery technique');
+                const tileid = self.getTileId(discoveryNode);
     
                 const finderNode = self.getRawNodeValue(discoveryNode, 'finder');
 
@@ -203,11 +204,13 @@ define([
                     }));
                 }
 
-                self.discovery([{
-                    method,
-                    note,
-                    technique,
-                }]);
+                self.discovery.push({ 
+                    method, 
+                    note, 
+                    technique, 
+                    tileid
+                });
+
             }
         },
         template: { require: 'text!templates/views/components/reports/artefact.htm' }
