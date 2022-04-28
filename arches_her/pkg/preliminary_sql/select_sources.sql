@@ -11,7 +11,7 @@ INSERT INTO map_sources(name, source)
     }');
 
 INSERT INTO map_sources(name, source)
-    VALUES ('select-heritage-asset', '{
+    VALUES ('select-monument', '{
         "data": "/geojson?nodeid=ca063178-28cf-11eb-be6d-f875a44e0e11&include_geojson_link=true",
         "type": "geojson"
     }');
