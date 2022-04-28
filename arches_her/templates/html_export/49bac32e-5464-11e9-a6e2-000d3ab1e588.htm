@@ -399,23 +399,23 @@
         {% endif %}
 
 
-        {# Associated Heritage Assets/Areas/Artefacts #}
-        {% if resource_data|has_key:"Associated Heritage Assets, Areas and Artefacts" %}
+        {# Associated Monuments/Areas/Artefacts #}
+        {% if resource_data|has_key:"Associated Monuments, Areas and Artefacts" %}
         <section>
             <div class="container">
-                <h3>Associated Heritage Assets, Areas and Artefacts</h3>
+                <h3>Associated Monuments, Areas and Artefacts</h3>
                 <div class="row">
                 <div class="column">
                     <div class="keeptogether">
                         <div class="rtable">
                             <div class="rrow rheader">
-                            <div class="rcell">Associated Asset/Area/Artefact</div>
+                            <div class="rcell">Associated Monument/Area/Artefact</div>
                             <div class="rcell">Association Type</div>
                             </div>
-                        {% for assocAAAVA in resource_data|val_from_key:"Associated Heritage Assets, Areas and Artefacts" %}
+                        {% for assocAAAVA in resource_data|val_from_key:"Associated Monuments, Areas and Artefacts" %}
                         <div class="rrow">
-                            <div class="rcell" data-title="Associated Asset/Area/Artefact">
-                                {{ assocAAAVA|val_from_key:"Heritage Asset, Area or Artefact"|val_from_key:"@display_value" }}
+                            <div class="rcell" data-title="Associated Monument/Area/Artefact">
+                                {{ assocAAAVA|val_from_key:"Associated Monument, Area or Artefact"|val_from_key:"@display_value" }}
                             </div>
                             <div class="rcell" data-title="Association Type">
                                 {{ assocAAAVA|val_from_key:"Association Type"|val_from_key:"@display_value" }}
