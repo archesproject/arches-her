@@ -67,7 +67,7 @@ define([
                 files: 'digital files'
             }
 
-            self.locationCards = {};
+            self.cards = {};
             self.nameCards = {};
             self.resourcesCards = {};
             self.classificationCards = {};
