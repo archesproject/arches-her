@@ -284,8 +284,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const constructionMaterial = self.getNodeValue(x, 'main construction material');
                         const constructionMethod = self.getNodeValue(x, 'construction method');
                         const constructionTechnique = self.getNodeValue(x, 'construction technique');
-                        const dateQualifier = self.getNodeValue(x, 'construction phase timespan', 'date qualifier');
-                        const displayDate = self.getNodeValue(x, 'construction phase timespan', 'display date');
+                        const dateQualifier = self.getNodeValue(x, 'construction phase timespan', 'construction phase date qualifier');
+                        const displayDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase display date');
                         const endDate = self.getNodeValue(x, 'construction phase timespan', 'end date');
                         const interpretationConfidence = self.getNodeValue(x, 'phase classification', 'phase certainty');
                         const method = self.getNodeValue(x, 'construction method');
