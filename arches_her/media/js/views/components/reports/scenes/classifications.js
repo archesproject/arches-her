@@ -298,7 +298,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const startDate = self.getNodeValue(x, 'construction phase timespan', 'start date');
                         const riggingType = self.getNodeValue(x, 'phase classification', 'type of rigging');
                         const propulsionType = self.getNodeValue(x, 'phase classification', 'propulsion type');
-                        const ordinanceType = self.getNodeValue(x, 'phase classification', 'ordinance type');
+                        const ordnanceType = self.getNodeValue(x, 'phase classification', 'ordnance type');
                         const vesselType = self.getNodeValue(x, 'phase classification', 'maritime vessel type');
                         const fixtureType = self.getNodeValue(x, 'phase classification', 'fixtures and fittings type');
                         const tileid = self.getTileId(x);
@@ -315,7 +315,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             fixtureType,
                             interpretationConfidence,
                             method, 
-                            ordinanceType,
+                            ordnanceType,
                             period, 
                             phase, 
                             phaseDescription, 
