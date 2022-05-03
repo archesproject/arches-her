@@ -241,7 +241,8 @@
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: assets, dataTableOptions: relatedResourceThreeColumnTableConfig}">
                             <tr>
-                                <td>
+                                <td data-bind="foreach: resource">
+                                    <span data-bind="visible: $index() > 0">, </span>
                                     <!-- ko if: resourceUrl -->
                                     <a data-bind="text: resourceName, attr: {href: resourceUrl}" class="aher-table-link"></a>
                                     <!-- /ko -->
@@ -269,6 +270,7 @@
         <!-- /ko -->
     </div>
 </div>
+
 <!-- Translation section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.translation">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.translation)}, css: {'fa-angle-double-right': visible.translation(), 'fa-angle-double-up': !visible.translation()}" class="fa toggle"></i> {% trans "Translations" %}</h2>
