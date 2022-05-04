@@ -27,6 +27,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 recordStatus: undefined
             }
 
+            self.hideNames = ko.observable(params.hideNames ?? false);
             self.cards = Object.assign({}, params.cards);
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
