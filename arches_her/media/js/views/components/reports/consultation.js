@@ -318,9 +318,9 @@ define([
             if(contactNode){
                 const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
                 const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
-                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
+                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer', 'resourceid');
                 const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
-                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
+                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer', 'resourceid');
                 const agentsNodes = self.getRawNodeValue(contactNode, 'agents', 'agent', 'instance_details');
                 const ownersNodes = self.getRawNodeValue(contactNode, 'owners', 'owner', 'instance_details');
                 const applicantsNodes = self.getRawNodeValue(contactNode, 'applicants', 'applicant', 'instance_details');
