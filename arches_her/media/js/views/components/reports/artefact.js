@@ -184,6 +184,7 @@ define([
                 const method = self.getNodeValue(discoveryNode, 'discovery method');
                 const note = self.getNodeValue(discoveryNode, 'discovery notes', 'discovery note');
                 const technique = self.getNodeValue(discoveryNode, 'recovery technique');
+                const tileid = self.getTileId(discoveryNode);
     
                 const finderNode = self.getRawNodeValue(discoveryNode, 'finder');
 
@@ -207,6 +208,7 @@ define([
                     method,
                     note,
                     technique,
+                    tileid,
                 }]);
             }
         },
