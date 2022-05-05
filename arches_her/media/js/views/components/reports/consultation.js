@@ -57,7 +57,8 @@ define([
 
             self.resourcesDataConfig = {
                 assets: 'related heritage assets and areas',
-                files: 'file(s)'
+                files: 'file(s)',
+                relatedApplicationArea: 'consultation area'
             };
             
             self.nameCards = {};
@@ -380,6 +381,7 @@ define([
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
+                    relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
 

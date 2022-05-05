@@ -32,6 +32,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 columns: Array(3).fill(null)
             };
 
+            self.applicationAreaTableConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(1).fill(null)
+            };
+            
             self.dataConfig = {
                 activities: 'associated activities',
                 consultations: 'associated consultations',
@@ -50,6 +55,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             self.assets = ko.observableArray();
             self.assets_rob = ko.observableArray();
             self.translation = ko.observableArray();
+            self.applicationArea = ko.observableArray();
             self.period = ko.observableArray();
             self.visible = {
                 period: ko.observable(true),
@@ -58,6 +64,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 consultations: ko.observable(true),
                 files: ko.observable(true),
                 assets: ko.observable(true),
+                applicationArea: ko.observable(true),
                 translation: ko.observable(true)
             }
             Object.assign(self.dataConfig, params.dataConfig || {});
@@ -122,6 +129,16 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         const association = self.getNodeValue(x, 'association type');
                         const tileid = self.getTileId(x);
                         return { resource, association, tileid };
+                    }));
+                }
+
+                const relatedApplicationArea = self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area', 'instance_details');
+                if(Array.isArray(relatedApplicationArea)){
+                    self.applicationArea(relatedApplicationArea.map(x => {
+                        const resource = self.getNodeValue(x);
+                        const resourceLink = self.getResourceLink(x);
+                        const tileid = self.getTileId(x);
+                        return {resource, resourceLink, tileid};    
                     }));
                 }
 

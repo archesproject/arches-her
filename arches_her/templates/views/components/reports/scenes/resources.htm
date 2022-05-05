@@ -271,6 +271,45 @@
     </div>
 </div>
 
+<!-- Related Application Area section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.relatedApplicationArea">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationArea)}, css: {'fa-angle-double-right': visible.applicationArea(), 'fa-angle-double-up': !visible.applicationArea()}" class="fa toggle"></i> {% trans "Related Application Areas" %}</h2>
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.applicationArea" class="aher-report-collapsible-container pad-lft">
+        <!-- ko ifnot: applicationArea().length -->
+        <div class="aher-nodata-note">No related application areas for this resource</div>
+        <!-- /ko -->    
+        <!-- ko if: applicationArea().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Application Area" %}</th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: applicationArea, dataTableOptions: applicationAreaTableConfig}">
+                            <tr>
+                                <td>
+                                    <!-- ko if: resourceLink -->
+                                    <a data-bind="text: resource, attr: {href: resourceLink}" class="aher-table-link"></a>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: resourceLink -->
+                                    <span data-bind="text: resource"></span>
+                                    <!-- /ko -->
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>  
+
+
 <!-- Translation section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.translation">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.translation)}, css: {'fa-angle-double-right': visible.translation(), 'fa-angle-double-up': !visible.translation()}" class="fa toggle"></i> {% trans "Translations" %}</h2>
