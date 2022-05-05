@@ -212,7 +212,6 @@ define([
                     technique,
                     tileid
                 });
-
             }
         },
         template: { require: 'text!templates/views/components/reports/artefact.htm' }
