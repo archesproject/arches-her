@@ -130,7 +130,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 }
 
                 var associatedFilesNode = self.getRawNodeValue(params.data(), self.dataConfig.files, 'instance_details');
-                if (associatedFilesNode) {
+                if (Array.isArray(associatedFilesNode)) {
                     const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.files));
                     self.files(associatedFilesNode.map(x => {
                         const file = self.getNodeValue(x);
