@@ -190,7 +190,7 @@ define([
             if(node) {
                 const resourceId = node?.resourceId || node?.instance_details?.[0]?.resourceId;
                 if(resourceId){
-                    return `${arches.urls.resource}\\${resourceId}`;
+                    return `${arches.urls.resource}/${resourceId}`;
                 }
             }
         },        
