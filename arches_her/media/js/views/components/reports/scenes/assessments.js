@@ -1,6 +1,6 @@
-define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable'], function(_, ko, arches, reportUtils) {
+define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'], function (_, ko, arches, reportUtils) {
     return ko.components.register('views/components/reports/scenes/assessments', {
-        viewModel: function(params) {
+        viewModel: function (params) {
             const self = this;
             Object.assign(self, reportUtils);
 
@@ -35,42 +35,44 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
             Object.assign(self.dataConfig, params.dataConfig || {});
 
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
-            if(params?.compiled){
+            if (params?.compiled) {
             } else {
-                const scientificDate = self.getRawNodeValue(params.data(), self.dataConfig.scientificDate) 
-                if(scientificDate){
-                    const constructionPhase = self.getNodeValue(scientificDate, 'associated construction phase');
-                    const dateDeterminationQualifier = self.getNodeValue(scientificDate, 'when determined', 'when determined date qualifier');
-                    const dateQualifier = self.getNodeValue(scientificDate, 'scientific date timespan', 'scientific date qualifier');
-                    const datingMethod = self.getNodeValue(scientificDate, 'dating method');
-                    const earliestDate = self.getNodeValue(scientificDate, 'scientific date timespan', 'scientific date start date');
-                    const endDateOfDetermination = self.getNodeValue(scientificDate, 'when determined', 'when determined end date');
-                    const generalNote = self.getNodeValue(scientificDate, 'notes', 'note');;
-                    const laboratoryNote = self.getNodeValue(scientificDate, 'laboratory references', 'laboratory reference');
-                    const latestDate = self.getNodeValue(scientificDate, 'scientific date timespan', 'scientific date end date');
-                    const standardDeviation = self.getNodeValue(scientificDate,  'standard deviation', 'standard deviation type');
-                    const standardDeviationComment = self.getNodeValue(scientificDate, 'standard deviation', 'standard deviation notes', 'standard deviation note');
-                    const startDateOfDetermination = self.getNodeValue(scientificDate, 'when determined', 'when determined start date');
-                    const tileid = self.getTileId(scientificDate);
-                    this.scientificDate([{
-                        constructionPhase,
-                        dateDeterminationQualifier,
-                        dateQualifier,
-                        datingMethod,
-                        earliestDate,
-                        endDateOfDetermination,
-                        generalNote,
-                        laboratoryNote,
-                        latestDate,
-                        standardDeviation,
-                        standardDeviationComment,
-                        startDateOfDetermination,
-                        tileid
-                    }]);
-                }                
-                
-                const artefactConditionNode = self.getRawNodeValue(params.data(), self.dataConfig.artefactCondition) 
-                if(Array.isArray(artefactConditionNode)){
+                const scientificDate = self.getRawNodeValue(params.data(), self.dataConfig.scientificDate)
+                if (Array.isArray(scientificDate)) {
+                    self.scientificDate(scientificDate.map(x => {
+                        const constructionPhase = self.getNodeValue(x, 'associated construction phase');
+                        const dateDeterminationQualifier = self.getNodeValue(x, 'when determined', 'when determined date qualifier');
+                        const dateQualifier = self.getNodeValue(x, 'scientific date timespan', 'scientific date qualifier');
+                        const datingMethod = self.getNodeValue(x, 'dating method');
+                        const earliestDate = self.getNodeValue(x, 'scientific date timespan', 'scientific date start date');
+                        const endDateOfDetermination = self.getNodeValue(x, 'when determined', 'when determined end date');
+                        const generalNote = self.getRawNodeValue(x, 'notes', 'note', '@display_value');
+                        const laboratoryNote = self.getNodeValue(x, 'laboratory references', 'laboratory reference');
+                        const latestDate = self.getNodeValue(x, 'scientific date timespan', 'scientific date end date');
+                        const standardDeviation = self.getNodeValue(x, 'standard deviation', 'standard deviation value');
+                        const standardDeviationComment = self.getRawNodeValue(x, 'standard deviation', 'standard deviation notes', 'standard deviation note', '@display_value');
+                        const startDateOfDetermination = self.getNodeValue(x, 'when determined', 'when determined start date');
+                        const tileid = self.getTileId(x);
+                        return {
+                            constructionPhase,
+                            dateDeterminationQualifier,
+                            dateQualifier,
+                            datingMethod,
+                            earliestDate,
+                            endDateOfDetermination,
+                            generalNote,
+                            laboratoryNote,
+                            latestDate,
+                            standardDeviation,
+                            standardDeviationComment,
+                            startDateOfDetermination,
+                            tileid
+                        };
+                    }));
+                }
+
+                const artefactConditionNode = self.getRawNodeValue(params.data(), self.dataConfig.artefactCondition)
+                if (Array.isArray(artefactConditionNode)) {
                     self.artefactCondition(artefactConditionNode.map(x => {
                         const type = self.getNodeValue(x, 'condition state', 'condition type');
                         const file = self.getNodeValue(x, 'condition state', 'digital file(s)');
@@ -78,17 +80,17 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const endDate = self.getNodeValue(x, 'condition timespan', 'date of assessment end');
                         const tileid = self.getTileId(x);
 
-                        return { 
+                        return {
                             type,
                             file,
-                            endDate, 
-                            startDate, 
+                            endDate,
+                            startDate,
                             tileid
                         };
                     }));
                 }
 
-            } 
+            }
 
         },
         template: { require: 'text!templates/views/components/reports/scenes/assessments.htm' }

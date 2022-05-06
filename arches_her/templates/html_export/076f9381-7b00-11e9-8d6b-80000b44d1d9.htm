@@ -5,8 +5,8 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Heritage Asset</title>
-      {% include 'html_export/milligram.htm' %}
+      <title>Keystone - Heritage Asset</title>
+		{% include 'html_export/milligram.htm' %}
       {% include 'html_export/custom_style.htm' %}
    </head>
    <body>
@@ -289,6 +289,7 @@
                            <div class="rrow rheader">
                               <div class="rcell">Construction Phase</div>
                               <div class="rcell">Period</div>
+                              <div class="rcell">Asset Type</div>
                               <div class="rcell">Construction Phase Start Date</div>
                               <div class="rcell">Construction Phase End Date</div>
                            </div>
@@ -299,6 +300,9 @@
                               </div>
                               <div class="rcell" data-title="Period">
                                  {{ conphase|val_from_key:"Cultural Period"|val_from_key:"@display_value" }}
+                              </div>
+                              <div class="rcell" data-title="Asset Type">
+                                 {{ conphase|val_from_key:"Phase Classification"|val_from_key:"Asset Type"|val_from_key:"@display_value" }}
                               </div>
                               <div class="rcell" data-title="Phase Start Date">
                                  {{ conphase|val_from_key:"Construction Phase Timespan"|val_from_key:"Construction Phase Start Date"|val_from_key:"@display_value" }}

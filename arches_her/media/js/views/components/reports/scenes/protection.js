@@ -37,7 +37,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
 
             self.designationTableConfig = {
                 ...this.defaultTableConfig,
-                columns: Array(11).fill(null)
+                columns: Array(10).fill(null)
             };
 
             self.currentDesignation = ko.observable();
@@ -104,13 +104,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                         const risk = self.getNodeValue(x, 'risk status');
                         const amendmentDate = self.getNodeValue(x, 'designation and protection timespan', 'designation amendment date');
                         const displayDate = self.getNodeValue(x, 'designation and protection timespan', 'display date');
-                        const dateQualifier = self.getNodeValue(x, 'designation and protection timespan', 'date qualifier');
-                        const reference = self.getNodeValue(x, 'references', 'reference');
+                        const reference = self.getNodeValue(x, 'reference url', 'url');
                         const tileid = self.getTileId(x);
                         const geometry = self.getNodeValue(x, 'designation mapping', 'designation geometry');
                         return {
                             amendmentDate,
-                            dateQualifier,
                             displayDate,
                             endDate,
                             geometry,

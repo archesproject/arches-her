@@ -284,8 +284,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const constructionMaterial = self.getNodeValue(x, 'main construction material');
                         const constructionMethod = self.getNodeValue(x, 'construction method');
                         const constructionTechnique = self.getNodeValue(x, 'construction technique');
-                        const dateQualifier = self.getNodeValue(x, 'construction phase timespan', 'date qualifier');
-                        const displayDate = self.getNodeValue(x, 'construction phase timespan', 'display date');
+                        const dateQualifier = self.getNodeValue(x, 'construction phase timespan', 'construction phase date qualifier');
+                        const displayDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase display date');
                         const endDate = self.getNodeValue(x, 'construction phase timespan', 'end date');
                         const interpretationConfidence = self.getNodeValue(x, 'phase classification', 'phase certainty');
                         const method = self.getNodeValue(x, 'construction method');
@@ -298,7 +298,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const startDate = self.getNodeValue(x, 'construction phase timespan', 'start date');
                         const riggingType = self.getNodeValue(x, 'phase classification', 'type of rigging');
                         const propulsionType = self.getNodeValue(x, 'phase classification', 'propulsion type');
-                        const ordinanceType = self.getNodeValue(x, 'phase classification', 'ordinance type');
+                        const ordnanceType = self.getNodeValue(x, 'phase classification', 'ordnance type');
                         const vesselType = self.getNodeValue(x, 'phase classification', 'maritime vessel type');
                         const fixtureType = self.getNodeValue(x, 'phase classification', 'fixtures and fittings type');
                         const tileid = self.getTileId(x);
@@ -315,7 +315,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             fixtureType,
                             interpretationConfidence,
                             method, 
-                            ordinanceType,
+                            ordnanceType,
                             period, 
                             phase, 
                             phaseDescription, 
@@ -353,11 +353,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 const componentsNode = self.getRawNodeValue(params.data(), 'components');
                 if(Array.isArray(componentsNode)) {
                     self.components(componentsNode.map(x => {
-                        const constructionPhase = self.getNodeValue(x, 'associated asset construction phase');
+                        const constructionPhase = self.getNodeValue(x, 'associated area phase');
                         const component = self.getNodeValue(x, 'component', 'component type');
                         const material = self.getNodeValue(x, 'component', 'component material');
                         const technique = self.getNodeValue(x, 'construction technique');
-                        const evidence = self.getNodeValue(x, 'component attribute assignment', 'component evidence type');
+                        const evidence = self.getNodeValue(x, 'component attribute assignment', 'evidence type');
                         const tileid = self.getTileId(x);
 
                         return { 
@@ -372,17 +372,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
                 if(self.dataConfig.usePhase) {
                     const usePhaseNode = self.getRawNodeValue(params.data(), 'use phase') || []; 
-
+                    
                     self.usePhases(usePhaseNode.map(x => {
-                        const type = self.getNodeValue(x, 'use phase classification', 'functional type');
+                        var type = self.getNodeValue(x, {
+                            testPaths: [
+                                ['use phase classification', 'functional type'],
+                                ['use phase classification', 'functional  craft type']
+                            ]
+                        });
                         const period = self.getNodeValue(x, 'use phase period');
-                        const startDate = self.getNodeValue(x, 'use phase timespan', 'use phase end date');
+                        const startDate = self.getNodeValue(x, 'use phase timespan', 'use phase start date');
                         const endDate = self.getNodeValue(x, 'use phase timespan', 'use phase end date');
                         const dateQualifier = self.getNodeValue(x, 'use phase timespan', 'use phase date qualifier');
                         const displayDate = self.getNodeValue(x, 'use phase display date');
                         const useEvidence = self.getNodeValue(x, 'use phase classification', 'use phase evidence type');
                         const descriptionType = self.getNodeValue(x, 'use phase classification', 'use phase classification description', 'use phase description type');
-                        const description = self.getNodeValue(x, 'use phase classification', 'use phase classification description', 'use phase description');
+                        const description = self.getRawNodeValue(x, 'use phase classification', 'use phase classification description', 'use phase description', '@display_value');
                         const tileid = self.getTileId(x);
                         return {
                             type,
