@@ -5,7 +5,7 @@ INSERT INTO map_sources(name, source)
     }');
 
 INSERT INTO map_sources(name, source)
-    VALUES ('select-heritage-area', '{
+    VALUES ('select-area', '{
         "data": "/geojson?nodeid=64be56e3-3ee5-11eb-b1f0-f875a44e0e11&include_geojson_link=true",
         "type": "geojson"
     }');
@@ -15,4 +15,3 @@ INSERT INTO map_sources(name, source)
         "data": "/geojson?nodeid=ca063178-28cf-11eb-be6d-f875a44e0e11&include_geojson_link=true",
         "type": "geojson"
     }');
-    

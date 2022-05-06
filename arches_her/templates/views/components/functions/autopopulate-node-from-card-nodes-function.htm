@@ -1,0 +1,95 @@
+{% load i18n %}
+
+
+    <!-- ko if: alert() -->
+    <div>
+        <div data-bind="visible: alert().active" style="display: none ; height: 100px;" class="relative">
+            <div id="card-alert-panel" data-bind="css: 'ep-form-alert ' + (alert() ? alert().type() : '')">
+                <h4 class="ep-form-alert-title" data-bind="text: alert().title"></h4>
+                <p class="ep-form-alert-text" data-bind="html: alert().text"></p>
+
+                <div class="ep-form-alert-default-dismiss">
+                    <i class="fa fa-times-circle" data-bind="click: alert().close" tabindex="0" aria-label="Close message" onkeypress="$(this).trigger('click');"></i>
+                </div>
+
+                <div class="ep-form-alert-buttons">
+                    <!-- ko if: alert().cancel -->
+                    <button class="btn btn-sm btn-danger btn-labeled fa fa-times" data-bind="click: alert().cancel">{% trans "Cancel" %}</button>
+                    <!-- /ko -->
+                    <!-- ko if: alert().ok -->
+                    <button class="btn btn-sm btn-primary btn-labeled fa fa-check" data-bind="click: alert().ok">{% trans "OK" %}</button>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+
+<div>
+
+  <div class="row widget-container">
+
+    <div>
+        <div class="form-group">
+            <label class="control-label widget-input-label" for="fnc_ap_choosecard">Choose a card</label>
+            <select id="fnc_ap_choosecard" data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: chosen_card, options: cards_in_graph, optionsText: 'name', optionsValue: 'nodegroup_id', valueAllowUnset: true"></select>
+        </div>
+        <div class="form-group">
+            <label class="control-label widget-input-label" for="target_node">Choose a node</label>
+            <select id="target_node" data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: target_node, options: string_nodes_in_card, optionsText: 'name', optionsValue: 'nodeid', valueAllowUnset: true"></select>
+        </div>
+        <div class="form-group">
+            <label class="control-label widget-input-label" for="fnc_ap_nodename">Name of node</label>
+            <input id="fnc_ap_nodename" placeholder="{% trans 'Use bracketed node names like this: <node name>' %}" aria-label="{% trans 'Use bracketed node names like this: <node name>' %}" class="form-control input-lg widget-input" data-bind="value: string_template_calc">
+        </div>
+        <div class="form-group">
+            <label class="control-label widget-input-label">Overwrite existing values on save</label>
+            <span tabindex="0" class="switch switch-small arches-switch on" data-bind="css: {'on': overwrite()}, click: function(){overwrite(!overwrite())}" onkeypress="$(this).trigger('click');">
+                <small></small>
+            </span>
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary" data-bind="click: addAutopopulateConfig">Add/Amend Current Configuration</button>
+            <button class="btn btn-primary" data-bind="click: trigger_string_template_reset">Reset String Template</button>
+            <button class="btn btn-primary" data-bind="click: clear_configuration_options">Clear Current Configuration</button>
+        </div>
+
+        <table class="table table-striped table-bordered dataTable" summary="List of auto population configurations">
+            <thead >
+                <tr>
+                    <th width="15%">Card</th>
+                    <th width="15%">Node to Populate</th>
+                    <th width="45%">String Template</th>
+                    <th width="45%">Overwrite Saved Value</th>
+                    <th width="7%" style="text-align:center">Delete</th>
+                    <th width="7%" style="text-align:center">Select for Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: return_calc_configs -->
+                    <tr>
+                        <td><span data-bind="text: card_name"></span></td>
+                        <td><span data-bind="text: target_name"></span></td>
+                        <td><span data-bind="text: string_template"></span></td>
+                        <td><span data-bind="text: overwrite_value"></span></td>
+                        <td style="text-align:center">
+                            <span class="rp-edit-buttons" style="margin-right:0%">
+                                <i tabindex="0" class="fa fa-trash"data-bind="click: $parent.deleteAutopopulateConfig" onkeypress="$(this).trigger('click');"></i>
+                            </span>
+                        </td>
+                        <td style="text-align:center">
+                            <span class="rp-edit-buttons" style="margin-right:0%">
+                                <i tabindex="0" class="fa fa-pencil" data-bind="click: $parent.updateAutopopulateConfig" onkeypress="$(this).trigger('click');"></i>
+                            </span>
+                        </td>
+                    </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+
+
+
+
+  </div>
+</div>
