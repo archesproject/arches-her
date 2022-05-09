@@ -347,11 +347,7 @@
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
-                        <ul>
-                        {% for assocCons in resource_data|val_from_key:"Associated Consultations" %}
-                        <li>{{ assocCons|val_from_key:"@display_value" }}</li>
-                        {% endfor %}
-                        </ul>
+                        {{ resource_data|val_from_key:"Associated Consultations"|val_from_key:"@display_value" }}
                      </div>
                   </div>
                </div>
@@ -368,11 +364,7 @@
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
-                        <ul>
-                        {% for assocAAAVA in resource_data|val_from_key:"Related Heritage Assets and Areas" %}
-                        <li>{{ assocAAAVA|val_from_key:"@display_value" }}</li>
-                        {% endfor %}
-                        </ul>
+                        {{ resource_data|val_from_key:"Related Heritage Assets and Areas"|val_from_key:"@display_value" }}
                      </div>
                   </div>
                </div>
@@ -389,11 +381,7 @@
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
-                        <ul>
-                        {% for assocAct in resource_data|val_from_key:"Associated Activities" %}
-                        <li>{{ assocAct|val_from_key:"@display_value" }}</li>
-                        {% endfor %}
-                        </ul>
+                        {{ resource_data|val_from_key:"Associated Activities"|val_from_key:"@display_value" }}
                      </div>
                   </div>
                </div>
