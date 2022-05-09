@@ -304,7 +304,7 @@ class FileTemplateView(View):
                     for contactTile in contactResource.tiles:
                         if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
                             if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
-                                nameTitle = contactTile.data[nameTitleNodeId]
+                                nameTitle = ConceptValue(contactTile.data[nameTitleNodeId]).value
                                 fullName = contactTile.data[fullnameNodeId]
                                 mapping_dict["Name of person consulting"] = "{0} {1}".format(nameTitle, fullName) if nameTitle else fullName
                         elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
