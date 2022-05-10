@@ -64,15 +64,27 @@ class AutopopulateNodeFromCardNodes(BaseFunction):
 
                     data_in_tile = tile.data
 
-                    if tile.data[node_to_populate] != None and tile.data[node_to_populate] != "":
+                    try:
+                        if node_to_populate in tile.data:
 
-                        if autopopulate_overwrite != False:
+
+                            if tile.data[node_to_populate] != None and tile.data[node_to_populate] != "":
+
+                                if autopopulate_overwrite != False:
+                                    write_to_node = True
+
+                                else:
+                                    write_to_node = False
+
+                            else:
+                                write_to_node = True
+
+                        else:
+                            tile.data[node_to_populate] = ""
                             write_to_node = True
 
-                    else:
-
-                        write_to_node = True
-
+                    except Exception as e:
+                        print(e)
 
                 if write_to_node == True:
                     for n in populating_nodes:
@@ -80,13 +92,21 @@ class AutopopulateNodeFromCardNodes(BaseFunction):
                         node_name_from_card = str(populating_nodes[n])
                         if node_name_from_card in autopopulated_string:
                             node_value_from_tile = ""
-                            if data_in_tile[node_id_from_card] != None:
-                                node_info = models.Node.objects.get(nodeid=n)
-                                datatype_factory_object = DataTypeFactory().get_instance(node_info.datatype)
-                                node_object =  models.Node.objects.get(pk=n)
-                                node_value_from_tile = datatype_factory_object.get_display_value(tile,node_object)
-                            autopopulated_string = autopopulated_string.replace("<%s>" % node_name_from_card, node_value_from_tile)
+                            if node_id_from_card in data_in_tile:
+                                try:
+                                    node_info = models.Node.objects.get(nodeid=n)
+                                    datatype_factory_object = DataTypeFactory().get_instance(node_info.datatype)
+                                    node_object =  models.Node.objects.get(pk=n)
+                                    node_display_value_from_tile = datatype_factory_object.get_display_value(tile,node_object)
+                                    if node_display_value_from_tile != None:
+                                        node_value_from_tile = node_display_value_from_tile
+                                except Exception as e:
+                                    print(e)
 
+                            try:
+                                autopopulated_string = autopopulated_string.replace("<%s>" % node_name_from_card, node_value_from_tile)
+                            except Exception as e:
+                                print(e)
                     tile.data[node_to_populate] = autopopulated_string
                     tile.save()
                     return
