@@ -64,7 +64,8 @@ define([
 
             self.resourceDataConfig = {
                 archive: 'associated archive objects',
-                files: 'digital files',
+                files: 'digital file(s)',
+                assets: 'associated monuments and areas'
                 actors: undefined
             }
 
