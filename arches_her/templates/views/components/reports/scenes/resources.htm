@@ -84,8 +84,14 @@
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: archive, dataTableOptions: archiveHolderTableConfig}">
                             <tr>
-                                <td>
-                                    <a data-bind="text: holder, attr: {href: holderLink}" class="aher-table-link"></a>
+                                <td data-bind="foreach: archiveHolders">
+                                    <span data-bind="visible: $index() > 0">, </span>
+                                    <!-- ko if: holderLink -->
+                                    <a class="aher-table-link" data-bind="text: holder, attr: {href: holderLink}"></a>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: holderLink -->
+                                    <span data-bind="text: holder"></span>
+                                    <!-- /ko -->
                                 </td>
                                 <td data-bind="text:title"></td>
                                 <td data-bind="text:reference"></td>

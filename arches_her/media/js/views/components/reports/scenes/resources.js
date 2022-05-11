@@ -41,7 +41,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 activities: 'associated activities',
                 consultations: 'associated consultations',
                 files: 'associated files',
-                assets: 'associated heritage assets, areas and artefacts'
+                assets: 'associated heritage assets, areas and artefacts',
+                archive: 'associated archives'
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -74,9 +75,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             } else {
                 const associatedActivitiesNode = self.getRawNodeValue(params.data(), self.dataConfig.activities, 'instance_details');
                 if(Array.isArray(associatedActivitiesNode)){
+                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.activities));
                     self.activities(associatedActivitiesNode.map(x => {
                         const activity = self.getNodeValue(x);
-                        const tileid = self.getTileId(x);
                         const resourceUrl = self.getResourceLink(x);
                         return { activity, resourceUrl, tileid };
                     }));
@@ -84,9 +85,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
                 const associatedConsultationsNode = self.getRawNodeValue(params.data(), self.dataConfig.consultations, 'instance_details');
                 if(Array.isArray(associatedConsultationsNode)){
+                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.consultations));
                     self.consultations(associatedConsultationsNode.map(x => {
                         const consultation = self.getNodeValue(x);
-                        const tileid = self.getTileId(x);
                         const resourceUrl = self.getResourceLink(x);
                         return { consultation, resourceUrl, tileid };
                     }));
@@ -95,13 +96,34 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
                 const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive);
                 if(Array.isArray(associatedArchiveNode)){
+                    let key = 'Associated Archive Objects';
+                    if (!(key in associatedArchiveNode[0])) {
+                        key = undefined;
+                    }
                     self.archive(associatedArchiveNode.map(x => {
-                        const holder = self.getNodeValue(x, 'archive holder');
-                        const holderLink = self.getResourceLink(self.getRawNodeValue(x, 'archive holder'));
-                        const reference = self.getNodeValue(x, 'archive object references', 'archive object reference');
-                        const title = self.getNodeValue(x, 'archive object titles', 'archive object title');
-                        const tileid = self.getTileId(x);
-                        return { holder, holderLink, reference, title, tileid };
+                        const archiveHolders = [];
+                        var reference;
+                        var title;
+                        var tileid;
+                        var holders;
+                        if (key) {
+                            reference = self.getNodeValue(x, key, 'archive object references', 'archive object reference');
+                            title = self.getNodeValue(x, key, 'archive object titles', 'archive object title');
+                            tileid = self.getTileId(x);
+                            holders = self.getRawNodeValue(x, key, 'archive holder', 'instance_details');
+                        } else {
+                            reference = self.getNodeValue(x, 'archive object references', 'archive object reference');
+                            title = self.getNodeValue(x, 'archive object titles', 'archive object title');
+                            tileid = self.getTileId(x);
+                            holders = self.getRawNodeValue(x, 'archive holder', 'instance_details');
+                        }
+                        holders?.forEach(element => {
+                            archiveHolders.push({
+                                holder: self.getNodeValue(element),
+                                holderLink: self.getResourceLink(element)
+                            });
+                        });
+                        return { archiveHolders, reference, title, tileid };
                     }));
                 }
 
@@ -115,32 +137,38 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }));
                 }
 
-                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets, 'instance_details');
-                if(Array.isArray(associatedArtifactsNode)){
-                    self.assets(associatedArtifactsNode.map(x => {
-                        var resource = [];
-                        for (const element of x?.['Associated Heritage Asset, Area or Artefact']?.['instance_details']) {
-                            if (element) {
-                                resource.push({
-                                    resourceName: self.getNodeValue(element),
-                                    resourceUrl: self.getResourceLink(element)
-                                });
-                            }
+                const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
+                if (associatedArtifactsNode) {
+                    if(Array.isArray(associatedArtifactsNode)){
+                        let key = 'Heritage Asset, Area or Artefact';
+                        if (!(key in associatedArtifactsNode[0])) {
+                            key = 'Associated Heritage Asset, Area or Artefact';
                         }
-                        const association = self.getNodeValue(x, 'association type');
-                        const tileid = self.getTileId(x);
-                        return { resource, association, tileid };
-                    }));
-                }
-
-                const relatedApplicationArea = self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area', 'instance_details');
-                if(Array.isArray(relatedApplicationArea)){
-                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area'))
-                    self.applicationArea(relatedApplicationArea.map(x => {
-                        const resource = self.getNodeValue(x);
-                        const resourceLink = self.getResourceLink(x);
-                        return {resource, resourceLink, tileid};    
-                    }));
+                        self.assets(associatedArtifactsNode.map(x => {
+                            var resource = [];
+                                for (const element of x[key]['instance_details']) {
+                                if (element) {
+                                    resource.push({
+                                        resourceName: self.getNodeValue(element),
+                                        resourceUrl: self.getResourceLink(element)
+                                    });
+                                }
+                            }
+                            const association = self.getNodeValue(x, 'association type');
+                            const tileid = self.getTileId(x);
+                            return { resource, association, tileid };
+                        }));
+                    } else {
+                        const instanceDetails = self.getRawNodeValue(associatedArtifactsNode, 'instance_details');
+                        if (Array.isArray(instanceDetails)) {
+                            const tileid = self.getTileId(associatedArtifactsNode);
+                            self.assets(instanceDetails.map(x => {
+                                const resourceName = self.getNodeValue(x);
+                                const resourceUrl = self.getResourceLink(x);
+                                return { resource: [{ resourceName, resourceUrl }], association: '--', tileid };
+                            }));
+                        }
+                    }
                 }
 
                 const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation);
