@@ -34,7 +34,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
             self.applicationAreaTableConfig = {
                 ...self.defaultTableConfig,
-                columns: Array(1).fill(null)
+                columns: Array(2).fill(null)
             };
             
             self.dataConfig = {
@@ -134,10 +134,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
                 const relatedApplicationArea = self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area', 'instance_details');
                 if(Array.isArray(relatedApplicationArea)){
+                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area'))
                     self.applicationArea(relatedApplicationArea.map(x => {
                         const resource = self.getNodeValue(x);
                         const resourceLink = self.getResourceLink(x);
-                        const tileid = self.getTileId(x);
                         return {resource, resourceLink, tileid};    
                     }));
                 }
