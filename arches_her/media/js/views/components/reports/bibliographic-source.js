@@ -53,6 +53,7 @@ define([
 
             self.resourceDataConfig = {
                 activities: undefined,
+                archive: undefined,
                 consultations: undefined,
                 assets: undefined,
                 files: 'digital file(s)'
