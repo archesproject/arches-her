@@ -49,7 +49,6 @@
                                     <th>{% trans "Risk" %}</th>
                                     <th class="none">{% trans "Amendment Date" %}</th>
                                     <th class="none">{% trans "Display Date" %}</th>
-                                    <th class="none">{% trans "Date Qualifier" %}</th>
                                     <th class="none">{% trans "Reference" %}</th>
                                     <th class="aher-table-control all"></th>
                                 </tr>
@@ -64,8 +63,11 @@
                                     <td data-bind="text: risk"></td>
                                     <td data-bind="text: amendmentDate"></td>
                                     <td data-bind="text: displayDate"></td>
-                                    <td data-bind="text: dateQualifier"></td>
-                                    <td data-bind="text: reference"></td>
+                                    <td>
+                                        <!-- ko if: reference -->
+                                        <a data-bind="text: reference, attr: {href: reference, target: '_blank'}"></a>
+                                        <!-- /ko -->
+                                    </td>
                                     <td class="aher-table-control">
                                         <div data-bind="if: $parent.cards.designations">
                                             <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.designations)}">
@@ -75,9 +77,6 @@
                                                 <i class="fa fa-trash"></i>
                                             </a>
                                         </div>
-                                        <a data-bind="click: function(){$parent.currentDesignation(tileid);$parent.jumpToDesignationGeometry($data)}">
-                                            <i class="fa fa-globe"></i>
-                                        </a>
                                         <i data-bind="visible: $parent.currentDesignation() == tileid" class="fa fa-arrow-left"></i>
                                     </td>
                                 </tr>

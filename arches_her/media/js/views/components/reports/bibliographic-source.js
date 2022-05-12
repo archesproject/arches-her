@@ -20,6 +20,7 @@ define([
             Object.assign(self, reportUtils);
             self.sections = [
                 {id: 'source', title: 'Bibliographic Source Details'},
+                {id: 'name', title: 'Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'classifications', title: 'Classifications and Dating'},
                 {id: 'archive', title: 'Archive Holding'},
@@ -43,7 +44,7 @@ define([
             };
 
             self.nameDataConfig = {
-                name: undefined,
+                name: 'bibliographic source'
             };
 
             self.classificationDataConfig = {
@@ -52,6 +53,7 @@ define([
 
             self.resourceDataConfig = {
                 activities: undefined,
+                archive: undefined,
                 consultations: undefined,
                 assets: undefined,
                 files: 'digital file(s)'
@@ -72,6 +74,7 @@ define([
             self.copyrightCards = {};
             self.summary = params.summary;
             self.cards = {};
+            self.add = params.addTile || self.addNewTile;
 
             self.visible = {
                 publication: ko.observable(true),
@@ -160,7 +163,7 @@ define([
                                 card: self.cards?.['pages']
                             },{
                                 key: 'Page Reference',
-                                value: self.getRawNodeValue(self.resource(), 'page references', 'page reference', 'page(s)'),
+                                value: self.getRawNodeValue(self.resource(), 'page references', 'page reference', 'page(s)', '@display_value'),
                                 type: 'kv',
                                 card: self.cards?.['page reference']
                             }]

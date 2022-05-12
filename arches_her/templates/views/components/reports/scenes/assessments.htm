@@ -78,7 +78,7 @@
                                 <th>{% trans "Dating Method" %}</th>
                                 <th>{% trans "Earliest Date" %}</th>
                                 <th>{% trans "Latest Date" %}</th>
-                                <th>{% trans "Date Qualifier)" %}</th>
+                                <th>{% trans "Date Qualifier" %}</th>
                                 <th class="none">{% trans "Standard Deviation" %}</th>
                                 <th class="none">{% trans "Standard Deviation Comment" %}</th>
                                 <th class="none">{% trans "Laboratory Note" %}</th>
@@ -96,13 +96,13 @@
                                 <td data-bind="text: earliestDate"></td>
                                 <td data-bind="text: latestDate"></td>
                                 <td data-bind="text: dateQualifier"></td>
-                                <td data-bind="text: datingMethod"></td>
                                 <td data-bind="text: standardDeviation"></td>
-                                <td data-bind="text: standardDeviationComment"></td>
+                                <td data-bind="html: standardDeviationComment"></td>
                                 <td data-bind="text: laboratoryNote"></td>
                                 <td data-bind="text: startDateOfDetermination"></td>
                                 <td data-bind="text: endDateOfDetermination"></td>
                                 <td data-bind="text: dateDeterminationQualifier"></td>
+                                <td data-bind="html: generalNote"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.scientificDate">
                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.scientificDate)}">

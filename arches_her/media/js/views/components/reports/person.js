@@ -79,7 +79,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                archive: undefined
             };
             self.nameCards = {};
             self.descriptionCards = {};

@@ -17,11 +17,11 @@ define([
 
             Object.assign(self, reportUtils);
             self.sections = [
+                {id: 'period', title: 'Period Names'},
                 {id: 'name', title: 'Names and Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'classifications', title: 'Classifications and Dating'},
                 {id: 'location', title: 'Location Data'},
-                {id: 'period', title: 'Period Names'},
                 {id: 'json', title: 'JSON'},
             ];
             self.reportMetadata = ko.observable(params.report?.report_json);
