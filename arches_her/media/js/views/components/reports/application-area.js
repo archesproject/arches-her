@@ -69,11 +69,11 @@ define([
             self.summary = params.summary;
             self.cards = {};
 
-            const associatedApplicationAreas = self.getRawNodeValue(self.resource(), 'associated application area');
+            const associatedApplicationAreas = self.getRawNodeValue(self.resource(), 'associated application area', 'instance_details');
             if(Array.isArray(associatedApplicationAreas)){
+                const tileid = self.getTileId(self.getRawNodeValue(self.resource(), 'associated application area'));
                 self.applicationAreas(associatedApplicationAreas.map(x => {
                     const resourceName = self.getNodeValue(x);
-                    const tileid = self.getTileId(x);
                     const resourceUrl = self.getResourceLink(self.getRawNodeValue(x));
                     return {resourceName, resourceUrl, tileid};
                 }));
@@ -84,6 +84,14 @@ define([
                 
                 self.cards = self.createCardDictionary(cards)
 
+                self.resourcesCards = {
+                    activities: self.cards?.['associated activities'],
+                    consultations: self.cards?.['associated consultations'],
+                    files: self.cards?.['associated digital files'],
+                    assets: self.cards?.['associated heritage assets'],
+                    applicationAreas: self.cards?.['associated application areas']
+                };
+                
                 self.nameCards = {
                     name: self.cards?.['application area names'],
                     externalCrossReferences: self.cards?.['external cross references'],
