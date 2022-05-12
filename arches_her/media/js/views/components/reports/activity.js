@@ -64,12 +64,15 @@ define([
 
             self.resourceDataConfig = {
                 archive: 'associated archive objects',
-                files: 'digital file(s)'
+                files: 'digital files',
+                assets: 'associated heritage assets and areas'
             }
 
+            self.cards = {};
             self.nameCards = {};
             self.resourcesCards = {};
             self.classificationCards = {};
+            self.locationCards = {};
             self.protectionCards = {};
             self.descriptionCards = {};
             self.peopleCards = {};
