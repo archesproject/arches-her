@@ -26,10 +26,22 @@
     </div>
     <div class="aher-tabbed-report">
         <div class="aher-tabbed-report-content">
+            <!-- Names Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/name',
+                    params: {
+                        data: resource,
+                        cards: nameCards,
+                        dataConfig: nameDataConfig,
+                        hideNames: true
+                    }
+                }"></div>
+            </div>
             <div class="aher-report-page" data-bind="if: activeSection() === 'source'">
 
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}" class="fa toggle"></i> {% trans "Bibliographic Source Names" %}</h2>
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}" class="fa toggle"></i> {% trans "Names" %}</h2>
                     <span data-bind="if: cards.sourceNames && (!sourceNames().length || cards.sourceNames.cardinality == 'n')">
                         <a class="aher-report-a" data-bind="click: function(){add(cards.sourceNames)}"><i class="fa fa-mail-reply"></i> {% trans "Add Bibliographic Source Name" %}</a>
                     </span>

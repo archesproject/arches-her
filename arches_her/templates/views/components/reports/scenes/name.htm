@@ -3,6 +3,7 @@
 {% block report %}
 
 {% block body %}
+<!-- ko ifnot: hideNames() -->
 <div data-bind="visible: !!dataConfig.name" class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}" class="fa toggle"></i> {% trans "Names" %}</h2>
     <span data-bind="if: cards.name && (!names().length || cards.name.cardinality == 'n')">
@@ -88,6 +89,7 @@
         <!-- /ko -->
     </div>
 </div>
+<!-- /ko -->
 
 <!-- External Reference -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.xref" >
