@@ -50,12 +50,14 @@ define([
                 administrativeAreas: undefined,
                 nationalGrid: undefined, 
                 locationDescription: undefined,
-                geometry: undefined
+                geometry: undefined,
+                namedLocations: undefined
             };
 
             self.resourceDataConfig = {
                 consultations: undefined,
-                files: undefined
+                files: undefined,
+                archive: undefined
             };
 
             self.nameCards = {};

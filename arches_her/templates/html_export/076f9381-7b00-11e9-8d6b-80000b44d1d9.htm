@@ -365,15 +365,11 @@
          {% if resource_data|has_key:"Parent Asset" %}
          <section>
             <div class="container">
-                <h3>Parent Assets</h3>
+                <h3>Parent Asset</h3>
                <div class="row">
                   <div class="column">
                     <div class="keeptogether">
-                        <ul>
-                            {% for parAsset in resource_data|val_from_key:"Parent Asset" %}
-                                <li>{{parAsset|val_from_key:"@display_value"}}</li>
-                            {% endfor %}
-                        </ul>
+                        {{resource_data|val_from_key:"Parent Asset"|val_from_key:"@display_value"}}
                      </div>
                   </div>
                </div>
@@ -416,18 +412,14 @@
 
 
          {# Associated Activities #}
-         {% if resource_data|has_key:"Associated_Activities" %}
+         {% if resource_data|has_key:"Associated Activities" %}
          <section>
             <div class="container">
                <h3>Associated Activities</h3>
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
-                        <ul>
-                           {% for assocAct in resource_data|val_from_key:"Associated_Activities" %}
-                           <li>{{ assocAct|val_from_key:"@display_value" }}</li>
-                           {% endfor %}
-                        </ul>
+                        {{ resource_data|val_from_key:"Associated Activities"|val_from_key:"@display_value" }}
                      </div>
                   </div>
                </div>

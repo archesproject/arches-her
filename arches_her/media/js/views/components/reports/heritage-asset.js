@@ -50,7 +50,7 @@ define([
             };
 
             self.resourceDataConfig = {
-                activities: 'associated_activities',
+                activities: 'associated activities',
                 files: 'digital file(s)'
             }
 

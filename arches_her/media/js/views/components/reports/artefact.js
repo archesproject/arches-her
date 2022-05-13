@@ -79,7 +79,8 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)',
-                consultations: undefined
+                consultations: undefined,
+                archive: undefined
             };
 
             self.nameCards = {};
@@ -182,7 +183,7 @@ define([
             
             if(discoveryNode){
                 const method = self.getNodeValue(discoveryNode, 'discovery method');
-                const note = self.getNodeValue(discoveryNode, 'discovery notes', 'discovery note');
+                const note = self.getRawNodeValue(discoveryNode, 'discovery notes', 'discovery note', '@display_value');
                 const technique = self.getNodeValue(discoveryNode, 'recovery technique');
                 const tileid = self.getTileId(discoveryNode);
     
@@ -204,12 +205,13 @@ define([
                     }));
                 }
 
-                self.discovery([{
-                    method,
-                    note,
-                    technique,
-                    tileid,
-                }]);
+                self.discovery.push({ 
+                    method, 
+                    note, 
+                    technique, 
+                    tileid
+                });
+
             }
         },
         template: { require: 'text!templates/views/components/reports/artefact.htm' }
