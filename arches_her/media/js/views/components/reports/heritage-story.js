@@ -42,7 +42,8 @@ define([
                 files: undefined,
                 assets: undefined,
                 translation: 'translation',
-                period: 'temporal coverage'
+                period: 'temporal coverage',
+                archive: undefined
             };
 
             self.locationDataConfig = {

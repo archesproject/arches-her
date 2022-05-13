@@ -12,7 +12,7 @@
 
 <body>
     <header>
-        {% include 'html_export/custom_header.htm' %} 
+        {% include 'html_export/custom_header.htm' %}
         <h1>Activities</h1>
     </header>
     <main>
@@ -139,7 +139,7 @@
         </section>
         <hr/>
         {% endif %}
-        
+
         {# Location Data #}
         {% if resource_data|has_key:"Location Data" %}
         <section>
@@ -215,7 +215,7 @@
         </section>
         <hr/>
         {% endif %}
-       
+
         {# Descriptions #}
         {% if resource_data|has_key:"Activity Descriptions" %}
         <section>
@@ -263,7 +263,7 @@
         </section>
         <hr/>
         {% endif %}
-      
+
         {# Bibliographic Source Citation #}
         {% if resource_data|has_key:"Bibliographic Source Citation" %}
         <section>
@@ -304,11 +304,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="keeptogether">
-                            <ul>
-                                {% for assocAAAVA in resource_data|val_from_key:"Associated Heritage Assets and Areas" %}
-                                <li>{{ assocAAAVA|val_from_key:"@display_value" }}</li>
-                                {% endfor %}
-                            </ul>
+                            {{ resource_data|val_from_key:"Associated Heritage Assets and Areas"|val_from_key:"@display_value" }}
                         </div>
                     </div>
                 </div>
@@ -325,11 +321,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="keeptogether">
-                            <ul>
-                                {% for activity in resource_data|val_from_key:"Parent_Activity" %}
-                                <li>{{ activity|val_from_key:"@display_value" }}</li>
-                                {% endfor %}
-                            </ul>
+                            {{ resource_data|val_from_key:"Parent_Activity"|val_from_key:"@display_value" }}
                         </div>
                     </div>
                 </div>
@@ -346,11 +338,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="keeptogether">
-                            <ul>
-                                {% for activity in resource_data|val_from_key:"Associated Activities" %}
-                                <li>{{ activity|val_from_key:"@display_value" }}</li>
-                                {% endfor %}
-                            </ul>
+                            {{ resource_data|val_from_key:"Associated Activities"|val_from_key:"@display_value" }}
                         </div>
                     </div>
                 </div>

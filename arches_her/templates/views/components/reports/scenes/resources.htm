@@ -84,8 +84,14 @@
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: archive, dataTableOptions: archiveHolderTableConfig}">
                             <tr>
-                                <td>
-                                    <a data-bind="text: holder, attr: {href: holderLink}" class="aher-table-link"></a>
+                                <td data-bind="foreach: archiveHolders">
+                                    <span data-bind="visible: $index() > 0">, </span>
+                                    <!-- ko if: holderLink -->
+                                    <a class="aher-table-link" data-bind="text: holder, attr: {href: holderLink}"></a>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: holderLink -->
+                                    <span data-bind="text: holder"></span>
+                                    <!-- /ko -->
                                 </td>
                                 <td data-bind="text:title"></td>
                                 <td data-bind="text:reference"></td>
@@ -217,14 +223,14 @@
 
 <!-- Associated Heritage Assets section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.assets">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assets)}, css: {'fa-angle-double-right': visible.assets(), 'fa-angle-double-up': !visible.assets()}" class="fa toggle"></i> {% trans "Associated Heritage/Areas/Artifacts" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assets)}, css: {'fa-angle-double-right': visible.assets(), 'fa-angle-double-up': !visible.assets()}" class="fa toggle"></i> {% trans "Associated Heritage Assets/Areas/Artefacts" %}</h2>
     <a data-bind="{if: cards.assets, click: function(){addNewTile(cards.assets)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.assets" class="aher-report-collapsible-container pad-lft">
 
         <!-- ko ifnot: assets().length -->
-        <div class="aher-nodata-note">No hertiage/area/artifacts for this resource</div>
+        <div class="aher-nodata-note">No hertiage assets/areas/artefacts for this resource</div>
         <!-- /ko -->
 
         <!-- ko if: assets().length -->
@@ -241,7 +247,8 @@
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: assets, dataTableOptions: relatedResourceThreeColumnTableConfig}">
                             <tr>
-                                <td>
+                                <td data-bind="foreach: resource">
+                                    <span data-bind="visible: $index() > 0">, </span>
                                     <!-- ko if: resourceUrl -->
                                     <a data-bind="text: resourceName, attr: {href: resourceUrl}" class="aher-table-link"></a>
                                     <!-- /ko -->
@@ -269,6 +276,54 @@
         <!-- /ko -->
     </div>
 </div>
+
+<!-- Related Application Area section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.relatedApplicationArea">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationArea)}, css: {'fa-angle-double-right': visible.applicationArea(), 'fa-angle-double-up': !visible.applicationArea()}" class="fa toggle"></i> {% trans "Related Application Areas" %}</h2>
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.applicationArea" class="aher-report-collapsible-container pad-lft">
+        <!-- ko ifnot: applicationArea().length -->
+        <div class="aher-nodata-note">No related application areas for this resource</div>
+        <!-- /ko -->    
+        <!-- ko if: applicationArea().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Application Area" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: applicationArea, dataTableOptions: applicationAreaTableConfig}">
+                            <tr>
+                                <td>
+                                    <!-- ko if: resourceLink -->
+                                    <a data-bind="text: resource, attr: {href: resourceLink}" class="aher-table-link"></a>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: resourceLink -->
+                                    <span data-bind="text: resource"></span>
+                                    <!-- /ko -->
+                                </td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.relatedApplicationArea">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.relatedApplicationArea)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>  
+
+
 <!-- Translation section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.translation">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.translation)}, css: {'fa-angle-double-right': visible.translation(), 'fa-angle-double-up': !visible.translation()}" class="fa toggle"></i> {% trans "Translations" %}</h2>

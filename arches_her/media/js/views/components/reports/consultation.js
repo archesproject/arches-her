@@ -57,7 +57,8 @@ define([
 
             self.resourcesDataConfig = {
                 assets: 'related heritage assets and areas',
-                files: 'file(s)'
+                files: 'file(s)',
+                relatedApplicationArea: 'consultation area'
             };
             
             self.nameCards = {};
@@ -317,9 +318,9 @@ define([
             if(contactNode){
                 const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
                 const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
-                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
+                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer', 'resourceid');
                 const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
-                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
+                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer', 'resourceid');
                 const agentsNodes = self.getRawNodeValue(contactNode, 'agents', 'agent', 'instance_details');
                 const ownersNodes = self.getRawNodeValue(contactNode, 'owners', 'owner', 'instance_details');
                 const applicantsNodes = self.getRawNodeValue(contactNode, 'applicants', 'applicant', 'instance_details');
@@ -380,6 +381,7 @@ define([
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
+                    relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
 
