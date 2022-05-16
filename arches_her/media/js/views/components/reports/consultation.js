@@ -50,7 +50,7 @@ define([
                 location: ['Consultation Area'],
                 addresses: undefined,
                 locationDescription: undefined,
-                administrativeAreas: undefined,
+                administrativeAreas: 'localities/administrative areas',
                 nationalGrid: undefined,
                 namedLocations: undefined
             }
@@ -375,6 +375,7 @@ define([
                         card: null,
                         subCards: {
                             locationGeometry: 'consultation location',
+                            administrativeAreas: 'localities/administrative areas'
                         }
                     }
                 };
