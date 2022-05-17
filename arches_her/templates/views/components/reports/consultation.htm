@@ -60,6 +60,12 @@
             <!-- Location Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
                 <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: consultationLocationDescription,
+                    }
+                }"></div>
+                <div data-bind="component: {
                     name: 'views/components/reports/scenes/location',
                     params: {
                         data: resource,

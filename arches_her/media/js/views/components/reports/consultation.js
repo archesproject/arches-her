@@ -387,6 +387,21 @@ define([
                     relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
+            
+            self.consultationLocationDescription = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Consultation Location Description',
+                            card: self.cards?.['consultation location'],
+                            data: [{
+                                key: 'Consultation Location Description',
+                                value: self.getNodeValue(self.resource(), 'consultation area', 'geometry', 'Consultation Location Descriptions', 'Consultation Location Description'),
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
 
             self.consultationDetails = ko.observable({
                 sections:
