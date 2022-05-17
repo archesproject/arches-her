@@ -21,7 +21,7 @@ details = {
 
 class ConsultationStatusFunction(BaseFunction): 
 
-    def save(self, tile, request):
+    def save(self, tile, request, context=None):
         cons_status_list_nodeid = "8d41e4d3-a250-11e9-8977-00224800b26d"
         cons_status_bool_nodeid = "6a773228-db20-11e9-b6dd-784f435179ea"
 
