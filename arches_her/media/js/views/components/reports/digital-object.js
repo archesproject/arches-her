@@ -64,7 +64,8 @@ define([
                             data: [{
                                 key: 'File',
                                 value: self.getFileName(self.getRawNodeValue(self.resource(), 'file content', 'file')),
-                                type: 'kv',
+                                href: self.getNodeValue(self.resource(), 'file content', 'file'),
+                                type: 'href',
                                 card: self.cards?.file
                             },{
                                 key: 'Format',
