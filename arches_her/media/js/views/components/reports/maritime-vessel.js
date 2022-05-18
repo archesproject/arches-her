@@ -23,6 +23,7 @@ define([
                 {id: 'location', title: 'Location Data'},
                 {id: 'protection', title: 'Designation and Protection Status'},
                 {id: 'assessments', title: 'Assessments'},
+                {id: 'images', title: 'Images'},
                 {id: 'status', title: 'Status and Ownership'},
                 {id: 'journey', title: 'Journey Details'},
                 {id: 'people', title: 'Associated People and Organizations'},
@@ -56,7 +57,8 @@ define([
             self.classificationDataConfig = {
                 maritimeProduction: 'construction phases',
                 components: undefined,
-                dimensions: 'dimensions'
+                dimensions: 'asset dimensions',
+                usePhase: 'use phases'
             };
 
             self.descriptionDataConfig = {
@@ -104,7 +106,8 @@ define([
 
                 self.classificationCards = {
                     production: self.cards?.['construction phases'],
-                    dimensions: self.cards?.['asset dimensions']
+                    dimensions: self.cards?.['asset dimensions'],
+                    usePhase: self.cards?.['use phase']
                 };
 
                 self.assessmentCards = {
@@ -121,6 +124,10 @@ define([
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
+
+                self.imagesCards = {
+                    images: self.cards?.['images']
+                }
 
                 self.locationCards = {
                     location: {

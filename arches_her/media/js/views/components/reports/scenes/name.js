@@ -27,11 +27,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 recordStatus: undefined
             }
 
+            self.hideNames = ko.observable(params.hideNames ?? false);
             self.cards = Object.assign({}, params.cards);
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.names = ko.observableArray();
+            self.showCurrency = ko.observable(true);
             self.crossReferences = ko.observableArray();
             self.systemReferenceNumbers = ko.observable();
             self.parentData = ko.observable();
@@ -86,6 +88,19 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const tileid = self.getTileId(x);
                         return { name, nameUseType, currency, tileid }
                     }));
+
+                    const anyCurrency = self.names().some(n => n.currency !== '--');
+                    if (!anyCurrency) {
+                        self.showCurrency = ko.observable(anyCurrency);
+                        self.nameTableConfig = {
+                            ...self.defaultTableConfig,
+                            "columns": [
+                                { "width": "70%" },
+                                { "width": "20%" },
+                            null,
+                            ]
+                        };
+                    }
                 }
 
                 const rawXrefData = self.getRawNodeValue(params.data(), {

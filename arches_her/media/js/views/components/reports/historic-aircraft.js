@@ -22,7 +22,6 @@ define([
                 {id: 'classifications', title: 'Classifications and Dating'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'protection', title: 'Designation and Protection Status'},
-                {id: 'assessments', title: 'Assessments'},
                 {id: 'status', title: 'Status and Ownership'},
                 {id: 'journey', title: 'Journey Details'},
                 {id: 'people', title: 'Associated People and Organizations'},
@@ -96,10 +95,6 @@ define([
                     dimensions: self.cards?.['aircraft dimensions']
                 };
 
-                self.assessmentCards = {
-                    scientificDate: self.cards?.['scientific date assignment']
-                };
-
                 self.peopleCards = {
                     people: self.cards?.['associated people and organizations']
                 };
@@ -113,7 +108,8 @@ define([
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated heritage assets, areas and artefacts'],
+                    archive: self.cards?.['associated archives']
                 };
 
                 self.locationCards = {

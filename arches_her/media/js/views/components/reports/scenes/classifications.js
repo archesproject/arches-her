@@ -372,17 +372,22 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
                 if(self.dataConfig.usePhase) {
                     const usePhaseNode = self.getRawNodeValue(params.data(), 'use phase') || []; 
-
+                    
                     self.usePhases(usePhaseNode.map(x => {
-                        const type = self.getNodeValue(x, 'use phase classification', 'functional type');
+                        var type = self.getNodeValue(x, {
+                            testPaths: [
+                                ['use phase classification', 'functional type'],
+                                ['use phase classification', 'functional  craft type']
+                            ]
+                        });
                         const period = self.getNodeValue(x, 'use phase period');
-                        const startDate = self.getNodeValue(x, 'use phase timespan', 'use phase end date');
+                        const startDate = self.getNodeValue(x, 'use phase timespan', 'use phase start date');
                         const endDate = self.getNodeValue(x, 'use phase timespan', 'use phase end date');
                         const dateQualifier = self.getNodeValue(x, 'use phase timespan', 'use phase date qualifier');
                         const displayDate = self.getNodeValue(x, 'use phase display date');
                         const useEvidence = self.getNodeValue(x, 'use phase classification', 'use phase evidence type');
                         const descriptionType = self.getNodeValue(x, 'use phase classification', 'use phase classification description', 'use phase description type');
-                        const description = self.getNodeValue(x, 'use phase classification', 'use phase classification description', 'use phase description');
+                        const description = self.getRawNodeValue(x, 'use phase classification', 'use phase classification description', 'use phase description', '@display_value');
                         const tileid = self.getTileId(x);
                         return {
                             type,

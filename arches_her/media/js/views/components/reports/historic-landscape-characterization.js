@@ -58,7 +58,8 @@ define([
             self.resourceDataConfig = {
                 activities: undefined,
                 files: undefined,
-                consultations: undefined
+                consultations: undefined,
+                archive: undefined
             }
 
             self.nameCards = {};

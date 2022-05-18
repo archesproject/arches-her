@@ -46,11 +46,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         const datingMethod = self.getNodeValue(x, 'dating method');
                         const earliestDate = self.getNodeValue(x, 'scientific date timespan', 'scientific date start date');
                         const endDateOfDetermination = self.getNodeValue(x, 'when determined', 'when determined end date');
-                        const generalNote = self.getNodeValue(x, 'notes', 'note');;
+                        const generalNote = self.getRawNodeValue(x, 'notes', 'note', '@display_value');
                         const laboratoryNote = self.getNodeValue(x, 'laboratory references', 'laboratory reference');
                         const latestDate = self.getNodeValue(x, 'scientific date timespan', 'scientific date end date');
-                        const standardDeviation = self.getNodeValue(x, 'standard deviation', 'standard deviation type');
-                        const standardDeviationComment = self.getNodeValue(x, 'standard deviation', 'standard deviation notes', 'standard deviation note');
+                        const standardDeviation = self.getNodeValue(x, 'standard deviation', 'standard deviation value');
+                        const standardDeviationComment = self.getRawNodeValue(x, 'standard deviation', 'standard deviation notes', 'standard deviation note', '@display_value');
                         const startDateOfDetermination = self.getNodeValue(x, 'when determined', 'when determined start date');
                         const tileid = self.getTileId(x);
                         return {

@@ -289,6 +289,7 @@
                            <div class="rrow rheader">
                               <div class="rcell">Construction Phase</div>
                               <div class="rcell">Period</div>
+                              <div class="rcell">Asset Type</div>
                               <div class="rcell">Construction Phase Start Date</div>
                               <div class="rcell">Construction Phase End Date</div>
                            </div>
@@ -299,6 +300,9 @@
                               </div>
                               <div class="rcell" data-title="Period">
                                  {{ conphase|val_from_key:"Cultural Period"|val_from_key:"@display_value" }}
+                              </div>
+                              <div class="rcell" data-title="Asset Type">
+                                 {{ conphase|val_from_key:"Phase Classification"|val_from_key:"Asset Type"|val_from_key:"@display_value" }}
                               </div>
                               <div class="rcell" data-title="Phase Start Date">
                                  {{ conphase|val_from_key:"Construction Phase Timespan"|val_from_key:"Construction Phase Start Date"|val_from_key:"@display_value" }}
@@ -365,15 +369,11 @@
          {% if resource_data|has_key:"Parent Asset" %}
          <section>
             <div class="container">
-                <h3>Parent Assets</h3>
+                <h3>Parent Asset</h3>
                <div class="row">
                   <div class="column">
                     <div class="keeptogether">
-                        <ul>
-                            {% for parAsset in resource_data|val_from_key:"Parent Asset" %}
-                                <li>{{parAsset|val_from_key:"@display_value"}}</li>
-                            {% endfor %}
-                        </ul>
+                        {{resource_data|val_from_key:"Parent Asset"|val_from_key:"@display_value"}}
                      </div>
                   </div>
                </div>
@@ -416,18 +416,14 @@
 
 
          {# Associated Activities #}
-         {% if resource_data|has_key:"Associated_Activities" %}
+         {% if resource_data|has_key:"Associated Activities" %}
          <section>
             <div class="container">
                <h3>Associated Activities</h3>
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
-                        <ul>
-                           {% for assocAct in resource_data|val_from_key:"Associated_Activities" %}
-                           <li>{{ assocAct|val_from_key:"@display_value" }}</li>
-                           {% endfor %}
-                        </ul>
+                        {{ resource_data|val_from_key:"Associated Activities"|val_from_key:"@display_value" }}
                      </div>
                   </div>
                </div>
