@@ -34,6 +34,7 @@ define([
 
             self.descriptionDataConfig = {
                 audience: 'audience type',
+                citation: 'bibliographic source citation'
             };
 
             self.resourceDataConfig = {

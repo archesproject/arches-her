@@ -92,7 +92,8 @@
 <!-- /ko -->
 
 <!-- External Reference -->
-<div class="aher-report-section" data-bind="visible: !!dataConfig.xref" >
+<!-- ko ifnot: hideCrossReferences() -->
+<div data-bind="visible: !!dataConfig.xref" class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}" class="fa toggle"></i> {% trans "External Cross References" %}</h2>
     <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
 
@@ -120,7 +121,7 @@
                             <tr>
                                 <td data-bind="text: name"></td>
                                 <td data-bind="text: source"></td>
-                                <td data-bind="text: description"></td>
+                                <td data-bind="html: description"></td>
                                 <td>
                                     <!-- ko with: url -->
                                     <!-- ko if: url -->
@@ -147,6 +148,7 @@
         <!-- /ko -->
     </div>
 </div>
+<!-- /ko -->
 
 <!-- System Reference Numbers section -->
 <div class="aher-report-section">
