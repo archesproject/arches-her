@@ -8,13 +8,13 @@
 
         <!-- Title Block -->
         <div class="aher-report-toolbar">
-            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Heritage Asset" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Monument" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
         </div>
 
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -140,13 +140,13 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
 {% block summary %}
 <div class="aher-summary-report-header">
-    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Heritage Asset)" %}</span></h1>
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Monument)" %}</span></h1>
 </div>
 <div class="model-summary-report">
     <div class="aher-report-page">
