@@ -77,7 +77,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -113,7 +113,7 @@ define([
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts'],
+                    assets: self.cards?.['associated monuments, areas and artefacts'],
                     archive: self.cards?.['associated archives']
                 };
 
@@ -140,28 +140,28 @@ define([
             }
 
             self.statusOwnerData = ko.observable({
-                sections: 
+                sections:
                     [
                         {
-                            title: "Status and Ownership", 
+                            title: "Status and Ownership",
                             data: [{
-                                key: 'Status', 
-                                value: self.getNodeValue(self.resource(), 'status'), 
+                                key: 'Status',
+                                value: self.getNodeValue(self.resource(), 'status'),
                                 card: self.cards?.['status'],
                                 type: 'kv'
                             }, {
-                                key: 'Nationality', 
-                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node => 
+                                key: 'Nationality',
+                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node =>
                                     self.getNodeValue(node, 'aircraft nationality')
-                                ), 
+                                ),
                                 card: self.cards?.['nationality'],
                                 type: 'kv'
                             }]
                         }
                     ]
             });
-            
-            const flightsNode = self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Last Flight Type']['value'] !== 'Final'); 
+
+            const flightsNode = self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Last Flight Type']['value'] !== 'Final');
 
             if(Array.isArray(flightsNode)){
                 // const notFinalFlight = flightsNode.filter(f => f['Last Flight Type']['value'] !== 'Final');
@@ -190,16 +190,16 @@ define([
                     const tileid = self.getTileId(node);
 
 
-                    return { 
-                        cargoType, 
-                        crew, 
-                        flightDescription, 
-                        flightDeparture, 
-                        flightDestination, 
-                        flightArrivalDate, 
-                        flightDepartureDate, 
-                        flightDateQualifier, 
-                        flightType, 
+                    return {
+                        cargoType,
+                        crew,
+                        flightDescription,
+                        flightDeparture,
+                        flightDestination,
+                        flightArrivalDate,
+                        flightDepartureDate,
+                        flightDateQualifier,
+                        flightType,
                         tileid
                     }
                 }));
@@ -220,7 +220,7 @@ define([
                     })
                 }
 
-    
+
                 const crewNode = self.getRawNodeValue(finalFlight, 'crew');
                 let crew = [];
                 if(Array.isArray(crewNode))
@@ -247,7 +247,7 @@ define([
                 const tileid = self.getTileId(finalFlight);
 
                 self.lastFlight([{
-                    description, 
+                    description,
                     crashSiteType,
                     crashSites,
                     crew,
