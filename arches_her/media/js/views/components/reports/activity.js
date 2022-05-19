@@ -65,7 +65,7 @@ define([
             self.resourceDataConfig = {
                 archive: 'associated archive objects',
                 files: 'digital files',
-                assets: 'associated heritage assets and areas'
+                assets: 'associated monuments and areas'
             }
 
             self.cards = {};
@@ -81,7 +81,7 @@ define([
                 activityArchive: ko.observable(true)
             }
 
-            const activityArchiveNode = self.getRawNodeValue(self.resource(), 'activity archive material') 
+            const activityArchiveNode = self.getRawNodeValue(self.resource(), 'activity archive material')
             if(Array.isArray(activityArchiveNode)){
                 self.activityArchive(activityArchiveNode.map(node => {
                     const type = self.getNodeValue(node, 'archive material', 'archive source type');
@@ -103,7 +103,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 Object.assign(self.cards, {
@@ -153,7 +153,7 @@ define([
                     consultations: self.cards?.['associated consultations'],
                     activities: self.cards?.['associated activities'],
                     archive: self.cards?.['associated archive objects'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts'],
+                    assets: self.cards?.['associated monuments and areas'],
                     files: self.cards?.['associated digital files'],
                 }
             }
