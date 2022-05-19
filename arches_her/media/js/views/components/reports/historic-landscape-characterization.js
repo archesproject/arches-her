@@ -109,7 +109,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 Object.assign(self.cards, {
@@ -128,7 +128,7 @@ define([
                 };
 
                 self.resourcesCards = {
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 }
 
                 self.locationCards = {
