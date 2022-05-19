@@ -170,6 +170,16 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         }
                     }
                 }
+                
+                const relatedApplicationArea = self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area', 'instance_details');
+                if(Array.isArray(relatedApplicationArea)){
+                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area'))
+                    self.applicationArea(relatedApplicationArea.map(x => {
+                        const resource = self.getNodeValue(x);
+                        const resourceLink = self.getResourceLink(x);
+                        return {resource, resourceLink, tileid};    
+                    }));
+                }
 
                 const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation);
                 if (Array.isArray(translationNode)) {
