@@ -13,7 +13,7 @@ define([
     'views/components/reports/scenes/resources',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
-    return ko.components.register('heritage-area-report', {
+    return ko.components.register('area-report', {
         viewModel: function(params) {
             var self = this;
             params.configKeys = ['tabs', 'activeTabIndex'];
@@ -39,7 +39,7 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'heritage area',
+                name: 'area names',
                 parent: 'parent area'
             };
 
@@ -75,11 +75,11 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
-                    name: self.cards?.['heritage area names'],
+                    name: self.cards?.['area names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                     parent: self.cards?.['parent area']
@@ -112,7 +112,7 @@ define([
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.locationCards = {
@@ -137,6 +137,6 @@ define([
             }
 
         },
-        template: { require: 'text!templates/views/components/reports/heritage-area.htm' }
+        template: { require: 'text!templates/views/components/reports/area.htm' }
     });
 });
