@@ -16,7 +16,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
 
             this.crossReferenceTableConfig = {
                 ...this.defaultTableConfig,
-                "columns": Array(4).fill(null)
+                "columns": [
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "50%" },
+                    { "width": "10%" },
+                   null,
+                ]
             };
 
             self.dataConfig = {
