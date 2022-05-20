@@ -56,11 +56,11 @@ define([
             }
 
             self.resourcesDataConfig = {
-                assets: 'related heritage assets and areas',
+                assets: 'related monuments and areas',
                 files: 'file(s)',
                 relatedApplicationArea: 'consultation area'
             };
-            
+
             self.nameCards = {};
             self.locationCards = {};
             self.resourcesCards = {};
@@ -170,8 +170,12 @@ define([
                     const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
                     const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
                     const urlNodeValue = self.getRawNodeValue(node, 'url');
-                    const url = urlNodeValue.url;
-                    const urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
+                    let url = undefined;
+                    let urlLabel = undefined;
+                    if(urlNodeValue){
+                        url = urlNodeValue.url;
+                        urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
+                    }
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
                 }));
@@ -379,7 +383,7 @@ define([
                 self.resourcesCards = {
                     consultations: self.cards?.['associated consultations'],
                     activities: self.cards?.['associated activities'],
-                    assets: self.cards?.['associated heritage assets and areas'],
+                    assets: self.cards?.['associated monuments and areas'],
                     files: self.cards?.['associated digital files'],
                     relatedApplicationArea: self.cards?.['consultation location']
                 };

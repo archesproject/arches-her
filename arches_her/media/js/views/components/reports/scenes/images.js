@@ -34,7 +34,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const caption = self.getNodeValue(x, {
                             testPaths: [
                                 ['captions', 'caption'],
-                                ['captions', 'captiion']
+                                ['captions', 'captiion'],
+                                ['caption notes', 'caption note', '@display_value'],
                             ]
                         });
                         const copyrightHolder = self.getNodeValue(x, 'copyright', 'copyright holder');
