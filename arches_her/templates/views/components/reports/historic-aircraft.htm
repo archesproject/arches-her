@@ -42,6 +42,7 @@
                     name: 'views/components/reports/scenes/description',
                     params: {
                         data: resource,
+                        dataConfig: descriptionDataConfig,
                         cards: descriptionCards,
                     }
                 }"></div>
@@ -74,16 +75,6 @@
                     params: {
                         data: resource,
                         cards: protectionCards,
-                    }
-                }"></div>
-            </div>
-            <!-- Assessments Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'assessments'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/assessments',
-                    params: {
-                        data: resource,
-                        cards: assessmentCards,
                     }
                 }"></div>
             </div>

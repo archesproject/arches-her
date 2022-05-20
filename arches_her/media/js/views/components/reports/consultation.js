@@ -170,8 +170,12 @@ define([
                     const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
                     const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
                     const urlNodeValue = self.getRawNodeValue(node, 'url');
-                    const url = urlNodeValue.url;
-                    const urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
+                    let url = undefined;
+                    let urlLabel = undefined;
+                    if(urlNodeValue){
+                        url = urlNodeValue.url;
+                        urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
+                    }
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
                 }));
