@@ -117,7 +117,7 @@ class AutopopulateNodeFromCardNodes(BaseFunction):
     def get(self):
         raise NotImplementedError
 
-    def save(self, tile, request):
+    def save(self, tile, request, context=None):
         self.logger = logging.getLogger(__name__)
         self.autopopulate_nodes(tile=tile, request=request, is_function_save_method=True)
         return
