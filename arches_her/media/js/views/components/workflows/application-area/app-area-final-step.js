@@ -31,11 +31,10 @@ define([
 
             try {
                 this.reportVals.designations = val.resource['Designation and Protection Assignment'].map(function(designation){
-                    reference = self.getResourceValue(designation,['Reference URL','@value'])
-                    referenceUrl = (reference !== 'none') ? JSON.parse(reference).url : undefined
-                    referenceLabel = (reference !== 'none') && JSON.parse(reference).url_label !== '' ? JSON.parse(reference).url_label
-                                                            : referenceUrl ? referenceUrl
-                                                            : 'none'
+                    const reference = self.getResourceValue(designation,['Reference URL','@value'])
+                    const referenceUrl = (reference !== 'none') ? JSON.parse(reference).url : undefined
+                    const referenceLabel = (reference !== 'none') && JSON.parse(reference).url_label !== '' ? JSON.parse(reference).url_label
+                        : referenceUrl ? referenceUrl: 'none';
                     return {
                         designationName: {'name': 'Designation Name', 'value': self.getResourceValue(designation,['Designation Names', 'Designation Name','@value'])},
                         designationNameUseType: {'name': 'Designation Name Use Type', 'value': self.getResourceValue(designation,['Designation Names', 'Designation Name Use Type','@value'])},
