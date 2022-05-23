@@ -36,7 +36,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 columns: Array(2).fill(null)
             };
-            
+
             self.dataConfig = {
                 activities: 'associated activities',
                 consultations: 'associated consultations',
@@ -170,18 +170,18 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         }
                     }
                 }
-                
+
                 const relatedApplicationArea = self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area', 'instance_details');
                 if(Array.isArray(relatedApplicationArea)){
                     const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area'))
                     self.applicationArea(relatedApplicationArea.map(x => {
                         const resource = self.getNodeValue(x);
                         const resourceLink = self.getResourceLink(x);
-                        return {resource, resourceLink, tileid};    
+                        return {resource, resourceLink, tileid};
                     }));
                 }
 
-                const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation);
+                const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation, 'instance_details');
                 if (Array.isArray(translationNode)) {
                     self.translation(translationNode.map(x => {
                         const resource = self.getNodeValue(x);
