@@ -23,7 +23,6 @@ define([
                 {id: 'name', title: 'Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
                 {id: 'classifications', title: 'Classifications and Dating'},
-                {id: 'archive', title: 'Archive Holding'},
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'json', title: 'JSON'},
@@ -41,6 +40,10 @@ define([
             self.sourceNamesTableConfig = {
                 ...self.defaultTableConfig,
                 columns: Array(4).fill(null)
+            };
+            self.sourceCreationConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(5).fill(null)
             };
 
             self.nameDataConfig = {
@@ -61,10 +64,7 @@ define([
             
             self.publication = ko.observableArray();
             self.sourceNames = ko.observableArray();
-            
-            self.archiveDataConfig = {
-                sourceCreation: 'bibliographic source creation'
-            };
+            self.sourceCreation = ko.observableArray();
 
             self.nameCards = {};
             self.archiveCards = {};
@@ -78,7 +78,8 @@ define([
 
             self.visible = {
                 publication: ko.observable(true),
-                sourceNames: ko.observable(true)
+                sourceNames: ko.observable(true),
+                sourceCreation: ko.observable(true),
             }
 
             if(params.report.cards){
@@ -105,16 +106,17 @@ define([
                     files: self.cards?.['associated digital files']
                 };
 
-                self.archiveCards = {
-                    sourceCreation: self.cards?.['bibliographic source creation']
-                };
-
                 self.copyrightCards = {
                     copyright: self.cards?.copyright
                 };
+                
+                self.sourceCreationCards = {
+                    sourceCreation: self.cards?.sourceCreation
+                };
 
                 Object.assign(self.cards, {
-                    sourceNames: self.cards?.['bibliographic source names']
+                    sourceNames: self.cards?.['bibliographic source names'],
+                    sourceCreation: self.cards?.['bibliographic source creation']
                 })
             }
 
@@ -145,6 +147,24 @@ define([
                     return { name, volume, part, tileid };
                 }));
             }
+
+            const sourceCreationNode = self.getRawNodeValue(self.resource(), 'bibliographic source creation') 
+            if(Array.isArray(sourceCreationNode)) {
+                self.sourceCreation(sourceCreationNode.map(x => {
+                    const author = self.getNodeValue(x, 'authorship', 'author', 'author names', 'author name');
+                    const editor = self.getNodeValue(x, 'editorship', 'editor', 'editor names', 'editor name');
+                    const contributor = self.getNodeValue(x, 'contribution', 'contributors', 'contributor names', 'contributor name');
+                    const statement = self.getRawNodeValue(x, 'creation statement of responsibility', 'statement of responsibility', '@display_value');
+                    const tileid = self.getTileId(x);
+                    return {
+                        author,
+                        editor,
+                        contributor,
+                        statement,
+                        tileid
+                    };
+                }));
+            } 
 
             self.bibliographicSourceData = ko.observable({
                 sections:

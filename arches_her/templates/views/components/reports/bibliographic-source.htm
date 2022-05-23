@@ -174,6 +174,57 @@
                         <!-- /ko -->
                     </div>
                 </div>
+                <!-- Bibliographic Source Creation section -->
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}"  class="fa toggle"></i> {% trans "Source Creation" %}</h2>
+                    <a data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.sourceCreation" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: sourceCreation() -->
+                        <div class="aher-nodata-note">{% trans "No source creation for this resource" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: sourceCreation() -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Author" %}</th>
+                                                <th>{% trans "Editor" %}</th>
+                                                <th>{% trans "Contributor" %}</th>
+                                                <th class="none">{% trans "Statement of Responsibility" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: sourceCreation, dataTableOptions: sourceCreationConfig}">
+                                            <tr>
+                                                <td data-bind="text: author"></td>
+                                                <td data-bind="text: editor"></td>
+                                                <td data-bind="text: contributor"></td>
+                                                <td data-bind="html: statement"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.sourceCreation">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceCreation)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceCreation)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/copyright',
                     params: {
@@ -182,17 +233,6 @@
                     }
                 }"></div>
             </div>
-            <!-- Archive Tab -->
-           <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
-               <div data-bind="component: {
-                   name: 'views/components/reports/scenes/archive',
-                   params: {
-                       data: resource,
-                       cards: archiveCards,
-                       dataConfig: archiveDataConfig
-                   }
-               }"></div>
-           </div>
            <!-- Resources Tab -->
            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
                <div data-bind="component: {
