@@ -100,8 +100,7 @@ define([
                 };
 
                 Object.assign(self.cards, {
-                    flights: self.cards?.['flights'],
-                    lastFlight: self.cards?.['last known flight']
+                    flights: self.cards?.['flights']
                 });
 
                 self.resourcesCards = {
@@ -156,12 +155,12 @@ define([
                     ]
             });
 
-            const flightsNode = self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Last Flight Type']['value'] !== 'Final');
+            const flightsNode = self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Flight Type']['value'] !== 'Final');
 
             if(Array.isArray(flightsNode)){
                 // const notFinalFlight = flightsNode.filter(f => f['Last Flight Type']['value'] !== 'Final');
                 self.flights(flightsNode.map(node => {
-                    const cargoType = self.getNodeValue(node, 'last cargo', 'last cargo type');
+                    const cargoType = self.getNodeValue(node, 'cargo', 'cargo type');
 
                     const crewNode = self.getRawNodeValue(node, 'crew');
                     let crew = [];
@@ -175,13 +174,13 @@ define([
                         })
                     }
 
-                    const flightDescription = self.getRawNodeValue(node, 'crash descriptions', 'last flight description', '@display_value');
-                    const flightDeparture = self.getNodeValue(node, 'final place of departure', 'final departure placenames', 'final place of departure name');
-                    const flightDestination = self.getNodeValue(node, 'final place of destination', 'final destination placenames', 'final place of destination name');
-                    const flightArrivalDate = self.getNodeValue(node, 'last flight timespan', 'expected date of arrival', 'expected date start');
-                    const flightDepartureDate = self.getNodeValue(node, 'last flight timespan', 'date of departure');
-                    const flightDateQualifier = self.getNodeValue(node, 'last flight timespan', 'last flight date qualifier');
-                    const flightType = self.getNodeValue(node, 'last flight type');
+                    const flightDescription = self.getRawNodeValue(node, 'flight descriptions', 'flight description', '@display_value');
+                    const flightDeparture = self.getNodeValue(node, 'place of departure', 'departure placenames', 'place of departure name');
+                    const flightDestination = self.getNodeValue(node, 'place of destination', 'destination placenames', 'place of destination name');
+                    const flightArrivalDate = self.getNodeValue(node, 'flight timespan', 'expected date of arrival', 'expected date start');
+                    const flightDepartureDate = self.getNodeValue(node, 'flight timespan', 'date of departure');
+                    const flightDateQualifier = self.getNodeValue(node, 'flight timespan', 'flight date qualifier');
+                    const flightType = self.getNodeValue(node, 'flight type');
                     const tileid = self.getTileId(node);
 
 
@@ -200,10 +199,10 @@ define([
                 }));
             }
 
-            const finalFlight = Object.assign({}, self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Last Flight Type']['value'] === 'Final'))[0];
+            const finalFlight = Object.assign({}, self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Flight Type']['value'] === 'Final'))[0];
 
             if(finalFlight){
-                const description = self.getRawNodeValue(finalFlight, 'crash descriptions', 'last flight description', '@display_value');
+                const description = self.getRawNodeValue(finalFlight, 'flight descriptions', 'flight description', '@display_value');
                 const crashSiteType = self.getNodeValue(finalFlight, 'crash site', 'crash site type');
                 const crashSiteNode = self.getRawNodeValue(finalFlight, 'crash site', 'instance_details');
                 let crashSites = [];
@@ -228,16 +227,16 @@ define([
                     })
                 }
 
-                const departureName = self.getNodeValue(finalFlight, 'final place of departure', 'final departure placenames', 'final place of departure name');
-                const departureNameCurrency = self.getNodeValue(finalFlight, 'final place of departure', 'final departure placenames', 'final place of departure name currency');
-                const destinationName = self.getNodeValue(finalFlight, 'final place of destination', 'final destination placenames', 'final place of destination name');
-                const destinationNameCurrency = self.getNodeValue(finalFlight, 'final place of destination', 'final destination placenames', 'final place of destination name currency');
-                const cargo = self.getNodeValue(finalFlight, 'last cargo', 'last cargo type');
-                const departureDate = self.getNodeValue(finalFlight, 'last flight timespan', 'date of departure');
-                const lossDate = self.getNodeValue(finalFlight, 'last flight timespan', 'date of loss');
-                const expectedArrivalDate = self.getNodeValue(finalFlight, 'last flight timespan', 'expected date of arrival', 'expected date start');
-                const dateQualifier = self.getNodeValue(finalFlight, 'last flight timespan', 'last flight date qualifier');
-                const type = self.getNodeValue(finalFlight, 'last flight type');
+                const departureName = self.getNodeValue(finalFlight, 'place of departure', 'departure placenames', 'place of departure name');
+                const departureNameCurrency = self.getNodeValue(finalFlight, 'place of departure', 'departure placenames', 'place of departure name currency');
+                const destinationName = self.getNodeValue(finalFlight, 'place of destination', 'destination placenames', 'place of destination name');
+                const destinationNameCurrency = self.getNodeValue(finalFlight, 'place of destination', 'destination placenames', 'place of destination name currency');
+                const cargo = self.getNodeValue(finalFlight, 'cargo', 'cargo type');
+                const departureDate = self.getNodeValue(finalFlight, 'flight timespan', 'date of departure');
+                const lossDate = self.getNodeValue(finalFlight, 'flight timespan', 'date of loss');
+                const expectedArrivalDate = self.getNodeValue(finalFlight, 'flight timespan', 'expected date of arrival', 'expected date start');
+                const dateQualifier = self.getNodeValue(finalFlight, 'flight timespan', 'flight date qualifier');
+                const type = self.getNodeValue(finalFlight, 'flight type');
                 const mannerOfLoss = self.getNodeValue(finalFlight, 'manner of loss');
                 const tileid = self.getTileId(finalFlight);
 
