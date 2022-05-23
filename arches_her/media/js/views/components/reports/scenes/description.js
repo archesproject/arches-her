@@ -59,7 +59,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 self.descriptions(params.data.descriptions);
             } else {
                 const rawDescriptionData = self.getRawNodeValue(params.data(), self.dataConfig.descriptions);
-                const descriptionData = rawDescriptionData ? Array.isArray(rawDescriptionData) ? rawDescriptionData : [rawDescriptionData] : undefined; 
+                const descriptionData = rawDescriptionData ? Array.isArray(rawDescriptionData) ? rawDescriptionData : [rawDescriptionData] : undefined;
                 if(descriptionData) {
                     self.descriptions(descriptionData.map(x => {
                         const type = self.getNodeValue(x, {
@@ -77,7 +77,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
 
                 const rawCitationData = self.getRawNodeValue(params.data(), self.dataConfig.citation);
-                const citationData = rawCitationData ? Array.isArray(rawCitationData) ? rawCitationData : [rawCitationData] : undefined; 
+                const citationData = rawCitationData ? Array.isArray(rawCitationData) ? rawCitationData : [rawCitationData] : undefined;
                 if(citationData) {
                     self.citations(citationData.map(x => {
                         const link = self.getResourceLink(x);
@@ -92,14 +92,16 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
-                const audienceTypeNode = self.getRawNodeValue(params.data(), self.dataConfig.audience);
-                if(Array.isArray(audienceTypeNode)){
+                const rawAudienceTypeNode = self.getRawNodeValue(params.data(), self.dataConfig.audience);
+                const audienceTypeNode = rawAudienceTypeNode ? Array.isArray(rawAudienceTypeNode) ? rawAudienceTypeNode : [rawAudienceTypeNode] : undefined;
+                if(audienceTypeNode){
                     self.audience(audienceTypeNode.map(x => {
                         const audienceType = self.getNodeValue(x);
                         const tileid = self.getTileId(x);
                         return {audienceType, tileid};
                     }));
                 }
+
 
                 if(self.dataConfig.subject){
                     self.subjectData = ko.observable({
@@ -117,7 +119,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             ]
                     });
                 }
-            } 
+            }
 
         },
         template: { require: 'text!templates/views/components/reports/scenes/description.htm' }
