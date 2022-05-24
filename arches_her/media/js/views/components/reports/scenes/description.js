@@ -66,9 +66,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             testPaths: [
                                 [`${self.dataConfig.descriptions.slice(0,-1)} type`]
                             ]});
-                        const content = self.getNodeValue(x, {
+                        const content = self.getRawNodeValue(x, {
                             testPaths: [
-                                [self.dataConfig.descriptions.slice(0,-1)]
+                                [self.dataConfig.descriptions.slice(0,-1), '@display_value']
                             ]});
 
                         const tileid = self.getTileId(x);
