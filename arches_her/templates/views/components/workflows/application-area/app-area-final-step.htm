@@ -43,6 +43,7 @@
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Area Map' %}</h5>
         <div class="final-step-section-block-item">
+            <!--ko if: geometry -->
             <div class="map-container">
                 <div class="map" data-bind="component: {
                     name: 'arches-map',
@@ -50,6 +51,7 @@
                 }">
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
     <div class="her-final-step-section">
