@@ -5,7 +5,7 @@ define([
 
     function viewModel(params) {
         SummaryStep.apply(this, [params]);
-
+        this.geometry = false;
         this.resourceData.subscribe(function(val){
             const self = this;
             var description = val.resource['Descriptions'] && val.resource['Descriptions'].length ? val.resource['Descriptions'][0] : {};
@@ -40,8 +40,13 @@ define([
 
             var geojsonStr = this.getResourceValue(val.resource, ['Geometry','Geospatial Coordinates','@value']);
             if (geojsonStr) {
-                var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
-                this.prepareMap(geojson, 'app-area-map-data');
+                try {
+                    var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
+                    this.prepareMap(geojson, 'app-area-map-data');
+                    this.geometry = true;
+                } catch(e) {
+                    //pass
+                }
             }
             this.loading(false);
         }, this);
