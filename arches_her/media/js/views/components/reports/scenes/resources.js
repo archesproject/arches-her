@@ -23,6 +23,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 columns: Array(4).fill(null)
             };
 
+
             //Related Resource 3 column table configuration
             self.relatedResourceThreeColumnTableConfig = {
                 ...self.defaultTableConfig,
@@ -42,7 +43,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 consultations: 'associated consultations',
                 files: 'associated files',
                 assets: 'associated heritage assets, areas and artefacts',
-                archive: 'associated archives'
+                archive: 'associated archives',
+                actors: 'associated actors'
             }
 
             self.cards = Object.assign({}, params.cards);
@@ -53,6 +55,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             self.consultations = ko.observableArray();
             self.files = ko.observableArray();
             self.archive = ko.observableArray();
+            self.actors = ko.observableArray();
             self.assets = ko.observableArray();
             self.assets_rob = ko.observableArray();
             self.translation = ko.observableArray();
@@ -64,6 +67,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 activities: ko.observable(true),
                 consultations: ko.observable(true),
                 files: ko.observable(true),
+                actors: ko.observable(true),
                 assets: ko.observable(true),
                 applicationArea: ko.observable(true),
                 translation: ko.observable(true)
@@ -171,6 +175,28 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }
                 }
 
+                const associatedActorsNode = self.getRawNodeValue(params.data(), self.dataConfig.actors);
+                if (associatedActorsNode){
+                    if(Array.isArray(associatedActorsNode)){
+                        self.actors(associatedActorsNode.map(x => {
+                            const associatedActors = []
+                            const actorInstances = self.getRawNodeValue(x, {
+                                testPaths:[
+                                    ['associated actor', 'actor', 'instance_details']
+                                ]
+                            })
+                            actorInstances?.forEach(element => {
+                                associatedActors.push({
+                                    actor: self.getNodeValue(element),
+                                    actorLink: self.getResourceLink(element)
+                                });
+                            });
+                            const tileid = self.getTileId(x);
+                            return {associatedActors, tileid};
+                        }))
+                    }
+                }
+
                 const relatedApplicationArea = self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area', 'instance_details');
                 if(Array.isArray(relatedApplicationArea)){
                     const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.relatedApplicationArea, 'geometry', 'related application area'))
@@ -190,6 +216,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         return { resource, resourceLink, tileid };
                     }));
                 }
+
 
                 if (self.dataConfig.period) {
                     const rawPeriodNode = self.getRawNodeValue(params.data(), self.dataConfig.period);
