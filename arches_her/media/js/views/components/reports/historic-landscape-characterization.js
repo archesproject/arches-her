@@ -59,7 +59,8 @@ define([
                 activities: undefined,
                 files: undefined,
                 consultations: undefined,
-                archive: undefined
+                archive: undefined,
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -109,7 +110,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 Object.assign(self.cards, {

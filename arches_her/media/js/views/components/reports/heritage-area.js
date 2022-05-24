@@ -54,7 +54,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             };
 
             self.locationDataConfig = {
@@ -75,7 +76,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
