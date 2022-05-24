@@ -15,8 +15,8 @@ define([
                     name: 'assign-name',
                     required: true,
                     informationboxdata: {
-                        heading: 'Assign an address',
-                        text: 'Assign an address to your application area. Use the address as the default name',
+                        heading: 'Application Area Name',
+                        text: 'Assign a name for your application area.',
                     },
                     layoutSections: [
                         {
