@@ -36,6 +36,31 @@ define([
                     ],
                 },
                 {
+                    title: 'Location  Description',
+                    name: 'location-description',
+                    required: false,
+                    informationboxdata: {
+                        heading: 'Location Description',
+                        text: 'Describe the application area location',
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'location-description', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
+                                        nodegroupid: 'faa0a425-94ff-11ea-8dea-f875a44e0e11',
+                                        resourceid: "['assign-name']['app-area-name'][0]['resourceid']['resourceInstanceId']",
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
+                },
+                {
                     title: 'Area Map',
                     name: 'area-map',
                     description: 'Draw (or select from the Development Area Overlay) the extent of...',
@@ -55,31 +80,6 @@ define([
                                     parameters: {
                                         graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                                         nodegroupid: '19096dc5-3a3b-11eb-b4cf-f875a44e0e11',
-                                        resourceid: "['assign-name']['app-area-name'][0]['resourceid']['resourceInstanceId']",
-                                    },
-                                },
-                            ], 
-                        },
-                    ],
-                },
-                {
-                    title: 'Location  Description',
-                    name: 'location-description',
-                    required: false,
-                    informationboxdata: {
-                        heading: 'Area Description',
-                        text: 'Describe the application area location',
-                    },
-                    layoutSections: [
-                        {
-                            componentConfigs: [
-                                { 
-                                    componentName: 'default-card',
-                                    uniqueInstanceName: 'location-description', /* unique to step */
-                                    tilesManaged: 'one',
-                                    parameters: {
-                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                                        nodegroupid: 'faa0a425-94ff-11ea-8dea-f875a44e0e11',
                                         resourceid: "['assign-name']['app-area-name'][0]['resourceid']['resourceInstanceId']",
                                     },
                                 },
