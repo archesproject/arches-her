@@ -96,7 +96,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 const audienceTypeNode = rawAudienceTypeNode ? Array.isArray(rawAudienceTypeNode) ? rawAudienceTypeNode : [rawAudienceTypeNode] : undefined;
                 if(audienceTypeNode){
                     self.audience(audienceTypeNode.map(x => {
-                        const audienceType = self.getNodeValue(x);
+                        const audienceTypeList = self.getRawNodeValue(x, '@display_value');
+                        var audienceType = audienceTypeList.replace(",",", ");
                         const tileid = self.getTileId(x);
                         return {audienceType, tileid};
                     }));
