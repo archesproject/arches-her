@@ -97,7 +97,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 if(audienceTypeNode){
                     self.audience(audienceTypeNode.map(x => {
                         const audienceTypeList = self.getRawNodeValue(x, '@display_value');
-                        var audienceType = audienceTypeList.replace(",",", ");
+                        var audienceType = audienceTypeList.replace(/,/g, ", ");
                         const tileid = self.getTileId(x);
                         return {audienceType, tileid};
                     }));
