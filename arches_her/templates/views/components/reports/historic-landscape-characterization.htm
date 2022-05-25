@@ -104,7 +104,7 @@
                                                 <th>{% trans "Historic Map" %}</th>
                                                 <th>{% trans "Broad Type" %}</th>
                                                 <th>{% trans "Confidence of Interpretation" %}</th>
-                                                <th>{% trans "Description" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
                                                 <th>{% trans "Display Date" %}</th>
                                                 <th class="none">{% trans "Start Date" %}</th>
                                                 <th class="none">{% trans "End Date" %}</th>
@@ -136,7 +136,7 @@
                                                 </td>
                                                 <td data-bind="text: broadType"></td>
                                                 <td data-bind="text: interpretationConfidence"></td>
-                                                <td data-bind="text: description"></td>
+                                                <td data-bind="html: description"></td>
                                                 <td data-bind="text: displayDate"></td>
                                                 <td data-bind="text: startDate"></td>
                                                 <td data-bind="text: endDate"></td>

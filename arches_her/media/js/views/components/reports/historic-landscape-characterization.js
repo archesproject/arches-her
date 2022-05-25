@@ -79,7 +79,7 @@ define([
                     const broadType = self.getNodeValue(x, 'hlc phase classification', 'broad type');
                     const hlcType = self.getNodeValue(x, 'hlc phase classification', 'broad type', 'hlc type');
                     const interpretationConfidence = self.getNodeValue(x, 'hlc phase classification', 'confidence of interpretation');
-                    const description = self.getNodeValue(x, 'hlc phase classification', 'hlc phase description');
+                    const description = self.getRawNodeValue(x, 'hlc phase classification', 'hlc phase classification description', 'hlc phase description', '@display_value');
                     const historicMapInstanceDetails = self.getRawNodeValue(x, 'hlc phase classification', 'historic map', 'instance_details');
                     if (Array.isArray(historicMapInstanceDetails)) {
                         historicMap(historicMapInstanceDetails.map(x => {
