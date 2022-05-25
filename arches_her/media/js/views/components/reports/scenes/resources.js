@@ -216,19 +216,26 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         return { resource, resourceLink, tileid };
                     }));
                 }
-
-
                 if (self.dataConfig.period) {
                     const rawPeriodNode = self.getRawNodeValue(params.data(), self.dataConfig.period);
-                    const periodNode = Array.isArray(rawPeriodNode) ? rawPeriodNode : [rawPeriodNode];
-
-                    self.period(periodNode.map(x => {
-                        const resource = self.getNodeValue(x);
-                        const resourceLink = self.getResourceLink(self.getRawNodeValue(x));
-                        const tileid = self.getTileId(x);
-                        return { resource, resourceLink, tileid };
-                    }));
+                    if(rawPeriodNode){
+                        const periodNode = Array.isArray(rawPeriodNode) ? rawPeriodNode : [rawPeriodNode];
+                        self.period(periodNode.map(x => {
+                            var resource = [];
+                                for (const element of x['instance_details']) {
+                                if (element) {
+                                    resource.push({
+                                        resourceName: self.getNodeValue(element),
+                                        resourceUrl: self.getResourceLink(element)
+                                    });
+                                }
+                            }
+                            const tileid = self.getTileId(x);
+                            return { resource, tileid };
+                        }));
+                    }
                 }
+
             }
         },
         template: { require: 'text!templates/views/components/reports/scenes/resources.htm' }
