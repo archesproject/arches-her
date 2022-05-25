@@ -230,10 +230,15 @@ class FileTemplateView(View):
         action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
         mitigations = []
 
+        mitigation_scope_dict = {}
+        mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
+        with open(mitigation_notes_path, "rb") as openfile:
+            mitigation_scope_dict = json.loads(openfile.read())
+
         for tile in tiles:
             mitigation = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation["content"] = get_value_from_tile(tile, action_node_id)
+                mitigation["content"] = "<p>{}</p><br><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scope_dict[tile.data[action_type_node_id]])
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             else:
                 for key, value in list(template_dict.items()):
@@ -313,7 +318,7 @@ class FileTemplateView(View):
                                 mapping_dict["Address of consulting organisation"] = contactTile.data[contactPointNodeId]
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<p>{}</p>{}<br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
