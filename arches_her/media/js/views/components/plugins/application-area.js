@@ -15,8 +15,8 @@ define([
                     name: 'assign-name',
                     required: true,
                     informationboxdata: {
-                        heading: 'Assign an address',
-                        text: 'Assign an address to your application area. Use the address as the default name',
+                        heading: 'Application Area Name',
+                        text: 'Assign a name for your application area.',
                     },
                     layoutSections: [
                         {
@@ -29,6 +29,31 @@ define([
                                         graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                                         nodegroupid: '9c9f9dbb-83bf-11ea-bca7-f875a44e0e11',
                                         renderContext: 'workflow',
+                                    },
+                                },
+                            ], 
+                        },
+                    ],
+                },
+                {
+                    title: 'Location  Description',
+                    name: 'location-description',
+                    required: false,
+                    informationboxdata: {
+                        heading: 'Location Description',
+                        text: 'Describe the application area location',
+                    },
+                    layoutSections: [
+                        {
+                            componentConfigs: [
+                                { 
+                                    componentName: 'default-card',
+                                    uniqueInstanceName: 'location-description', /* unique to step */
+                                    tilesManaged: 'one',
+                                    parameters: {
+                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
+                                        nodegroupid: 'faa0a425-94ff-11ea-8dea-f875a44e0e11',
+                                        resourceid: "['assign-name']['app-area-name'][0]['resourceid']['resourceInstanceId']",
                                     },
                                 },
                             ], 
@@ -55,31 +80,6 @@ define([
                                     parameters: {
                                         graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
                                         nodegroupid: '19096dc5-3a3b-11eb-b4cf-f875a44e0e11',
-                                        resourceid: "['assign-name']['app-area-name'][0]['resourceid']['resourceInstanceId']",
-                                    },
-                                },
-                            ], 
-                        },
-                    ],
-                },
-                {
-                    title: 'Location  Description',
-                    name: 'location-description',
-                    required: false,
-                    informationboxdata: {
-                        heading: 'Area Description',
-                        text: 'Describe the application area location',
-                    },
-                    layoutSections: [
-                        {
-                            componentConfigs: [
-                                { 
-                                    componentName: 'default-card',
-                                    uniqueInstanceName: 'location-description', /* unique to step */
-                                    tilesManaged: 'one',
-                                    parameters: {
-                                        graphid: '42ce82f6-83bf-11ea-b1e8-f875a44e0e11',
-                                        nodegroupid: 'faa0a425-94ff-11ea-8dea-f875a44e0e11',
                                         resourceid: "['assign-name']['app-area-name'][0]['resourceid']['resourceInstanceId']",
                                     },
                                 },

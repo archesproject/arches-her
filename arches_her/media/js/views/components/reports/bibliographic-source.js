@@ -22,7 +22,7 @@ define([
                 {id: 'source', title: 'Bibliographic Source Details'},
                 {id: 'name', title: 'Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
-                {id: 'classifications', title: 'Classifications and Dating'},
+                {id: 'classifications', title: 'Source Type'},
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'json', title: 'JSON'},
