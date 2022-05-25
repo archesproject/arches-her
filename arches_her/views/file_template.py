@@ -238,7 +238,7 @@ class FileTemplateView(View):
         for tile in tiles:
             mitigation = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation["content"] = "{}<br><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scope_dict[tile.data[action_type_node_id]])
+                mitigation["content"] = "<p>{}</p><br><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scope_dict[tile.data[action_type_node_id]])
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             else:
                 for key, value in list(template_dict.items()):
@@ -318,7 +318,7 @@ class FileTemplateView(View):
                                 mapping_dict["Address of consulting organisation"] = contactTile.data[contactPointNodeId]
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<p>{}</p>{}<br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"]
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
