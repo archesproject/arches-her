@@ -318,7 +318,7 @@ class FileTemplateView(View):
                                 mapping_dict["Address of consulting organisation"] = contactTile.data[contactPointNodeId]
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"]
+            mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
