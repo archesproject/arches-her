@@ -223,7 +223,8 @@ class FileTemplateView(View):
         def get_value_from_tile(tile, node_id):
             current_node = models.Node.objects.get(nodeid=node_id)
             datatype = datatype_factory.get_instance(current_node.datatype)
-            return datatype.get_display_value(tile, current_node)
+            returnvalue = datatype.get_display_value(tile, current_node)
+            return "" if returnvalue is None else returnvalue
 
         # Advice and Conditions.
         advice_nodegroup_id = '8d41e49f-a250-11e9-b6b3-00224800b26d'
@@ -259,7 +260,7 @@ class FileTemplateView(View):
                     if value in tile.data:
                         lookup_val = get_value_from_tile(tile, value)
                         try:
-                            mapping_dict[key] = "" if lookup_val is None else lookup_val
+                            mapping_dict[key] = lookup_val
                         except TypeError:
                             pass
             if len(mitigation) > 0:
