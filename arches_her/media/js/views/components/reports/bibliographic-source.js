@@ -59,9 +59,10 @@ define([
                 archive: undefined,
                 consultations: undefined,
                 assets: undefined,
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             };
-            
+
             self.publication = ko.observableArray();
             self.sourceNames = ko.observableArray();
             self.sourceCreation = ko.observableArray();
@@ -84,7 +85,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -92,7 +93,7 @@ define([
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
-                
+
                 self.classificationCards = {
                     type: self.cards?.['bibliographic source types']
                 };
@@ -109,7 +110,7 @@ define([
                 self.copyrightCards = {
                     copyright: self.cards?.copyright
                 };
-                
+
                 self.sourceCreationCards = {
                     sourceCreation: self.cards?.sourceCreation
                 };
@@ -120,8 +121,8 @@ define([
                 })
             }
 
-            const publicationNode = self.getRawNodeValue(self.resource(), 'publication'); 
-            
+            const publicationNode = self.getRawNodeValue(self.resource(), 'publication');
+
             if(publicationNode){
                 const place = self.getNodeValue(publicationNode, 'publication event', 'place of publication', 'publication placename', 'publication placename value');
                 const date = self.getNodeValue(publicationNode, 'publication event', 'publication time span', 'date of publication');
@@ -148,7 +149,7 @@ define([
                 }));
             }
 
-            const sourceCreationNode = self.getRawNodeValue(self.resource(), 'bibliographic source creation') 
+            const sourceCreationNode = self.getRawNodeValue(self.resource(), 'bibliographic source creation')
             if(Array.isArray(sourceCreationNode)) {
                 self.sourceCreation(sourceCreationNode.map(x => {
                     const author = self.getNodeValue(x, 'authorship', 'author', 'author names', 'author name');
@@ -164,7 +165,7 @@ define([
                         tileid
                     };
                 }));
-            } 
+            }
 
             self.bibliographicSourceData = ko.observable({
                 sections:
