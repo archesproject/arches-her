@@ -55,7 +55,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -76,7 +77,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -135,28 +136,28 @@ define([
             }
 
             self.statusOwnerData = ko.observable({
-                sections: 
+                sections:
                     [
                         {
-                            title: "Status and Ownership", 
+                            title: "Status and Ownership",
                             data: [{
-                                key: 'Status', 
-                                value: self.getNodeValue(self.resource(), 'status'), 
+                                key: 'Status',
+                                value: self.getNodeValue(self.resource(), 'status'),
                                 card: self.cards?.['status'],
                                 type: 'kv'
                             }, {
-                                key: 'Nationality', 
-                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node => 
+                                key: 'Nationality',
+                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node =>
                                     self.getNodeValue(node, 'aircraft nationality')
-                                ), 
+                                ),
                                 card: self.cards?.['nationality'],
                                 type: 'kv'
                             }]
                         }
                     ]
             });
-            
-            const flightsNode = self.getRawNodeValue(self.resource(), 'flights'); 
+
+            const flightsNode = self.getRawNodeValue(self.resource(), 'flights');
 
             if(Array.isArray(flightsNode)){
                 self.flights(flightsNode.map(node => {
@@ -184,30 +185,30 @@ define([
                     const tileid = self.getTileId(node);
 
 
-                    return { 
-                        cargoType, 
-                        crew, 
-                        flightDescription, 
-                        flightDeparture, 
-                        flightDestination, 
-                        flightArrivalDate, 
-                        flightDepartureDate, 
-                        flightDisplayDate, 
-                        flightDateQualifier, 
-                        flightType, 
+                    return {
+                        cargoType,
+                        crew,
+                        flightDescription,
+                        flightDeparture,
+                        flightDestination,
+                        flightArrivalDate,
+                        flightDepartureDate,
+                        flightDisplayDate,
+                        flightDateQualifier,
+                        flightType,
                         tileid
                     }
                 }));
             }
 
-            const crashNode = self.getRawNodeValue(self.resource(), 'crash_event'); 
+            const crashNode = self.getRawNodeValue(self.resource(), 'crash_event');
 
             if(crashNode){
                 const description = self.getNodeValue(crashNode, 'crash descriptions', 'last flight description');
                 const crashSiteType = self.getNodeValue(crashNode, 'crash site', 'crash site type');
                 const crashSite = self.getNodeValue(crashNode, 'crash site');
                 const crashSiteLink = self.getResourceLink(self.getRawNodeValue(crashNode, 'crash site'));
-    
+
                 const crewNode = self.getRawNodeValue(crashNode, 'crew');
                 let crew = [];
                 if(Array.isArray(crewNode))
@@ -234,7 +235,7 @@ define([
                 const tileid = self.getTileId(crashNode);
 
                 self.lastFlight([{
-                    description, 
+                    description,
                     crashSiteType,
                     crashSite,
                     crashSiteLink,

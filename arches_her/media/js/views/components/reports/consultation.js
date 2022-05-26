@@ -58,9 +58,10 @@ define([
             self.resourcesDataConfig = {
                 assets: 'related heritage assets and areas',
                 files: 'file(s)',
-                relatedApplicationArea: 'consultation area'
+                relatedApplicationArea: 'consultation area',
+                actors: undefined
             };
-            
+
             self.nameCards = {};
             self.locationCards = {};
             self.resourcesCards = {};

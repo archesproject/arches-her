@@ -92,14 +92,17 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
-                const audienceTypeNode = self.getRawNodeValue(params.data(), self.dataConfig.audience);
-                if(Array.isArray(audienceTypeNode)){
+                const rawAudienceTypeNode = self.getRawNodeValue(params.data(), self.dataConfig.audience);
+                const audienceTypeNode = rawAudienceTypeNode ? Array.isArray(rawAudienceTypeNode) ? rawAudienceTypeNode : [rawAudienceTypeNode] : undefined;
+                if(audienceTypeNode){
                     self.audience(audienceTypeNode.map(x => {
-                        const audienceType = self.getNodeValue(x);
+                        const audienceTypeList = self.getRawNodeValue(x, '@display_value');
+                        var audienceType = audienceTypeList.replace(/,/g, ", ");
                         const tileid = self.getTileId(x);
                         return {audienceType, tileid};
                     }));
                 }
+
 
                 if(self.dataConfig.subject){
                     self.subjectData = ko.observable({
