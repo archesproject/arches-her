@@ -225,6 +225,13 @@ class FileTemplateView(View):
             datatype = datatype_factory.get_instance(current_node.datatype)
             return datatype.get_display_value(tile, current_node)
 
+        # Advice and Conditions.
+        advice_nodegroup_id = '8d41e49f-a250-11e9-b6b3-00224800b26d'
+        advice_node_id = 'c36808b0-952c-11ea-9ff0-f875a44e0e11'
+        advice_type_node_id = '56fa335d-06fa-11eb-8328-f875a44e0e11'
+        conditions = []
+
+        # Action and Mitigations.
         action_nodegroup_id = 'a5e15f5c-51a3-11eb-b240-f875a44e0e11'
         action_node_id = 'bfd39106-51a3-11eb-9104-f875a44e0e11'
         action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
@@ -237,9 +244,16 @@ class FileTemplateView(View):
 
         for tile in tiles:
             mitigation = {}
+            condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation["content"] = "<p>{}</p><br><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scope_dict[tile.data[action_type_node_id]])
+                mitigation_scopenote = mitigation_scope_dict.get(tile.data[action_type_node_id], "")                
+                if len(mitigation_scopenote) > 0:
+                    mitigation_scopenote = "<br>" + mitigation_scopenote
+                mitigation["content"] = "<p>{}</p><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scopenote)
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
+            elif str(tile.nodegroup_id) == advice_nodegroup_id:
+                condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
+                condition["type"] = get_value_from_tile(tile, advice_type_node_id)
             else:
                 for key, value in list(template_dict.items()):
                     if value in tile.data:
@@ -250,6 +264,8 @@ class FileTemplateView(View):
                             pass
             if len(mitigation) > 0:
                 mitigations.append(mitigation)
+            elif len(condition) > 0:
+                conditions.append(condition)
 
             contactNodeId = "b7304f4c-3ace-11eb-8884-f875a44e0e11"
             contacts = {
@@ -319,6 +335,9 @@ class FileTemplateView(View):
 
         for mitigation in mitigations:
             mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"])
+        
+        for condition in conditions:
+            mapping_dict["Condition"] += "<p><b>{}</b></p>{}<br>".format(condition["type"], condition["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
