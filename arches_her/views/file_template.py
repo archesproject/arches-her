@@ -334,7 +334,8 @@ class FileTemplateView(View):
                         elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                             if contactTile.data[contactPointTypeNodeId] == contactPointTypeMailValueId:
                                 mapping_dict["Contact Name"] = contactTile.data[contactNameForCorrespondenceNodeId]
-                                mapping_dict["Address of consulting organisation"] = contactTile.data[contactPointNodeId]
+                                addressConsult = get_value_from_tile(contactTile, contactPointNodeId).replace(", ", "<br>").replace(",", "<br>")
+                                mapping_dict["Address of consulting organisation"] = addressConsult
 
         for mitigation in mitigations:
             mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"])
