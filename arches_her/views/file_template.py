@@ -209,9 +209,7 @@ class FileTemplateView(View):
             "Signature": "",
             "Archaeological Priority Area": "",
             "Assessment of Significance": "",
-            "Condition Type": "",
             "Condition": "",
-            "Mitigation Type": "",
             "Mitigation": "",
             "Casework Officer Email": "",
             "Casework Officer Number": "",
@@ -338,10 +336,10 @@ class FileTemplateView(View):
                                 mapping_dict["Address of consulting organisation"] = addressConsult
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
         
         for condition in conditions:
-            mapping_dict["Condition"] += "<p><b>{}</b></p>{}<br>".format(condition["type"], condition["content"])
+            mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
