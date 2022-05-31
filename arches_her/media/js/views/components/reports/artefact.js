@@ -80,7 +80,8 @@ define([
             self.resourceDataConfig = {
                 files: 'digital file(s)',
                 consultations: undefined,
-                archive: undefined
+                archive: undefined,
+                actors: undefined
             };
 
             self.nameCards = {};

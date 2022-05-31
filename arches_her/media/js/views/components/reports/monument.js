@@ -51,13 +51,15 @@ define([
 
             self.resourceDataConfig = {
                 activities: 'associated activities',
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
+            self.assessmentCards = {};
             self.imagesCards = {};
             self.locationCards = {};
             self.protectionCards = {};

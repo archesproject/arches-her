@@ -55,7 +55,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -192,6 +193,7 @@ define([
                         flightDestination,
                         flightArrivalDate,
                         flightDepartureDate,
+                        flightDisplayDate,
                         flightDateQualifier,
                         flightType,
                         tileid

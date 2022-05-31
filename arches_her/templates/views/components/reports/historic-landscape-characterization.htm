@@ -104,7 +104,7 @@
                                                 <th>{% trans "Historic Map" %}</th>
                                                 <th>{% trans "Broad Type" %}</th>
                                                 <th>{% trans "Confidence of Interpretation" %}</th>
-                                                <th>{% trans "Description" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
                                                 <th>{% trans "Display Date" %}</th>
                                                 <th class="none">{% trans "Start Date" %}</th>
                                                 <th class="none">{% trans "End Date" %}</th>
@@ -116,15 +116,27 @@
                                         <tbody data-bind="dataTablesForEach: { data: historicLandscapeClassificationPhase, dataTableOptions: hlcPhaseTableConfig}">
                                             <tr>
                                                 <td data-bind="text: hlcType"></td>
-                                                <td>
-                                                    <a data-bind="text: period, attr: {href: periodLink}" class="aher-table-link"></a>
+                                                <td data-bind="foreach: period">
+                                                    <span data-bind="visible: $index() > 0">, </span>
+                                                    <!-- ko if: periodLink -->
+                                                    <a data-bind="text: periodName, attr: {href: periodLink}" class="aher-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: periodLink -->
+                                                    <span data-bind="text: periodName"></span>
+                                                    <!-- /ko -->
                                                 </td>
-                                                <td>
-                                                    <a data-bind="text: historicMap, attr: {href: historicMapLink}" class="aher-table-link"></a>
+                                                <td data-bind="foreach: historicMap">
+                                                    <span data-bind="visible: $index() > 0">, </span>
+                                                    <!-- ko if: mapLink -->
+                                                    <a data-bind="text: mapName, attr: {href: mapLink}" class="aher-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: mapLink -->
+                                                    <span data-bind="text: mapName"></span>
+                                                    <!-- /ko -->
                                                 </td>
                                                 <td data-bind="text: broadType"></td>
                                                 <td data-bind="text: interpretationConfidence"></td>
-                                                <td data-bind="text: description"></td>
+                                                <td data-bind="html: description"></td>
                                                 <td data-bind="text: displayDate"></td>
                                                 <td data-bind="text: startDate"></td>
                                                 <td data-bind="text: endDate"></td>

@@ -57,7 +57,8 @@ define([
             self.resourceDataConfig = {
                 consultations: undefined,
                 files: undefined,
-                archive: undefined
+                archive: undefined,
+                actors: undefined
             };
 
             self.nameCards = {};

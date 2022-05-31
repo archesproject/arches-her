@@ -12,6 +12,7 @@ define([
 
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
+        this.geometry = false;
 
         this.resourceData.subscribe(function(val){
             this.displayName = val['displayname'] || 'Unnamed';
@@ -46,8 +47,13 @@ define([
 
             var geojsonStr = this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Geospatial Coordinates', '@value']);
             if (geojsonStr) {
-                var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
-                this.prepareMap(geojson, 'app-area-map-data');
+                try {
+                    var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
+                    this.prepareMap(geojson, 'app-area-map-data');
+                    this.geometry = true;
+                } catch(e) {
+                    //pass
+                }
             };
             this.resourceLoading(false);
             if (!self.relatedResourceLoading()) {
