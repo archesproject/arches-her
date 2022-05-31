@@ -209,9 +209,7 @@ class FileTemplateView(View):
             "Signature": "",
             "Archaeological Priority Area": "",
             "Assessment of Significance": "",
-            "Condition Type": "",
             "Condition": "",
-            "Mitigation Type": "",
             "Mitigation": "",
             "Casework Officer Email": "",
             "Casework Officer Number": "",
@@ -282,6 +280,8 @@ class FileTemplateView(View):
             contactDetailsNodegroupId = "2547c12f-9505-11ea-a507-f875a44e0e11"
             contactNameForCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
             fullnameNodeId = "5f8ded26-7ef9-11ea-8e29-f875a44e0e11"
+            firstnameNodeId = "2caeb5e7-7b44-11ea-a919-f875a44e0e11"
+            lastnameNodeId = "96a3942a-7e53-11ea-8b5a-f875a44e0e11"
             nameTitleNodeId = "6da2f03b-7e55-11ea-8fe5-f875a44e0e11"
             nameUseTypeNodeId = "4110f747-1a44-11e9-96b7-000d3ab1e588"
             forCorrespondenceNameValueId = "85c26c81-e356-4454-a2ba-67e7ad9b95cd"
@@ -327,18 +327,19 @@ class FileTemplateView(View):
                         if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
                             if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
                                 nameTitle = ConceptValue(contactTile.data[nameTitleNodeId]).value
-                                fullName = contactTile.data[fullnameNodeId]
+                                fullName = "{0} {1}".format(get_value_from_tile(contactTile, firstnameNodeId), get_value_from_tile(contactTile, lastnameNodeId))
                                 mapping_dict["Name of person consulting"] = "{0} {1}".format(nameTitle, fullName) if nameTitle else fullName
                         elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                             if contactTile.data[contactPointTypeNodeId] == contactPointTypeMailValueId:
                                 mapping_dict["Contact Name"] = contactTile.data[contactNameForCorrespondenceNodeId]
-                                mapping_dict["Address of consulting organisation"] = contactTile.data[contactPointNodeId]
+                                addressConsult = get_value_from_tile(contactTile, contactPointNodeId).replace(", ", "<br>").replace(",", "<br>")
+                                mapping_dict["Address of consulting organisation"] = addressConsult
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<p><b>{}</b></p>{}<br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
         
         for condition in conditions:
-            mapping_dict["Condition"] += "<p><b>{}</b></p>{}<br>".format(condition["type"], condition["content"])
+            mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
