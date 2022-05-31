@@ -46,6 +46,7 @@ define([
                         heading: 'Consultation Dates',
                         text: 'The target date is automatically set 21 days from log date',
                     },
+                    required: true,
                     layoutSections: [
                         {
                             componentConfigs: [
