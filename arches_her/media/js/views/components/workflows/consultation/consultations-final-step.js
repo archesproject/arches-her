@@ -31,6 +31,7 @@ define([
                 owner: {'name': 'Owner', 'value': this.getResourceValue(val.resource, ['Contacts','Owners','Owner','@value'])},
                 applicant: {'name': 'Applicant', 'value': this.getResourceValue(val.resource, ['Contacts','Applicants','Applicant','@value'])},
                 relatedApplicationAreas:  {'name': 'Related Application Areas', 'value': this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Related Application Area', '@value'])},
+                locationDescription: {'name': 'Consultation Location Description', 'value': this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Consultation Location Descriptions', 'Consultation Location Description', '@value'])},
             };
 
             try {
