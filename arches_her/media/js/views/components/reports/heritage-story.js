@@ -34,15 +34,18 @@ define([
 
             self.descriptionDataConfig = {
                 audience: 'audience type',
+                citation: 'bibliographic source citation'
             };
 
             self.resourceDataConfig = {
                 activities: undefined,
                 consultations: undefined,
                 files: undefined,
-                assets: undefined,
+                assets: 'associated heritage assets, areas and artefacts',
                 translation: 'translation',
-                period: 'temporal coverage'
+                period: 'temporal coverage',
+                archive: undefined,
+                actors: 'associated actors'
             };
 
             self.locationDataConfig = {
@@ -62,7 +65,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -91,7 +94,9 @@ define([
 
                 self.resourcesCards = {
                     translation: self.cards?.['translation'],
-                    period: self.cards?.['temporal coverage']
+                    period: self.cards?.['temporal coverage'],
+                    assets: self.cards?.['associated heritage assets, areas and artefacts'],
+                    actors: self.cards?.['associated people and organizations']
                 }
             }
 

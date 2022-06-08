@@ -3,6 +3,7 @@
 {% block report %}
 
 {% block body %}
+<!-- ko ifnot: hideNames() -->
 <div data-bind="visible: !!dataConfig.name" class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}" class="fa toggle"></i> {% trans "Names" %}</h2>
     <span data-bind="if: cards.name && (!names().length || cards.name.cardinality == 'n')">
@@ -53,9 +54,11 @@
         <!-- /ko -->
     </div>
 </div>
+<!-- /ko -->
 
 <!-- External Reference -->
-<div class="aher-report-section" data-bind="visible: !!dataConfig.xref" >
+<!-- ko ifnot: hideCrossReferences() -->
+<div data-bind="visible: !!dataConfig.xref" class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}" class="fa toggle"></i> {% trans "External Cross References" %}</h2>
     <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
 
@@ -74,7 +77,8 @@
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
                                 <th class="min-tabletl">{% trans "Source" %}</th>
-                                <th class="min-medium">{% trans "Note" %}</th>
+                                <th class="none">{% trans "Note" %}</th>
+                                <th>{% trans "URL" %}</th>
                                 <th class="aher-table-control all"></th>
                             </tr>
                         </thead>
@@ -82,7 +86,14 @@
                             <tr>
                                 <td data-bind="text: name"></td>
                                 <td data-bind="text: source"></td>
-                                <td data-bind="text: description"></td>
+                                <td data-bind="html: description"></td>
+                                <td>
+                                    <!-- ko with: url -->
+                                    <!-- ko if: url -->
+                                    <a data-bind="text: url, attr: {href: url, target: '_blank'}"></a>
+                                    <!-- /ko -->
+                                    <!-- /ko -->
+                                </td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.externalCrossReferences">
                                         <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
@@ -102,6 +113,7 @@
         <!-- /ko -->
     </div>
 </div>
+<!-- /ko -->
 
 <!-- System Reference Numbers section -->
 <div class="aher-report-section">

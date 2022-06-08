@@ -3459,23 +3459,25 @@
             "functions_x_graphs": [
                 {
                     "config": {
-                        "description": {
-                            "nodegroup_id": "95a57b40-95bc-11ea-9792-f875a44e0e11",
-                            "string_template": "<Description>"
-                        },
-                        "map_popup": {
-                            "nodegroup_id": "95a57b40-95bc-11ea-9792-f875a44e0e11",
-                            "string_template": "<Description>"
-                        },
-                        "name": {
-                            "nodegroup_id": "03e2984b-8ecf-11ea-8f83-f875a44e0e11",
-                            "string_template": "<Bibliographic Source Name>"
+                        "descriptor_types": {
+                            "description": {
+                                "nodegroup_id": "95a57b40-95bc-11ea-9792-f875a44e0e11",
+                                "string_template": "<Description>"
+                            },
+                            "map_popup": {
+                                "nodegroup_id": "95a57b40-95bc-11ea-9792-f875a44e0e11",
+                                "string_template": "<Description>"
+                            },
+                            "name": {
+                                "nodegroup_id": "03e2984b-8ecf-11ea-8f83-f875a44e0e11",
+                                "string_template": "<Bibliographic Source Name>"
+                            }
                         },
                         "triggering_nodegroups": []
                     },
                     "function_id": "60000000-0000-0000-0000-000000000001",
                     "graph_id": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
-                    "id": "eb2a9a3a-52f9-11ec-a3a5-a87eeabdefba"
+                    "id": "20b3d19e-afd2-11ec-b01d-acde48001122"
                 }
             ],
             "graphid": "24d7b54f-5464-11e9-a86b-000d3ab1e588",
@@ -3579,6 +3581,7 @@
             ],
             "nodes": [
                 {
+                    "alias": "bibliographic_source_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -3594,9 +3597,10 @@
                     "nodeid": "03e2984b-8ecf-11ea-8f83-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 10
+                    "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -3615,6 +3619,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -3635,6 +3640,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_name_use_type",
                     "config": {
                         "rdmCollection": "b45790a9-c300-44ab-8853-6e5f5b69dfb6"
                     },
@@ -3655,6 +3661,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "page_reference",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -3673,6 +3680,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "page_reference_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -3693,6 +3701,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "page_s_",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -3711,6 +3720,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "page_reference_type",
                     "config": {
                         "rdmCollection": "3efb92ea-ae58-42a3-8374-db3653c36c9f"
                     },
@@ -3731,6 +3741,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publication",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -3748,9 +3759,10 @@
                     "nodeid": "1987a81b-8ed0-11ea-ba85-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P128i_is_carried_by",
-                    "sortorder": 9
+                    "sortorder": 0
                 },
                 {
+                    "alias": "publication_time_span",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -3769,6 +3781,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "place_of_publication",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -3787,6 +3800,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_publication",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -3813,6 +3827,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publishers",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -3831,6 +3846,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publication_event",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -3849,6 +3865,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "page_references",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -3864,9 +3881,10 @@
                     "nodeid": "1ed132d8-95f1-11ea-b306-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
-                    "sortorder": 8
+                    "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source",
                     "config": {
                         "fillColor": "rgba(12,52,112,0.8)"
                     },
@@ -3887,6 +3905,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "digital_file_s_",
                     "config": {
                         "graphs": [
                             {
@@ -3914,6 +3933,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publication_placename",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -3932,6 +3952,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publication_placename_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -3952,6 +3973,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publication_placename_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -3972,6 +3994,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publication_placename_value",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -3990,6 +4013,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "volume_number",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4008,6 +4032,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "system_reference_numbers",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -4025,9 +4050,10 @@
                     "nodeid": "46fbf78d-95ce-11ea-91b5-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E15_Identifier_Assignment",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P140i_was_attributed_by",
-                    "sortorder": 12
+                    "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number",
                     "config": null,
                     "datatype": "number",
                     "description": null,
@@ -4046,6 +4072,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4064,6 +4091,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4082,6 +4110,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primaryreferencenumber",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4100,6 +4129,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacyid",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4118,6 +4148,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "uuid",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -4136,6 +4167,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -4156,6 +4188,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -4176,6 +4209,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id_type",
                     "config": {
                         "rdmCollection": "c223718d-cdc1-4c5f-997b-7d67018e27f7"
                     },
@@ -4196,6 +4230,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "primary_reference_number_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4216,6 +4251,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resourceid_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4236,6 +4272,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "legacy_id_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4256,6 +4293,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4276,6 +4314,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "volume_number_type",
                     "config": {
                         "rdmCollection": "3efb92ea-ae58-42a3-8374-db3653c36c9f"
                     },
@@ -4296,6 +4335,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publisher_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -4314,6 +4354,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publisher_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -4334,6 +4375,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publisher_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4354,6 +4396,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "publisher",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4372,6 +4415,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -4389,9 +4433,10 @@
                     "nodeid": "6c862f81-8ed4-11ea-b9e9-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E30_Right",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P104_is_subject_to",
-                    "sortorder": 6
+                    "sortorder": 0
                 },
                 {
+                    "alias": "copyright_holder",
                     "config": {
                         "graphid": [
                             "d4a88461-5463-11e9-90d9-000d3ab1e588",
@@ -4427,6 +4472,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright_type",
                     "config": {
                         "rdmCollection": "c73164aa-acbd-4d7b-878b-1e8b723d0e57"
                     },
@@ -4447,6 +4493,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright_note",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4465,6 +4512,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright_note_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -4485,6 +4533,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright_note_text",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4503,6 +4552,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4523,6 +4573,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4543,6 +4594,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "number_of_pages",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4561,6 +4613,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_volume_part",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4579,6 +4632,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "volume_part_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4599,6 +4653,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "volume_part",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4617,6 +4672,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "volume_part_type",
                     "config": {
                         "rdmCollection": "3efb92ea-ae58-42a3-8374-db3653c36c9f"
                     },
@@ -4637,6 +4693,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "language",
                     "config": {
                         "rdmCollection": "daacadea-1454-4cf4-8b14-9ade8069f4d7"
                     },
@@ -4654,9 +4711,10 @@
                     "nodeid": "8cd5def1-8ecf-11ea-ade5-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E56_Language",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P72_has_language",
-                    "sortorder": 5
+                    "sortorder": 0
                 },
                 {
+                    "alias": "language_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4677,6 +4735,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "measurement_unit",
                     "config": {
                         "rdmCollection": "51407fe6-9f8d-439d-8309-d6804b4437d2"
                     },
@@ -4697,6 +4756,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4712,9 +4772,10 @@
                     "nodeid": "95a57b40-95bc-11ea-9792-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E33_Linguistic_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of",
-                    "sortorder": 4
+                    "sortorder": 0
                 },
                 {
+                    "alias": "description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -4733,6 +4794,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -4753,6 +4815,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4773,6 +4836,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "resource_model_type",
                     "config": {
                         "rdmCollection": "49b0d419-7425-4beb-8460-9b87e320ea05"
                     },
@@ -4790,9 +4854,10 @@
                     "nodeid": "980ebd07-a0f8-11ea-868d-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 14
+                    "sortorder": 0
                 },
                 {
+                    "alias": "resource_model_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4813,6 +4878,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "pages",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4828,9 +4894,10 @@
                     "nodeid": "9c800fcc-8f9b-11ea-b968-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E54_Dimension",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P43_has_dimension",
-                    "sortorder": 3
+                    "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_type",
                     "config": {
                         "rdmCollection": "dcd69b56-c44a-4e5d-8e71-92192b0fbb4a"
                     },
@@ -4848,9 +4915,10 @@
                     "nodeid": "9f29bb76-8ed4-11ea-81d3-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 2
+                    "sortorder": 0
                 },
                 {
+                    "alias": "journal_or_serial",
                     "config": {
                         "graphid": [
                             "24d7b54f-5464-11e9-a86b-000d3ab1e588"
@@ -4878,9 +4946,10 @@
                     "nodeid": "b083ef94-8ee6-11ea-a277-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P106i_forms_part_of",
-                    "sortorder": 1
+                    "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_creation",
                     "config": {
                         "fillColor": "rgba(233,112,111,0.8)"
                     },
@@ -4901,6 +4970,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "statement_of_responsibility_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -4921,6 +4991,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "statement_of_responsibility_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -4941,6 +5012,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contribution",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -4959,6 +5031,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editorship",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -4977,6 +5050,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_statement_of_responsibility",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -4995,6 +5069,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "statement_of_responsibility",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5013,6 +5088,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorship",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5031,6 +5107,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorship_type",
                     "config": {
                         "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
                     },
@@ -5051,6 +5128,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "authorship_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5071,6 +5149,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editorship_type",
                     "config": {
                         "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
                     },
@@ -5091,6 +5170,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editorship_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5111,6 +5191,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editor",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5129,6 +5210,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editor_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5147,6 +5229,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editor_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5165,6 +5248,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editor_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5185,6 +5269,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "editor_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5205,6 +5290,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "author",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5223,6 +5309,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "author_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5243,6 +5330,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "author_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5263,6 +5351,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "author_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5281,6 +5370,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "author_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5299,6 +5389,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contributors",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5317,6 +5408,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contributor_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5337,6 +5429,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contributor_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5357,6 +5450,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contributor_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5375,6 +5469,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contributor_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5393,6 +5488,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contribution_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5413,6 +5509,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "contribution_type",
                     "config": {
                         "rdmCollection": "0cdf5418-d21b-4d01-9760-8edad86ac4f0"
                     },
@@ -5433,6 +5530,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5453,6 +5551,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_references",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5468,9 +5567,10 @@
                     "nodeid": "c7475507-eeca-11eb-bf1d-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E42_Identifier",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "sortorder": 11
+                    "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5489,6 +5589,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -5509,6 +5610,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_notes",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5527,6 +5629,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5545,6 +5648,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5565,6 +5669,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "url",
                     "config": null,
                     "datatype": "url",
                     "description": null,
@@ -5583,6 +5688,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "external_cross_reference_source",
                     "config": {
                         "rdmCollection": "06bbe5d2-93e8-43df-a4f4-5667648fd2ef"
                     },
@@ -5603,6 +5709,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "measurement_unit_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5623,6 +5730,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_metadata",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5638,9 +5746,10 @@
                     "nodeid": "eb6a4c81-eeca-11eb-a970-a87eeabdefba",
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P67i_is_referred_to_by",
-                    "sortorder": 13
+                    "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5661,6 +5770,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5681,6 +5791,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -5701,6 +5812,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5721,6 +5833,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_update",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -5739,6 +5852,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5759,6 +5873,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -5779,6 +5894,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -5799,6 +5915,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5819,6 +5936,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5839,6 +5957,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -5857,6 +5976,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -5877,6 +5997,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -5897,6 +6018,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5917,6 +6039,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "validation",
                     "config": {
                         "rdmCollection": "98b8dd4b-81d3-4f82-8c9a-6da6ee5c4219"
                     },
@@ -5937,6 +6060,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -5957,6 +6081,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -5975,6 +6100,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_note",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -5993,6 +6119,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6011,6 +6138,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_notes_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -6031,6 +6159,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_end_date",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6051,6 +6180,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_last_update",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -6071,6 +6201,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -6091,6 +6222,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6109,6 +6241,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6127,6 +6260,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -6147,6 +6281,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creator_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6167,6 +6302,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6185,6 +6321,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6203,6 +6340,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "creation_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -6223,6 +6361,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_names",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -6241,6 +6380,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "update_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -6261,6 +6401,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -6279,6 +6420,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "updater_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6299,6 +6441,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "validation_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6319,6 +6462,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "audit_creation",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -6337,6 +6481,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "copyright_note_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6357,6 +6502,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "bibliographic_source_volume_number",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -6375,6 +6521,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "volume_number_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -6399,6 +6546,7 @@
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "bibliographic_source",
                 "config": {
                     "fillColor": "rgba(12,52,112,0.8)"
                 },
@@ -6419,7 +6567,7 @@
             },
             "slug": null,
             "subtitle": "Covers documentation of references to bibliographic sources of information held outside of the information system.",
-            "template_id": "50000000-0000-0000-0000-000000000001",
+            "template_id": "44fdae23-7883-4d5c-88fa-7498b6fc898d",
             "version": ""
         }
     ]

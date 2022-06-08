@@ -33,7 +33,8 @@
                     params: {
                         data: resource,
                         cards: nameCards,
-                        dataConfig: nameDataConfig
+                        dataConfig: nameDataConfig,
+                        hideCrossReferences: true
                     }
                 }"></div>
                 <div data-bind="component: {
@@ -199,7 +200,7 @@
                                 </div>
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Casework Officer: </h4>
-                                    <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficer}"></a>
+                                    <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficerLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes pad-top">
                                     <h4 class="aher-block-key">Agents: </h4>

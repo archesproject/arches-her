@@ -33,7 +33,7 @@ define([
                 name: 'archive source',
             };
             self.descriptionDataConfig = {
-                citation: 'bibliographic source citation', 
+                citation: 'bibliographic source citation',
                 subject: 'subjects'
             };
 
@@ -46,9 +46,10 @@ define([
                 activities: undefined,
                 consultations: undefined,
                 assets: undefined,
-                period: 'periods'
+                period: 'periods',
+                actors: undefined
             };
-            
+
             self.visible = {
                 archiveHolding: ko.observable(true)
             }
@@ -65,7 +66,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -99,11 +100,11 @@ define([
                     const archiveHoldingTile = self.cards?.['archive holding'].tiles().find(tile => tile.tileid === tileid);
                     const archiveHoldingCards = self.createCardDictionary(archiveHoldingTile.cards);
                     return {
-                        tileid, 
+                        tileid,
                         visible: ko.observable(true),
-                        data: 
-                        {   
-                            section: [{ 
+                        data:
+                        {
+                            section: [{
                                 visible: ko.observable(true),
                                 card: archiveHoldingCards?.['archive source creation'],
                                 tileid: self.getTileId(self.getRawNodeValue(node, 'archive source creation')),

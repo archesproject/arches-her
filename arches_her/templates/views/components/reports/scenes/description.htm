@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -15,7 +15,7 @@
         <!-- ko ifnot: descriptions().length -->
         <div class="aher-nodata-note">No descriptions for this resource</div>
         <!-- /ko -->
-        
+
         <!-- ko if: descriptions().length -->
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
@@ -30,7 +30,7 @@
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: descriptions, dataTableOptions: descriptionTableConfig }">
                             <tr>
-                                <td data-bind="text: content"></td>
+                                <td data-bind="html: content"></td>
                                 <td data-bind="text: type"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards && $parent.cards.descriptions">
@@ -63,7 +63,7 @@
         <!-- ko ifnot: citations().length -->
         <div class="aher-nodata-note">No citation for this resource</div>
         <!-- /ko -->
-        
+
         <!-- ko if: citations().length -->
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
@@ -159,6 +159,6 @@
             data: subjectData,
         }
     }"></div>
-</div>  
+</div>
 {% endblock body %}
 {% endblock report %}

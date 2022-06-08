@@ -36,7 +36,7 @@
 <!-- /ko --> 
 
 <!-- ko if: item.type == 'href'-->
-<div class="aher-block-value"><a data-bind="text: item.value, attr: { href: item.href }"></a></div>
+<div class="aher-block-value"><a data-bind="text: item.value, attr: { href: item.href, target: '_blank' }"></a></div>
 <!-- /ko -->  
 
 <!-- ko if: item.type == 'timespan' -->

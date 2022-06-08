@@ -1,0 +1,398 @@
+{% load template_tags %}
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Consultation</title>
+      {% include 'html_export/milligram.htm' %}
+      {% include 'html_export/custom_style.htm' %}
+   </head>
+   <body>
+      <header>
+         {% include 'html_export/custom_header.htm' %}
+         <h1>Consultations</h1>
+      </header>
+      <main>
+         {% for resource in resources %}
+         {% with resource_data=resource.resource %}
+         <section class="section-title">
+            <blockquote>
+               <h2>{{ resource.displayname }}</h2>
+            </blockquote>
+         </section>
+
+         {# System Ref #}
+         {% if resource_data|has_key:"System Reference Numbers" %}
+         <section>
+            <div class="container">
+               <div class="row">
+                  <div class="column">
+                     <div>
+                        <h3>System Reference Numbers</h3>
+                        <p>
+                           <strong>Primary Reference Number: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"PrimaryReferenceNumber"|val_from_key:"Primary Reference Number"|val_from_key:"@display_value" }}<br>
+                           <strong>Legacy ID: </strong>{{ resource_data|val_from_key:"System Reference Numbers"|val_from_key:"LegacyID"|val_from_key:"Legacy ID"|val_from_key:"@display_value" }}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# External References #}
+         {% if resource_data|has_key:"References" %}
+         <section >
+            <div class="container">
+               <h3>External References</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <div class="rtable">
+                           <div class="rrow rheader">
+                              <div class="rcell">Number</div>
+                              <div class="rcell">Number Type</div>
+                           </div>
+
+                           {% for ref in resource_data|val_from_key:"References" %}
+                           <div class="rrow">
+                              <div class="rcell" data-title="Name">
+                                 {{ ref|val_from_key:"Agency Identifier"|val_from_key:"Reference"|val_from_key:"@display_value" }}
+                              </div>
+                              <div class="rcell" data-title="Name Type">
+                                 {{ ref|val_from_key:"Agency Identifier"|val_from_key:"Reference Type"|val_from_key:"@display_value" }}
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+         {# Consultation Names #}
+         {% if resource_data|has_key:"Consultation Names" %}
+         <section >
+            <div class="container">
+               <h3>Consultation Names</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <div class="rtable">
+                           <div class="rrow rheader">
+                              <div class="rcell">Name</div>
+                              <div class="rcell">Name Type</div>
+                           </div>
+
+                           {% for names in resource_data|val_from_key:"Consultation Names" %}
+                           <div class="rrow">
+                              <div class="rcell" data-title="Name">
+                                 {% if names|has_key:"Consultation Name" %}
+                                 {{ names|val_from_key:"Consultation Name"|val_from_key:"@display_value" }}
+                                 {% endif %}
+                              </div>
+                              <div class="rcell" data-title="Name Type">
+                                 {% if names|has_key:"Consultation Name Use Type" %}
+                                 {{ names|val_from_key:"Consultation Name Use Type"|val_from_key:"@display_value" }}
+                                 {% endif %}
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Application Type #}
+         {% if resource_data|has_key:"Application Type" %}
+         <section>
+            <div class="container">
+               <div class="row">
+                  <div class="column">
+                     <div>
+                        <h3>Application Type</h3>
+                        <p>
+                            {{resource_data|val_from_key:"Application Type"|val_from_key:"@display_value"}}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Consultation Type #}
+         {% if resource_data|has_key:"Consultation Type" %}
+         <section>
+            <div class="container">
+               <div class="row">
+                  <div class="column">
+                     <div>
+                        <h3>Consultation Type</h3>
+                        <p>
+                            {{resource_data|val_from_key:"Consultation Type"|val_from_key:"@display_value"}}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+         {# Designation Type #}
+         {% if resource_data|has_key:"Designation Type" %}
+         <section>
+            <div class="container">
+               <div class="row">
+                  <div class="column">
+                     <div>
+                        <h3>Designation Type</h3>
+                        <p>
+                            {{resource_data|val_from_key:"Designation Type"|val_from_key:"@display_value"}}
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+         {# Proposals #}
+         {% if resource_data|has_key:"Proposal" %}
+         <section>
+            <div class="container">
+               <h3>Proposals</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        {% for prop in resource_data|val_from_key:"Proposal" %}
+                           <div>
+                              {{ prop|val_from_key:"Proposal Text"|val_from_key:"@display_value"|safe }}
+                           </div>
+                        {% endfor %}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Contacts #}
+         {% if resource_data|has_key:"Contacts" %}
+         <section>
+            <div class="container">
+               <h3>Contacts</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <div class="row">
+                            <div class="column">
+                               <h4>Casework Officer</h4>
+                               <p>{% if resource_data|val_from_key:"Contacts"|has_key:"Casework Officers" %}
+                                    {{ resource_data|val_from_key:"Contacts"|val_from_key:"Casework Officers"|val_from_key:"Casework Officer"|val_from_key:"@display_value" }}
+                                  {% endif %}
+                               </p>
+                            </div>
+                            <div class="column">
+                                <h4>Planning Officer</h4>
+                                <p>{% if resource_data|val_from_key:"Contacts"|has_key:"Planning Officers" %}
+                                    {{ resource_data|val_from_key:"Contacts"|val_from_key:"Planning Officers"|val_from_key:"Planning Officer"|val_from_key:"@display_value" }}
+                                   {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="column">
+                               <h4>Applicants</h4>
+                               <p>{% if resource_data|val_from_key:"Contacts"|has_key:"Applicants" %}
+                                    {{ resource_data|val_from_key:"Contacts"|val_from_key:"Applicants"|val_from_key:"Applicant"|val_from_key:"@display_value" }}
+                                  {% endif %}
+                               </p>
+                            </div>
+                            <div class="column">
+                                <h4>Agents</h4>
+                                <p>{% if resource_data|val_from_key:"Contacts"|has_key:"Agents" %}
+                                    {{ resource_data|val_from_key:"Contacts"|val_from_key:"Agents"|val_from_key:"Agent"|val_from_key:"@display_value" }}
+                                   {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr />
+         {% endif %}
+
+         {# Consultation Dates #}
+         {% if resource_data|has_key:"Consultation Dates" %}
+         <section>
+            <div class="container">
+               <h3>Consultation Dates</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <p>
+                            <strong>Log Date:</strong> {{ resource_data|val_from_key:"Consultation Dates"|val_from_key:"Log Date"|val_from_key:"@display_value" }}<br />
+                            <strong>Target Date:</strong> {{ resource_data|val_from_key:"Consultation Dates"|val_from_key:"Target Date"|val_from_key:"Target Date Start"|val_from_key:"@display_value" }}<br />
+                            <strong>Completion Date: </strong> {{ resource_data|val_from_key:"Consultation Dates"|val_from_key:"Completion Date"|val_from_key:"@display_value" }}<br />
+                        </p>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Advice #}
+         {% if resource_data|has_key:"Advice" %}
+         <section >
+            <div class="container">
+               <h3>Advice</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <div class="rtable">
+                           <div class="rrow rheader">
+                              <div class="rcell">Advice Type</div>
+                              <div class="rcell">Advice Text</div>
+                           </div>
+
+                           {% for advice in resource_data|val_from_key:"Advice" %}
+                           <div class="rrow">
+                              <div class="rcell" data-title="Advice Type">
+                                 {% if advice|has_key:"Advice Type" %}
+                                 {{ advice|val_from_key:"Advice Type"|val_from_key:"@display_value" }}
+                                 {% endif %}
+                              </div>
+                              <div class="rcell" data-title="Advice Text">
+                                {% if advice|has_key:"Advice text" %}
+                                {{ advice|val_from_key:"Advice text"|val_from_key:"@display_value"|safe }}
+                                {% endif %}
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+
+         {# Site Visits #}
+         {% if resource_data|has_key:"Site Visits" %}
+         <section >
+            <div class="container">
+               <h3>Site Visits</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        <div class="rtable">
+                           <div class="rrow rheader">
+                              <div class="rcell">Date of Visit</div>
+                              <div class="rcell">Recommendation Value</div>
+                           </div>
+
+                           {% for visit in resource_data|val_from_key:"Site Visits" %}
+                           <div class="rrow">
+                              <div class="rcell" data-title="Date of Visit">
+                                 {% if visit|has_key:"Timespan of Visit" %}
+                                 {{ visit|val_from_key:"Timespan of Visit"|val_from_key:"Date of Visit"|val_from_key:"@display_value" }}
+                                 {% endif %}
+                              </div>
+                              <div class="rcell" data-title="Recommendation Value">
+                                {% if visit|has_key:"Recommendations" %}
+                                    {% for rec in visit|val_from_key:"Recommendations" %}
+                                        <p>{{ rec|val_from_key:"Recommendation"|val_from_key:"Recommendation Value"|val_from_key:"@display_value"|safe  }}</p>
+                                    {% endfor %}
+                                {% endif %}
+                              </div>
+                           </div>
+                           {% endfor %}
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Associated Consultations #}
+         {% if resource_data|has_key:"Associated Consultations" %}
+         <section>
+            <div class="container">
+               <h3>Associated Consultations</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        {{ resource_data|val_from_key:"Associated Consultations"|val_from_key:"@display_value" }}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Related Heritage Assets and Areas #}
+         {% if resource_data|has_key:"Related Heritage Assets and Areas" %}
+         <section>
+            <div class="container">
+               <h3>Related Heritage Assets and Areas</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        {{ resource_data|val_from_key:"Related Heritage Assets and Areas"|val_from_key:"@display_value" }}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {# Associated Activities #}
+         {% if resource_data|has_key:"Associated Activities" %}
+         <section>
+            <div class="container">
+               <h3>Associated Activities</h3>
+               <div class="row">
+                  <div class="column">
+                     <div class="keeptogether">
+                        {{ resource_data|val_from_key:"Associated Activities"|val_from_key:"@display_value" }}
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </section>
+         <hr/>
+         {% endif %}
+
+         {% endwith%}
+         {% endfor %}
+      </main>
+   </body>
+</html>
+
