@@ -252,7 +252,11 @@ class FileTemplateView(View):
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
                 condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
-                condition["type"] = get_value_from_tile(tile, advice_type_node_id)
+                template_name = self.get_template_path(self.request._post['template_id'])
+                if template_name == "WSI Amend Letter.docx" or template_name == "WSI Approval Letter.docx":
+                    condition["type"] = ""
+                else:
+                    condition["type"] = get_value_from_tile(tile, advice_type_node_id)
             else:
                 for key, value in list(template_dict.items()):
                     if value in tile.data:
