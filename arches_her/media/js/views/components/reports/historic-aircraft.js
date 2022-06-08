@@ -193,7 +193,6 @@ define([
                         flightDestination,
                         flightArrivalDate,
                         flightDepartureDate,
-                        flightDisplayDate,
                         flightDateQualifier,
                         flightType,
                         tileid
