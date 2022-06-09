@@ -93,11 +93,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="keeptogether">
-                            <ul>
-                                {% for type in resource_data|val_from_key:"Activity Type" %}
-                                <li>{{ type|val_from_key:"@display_value" }}</li>
-                                {% endfor %}
-                            </ul>
+                            {{ resource_data|val_from_key:"Activity Type"|val_from_key:"@display_value" }}
                         </div>
                     </div>
                 </div>
