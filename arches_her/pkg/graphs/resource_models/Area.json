@@ -50,7 +50,7 @@
                     "helptitle": null,
                     "instructions": null,
                     "is_editable": true,
-                    "name": "Associated Heritage Assets, Areas and Artefacts",
+                    "name": "Associated Monuments, Areas and Artefacts",
                     "nodegroup_id": "12e7c583-1864-11eb-a071-f875a44e0e11",
                     "sortorder": 15,
                     "visible": true
@@ -723,7 +723,7 @@
                     "config": null,
                     "constraints": [],
                     "cssclass": null,
-                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a heritage asset. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
+                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a monument. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
                     "graph_id": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
                     "helpenabled": false,
                     "helptext": null,
@@ -991,11 +991,11 @@
                     "card_id": "12e7c585-1864-11eb-8846-f875a44e0e11",
                     "config": {
                         "defaultResourceInstance": [],
-                        "label": "Associated Heritage Asset, Area or Artefact",
-                        "placeholder": null
+                        "label": "Associated Monument, Area or Artefact",
+                        "placeholder": "Add new Relationship"
                     },
                     "id": "12e7c589-1864-11eb-8bbc-f875a44e0e11",
-                    "label": "Associated Heritage Asset, Area or Artefact",
+                    "label": "Associated Monument, Area or Artefact",
                     "node_id": "12e7c588-1864-11eb-ad10-f875a44e0e11",
                     "sortorder": 0,
                     "visible": true,
@@ -4371,12 +4371,12 @@
                     "card_id": "b334ddde-4e87-11eb-ab31-f875a44e0e11",
                     "config": {
                         "defaultValue": "",
-                        "label": "Asset Type",
+                        "label": "Area Type",
                         "options": [],
                         "placeholder": "Select an option"
                     },
                     "id": "b3350508-4e87-11eb-b885-f875a44e0e11",
-                    "label": "Asset Type",
+                    "label": "Area Type",
                     "node_id": "b334dde6-4e87-11eb-a67c-f875a44e0e11",
                     "sortorder": 0,
                     "visible": true,
@@ -4386,12 +4386,12 @@
                     "card_id": "b334ddde-4e87-11eb-ab31-f875a44e0e11",
                     "config": {
                         "defaultValue": "953238ab-fefc-42e9-9b20-0b4441df2b41",
-                        "label": "Asset Metatype",
+                        "label": "Area Metatype",
                         "options": [],
                         "placeholder": "Select an option"
                     },
                     "id": "b3350509-4e87-11eb-a7ed-f875a44e0e11",
-                    "label": "Asset Metatype",
+                    "label": "Area Metatype",
                     "node_id": "b334ddec-4e87-11eb-81ba-f875a44e0e11",
                     "sortorder": 1,
                     "visible": false,
@@ -4991,7 +4991,7 @@
                         "defaultValue": "",
                         "label": "Land Use Classification",
                         "options": [],
-                        "placeholder": "Use to record a particular status associated with the Asset."
+                        "placeholder": "Use to record a particular status associated with the Area."
                     },
                     "id": "d17aeff8-28cd-11eb-a8fe-f875a44e0e11",
                     "label": "Land Use Classification",
@@ -6250,7 +6250,7 @@
             },
             "deploymentdate": null,
             "deploymentfile": null,
-            "description": "Used to record complex human-made, or human conceived, sites, areas or landscapes. Areas can be anything from a simple prehistoric settlement site (evidenced by a few flint-working fragments) to large-scale, urban conservation areas incorporating multiple assets within a city. The use of Area or Heritage Asset will be a question of granularity.\n\nFor building complexes such as castles, prisons and airfields, Area may be used to record the footprint of the site, eg. the curtain wall and outer defences of a castle. This Area can then be used as the parent for multiple Heritage Asset records.",
+            "description": "Used to record complex human-made, or human conceived, sites, areas or landscapes. Areas can be anything from a simple prehistoric settlement site (evidenced by a few flint-working fragments) to large-scale, urban conservation areas incorporating multiple assets within a city. The use of Area or Monument will be a question of granularity.\n\nFor building complexes such as castles, prisons and airfields, Area may be used to record the footprint of the site, eg. the curtain wall and outer defences of a castle. This Area can then be used as the parent for multiple Monument records.",
             "edges": [
                 {
                     "description": null,
@@ -10595,7 +10595,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "associated_heritage_assets_areas_and_artefacts",
+                    "alias": "associated_monuments_areas_and_artefacts",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -10606,7 +10606,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Associated Heritage Assets, Areas and Artefacts",
+                    "name": "Associated Monuments, Areas and Artefacts",
                     "nodegroup_id": "12e7c583-1864-11eb-a071-f875a44e0e11",
                     "nodeid": "12e7c583-1864-11eb-a071-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
@@ -10656,7 +10656,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "associated_heritage_asset_area_or_artefact",
+                    "alias": "associated_monument_area_or_artefact",
                     "config": {
                         "graphs": [
                             {
@@ -10673,7 +10673,7 @@
                             },
                             {
                                 "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                                "name": "Heritage Asset"
+                                "name": "Monument"
                             },
                             {
                                 "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
@@ -10688,13 +10688,13 @@
                     "datatype": "resource-instance-list",
                     "description": null,
                     "exportable": true,
-                    "fieldname": "Assoc_HAs",
+                    "fieldname": "Assoc_Mons",
                     "graph_id": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
                     "is_collector": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Associated Heritage Asset, Area or Artefact",
+                    "name": "Associated Monument, Area or Artefact",
                     "nodegroup_id": "12e7c583-1864-11eb-a071-f875a44e0e11",
                     "nodeid": "12e7c588-1864-11eb-ad10-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
@@ -16129,20 +16129,20 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "asset_type",
+                    "alias": "area_type",
                     "config": {
                         "rdmCollection": "b82ee4cf-2f90-4dab-bed7-bda3feaf6d64"
                     },
                     "datatype": "concept-list",
                     "description": null,
                     "exportable": true,
-                    "fieldname": "Asset_Type",
+                    "fieldname": "Area_Type",
                     "graph_id": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
                     "is_collector": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Asset Type",
+                    "name": "Area Type",
                     "nodegroup_id": "b334dddc-4e87-11eb-ab6c-f875a44e0e11",
                     "nodeid": "b334dde6-4e87-11eb-a67c-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
@@ -16234,7 +16234,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "asset_metatype",
+                    "alias": "area_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -16247,7 +16247,7 @@
                     "isrequired": false,
                     "issearchable": false,
                     "istopnode": false,
-                    "name": "Asset Metatype",
+                    "name": "Area Metatype",
                     "nodegroup_id": "b334dddc-4e87-11eb-ab6c-f875a44e0e11",
                     "nodeid": "b334ddec-4e87-11eb-81ba-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
@@ -16893,7 +16893,7 @@
                     "alias": "land_use_classification_assignment",
                     "config": null,
                     "datatype": "semantic",
-                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a heritage asset. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
+                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_Thing. Used to record the Land Use Classification associated with an area. Included for migration purposes. Dependencies:> Land Use concept collection available in the RDM",
                     "exportable": false,
                     "fieldname": "",
                     "graph_id": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
@@ -17309,7 +17309,7 @@
                     "datatype": "concept",
                     "description": null,
                     "exportable": true,
-                    "fieldname": "Area_Type",
+                    "fieldname": "Area__Type",
                     "graph_id": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
                     "is_collector": false,
                     "isrequired": false,
@@ -19174,7 +19174,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area_names",
+                    "alias": "area_names_n1",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -19214,7 +19214,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area_name_type",
+                    "alias": "area_name_type_n1",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -19235,7 +19235,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area_name",
+                    "alias": "area_name_n1",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -19318,7 +19318,7 @@
                 "sortorder": 0
             },
             "slug": null,
-            "subtitle": "Used to record complex human-made, or human conceived, sites, areas or landscapes. Areas can be anything from a simple prehistoric settlement site (evidenced by a few flint-working fragments) to large-scale, urban conservation areas incorporating multiple assets within a city. The use of Area or Heritage Asset will be a question of granularity.",
+            "subtitle": "Used to record complex human-made, or human conceived, sites, areas or landscapes. Areas can be anything from a simple prehistoric settlement site (evidenced by a few flint-working fragments) to large-scale, urban conservation areas incorporating multiple assets within a city. The use of Area or Monument will be a question of granularity.",
             "template_id": "c6f163ca-3ca5-4c50-b398-bee406fe059d",
             "version": ""
         }

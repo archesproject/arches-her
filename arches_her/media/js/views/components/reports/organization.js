@@ -91,7 +91,7 @@ define([
 
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.classificationCards = {

@@ -147,7 +147,7 @@ define([
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
                     files: self.cards?.['associated digital files'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.discoveryCards = {

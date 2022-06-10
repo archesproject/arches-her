@@ -110,7 +110,6 @@
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
-                                                <th>{% trans "Display Date" %}</th>
                                                 <th>{% trans "Departure" %}</th>
                                                 <th>{% trans "Destination" %}</th>
                                                 <th>{% trans "Cargo Type" %}</th>
@@ -125,18 +124,17 @@
                                         <tbody data-bind="dataTablesForEach: {data: flights, dataTableOptions: flightsTableConfig}">
                                             <tr>
                                                 <td data-bind="text: flightType"></td>
-                                                <td data-bind="text: flightDisplayDate"></td>
                                                 <td data-bind="text: flightDeparture"></td>
                                                 <td data-bind="text: flightDestination"></td>
                                                 <td data-bind="text: cargoType"></td>
-                                                <td data-bind="text: flightDescription"></td>
+                                                <td data-bind="html: flightDescription"></td>
                                                 <td data-bind="text: flightDepartureDate"></td>
                                                 <td data-bind="text: flightArrivalDate"></td>
                                                 <td data-bind="text: flightDateQualifier"></td>
                                                 <td>
                                                     <!-- ko foreach: { data: crew, as: 'member' } -->
                                                     <div>
-                                                        <span data-bind="text: member.name"></span> - <span data-bind="text: member.role"></span>
+                                                        <a class="aher-table-link" data-bind="text: member.name, attr: {href: member.link}"></a> - <span data-bind="text: member.role"></span>
                                                     </div>
                                                     <!-- /ko -->
                                                 </td>
@@ -208,10 +206,16 @@
                                                 <td data-bind="text: departureName"></td>
                                                 <td data-bind="text: destinationName"></td>
                                                 <td data-bind="text: mannerOfLoss"></td>
-                                                <td>
-                                                    <a class="aher-table-link" data-bind="text: crashSite, attr: {href: crashSiteLink}"></a>
+                                                <td data-bind="foreach: crashSites">
+                                                    <span data-bind="visible: $index() > 0">, </span>
+                                                    <!-- ko if: crashSiteLink -->
+                                                    <a class="aher-table-link" data-bind="text: crashSiteName, attr: {href: crashSiteLink}"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: crashSiteLink -->
+                                                    <span data-bind="text: crashSiteName"></span>
+                                                    <!-- /ko -->
                                                 </td>
-                                                <td data-bind="text: description"></td>
+                                                <td data-bind="html: description"></td>
                                                 <td data-bind="text: departureNameCurrency"></td>
                                                 <td data-bind="text: destinationNameCurrency"></td>
                                                 <td data-bind="text: dateQualifier"></td>
@@ -224,11 +228,11 @@
                                                     <!-- /ko -->
                                                 </td>
                                                 <td class="aher-table-control">
-                                                    <div data-bind="if: $parent.cards.lastFlight">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.lastFlight)}">
+                                                    <div data-bind="if: $parent.cards.flights">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.lastFlight)">
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
