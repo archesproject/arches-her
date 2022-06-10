@@ -24,6 +24,9 @@ class BNGCentreDataType(BaseDataType):
     def validate(self, value, row_number=None, source=None, node=None, nodeid=None, strict=False):
 
         errors = []
+        if value is None:
+            return errors
+        
         gridSquareArray = [
             "NA",
             "NB",
