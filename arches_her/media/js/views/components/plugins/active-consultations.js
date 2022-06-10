@@ -12,7 +12,7 @@ define([
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
-            this.resourceEditorURL = '/arches-her' + arches.urls.resource_editor;
+            this.resourceEditorURL = arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
@@ -244,9 +244,9 @@ define([
                         consultations.forEach( function(consultation) {
                             var link= arches.urls.resource+'/'+consultation["resourceinstanceid"];
                             results.push([
-                                $('<a></a>').attr("href",link).text(consultation['Name'])[0].outerHTML,
+                                $('<a></a>').attr("href",link).text(consultation['Consultation Name'])[0].outerHTML,
                                 $('<a></a>').attr("href",link).text(consultation['Consultation Type'])[0].outerHTML,
-                                $('<a></a>').attr("href",link).text(consultation['Target Date'])[0].outerHTML,
+                                $('<a></a>').attr("href",link).text(consultation['Target Date Start'])[0].outerHTML,
                                 $('<a></a>').attr("href",link).text(consultation['Casework Officer'])[0].outerHTML,
                                 $('<a></a>').attr("href",link).html(consultation['Proposal Text'])[0].outerHTML
                             ]);

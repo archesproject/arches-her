@@ -1,0 +1,216 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+{% block report %}
+    {% block report_title_bar %}
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
+
+        <!-- Title Block -->
+        <div class="aher-report-toolbar">
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Historic Landscape Characterization" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+        </div>
+
+    </div>
+    {% endblock report_title_bar %}
+
+    
+    {% block body %}
+    <!-- Link nav -->
+    <div class="aher-report-anchor-container">
+        <ol class="aher-report-anchors breadcrumb">
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <!-- /ko -->
+        </ol>
+    </div>
+    <div class="aher-tabbed-report">
+        <div class="aher-tabbed-report-content">
+            <!-- Names Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/name',
+                    params: {
+                        data: resource,
+                        cards: nameCards,
+                        dataConfig: nameDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Description Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/description',
+                    params: {
+                        data: resource,
+                        cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                        dataConfig: locationDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+            <div class="aher-report-page" data-bind="if: activeSection() === 'hlc-attributes'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: hlcAttributes,
+                    }
+                }"></div>
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <!-- HLC Phase section -->
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}" class="fa toggle"></i> {% trans "HLC Phase" %}</h2>
+                    <a data-bind="{if: cards.historicLandscapeClassificationPhase, click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.historicLandscapeClassificationPhase" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: historicLandscapeClassificationPhase().length -->
+                        <div class="aher-nodata-note">No historic landscape classification phase for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: historicLandscapeClassificationPhase().length -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table" data-bind="">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Period" %}</th>
+                                                <th>{% trans "Historic Map" %}</th>
+                                                <th>{% trans "Broad Type" %}</th>
+                                                <th>{% trans "Confidence of Interpretation" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
+                                                <th>{% trans "Display Date" %}</th>
+                                                <th class="none">{% trans "Start Date" %}</th>
+                                                <th class="none">{% trans "End Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Confidence of Dating" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: historicLandscapeClassificationPhase, dataTableOptions: hlcPhaseTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: hlcType"></td>
+                                                <td data-bind="foreach: period">
+                                                    <span data-bind="visible: $index() > 0">, </span>
+                                                    <!-- ko if: periodLink -->
+                                                    <a data-bind="text: periodName, attr: {href: periodLink}" class="aher-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: periodLink -->
+                                                    <span data-bind="text: periodName"></span>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td data-bind="foreach: historicMap">
+                                                    <span data-bind="visible: $index() > 0">, </span>
+                                                    <!-- ko if: mapLink -->
+                                                    <a data-bind="text: mapName, attr: {href: mapLink}" class="aher-table-link"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: mapLink -->
+                                                    <span data-bind="text: mapName"></span>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td data-bind="text: broadType"></td>
+                                                <td data-bind="text: interpretationConfidence"></td>
+                                                <td data-bind="html: description"></td>
+                                                <td data-bind="text: displayDate"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: dateConfidence"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.historicLandscapeClassificationPhase">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.historicLandscapeClassificationPhase)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.historicLandscapeClassificationPhase)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+             <!-- JSON Tab -->
+            <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
+                <div class="aher-flex-col" data-bind="component: {
+                    name: 'views/components/reports/scenes/json',
+                    params: {
+                        resourceInstanceId: reportMetadata().resourceinstanceid,
+                    }
+                }"></div>
+            </div>
+            <!-- Communication Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/communication',
+                    params: {
+                        data: resource,
+                        cards: communicationCards
+                    }
+                }"></div>
+            </div>
+        </div>
+    </div>            
+    {% endblock body %}
+{% endblock report %}
+
+{% block summary %}
+<div class="aher-summary-report-header">
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Historic Landscape Characterization)" %}</span></h1>
+</div>
+<div class="model-summary-report">
+    <div class="aher-report-page">
+        <!-- Names -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/name',
+            params: {
+                data: resource,
+                cards: nameCards,
+                dataConfig: nameDataConfig
+            }
+        }"></div>
+        <!-- Description -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/description',
+            params: {
+                data: resource,
+                cards: descriptionCards,
+                dataConfig: descriptionDataConfig
+            }
+        }"></div>
+    </div>
+</div>
+
+{% endblock summary %}

@@ -1,0 +1,112 @@
+
+<div class="card-component">
+    <div class="row widget-wrapper">
+        <div class="widget-input-label">Select Related Consultation</div>
+        <div data-bind="component: {
+            name: 'resource-instance-select-widget',
+            params: {
+                loading: loading,
+                form: $data,
+                value: resValue,
+                pageVm: $root,
+                graphids: [graphid],
+                disabled: disableResourceSelection,
+                renderContext: 'workflow'
+            }
+        }">
+        </div>
+    </div>
+    <!-- ko if: resourceid -->
+    <div>
+    <div data-bind="component: {
+        name: 'datepicker-widget',
+        params: {
+            node: {
+                config: {
+                    'dateFormat': 'YYYY-MM-DD',
+                },
+            },
+            config: {
+                'label': 'Communication Date',
+                'maxDate': '',
+                'minDate': '',
+                'viewMode': 'days',
+                'dateFormat': 'YYYY-MM-DD',
+                'placeholder': 'Enter date',
+                'defaultValue': ''
+            },
+            value: date,
+            loading: loading,
+            form: $data,
+            pageVm: $root
+        }
+    }">
+    </div>
+    <div data-bind="component: {
+        name: 'text-widget',
+        params: {
+            config: {
+                'label': 'Subject',
+            },
+            value: subject,
+            loading: loading,
+            form: $data,
+            pageVm: $root
+        }
+    }">
+    </div>
+    <div data-bind="component: {
+        name: 'concept-radio-widget',
+        params: {
+            node: {
+                config: {
+                    'rdmCollection': ko.observable(),
+                },
+            },
+            config: {
+                'label': 'Type*',
+                'options': [{
+                    'id': '0f466b8b-a347-439f-9b61-bee9811ccbf0',
+                    'text': 'Email',
+                    'children': [],
+                    'collector': '',
+                    'conceptid': '084c4ed7-e6c5-4af4-be0f-7fe5d20375a0',
+                    'sortorder': ''
+                  },
+                  {
+                    'id': 'ee62df87-ae9f-40d6-9697-2304f6bb0aa2',
+                    'text': 'Fax',
+                    'children': [],
+                    'collector': '',
+                    'conceptid': 'f061dc1b-97db-45e6-aa70-1ffb00e9cfdc',
+                    'sortorder': ''
+                  },
+                  {
+                    'id': 'e6d433a2-7f77-4eb7-96f2-57ebe0ac251e',
+                    'text': 'Mail',
+                    'children': [],
+                    'collector': '',
+                    'conceptid': '12acd509-aadb-4692-a152-b404c1f7a626',
+                    'sortorder': ''
+                  },
+                  {
+                    'id': '75e6cfad-7418-4ed3-841b-3c083d7df30b',
+                    'text': 'Telephone',
+                    'children': [],
+                    'collector': '',
+                    'conceptid': '183d4d65-5a7e-466d-83df-858eef939448',
+                    'sortorder': ''
+                  }],
+                'placeholder': 'Select an option',
+                'defaultValue': ''
+              },
+            value: type,
+            loading: loading,
+            form: $data,
+            pageVm: $root
+        },
+    }">
+    </div>
+    </div>
+    <!-- /ko -->
+</div>

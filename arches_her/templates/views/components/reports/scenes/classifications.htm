@@ -1,0 +1,614 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div data-bind="visible: !!dataConfig.type, component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: typeData,
+    }
+}"></div>
+<div data-bind="visible: !!dataConfig.activityTimespan, component: {
+    name: 'views/components/reports/scenes/default',
+    params: {
+        data: activityTimespan,
+    }
+}"></div>
+<!-- Construction Phases -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.artefactProduction">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Production Phases" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.production" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: production().length -->
+        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: production().length && !!dataConfig.artefactProduction -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Artefact Type" %}</th>
+                                <th>{% trans "Period" %}</th>
+                                <th>{% trans "Producer" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Method" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Phase Evidence" %}</th>
+                                <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                <th class="none">{% trans "Material" %}</th>
+                                <th class="none">{% trans "Production Technique" %}</th>
+                                <th class="none">{% trans "Phase Description" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: artefactProdTableConfiguration}">
+                            <tr>
+                                <td data-bind="text: artefactType"></td>
+                                <td><a class="aher-table-link" data-bind="text: period, attr: {href: periodLink}"></a></td>
+                                <td><a class="aher-table-link" data-bind="text: producer, attr: {href: producerLink}"></a></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: method"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: phaseEvidence"></td>
+                                <td data-bind="text: interpretationConfidence"></td>
+                                <td data-bind="text: material"></td>
+                                <td data-bind="text: productionTechnique"></td>
+                                <td data-bind="text: phaseDescription"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.production">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Construction Phases -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.production">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.production" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: production().length -->
+        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: production().length && !!dataConfig.production -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Period" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Method" %}</th>
+                                <th>{% trans "Phase" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Display Date" %}</th>
+                                <th class="none">{% trans "Date Confidence" %}</th>
+                                <th class="none">{% trans "Phase Evidence" %}</th>
+                                <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                <th class="none">{% trans "Construction Material" %}</th>
+                                <th class="none">{% trans "Covering Material" %}</th>
+                                <th class="none">{% trans "Construction Technique" %}</th>
+                                <th class="none">{% trans "Phase Description" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: conPhasesTableConfig}">
+                            <tr>
+                                <td data-bind="text: assetType"></td>
+                                <td data-bind="text: period"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: method"></td>
+                                <td data-bind="text: phase"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: displayDate"></td>
+                                <td data-bind="text: dateConfidence"></td>
+                                <td data-bind="text: phaseEvidence"></td>
+                                <td data-bind="text: interpretationConfidence"></td>
+                                <td data-bind="text: constructionMaterial"></td>
+                                <td data-bind="text: coveringMaterial"></td>
+                                <td data-bind="text: constructionTechnique"></td>
+                                <td data-bind="text: phaseDescription"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.production">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Construction Phases -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.aircraftProduction">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.production" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: production().length -->
+        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: production().length && !!dataConfig.aircraftProduction -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Period" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Method" %}</th>
+                                <th>{% trans "Phase" %}</th>
+                                <th class="none">{% trans "Aircraft Form" %}</th>
+                                <th class="none">{% trans "Aircraft Function" %}</th>
+                                <th class="none">{% trans "Aircraft Type" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Display Date" %}</th>
+                                <th class="none">{% trans "Phase Evidence" %}</th>
+                                <th class="none">{% trans "Phase Certainty" %}</th>
+                                <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                <th class="none">{% trans "Construction Material" %}</th>
+                                <th class="none">{% trans "Construction Technique" %}</th>
+                                <th class="none">{% trans "Construction Method" %}</th>
+                                <th class="none">{% trans "Phase Description" %}</th>
+                                <th class="none">{% trans "Place of Manufacture" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: aircraftConstructionConfig}">
+                            <tr>
+                                <td data-bind="text: period"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: method"></td>
+                                <td data-bind="text: phase"></td>
+                                <td data-bind="text: aircraftForm"></td>
+                                <td data-bind="text: aircraftFunction"></td>
+                                <td data-bind="text: aircraftType"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: displayDate"></td>
+                                <td data-bind="text: phaseEvidence"></td>
+                                <td data-bind="text: phaseCertainty"></td>
+                                <td data-bind="text: interpretationConfidence"></td>
+                                <td data-bind="text: constructionMaterial"></td>
+                                <td data-bind="text: constructionTechnique"></td>
+                                <td data-bind="text: constructionMethod"></td>
+                                <td data-bind="text: phaseDescription"></td>
+                                <td data-bind="text: placeOfManufacture"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.production">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Maritime Construction Phases -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.maritimeProduction">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.production)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Phases" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.production, click: function(){addNewTile(cards.production)}"><i class="fa fa-mail-reply"></i> {% trans "Add Phase" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.production" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: production().length -->
+        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: production().length && !!dataConfig.maritimeProduction -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Period" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Method" %}</th>
+                                <th>{% trans "Phase" %}</th>
+                                <th class="none">{% trans "Propulsion Type" %}</th>
+                                <th class="none">{% trans "Rigging Type" %}</th>
+                                <th class="none">{% trans "Vessel Type" %}</th>
+                                <th class="none">{% trans "Ordnance Type" %}</th>
+                                <th class="none">{% trans "Fixture Type" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Display Date" %}</th>
+                                <th class="none">{% trans "Phase Evidence" %}</th>
+                                <th class="none">{% trans "Phase Certainty" %}</th>
+                                <th class="none">{% trans "Interpretation Confidence" %}</th>
+                                <th class="none">{% trans "Construction Material" %}</th>
+                                <th class="none">{% trans "Construction Technique" %}</th>
+                                <th class="none">{% trans "Construction Method" %}</th>
+                                <th class="none">{% trans "Phase Description" %}</th>
+                                <th class="none">{% trans "Builder" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: maritimeProductionConfig}">
+                            <tr>
+                                <td data-bind="text: period"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: method"></td>
+                                <td data-bind="text: phase"></td>
+                                <td data-bind="text: propulsionType"></td>
+                                <td data-bind="text: riggingType"></td>
+                                <td data-bind="text: vesselType"></td>
+                                <td data-bind="text: ordnanceType"></td>
+                                <td data-bind="text: fixtureType"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: displayDate"></td>
+                                <td data-bind="text: phaseEvidence"></td>
+                                <td data-bind="text: phaseCertainty"></td>
+                                <td data-bind="text: interpretationConfidence"></td>
+                                <td data-bind="text: constructionMaterial"></td>
+                                <td data-bind="text: constructionTechnique"></td>
+                                <td data-bind="text: constructionMethod"></td>
+                                <td data-bind="text: phaseDescription"></td>
+                                <td data-bind="text: builder"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.production">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Dimensions -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.dimensions">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.dimensions)}" class="fa fa-angle-double-right toggle"></i> {% trans "Dimensions" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.dimensions, click: function(){addNewTile(cards.dimensions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Dimension" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.dimensions" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: dimensions().length -->
+        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: dimensions().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Measurement Unit" %}</th>
+                                <th>{% trans "Value" %}</th>
+                                <th class="none">{% trans "Type Qualifier" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: dimensions, dataTableOptions: dimensionTableConfig}">
+                            <tr>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: measurementUnit"></td>
+                                <td data-bind="text: value"></td>
+                                <td data-bind="text: qualifier"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.dimensions">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.dimensions)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.dimensions)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Components -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.components">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.components)}" class="fa fa-angle-double-right toggle"></i> {% trans "Construction Components" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.components, click: function(){addNewTile(cards.components)}"><i class="fa fa-mail-reply"></i> {% trans "Add Component" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.components" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: components().length -->
+        <div class="aher-nodata-note">No components for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: components().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Construction Phase" %}</th>
+                                <th>{% trans "Component" %}</th>
+                                <th>{% trans "Technique" %}</th>
+                                <th>{% trans "Material" %}</th>
+                                <th class="medium">{% trans "Evidence" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: components, dataTableOptions: componentsTableConfig}">
+                            <tr>
+                                <td data-bind="text: constructionPhase"></td>
+                                <td data-bind="text: component"></td>
+                                <td data-bind="text: technique"></td>
+                                <td data-bind="text: material"></td>
+                                <td data-bind="text: evidence"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.components">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.components)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.components)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Use Phases -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.usePhase">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}">
+        <i class="fa fa-mail-reply"></i> 
+        <span data-bind="ifnot: cards.usePhase.tiles().length">{% trans "Add Use Phase" %}</span>
+        <span data-bind="if: cards.usePhase.tiles().length">{% trans "Edit Use Phase" %}</span>
+    </a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.usePhase" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: usePhases().length -->
+        <div class="aher-nodata-note">No uses for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: usePhases().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Period" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Display Date" %}</th>
+                                <th class="none">{% trans "Use Evidence" %}</th>
+                                <th class="none">{% trans "Description Type" %}</th>
+                                <th class="none">{% trans "Description" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: usePhases, dataTableOptions: usePhasesTableConfig}">
+                            <tr>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: period"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: displayDate"></td>
+                                <td data-bind="text: useEvidence"></td>
+                                <td data-bind="text: descriptionType"></td>
+                                <td data-bind="html: description"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.usePhase">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.usePhase)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.usePhase)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Dates -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.organizationFormation">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.organizationFormation)}" class="fa fa-angle-double-right toggle"></i> {% trans "Organization Formation" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.organizationFormation, click: function(){addNewTile(cards.organizationFormation)}">
+        <i class="fa fa-mail-reply"></i> 
+        <span data-bind="ifnot: cards.organizationFormation.tiles().length">{% trans "Add Dates" %}</span>
+        <span data-bind="if: cards.organizationFormation.tiles().length">{% trans "Edit Dates" %}</span>
+    </a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.organizationFormation" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: organizationFormation().length -->
+        <div class="aher-nodata-note">No organization formation data for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: organizationFormation().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Organization Type" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th>{% trans "Date Qualifier" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: organizationFormation, dataTableOptions: organizationFormationTableConfig}">
+                            <tr>
+                                <td data-bind="text: organizationType"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.organizationFormation">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.organizationFormation)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.organizationFormation)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Dates -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.dates">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.dates)}" class="fa fa-angle-double-right toggle"></i> {% trans "Dates" %}</h2>
+    <a class="aher-report-a" data-bind="if: cards.dates, click: function(){addNewTile(cards.dates)}">
+        <i class="fa fa-mail-reply"></i> 
+        <span data-bind="ifnot: cards.dates.tiles().length">{% trans "Add Dates" %}</span>
+        <span data-bind="if: cards.dates.tiles().length">{% trans "Edit Dates" %}</span>
+    </a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.dates" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: dates().length -->
+        <div class="aher-nodata-note">No dates for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: dates().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: dates, dataTableOptions: datesTableConfig}">
+                            <tr>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.dates">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.dates)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.dates)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>            
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

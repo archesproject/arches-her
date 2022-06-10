@@ -1,0 +1,57 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.copyright)}, css: {'fa-angle-double-right': visible.copyright(), 'fa-angle-double-up': !visible.copyright()}" class="fa toggle"></i> {% trans "Copyright" %}</h2>
+    <span data-bind="if: cards.copyright && (!copyright().length || cards.copyright.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.copyright)}"><i class="fa fa-mail-reply"></i> {% trans "Add Copyright" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.copyright" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: copyright().length -->
+        <div class="aher-nodata-note">No copyright for this resource</div>
+        <!-- /ko -->
+        
+        <!-- ko if: copyright().length -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Holder" %}</th>
+                                <th>{% trans "Type" %}</th>
+                                <th class="none">{% trans "Note" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: copyright, dataTableOptions: copyrightTableConfig }">
+                            <tr>
+                                <td data-bind="text: holder"></td>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: note"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.copyright">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.copyright)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.copyright)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

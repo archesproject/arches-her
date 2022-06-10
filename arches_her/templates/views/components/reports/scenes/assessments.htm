@@ -1,0 +1,126 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<!-- Artefact condition section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.artefactCondition">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.artefactCondition)}, css: {'fa-angle-double-right': visible.artefactCondition(), 'fa-angle-double-up': !visible.artefactCondition()}"  class="fa toggle"></i> {% trans "Artefact Condition" %}</h2>
+    <a data-bind="{if: cards.artefactCondition, click: function(){addNewTile(cards.artefactCondition)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.artefactCondition" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: artefactCondition() -->
+        <div class="aher-nodata-note">{% trans "No dates for this resource" %}</div>
+        <!-- /ko -->
+
+        <!-- ko if: artefactCondition() -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Digital File" %}</th>
+                                <th>{% trans "Start Date" %}</th>
+                                <th>{% trans "End Date" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: artefactCondition, dataTableOptions: artefactConditionConfig}">
+                            <tr>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: file"></td>
+                                <td data-bind="text: startDate"></td>
+                                <td data-bind="text: endDate"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.artefactCondition">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.artefactCondition)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.artefactCondition)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Scientific date section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.scientificDate">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.scientificDate)}, css: {'fa-angle-double-right': visible.scientificDate(), 'fa-angle-double-up': !visible.scientificDate()}"  class="fa toggle"></i> {% trans "Scientific Date Determination" %}</h2>
+    <a data-bind="{if: cards.scientificDate, click: function(){addNewTile(cards.scientificDate)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.scientificDate" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: scientificDate() -->
+        <div class="aher-nodata-note">{% trans "No dates for this resource" %}</div>
+        <!-- /ko -->
+
+        <!-- ko if: scientificDate() -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th>{% trans "Construction Phase" %}</th>
+                                <th>{% trans "Dating Method" %}</th>
+                                <th>{% trans "Earliest Date" %}</th>
+                                <th>{% trans "Latest Date" %}</th>
+                                <th>{% trans "Date Qualifier" %}</th>
+                                <th class="none">{% trans "Standard Deviation" %}</th>
+                                <th class="none">{% trans "Standard Deviation Comment" %}</th>
+                                <th class="none">{% trans "Laboratory Note" %}</th>
+                                <th class="none">{% trans "Start Date of Date Determination" %}</th>
+                                <th class="none">{% trans "End Date of Date Determination" %}</th>
+                                <th class="none">{% trans "Date Determination Qualifier" %}</th>
+                                <th class="none">{% trans "General Note" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: scientificDate, dataTableOptions: scientificDatesTableConfig}">
+                            <tr>
+                                <td data-bind="text: constructionPhase"></td>
+                                <td data-bind="text: datingMethod"></td>
+                                <td data-bind="text: earliestDate"></td>
+                                <td data-bind="text: latestDate"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td data-bind="text: standardDeviation"></td>
+                                <td data-bind="html: standardDeviationComment"></td>
+                                <td data-bind="text: laboratoryNote"></td>
+                                <td data-bind="text: startDateOfDetermination"></td>
+                                <td data-bind="text: endDateOfDetermination"></td>
+                                <td data-bind="text: dateDeterminationQualifier"></td>
+                                <td data-bind="html: generalNote"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.scientificDate">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.scientificDate)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.scientificDate)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

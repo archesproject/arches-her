@@ -4,9 +4,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from arches_her.views.file_template import FileTemplateView
 from arches_her.views.index import IndexView
-from arches_her.views.consultations_help import HelpView
-from arches_her.views.consultations_about import AboutView
-from arches_her.views import search
 from django.views.generic import RedirectView
 from arches_her.views.resource import ResourceDescriptors
 from arches_her.views.active_consultations import ActiveConsultationsView
@@ -20,13 +17,8 @@ urlpatterns = [
     url(r'^'+settings.APP_PATHNAME+'/$', IndexView.as_view(), name='consultations-root'),
     url(r'^index.htm', IndexView.as_view(), name='home'),
     url(r'^'+settings.APP_PATHNAME+'/index.htm', IndexView.as_view(), name='consultations-home'),
-    url(r'^'+settings.APP_PATHNAME+'/search$', search.SearchView.as_view(), name="search_home_consultations"),
-    url(r'^'+settings.APP_PATHNAME+'/search/resources$', search.search_results, name="search_results"),
     url(r'^'+settings.APP_PATHNAME+'/', include('arches.urls')),
-    url(r'^'+settings.APP_PATHNAME+'/consultations-help$', HelpView.as_view(), name="consultations-help"),
-    url(r'^'+settings.APP_PATHNAME+'/consultations-about$', AboutView.as_view(), name="consultations-about"),
     url(r'^plugins/active-consultations$', RedirectView.as_view(url='/'+settings.APP_PATHNAME+'/plugins/active-consultations')),
-    url(r'^resource/standard', RedirectView.as_view(url='/resource'), name='standard'),
     url(r'^resource/descriptors/(?P<resourceid>%s|())$' % uuid_regex, ResourceDescriptors.as_view(), name="resource_descriptors"),
     url(r'^'+settings.APP_PATHNAME+'/index.htm', IndexView.as_view(), name='home'),
     url(r'^', include('arches.urls')),

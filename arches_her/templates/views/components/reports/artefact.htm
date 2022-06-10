@@ -1,0 +1,271 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+{% block report %}
+    {% block report_title_bar %}
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
+
+        <!-- Title Block -->
+        <div class="aher-report-toolbar">
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Artefact" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+        </div>
+
+    </div>
+    {% endblock report_title_bar %}
+
+    
+    {% block body %}
+    <!-- Link nav -->
+    <div class="aher-report-anchor-container">
+        <ol class="aher-report-anchors breadcrumb">
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <!-- /ko -->
+        </ol>
+    </div>
+    <div class="aher-tabbed-report">
+        <div class="aher-tabbed-report-content">
+            <!-- Names Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/name',
+                    params: {
+                        data: resource,
+                        cards: nameCards,
+                        dataConfig: nameDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Description Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/description',
+                    params: {
+                        data: resource,
+                        cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/classifications',
+                    params: {
+                        data: resource,
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                        dataConfig: locationDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Publication Details Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'publication'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/copyright',
+                    params: {
+                        data: resource,
+                        cards: copyrightCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Discovery Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'discovery'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.discovery)}, css: {'fa-angle-double-right': visible.discovery(), 'fa-angle-double-up': !visible.discovery()}" class="fa toggle"></i> {% trans "Discovery" %}</h2>
+                    <a class="aher-report-a" data-bind="{if: cards.discovery, event:{ mousedown:function(d, e){addNewTile(cards.discovery, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: discovery().length">{% trans "Edit Discovery" %}</span><span data-bind="ifnot: discovery().length">{% trans "Add Discovery" %}</span></a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.discovery" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: discovery().length -->
+                        <div class="aher-nodata-note">No owner classes for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: discovery().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- discovery Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Method" %}</th>
+                                                <th>{% trans "Recovery Technique" %}</th>
+                                                <th class="none">{% trans "Note" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: discovery, dataTableOptions: discoveryTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: method"></td>
+                                                <td data-bind="text: technique"></td>
+                                                <td data-bind="html: note"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.discovery">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.discovery)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.discovery)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.finders)}, css: {'fa-angle-double-right': visible.finders(), 'fa-angle-double-up': !visible.finders()}" class="fa toggle"></i> {% trans "Finders" %}</h2>
+                    <span data-bind="if: cards.finders && (!finders().length || cards.finders.cardinality == 'n')">
+                        <a class="aher-report-a" data-bind="click: function(){addNewTile(cards.finders)}"><i class="fa fa-mail-reply"></i> {% trans "Add Finder" %}</a>
+                    </span>
+                
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.finders" class="aher-report-collapsible-container pad-lft">
+                
+                        <!-- ko ifnot: finders().length -->
+                        <div class="aher-nodata-note">No finders for this resource</div>
+                        <!-- /ko -->
+                        
+                        <!-- ko if: finders().length -->
+                        <div class="aher-report-subsection" >
+                            <div>
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Name" %}</th>
+                                                <th>{% trans "Name Use Type" %}</th>
+                                                <th class="none">{% trans "Name Use Currency" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: finders, dataTableOptions: findersTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: name"></td>
+                                                <td data-bind="text: nameUseType"></td>
+                                                <td data-bind="text: currency"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.finders">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.finders)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.finders)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- Designation/Protection Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'protection'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/protection',
+                    params: {
+                        data: resource,
+                        cards: protectionCards,
+                        dataConfig: protectionDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Assessments Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'assessments'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/assessments',
+                    params: {
+                        data: resource,
+                        cards: assessmentCards,
+                        dataConfig: assessmentsDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Archive Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/archive',
+                    params: {
+                        data: resource,
+                        cards: archiveCards,
+                        dataConfig: archiveDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+             <!-- JSON Tab -->
+            <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
+                <div class="aher-flex-col" data-bind="component: {
+                    name: 'views/components/reports/scenes/json',
+                    params: {
+                        resourceInstanceId: reportMetadata().resourceinstanceid,
+                    }
+                }"></div>
+            </div>
+        </div>
+    </div>            
+    {% endblock body %}
+{% endblock report %}
+
+{% block summary %}
+<div class="aher-summary-report-header">
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Artefact)" %}</span></h1>
+</div>
+<div class="model-summary-report">
+    <div class="aher-report-page">
+        <!-- Names -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/name',
+            params: {
+                data: resource,
+                cards: nameCards,
+                dataConfig: nameDataConfig
+            }
+        }"></div>
+        <!-- Description -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/description',
+            params: {
+                data: resource,
+                cards: descriptionCards,
+                dataConfig: descriptionDataConfig
+            }
+        }"></div>
+    </div>
+</div>
+
+{% endblock summary %}

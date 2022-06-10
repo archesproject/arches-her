@@ -1,0 +1,44 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<div class="aher-report-section" data-bind="foreach: {data: sections, as: 'section', noChildContext: true}">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible[section.title])}, css: {'fa-angle-double-right': visible[section.title](), 'fa-angle-double-up': !visible[section.title]()}" class="fa toggle"></i> <span data-bind="text: section.title"></span></h2>
+    <span data-bind="if: section.card && section.card.cardinality == '1'">
+        <a class="aher-report-a" data-bind="click: function(){add(section.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:section.title"></span></a>
+    </span>
+    <span data-bind="if: section.card && section.card.cardinality == 'n'">
+        <a class="aher-report-a" data-bind="click: function(){add(section.card)}"><i class="fa fa-mail-reply"></i> {% trans "Add" %} <span style="text-transform: capitalize;" data-bind="text:section.title"></span></a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible[section.title]" class="aher-report-collapsible-container pad-lft">
+
+         <!-- ko ifnot: section.data.length -->
+         <div class="aher-nodata-note">No data for this section</div>
+         <!-- /ko -->
+         
+         <!-- ko if: section.data.length -->
+         <div class="aher-report-subsection" >
+             <div>
+                 <div data-bind="foreach: {data: section.data, as: 'item', noChildContext: true}" class="aher-report-subsection-item">
+                     <div class="aher-block-attributes">
+                        <div data-bind="component: {
+                            name: 'views/components/reports/scenes/keyvalue',
+                            params: {
+                                data: item,
+                                tileid: item.tileid,
+                                inline: true
+                            }
+                        }"></div>
+                         
+                     </div>
+                 </div>
+             </div>
+         </div>
+         <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

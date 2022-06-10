@@ -1,0 +1,167 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+{% block report %}
+    {% block report_title_bar %}
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
+
+        <!-- Title Block -->
+        <div class="aher-report-toolbar">
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Archive Source" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+        </div>
+
+    </div>
+    {% endblock report_title_bar %}
+
+    
+    {% block body %}
+    <!-- Link nav -->
+    <div class="aher-report-anchor-container">
+        <ol class="aher-report-anchors breadcrumb">
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <!-- /ko -->
+        </ol>
+    </div>
+    <div class="aher-tabbed-report">
+        <div class="aher-tabbed-report-content">
+            <!-- Names Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/name',
+                    params: {
+                        data: resource,
+                        cards: nameCards,
+                        dataConfig: nameDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Description Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/description',
+                    params: {
+                        data: resource,
+                        cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/classifications',
+                    params: {
+                        data: resource,
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Archive Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
+                <div>
+                    <h2 class="aher-report-section-subtitle" style="display: block; margin-bottom: 5px;"><i data-bind="click: function() {toggleVisibility(visible.archiveHolding)}, css: {'fa-angle-double-right': visible.archiveHolding(), 'fa-angle-double-up': !visible.archiveHolding()}" class="fa toggle"></i> <span>{% trans "Archive Holding" %}</span></h2>
+                    <div data-bind="visible: visible.archiveHolding">
+                    <!-- ko ifnot: archiveHolding().length -->
+                    <div class="aher-nodata-note">No archive holdings</div>
+                    <!-- /ko -->
+                    <!-- Show this div if there are event data -->
+                    <!-- ko foreach: { data: archiveHolding, as: "archive", noChildContext: true} -->
+                    <!-- ko if: !!archive && archive.data -->
+                    <div class="aher-report-subsection">
+                        <h2 class="aher-report-section-subtitle"><i data-bind="click: function() {toggleVisibility(archive.visible)}, css: {'fa-angle-double-right': archive.visible(), 'fa-angle-double-up': !archive.visible()}" class="fa toggle"></i> <span>{% trans "Holding" %}</span> <span data-bind="text: $index() + 1"></span></h2>
+                        <div data-bind="visible: archive.visible">
+                            <!-- ko foreach: { data: archive.data.section, as: "section", noChildContext: true} -->
+                            <div class="aher-report-subsection">
+                                <h2 class="aher-report-section-subtitle" style="margin-bottom: 5px"><i data-bind="click: function() {toggleVisibility(section.visible)}, css: {'fa-angle-double-right': section.visible(), 'fa-angle-double-up': !section.visible()}" class="fa toggle"></i> <span data-bind="text: section.title"></span></h2>
+                                <a data-bind="{if: section.card, click: function(){addNewTile(section.card)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span data-bind="text:section.title"></span></a>
+
+                                <div data-bind="visible: section.visible" class="aher-report-collapsible-container">
+                                    
+                                    <div class="aher-report-event-section aher-report-subsection-container">
+                                        <div style="width:95%" data-bind="foreach: {data: section.data, as: 'item'}" class="aher-report-subsection-two-column">
+                                            <div class="aher-keyvalue" data-bind="component: {
+                                                name: 'views/components/reports/scenes/keyvalue',
+                                                params: {
+                                                    data: item,
+                                                    inline: true
+                                                }
+                                            }"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--/ko-->
+                        </div>
+                    </div>
+                    <!--/ko-->
+                    <!--/ko-->
+                    </div>
+                </div>
+            </div>
+            <!-- Images Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'images'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/images',
+                    params: {
+                        data: resource,
+                        cards: imagesCards,
+                        dataConfig: imagesDataConfig
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+             <!-- JSON Tab -->
+            <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
+                <div class="aher-flex-col" data-bind="component: {
+                    name: 'views/components/reports/scenes/json',
+                    params: {
+                        resourceInstanceId: reportMetadata().resourceinstanceid,
+                    }
+                }"></div>
+            </div>
+        </div>
+    </div>            
+    {% endblock body %}
+{% endblock report %}
+
+{% block summary %}
+<div class="aher-summary-report-header">
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Archive Source)" %}</span></h1>
+</div>
+<div class="model-summary-report">
+    <div class="aher-report-page">
+        <!-- Names -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/name',
+            params: {
+                data: resource,
+                cards: nameCards,
+                dataConfig: nameDataConfig
+            }
+        }"></div>
+        <!-- Description -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/description',
+            params: {
+                data: resource,
+                cards: descriptionCards,
+                dataConfig: descriptionDataConfig
+            }
+        }"></div>
+    </div>
+</div>
+
+{% endblock summary %}

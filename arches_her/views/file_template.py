@@ -22,22 +22,22 @@ import os
 import uuid
 from datetime import datetime
 import docx
+import textwrap
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.xmlchemy import OxmlElement
 from html.parser import HTMLParser
 from html.entities import name2codepoint
-from pprint import pprint
 from django.core.files.uploadedfile import UploadedFile
 from django.http import HttpRequest, HttpResponseNotFound
 from django.utils.translation import ugettext as _
 from django.views.generic import View
 from arches.app.datatypes.datatypes import DataTypeFactory
 from arches.app.models import models
+from arches.app.models.concept import ConceptValue
 from arches.app.models.resource import Resource
 from arches.app.models.system_settings import settings
 from arches.app.models.tile import Tile
-from arches.app.utils.betterJSONSerializer import JSONSerializer, JSONDeserializer
 from arches.app.utils.response import JSONResponse
 from arches.app.views.tile import TileData
 
@@ -69,11 +69,11 @@ class FileTemplateView(View):
     
     
     def post(self, request): 
-        # data = JSONDeserializer().deserialize(request.body)
         datatype_factory = DataTypeFactory()
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
         resourceinstance_id = request.POST.get('resourceinstance_id', None)
+        transaction_id = request.POST.get('transaction_id', uuid.uuid1())
         self.resource = Resource.objects.get(resourceinstanceid=resourceinstance_id)
         self.resource.load_tiles()
 
@@ -83,7 +83,11 @@ class FileTemplateView(View):
         if os.path.exists(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx')) is False:
             os.mkdir(os.path.join(settings.APP_ROOT, 'uploadedfiles','docx'))
 
-        self.doc = Document(template_path)
+        try:
+            self.doc = Document(template_path)
+        except:
+            return HttpResponseNotFound("No Template Found")
+
         self.edit_letter(self.resource, datatype_factory)
 
         date = datetime.today()
@@ -132,6 +136,7 @@ class FileTemplateView(View):
         new_req.method = 'POST'
         new_req.user = request.user
         new_req.POST['data'] = tile
+        new_req.POST['transaction_id'] = transaction_id
         new_req.FILES['file-list_' + file_list_node_id] = file_data
         new_tile = TileData()
         new_tile.action = "update_tile"
@@ -156,16 +161,15 @@ class FileTemplateView(View):
             "41f3d0bb-a94d-469f-80c8-85ab03283972":	"Condition Historic Building Recording Letter.docx", # Letter D3
             "7f1e7061-8bb0-4338-9342-118f1e9214aa":	"WSI Approval Letter.docx", # Letter F1
             "eaa8a075-50e6-4c3d-ac08-fbe84865f577":	"WSI Amend Letter.docx", # Letter F2
+            "8d605e5c-d0da-4b72-9ce3-2f7dac3381d1":	"Post Excavation Assessment Approval Letter.docx", # Letter G - PXA Approval
             "a31061ea-9b80-435f-82c8-94dc10afcbae":	"Condition Satisfied Letter.docx", # Letter H
+            "eed24dd2-85a0-4402-a6ba-bda426b5da89":	"Blank Adviser Letter.docx", # Letter I - Bespoke Letter
             # No template available yet
-            "8d605e5c-d0da-4b72-9ce3-2f7dac3381d1":	"", # Letter G - PXA Approval
-            "eed24dd2-85a0-4402-a6ba-bda426b5da89":	"", # Letter I - Bespoke Letter
             "a26c77ff-1d04-4b76-a45f-417f7ed24333": "", # Additional Condition Text
             "8c12a812-8000-4ec9-913d-c6fd516117f2": "", # Archaeological Recommendation Text
             # No concept selection available
             "missing 0": "Conditions Scope Notes.docx",
             "missing 1": "Mitigation Scope Notes.docx",
-            "missing 2": "Post Excavation Assessment Approval Letter.docx"
         }
         for key, value in list(template_dict.items()):
             if key == template_id:
@@ -194,19 +198,77 @@ class FileTemplateView(View):
         self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)    
 
     def replace_in_letter(self, tiles, template_dict, datatype_factory):
+        mapping_dict = {
+            "Reference": "",
+            "Primary Reference Number": "",
+            "Casework Officer": "",
+            "Completion Date": "",
+            "Consultation Name": "",
+            "Proposal Description": "",
+            "Log Date": "",
+            "Signature": "",
+            "Archaeological Priority Area": "",
+            "Assessment of Significance": "",
+            "Condition": "",
+            "Mitigation": "",
+            "Casework Officer Email": "",
+            "Casework Officer Number": "",
+            "Contact Name": "",
+            "Address of consulting organisation": "",
+            "Name of person consulting": "",
+        }
+
+        def get_value_from_tile(tile, node_id):
+            current_node = models.Node.objects.get(nodeid=node_id)
+            datatype = datatype_factory.get_instance(current_node.datatype)
+            returnvalue = datatype.get_display_value(tile, current_node)
+            return "" if returnvalue is None else returnvalue
+
+        # Advice and Conditions.
+        advice_nodegroup_id = '8d41e49f-a250-11e9-b6b3-00224800b26d'
+        advice_node_id = 'c36808b0-952c-11ea-9ff0-f875a44e0e11'
+        advice_type_node_id = '56fa335d-06fa-11eb-8328-f875a44e0e11'
+        conditions = []
+
+        # Action and Mitigations.
+        action_nodegroup_id = 'a5e15f5c-51a3-11eb-b240-f875a44e0e11'
+        action_node_id = 'bfd39106-51a3-11eb-9104-f875a44e0e11'
+        action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
+        mitigations = []
+
+        mitigation_scope_dict = {}
+        mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
+        with open(mitigation_notes_path, "rb") as openfile:
+            mitigation_scope_dict = json.loads(openfile.read())
+
         for tile in tiles:
-            for key, value in list(template_dict.items()):
-                html = False
-                if value in tile.data:
-                    my_node = models.Node.objects.get(nodeid=value)
-                    datatype = datatype_factory.get_instance(my_node.datatype)
-                    lookup_val = datatype.get_display_value(tile, my_node)
-                    try:
-                        if '<' in lookup_val: # look for html tag, not ideal
-                            html = True
-                        self.replace_string(self.doc, key, lookup_val, html)
-                    except TypeError:
-                        pass
+            mitigation = {}
+            condition = {}
+            if str(tile.nodegroup_id) == action_nodegroup_id:
+                mitigation_scopenote = mitigation_scope_dict.get(tile.data[action_type_node_id], "")                
+                if len(mitigation_scopenote) > 0:
+                    mitigation_scopenote = "<br>" + mitigation_scopenote
+                mitigation["content"] = "<p>{}</p><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scopenote)
+                mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
+            elif str(tile.nodegroup_id) == advice_nodegroup_id:
+                condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
+                template_name = self.get_template_path(self.request._post['template_id'])
+                if template_name == "WSI Amend Letter.docx" or template_name == "WSI Approval Letter.docx":
+                    condition["type"] = ""
+                else:
+                    condition["type"] = get_value_from_tile(tile, advice_type_node_id)
+            else:
+                for key, value in list(template_dict.items()):
+                    if value in tile.data:
+                        lookup_val = get_value_from_tile(tile, value)
+                        try:
+                            mapping_dict[key] = lookup_val
+                        except TypeError:
+                            pass
+            if len(mitigation) > 0:
+                mitigations.append(mitigation)
+            elif len(condition) > 0:
+                conditions.append(condition)
 
             contactNodeId = "b7304f4c-3ace-11eb-8884-f875a44e0e11"
             contacts = {
@@ -220,60 +282,81 @@ class FileTemplateView(View):
             addressNodegroupId = "5f93048e-80a9-11ea-b0da-f875a44e0e11"
             nameNodegroupId = "4110f741-1a44-11e9-885e-000d3ab1e588"
             contactDetailsNodegroupId = "2547c12f-9505-11ea-a507-f875a44e0e11"
-            contactNamesNodegroupId = "2beefb51-4084-11eb-9b2b-f875a44e0e11"
-
+            contactNameForCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
             fullnameNodeId = "5f8ded26-7ef9-11ea-8e29-f875a44e0e11"
-            contactNameforCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
+            firstnameNodeId = "2caeb5e7-7b44-11ea-a919-f875a44e0e11"
+            lastnameNodeId = "96a3942a-7e53-11ea-8b5a-f875a44e0e11"
+            nameTitleNodeId = "6da2f03b-7e55-11ea-8fe5-f875a44e0e11"
+            nameUseTypeNodeId = "4110f747-1a44-11e9-96b7-000d3ab1e588"
+            forCorrespondenceNameValueId = "85c26c81-e356-4454-a2ba-67e7ad9b95cd"
+            primaryNameValueId = "2df285fa-9cf2-45e7-bc05-a67b7d7ddc2f"
             contactPointNodeId = "2547c133-9505-11ea-8e49-f875a44e0e11"
             contactPointTypeNodeId = "2547c132-9505-11ea-b22f-f875a44e0e11"
+            contactPointTypeMailValueId = "e6d433a2-7f77-4eb7-96f2-57ebe0ac251e"
             addressDict = {
-                "Building Name": "e157f10c-3af6-11eb-9ad2-f875a44e0e11",
-                "Building Number": "e157f10e-3af6-11eb-9c5e-f875a44e0e11",
-                "Street": "e157f110-3af6-11eb-80dc-f875a44e0e11",
-                "Locality": "e157f127-3af6-11eb-9394-f875a44e0e11",
-                "Town or City": "e157c9ff-3af6-11eb-9162-f875a44e0e11",
-                "Postcode": "e157ca01-3af6-11eb-bb2d-f875a44e0e11"
+                "Building Name": "b3a2761d-effb-11eb-9867-a87eeabdefba",
+                "Building Number": "b3a2761f-effb-11eb-9059-a87eeabdefba",
+                "Street": "b3a27621-effb-11eb-83e6-a87eeabdefba",
+                "Locality": "b3a28c1a-effb-11eb-a811-a87eeabdefba",
+                "Town or City": "b3a27617-effb-11eb-a80f-a87eeabdefba",
+                "Postcode": "b3a27619-effb-11eb-a66d-a87eeabdefba",
             }
-
             if contactNodeId in tile.data:
-                caseAgentResourceiId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
-                caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceiId)
-                caseAgentResource.load_tiles()
-                for caseAgentTile in caseAgentResource.tiles:
-                    if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
-                        if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                            print("email: " + caseAgentTile.data[contactPointNodeId])
-                            self.replace_string(self.doc, "Casework Officer Email", caseAgentTile.data[contactPointNodeId], False)
-                        elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                            print("phone number: " + caseAgentTile.data[contactPointNodeId])
-                            self.replace_string(self.doc, "Casework Officer Number", caseAgentTile.data[contactPointNodeId], False)
+                caseAgentResourceId = None
+                contactResourceiId = None
+                if tile.data[contacts["Casework Officer"]]:
+                    caseAgentResourceId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
+                if caseAgentResourceId:
+                    caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceId)
+                    caseAgentResource.load_tiles()
+                    for caseAgentTile in caseAgentResource.tiles:
+                        if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
+                            if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
+                                mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
+                            elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
+                                mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
 
-                if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4":
+                if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4" and tile.data[contacts["Planning Officer"]]:
                     contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
-                elif tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912":
+                elif tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912" and tile.data[contacts["Owner"]]:
                     contactResourceiId = tile.data[contacts["Owner"]][0]["resourceId"]
-                elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b":
+                elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b" and tile.data[contacts["Agent"]]:
                     contactResourceiId = tile.data[contacts["Agent"]][0]["resourceId"]
-                contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
-                contactResource.load_tiles()
+                
+                if contactResourceiId:
+                    contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
+                    contactResource.load_tiles()
 
-                for contactTile in contactResource.tiles:
-                    if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
-                        self.replace_string(self.doc, "Name of person consulting", contactTile.data[fullnameNodeId], False)
-                    if contactTile.nodegroup.nodegroupid == uuid.UUID(contactNamesNodegroupId):
-                        self.replace_string(self.doc, "Contact Name", contactTile.data[contactNameforCorrespondenceNodeId], False)
-                    if contactTile.nodegroup.nodegroupid == uuid.UUID(addressNodegroupId):
-                        addressString = "{}, {}\n{}, {}\n{}\n{}".format(
-                            contactTile.data[addressDict["Building Name"]],
-                            contactTile.data[addressDict["Building Number"]],
-                            contactTile.data[addressDict["Street"]],
-                            contactTile.data[addressDict["Locality"]],
-                            contactTile.data[addressDict["Town or City"]],
-                            contactTile.data[addressDict["Postcode"]]
-                        )
-                        print("Address of consulting organisation" + addressString)
-                        self.replace_string(self.doc, "Address of consulting organisation", addressString, False)
-    
+                    for contactTile in contactResource.tiles:
+                        if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
+                            if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
+                                nameTitle = ConceptValue(contactTile.data[nameTitleNodeId]).value
+                                fullName = "{0} {1}".format(get_value_from_tile(contactTile, firstnameNodeId), get_value_from_tile(contactTile, lastnameNodeId))
+                                mapping_dict["Name of person consulting"] = "{0} {1}".format(nameTitle, fullName) if nameTitle else fullName
+                        elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
+                            if contactTile.data[contactPointTypeNodeId] == contactPointTypeMailValueId:
+                                mapping_dict["Contact Name"] = contactTile.data[contactNameForCorrespondenceNodeId]
+                                addressConsult = get_value_from_tile(contactTile, contactPointNodeId).replace(", ", "<br>").replace(",", "<br>")
+                                mapping_dict["Address of consulting organisation"] = addressConsult
+
+        for mitigation in mitigations:
+            mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
+        
+        for condition in conditions:
+            mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
+
+        associate_heritage = mapping_dict["Archaeological Priority Area"]
+        if associate_heritage == "":
+            mapping_dict["Archaeological Priority Area"] = "The planning application is not in an area of archaeological interest."
+        else:
+            mapping_dict["Archaeological Priority Area"] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(associate_heritage)
+            
+        for key in mapping_dict:
+            html = False
+            if '<' in mapping_dict[key]: # look for html tag, not ideal
+                html = True
+            self.replace_string(self.doc, key, mapping_dict[key], html)
+
     def replace_string(self, document, key, v, html=False):
         # Note that the intent here is to preserve how things are styled in the docx
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
@@ -406,7 +489,6 @@ class DocumentHTMLParser(HTMLParser):
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
-        # print(tag,attrs)
         self.run = self.paragraph.add_run()
         if tag == "i" or tag == "em":
             self.run.italic = True

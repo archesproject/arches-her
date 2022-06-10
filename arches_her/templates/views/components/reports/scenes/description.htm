@@ -1,0 +1,164 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+{% block report %}
+
+{% block body %}
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Descriptions" %}</h2>
+    <span data-bind="if: cards.descriptions && (!descriptions().length || cards.descriptions.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.descriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.descriptions" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: descriptions().length -->
+        <div class="aher-nodata-note">No descriptions for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: descriptions().length -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Content" %}</th>
+                                <th>{% trans "Type" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: descriptions, dataTableOptions: descriptionTableConfig }">
+                            <tr>
+                                <td data-bind="html: content"></td>
+                                <td data-bind="text: type"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.descriptions">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.descriptions)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.descriptions)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<div class="aher-report-section" data-bind="visible: !!dataConfig.citation">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.citation)}, css: {'fa-angle-double-right': visible.citation(), 'fa-angle-double-up': !visible.citation()}" class="fa toggle"></i> {% trans "Citations" %}</h2>
+    <span data-bind="if: cards.citation && (!citations() || cards.citation.cardinality == 'n')">
+        <a class="aher-report-a" data-bind="click: function(){add(cards.citation)}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+    </span>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.citation" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: citations().length -->
+        <div class="aher-nodata-note">No citation for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: citations().length -->
+        <div class="aher-report-subsection" >
+            <div class="firstchild-container">
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Source" %}</th>
+                                <th class="none">{% trans "Source Number" %}</th>
+                                <th class="none">{% trans "Pages" %}</th>
+                                <th class="none">{% trans "Figures" %}</th>
+                                <th class="none">{% trans "Plates" %}</th>
+                                <th class="none">{% trans "Comment" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: citations, dataTableOptions: citationTableConfig }">
+                            <tr>
+                                <td><a class="aher-table-link" data-bind="attr: {href: link}, text: linkText"></a></td>
+                                <td data-bind="text: sourceNumber"></td>
+                                <td data-bind="text: pages"></td>
+                                <td data-bind="text: figures"></td>
+                                <td data-bind="text: plates"></td>
+                                <td data-bind="text: comment"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards && $parent.cards.citation">
+                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.citation)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.citation)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<!-- Audience section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.audience">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.audience)}, css: {'fa-angle-double-right': visible.audience(), 'fa-angle-double-up': !visible.audience()}" class="fa toggle"></i> {% trans "Audience" %}</h2>
+    <a data-bind="{if: cards.audience, click: function(){addNewTile(cards.audience)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Audience" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.audience" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: audience().length -->
+        <div class="aher-nodata-note">No hertiage/area/artifacts for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: audience().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Audience Type" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: audience, dataTableOptions: relatedResourceTwoColumnTableConfig}">
+                            <tr>
+                                <td data-bind="text: audienceType"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.audience">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.audience)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.audience)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+<div data-bind="visible: !!dataConfig.subject">
+    <div data-bind="component: {
+        name: 'views/components/reports/scenes/default',
+        params: {
+            data: subjectData,
+        }
+    }"></div>
+</div>
+{% endblock body %}
+{% endblock report %}

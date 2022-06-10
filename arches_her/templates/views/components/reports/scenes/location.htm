@@ -1,0 +1,413 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<!-- Geometry/Map -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.geometry">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.coordinates)}, css: {'fa-angle-double-right': visible.coordinates(), 'fa-angle-double-up': !visible.coordinates()}" class="fa toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
+    <a class="aher-report-a" data-bind="{if: cards.locationGeometry && !coordinateData || locationRoot, click: function(){addNewTile(cards.locationGeometry || locationRoot)}}">
+        <i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}
+    </a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.coordinates" class="aher-report-collapsible-container pad-lft">
+
+        <div class="aher-report-subsection">
+            <div class="aher-report-subsection-container no-flex map-container">
+                <h3><i data-bind="css: {'fa-angle-double-right': visible.geometry(), 'fa-angle-double-up': !visible.geometry()}" class="fa toggle"></i> {% trans "Geometry " %}  <span data-bind="visible: observableValueSet([geometryShape])">(Shape type: <span data-bind="text: geometryShape"></span>)</span></h3>
+                <a class="aher-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+                <div data-bind="if: visible.geometry">
+                    <div data-bind="component: {
+                        name: 'views/components/reports/scenes/map',
+                        params: {
+                            geojson: coordinateData
+                        }}">
+                    </div>
+                </div>
+                <h3 class="" data-bind="click: function() {toggleVisibility(visible.geometryMetadata)}, css: {'shim': visible.geometryMetadata(), 'highlight': !visible.geometryMetadata()}"><i data-bind="click: function() {toggleVisibility(visible.geometryMetadata)}, css: {'fa-angle-double-right': visible.geometryMetadata(), 'fa-angle-double-up': !visible.geometryMetadata()}" class="fa toggle"></i> {% trans "Geometry Metadata" %}</h3>
+                <div class="" data-bind="if: visible.geometryMetadata">
+                    <!-- Record Authorization/Compilation/Update -->
+                    <div class="aher-report-subsection-firstchild no-top-pad">
+                        <h5 class="aher-geom-metadata-header">Record Edit History</h5>
+                        
+                        <!-- ko ifnot: recordEditExists -->
+                        <div class="aher-nodata-note">No authorization record for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: recordEditExists -->   
+                        <div class="firstchild-container" data-bind="{with: geometryMetadata}">
+                            <div class="aher-report-subsection-item flex">
+                                <div class="aher-block-attributes actor-name">
+                                    <h6 class="aher-block-key compressed">Authorizer: </h6>
+                                    <div data-bind="text: authorizerName" class="aher-block-value"></div>
+                                </div>
+                                <div class="aher-block-attributes timespan">
+                                    <h6 class="aher-block-key compressed">Authorization Date: </h6>
+                                    <div data-bind="text: authorizationDate" class="aher-block-value"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key compressed">Type of Authorization: </h6>
+                                    <div data-bind="text: typeOfAuthorization" class="aher-block-value"></div>
+                                </div>
+                            </div>
+                            <div class="aher-report-subsection-item flex">
+                                <div class="aher-block-attributes actor-name">
+                                    <h6 class="aher-block-key compressed">Compiler: </h6>
+                                    <div data-bind="text: compilerName" class="aher-block-value"></div>
+                                </div>
+                                <div class="aher-block-attributes timespan">
+                                    <h6 class="aher-block-key compressed">Compile Date: </h6>
+                                    <div data-bind="text: compileDate" class="aher-block-value"></div>
+                                </div>
+                            </div>
+                            <div class="aher-report-subsection-item flex">
+                                <div class="aher-block-attributes actor-name">
+                                    <h6 class="aher-block-key compressed">Updater: </h6>
+                                    <div data-bind="text: updaterName"  class="aher-block-value"></div>
+                                </div>
+                                <div class="aher-block-attributes timespan">
+                                    <h6 class="aher-block-key compressed">Update Date: </h6>
+                                    <div data-bind="text: updateDate"  class="aher-block-value"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->   
+                    </div>
+
+                    <!-- Geometry Sources/Scale -->
+                    <div class="aher-report-subsection-firstchild">
+                        <h5 class="aher-geom-metadata-header">Record Sources/Scale</h5>
+
+                        <!-- ko ifnot: geometryScaleExists -->
+                        <div class="aher-nodata-note">No record sources/scale for this resource</div>
+                        <!-- /ko -->   
+
+                        <!-- ko if: geometryScaleExists -->
+                        <div class="firstchild-container">
+                            <div class="aher-report-subsection-item flex column-order pad-btm" data-bind="{with: geometryScale}">
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key compressed">Coordinate System: </h6>
+                                    <div data-bind="text: coordinateSystem" class="aher-block-value"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key compressed">Basemap: </h6>
+                                    <div data-bind="text: basemap" class="aher-block-value"></div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key compressed">Capture Scale: </h6>
+                                    <div data-bind="text: captureScale" class="aher-block-value">--</div>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h6 class="aher-block-key compressed">Accuracy: </h6>
+                                    <div data-bind="text: accuracy" class="aher-block-value"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->   
+                    </div>
+
+                    <!-- Record Description -->
+                    <div class="aher-report-subsection-firstchild">
+                        <h5 class="aher-geom-metadata-header">Description</h5>
+                        
+                        <!-- ko if: !observableValueSet([geometryNotes]) || geometryNotes() == "" -->
+                        <div class="aher-nodata-note">No description record for this resource</div>
+                        <!-- /ko -->   
+
+                        <!-- ko if: observableValueSet([geometryNotes]) -->
+                        <div class="firstchild-container pad-btm">
+                            <div class="aher-report-subsection-item">
+                                <div class="aher-block-attributes" style="margin-top: 5px;">
+                                    <h6 class="aher-block-key compressed">Metadata Description: </h6>
+                                    <div data-bind="text: geometryNotes" class="aher-block-value"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Addresses -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.addresses">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.addresses)}, css: {'fa-angle-double-right': visible.addresses(), 'fa-angle-double-up': !visible.addresses()}" class="fa toggle"></i> {% trans "Addresses" %}</h2>
+    <a class="aher-report-a" data-bind="{if: cards.addresses || locationRoot, click: function(){addNewTile(cards.addresses || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.addresses" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: addresses().length -->
+        <div class="aher-nodata-note">No addresses for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: addresses().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <!-- Address Table -->
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Street Number" %}</th>
+                                <th>{% trans "Street" %}</th>
+                                <th>{% trans "Locality" %}</th>
+                                <th>{% trans "Town/City" %}</th>
+                                <th>{% trans "Postcode" %}</th>
+                                <th class="none"> {% trans "Status" %}</th>
+                                <th class="none">{% trans "Building Name" %}</th>
+                                <th class="none">{% trans "Building Number" %}</th>
+                                <th class="none">{% trans "Build No. Sub-street" %}</th>
+                                <th class="none">{% trans "Sub-street" %}</th>
+                                <th class="none">{% trans "County" %}</th>
+                                <th class="none">{% trans "Full Address" %}</th>
+                                <th class="none">{% trans "Currency" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: addresses, dataTableOptions: addressTableConfig}">
+                            <tr>
+                                <td data-bind="text: buildingNumber"></td>
+                                <td data-bind="text: street"></td>
+                                <td data-bind="text: locality"></td>
+                                <td data-bind="text: town"></td>
+                                <td data-bind="text: postcode"></td>
+                                <td data-bind="text: status"></td>
+                                <td data-bind="text: buildingName"></td>
+                                <td data-bind="text: buildingNumber"></td>
+                                <td data-bind="text: buildingNumberSubStreet"></td>
+                                <td data-bind="text: subStreet"></td>
+                                <td data-bind="text: county"></td>
+                                <td data-bind="text: fullAddress"></td>
+                                <td data-bind="text: currency"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.addresses">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.addresses)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.addresses)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Location Description -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.locationDescription">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Location Descriptions" %}</h2>
+    <a class="aher-report-a" data-bind="{if: cards.locationDescriptions || locationRoot, click: function(){addNewTile(cards.locationDescriptions || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.descriptions" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: descriptions().length -->
+        <div class="aher-nodata-note">No location description for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: descriptions().length -->
+        
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <!-- Statements Table -->
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Description" %}</th>
+                                <th>{% trans "Type" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: descriptions, dataTableOptions: locDescriptionsTableConfig }">
+                            <tr>
+                                <td data-bind="text: description" class="line-clamp-1" style="vertical-align: unset; padding-top: 7px;"></td>
+                                <td data-bind="text: type"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.locationDescriptions">
+                                    <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.locationDescriptions)}">
+                                        <i class="fa fa-mail-reply"></i>
+                                    </a>
+                                    <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cardslocationDescriptions)">
+                                        <i class="fa fa-trash"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Admin Areas -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.administrativeAreas">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.administrativeAreas)}, css: {'fa-angle-double-right': visible.administrativeAreas(), 'fa-angle-double-up': !visible.administrativeAreas()}" class="fa toggle"></i> {% trans "Administrative Areas" %}</h2>
+    <a class="aher-report-a" data-bind="{if: cards.administrativeAreas || locationRoot, click: function(){addNewTile(cards.administrativeAreas || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.administrativeAreas" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: administrativeAreas().length -->
+        <div class="aher-nodata-note">No administrative areas for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: administrativeAreas().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <!-- Statements Table -->
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Name" %}</th>
+                                <th>{% trans "Type" %}</th>
+                                <th>{% trans "Currency" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: administrativeAreas, dataTableOptions: adminAreasTableConfig }">
+                            <tr>
+                                <td data-bind="text: name"></td>
+                                <td data-bind="text: type"></td>
+                                <td data-bind="text: currency"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.administrativeAreas">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.administrativeAreas)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.administrativeAreas)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- National Grid References -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.nationalGrid">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.nationalGrid)}, css: {'fa-angle-double-right': visible.nationalGrid(), 'fa-angle-double-up': !visible.nationalGrid()}" class="fa toggle"></i> {% trans "National Grid References" %}</h2>
+    <a class="aher-report-a" data-bind="{if: cards.nationalGridReferences || locationRoot, click: function(){addNewTile(cards.nationalGridReferences || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.nationalGrid" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: nationalGridReferences().length -->
+        <div class="aher-nodata-note">No grid references for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: nationalGridReferences().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <!-- Statements Table -->
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "National Grid Reference" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: nationalGridReferences, dataTableOptions: gridReferencesTableConfig}">
+                            <tr>
+                                <td data-bind="text: reference"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.nationalGridReferences">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.nationalGridReferences)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.nationalGridReferences)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<!-- Named Locations -->
+<div class="aher-report-section" data-bind="if: !!dataConfig.namedLocations">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.namedLocations)}, css: {'fa-angle-double-right': visible.namedLocations(), 'fa-angle-double-up': !visible.namedLocations()}" class="fa toggle"></i> {% trans "Named Locations" %}</h2>
+    <a class="aher-report-a" data-bind="{if: cards.namedLocations || locationRoot, click: function(){addNewTile(cards.namedLocations || locationRoot)}}"><i class="fa fa-mail-reply"></i> {% trans "Add Location" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.namedLocations" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: namedLocations().length -->
+        <div class="aher-nodata-note">No named location for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: namedLocations().length -->
+        <div class="aher-report-subsection">
+            
+            <div class="firstchild-container">
+                <!-- named Locations Table -->
+                <div class="aher-table pad-btm">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Placename" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: {data: namedLocations, dataTableOptions: namedLocationsTableConfig }">
+                            <tr>
+                                <td data-bind="text: placename"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.namedLocations">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.namedLocations)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.namedLocations)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+{% endblock body %}
+{% endblock report %}
+{% block summary %}
+
+<div class="model-summary-report">
+Do not use - yet.
+</div>
+
+{% endblock summary %}

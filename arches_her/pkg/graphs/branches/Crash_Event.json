@@ -204,7 +204,7 @@
                     "label": "Place of Departure Type",
                     "node_id": "f1ff868b-29ba-11eb-ad48-f875a44e0e11",
                     "sortorder": 10,
-                    "visible": true,
+                    "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
@@ -330,6 +330,7 @@
                 {
                     "card_id": "f1ff8680-29ba-11eb-b3a3-f875a44e0e11",
                     "config": {
+                        "defaultResourceInstance": [],
                         "label": "Associated Crash Site",
                         "placeholder": null
                     },
@@ -445,7 +446,7 @@
                     "label": "Expected Date End ",
                     "node_id": "f1ffd48d-29ba-11eb-97e0-f875a44e0e11",
                     "sortorder": 23,
-                    "visible": false,
+                    "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000004"
                 },
                 {
@@ -574,7 +575,7 @@
                     "label": "Place of Destination Type",
                     "node_id": "f1ff8694-29ba-11eb-942a-f875a44e0e11",
                     "sortorder": 18,
-                    "visible": true,
+                    "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
             ],
@@ -1023,6 +1024,26 @@
             ],
             "nodes": [
                 {
+                    "alias": "crash_event",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Crash_Event",
+                    "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
+                    "nodeid": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E81_Transformation",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "last_flight_type",
                     "config": {
                         "rdmCollection": "f8ff8b9b-d6ae-4b98-9cd9-6d065b7fa220"
                     },
@@ -1043,6 +1064,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_timespan",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -1061,6 +1083,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_date_qualifier_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1071,7 +1094,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Last Flight Date Qualifier Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1081,6 +1104,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "crash_site_type",
                     "config": {
                         "rdmCollection": "9222b257-6015-4808-9dac-7b962a2679a8"
                     },
@@ -1101,6 +1125,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "expected_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -1111,7 +1136,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Expected Date Qualifier",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1121,6 +1146,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "manner_of_loss",
                     "config": {
                         "rdmCollection": "757832dd-028d-444a-b2f2-8742b6d43220"
                     },
@@ -1141,6 +1167,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "crash_site_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1151,7 +1178,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Crash Site Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1161,6 +1188,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name",
                     "config": {
                         "rdmCollection": "ce567d28-d6a8-4437-a59e-f6e82a466a53"
                     },
@@ -1181,6 +1209,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -1191,7 +1220,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Departure Name Type",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1201,6 +1230,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1211,7 +1241,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Departure Name Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1221,6 +1251,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -1231,7 +1262,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Departure Name Use Type",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1241,6 +1272,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1251,7 +1283,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Departure Name Use Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1261,6 +1293,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -1281,6 +1314,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1291,7 +1325,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Departure Name Currency Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1301,6 +1335,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_departure_placenames",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -1319,6 +1354,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_cargo_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1329,7 +1365,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Last Cargo Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1339,6 +1375,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -1357,6 +1394,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name",
                     "config": {
                         "rdmCollection": "ce567d28-d6a8-4437-a59e-f6e82a466a53"
                     },
@@ -1377,6 +1415,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name_type",
                     "config": {
                         "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
                     },
@@ -1387,7 +1426,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Destination Name Type",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1397,6 +1436,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name_use_type",
                     "config": {
                         "rdmCollection": "1e4df896-992b-475e-bb5a-78817d3066d7"
                     },
@@ -1407,7 +1447,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Destination Name Use Type",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1417,6 +1457,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name_currency",
                     "config": {
                         "rdmCollection": "a346ee99-67f6-44cd-87f7-b564ce32cdf3"
                     },
@@ -1437,6 +1478,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1447,7 +1489,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Destination Name Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1457,6 +1499,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name_use_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1467,7 +1510,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Destination Name Use Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1477,6 +1520,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_destination_placenames",
                     "config": null,
                     "datatype": "semantic",
                     "description": "The name of a resource.Applies to Heritage Resource, Heritage Resource Group, Activity, and Historical Event.  Actors receive their 'names' from the Appellation branch.",
@@ -1495,6 +1539,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_destination_name_currency_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1505,7 +1550,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Final Place of Destination Name Currency Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1515,6 +1560,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_loss",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -1535,6 +1581,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_date_qualifier",
                     "config": {
                         "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
                     },
@@ -1555,6 +1602,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "manner_of_loss_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1565,7 +1613,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Manner of Loss Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1575,6 +1623,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "expected_date_of_arrival",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -1593,6 +1642,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_departure",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -1613,17 +1663,20 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "crash_site",
                     "config": {
                         "graphs": [
                             {
                                 "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                                "name": "Heritage Asset"
+                                "name": "Monument"
                             },
                             {
                                 "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
-                                "name": "Heritage Area"
+                                "name": "Area"
                             }
-                        ]
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
                     },
                     "datatype": "resource-instance-list",
                     "description": null,
@@ -1642,6 +1695,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1652,7 +1706,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Last Flight Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1662,6 +1716,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_description_type",
                     "config": {
                         "rdmCollection": "0ff39ed3-cc95-4c60-9321-6d4e65fb1f2d"
                     },
@@ -1672,7 +1727,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Last Flight Description Type",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1682,6 +1737,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_description_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1692,7 +1748,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Last Flight Description Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1702,6 +1758,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_flight_description",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -1720,6 +1777,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "expected_date_end_",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -1740,6 +1798,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "expected_date_start",
                     "config": {
                         "dateFormat": "YYYY-MM-DD"
                     },
@@ -1760,6 +1819,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "crash_description_language",
                     "config": {
                         "rdmCollection": "daacadea-1454-4cf4-8b14-9ade8069f4d7"
                     },
@@ -1770,7 +1830,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Crash Description Language",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1780,6 +1840,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "crash_description_language_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -1790,7 +1851,7 @@
                     "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Crash Description Language Metatype",
                     "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
@@ -1800,6 +1861,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_cargo",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -1818,6 +1880,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "crash_descriptions",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -1836,6 +1899,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "final_place_of_departure",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -1854,6 +1918,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "last_cargo_type",
                     "config": {
                         "rdmCollection": "b237606c-ed18-4b8d-bf97-7714353995a8"
                     },
@@ -1872,30 +1937,13 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "f1ff5f90-29ba-11eb-adb1-f875a44e0e11",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Crash_Event",
-                    "nodegroup_id": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
-                    "nodeid": "f1ff5f91-29ba-11eb-a521-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E81_Transformation",
-                    "parentproperty": "",
-                    "sortorder": 0
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "crash_event",
                 "config": null,
                 "datatype": "semantic",
                 "description": "",

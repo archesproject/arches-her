@@ -1,0 +1,368 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+{% block report %}
+    {% block report_title_bar %}
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
+
+        <!-- Title Block -->
+        <div class="aher-report-toolbar">
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Maritime Vessel" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+        </div>
+
+    </div>
+    {% endblock report_title_bar %}
+
+    
+    {% block body %}
+    <!-- Link nav -->
+    <div class="aher-report-anchor-container">
+        <ol class="aher-report-anchors breadcrumb">
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <!-- /ko -->
+        </ol>
+    </div>
+    <div class="aher-tabbed-report">
+        <div class="aher-tabbed-report-content">
+            <!-- Names Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/name',
+                    params: {
+                        data: resource,
+                        cards: nameCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Description Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/description',
+                    params: {
+                        data: resource,
+                        dataConfig: descriptionDataConfig,
+                        cards: descriptionCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/classifications',
+                    params: {
+                        data: resource,
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Status/Owner Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'status'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: statusData,
+                    }
+                }"></div>
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.nationalities)}, css: {'fa-angle-double-right': visible.nationalities(), 'fa-angle-double-up': !visible.nationalities()}" class="fa toggle"></i> {% trans "Nationalities" %}</h2>
+                    <a class="aher-report-a" data-bind="{if: cards.nationalities, event:{ mousedown:function(d, e){addNewTile(cards.nationalities, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: nationalities().length">{% trans "Edit Nationality" %}</span><span data-bind="ifnot: nationalities().length">{% trans "Add Nationality" %}</span></a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.nationalities" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: nationalities().length -->
+                        <div class="aher-nodata-note">No nationality classes for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: nationalities().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Nationalities Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Nationality" %}</th>
+                                                <th>{% trans "Place of Registration" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: nationalities, dataTableOptions: nationalitiesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: nationality"></td>
+                                                <td data-bind="text: placeOfRegistration"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.nationalities">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.nationalities)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.nationalities)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.owners)}, css: {'fa-angle-double-right': visible.owners(), 'fa-angle-double-up': !visible.owners()}" class="fa toggle"></i> {% trans "Owners" %}</h2>
+                    <a class="aher-report-a" data-bind="{if: cards.owners, event:{ mousedown:function(d, e){addNewTile(cards.owners, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: owners().length">{% trans "Edit Owner" %}</span><span data-bind="ifnot: owners().length">{% trans "Add Owner" %}</span></a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.owners" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: owners().length -->
+                        <div class="aher-nodata-note">No owner classes for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: owners().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Owners Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Owner" %}</th>
+                                                <th>{% trans "Ownership Display Date" %}</th>
+                                                <th class="none">{% trans "Ownership Start Date" %}</th>
+                                                <th class="none">{% trans "Ownership End Date" %}</th>
+                                                <th class="none">{% trans "Ownership Date Qualifier" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: owners, dataTableOptions: ownersTableConfig}">
+                                            <tr>
+                                                <td>
+                                                    <a class="aher-table-link" data-bind="text: owner, attr: {href: ownerLink}"></a>
+                                                </td>
+                                                <td data-bind="text: displayDate"></td>
+                                                <td data-bind="text: startDate"></td>
+                                                <td data-bind="text: endDate"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.owners">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.owners)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.owners)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Journeys -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'journey'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.voyages)}, css: {'fa-angle-double-right': visible.voyages(), 'fa-angle-double-up': !visible.voyages()}" class="fa toggle"></i> {% trans "Voyages" %}</h2>
+                    <a class="aher-report-a" data-bind="{if: cards.voyages, event:{ mousedown:function(d, e){addNewTile(cards.voyages, e)}}}"><i class="fa fa-mail-reply"></i> <span>{% trans "Add Voyage" %}</span></a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.voyages" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: voyages().length -->
+                        <div class="aher-nodata-note">No voyages for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: voyages().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- Voyages Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Departure Date" %}</th>
+                                                <th>{% trans "Arrival Date" %}</th>
+                                                <th>{% trans "Loss Start Date" %}</th>
+                                                <th>{% trans "Loss End Date" %}</th>
+                                                <th>{% trans "Cargo" %}</th>
+                                                <th>{% trans "Departure Place" %}</th>
+                                                <th>{% trans "Destination Place" %}</th>
+                                                <th>{% trans "Manner of Loss" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
+                                                <th class="none">{% trans "Expected Arrival Date" %}</th>
+                                                <th class="none">{% trans "Departure Name Currency" %}</th>
+                                                <th class="none">{% trans "Destination Name Currency" %}</th>
+                                                <th class="none">{% trans "Loss Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Crew" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: voyages, dataTableOptions: voyagesTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: departureDate"></td>
+                                                <td data-bind="text: arrivalDate"></td>
+                                                <td data-bind="text: lossStartDate"></td>
+                                                <td data-bind="text: lossEndDate"></td>
+                                                <td data-bind="text: cargo"></td>
+                                                <td data-bind="text: departureName"></td>
+                                                <td data-bind="text: destinationName"></td>
+                                                <td data-bind="text: mannerOfLoss"></td>
+                                                <td data-bind="text: description"></td>
+                                                <td data-bind="text: expectedArrivalDate"></td>
+                                                <td data-bind="text: departureNameCurrency"></td>
+                                                <td data-bind="text: destinationNameCurrency"></td>
+                                                <td data-bind="text: lossDateQualifier"></td>
+                                                <td>
+                                                    <!-- ko foreach: { data: crew, as: 'member' } -->
+                                                    <div>
+                                                        <a class="aher-table-link" data-bind="text: member.name, attr: {href: member.link}"></a> - <span data-bind="text: member.role"></span>
+                                                    </div>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.voyages">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.voyages)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.voyages)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- Designation/Protection Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'protection'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/protection',
+                    params: {
+                        data: resource,
+                        cards: protectionCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Assessments Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'assessments'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/assessments',
+                    params: {
+                        data: resource,
+                        cards: assessmentCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Images Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'images'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/images',
+                    params: {
+                        data: resource,
+                        cards: imagesCards,
+                    }
+                }"></div>
+            </div>
+            <!-- People Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'people'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/people',
+                    params: {
+                        data: resource,
+                        cards: peopleCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+             <!-- JSON Tab -->
+            <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
+                <div class="aher-flex-col" data-bind="component: {
+                    name: 'views/components/reports/scenes/json',
+                    params: {
+                        resourceInstanceId: reportMetadata().resourceinstanceid,
+                    }
+                }"></div>
+            </div>
+            <!-- Communication Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/communication',
+                    params: {
+                        data: resource,
+                        cards: communicationCards
+                    }
+                }"></div>
+            </div>
+        </div>
+    </div>            
+    {% endblock body %}
+{% endblock report %}
+
+{% block summary %}
+<div class="aher-summary-report-header">
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Maritime Vessel)" %}</span></h1>
+</div>
+<div class="model-summary-report">
+    <div class="aher-report-page">
+        <!-- Names -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/name',
+            params: {
+                data: resource,
+                cards: nameCards
+            }
+        }"></div>
+        <!-- Description -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/description',
+            params: {
+                data: resource,
+                cards: descriptionCards,
+            }
+        }"></div>
+    </div>
+</div>
+
+{% endblock summary %}

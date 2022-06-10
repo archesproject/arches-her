@@ -31,6 +31,7 @@
                         "label": "Number of Pages",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "e90c0ffd-992e-11ea-98a1-f875a44e0e11",
@@ -123,6 +124,26 @@
             ],
             "nodes": [
                 {
+                    "alias": "pages",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Pages",
+                    "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
+                    "nodeid": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E54_Dimension",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "number_of_pages",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -141,6 +162,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "measurement_unit",
                     "config": {
                         "rdmCollection": "51407fe6-9f8d-439d-8309-d6804b4437d2"
                     },
@@ -151,7 +173,7 @@
                     "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Measurement Unit",
                     "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
@@ -161,6 +183,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "measurement_unit_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -171,7 +194,7 @@
                     "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Measurement Unit Metatype",
                     "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
@@ -179,30 +202,13 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0
-                },
-                {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "e90c0ff6-992e-11ea-ace2-f875a44e0e11",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Pages",
-                    "nodegroup_id": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
-                    "nodeid": "e90c0ff7-992e-11ea-bc2e-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E54_Dimension",
-                    "parentproperty": "",
-                    "sortorder": 0
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "pages",
                 "config": null,
                 "datatype": "semantic",
                 "description": null,

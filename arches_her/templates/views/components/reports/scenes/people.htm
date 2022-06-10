@@ -1,0 +1,62 @@
+{% extends "views/report-templates/default.htm" %} 
+{% load i18n %} 
+{% block report %}
+
+{% block body %}
+<!-- Associated Actors -->
+<div class="aher-report-section">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.people)}, css: {'fa-angle-double-right': visible.people(), 'fa-angle-double-up': !visible.people()}" class="fa toggle"></i> {% trans "Associated People and Organizations" %}</h2>
+    <a data-bind="{if: cards.people, click: function(){addNewTile(cards.people)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add People/Organizations" %}</a>
+
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.people" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: people().length -->
+        <div class="aher-nodata-note">No people for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: people().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Actor" %}</th>
+                                <th>{% trans "Role" %}</th>
+                                <th>{% trans "Start of Role" %}</th>
+                                <th>{% trans "End of Role" %}</th>
+                                <th class="none">{% trans "Display Date" %}</th>
+                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: people, dataTableOptions: peopleTableConfig}">
+                            <tr>
+                                <td data-bind="text: actor"><a href="" class="aher-table-link"></a></td>
+                                <td data-bind="text: role"></td>
+                                <td data-bind="text: startOfRole"></td>
+                                <td data-bind="text: endOfRole"></td>
+                                <td data-bind="text: displayDate"></td>
+                                <td data-bind="text: dateQualifier"></td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.people">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.people)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.people)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+{% endblock body %}
+{% endblock report %}

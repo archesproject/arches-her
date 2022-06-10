@@ -1,0 +1,310 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+
+{% block report %}
+    {% block report_title_bar %}
+    <!-- Custom Template Report Title Bar -->
+    <div class="relative">
+
+        <!-- Title Block -->
+        <div class="aher-report-toolbar">
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Historic Aircraft" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+        </div>
+
+    </div>
+    {% endblock report_title_bar %}
+
+    
+    {% block body %}
+    <!-- Link nav -->
+    <div class="aher-report-anchor-container">
+        <ol class="aher-report-anchors breadcrumb">
+            <!-- ko foreach: {data: sections, as: 'section'} -->
+            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <!-- /ko -->
+        </ol>
+    </div>
+    <div class="aher-tabbed-report">
+        <div class="aher-tabbed-report-content">
+            <!-- Names Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/name',
+                    params: {
+                        data: resource,
+                        cards: nameCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Description Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/description',
+                    params: {
+                        data: resource,
+                        dataConfig: descriptionDataConfig,
+                        cards: descriptionCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Classification Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/classifications',
+                    params: {
+                        data: resource,
+                        dataConfig: classificationDataConfig,
+                        cards: classificationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Location Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/location',
+                    params: {
+                        data: resource,
+                        cards: locationCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Designation/Protection Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'protection'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/protection',
+                    params: {
+                        data: resource,
+                        cards: protectionCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Status/Owner Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'status'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: statusOwnerData,
+                    }
+                }"></div>
+            </div>
+            <!-- Journeys -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'journey'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.flights)}, css: {'fa-angle-double-right': visible.flights(), 'fa-angle-double-up': !visible.flights()}" class="fa toggle"></i> {% trans "Flights" %}</h2>
+                    <a class="aher-report-a" data-bind="{if: cards.flights, event:{ mousedown:function(d, e){addNewTile(cards.flights, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: flights().length">{% trans "Edit Flight" %}</span><span data-bind="ifnot: flights().length">{% trans "Add Flight" %}</span></a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.flights" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: flights().length -->
+                        <div class="aher-nodata-note">No flight classes for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: flights().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- flight Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Departure" %}</th>
+                                                <th>{% trans "Destination" %}</th>
+                                                <th>{% trans "Cargo Type" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
+                                                <th class="none">{% trans "Departure Date" %}</th>
+                                                <th class="none">{% trans "Arrival Date" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Crew" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: flights, dataTableOptions: flightsTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: flightType"></td>
+                                                <td data-bind="text: flightDeparture"></td>
+                                                <td data-bind="text: flightDestination"></td>
+                                                <td data-bind="text: cargoType"></td>
+                                                <td data-bind="html: flightDescription"></td>
+                                                <td data-bind="text: flightDepartureDate"></td>
+                                                <td data-bind="text: flightArrivalDate"></td>
+                                                <td data-bind="text: flightDateQualifier"></td>
+                                                <td>
+                                                    <!-- ko foreach: { data: crew, as: 'member' } -->
+                                                    <div>
+                                                        <a class="aher-table-link" data-bind="text: member.name, attr: {href: member.link}"></a> - <span data-bind="text: member.role"></span>
+                                                    </div>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.flights">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.lastFlight)}, css: {'fa-angle-double-right': visible.lastFlight(), 'fa-angle-double-up': !visible.lastFlight()}" class="fa toggle"></i> {% trans "Last Flight" %}</h2>
+                    <a class="aher-report-a" data-bind="{if: cards.lastFlight, event:{ mousedown:function(d, e){addNewTile(cards.lastFlight, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: lastFlight().length">{% trans "Edit Last Flight" %}</span><span data-bind="ifnot: lastFlight().length">{% trans "Add Flight" %}</span></a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.lastFlight" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: lastFlight().length -->
+                        <div class="aher-nodata-note">No last flight for this resource</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: lastFlight().length -->
+                        <div class="aher-report-subsection">
+                            
+                            <div class="firstchild-container">
+                                <!-- last flight Table -->
+                                <div class="aher-table pad-btm">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr class="aher-table-header">
+                                                <th>{% trans "Type" %}</th>
+                                                <th>{% trans "Departure Date" %}</th>
+                                                <th>{% trans "Expected Arrival Date" %}</th>
+                                                <th>{% trans "Loss Date" %}</th>
+                                                <th>{% trans "Cargo Type" %}</th>
+                                                <th>{% trans "Departure Place" %}</th>
+                                                <th>{% trans "Destination Place" %}</th>
+                                                <th>{% trans "Manner of Loss" %}</th>
+                                                <th>{% trans "Crash Site" %}</th>
+                                                <th class="none">{% trans "Description" %}</th>
+                                                <th class="none">{% trans "Departure Name Currency" %}</th>
+                                                <th class="none">{% trans "Destination Name Currency" %}</th>
+                                                <th class="none">{% trans "Date Qualifier" %}</th>
+                                                <th class="none">{% trans "Crash Site Type" %}</th>
+                                                <th class="none">{% trans "Crew" %}</th>
+                                                <th class="aher-table-control all"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: {data: lastFlight, dataTableOptions: lastFlightTableConfig}">
+                                            <tr>
+                                                <td data-bind="text: type"></td>
+                                                <td data-bind="text: departureDate"></td>
+                                                <td data-bind="text: expectedArrivalDate"></td>
+                                                <td data-bind="text: lossDate"></td>
+                                                <td data-bind="text: cargo"></td>
+                                                <td data-bind="text: departureName"></td>
+                                                <td data-bind="text: destinationName"></td>
+                                                <td data-bind="text: mannerOfLoss"></td>
+                                                <td data-bind="foreach: crashSites">
+                                                    <span data-bind="visible: $index() > 0">, </span>
+                                                    <!-- ko if: crashSiteLink -->
+                                                    <a class="aher-table-link" data-bind="text: crashSiteName, attr: {href: crashSiteLink}"></a>
+                                                    <!-- /ko -->
+                                                    <!-- ko ifnot: crashSiteLink -->
+                                                    <span data-bind="text: crashSiteName"></span>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td data-bind="html: description"></td>
+                                                <td data-bind="text: departureNameCurrency"></td>
+                                                <td data-bind="text: destinationNameCurrency"></td>
+                                                <td data-bind="text: dateQualifier"></td>
+                                                <td data-bind="text: crashSiteType"></td>
+                                                <td>
+                                                    <!-- ko foreach: { data: crew, as: 'member' } -->
+                                                    <div>
+                                                        <a class="aher-table-link" data-bind="text: member.name, attr: {href: member.link}"></a> - <span data-bind="text: member.role"></span>
+                                                    </div>
+                                                    <!-- /ko -->
+                                                </td>
+                                                <td class="aher-table-control">
+                                                    <div data-bind="if: $parent.cards.flights">
+                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}">
+                                                            <i class="fa fa-mail-reply"></i>
+                                                        </a>
+                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)">
+                                                            <i class="fa fa-trash"></i>
+                                                        </a>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
+            </div>
+            <!-- People Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'people'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/people',
+                    params: {
+                        data: resource,
+                        cards: peopleCards,
+                    }
+                }"></div>
+            </div>
+            <!-- Resources Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/resources',
+                    params: {
+                        data: resource,
+                        cards: resourcesCards,
+                        dataConfig: resourceDataConfig
+                    }
+                }"></div>
+            </div>
+             <!-- JSON Tab -->
+            <div class="aher-report-page aher-flex-col" data-bind="if: activeSection() === 'json'">
+                <div class="aher-flex-col" data-bind="component: {
+                    name: 'views/components/reports/scenes/json',
+                    params: {
+                        resourceInstanceId: reportMetadata().resourceinstanceid,
+                    }
+                }"></div>
+            </div>
+        </div>
+    </div>            
+    {% endblock body %}
+{% endblock report %}
+
+{% block summary %}
+<div class="aher-summary-report-header">
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Historic Aircraft)" %}</span></h1>
+</div>
+<div class="model-summary-report">
+    <div class="aher-report-page">
+        <!-- Names -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/name',
+            params: {
+                data: resource,
+                cards: nameCards
+            }
+        }"></div>
+        <!-- Description -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/description',
+            params: {
+                data: resource,
+                cards: descriptionCards,
+            }
+        }"></div>
+    </div>
+</div>
+
+{% endblock summary %}

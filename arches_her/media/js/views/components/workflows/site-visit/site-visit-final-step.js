@@ -11,13 +11,11 @@ define([
         this.attendees = ko.observableArray();
         this.photographs = ko.observableArray();
 
-        var currentTileId = ko.unwrap(params.form.externalStepData.sitevisitedetailsstep.data.tileid);
-
         this.resourceData.subscribe(function(val){
             var currentSiteVisit;
             if (Array.isArray(val.resource['Site Visits'])){
                 val.resource['Site Visits'].forEach(function(visit) {
-                    if (visit['@tile_id'] === currentTileId){
+                    if (visit['@tile_id'] === ko.unwrap(params.parenttileid)){
                         currentSiteVisit = visit;
                     }
                 });
@@ -25,15 +23,11 @@ define([
                 currentSiteVisit = val.resource['Site Visits'];
             }
 
-            var observation = currentSiteVisit['Observations'] && currentSiteVisit['Observations'].length ? currentSiteVisit['Observations'][0] : {};
-            var recommendation = currentSiteVisit['Recommendations'] && currentSiteVisit['Recommendations'].length ? currentSiteVisit['Recommendations'][0] : {};
-
+            this.displayName = val['displayname'] || 'Unnamed';
             this.reportVals = {
                 consultationName: {'name': 'Consultation', 'value': this.getResourceValue(val, ['displayname'])},
                 date: {'name': 'Date', 'value': this.getResourceValue(currentSiteVisit, ['Timespan of Visit', 'Date of Visit', '@value'])},
                 locatinDescription: {'name': 'Visit Location Description', 'value': this.getResourceValue(currentSiteVisit, ['Location', 'Location Descriptions', 'Location Description', '@value'])},
-                observation: {'name': 'Observations', 'value': this.getResourceValue(observation, ['Observation', 'Observation Notes', '@value'])},
-                recommendations: {'name': 'Recommendations', 'value': this.getResourceValue(recommendation, ['Recommendation', 'Recommendation Value', '@value'])},
             }
 
             try {
@@ -45,6 +39,28 @@ define([
                 })
             } catch(e) {
                 this.reportVals.attendees = [];
+            }
+
+            try {
+                this.reportVals.observations = currentSiteVisit['Observations'].map(function(obs){
+                    return {
+                        observation: {'name': 'observation', 'value': self.getResourceValue(obs, ['Observation', 'Observation Notes', '@value'])},
+                        observedBy: {'name': 'observedBy', 'value': self.getResourceValue(obs, ['Observed by', '@value'])},
+                    };
+                })
+            } catch(e) {
+                this.reportVals.observations = [];
+            }
+
+            try {
+                this.reportVals.recommendations = currentSiteVisit['Recommendations'].map(function(rec){
+                    return {
+                        recommendation: {'name': 'recommendation', 'value': self.getResourceValue(rec, ['Recommendation', 'Recommendation Value', '@value'])},
+                        recommendedBy: {'name': 'recommendedBy', 'value': self.getResourceValue(rec, ['Recommended by', '@value'])},
+                    };
+                })
+            } catch(e) {
+                this.reportVals.recommendations = [];
             }
 
             try {

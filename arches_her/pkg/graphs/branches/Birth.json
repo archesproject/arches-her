@@ -34,28 +34,11 @@
                 {
                     "card_id": "ec89fcf4-9923-11ea-8632-f875a44e0e11",
                     "config": {
-                        "dateFormat": "YYYY-MM-DD",
-                        "defaultValue": "",
-                        "label": "Date of Birth",
-                        "maxDate": false,
-                        "minDate": false,
-                        "placeholder": "Enter date",
-                        "viewMode": "days"
-                    },
-                    "id": "ec89fd0b-9923-11ea-8009-f875a44e0e11",
-                    "label": "Date of Birth",
-                    "node_id": "ec89fcf9-9923-11ea-a46d-f875a44e0e11",
-                    "sortorder": 0,
-                    "visible": true,
-                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
-                },
-                {
-                    "card_id": "ec89fcf4-9923-11ea-8632-f875a44e0e11",
-                    "config": {
                         "defaultValue": "",
                         "label": "Birthplace",
                         "maxLength": null,
                         "placeholder": "Enter text",
+                        "uneditable": false,
                         "width": "100%"
                     },
                     "id": "ec89fd08-9923-11ea-a680-f875a44e0e11",
@@ -79,6 +62,24 @@
                     "sortorder": 3,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
+                },
+                {
+                    "card_id": "ec89fcf4-9923-11ea-8632-f875a44e0e11",
+                    "config": {
+                        "dateFormat": "YYYY-MM-DD",
+                        "defaultValue": "",
+                        "label": "Date of Birth",
+                        "maxDate": false,
+                        "minDate": false,
+                        "placeholder": "Enter date",
+                        "viewMode": "days"
+                    },
+                    "id": "ec89fd0b-9923-11ea-8009-f875a44e0e11",
+                    "label": "Date of Birth",
+                    "node_id": "ec89fcf9-9923-11ea-a46d-f875a44e0e11",
+                    "sortorder": 0,
+                    "visible": true,
+                    "widget_id": "adfd15ce-dbab-11e7-86d1-0fcf08612b27"
                 },
                 {
                     "card_id": "ec89fcf4-9923-11ea-8632-f875a44e0e11",
@@ -223,13 +224,37 @@
             ],
             "nodes": [
                 {
+                    "alias": "birth",
+                    "config": {
+                        "fillColor": "rgba(233,112,111,0.8)"
+                    },
+                    "datatype": "semantic",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": true,
+                    "name": "Birth",
+                    "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
+                    "nodeid": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E67_Birth",
+                    "parentproperty": "",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "mother",
                     "config": {
                         "graphs": [
                             {
                                 "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
                                 "name": "Person"
                             }
-                        ]
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
                     },
                     "datatype": "resource-instance",
                     "description": "Represents a single node in a graph",
@@ -248,6 +273,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "birthplace_metatype",
                     "config": {
                         "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
                     },
@@ -258,7 +284,7 @@
                     "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
                     "is_collector": false,
                     "isrequired": false,
-                    "issearchable": true,
+                    "issearchable": false,
                     "istopnode": false,
                     "name": "Birthplace Metatype",
                     "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
@@ -268,13 +294,16 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "father",
                     "config": {
                         "graphs": [
                             {
                                 "graphid": "22477f01-1a44-11e9-b0a9-000d3ab1e588",
                                 "name": "Person"
                             }
-                        ]
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
                     },
                     "datatype": "resource-instance",
                     "description": "Represents a single node in a graph",
@@ -293,6 +322,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "date_of_birth",
                     "config": {
                         "fuzzy_day_padding": 1,
                         "fuzzy_month_padding": 1,
@@ -319,6 +349,7 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "place_of_birth",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -337,64 +368,7 @@
                     "sortorder": 0
                 },
                 {
-                    "config": null,
-                    "datatype": "semantic",
-                    "description": "Represents a single node in a graph",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Birth Time Span",
-                    "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
-                    "nodeid": "ec89fd01-9923-11ea-9fcf-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
-                    },
-                    "datatype": "concept",
-                    "description": null,
-                    "exportable": false,
-                    "fieldname": null,
-                    "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
-                    "is_collector": false,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": false,
-                    "name": "Birthplace Type",
-                    "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
-                    "nodeid": "ec89fd02-9923-11ea-98e5-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "sortorder": 0
-                },
-                {
-                    "config": {
-                        "fillColor": "rgba(233,112,111,0.8)"
-                    },
-                    "datatype": "semantic",
-                    "description": "",
-                    "exportable": false,
-                    "fieldname": "",
-                    "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
-                    "is_collector": true,
-                    "isrequired": false,
-                    "issearchable": true,
-                    "istopnode": true,
-                    "name": "Birth",
-                    "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
-                    "nodeid": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
-                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E67_Birth",
-                    "parentproperty": "",
-                    "sortorder": 0
-                },
-                {
+                    "alias": "birthplace",
                     "config": null,
                     "datatype": "semantic",
                     "description": "Represents a single node in a graph",
@@ -413,6 +387,47 @@
                     "sortorder": 0
                 },
                 {
+                    "alias": "birth_time_span",
+                    "config": null,
+                    "datatype": "semantic",
+                    "description": "Represents a single node in a graph",
+                    "exportable": false,
+                    "fieldname": "",
+                    "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Birth Time Span",
+                    "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
+                    "nodeid": "ec89fd01-9923-11ea-9fcf-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E52_Time-Span",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P4_has_time-span",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "birthplace_type",
+                    "config": {
+                        "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
+                    },
+                    "datatype": "concept",
+                    "description": null,
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "ec89d5f0-9923-11ea-9ddc-f875a44e0e11",
+                    "is_collector": false,
+                    "isrequired": false,
+                    "issearchable": false,
+                    "istopnode": false,
+                    "name": "Birthplace Type",
+                    "nodegroup_id": "ec89d5f1-9923-11ea-9f9c-f875a44e0e11",
+                    "nodeid": "ec89fd02-9923-11ea-98e5-f875a44e0e11",
+                    "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0
+                },
+                {
+                    "alias": "birth_place",
                     "config": null,
                     "datatype": "string",
                     "description": null,
@@ -435,6 +450,7 @@
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
+                "alias": "birth",
                 "config": {
                     "fillColor": "rgba(233,112,111,0.8)"
                 },
