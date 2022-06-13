@@ -206,7 +206,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const phaseEvidence = self.getNodeValue(x, 'phase classification', 'construction phase evidence type');
                         const startDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase start date');
                         const tileid = self.getTileId(x);
-                        const assetType = self.getNodeValue(x, 'phase classification', 'asset type');
+                        const assetType = self.getNodeValue(x, {testPaths: [
+                            ['phase classification', 'asset type'],
+                            ['phase classification', 'monument type']
+                        ]});
 
                         return { 
                             assetType,
