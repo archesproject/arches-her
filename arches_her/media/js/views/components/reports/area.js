@@ -39,7 +39,7 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'area names',
+                name: 'area',
                 parent: 'parent area'
             };
 
