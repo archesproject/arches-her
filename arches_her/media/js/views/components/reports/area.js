@@ -39,7 +39,7 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'area names',
+                name: 'area',
                 parent: 'parent area'
             };
 
@@ -71,6 +71,7 @@ define([
             self.locationCards = {};
             self.protectionCards = {};
             self.resourcesCards = {};
+            self.assessmentCards = {};
             self.summary = params.summary;
             self.cards = {};
 

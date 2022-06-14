@@ -8,7 +8,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                 location: ['location data'],
                 protection: 'designation and protection assignment',
                 landUse: 'land use classification assignment',
-                areaAssignment: ['area', 'area assignments']
+                areaAssignment: ['area assignments', 'area assignment']
             }
 
             self.cards = params.cards || {};
