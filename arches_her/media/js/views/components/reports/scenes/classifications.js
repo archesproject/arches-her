@@ -208,7 +208,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const tileid = self.getTileId(x);
                         const assetType = self.getNodeValue(x, {testPaths: [
                             ['phase classification', 'asset type'],
-                            ['phase classification', 'monument type']
+                            ['phase classification', 'monument type'],
+                            ['phase classification', 'area type']
                         ]});
 
                         return { 
