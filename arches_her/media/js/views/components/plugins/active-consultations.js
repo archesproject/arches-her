@@ -34,7 +34,6 @@ define([
             this.keywordSearchOnEnter = function(data, event) {
                 if (event.keyCode === 13 || event.key === "Enter") {
                     self.keywordSearch();
-                    console.log(event.key);
                 }
                 else{
                     //pass
@@ -186,7 +185,6 @@ define([
             }, this);
 
             this.getConsultations = function() {
-                console.log("getConsultations");
                 self.loading(true);
                 self.activeItems.removeAll();
                 $.ajax({
