@@ -26,13 +26,24 @@ define([
             this.keywordSearch = function() {
                 if(self.keyword() && self.keyword() != "") {
                     self.orderByOption("");
+                    self.page(1);
                     self.getConsultations();
                     self.searched = true;
                 }
             };
+            this.keywordSearchOnEnter = function(data, event) {
+                if (event.keyCode === 13 || event.key === "Enter") {
+                    self.keywordSearch();
+                    console.log(event.key);
+                }
+                else{
+                    //pass
+                }
+            }
             this.resetKeywordSearch = function() {
                 self.keyword("");
                 self.orderByOption("");
+                self.page(1);
                 self.getConsultations();
                 self.searched = false;
             };
@@ -175,6 +186,7 @@ define([
             }, this);
 
             this.getConsultations = function() {
+                console.log("getConsultations");
                 self.loading(true);
                 self.activeItems.removeAll();
                 $.ajax({
