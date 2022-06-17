@@ -20,9 +20,9 @@ define([
             Object.assign(self, reportUtils);
             self.sections = [
                 {id: 'source', title: 'Bibliographic Source Details'},
+                {id: 'name', title: 'Identifiers'},
                 {id: 'description', title: 'Descriptions and Citations'},
-                {id: 'classifications', title: 'Classifications and Dating'},
-                {id: 'archive', title: 'Archive Holding'},
+                {id: 'classifications', title: 'Source Type'},
                 {id: 'publication', title: 'Publication Details'},
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'json', title: 'JSON'},
@@ -41,9 +41,13 @@ define([
                 ...self.defaultTableConfig,
                 columns: Array(4).fill(null)
             };
+            self.sourceCreationConfig = {
+                ...self.defaultTableConfig,
+                columns: Array(5).fill(null)
+            };
 
             self.nameDataConfig = {
-                name: undefined,
+                name: 'bibliographic source'
             };
 
             self.classificationDataConfig = {
@@ -52,17 +56,16 @@ define([
 
             self.resourceDataConfig = {
                 activities: undefined,
+                archive: undefined,
                 consultations: undefined,
                 assets: undefined,
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             };
-            
+
             self.publication = ko.observableArray();
             self.sourceNames = ko.observableArray();
-            
-            self.archiveDataConfig = {
-                sourceCreation: 'bibliographic source creation'
-            };
+            self.sourceCreation = ko.observableArray();
 
             self.nameCards = {};
             self.archiveCards = {};
@@ -72,15 +75,17 @@ define([
             self.copyrightCards = {};
             self.summary = params.summary;
             self.cards = {};
+            self.add = params.addTile || self.addNewTile;
 
             self.visible = {
                 publication: ko.observable(true),
-                sourceNames: ko.observable(true)
+                sourceNames: ko.observable(true),
+                sourceCreation: ko.observable(true),
             }
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -88,7 +93,7 @@ define([
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
                 };
-                
+
                 self.classificationCards = {
                     type: self.cards?.['bibliographic source types']
                 };
@@ -102,21 +107,22 @@ define([
                     files: self.cards?.['associated digital files']
                 };
 
-                self.archiveCards = {
-                    sourceCreation: self.cards?.['bibliographic source creation']
-                };
-
                 self.copyrightCards = {
                     copyright: self.cards?.copyright
                 };
 
+                self.sourceCreationCards = {
+                    sourceCreation: self.cards?.sourceCreation
+                };
+
                 Object.assign(self.cards, {
-                    sourceNames: self.cards?.['bibliographic source names']
+                    sourceNames: self.cards?.['bibliographic source names'],
+                    sourceCreation: self.cards?.['bibliographic source creation']
                 })
             }
 
-            const publicationNode = self.getRawNodeValue(self.resource(), 'publication'); 
-            
+            const publicationNode = self.getRawNodeValue(self.resource(), 'publication');
+
             if(publicationNode){
                 const place = self.getNodeValue(publicationNode, 'publication event', 'place of publication', 'publication placename', 'publication placename value');
                 const date = self.getNodeValue(publicationNode, 'publication event', 'publication time span', 'date of publication');
@@ -143,6 +149,24 @@ define([
                 }));
             }
 
+            const sourceCreationNode = self.getRawNodeValue(self.resource(), 'bibliographic source creation')
+            if(Array.isArray(sourceCreationNode)) {
+                self.sourceCreation(sourceCreationNode.map(x => {
+                    const author = self.getNodeValue(x, 'authorship', 'author', 'author names', 'author name');
+                    const editor = self.getNodeValue(x, 'editorship', 'editor', 'editor names', 'editor name');
+                    const contributor = self.getNodeValue(x, 'contribution', 'contributors', 'contributor names', 'contributor name');
+                    const statement = self.getRawNodeValue(x, 'creation statement of responsibility', 'statement of responsibility', '@display_value');
+                    const tileid = self.getTileId(x);
+                    return {
+                        author,
+                        editor,
+                        contributor,
+                        statement,
+                        tileid
+                    };
+                }));
+            }
+
             self.bibliographicSourceData = ko.observable({
                 sections:
                     [
@@ -160,7 +184,7 @@ define([
                                 card: self.cards?.['pages']
                             },{
                                 key: 'Page Reference',
-                                value: self.getRawNodeValue(self.resource(), 'page references', 'page reference', 'page(s)'),
+                                value: self.getRawNodeValue(self.resource(), 'page references', 'page reference', 'page(s)', '@display_value'),
                                 type: 'kv',
                                 card: self.cards?.['page reference']
                             }]

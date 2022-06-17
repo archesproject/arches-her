@@ -50,14 +50,16 @@ define([
             };
 
             self.resourceDataConfig = {
-                activities: 'associated_activities',
-                files: 'digital file(s)'
+                activities: 'associated activities',
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
+            self.assessmentCards = {};
             self.imagesCards = {};
             self.locationCards = {};
             self.protectionCards = {};
@@ -68,7 +70,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {

@@ -48,14 +48,17 @@ define([
 
             self.locationDataConfig = {
                 administrativeAreas: undefined,
-                nationalGrid: undefined, 
+                nationalGrid: undefined,
                 locationDescription: undefined,
-                geometry: undefined
+                geometry: undefined,
+                namedLocations: undefined
             };
 
             self.resourceDataConfig = {
                 consultations: undefined,
-                files: undefined
+                files: undefined,
+                archive: undefined,
+                actors: undefined
             };
 
             self.nameCards = {};
@@ -71,7 +74,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -116,13 +119,13 @@ define([
             }
 
             self.currencyData = ko.observable({
-                sections: 
+                sections:
                     [
                         {
-                            title: "Organization Currency", 
+                            title: "Organization Currency",
                             data: [{
-                                key: 'Currency Type', 
-                                value: self.getNodeValue(self.resource(), 'organization currency type'), 
+                                key: 'Currency Type',
+                                value: self.getNodeValue(self.resource(), 'organization currency type'),
                                 card: self.cards?.['organization currency'],
                                 type: 'kv'
                             }]
@@ -131,13 +134,13 @@ define([
             });
 
             self.peopleData = ko.observable({
-                sections: 
+                sections:
                     [
                         {
-                            title: "Associated People and Organizations", 
+                            title: "Associated People and Organizations",
                             data: [{
-                                key: 'Associates', 
-                                value: self.getRawNodeValue(self.resource(), 'associated actors'), 
+                                key: 'Associates',
+                                value: self.getRawNodeValue(self.resource(), 'associated actors'),
                                 card: self.cards?.['associated people and organizations'],
                                 type: 'resource'
                             }]

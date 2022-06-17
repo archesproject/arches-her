@@ -36,6 +36,17 @@ define([
             self.cards = {};
             self.copyrightCards = {};
 
+            self.visible = {
+                files: ko.observable(true),
+            }
+
+            self.createTableConfig = function(col) {
+                return {
+                    ...self.defaultTableConfig,
+                    columns: Array(col).fill(null)
+                };
+            }
+
             if(params.report.cards){
                 const cards = params.report.cards;
                 
@@ -56,17 +67,25 @@ define([
                 }
             }
 
+            self.files = ko.observableArray();
+            
+            const fileDetailsNode = self.getRawNodeValue(self.resource(), 'file content', 'file', 'file_details');
+            const fileNode = self.getRawNodeValue(self.resource(), 'file content', 'file');
+            if(Array.isArray(fileDetailsNode)){
+                const tileid = self.getTileId(fileNode);
+                self.files(fileDetailsNode.map(node => {
+                    const name = self.getNodeValue(node, 'name');
+                    const link = self.getNodeValue(node, 'url');
+                    return {name, link, tileid};
+                }));
+            };
+
             self.fileData = ko.observable({
                 sections:
                     [
                         {
-                            title: 'File Details',
+                            title: 'Details',
                             data: [{
-                                key: 'File',
-                                value: self.getFileName(self.getRawNodeValue(self.resource(), 'file content', 'file')),
-                                type: 'kv',
-                                card: self.cards?.file
-                            },{
                                 key: 'Format',
                                 value: self.getNodeValue(self.resource(), 'file format type'),
                                 type: 'kv',

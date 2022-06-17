@@ -23,6 +23,7 @@ define([
                 {id: 'location', title: 'Location Data'},
                 {id: 'protection', title: 'Designation and Protection Status'},
                 {id: 'assessments', title: 'Assessments'},
+                {id: 'images', title: 'Images'},
                 {id: 'status', title: 'Status and Ownership'},
                 {id: 'journey', title: 'Journey Details'},
                 {id: 'people', title: 'Associated People and Organizations'},
@@ -56,7 +57,8 @@ define([
             self.classificationDataConfig = {
                 maritimeProduction: 'construction phases',
                 components: undefined,
-                dimensions: 'dimensions'
+                dimensions: 'asset dimensions',
+                usePhase: 'use phases'
             };
 
             self.descriptionDataConfig = {
@@ -64,7 +66,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -88,7 +91,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -104,7 +107,8 @@ define([
 
                 self.classificationCards = {
                     production: self.cards?.['construction phases'],
-                    dimensions: self.cards?.['asset dimensions']
+                    dimensions: self.cards?.['asset dimensions'],
+                    usePhase: self.cards?.['use phase']
                 };
 
                 self.assessmentCards = {
@@ -121,6 +125,10 @@ define([
                     files: self.cards?.['associated digital file(s)'],
                     assets: self.cards?.['associated heritage assets, areas and artefacts']
                 };
+
+                self.imagesCards = {
+                    images: self.cards?.['images']
+                }
 
                 self.locationCards = {
                     location: {
@@ -150,13 +158,13 @@ define([
             }
 
             self.statusData = ko.observable({
-                sections: 
+                sections:
                     [
                         {
-                            title: "Vessel Status", 
+                            title: "Vessel Status",
                             data: [{
-                                key: 'Status', 
-                                value: self.getNodeValue(self.resource(), 'status'), 
+                                key: 'Status',
+                                value: self.getNodeValue(self.resource(), 'status'),
                                 card: self.cards?.['status'],
                                 type: 'kv'
                             }]
@@ -164,7 +172,7 @@ define([
                     ]
             });
 
-            const nationalityNode = self.getRawNodeValue(self.resource(), 'nationalities'); 
+            const nationalityNode = self.getRawNodeValue(self.resource(), 'nationalities');
 
             if(Array.isArray(nationalityNode)){
                 self.nationalities(nationalityNode.map(node => {
@@ -175,7 +183,7 @@ define([
                 }));
             }
 
-            const ownersNode = self.getRawNodeValue(self.resource(), 'owner'); 
+            const ownersNode = self.getRawNodeValue(self.resource(), 'owner');
 
             if(Array.isArray(ownersNode)){
                 self.owners(ownersNode.map(node => {
@@ -191,12 +199,12 @@ define([
             }
 
 
-            const voyagesNode = self.getRawNodeValue(self.resource(), 'voyages'); 
+            const voyagesNode = self.getRawNodeValue(self.resource(), 'voyages');
 
             if(voyagesNode){
                 self.voyages(voyagesNode.map(node => {
                     const description = self.getNodeValue(node, 'voyage descriptions', 'voyage description');
-        
+
                     const crewNode = self.getRawNodeValue(node, 'crew');
                     let crew = [];
                     if(Array.isArray(crewNode))
@@ -229,7 +237,7 @@ define([
                         lossStartDate,
                         lossEndDate,
                         lossDateQualifier,
-                        description, 
+                        description,
                         crew,
                         departureName,
                         departureNameCurrency,

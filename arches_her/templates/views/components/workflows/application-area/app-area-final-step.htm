@@ -14,61 +14,6 @@
         </div>
     </div>
     <div class="her-final-step-section">
-        <h5 class="summary-value">{% trans 'Application Area Address' %}</h5>
-        <div class="final-step-section-block address-block">
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.buildingName.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.buildingName.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.buildingNumber.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.buildingNumber.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.buildingNumberSubStreet.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.buildingNumberSubStreet.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.subStreet.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.subStreet.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.street.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.street.value"></div>
-                </div>
-            </div>
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.locality.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.locality.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.townCity.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.townCity.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.county.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.county.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.postcode.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.postcode.value"></div>
-                </div>
-            </div>
-            <div class="final-step-section-block-item">
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.status.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.status.value"></div>
-                </div>
-                <div class="block-item">
-                    <div class="summary-label" data-bind="text: reportVals.currency.name + ':'"></div>
-                    <div class="summary-value" data-bind="text: reportVals.currency.value"></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Application Area Name' %}</h5>
         <div class="final-step-section-block">
             <div class="final-step-section-block-item">
@@ -79,9 +24,26 @@
             </div>
         </div>
     </div>
+
+    <div class="her-final-step-section">
+        <h5 class="summary-value">{% trans 'Location Description' %}</h5>
+        <div class="final-step-section-block">
+            <div class="final-step-section-block-item">
+                <div class="block-item">
+                    <div class="summary-label">{% trans 'Description Type: '  %}</div>
+                    <div class="summary-value" data-bind="text: reportVals.locationDescriptionType.value"></div>
+                </div>
+                <div class="block-item">
+                    <div class="summary-label">{% trans 'Description: '  %}</div>
+                    <div class="summary-value" data-bind="html: reportVals.locationDescription.value"></div>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Area Map' %}</h5>
         <div class="final-step-section-block-item">
+            <!--ko if: geometry -->
             <div class="map-container">
                 <div class="map" data-bind="component: {
                     name: 'arches-map',
@@ -89,6 +51,7 @@
                 }">
                 </div>
             </div>
+            <!-- /ko -->
         </div>
     </div>
     <div class="her-final-step-section">

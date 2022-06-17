@@ -59,6 +59,43 @@
             </div>
             <!-- File Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'file'">
+                <div class="aher-report-section">
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.files)}, css: {'fa-angle-double-right': visible.files(), 'fa-angle-double-up': !visible.files()}"  class="fa toggle"></i> {% trans "Files" %}</h2>
+                    <a data-bind="{if: cards['file'], click: function(){addNewTile(cards['file'])}}" class="aher-report-a">
+                        <i class="fa fa-mail-reply"></i>
+                        <span data-bind="if: cards.file.tiles().length">{% trans "Edit Files" %}</span>
+                        <span data-bind="ifnot: cards.file.tiles().length">{% trans "Add Files" %}</span>
+                    </a>
+
+                    <!-- Collapsible content -->
+                    <div data-bind="visible: visible.files" class="aher-report-collapsible-container pad-lft">
+
+                        <!-- ko ifnot: files().length -->
+                        <div class="aher-nodata-note">{% trans "No files" %}</div>
+                        <!-- /ko -->
+
+                        <!-- ko if: files().length -->
+                        <div class="aher-report-subsection">
+                            <div class="firstchild-container">
+                                <div class="aher-table">
+                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>{% trans "Filename" %}</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody data-bind="dataTablesForEach: { data: files, dataTableOptions: createTableConfig(1)}">
+                                            <tr>
+                                                <td><a class="aher-table-link" data-bind="text: name, attr: {href: link}" target="_blank"></a></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /ko -->
+                    </div>
+                </div>
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/default',
                     params: {

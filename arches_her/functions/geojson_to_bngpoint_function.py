@@ -191,7 +191,7 @@ class GeoJSONToBNGPoint(BaseFunction):
 
         return
 
-    def save(self, tile, request):
+    def save(self, tile, request, context=None):
 
         self.save_bngpoint(tile=tile, request=request, is_function_save_method=True)
         return

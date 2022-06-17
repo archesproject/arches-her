@@ -10,7 +10,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 paging: true,
                 searching: true,
                 scrollY: "250px",
-                columns: Array(8).fill(null)
+                columns: Array(7).fill(null)
             };
 
             self.dataConfig = {
@@ -39,7 +39,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const endOfRole = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor end date');
                         const displayDate = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor display date');
                         const dateQualifier = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor date qualifier');
-                        const roleType = self.getNodeValue(x, 'role type');
                         const tileid = self.getTileId(x); 
                         return {
                             actor,
@@ -48,7 +47,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             endOfRole,
                             displayDate,
                             dateQualifier,
-                            roleType,
                             tileid
                         };
                     }));

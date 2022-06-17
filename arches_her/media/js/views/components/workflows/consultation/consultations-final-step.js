@@ -12,6 +12,7 @@ define([
 
         this.resourceLoading = ko.observable(true);
         this.relatedResourceLoading = ko.observable(true);
+        this.geometry = false;
 
         this.resourceData.subscribe(function(val){
             this.displayName = val['displayname'] || 'Unnamed';
@@ -30,6 +31,7 @@ define([
                 owner: {'name': 'Owner', 'value': this.getResourceValue(val.resource, ['Contacts','Owners','Owner','@value'])},
                 applicant: {'name': 'Applicant', 'value': this.getResourceValue(val.resource, ['Contacts','Applicants','Applicant','@value'])},
                 relatedApplicationAreas:  {'name': 'Related Application Areas', 'value': this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Related Application Area', '@value'])},
+                locationDescription: {'name': 'Consultation Location Description', 'value': this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Consultation Location Descriptions', 'Consultation Location Description', '@value'])},
             };
 
             try {
@@ -46,8 +48,13 @@ define([
 
             var geojsonStr = this.getResourceValue(val.resource, ['Consultation Area', 'Geometry', 'Geospatial Coordinates', '@value']);
             if (geojsonStr) {
-                var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
-                this.prepareMap(geojson, 'app-area-map-data');
+                try {
+                    var geojson = JSON.parse(geojsonStr.replaceAll("'", '"'));
+                    this.prepareMap(geojson, 'app-area-map-data');
+                    this.geometry = true;
+                } catch(e) {
+                    //pass
+                }
             };
             this.resourceLoading(false);
             if (!self.relatedResourceLoading()) {

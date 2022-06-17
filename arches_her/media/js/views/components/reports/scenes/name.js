@@ -16,7 +16,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
 
             this.crossReferenceTableConfig = {
                 ...this.defaultTableConfig,
-                "columns": Array(4).fill(null)
+                "columns": [
+                    { "width": "20%" },
+                    { "width": "20%" },
+                    { "width": "50%" },
+                    { "width": "10%" },
+                   null,
+                ]
             };
 
             self.dataConfig = {
@@ -27,11 +33,13 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 recordStatus: undefined
             }
 
+            self.hideNames = ko.observable(params.hideNames ?? false);
             self.cards = Object.assign({}, params.cards);
             self.edit = params.editTile || self.editTile;
             self.delete = params.deleteTile || self.deleteTile;
             self.add = params.addTile || self.addNewTile;
             self.names = ko.observableArray();
+            self.hideCrossReferences = ko.observable(params.hideCrossReferences ?? false);
             self.crossReferences = ko.observableArray();
             self.systemReferenceNumbers = ko.observable();
             self.parentData = ko.observable();
@@ -99,15 +107,20 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     self.crossReferences(xrefData.map(x => {
                         const name = self.getNodeValue(x,{
                             testPaths: [
+                                ['external cross reference', '@display_value'],
                                 ['external cross reference']
                             ]});
                         const description = self.getNodeValue(x, {
                             testPaths: [
+                                ['external cross reference notes', 'external cross reference description', '@display_value'],
                                 ['external cross reference notes', 'external cross reference description']
                             ]});
                         
                         const source = self.getNodeValue(x, {
-                            testPaths: [['external cross reference source']]
+                            testPaths: [
+                                ['external cross reference source', '@display_value'],
+                                ['external cross reference source']
+                            ]
                         });
 
                         const urlJson = self.getNodeValue(x, {

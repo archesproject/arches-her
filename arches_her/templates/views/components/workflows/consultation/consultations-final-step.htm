@@ -16,6 +16,7 @@
     <div class="her-final-step-section">
         <h5 class="summary-value">{% trans 'Consultation Area' %}</h5>
         <div class="final-step-section-block-item">
+            <!--ko if: geometry -->
             <div class="map-container">
                 <div class="map" data-bind="component: {
                     name: 'arches-map',
@@ -23,6 +24,7 @@
                 }">
                 </div>
             </div>
+            <!--/ko-->
             
             <!-- Related Map information -->
             <div class="final-step-section-block-item">
@@ -33,6 +35,10 @@
                 <div class="block-item">
                     <div class="summary-label" data-bind="text: reportVals.relatedApplicationAreas.name + ':'"></div>
                     <div class="summary-value" data-bind="text: reportVals.relatedApplicationAreas.value"></div>
+                </div>
+                <div class="block-item">
+                    <div class="summary-label" data-bind="text: reportVals.locationDescription.name + ':'"></div>
+                    <div class="summary-value" data-bind="text: reportVals.locationDescription.value"></div>
                 </div>
             </div>
         </div>

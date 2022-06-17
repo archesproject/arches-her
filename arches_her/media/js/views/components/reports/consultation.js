@@ -50,16 +50,18 @@ define([
                 location: ['Consultation Area'],
                 addresses: undefined,
                 locationDescription: undefined,
-                administrativeAreas: undefined,
+                administrativeAreas: 'localities/administrative areas',
                 nationalGrid: undefined,
                 namedLocations: undefined
             }
 
             self.resourcesDataConfig = {
                 assets: 'related heritage assets and areas',
-                files: 'file(s)'
+                files: 'file(s)',
+                relatedApplicationArea: 'consultation area',
+                actors: undefined
             };
-            
+
             self.nameCards = {};
             self.locationCards = {};
             self.resourcesCards = {};
@@ -169,8 +171,12 @@ define([
                     const note = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description');
                     const noteDescType = self.getNodeValue(node, 'external cross reference notes', 'external cross reference description type');
                     const urlNodeValue = self.getRawNodeValue(node, 'url');
-                    const url = urlNodeValue.url;
-                    const urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
+                    let url = undefined;
+                    let urlLabel = undefined;
+                    if(urlNodeValue){
+                        url = urlNodeValue.url;
+                        urlLabel = urlNodeValue.url_label ? urlNodeValue.url_label : urlNodeValue.url;
+                    }
                     const tileid = self.getTileId(node);
                     return {reference, source, note, noteDescType, url, urlLabel, tileid};
                 }));
@@ -317,9 +323,11 @@ define([
             if(contactNode){
                 const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
                 const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
-                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
+                const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer', 'resourceid');
+                const planningBody = self.getNodeValue(contactNode, 'planning officers', 'planning body');
+                const planningBodyLink = self.getNodeValue(contactNode, 'planning officers', 'planning body', 'resourceid');
                 const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
-                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
+                const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer', 'resourceid');
                 const agentsNodes = self.getRawNodeValue(contactNode, 'agents', 'agent', 'instance_details');
                 const ownersNodes = self.getRawNodeValue(contactNode, 'owners', 'owner', 'instance_details');
                 const applicantsNodes = self.getRawNodeValue(contactNode, 'applicants', 'applicant', 'instance_details');
@@ -347,7 +355,7 @@ define([
                 const tileid = self.getTileId(contactNode);
 
                 self.contacts(
-                    { consultingContact, planningOfficer, planningOfficerLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
+                    { consultingContact, planningOfficer, planningOfficerLink, planningBody, planningBodyLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
                 )
             };
 
@@ -372,6 +380,7 @@ define([
                         card: null,
                         subCards: {
                             locationGeometry: 'consultation location',
+                            administrativeAreas: 'localities/administrative areas'
                         }
                     }
                 };
@@ -380,8 +389,24 @@ define([
                     activities: self.cards?.['associated activities'],
                     assets: self.cards?.['associated heritage assets and areas'],
                     files: self.cards?.['associated digital files'],
+                    relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
+            
+            self.consultationLocationDescription = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Consultation Location Description',
+                            card: self.cards?.['consultation location'],
+                            data: [{
+                                key: 'Consultation Location Description',
+                                value: self.getNodeValue(self.resource(), 'consultation area', 'geometry', 'Consultation Location Descriptions', 'Consultation Location Description'),
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
 
             self.consultationDetails = ko.observable({
                 sections:
