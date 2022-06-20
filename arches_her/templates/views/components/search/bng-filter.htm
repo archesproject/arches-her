@@ -1,0 +1,16 @@
+{% load i18n %} {% load staticfiles %}
+<div class="search-container time-search-container">
+    <div class="filter-title">{% trans "Date Interval" %}
+        <div class="pull-right">
+            <div class="btn-group">
+                <button class="btn btn-primary btn-active-primary dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true" data-bind="click: function () { clear(); }"> <i class="fa fa-close"></i> {% trans "Clear" %}
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr class="title-underline">
+    <div>
+        <label for="bngValue">Search British National Grid Reference</label>
+        <input tabindex=0 id="bng_value" data-bind="value: bng"></div>
+    </div>
+</div>
