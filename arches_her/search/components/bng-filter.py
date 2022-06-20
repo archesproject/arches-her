@@ -1,4 +1,5 @@
 import logging
+import json
 from operator import invert
 from django.contrib.gis.geos import GEOSGeometry
 from django.db import connection
@@ -110,46 +111,56 @@ class BngFilter(BaseSearchFilter):
 
             gridSquareLetters = bng_value[0:2]
             bngValueNumbers = bng_value[2:]
-            splitSection = int(len(bng_value) / 2)
+            splitSection = int(len(bngValueNumbers) / 2)
             gridSquareNumbers = grid_square[gridSquareLetters]
-            eastingValue = str(gridSquareNumbers[0]) + str(bngValueNumbers[:splitSection])
-            northingValue = str(gridSquareNumbers[1]) + str(bngValueNumbers[splitSection:])
+            eastingValue = f"{str(gridSquareNumbers[0])}{str(bngValueNumbers[:splitSection])}"
+            northingValue = f"{str(gridSquareNumbers[1])}{str(bngValueNumbers[splitSection:])}"
             
             # we need to create a square polygon to represent the BNG 
             
-            xmin = '{:<07d}'.format(eastingValue) #)pad_value(eastingValue, 0, 7) #set it to 7 so we can create the square
-            xmax = '{:<97d}'.format(eastingValue) #set it to 7 so we can create the square
-            ymin = '{:<07d}'.format(northingValue) #set it to 7 so we can create the square
-            ymax = '{:<97d}'.format(eastingValue) #set it to 7 so we can create the square
+            xmin = self.pad_coord(eastingValue, '0', 6)
+            xmax = self.pad_coord(eastingValue, '9', 6)
+            ymin = self.pad_coord(northingValue, '0', 6)
+            ymax = self.pad_coord(northingValue, '9', 6)
             
             wkt_polygon = "POLYGON((" + xmin + " " + ymin + "," + xmin + " " + ymax + "," + xmax + " " + ymax + "," + xmax + " " + ymin + "," + xmin + " " + ymin + "))"
-            bng_polygon = GEOSGeometry(wkt_polygon, srid=4326)
+            bng_polygon = self.convert_geom_to_wgs84(GEOSGeometry(wkt_polygon, srid=27700), from_srid=27700, to_srid=4326)
             bng_geojson = json.loads(bng_polygon.geojson)
-            
-            #osgb36PointString = "POINT (" + eastingValue + " " + northingValue + ")"
-            #osgb36Point = GEOSGeometry(osgb36PointString, srid=27700)
-            #osgb36Point.transform(4326, False)
-            #pointGeoJSON = json.loads(osgb36Point.geojson)
-
-            """
-                This section creates a geojson object required in the format required by Arches.  The date and time the object was
-                created has also been added in the feature's properties.
-            """
 
             uuidForRecord = uuid4()
             bngFeature = {
                 "geometry": bng_geojson,
                 "type": "Feature",
                 "id": str(uuidForRecord),
-                "properties": {"datetime": dt.strftime("%d/%m/%Y %H:%M:%S"), "bngref": str(bng_value)},
+                "properties": {"bngref": str(bng_value)},
             }
 
-            geometryValue.features.appned(bngFeature)
+            geometryValue["features"].append(bngFeature)
 
         return geometryValue
 
             
+    def pad_coord(self, coord, pad_value, pad_length):
+        """
+        This function right pads a string with a given value to a given length.
+        """
+        if len(coord) < pad_length:
+            coord = coord + pad_value * (pad_length - len(coord)) + f".{pad_value}"
+        return coord
     
+    def convert_geom_to_wgs84(self, geom, from_srid, to_srid=4326):
+
+        with connection.cursor() as cursor:
+            # Transform geom to the analysis SRID, buffer it, and transform it back to wgs84
+            cursor.execute(
+                """SELECT ST_TRANSFORM(ST_SETSRID(%s::geometry, %s), %s)""",
+                (geom.hex.decode("utf-8"), from_srid, to_srid),
+            )
+            res = cursor.fetchone()
+            geom = GEOSGeometry(res[0], srid=4326)
+        return geom
+        
+        
     def bng_grid_square(self):
         return {
             "NA": [0, 9],
