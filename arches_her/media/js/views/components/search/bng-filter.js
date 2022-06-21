@@ -171,7 +171,7 @@ define([
                 self.updateResults();
             },
 
-            clear: function(reset_features) {
+            clear: function() {
                 var self = this;
                 self.filter.inverted(false);
                 self.bng("");
@@ -218,8 +218,6 @@ define([
                 }
             }
 
-
-            
         }),
         template: { require: 'text!templates/views/components/search/bng-filter.htm' }
     });
