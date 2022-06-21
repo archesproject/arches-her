@@ -1,6 +1,6 @@
 {% load i18n %} {% load staticfiles %}
 <div class="search-container time-search-container">
-    <div class="filter-title">{% trans "Search using British National Grid" %}
+    <div class="filter-title">{% trans "Filter by BNG" %}
         <div class="pull-right">
             <div class="btn-group">
                 <button class="btn btn-primary btn-active-primary dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true" data-bind="click: function () { clear(); }"> <i class="fa fa-close"></i> {% trans "Clear" %}
@@ -10,7 +10,7 @@
     </div>
     <hr class="title-underline">
     <div>
-        <label for="bngValue">Search British National Grid Reference</label>
+        <label for="bngValue">BNG reference to filter by: </label>
         <input tabindex=0 id="bng_value" data-bind="value: bng">
         <hr class="title-underline">
         <div class="">
@@ -25,6 +25,7 @@
                         },
                         center: grid_source_center,
                         zoom: grid_source_zoom,
+                        interactive: false
                     },
                     afterRender: setupMap
                 }">
