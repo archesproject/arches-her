@@ -1,6 +1,6 @@
 {% load i18n %} {% load staticfiles %}
 <div class="search-container time-search-container">
-    <div class="filter-title">{% trans "Date Interval" %}
+    <div class="filter-title">{% trans "Search using British National Grid" %}
         <div class="pull-right">
             <div class="btn-group">
                 <button class="btn btn-primary btn-active-primary dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true" data-bind="click: function () { clear(); }"> <i class="fa fa-close"></i> {% trans "Clear" %}
@@ -11,6 +11,24 @@
     <hr class="title-underline">
     <div>
         <label for="bngValue">Search British National Grid Reference</label>
-        <input tabindex=0 id="bng_value" data-bind="value: bng"></div>
+        <input tabindex=0 id="bng_value" data-bind="value: bng">
+        <hr class="title-underline">
+        <div class="">
+            <div id="map" class="relative" style="height: 500px; opacity: 1;" data-bind="mapboxgl: {
+                    mapOptions: {
+                        style: {
+                            version: 8,
+                            sources: sources,
+                            sprite: sprite,
+                            glyphs: glyphs,
+                            layers: layers,
+                        },
+                        center: grid_source_center,
+                        zoom: grid_source_zoom,
+                    },
+                    afterRender: setupMap
+                }">
+            </div>
+        </div>
     </div>
 </div>

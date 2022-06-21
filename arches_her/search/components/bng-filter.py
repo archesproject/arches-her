@@ -66,7 +66,7 @@ class BngFilter(BaseSearchFilter):
             search_results_object[details["componentname"]] = {}
 
         try:
-            search_results_object[details["componentname"]]["search_buffer"] = feature_geom
+            search_results_object[details["componentname"]]["grid_square"] = feature_geom
         except NameError:
             logger.info(_("Feature geometry is not defined"))
         
