@@ -1,5 +1,5 @@
 {% load i18n %} {% load staticfiles %}
-<div class="search-container time-search-container">
+<div class="search-container bng-search-container">
     <div class="filter-title">{% trans "Filter by BNG" %}
         <div class="pull-right">
             <div class="btn-group">
@@ -10,8 +10,19 @@
     </div>
     <hr class="title-underline">
     <div>
-        <label for="bngValue">BNG reference to filter by: </label>
-        <input tabindex=0 id="bng_value" data-bind="value: bng">
+        <p>
+            Enter a valid British Nation Grid reference
+        </p>
+        <div>
+            <label for="bngValue">BNG reference to filter by: </label>
+            <input type="text" tabindex=0 id="bng_value" data-bind="value: bng">
+            <span style="color: red;" data-bind='visible: bngHasError , text: bngMessageError'> </span>
+        </div>
+        <div>
+            <label for="bngValue">BNG reference to filter by: </label>
+            <input type="number" tabindex=0 id="buffer_value" data-bind="value: buffer">
+            <span style="color: red;" data-bind='visible: bufferHasError , text: bufferMessageError'> </span>
+        </div>
         <hr class="title-underline">
         <div class="">
             <div id="map" class="relative" style="height: 500px; opacity: 1;" data-bind="mapboxgl: {
