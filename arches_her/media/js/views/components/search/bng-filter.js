@@ -15,7 +15,8 @@ define([
                 var self = this;
 
                 this.dependenciesLoaded = ko.observable(false)
-                this.bng = ko.observable('').extend({ rateLimit: 200 });
+                this.bng = ko.observable("").extend({ rateLimit: 200 });
+                this.buffer = ko.observable(0).extend({ rateLimit: 200 });
                 this.mapboxgl = mapboxgl;
 
                 options.name = "BNG Filter";
@@ -23,18 +24,111 @@ define([
 
                 this.filter = {
                     bng: ko.observable(null),
+                    buffer: ko.observable(0),
                     inverted: ko.observable(false)
                 };
                 
-                this.bng.subscribe(function(value) {
-                    self.filter.bng(value);
-                    self.updateQuery();
+                this.bngMessageError = ko.observable("");
+                this.bufferMessageError = ko.observable("");
+                this.bngHasError = ko.computed(function() {
+                    console.log(ko.unwrap(self.bngMessageError()));
+                    return self.bngMessageError().length > 0;
                 });
+                this.bufferHasError = ko.computed(function() {
+                    console.log(ko.unwrap(self.bufferMessageError()));
+                    return self.bufferMessageError().length > 0;
+                });
+
+                this.bng.subscribe(function(value) {
+                    self.validate();
+                    let hasErr = ko.unwrap(self.bngHasError());
+                    if(!hasErr){
+                        self.filter.bng(value);
+                        self.updateQuery();
+                    }
+                    
+                });
+                this.buffer.subscribe(function(value) {
+                    self.validate();
+                    let hasErr = ko.unwrap(self.bufferHasError());
+                    if(!hasErr){
+                        self.filter.buffer(parseInt(value));
+                        self.updateQuery();
+                    }
+                });
+
+                this.gridList = [
+                    "HO", "HP","HT","HU","HW","HX","HY","HZ",
+                    "NA","NB","NC","ND","NE","NF","NG","NH","NJ","NK","NL","NM","NN","NO","NP","NQ","NR","NS","NT","NU","NV","NW","NX","NY","NZ",
+                    "OA","OB","OF","OG","OL","OM","OQ","OR","OV","OW","SA","SB",
+                    "SC","SD","SE","SF","SG","SH","SJ","SK","SL","SM","SN","SO","SP","SQ","SR","SS","ST","SU","SV","SW","SX","SY","SZ",
+                    "TA","TB","TF","TG","TL","TM","TQ","TR","TV","TW"
+                ]
+
+                this.validateBng = function() {
+                    self.bngMessageError("");
+                    if (self.bng() && self.bng().length > 0) {
+                        // bng must have even number of chars
+                        if (self.bng().length % 2 !== 0) {
+                            self.bngMessageError("BNG must have an even number of characters");
+                            return;
+                        }
+                        
+                        //bng must be between 4 and 12 characters
+                        if (self.bng().length < 4 || self.bng().length > 12) {
+                            self.bngMessageError("BNG must be between 4 and 12 characters");
+                            return;
+                        }
+                        
+                        // the first tochars must be in the gridlist
+                        var gridlist = self.gridList;
+                        if (gridlist.indexOf(self.bng().toUpperCase().substring(0, 2)) === -1) {
+                            self.bngMessageError("BNG must start with a valid 100km grid square identifier");
+                            return;
+                        }
+                        
+                        //must start with two letters and then all chars after the first two must be digits
+                        var regex = /^[a-zA-Z]{2}[0-9]{2,10}/;
+                        var matches = regex.exec(self.bng());
+                        if (matches.indexOf(self.bng()) === -1) {
+                            self.bngMessageError("BNG must start with two alpha characters followed by 2 to 10 digits");
+                            return;
+                        }                      
+
+                    }
+                }               
+
+                this.validateBuffer = function() {
+                    var buffer = self.buffer();
+                    try {
+                        buffer = parseFloat(buffer);
+                        if (isNaN(buffer)) {
+                            self.bufferMessageError("Buffer must be a number");
+                            return;
+                        }
+                    } catch (e) {
+                        self.bufferMessageError("Buffer must be a number");
+                        return;
+                    }
+
+                    if (buffer < 0) {
+                        self.bufferMessageError("Buffer must be a positive number");
+                        return;
+                    }
+                                        
+                    self.bufferMessageError("");
+                    return;
+                }
+
+                this.validate = function() {
+                    self.validateBng();
+                    self.validateBuffer();
+                }
 
                 this.filters[componentName](this);
                 this.pageLoaded = false;
-
-                var color = "#f0c200";
+                var bufferColour = "#009ab9";
+                var gridSquareColour = "#f0c200";
                 this.layers = arches.mapLayers.find(function(layer){
                     return layer.addtomap && !layer.isoverlay;
                 })['layer_definitions'].concat([
@@ -42,28 +136,41 @@ define([
                         "id": "grid-square-polygon-fill",
                         "source": "grid-square",
                         "type": "fill",
-                        "filter": ['all',[
-                            "==", "$type", "Polygon"
-                        ]],
+                        "filter": ['all',["==", "$type", "Polygon"],["==", "type", "grid_square"]],
                         "paint": {
-                            "fill-color": color,
-                            "fill-outline-color": color,
+                            "fill-color": gridSquareColour,
+                            "fill-outline-color": gridSquareColour,
                             "fill-opacity": 0.1
                         }
                     }, {
                         "id": "grid-square-polygon-stroke",
                         "source": "grid-square",
                         "type": "line",
-                        "filter": ['all',[
-                            "==", "$type", "Polygon"
-                        ]],
+                        "filter": ['all',["==", "$type", "Polygon"],["==", "type", "grid_square"]],
                         "layout": {
                             "line-cap": "round",
                             "line-join": "round"
                         },
                         "paint": {
-                            "line-color": color,
+                            "line-color": gridSquareColour,
                             "line-width": 2
+                        }
+                    }
+                    , {
+                        "id": "grid-square-buffer-polygon-stroke",
+                        "source": "grid-square",
+                        "type": "line",
+                        "filter": ['all',[
+                            "==", "$type", "Polygon"
+                        ],["==", "type", "grid_square_buffer"]],
+                        "layout": {
+                            "line-cap": "round",
+                            "line-join": "round"
+                        },
+                        "paint": {
+                            "line-color": bufferColour,
+                            "line-width": 2,
+                            'line-dasharray': [2, 3],
                         }
                     }
                 ]);
@@ -144,11 +251,14 @@ define([
             updateQuery: function() {
                 var self = this;
                 if (self.filter.bng() != "" && self.filter.bng() != null) {
-                    var queryObj = self.query();
-                    if (self.getFilter('term-filter').hasTag(self.type) === false) {
-                        self.getFilter('term-filter').addTag('BNG Filter', self.name, self.filter.inverted);
+                    self.validate();
+                    if(!self.bngHasError() && !self.bufferHasError()) {
+                        var queryObj = self.query();
+                        if (self.getFilter('term-filter').hasTag(self.type) === false) {
+                            self.getFilter('term-filter').addTag('BNG Filter', self.name, self.filter.inverted);
+                        }
+                        queryObj[componentName] = ko.toJSON(self.filter);
                     }
-                    queryObj[componentName] = ko.toJSON(self.filter);
                 } 
                 else{
                     queryObj = self.query()
@@ -167,6 +277,7 @@ define([
                     self.getFilter('term-filter').addTag(self.name, self.name, self.filter.inverted);
                     self.filter.inverted(!!bngVal.inverted);
                     self.bng(bngVal.bng);
+                    self.buffer(bngVal.buffer);
                 }
                 self.updateResults();
             },
@@ -175,6 +286,7 @@ define([
                 var self = this;
                 self.filter.inverted(false);
                 self.bng("");
+                self.buffer(0);
                 self.updateQuery();
             },
 
@@ -187,12 +299,8 @@ define([
 
                 if(!!self.searchResults[componentName]) {
                     var grid_square = self.searchResults[componentName].grid_square;
-                    if(!!grid_square["coordinates"]) {
-                        geoJSON.features.push({
-                            "type": "Feature",
-                            "properties": {},
-                            "geometry": grid_square
-                        });
+                    if(!!grid_square["features"]) {
+                        geoJSON = grid_square;
                     }
                 }
 
