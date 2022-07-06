@@ -31,34 +31,46 @@ class BngFilter(BaseSearchFilter):
         search_query = Bool()
         querysting_params = self.request.GET.get(details["componentname"], "")
         bng_filter = JSONDeserializer().deserialize(querysting_params)
-        bng = bng_filter["bng"]
+        bng = bng_filter["bng"].upper()
+        buffer = bng_filter["buffer"]
         inverted = bng_filter["inverted"]
         
-        spatial_filter = self.build_geojson_from_bng(bng);
-        
-        if "features" in spatial_filter:
-            if len(spatial_filter["features"]) > 0:
-                feature_geom = spatial_filter["features"][0]["geometry"]
-                geoshape = GeoShape(
-                    field="geometries.geom.features.geometry", type=feature_geom["type"], coordinates=feature_geom["coordinates"]
-                )
+        #bng should have an even number of chars to be a correct grid
+        if len(bng) % 2 == 0:
+            spatial_filter = self.build_geojson_from_bng(bng, buffer);
+            print(json.dumps(spatial_filter))
+            if "features" in spatial_filter:
+                if len(spatial_filter["features"]) > 0:
+                    grid_square_geom = spatial_filter["features"][0]["geometry"]
+                    try:
+                        grid_square_buffer = spatial_filter["features"][1]["geometry"]
+                    except:
+                        grid_square_buffer = None
+                    
+                    dsl_geom = grid_square_geom if grid_square_buffer is None else grid_square_buffer
 
-                spatial_query = Bool()
-                if inverted is True:
-                    spatial_query.must_not(geoshape)
-                else:
-                    spatial_query.filter(geoshape)
+                    geoshape = GeoShape(
+                        field="geometries.geom.features.geometry", type=dsl_geom["type"], coordinates=dsl_geom["coordinates"]
+                    )
 
-                # get the nodegroup_ids that the user has permission to search
-                spatial_query.filter(Terms(field="geometries.nodegroup_id", terms=permitted_nodegroups))
+                    spatial_query = Bool()
+                    if inverted is True:
+                        spatial_query.must_not(geoshape)
+                    else:
+                        spatial_query.filter(geoshape)
 
-                if include_provisional is False:
-                    spatial_query.filter(Terms(field="geometries.provisional", terms=["false"]))
+                    # get the nodegroup_ids that the user has permission to search
+                    spatial_query.filter(Terms(field="geometries.nodegroup_id", terms=permitted_nodegroups))
 
-                elif include_provisional == "only provisional":
-                    spatial_query.filter(Terms(field="geometries.provisional", terms=["true"]))
+                    if include_provisional is False:
+                        spatial_query.filter(Terms(field="geometries.provisional", terms=["false"]))
 
-                search_query.filter(Nested(path="geometries", query=spatial_query))
+                    elif include_provisional == "only provisional":
+                        spatial_query.filter(Terms(field="geometries.provisional", terms=["true"]))
+
+                    search_query.filter(Nested(path="geometries", query=spatial_query))
+        else:
+            logger.warn(_(f"BNG Filter: BNG is not valid - must be an even number of chars ({bng})"))
 
         search_results_object["query"].add_query(search_query)
 
@@ -66,18 +78,10 @@ class BngFilter(BaseSearchFilter):
             search_results_object[details["componentname"]] = {}
 
         try:
-            search_results_object[details["componentname"]]["grid_square"] = feature_geom
+            search_results_object[details["componentname"]]["grid_square"] = spatial_filter
         except NameError:
             logger.info(_("Feature geometry is not defined"))
         
-            
-    #def append_dsl(self, search_results_object, permitted_nodegroups, include_provisional):
-    #    """
-    #    used to append ES query dsl to the search request
-    #
-    #    """
-    #
-    #    pass
 
     def view_data(self):
         """
@@ -95,47 +99,51 @@ class BngFilter(BaseSearchFilter):
 
         pass
     
-    def build_geojson_from_bng(self, bng_value):
+    def build_geojson_from_bng(self, bng_value, buffer_value=0):
         
         geometryValue = {"type": "FeatureCollection", "features": []}
-        grid_square = self.bng_grid_square()
+        
         if bng_value != None:
-            """
-            The following section turns the alphanumberic BNG value in the tile into a point geometry object and then transforms that object
-            into WGS 1984 long/lat projection system.
             
-            Support to 12 alpha numeric BNG values  = 1m precision
-            LL XXXXX XXXXX
+            grid_square = self.bng_grid_square()
             
-            """
-
             gridSquareLetters = bng_value[0:2]
             bngValueNumbers = bng_value[2:]
             splitSection = int(len(bngValueNumbers) / 2)
             gridSquareNumbers = grid_square[gridSquareLetters]
             eastingValue = f"{str(gridSquareNumbers[0])}{str(bngValueNumbers[:splitSection])}"
             northingValue = f"{str(gridSquareNumbers[1])}{str(bngValueNumbers[splitSection:])}"
-            
-            # we need to create a square polygon to represent the BNG 
-            
+                        
             xmin = self.pad_coord(eastingValue, '0', 6)
             xmax = self.pad_coord(eastingValue, '9', 6)
             ymin = self.pad_coord(northingValue, '0', 6)
             ymax = self.pad_coord(northingValue, '9', 6)
             
             wkt_polygon = "POLYGON((" + xmin + " " + ymin + "," + xmin + " " + ymax + "," + xmax + " " + ymax + "," + xmax + " " + ymin + "," + xmin + " " + ymin + "))"
-            bng_polygon = self.convert_geom_to_wgs84(GEOSGeometry(wkt_polygon, srid=27700), from_srid=27700, to_srid=4326)
+            bng_polygon = self.transform_to_wgs84(GEOSGeometry(wkt_polygon, srid=27700), from_srid=27700)
             bng_geojson = json.loads(bng_polygon.geojson)
-
+            
             uuidForRecord = uuid4()
-            bngFeature = {
+            bng_feature = {
                 "geometry": bng_geojson,
                 "type": "Feature",
                 "id": str(uuidForRecord),
-                "properties": {"bngref": str(bng_value)},
+                "properties": {"type": "grid_square", "bngref": str(bng_value)},
             }
-
-            geometryValue["features"].append(bngFeature)
+            
+            geometryValue["features"].append(bng_feature)
+            
+            if buffer_value > 0:
+                bng_buffer_polygon = _buffer(bng_polygon, buffer_value)
+                bng_buffer_geojson = json.loads(bng_buffer_polygon.geojson)
+                uuidForRecord = uuid4()
+                bng_buffer_feature = {
+                    "geometry": bng_buffer_geojson,
+                    "type": "Feature",
+                    "id": str(uuidForRecord),
+                    "properties": {"type": "grid_square_buffer", "bngref": str(bng_value), "buffer": buffer_value},
+                }
+                geometryValue["features"].append(bng_buffer_feature)
 
         return geometryValue
 
@@ -148,8 +156,8 @@ class BngFilter(BaseSearchFilter):
             coord = coord + pad_value * (pad_length - len(coord)) + f".{pad_value}"
         return coord
     
-    def convert_geom_to_wgs84(self, geom, from_srid, to_srid=4326):
-
+    def transform_to_wgs84(self, geom, from_srid):
+        to_srid = 4326
         with connection.cursor() as cursor:
             # Transform geom to the analysis SRID, buffer it, and transform it back to wgs84
             cursor.execute(
@@ -163,6 +171,14 @@ class BngFilter(BaseSearchFilter):
         
     def bng_grid_square(self):
         return {
+            "HO": [3, 12],
+            "HP": [4, 12],
+            "HT": [3, 11],
+            "HU": [4, 11],
+            "HW": [1, 10], 
+            "HX": [2, 10],
+            "HY": [3, 10],
+            "HZ": [4, 10],
             "NA": [0, 9],
             "NB": [1, 9],
             "NC": [2, 9],
@@ -234,3 +250,25 @@ class BngFilter(BaseSearchFilter):
             "TV": [5, 0],
             "TW": [6, 0],
         }
+        
+def _buffer(geojson, width=0):
+    geojson = JSONSerializer().serialize(geojson)
+    geom = GEOSGeometry(geojson, srid=4326)
+
+    try:
+        width = float(width)
+    except Exception:
+        width = 0
+
+    if width > 0:
+        with connection.cursor() as cursor:
+            # Transform geom to the analysis SRID, buffer it, and transform it back to wgs84
+            cursor.execute(
+                """SELECT ST_TRANSFORM(
+                    ST_BUFFER(ST_TRANSFORM(ST_SETSRID(%s::geometry, 4326), %s), %s),
+                4326)""",
+                (geom.hex.decode("utf-8"), settings.ANALYSIS_COORDINATE_SYSTEM_SRID, width),
+            )
+            res = cursor.fetchone()
+            geom = GEOSGeometry(res[0], srid=4326)
+    return geom
