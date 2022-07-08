@@ -15,13 +15,26 @@
         </p>
         <div>
             <label for="bngValue">BNG reference to filter by: </label>
-            <input type="text" tabindex=0 id="bng_value" data-bind="value: bng">
-            <span style="color: red;" data-bind='visible: bngHasError , text: bngMessageError'> </span>
+            <input type="text" placeholder="Alpha numeric: TQ3456789012" tabindex=0 id="bng_value" data-bind="value: bng">
+            <div data-bind="visible: bngHasError">
+                <span aria-live="polite" style="color: red;" data-bind="text: bngMessageError"> </span>
+            </div>
         </div>
         <div>
-            <label for="bngValue">BNG reference to filter by: </label>
+            <label for="xValue">Easting (X): </label>
+            <input type="number" tabindex=0 id="xValue" data-bind="value: bng_x">
+            <label for="yValue">Northing (Y): </label>
+            <input type="number" tabindex=0 id="yValue" data-bind="value: bng_y">
+            <div data-bind="visible: xyHasError">
+                <span aria-live="polite" style="color: red;" data-bind="text: xyMessageError"> </span>
+            </div>
+        </div>
+        <div>
+            <label for="bngValue">Buffer radius in metres: </label>
             <input type="number" tabindex=0 id="buffer_value" data-bind="value: buffer">
-            <span style="color: red;" data-bind='visible: bufferHasError , text: bufferMessageError'> </span>
+            <div data-bind="visible: bufferHasError" >
+                <span aria-live="polite" style="color: red;" data-bind="text: bufferMessageError"> </span>
+            </div> 
         </div>
         <hr class="title-underline">
         <div class="">
