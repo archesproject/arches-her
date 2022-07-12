@@ -1,9 +1,9 @@
 version: '3.8'
-name: arches_her6-1
+name: arches_her6-2
 services:
     aher:
-      container_name: aher
-      image: fargeo/aher
+      container_name: aher6-2
+      image: fargeo/aher6-2
       build:
         context: ..
         dockerfile: arches_her/Dockerfile
@@ -19,7 +19,7 @@ services:
       tty: true
 
     koop_aher:
-      container_name: koop_aher
+      container_name: koop_aher6-2
       image: ryana86/arches-koop:1.0
       ports:
         - 3002:3000
@@ -36,5 +36,5 @@ networks:
     name: arches6-2-dev
 
 volumes:
-    arches-log:
-    arches-static:
+    arches-log-afs6-2:
+    arches-static-afs6-2:
