@@ -5,6 +5,7 @@ Django settings for arches_her project.
 import os
 from arches import __version__
 import inspect
+from django.utils.translation import gettext_lazy as _
 
 try:
     from arches.settings import *
@@ -39,6 +40,7 @@ SEARCH_EXPORT_IMMEDIATE_DOWNLOAD_THRESHOLD = 2000  # The maximum number of insta
 SEARCH_EXPORT_LIMIT = 15000  # The maximum documents ElasticSearch will return in an export - **System Settings**
 
 BYPASS_CARDINALITY_TILE_VALIDATION = False
+ETL_MODULE_LOCATIONS.append("arches_her.etl_modules")
 
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"
 CELERY_ACCEPT_CONTENT = ["json"]
@@ -163,6 +165,14 @@ CACHE_BY_USER = {"anonymous": 3600 * 24}
 
 MOBILE_OAUTH_CLIENT_ID = ""
 MOBILE_DEFAULT_ONLINE_BASEMAP = {"default": "mapbox://styles/mapbox/streets-v9"}
+
+LANGUAGES = [
+    # ("de", _("German")),
+    ("en", _("English")),
+    # ("en-gb", _("British English")),
+    # ("es", _("Spanish")),
+    # ("ar", _("Arabic")),
+]
 
 SESSION_COOKIE_NAME = f"{APP_NAME}_{__version__}"
 APP_TITLE = "Arches-HER"
