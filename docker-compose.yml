@@ -1,12 +1,12 @@
 version: '3.8'
-name: arches_her6-2
+name: arches_her7-0
 services:
     aher:
-      container_name: aher6-2
-      image: fargeo/aher6-2
+      container_name: aher7-0
+      image: fargeo/aher7-0
       build:
         context: ..
-        dockerfile: arches_her/Dockerfile
+        dockerfile: arches-her/Dockerfile
       command: run_arches
       volumes:
         - ../arches/:/web_root/arches
@@ -14,15 +14,15 @@ services:
       env_file:
         - ./docker/env_file.env
       ports:
-        - 8003:8000
+        - 8004:8000
       stdin_open: true
       tty: true
 
     koop_aher:
-      container_name: koop_aher6-2
+      container_name: koop_aher7-0
       image: ryana86/arches-koop:1.0
       ports:
-        - 3003:3000
+        - 3004:3000
       volumes:
       - ./arches_her/pkg/koop:/usr/src/app/config
       env_file:
@@ -33,8 +33,8 @@ services:
 networks:
   default:
     external: true
-    name: arches6-2-dev
+    name: arches7-0-dev
 
 volumes:
-    arches-log-afs6-2:
-    arches-static-afs6-2:
+    arches-log-aher7-0:
+    arches-static-aher7-0:
