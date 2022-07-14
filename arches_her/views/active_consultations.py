@@ -74,7 +74,7 @@ class ActiveConsultationsView(View):
                 return JSONResponse({'results': grouped_tile_list})
             elif page_num >= 1:
                 grouped_tile_list = build_resource_dict(filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword)
-                if order_param in list(order_config.keys()) and order_param is not None and keyword is None:
+                if order_param in list(order_config.keys()) and order_param is not None:
                     try:
                         grouped_tile_list = sorted(
                                                 grouped_tile_list, 
