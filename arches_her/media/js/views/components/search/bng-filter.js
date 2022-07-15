@@ -6,8 +6,9 @@ define([
     'views/components/search/base-filter',
     'geojson-extent',
     'mapbox-gl',
+    'turf',
     'bindings/mapbox-gl',
-], function($, _, arches, ko, BaseFilter, geojsonExtent, mapboxgl) {
+], function($, _, arches, ko, BaseFilter, geojsonExtent, mapboxgl, turf) {
     var componentName = 'bng-filter';
     return ko.components.register(componentName, {
         viewModel: BaseFilter.extend({
@@ -44,26 +45,63 @@ define([
                     return self.xyMessageError().length > 0;
                 });
 
+                this.isDirty = false;
                 this.bng.subscribe(function(value) {
-                    self.validate();
-                    let hasErr = ko.unwrap(self.bngHasError());
-                    if(!hasErr){
-                        let bng_xy = self.xyFromBng(value);
-                        self.bng_x = bng_xy["x"];
-                        self.bng_y = bng_xy["y"];
-                        self.filter.bng(value);
-                        self.updateQuery();
+                    if(!self.isDirty) {
+                        self.isDirty = true;
+                        self.validate();
+                        let hasErr = ko.unwrap(self.bngHasError());
+                        if(!hasErr){
+                            let bng_xy = self.xyFromBng(value);
+                            self.bng_x(bng_xy["x"]);
+                            self.bng_y(bng_xy["y"]);
+                            self.filter.bng(value);
+                            self.updateQuery();
+                        }
+                        setTimeout(function(){
+                            self.isDirty = false;
+                        },100);
                     }
                 });
 
                 this.bng_x.subscribe(function(value) {
-                    self.validate();
-                    let hasErr = ko.unwrap(self.xyHasError());
-                    if(!hasErr){
-                        let bng = self.bngFromXy(value, self.bng_y());
-                        self.bng(bng);
-                        self.filter.bng(bng);
-                        self.updateQuery();
+                    if(!self.isDirty){
+                        self.isDirty = true;
+                        self.validateXy();
+                        let hasErr = ko.unwrap(self.xyHasError());
+                        if(!hasErr){
+                            let bng = self.bngFromXY(value, ko.unwrap(self.bng_y));
+                            self.bng(bng);
+                            self.validate();
+                            hasErr = ko.unwrap(self.bngHasError());
+                            if(!hasErr){
+                                self.filter.bng(bng);
+                                self.updateQuery();
+                            }
+                        }
+                        setTimeout(function(){
+                            self.isDirty = false;
+                        },100);
+                    }
+                });
+                this.bng_y.subscribe(function(value) {
+                    if(!self.isDirty){
+                        self.isDirty = true;
+                        self.validateXy();
+                        let hasErr = ko.unwrap(self.xyHasError());
+                        if(!hasErr){
+                            let bng = self.bngFromXY(ko.unwrap(self.bng_x), value);
+                            self.bng(bng);
+                            self.validate();
+                            hasErr = ko.unwrap(self.bngHasError());
+                            if(!hasErr){
+                                self.filter.bng(bng);
+                                self.updateQuery();
+                            }
+                        }
+                        setTimeout(function(){
+                            self.isDirty = false;
+                        },100);
                     }
                 });
 
@@ -200,8 +238,9 @@ define([
 
                 this.validateXy = function() {
                     self.xyMessageError("");
-                    if (!self.bng_x() || isNaN(self.bng_x) || self.bng_x() > -1 || !self.bng_y() || isNaN(self.bng_y) || !self.bng_y() > -1) {
-
+                    let x = parseFloat(self.bng_x());
+                    let y = parseFloat(self.bng_y());
+                    if (isNaN(x) || x < 0 || isNaN(y) || y < 0) {
                         self.xyMessageError("X and Y must be numeric 0 or greater");
                         return;
                     }
@@ -238,13 +277,17 @@ define([
                 this.xyFromBng = function(bng) {
                     let ret = {"x":0,"y":0};
                     try {
-                        if(bng.length() = 12) {
-                            let oneHundredKmGrid = self.gridList(bng.substring(0, 2));
-                            let x = oneHundredKmGrid[0] * 100000 + parseInt(bng.substring(2, bng.length / 2));
-                            let y = oneHundredKmGrid[1] * 100000 + parseInt(bng.substring(bng.length / 2, bng.length));
+                        if(bng.length == 12) {
+                            let oneHundredKmGrid = self.gridList[bng.substring(0, 2)];
+                            let x = oneHundredKmGrid[0] * 100000 + parseInt(bng.substring(2, 7));
+                            let y = oneHundredKmGrid[1] * 100000 + parseInt(bng.substring(7, 12));
                             ret = {"x":x,"y":y};
                         }
+                        else{
+                            self.xyMessageError("Can only convert BNG to XY if BNG is 12 characters long");
+                        }
                     } catch (error) {
+                        console.log(error);
                         self.xyMessageError("Could not convert BNG to XY");
                     }
                     
@@ -257,9 +300,17 @@ define([
                         let gridlist = self.gridList;
                         let xOneHundredKmGrid = Math.floor(x / 100000);
                         let yOneHundredKmGrid = Math.floor(y / 100000);
-                        let xGrid = Math.floor((x % 100000) / 1000);
-                        let yGrid = Math.floor((y % 100000) / 1000);
-                        bng = gridlist[xOneHundredKmGrid].toString() + gridlist[yOneHundredKmGrid].toString() + xGrid.toString() + yGrid.toString();
+                        let oneHundredKmGrid = [xOneHundredKmGrid, yOneHundredKmGrid];
+                        let xGrid = x.toString().substring(xOneHundredKmGrid.toString().length,x.toString().length)//Math.floor((x % 100000) / 1000);
+                        let yGrid = y.toString().substring(yOneHundredKmGrid.toString().length,y.toString().length)//Math.floor((y % 100000) / 1000);
+                        let gridLetters = ""
+                        for (let key in gridlist) {
+                            if (gridlist[key] === oneHundredKmGrid) {
+                                gridLetters = key;
+                                break;
+                            }
+                        }                     
+                        bng = gridLetters + xGrid + yGrid;
                     }
                     catch (error) {
                         self.xyMessageError("Could not convert XY to BNG");
@@ -276,6 +327,19 @@ define([
                     return layer.addtomap && !layer.isoverlay;
                 })['layer_definitions'].concat([
                     {
+                        "id": "grid-square-marker",
+                        "source": "grid-square",
+                        "type": "circle",
+                        "layout": {
+                            "visibility": "visible"
+                        },
+                        "filter": ['all',["==", "$type", "Point"],["==", "type", "grid_square"]],
+                        "paint": {
+                            "circle-radius": 6,
+                            "circle-stroke-color": gridSquareColour,
+                            "circle-color": gridSquareColour
+                        }
+                    },{
                         "id": "grid-square-polygon-fill",
                         "source": "grid-square",
                         "type": "fill",
@@ -437,6 +501,7 @@ define([
 
             updateResults: function() { 
                 var self = this;
+                var isPoint = false;
                 var geoJSON = {
                     "type": "FeatureCollection",
                     "features": []
@@ -446,6 +511,9 @@ define([
                     var grid_square = self.searchResults[componentName].grid_square;
                     if(!!grid_square["features"]) {
                         geoJSON = grid_square;
+                        if(grid_square.features.length == 1) {
+                            isPoint = grid_square.features[0].geometry.type == "Point";
+                        }
                     }
                 }
 
@@ -457,9 +525,11 @@ define([
                 {
                     bounds_geojson = self.default_bng_extent_geojson;
                 }
+                
 
                 try {
                     self.map().getSource('grid-square')?.setData(geoJSON);
+                    bounds_geojson = isPoint ? turf.buffer(bounds_geojson, 100, {units: 'meters'}) : bounds_geojson;
                     var extent = geojsonExtent(bounds_geojson);
                     var bounds = new self.mapboxgl.LngLatBounds(extent);
                     self.map().fitBounds(bounds, {
