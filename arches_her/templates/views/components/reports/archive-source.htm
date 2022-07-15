@@ -71,7 +71,6 @@
                     <!-- ko foreach: { data: archiveHolding, as: "archive", noChildContext: true} -->
                     <!-- ko if: !!archive && archive.data -->
                     <div class="aher-report-subsection">
-                        <h2 class="aher-report-section-subtitle"><i data-bind="click: function() {toggleVisibility(archive.visible)}, css: {'fa-angle-double-right': archive.visible(), 'fa-angle-double-up': !archive.visible()}" class="fa toggle"></i> <span>{% trans "Holding" %}</span></h2>
                         <div data-bind="visible: archive.visible">
                             <!-- ko foreach: { data: archive.data.section, as: "section", noChildContext: true} -->
                             <div class="aher-report-subsection">
