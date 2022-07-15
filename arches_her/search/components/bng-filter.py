@@ -118,10 +118,15 @@ class BngFilter(BaseSearchFilter):
             xmax = self.pad_coord(eastingValue, '9', 6)
             ymin = self.pad_coord(northingValue, '0', 6)
             ymax = self.pad_coord(northingValue, '9', 6)
+            isPolygon = True
+            if xmin == xmax and ymin == ymax:
+                isPolygon = False
+                wkt_geom = "POINT(" + xmin + " " + ymax + ")"
+            else:
+                wkt_geom = "POLYGON((" + xmin + " " + ymin + "," + xmin + " " + ymax + "," + xmax + " " + ymax + "," + xmax + " " + ymin + "," + xmin + " " + ymin + "))"
             
-            wkt_polygon = "POLYGON((" + xmin + " " + ymin + "," + xmin + " " + ymax + "," + xmax + " " + ymax + "," + xmax + " " + ymin + "," + xmin + " " + ymin + "))"
-            bng_polygon = self.transform_to_wgs84(GEOSGeometry(wkt_polygon, srid=27700), from_srid=27700)
-            bng_geojson = json.loads(bng_polygon.geojson)
+            bng_geom = self.transform_to_wgs84(GEOSGeometry(wkt_geom, srid=27700), from_srid=27700)
+            bng_geojson = json.loads(bng_geom.geojson)
             
             uuidForRecord = uuid4()
             bng_feature = {
@@ -134,7 +139,7 @@ class BngFilter(BaseSearchFilter):
             geometryValue["features"].append(bng_feature)
             
             if buffer_value > 0:
-                bng_buffer_polygon = _buffer(bng_polygon, buffer_value)
+                bng_buffer_polygon = _buffer(bng_geom, buffer_value)
                 bng_buffer_geojson = json.loads(bng_buffer_polygon.geojson)
                 uuidForRecord = uuid4()
                 bng_buffer_feature = {
