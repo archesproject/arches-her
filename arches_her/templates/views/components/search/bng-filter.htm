@@ -21,10 +21,14 @@
             </div>
         </div>
         <div>
-            <label for="xValue">Easting (X): </label>
-            <input type="number" tabindex=0 id="xValue" data-bind="value: bng_x">
-            <label for="yValue">Northing (Y): </label>
-            <input type="number" tabindex=0 id="yValue" data-bind="value: bng_y">
+            <div>
+                <label for="xValue">Easting (X): </label>
+                <input type="number" tabindex=0 id="xValue" data-bind="value: bng_x">
+            </div>
+            <div>
+                <label for="yValue">Northing (Y): </label>
+                <input type="number" tabindex=0 id="yValue" data-bind="value: bng_y">            
+            </div>
             <div data-bind="visible: xyHasError">
                 <span aria-live="polite" style="color: red;" data-bind="text: xyMessageError"> </span>
             </div>
