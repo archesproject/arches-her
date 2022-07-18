@@ -114,14 +114,6 @@ define([
                     }
                 });
 
-                /*this.gridList = [
-                    "HO", "HP","HT","HU","HW","HX","HY","HZ",
-                    "NA","NB","NC","ND","NE","NF","NG","NH","NJ","NK","NL","NM","NN","NO","NP","NQ","NR","NS","NT","NU","NV","NW","NX","NY","NZ",
-                    "OA","OB","OF","OG","OL","OM","OQ","OR","OV","OW","SA","SB",
-                    "SC","SD","SE","SF","SG","SH","SJ","SK","SL","SM","SN","SO","SP","SQ","SR","SS","ST","SU","SV","SW","SX","SY","SZ",
-                    "TA","TB","TF","TG","TL","TM","TQ","TR","TV","TW"
-                ]*/
-
                 this.gridList = {
                     "HO": [3, 12],
                     "HP": [4, 12],
