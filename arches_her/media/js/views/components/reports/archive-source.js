@@ -98,11 +98,11 @@ define([
                 archiveHoldingNode = [archiveHoldingNode];
             }
 
-            if(Array.isArray(archiveHoldingNode) && self.cards?.['archive holding']) {
+            if(Array.isArray(archiveHoldingNode)) {
                 self.archiveHolding(archiveHoldingNode.map(node => {
                     const tileid = self.getTileId(node);
-                    const archiveHoldingTile = self.cards?.['archive holding'].tiles().find(tile => tile.tileid === tileid);
-                    const archiveHoldingCards = self.createCardDictionary(archiveHoldingTile.cards);
+                    const archiveHoldingTile = self.cards?.['archive holding']?.tiles().find(tile => tile.tileid === tileid);
+                    const archiveHoldingCards = archiveHoldingTile ? self.createCardDictionary(archiveHoldingTile.cards) : null;
                     return {
                         tileid,
                         visible: ko.observable(true),
