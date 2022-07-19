@@ -10,14 +10,24 @@
                     "config": null,
                     "constraints": [],
                     "cssclass": null,
-                    "description": "",
+                    "description": {
+                        "en": ""
+                    },
                     "graph_id": "03685224-eebc-11eb-b661-a87eeabdefba",
                     "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
-                    "instructions": null,
+                    "helptext": {
+                        "en": null
+                    },
+                    "helptitle": {
+                        "en": null
+                    },
+                    "instructions": {
+                        "en": null
+                    },
                     "is_editable": true,
-                    "name": "Contested Heritage Assignment",
+                    "name": {
+                        "en": "Contested Heritage Assignment"
+                    },
                     "nodegroup_id": "03685225-eebc-11eb-84a1-a87eeabdefba",
                     "sortorder": null,
                     "visible": false
@@ -28,11 +38,18 @@
                     "card_id": "03685227-eebc-11eb-83a3-a87eeabdefba",
                     "config": {
                         "defaultValue": "",
+                        "i18n_properties": [
+                            "placeholder"
+                        ],
                         "label": "Contested Heritage?",
-                        "placeholder": "Select an option"
+                        "placeholder": {
+                            "en": "Select an option"
+                        }
                     },
                     "id": "0368522a-eebc-11eb-8ea9-a87eeabdefba",
-                    "label": "Contested Heritage?",
+                    "label": {
+                        "en": "Contested Heritage?"
+                    },
                     "node_id": "03685229-eebc-11eb-9ef2-a87eeabdefba",
                     "sortorder": 0,
                     "visible": true,
@@ -42,6 +59,9 @@
                     "card_id": "03685227-eebc-11eb-83a3-a87eeabdefba",
                     "config": {
                         "defaultValue": "62f3f620-ea25-46c8-9a7b-dbadf23aa874",
+                        "i18n_properties": [
+                            "placeholder"
+                        ],
                         "label": "Contested Heritage Metatype",
                         "options": [
                             {
@@ -557,10 +577,14 @@
                                 "text": "Validation Type"
                             }
                         ],
-                        "placeholder": "Select an option"
+                        "placeholder": {
+                            "en": "Select an option"
+                        }
                     },
                     "id": "0368522b-eebc-11eb-81e2-a87eeabdefba",
-                    "label": "Contested Heritage Metatype",
+                    "label": {
+                        "en": "Contested Heritage Metatype"
+                    },
                     "node_id": "03685228-eebc-11eb-b597-a87eeabdefba",
                     "sortorder": 1,
                     "visible": false,
@@ -619,7 +643,9 @@
             },
             "deploymentdate": null,
             "deploymentfile": null,
-            "description": "",
+            "description": {
+                "en": ""
+            },
             "edges": [
                 {
                     "description": null,
@@ -644,10 +670,11 @@
             "graphid": "03685224-eebc-11eb-b661-a87eeabdefba",
             "iconclass": "fa fa-briefcase",
             "is_editable": true,
-            "isactive": true,
             "isresource": false,
             "jsonldcontext": null,
-            "name": "Contested Heritage Assignment",
+            "name": {
+                "en": "Contested Heritage Assignment"
+            },
             "nodegroups": [
                 {
                     "cardinality": "1",
@@ -659,12 +686,13 @@
             "nodes": [
                 {
                     "alias": "contested_heritage_assignment",
-                    "config": null,
+                    "config": {},
                     "datatype": "semantic",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
                     "graph_id": "03685224-eebc-11eb-b661-a87eeabdefba",
+                    "hascustomalias": false,
                     "is_collector": true,
                     "isrequired": false,
                     "issearchable": true,
@@ -686,6 +714,7 @@
                     "exportable": false,
                     "fieldname": null,
                     "graph_id": "03685224-eebc-11eb-b661-a87eeabdefba",
+                    "hascustomalias": false,
                     "is_collector": false,
                     "isrequired": false,
                     "issearchable": false,
@@ -700,25 +729,32 @@
                 {
                     "alias": "contested_heritage",
                     "config": {
+                        "i18n_config": {
+                            "fn": "arches.app.datatypes.datatypes.DomainDataType"
+                        },
                         "options": [
                             {
                                 "id": "9d1ad6ea-cb16-4015-a6c0-c312e83973f6",
                                 "selected": false,
-                                "text": "Yes"
+                                "text": {
+                                    "en": "Yes"
+                                }
                             },
                             {
                                 "id": "4877dda1-af20-46e1-9782-6844575f9ab6",
                                 "selected": false,
-                                "text": "No"
+                                "text": {
+                                    "en": "No"
+                                }
                             }
-                        ],
-                        "rdmCollection": null
+                        ]
                     },
                     "datatype": "domain-value",
                     "description": "Allows a concept collection to be typed. Useful for data sharing.",
                     "exportable": true,
                     "fieldname": "Contested",
                     "graph_id": "03685224-eebc-11eb-b661-a87eeabdefba",
+                    "hascustomalias": false,
                     "is_collector": false,
                     "isrequired": false,
                     "issearchable": true,
@@ -732,16 +768,24 @@
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "publication": {
+                "graph_id": "03685224-eebc-11eb-b661-a87eeabdefba",
+                "notes": null,
+                "publicationid": "9fbb878a-06d9-11ed-ad22-acde48001122",
+                "published_time": "2022-07-18T15:38:47.589",
+                "user_id": 1
+            },
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "root": {
                 "alias": "contested_heritage_assignment",
-                "config": null,
+                "config": {},
                 "datatype": "semantic",
                 "description": null,
                 "exportable": false,
                 "fieldname": null,
                 "graph_id": "03685224-eebc-11eb-b661-a87eeabdefba",
+                "hascustomalias": false,
                 "is_collector": true,
                 "isrequired": false,
                 "issearchable": true,
@@ -753,7 +797,9 @@
                 "sortorder": 0
             },
             "slug": null,
-            "subtitle": "",
+            "subtitle": {
+                "en": ""
+            },
             "template_id": "50000000-0000-0000-0000-000000000004",
             "version": ""
         }
