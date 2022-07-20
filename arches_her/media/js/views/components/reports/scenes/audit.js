@@ -5,7 +5,7 @@ define([
     'utils/report',
     'templates/views/components/reports/scenes/audit.htm',
     'bindings/datatable'
-], function(_, ko, arches, reportUtils, AuditReportTemplate) {
+], function(_, ko, arches, reportUtils, auditReportTemplate) {
     return ko.components.register('views/components/reports/scenes/audit', {
         viewModel: function(params) {
             const self = this;
@@ -66,6 +66,6 @@ define([
             } 
 
         },
-        template: AuditReportTemplate
+        template: auditReportTemplate
     });
 });
