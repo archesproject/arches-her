@@ -4,8 +4,9 @@ define([
     'knockout',
     'knockout-mapping',
     'views/components/workflows/new-tile-step',
-    'viewmodels/alert'
-], function($, arches, ko, koMapping, NewTileStep, AlertViewModel) {
+    'viewmodels/alert',
+    'templates/views/components/workflows/correspondence-letter-step.htm',
+], function($, arches, ko, koMapping, NewTileStep, AlertViewModel, correspondenceLetterStepTemplate) {
     function viewModel(params) {
 
         NewTileStep.apply(this, [params]);
@@ -99,6 +100,6 @@ define([
 
     return ko.components.register('correspondence-letter-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/correspondence-letter-step.htm' }
+        template: correspondenceLetterStepTemplate
     });
 });

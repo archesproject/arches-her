@@ -1,7 +1,8 @@
 define([
     'knockout',
     'views/components/workflows/summary-step',
-], function(ko, SummaryStep) {
+    'templates/views/components/workflows/communication-workflow/communication-final-step.htm',
+], function(ko, SummaryStep, communicationFinalStepTemplate) {
 
     function viewModel(params) {
         var self = this;
@@ -89,7 +90,7 @@ define([
 
     ko.components.register('communication-final-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/communication-workflow/communication-final-step.htm' }
+        template: communicationFinalStepTemplate
     });
     return viewModel;
 });

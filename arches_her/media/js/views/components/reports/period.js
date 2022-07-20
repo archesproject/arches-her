@@ -5,9 +5,10 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/period.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, periodReportTemplate) {
     return ko.components.register('period-report', {
         viewModel: function(params) {
             var self = this;
@@ -131,6 +132,6 @@ define([
             });
 
         },
-        template: { require: 'text!templates/views/components/reports/period.htm' }
+        template: periodReportTemplate
     });
 });

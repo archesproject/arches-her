@@ -3,9 +3,10 @@ define([
     'arches',
     'viewmodels/workflow',
     'viewmodels/workflow-step',
+    'templates/views/components/plugins/correspondence-workflow.htm',
     'views/components/workflows/correspondence-select-resource',
     'views/components/workflows/correspondence-final-step'
-], function(ko, arches, Workflow, Step) {
+], function(ko, arches, Workflow, Step, correspondenceWorkflowTemplate) {
     return ko.components.register('correspondence-workflow', {
         viewModel: function(params) {
             this.componentName = 'correspondence-workflow';
@@ -69,6 +70,6 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = arches.urls.plugin('init-workflow');
         },
-        template: { require: 'text!templates/views/components/plugins/correspondence-workflow.htm' }
+        template: correspondenceWorkflowTemplate
     });
 });

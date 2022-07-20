@@ -5,9 +5,10 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/heritage-asset.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, heritageAssetReportTemplate) {
     return ko.components.register('heritage-asset-report', {
         viewModel: function(params) {
             var self = this;
@@ -134,6 +135,6 @@ define([
             }
 
         },
-        template: { require: 'text!templates/views/components/reports/heritage-asset.htm' }
+        template: heritageAssetReportTemplate
     });
 });
