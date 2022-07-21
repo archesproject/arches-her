@@ -4,8 +4,9 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/new-tile-step'
-], function(_, $, arches, ko, koMapping, NewTileStep) {
+    'views/components/workflows/new-tile-step',
+    'templates/views/components/workflows/photo-gallery-step.htm',
+], function(_, $, arches, ko, koMapping, NewTileStep, photoGalleryStepTemplate ) {
     function viewModel(params) {
         _.extend(this, params.form);
 
@@ -26,9 +27,7 @@ define([
 
     return ko.components.register('photo-gallery-step', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/photo-gallery-step.htm'
-        }
+        template: photoGalleryStepTemplate
     });
 
     return viewModel;

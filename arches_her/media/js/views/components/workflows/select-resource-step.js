@@ -4,7 +4,8 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-], function(_, $, arches, ko, koMapping) {
+    'templates/views/components/workflows/select-resource-step.htm',
+], function(_, $, arches, ko, koMapping, selectResourceStepTemplate) {
     function viewModel(params) {
         _.extend(this, params.form);
 
@@ -47,9 +48,7 @@ define([
 
     ko.components.register('select-resource-step', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/select-resource-step.htm'
-        }
+        template: selectResourceStepTemplate
     });
 
     return viewModel;

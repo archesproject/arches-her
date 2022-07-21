@@ -1,7 +1,8 @@
 define([
     'knockout',
-    'viewmodels/card-component'
-], function(ko, CardViewModel) {
+    'viewmodels/card-component',
+    'templates/views/components/cards/default.htm',
+], function(ko, CardViewModel, defaultCardTemplate) {
 
     function viewmodel(params) {
         CardViewModel.apply(this, [params]);
@@ -48,8 +49,6 @@ define([
 
     return ko.components.register('default-card', {
         viewModel: viewmodel,
-        template: {
-            require: 'text!templates/views/components/cards/default.htm'
-        }
+        template: defaultCardTemplate
     });
 });

@@ -4,8 +4,9 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/new-tile-step'
-], function(_, $, arches, ko, koMapping, NewTileStep) {
+    'views/components/workflows/new-tile-step',
+    'templates/views/components/workflows/new-tile-step.htm',
+], function(_, $, arches, ko, koMapping, NewTileStep, newTileStepTemplate) {
 
     function viewModel(params) {
 
@@ -80,9 +81,7 @@ define([
 
     return ko.components.register('file-template', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/new-tile-step.htm'
-        }
+        template: newTileStepTemplate
     });
     return viewModel;
 });

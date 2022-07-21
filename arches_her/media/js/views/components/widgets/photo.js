@@ -5,9 +5,10 @@ define([
     'dropzone',
     'uuid',
     'viewmodels/file-widget',
+    'templates/views/components/widgets/photo.htm',
     'bindings/gallery',
     'bindings/dropzone'
-], function($, ko, _, Dropzone, uuid, FileWidgetViewModel) {
+], function($, ko, _, Dropzone, uuid, FileWidgetViewModel, photoWidgetTemplate) {
     /**
      * registers a file-widget component for use in forms
      * @function external:"ko.components".file-widget
@@ -93,9 +94,7 @@ define([
                 }
             };
         },
-        template: {
-            require: 'text!widget-templates/photo'
-        }
+        template: photoWidgetTemplate
     });
 
 });

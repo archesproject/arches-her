@@ -3,7 +3,8 @@ define([
     'arches',
     'knockout',
     'uuid',
-], function(_, arches, ko, uuid) {
+    'templates/views/components/workflows/application-area/app-area-address-step.htm',
+], function(_, arches, ko, uuid, appAreaAddressStepTemplate) {
     function viewModel(params) {
         var self = this;
 
@@ -186,8 +187,6 @@ define([
 
     return ko.components.register('app-area-address-step', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/application-area/app-area-address-step.htm'
-        }
+        template: appAreaAddressStepTemplate
     });
 });
