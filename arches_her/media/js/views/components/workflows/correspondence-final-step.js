@@ -4,8 +4,9 @@ define([
     'knockout',
     'knockout-mapping',
     'views/components/workflows/summary-step',
-    'viewmodels/alert'
-], function($, arches, ko, koMapping, SummaryStep, AlertViewModel) {
+    'viewmodels/alert',
+    'templates/views/components/workflows/correspondence-final-step.htm',
+], function($, arches, ko, koMapping, SummaryStep, AlertViewModel, correspondenceFinalStepTemplate) {
     function viewModel(params) {
         var self = this;
         SummaryStep.apply(this, [params]);
@@ -40,6 +41,6 @@ define([
 
     return ko.components.register('correspondence-final-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/correspondence-final-step.htm' }
+        template: correspondenceFinalStepTemplate
     });
 });

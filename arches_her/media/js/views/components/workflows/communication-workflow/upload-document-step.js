@@ -5,8 +5,9 @@ define([
     'knockout-mapping',
     'uuid',
     'arches',
+    'templates/views/components/workflows/communication-workflow/upload-document-step.htm',
     'bindings/select2-query',
-], function($, _, ko, koMapping, uuid, arches) {
+], function($, _, ko, koMapping, uuid, arches, uploadDocumentStepTemplate) {
     function viewModel(params) {
         var self = this;
 
@@ -112,7 +113,7 @@ define([
 
     ko.components.register('upload-document-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/communication-workflow/upload-document-step.htm' }
+        template: uploadDocumentStepTemplate
     });
     return viewModel;
 });

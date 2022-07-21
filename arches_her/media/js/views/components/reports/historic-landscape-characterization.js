@@ -5,9 +5,10 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/historic-landscape-characterization.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, historicLandscapeCharacterizationReportTemplate) {
     return ko.components.register('historic-landscape-characterization-report', {
         viewModel: function(params) {
             var self = this;
@@ -194,6 +195,6 @@ define([
                     ]
             });
         },
-        template: { require: 'text!templates/views/components/reports/historic-landscape-characterization.htm' }
+        template: historicLandscapeCharacterizationReportTemplate
     });
 });

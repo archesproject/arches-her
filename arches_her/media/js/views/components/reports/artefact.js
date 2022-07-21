@@ -5,10 +5,11 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/artefact.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json',
     'views/components/reports/scenes/archive'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, artefactReportTemplate) {
     return ko.components.register('artefact-report', {
         viewModel: function(params) {
             var self = this;
@@ -215,6 +216,6 @@ define([
 
             }
         },
-        template: { require: 'text!templates/views/components/reports/artefact.htm' }
+        template: artefactReportTemplate
     });
 });

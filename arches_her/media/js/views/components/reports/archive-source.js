@@ -5,9 +5,10 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/archive-source.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, archiveSourceReportTemplate) {
     return ko.components.register('archive-source-report', {
         viewModel: function(params) {
             var self = this;
@@ -164,6 +165,6 @@ define([
             }
 
         },
-        template: { require: 'text!templates/views/components/reports/archive-source.htm' }
+        template: archiveSourceReportTemplate
     });
 });
