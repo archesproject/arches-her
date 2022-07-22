@@ -8,7 +8,6 @@ define([
     'templates/views/components/plugins/active-consultations.htm',
     'bindings/chosen',
     'bindings/mapbox-gl',
-    'widgets'
 ], function(ko, arches, $, moment, AlertViewModel, geojsonExtent, activeConsultationsTemplate) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
