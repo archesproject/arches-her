@@ -18,14 +18,21 @@ services:
       stdin_open: true
       tty: true
 
-
-    koop_aher:
-      container_name: koop_aher6-2
-      image: ryana86/arches-koop:1.0
+    pg_featureserv_aher:
+      container_name: pg_featureserv_aher6-2
+      image: pramsey/pg_featureserv:latest
       ports:
-        - 3003:3000
-      volumes:
-      - ./arches_her/pkg/koop:/usr/src/app/config
+        - 9001:9000
+      env_file:
+        - ./docker/env_file.env
+      depends_on:
+        - aher
+
+    pg_tileserv_aher:
+      container_name: pg_tileserv_aher6-2
+      image: pramsey/pg_tileserv:latest
+      ports:
+        - 7800:7800
       env_file:
         - ./docker/env_file.env
       depends_on:
