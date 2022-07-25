@@ -208,7 +208,7 @@ define([
             const proposalNode = self.getRawNodeValue(self.resource(), 'proposal');
             if(Array.isArray(proposalNode)){
                 self.proposal(proposalNode.map(node => {
-                    const proposal = self.getNodeValue(node, 'proposal text');
+                    const proposal = self.getRawNodeValue(node, 'proposal text', '@display_value');
                     const file = self.getNodeValue(node, 'digital file(s)');
                     const fileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
                     const tileid = self.getTileId(node);
@@ -219,7 +219,7 @@ define([
             const adviceNode = self.getRawNodeValue(self.resource(), 'advice');
             if(Array.isArray(adviceNode)){
                 self.advice(adviceNode.map(node => {
-                    const advice = self.getNodeValue(node, 'advice text');
+                    const advice = self.getRawNodeValue(node, 'advice text', '@display_value');
                     const adviceType = self.getNodeValue(node, 'advice type');
                     const tileid = self.getTileId(node);
                     return {advice, adviceType, tileid};
@@ -229,7 +229,7 @@ define([
             const actionNode = self.getRawNodeValue(self.resource(), 'action');
             if(Array.isArray(actionNode)){
                 self.action(actionNode.map(node => {
-                    const action = self.getNodeValue(node, 'action text');
+                    const action = self.getRawNodeValue(node, 'action text', '@display_value');
                     const actionType = self.getNodeValue(node, 'action type');
                     const relatedAdvice = self.getNodeValue(node, 'related advice');
                     const tileid = self.getTileId(node);
@@ -392,7 +392,7 @@ define([
                     relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
-            
+
             self.consultationLocationDescription = ko.observable({
                 sections:
                     [

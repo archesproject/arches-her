@@ -284,7 +284,7 @@
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: proposal, dataTableOptions: proposalTableConfig}">
                                             <tr>
-                                                <td data-bind="text: proposal"></td>
+                                                <td data-bind="html: proposal"></td>
                                                 <td><a class="aher-table-link" data-bind="text: file, attr: {href: fileLink}"></a></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.proposal">
@@ -331,7 +331,7 @@
                                         <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
                                         <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: adviceTableConfig}">
                                             <tr>
-                                                <td data-bind="text: advice"></td>
+                                                <td data-bind="html: advice"></td>
                                                 <td data-bind="text: adviceType"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.advice">
@@ -378,7 +378,7 @@
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: action, dataTableOptions: actionTableConfig}">
                                             <tr>
-                                                <td data-bind="text: action"></td>
+                                                <td data-bind="html: action"></td>
                                                 <td data-bind="text: actionType"></td>
                                                 <td data-bind="text: relatedAdvice"></td>
                                                 <td class="aher-table-control">
@@ -713,7 +713,7 @@
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.recommendationsTableConfig}">
                                                         <tr>
-                                                            <td data-bind="text: recommendation"></td>
+                                                            <td data-bind="html: recommendation"></td>
                                                             <td data-bind="text: recommendedBy"></td>
                                                             <td class="aher-table-control">
                                                                 <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.recommendations">
