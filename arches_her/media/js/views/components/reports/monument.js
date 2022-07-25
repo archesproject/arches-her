@@ -36,7 +36,7 @@ define([
             self.nameDataConfig = {
                 name: 'monument',
                 nameChildren: 'child monument',
-                parent: 'parent asset'
+                parent: 'parent monument or area'
             };
 
             self.classificationDataConfig = {
