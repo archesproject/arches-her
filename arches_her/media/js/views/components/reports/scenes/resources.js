@@ -42,7 +42,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 activities: 'associated activities',
                 consultations: 'associated consultations',
                 files: 'associated files',
-                assets: 'associated heritage assets, areas and artefacts',
+                assets: 'associated monuments, areas and artefacts',
                 archive: 'associated archives',
                 actors: 'associated actors'
             }
@@ -144,9 +144,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
                 if (associatedArtifactsNode) {
                     if(Array.isArray(associatedArtifactsNode)){
-                        let key = 'Heritage Asset, Area or Artefact';
+                        let key = 'Monument, Area or Artefact';
                         if (!(key in associatedArtifactsNode[0])) {
-                            key = 'Associated Heritage Asset, Area or Artefact';
+                            key = 'Associated Monument, Area or Artefact';
                         }
                         self.assets(associatedArtifactsNode.map(x => {
                             var resource = [];

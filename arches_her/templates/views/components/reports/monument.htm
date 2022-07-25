@@ -8,13 +8,13 @@
 
         <!-- Title Block -->
         <div class="aher-report-toolbar">
-            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Heritage Area" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
+            <h1 class="aher-report-toolbar-title"><span class="aher-report-name">{% trans "Monument" %}:</span><span data-bind="text: displayname" class="aher-report-instance-name"></span></h1>
         </div>
 
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -43,8 +43,8 @@
                     name: 'views/components/reports/scenes/description',
                     params: {
                         data: resource,
-                        dataConfig: descriptionDataConfig,
                         cards: descriptionCards,
+                        dataConfig: descriptionDataConfig
                     }
                 }"></div>
             </div>
@@ -55,7 +55,7 @@
                     params: {
                         data: resource,
                         dataConfig: classificationDataConfig,
-                        cards: classificationCards,
+                        cards: classificationCards
                     }
                 }"></div>
             </div>
@@ -65,8 +65,7 @@
                     name: 'views/components/reports/scenes/location',
                     params: {
                         data: resource,
-                        cards: locationCards,
-                        dataConfig: locationDataConfig
+                        cards: locationCards
                     }
                 }"></div>
             </div>
@@ -76,7 +75,7 @@
                     name: 'views/components/reports/scenes/protection',
                     params: {
                         data: resource,
-                        cards: protectionCards,
+                        cards: protectionCards
                     }
                 }"></div>
             </div>
@@ -86,7 +85,7 @@
                     name: 'views/components/reports/scenes/assessments',
                     params: {
                         data: resource,
-                        cards: assessmentCards,
+                        cards: assessmentCards
                     }
                 }"></div>
             </div>
@@ -96,7 +95,7 @@
                     name: 'views/components/reports/scenes/images',
                     params: {
                         data: resource,
-                        cards: imagesCards,
+                        cards: imagesCards
                     }
                 }"></div>
             </div>
@@ -106,7 +105,7 @@
                     name: 'views/components/reports/scenes/people',
                     params: {
                         data: resource,
-                        cards: peopleCards,
+                        cards: peopleCards
                     }
                 }"></div>
             </div>
@@ -130,14 +129,24 @@
                     }
                 }"></div>
             </div>
+            <!-- Communication Tab -->
+            <div class="aher-report-page" data-bind="if: activeSection() === 'communication'">
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/communication',
+                    params: {
+                        data: resource,
+                        cards: communicationCards
+                    }
+                }"></div>
+            </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
 {% block summary %}
 <div class="aher-summary-report-header">
-    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Heritage Area)" %}</span></h1>
+    <h1 class="aher-summary-report-title"><span data-bind="text: displayname" class="aher-report-instance-name"></span><span class="aher-report-name pad-lft-sm">{% trans "(Monument)" %}</span></h1>
 </div>
 <div class="model-summary-report">
     <div class="aher-report-page">

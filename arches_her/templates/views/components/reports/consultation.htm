@@ -14,7 +14,7 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -155,7 +155,7 @@
                                             <tr>
                                                 <td data-bind="text: reference"></td>
                                                 <td data-bind="text: referenceType"></td>
-                                                <td><a class="aher-table-link" data-bind="text: agency, attr: {href: agencyLink}"></a></td>                                                
+                                                <td><a class="aher-table-link" data-bind="text: agency, attr: {href: agencyLink}"></a></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards['external system references']">
                                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external system references'])}">
@@ -256,7 +256,7 @@
                 </div>
 
             </div>
-            
+
             <!-- Consultation Progression Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'progression'">
                 <div class="aher-report-section">
@@ -407,13 +407,13 @@
                         <span data-bind="if: cards.outcomes.tiles().length">{% trans "Edit outcomes" %}</span>
                         <span data-bind="ifnot: cards.outcomes.tiles().length">{% trans "Add outcomes" %}</span>
                     </a>
-    
+
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.outcomes" class="aher-report-collapsible-container pad-lft">
                         <!-- ko ifnot: outcomes() -->
                         <div class="aher-nodata-note">No outcome for this consultation</div>
                         <!-- /ko -->
-    
+
                         <!-- ko if: outcomes() -->
                         <div class="aher-report-subsection">
                             <div class="firstchild-container pad-btm">
@@ -546,7 +546,7 @@
                                                 <th>{% trans "Subject" %}</th>
                                                 <th>{% trans "Type" %}</th>
                                                 <th class="none">{% trans "Date" %}</th>
-                                                <th class="none"{% trans "Participants" %}</th>
+                                                <th class="none">{% trans "Participants" %}</th>
                                                 <th class="none">{% trans "Related Condition" %}</th>
                                                 <th class="none">{% trans "Note" %}</th>
                                                 <th class="none">{% trans "Follow-On Action" %}</th>
@@ -698,7 +698,7 @@
                                     <!-- ko ifnot: visit.recommendations().length -->
                                     <div class="aher-nodata-note">No recommendation for this visit</div>
                                     <!-- /ko -->
-    
+
                                     <!-- ko if: visit.recommendations().length -->
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
@@ -733,7 +733,7 @@
                                     </div>
                                     <!-- /ko -->
                                 </div>
-                            
+
                                 <h4 class="aher-block-key">Photographs</h4>
                                 <div class="aher-report-photo-container">
                                     <!-- ko ifnot: visit.photographs.length -->
@@ -774,7 +774,7 @@
                     <!-- /ko -->
                     <!-- /ko -->
                 </div>
-            </div>            
+            </div>
             <!-- Resources Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
                 <div data-bind="component: {
@@ -796,7 +796,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 

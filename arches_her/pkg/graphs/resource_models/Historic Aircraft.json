@@ -320,7 +320,7 @@
                     "config": null,
                     "constraints": [],
                     "cssclass": null,
-                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a heritage asset. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
+                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_Thing. Used to record the status of the land associated with the location of the historic aircraft. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
                     "graph_id": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
                     "helpenabled": false,
                     "helptext": null,
@@ -753,7 +753,7 @@
                     "helptitle": null,
                     "instructions": null,
                     "is_editable": true,
-                    "name": "Associated Heritage Assets, Areas and Artefacts",
+                    "name": "Associated Monuments, Areas and Artefacts",
                     "nodegroup_id": "dd2c635a-28e7-11eb-a7b8-f875a44e0e11",
                     "sortorder": 11,
                     "visible": true
@@ -3280,7 +3280,7 @@
                                 "text": "Woodland"
                             }
                         ],
-                        "placeholder": "Use to record a particular status associated with the Asset."
+                        "placeholder": "Use to record a particular status associated with the Historic Aircraft."
                     },
                     "id": "9766d7e2-f450-11eb-b285-a87eeabdefba",
                     "label": "Land Use Classification",
@@ -6286,11 +6286,11 @@
                     "card_id": "dd2c635c-28e7-11eb-8dac-f875a44e0e11",
                     "config": {
                         "defaultResourceInstance": [],
-                        "label": "Associated Heritage Asset , Area or Artefact",
+                        "label": "Associated Monument, Area or Artefact",
                         "placeholder": null
                     },
                     "id": "dd2c6360-28e7-11eb-b82c-f875a44e0e11",
-                    "label": "Associated Heritage Asset , Area or Artefact",
+                    "label": "Associated Monument, Area or Artefact",
                     "node_id": "dd2c635f-28e7-11eb-b656-f875a44e0e11",
                     "sortorder": 0,
                     "visible": true,
@@ -14073,11 +14073,11 @@
                         "graphs": [
                             {
                                 "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                                "name": "Heritage Asset"
+                                "name": "Monument"
                             },
                             {
                                 "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
-                                "name": "Heritage Area"
+                                "name": "Area"
                             }
                         ],
                         "searchDsl": "",
@@ -14743,7 +14743,7 @@
                     "alias": "land_use_classification_assignment",
                     "config": null,
                     "datatype": "semantic",
-                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a heritage asset. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
+                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_Thing. Used to record the status of the land associated with the location of the historic aircraft. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
                     "exportable": false,
                     "fieldname": "",
                     "graph_id": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
@@ -14797,7 +14797,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area_assignments",
+                    "alias": "area_assignment",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -14808,7 +14808,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Area Assignments",
+                    "name": "Area Assignment",
                     "nodegroup_id": "97666322-f450-11eb-8573-a87eeabdefba",
                     "nodeid": "97666322-f450-11eb-8573-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
@@ -18297,7 +18297,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area",
+                    "alias": "area_assignments",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -18308,7 +18308,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Area",
+                    "name": "Area Assignments",
                     "nodegroup_id": "9766632e-f450-11eb-9886-a87eeabdefba",
                     "nodeid": "9766d7d8-f450-11eb-b320-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
@@ -19742,7 +19742,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "associated_heritage_assets_areas_and_artefacts",
+                    "alias": "associated_monuments_areas_and_artefacts",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -19753,7 +19753,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Associated Heritage Assets, Areas and Artefacts",
+                    "name": "Associated Monuments, Areas and Artefacts",
                     "nodegroup_id": "dd2c635a-28e7-11eb-a7b8-f875a44e0e11",
                     "nodeid": "dd2c635a-28e7-11eb-a7b8-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
@@ -19803,7 +19803,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "associated_heritage_asset_area_or_artefact",
+                    "alias": "associated_monument_area_or_artefact",
                     "config": {
                         "graphs": [
                             {
@@ -19820,12 +19820,12 @@
                             },
                             {
                                 "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                                "name": "Heritage Asset"
+                                "name": "Monument"
                             },
                             {
                                 "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
                                 "inverseOntologyProperty": "http://www.cidoc-crm.org/cidoc-crm/P53i_is_former_or_current_location_of",
-                                "name": "Heritage Area",
+                                "name": "Area",
                                 "ontologyProperty": "http://www.cidoc-crm.org/cidoc-crm/P53_has_former_or_current_location"
                             }
                         ],
@@ -19835,13 +19835,13 @@
                     "datatype": "resource-instance-list",
                     "description": null,
                     "exportable": true,
-                    "fieldname": "Assoc_HAs",
+                    "fieldname": "Assoc_Mons",
                     "graph_id": "b8032b00-594d-11e9-9cf0-18cf5eb368c4",
                     "is_collector": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Associated Heritage Asset, Area or Artefact",
+                    "name": "Associated Monument, Area or Artefact",
                     "nodegroup_id": "dd2c635a-28e7-11eb-a7b8-f875a44e0e11",
                     "nodeid": "dd2c635f-28e7-11eb-b656-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
@@ -21774,7 +21774,7 @@
                 "sortorder": 0
             },
             "slug": null,
-            "subtitle": "Used to record the details of historic aircraft which are either retained as heritage assets (eg. Museum exhibits or Gate Guardians) or have been identified through the discovery of associated crash sites. A Heritage Asset record should be created for the crash site where known. ",
+            "subtitle": "Used to record the details of historic aircraft which are either retained as monuments (eg. Museum exhibits or Gate Guardians) or have been identified through the discovery of associated crash sites. A monument record should be created for the crash site where known. ",
             "template_id": "655f86f0-643a-4df4-be8b-9e9030d2ff94",
             "version": ""
         }
