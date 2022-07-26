@@ -54,7 +54,7 @@ class ResourceDescriptors(View):
                 }
                 resource = Resource.objects.get(pk=resourceid)
                 se = SearchEngineFactory().create()
-                document = se.search(index='resources', id=resourceid, doc_type='_doc')
+                document = se.search(index='resources', id=resourceid)
                 datatype_factory = DataTypeFactory()
                 additional_data = {}
                 if document['_source']['graph_id'] == '8d41e49e-a250-11e9-9eab-00224800b26d':
