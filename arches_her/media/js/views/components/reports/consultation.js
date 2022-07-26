@@ -298,7 +298,7 @@ define([
                         })) : []);
                     const recommendations = ko.observable(Array.isArray(recommendationsNodes) ? (
                         recommendationsNodes.map(recommendationNode => {
-                            const recommendation = self.getNodeValue(recommendationNode, 'recommendation', 'recommendation value');
+                            const recommendation = self.getRawNodeValue(recommendationNode, 'recommendation', 'recommendation value', '@display_value');
                             const recommendedBy = self.getNodeValue(recommendationNode, 'recommended by');
                             const tileid = self.getTileId(recommendationNode);
                             return {recommendation, recommendedBy, tileid};
