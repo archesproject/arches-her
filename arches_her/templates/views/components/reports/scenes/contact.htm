@@ -20,14 +20,15 @@
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="contact-details-table_info">Contact detail table.</p>
+                    <table id="contact-details-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Contact Point" %}</th>
                                 <th>{% trans "Contact Point Type" %}</th>
                                 <th>{% trans "Contact Name for Correspondence" %}</th>
                                 <th>{% trans "Contact Name Currency" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: contact, dataTableOptions: contactTableConfig }">
