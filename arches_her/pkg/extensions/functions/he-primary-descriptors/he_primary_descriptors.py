@@ -60,11 +60,14 @@ class HEPrimaryDescriptors(AbstractPrimaryDescriptorsFunction):
                 select objects.value
                 from tile_value, jsonb_each(tiledata) objects
                 where objects.key::text = nodeid::text"""
-            with connection.cursor() as cursor:
-                cursor.execute(sql)
-                row = cursor.fetchone()
-                if row and row[0] is not None:
-                    primary_reference_number = str(row[0])
+            try:
+                with connection.cursor() as cursor:
+                    cursor.execute(sql)
+                    row = cursor.fetchone()
+                    if row and row[0] is not None:
+                        primary_reference_number = str(row[0])
+            except:
+                pass
         try:
             if "nodegroup_id" in config and config["nodegroup_id"] != "" and config["nodegroup_id"] is not None:
                 tiles = models.TileModel.objects.filter(nodegroup_id=uuid.UUID(config["nodegroup_id"]), sortorder=0).filter(
