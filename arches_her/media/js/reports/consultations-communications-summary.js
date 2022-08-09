@@ -1,6 +1,7 @@
 define([
-    'knockout'
-], function(ko) {
+    'knockout',
+    'templates/views/components/reports/consultations-communications-summary.htm'
+], function(ko, consultationsCommunicationsSummaryReportTemplate) {
     ko.components.register('consultations-communications-summary', {
         viewModel: function(params) {
             this.communications = ko.computed(function() {
@@ -26,6 +27,6 @@ define([
                 });
             });
         },
-        template: { require: 'text!templates/views/components/reports/consultations-communications-summary.htm' }
+        template: consultationsCommunicationsSummaryReportTemplate
     });
 });

@@ -1,8 +1,9 @@
 define([
     'knockout',
     'views/components/workflows/summary-step',
-    'viewmodels/alert'
-], function(ko, SummaryStep, AlertViewModel) {
+    'viewmodels/alert',
+    'templates/views/components/workflows/site-visit/site-visit-final-step.htm',
+], function(ko, SummaryStep, AlertViewModel, siteVisitFinalStepTemplate) {
 
     function viewModel(params) {
         var self = this;
@@ -82,7 +83,7 @@ define([
 
     ko.components.register('site-visit-final-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/site-visit/site-visit-final-step.htm' }
+        template: siteVisitFinalStepTemplate
     });
     return viewModel;
 });

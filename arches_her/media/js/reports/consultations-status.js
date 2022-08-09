@@ -1,7 +1,8 @@
 define([
     'knockout',
-    'underscore'
-], function(ko, _) {
+    'underscore',
+    'templates/views/components/reports/consultations-status.htm'
+], function(ko, _, consultationsStatusReportTemplate) {
     ko.components.register('consultations-status', {
         viewModel: function(params) {
             var getNodeValues = function(nodeId) {
@@ -53,6 +54,6 @@ define([
                 });
             });
         },
-        template: { require: 'text!templates/views/components/reports/consultations-status.htm' }
+        template: consultationsStatusReportTemplate
     });
 });

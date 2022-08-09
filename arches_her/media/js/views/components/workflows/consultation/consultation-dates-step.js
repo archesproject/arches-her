@@ -3,7 +3,8 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-], function($, arches, ko, koMapping) {
+    'templates/views/components/workflows/consultation/consultation-dates-step.htm',
+], function($, arches, ko, koMapping, consultationDatesStepTemplate) {
     function viewModel(params) {
 
         var self = this;
@@ -118,8 +119,6 @@ define([
 
     return ko.components.register('consultation-dates-step', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/consultation/consultation-dates-step.htm'
-        }
+        template: consultationDatesStepTemplate
     });
 });

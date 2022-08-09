@@ -5,7 +5,8 @@ define([
     'knockout',
     'knockout-mapping',
     'geojson-extent',
-], function($, _, arches, ko, koMapping, geojsonExtent) {
+    'templates/views/components/workflows/consultation/consultation-map-step.htm',
+], function($, _, arches, ko, koMapping, geojsonExtent, consultationMapStepTemplate) {
     function viewModel(params) {
         var self = this;
 
@@ -174,9 +175,7 @@ define([
 
     ko.components.register('consultation-map-step', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/consultation/consultation-map-step.htm'
-        }
+        template: consultationMapStepTemplate
     });
 
     return viewModel;

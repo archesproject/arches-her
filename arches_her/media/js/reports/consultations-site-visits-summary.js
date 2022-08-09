@@ -1,6 +1,7 @@
 define([
-    'knockout'
-], function(ko) {
+    'knockout',
+    'templates/views/components/reports/consultations-site-visits-summary.htm'
+], function(ko, consultationsSiteVisitsSummaryReportTemplate) {
     ko.components.register('consultations-site-visits-summary', {
         viewModel: function(params) {
             this.visits = ko.computed(function() {
@@ -14,6 +15,6 @@ define([
                 });
             });
         },
-        template: { require: 'text!templates/views/components/reports/consultations-site-visits-summary.htm' }
+        template: consultationsSiteVisitsSummaryReportTemplate
     });
 });

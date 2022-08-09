@@ -3,7 +3,8 @@ define([
     'uuid',
     'arches',
     'views/components/workflows/summary-step',
-], function(ko, uuid, arches, SummaryStep) {
+    'templates/views/components/workflows/consultation/consultations-final-step.htm',
+], function(ko, uuid, arches, SummaryStep, consultationsFinalStepTemplate) {
 
     function viewModel(params) {
         var self = this;
@@ -110,7 +111,7 @@ define([
 
     ko.components.register('consultations-final-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/consultation/consultations-final-step.htm' }
+        template: consultationsFinalStepTemplate
     });
     return viewModel;
 });

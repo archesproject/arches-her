@@ -2,9 +2,10 @@ define([
     'knockout', 
     'utils/report',
     'arches',
+    'templates/views/components/reports/scenes/json.htm',
     'viewmodels/widget',
     'bindings/codemirror'
-], function(ko, reportUtils, arches) {
+], function(ko, reportUtils, arches, jsonTemplate) {
     return ko.components.register('views/components/reports/scenes/json', {
         viewModel: function(params) {
             var self = this;
@@ -31,8 +32,6 @@ define([
             };
             self.setSelectedJson('json');
         },
-        template: {
-            require: 'text!templates/views/components/reports/scenes/json.htm'
-        }
+        template: jsonTemplate
     });
 });

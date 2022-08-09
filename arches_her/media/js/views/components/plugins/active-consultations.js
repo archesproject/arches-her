@@ -5,13 +5,15 @@ define([
     'moment',
     'viewmodels/alert',
     'geojson-extent',
+    'templates/views/components/plugins/active-consultations.htm',
     'bindings/chosen',
     'bindings/mapbox-gl',
-    'widgets'
-], function(ko, arches, $, moment, AlertViewModel, geojsonExtent) {
+], function(ko, arches, $, moment, AlertViewModel, geojsonExtent, activeConsultationsTemplate) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
+
+            this.urls = arches.urls;
             this.resourceEditorURL = '/arches-her' + arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
@@ -261,6 +263,6 @@ define([
 
             };
         },
-        template: { require: 'text!templates/views/components/plugins/active-consultations.htm' }
+        template: activeConsultationsTemplate
     });
 });

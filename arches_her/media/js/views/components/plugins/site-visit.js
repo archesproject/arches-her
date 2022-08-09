@@ -2,11 +2,12 @@ define([
     'knockout',
     'arches',
     'viewmodels/workflow',
+    'templates/views/components/plugins/site-visit.htm',
     'viewmodels/workflow-step',
     'views/components/workflows/select-resource-step',
     'views/components/workflows/photo-gallery-step',
     'views/components/workflows/site-visit/site-visit-final-step'
-], function(ko, arches, Workflow) {
+], function(ko, arches, Workflow, siteVisitTemplate) {
     return ko.components.register('site-visit', {
         viewModel: function(params) {
             this.componentName = 'site-visit';
@@ -170,6 +171,6 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = arches.urls.plugin('init-workflow');
         },
-        template: { require: 'text!templates/views/components/plugins/site-visit.htm' }
+        template: siteVisitTemplate
     });
 });

@@ -1,9 +1,10 @@
 define(['knockout',
-        'knockout-mapping',
-        'views/list',
-        'viewmodels/function',
-        'bindings/chosen'],
-function (ko, koMapping, ListView, FunctionViewModel, chosen) {
+    'knockout-mapping',
+    'views/list',
+    'viewmodels/function',
+    'bindings/chosen',
+    'templates/views/components/functions/bngpoint-to-geojson-function.htm',
+], function(ko, koMapping, ListView, FunctionViewModel, chosen, bngpointToGeojsonFunctionTemplate) {
     return ko.components.register('views/components/functions/bngpoint-to-geojson-function', {
         viewModel: function(params) {
             FunctionViewModel.apply(this, arguments);
@@ -70,8 +71,6 @@ function (ko, koMapping, ListView, FunctionViewModel, chosen) {
 
             window.setTimeout(function(){$("select[data-bind^=chosen]").trigger("chosen:updated")}, 300);
         },
-        template: {
-            require: 'text!templates/views/components/functions/bngpoint-to-geojson-function.htm'
-        }
+        template: bngpointToGeojsonFunctionTemplate
     });
 })

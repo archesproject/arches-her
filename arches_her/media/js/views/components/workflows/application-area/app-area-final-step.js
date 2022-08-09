@@ -1,7 +1,8 @@
 define([
     'knockout',
     'views/components/workflows/summary-step',
-], function(ko, SummaryStep) {
+    'templates/views/components/workflows/application-area/app-area-final-step.htm',
+], function(ko, SummaryStep, appAreaFinalStepTemplate) {
 
     function viewModel(params) {
         SummaryStep.apply(this, [params]);
@@ -54,7 +55,7 @@ define([
 
     ko.components.register('app-area-final-step', {
         viewModel: viewModel,
-        template: { require: 'text!templates/views/components/workflows/application-area/app-area-final-step.htm' }
+        template: appAreaFinalStepTemplate
     });
     return viewModel;
 });

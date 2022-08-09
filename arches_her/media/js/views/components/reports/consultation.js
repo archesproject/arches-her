@@ -5,9 +5,10 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/consultation.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, consultationReportTemplate) {
     return ko.components.register('consultation-report', {
         viewModel: function(params) {
             var self = this;
@@ -462,6 +463,6 @@ define([
                     ]
             });
         },
-        template: { require: 'text!templates/views/components/reports/consultation.htm' }
+        template: consultationReportTemplate
     });
 });

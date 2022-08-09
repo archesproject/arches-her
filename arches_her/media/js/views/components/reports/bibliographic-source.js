@@ -5,11 +5,12 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/bibliographic-source.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/audit',
     'views/components/reports/scenes/default',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, bibliographicSourceReportTemplate) {
     return ko.components.register('bibliographic-source-report', {
         viewModel: function(params) {
             var self = this;
@@ -193,6 +194,6 @@ define([
             });
 
         },
-        template: { require: 'text!templates/views/components/reports/bibliographic-source.htm' }
+        template: bibliographicSourceReportTemplate
     });
 });

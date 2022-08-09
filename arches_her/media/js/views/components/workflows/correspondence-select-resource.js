@@ -6,8 +6,9 @@ define([
     'knockout',
     'knockout-mapping',
     'views/components/workflows/select-resource-step',
-    'viewmodels/alert'
-], function(_, $, uuid, arches, ko, koMapping, SelectResourceStep, AlertViewModel) {
+    'viewmodels/alert',
+    'templates/views/components/workflows/correspondence-select-resource.htm',
+], function(_, $, uuid, arches, ko, koMapping, SelectResourceStep, AlertViewModel, correspondenceSelectResourceStepTemplate) {
     function viewModel(params) {
         var self = this;
         SelectResourceStep.apply(this, [params]);
@@ -139,9 +140,7 @@ define([
 
     ko.components.register('correspondence-select-resource', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/correspondence-select-resource.htm'
-        }
+        template: correspondenceSelectResourceStepTemplate
     });
 
     return viewModel;

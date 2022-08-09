@@ -1,6 +1,7 @@
 define([
-    'knockout'
-], function(ko) {
+    'knockout',
+    'templates/views/components/reports/consultations-site-visit-main.htm'
+], function(ko, consultationsSiteVisitMainReportTemplate) {
     ko.components.register('consultations-site-visit-main', {
         viewModel: function(params) {
             this.activeCards = params.activeCards;
@@ -34,6 +35,6 @@ define([
                 });
             });
         },
-        template: { require: 'text!templates/views/components/reports/consultations-site-visit-main.htm' }
+        template: consultationsSiteVisitMainReportTemplate
     });
 });

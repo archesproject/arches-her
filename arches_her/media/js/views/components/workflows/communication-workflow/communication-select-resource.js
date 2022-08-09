@@ -3,8 +3,9 @@ define([
     'knockout',
     'uuid',
     'arches',
-    'viewmodels/alert'
-], function(_, ko, uuid, arches, AlertViewModel) {
+    'viewmodels/alert',
+    'templates/views/components/workflows/communication-workflow/communication-select-resource.htm',
+], function(_, ko, uuid, arches, AlertViewModel, communicationSelectResourceStepTemplate) {
     function viewModel(params) {
         var self = this;
         this.resValue = ko.observable().extend({ deferred: true });
@@ -124,9 +125,7 @@ define([
 
     ko.components.register('communication-select-resource', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/communication-workflow/communication-select-resource.htm'
-        }
+        template: communicationSelectResourceStepTemplate
     });
 
     return viewModel;

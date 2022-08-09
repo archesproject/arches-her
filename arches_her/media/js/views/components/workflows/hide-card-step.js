@@ -4,8 +4,9 @@ define([
     'arches',
     'knockout',
     'knockout-mapping',
-    'views/components/workflows/new-tile-step'
-], function(_, $, arches, ko, koMapping, NewTileStep) {
+    'views/components/workflows/new-tile-step',
+    'templates/views/components/workflows/hide-card-step.htm',
+], function(_, $, arches, ko, koMapping, NewTileStep, hideCardStepTemplate) {
     function viewModel(params) {
         NewTileStep.apply(this, [params]);
         if (!params.resourceid()) {
@@ -27,8 +28,6 @@ define([
 
     return ko.components.register('hide-card-step', {
         viewModel: viewModel,
-        template: {
-            require: 'text!templates/views/components/workflows/hide-card-step.htm'
-        }
+        template: hideCardStepTemplate
     });
 });

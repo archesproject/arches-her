@@ -1,4 +1,14 @@
-define(['underscore', 'knockout', 'arches', 'utils/report', 'geojson-extent','views/components/cards/select-feature-layers', 'views/components/map', 'bindings/datatable'], function(_, ko, arches, reportUtils, geojsonExtent, selectFeatureLayersFactory, MapComponentViewModel) {
+define([
+    'underscore',
+    'knockout',
+    'arches',
+    'utils/report',
+    'geojson-extent',
+    'views/components/cards/select-feature-layers',
+    'views/components/map',
+    'templates/views/components/reports/scenes/map.htm',
+    'bindings/datatable'
+], function(_, ko, arches, reportUtils, geojsonExtent, selectFeatureLayersFactory, MapComponentViewModel, mapReportTemplate) {
     return ko.components.register('views/components/reports/scenes/map', {
         viewModel: function(params) {
             const self = this;
@@ -176,6 +186,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'geojson-extent','vi
             self.geojson = ko.unwrap(params.geojson);
             self.prepareMap('app-area-map-data', self.geojson);
         },
-        template: { require: 'text!templates/views/components/reports/scenes/map.htm' }
+        template: mapReportTemplate
     });
 });

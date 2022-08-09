@@ -5,9 +5,10 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/maritime-vessel.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, maritimeVesselReport) {
     return ko.components.register('maritime-vessel-report', {
         viewModel: function(params) {
             var self = this;
@@ -254,6 +255,6 @@ define([
             }
 
         },
-        template: { require: 'text!templates/views/components/reports/maritime-vessel.htm' }
+        template: maritimeVesselReport
     });
 });

@@ -3,11 +3,12 @@ define([
     'jquery',
     'arches',
     'viewmodels/workflow',
+    'templates/views/components/plugins/consultation-workflow.htm',
     'viewmodels/workflow-step',
     'views/components/workflows/consultation/consultation-dates-step',
     'views/components/workflows/consultation/consultation-map-step',
     'views/components/workflows/consultation/consultations-final-step'
-], function(ko, $, arches, Workflow) {
+], function(ko, $, arches, Workflow, consultationWorkflowTemplate) {
     return ko.components.register('consultation-workflow', {
         viewModel: function(params) {
 
@@ -193,6 +194,6 @@ define([
             Workflow.apply(this, [params]);
             this.quitUrl = arches.urls.plugin('init-workflow');
         },
-        template: { require: 'text!templates/views/components/plugins/consultation-workflow.htm' }
+        template: consultationWorkflowTemplate
     });
 });

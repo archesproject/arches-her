@@ -5,10 +5,11 @@ define([
     'arches',
     'utils/resource',
     'utils/report',
+    'templates/views/components/reports/digital-object.htm',
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/copyright',
     'views/components/reports/scenes/json'
-], function($, _, ko, arches, resourceUtils, reportUtils) {
+], function($, _, ko, arches, resourceUtils, reportUtils, digitalObjectReportTemplate) {
     return ko.components.register('digital-object-report', {
         viewModel: function(params) {
             var self = this;
@@ -105,6 +106,6 @@ define([
                     ]
             });
         },
-        template: { require: 'text!templates/views/components/reports/digital-object.htm' }
+        template: digitalObjectReportTemplate
     });
 });

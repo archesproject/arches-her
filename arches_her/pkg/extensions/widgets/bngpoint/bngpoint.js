@@ -1,4 +1,10 @@
-define(['knockout', 'proj4','underscore', 'viewmodels/widget'], function (ko, proj4, _, WidgetViewModel) {
+define([
+    'knockout',
+    'proj4',
+    'underscore',
+    'viewmodels/widget',
+    'templates/views/components/widgets/bngpoint.htm',
+], function (ko, proj4, _, WidgetViewModel, bngpointTemplate) {
     /**
     * registers a text-widget component for use in forms
     * @function external:"ko.components".text-widget
@@ -354,6 +360,6 @@ define(['knockout', 'proj4','underscore', 'viewmodels/widget'], function (ko, pr
 				
             }, this);
         },
-        template: { require: 'text!templates/views/components/widgets/bngpoint.htm' }
+        template: bngpointTemplate
     });
 });

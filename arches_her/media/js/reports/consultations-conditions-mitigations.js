@@ -1,6 +1,7 @@
 define([
-    'knockout'
-], function(ko) {
+    'knockout',
+    'templates/views/components/reports/consultations-conditions-mitigations.htm'
+], function(ko, consultationsConditionsMitigationsReportTemplate) {
     ko.components.register('consultations-conditions-mitigations', {
         viewModel: function(params) {
             var getTiles = function(nodegroupId, typeNodeId) {
@@ -24,6 +25,6 @@ define([
                 return getTiles('a5e15f5c-51a3-11eb-b240-f875a44e0e11', 'e2585f8a-51a3-11eb-a7be-f875a44e0e11');
             });
         },
-        template: { require: 'text!templates/views/components/reports/consultations-conditions-mitigations.htm' }
+        template: consultationsConditionsMitigationsReportTemplate
     });
 });
