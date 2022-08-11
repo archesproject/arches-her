@@ -18,6 +18,22 @@ services:
       stdin_open: true
       tty: true
 
+    aher-webpack:
+      container_name: aher-webpack-7-0
+      image: fargeo/aher-webpack-7-0
+      build:
+        context: ..
+        dockerfile: arches-her/docker/webpack/Dockerfile
+      command: run_webpack
+      volumes:
+        - ../arches/:/web_root/arches
+        - ./:/web_root/arches_her
+      env_file:
+        - ./docker/webpack/env_file.env
+      ports:
+        - 8021:8021
+      stdin_open: true
+      tty: true
     pg_featureserv_aher:
       container_name: pg_featureserv_aher7-0
       image: pramsey/pg_featureserv:latest
