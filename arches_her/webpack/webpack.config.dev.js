@@ -22,6 +22,8 @@ module.exports = merge(commonWebpackConfig, {
                 warnings: false,
             },
         },
+        hot: true,
+        host: '0.0.0.0',
         devMiddleware: {
             index: true,
             publicPath: '/static',
