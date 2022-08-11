@@ -10,7 +10,7 @@ const { WEBPACK_DEVELOPMENT_SERVER_PORT } = require('./webpack-meta-config.js');
 
 module.exports = merge(commonWebpackConfig, {
     mode: 'development',
-    devtool: 'inline-cheap-source-map',
+    devtool: 'inline-source-map',
     output: {
         chunkFilename: 'js/[name].chunk.js',
     },
@@ -31,6 +31,7 @@ module.exports = merge(commonWebpackConfig, {
         },
         port: WEBPACK_DEVELOPMENT_SERVER_PORT,
     },
+    target: 'web',
     plugins: [
         // new ESLintPlugin({
         //     extensions: [`js`, `jsx`],
