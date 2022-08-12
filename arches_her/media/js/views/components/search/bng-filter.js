@@ -55,6 +55,7 @@ define([
                             let bng_xy = self.xyFromBng(value);
                             self.bng_x(bng_xy["x"]);
                             self.bng_y(bng_xy["y"]);
+                            self.validateXy();
                             self.filter.bng(value);
                             self.updateQuery();
                         }
@@ -297,7 +298,7 @@ define([
                         let yGrid = y.toString().substring(yOneHundredKmGrid.toString().length,y.toString().length)//Math.floor((y % 100000) / 1000);
                         let gridLetters = ""
                         for (let key in gridlist) {
-                            if (gridlist[key] === oneHundredKmGrid) {
+                            if (gridlist[key][0] == oneHundredKmGrid[0] & gridlist[key][1] == oneHundredKmGrid[1]) {
                                 gridLetters = key;
                                 break;
                             }
@@ -439,6 +440,7 @@ define([
 
                 this.setupMap = function(map){
                     self.map = ko.observable(map);
+                    self.map().resize();
                     self.restoreState();
                 }
 
