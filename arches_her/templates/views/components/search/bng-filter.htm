@@ -13,51 +13,51 @@
         <p>
             Enter a valid British Nation Grid reference
         </p>
-        <div>
+        <div class="bng-search-input">
             <label for="bngValue">BNG reference to filter by: </label>
-            <input type="text" placeholder="Alpha numeric: TQ3456789012" tabindex=0 id="bng_value" data-bind="value: bng">
-            <div data-bind="visible: bngHasError">
-                <span aria-live="polite" style="color: red;" data-bind="text: bngMessageError"> </span>
+            <input type="text" placeholder="Alpha numeric: TQ3456789012" tabindex=0 id="bng_value" data-bind="value: bng" aria>
+            <div data-bind="visible: bngHasError" class="bng-search-error">
+                <span aria-live="polite" data-bind="text: bngMessageError"> </span>
             </div>
         </div>
         <div>
-            <div>
+            <div class="bng-search-input">
                 <label for="xValue">Easting (X): </label>
                 <input type="number" tabindex=0 id="xValue" data-bind="value: bng_x">
             </div>
-            <div>
+            <div class="bng-search-input">
                 <label for="yValue">Northing (Y): </label>
                 <input type="number" tabindex=0 id="yValue" data-bind="value: bng_y">            
             </div>
-            <div data-bind="visible: xyHasError">
-                <span aria-live="polite" style="color: red;" data-bind="text: xyMessageError"> </span>
+            <div data-bind="visible: xyHasError" class="bng-search-error">
+                <span aria-live="polite" data-bind="text: xyMessageError"> </span>
             </div>
         </div>
         <div>
-            <label for="bngValue">Buffer radius in metres: </label>
-            <input type="number" tabindex=0 id="buffer_value" data-bind="value: buffer">
-            <div data-bind="visible: bufferHasError" >
-                <span aria-live="polite" style="color: red;" data-bind="text: bufferMessageError"> </span>
+            <div lass="bng-search-input">
+                <label for="bngValue">Buffer radius in metres: </label>
+                <input type="number" tabindex=0 id="buffer_value" data-bind="value: buffer">
+                <div data-bind="visible: bufferHasError" class="bng-search-error">
+                    <span aria-live="polite" data-bind="text: bufferMessageError"> </span>
+                </div>
             </div> 
         </div>
         <hr class="title-underline">
-        <div class="">
-            <div id="map" class="relative" style="height: 500px; opacity: 1;" data-bind="mapboxgl: {
-                    mapOptions: {
-                        style: {
-                            version: 8,
-                            sources: sources,
-                            sprite: sprite,
-                            glyphs: glyphs,
-                            layers: layers,
-                        },
-                        center: grid_source_center,
-                        zoom: grid_source_zoom,
-                        interactive: false
+        <div id="bng-search-map" aria-hidden="true" id="map" class="relative" style="padding: 0; height: 500px" data-bind="mapboxgl: {
+                mapOptions: {
+                    style: {
+                        version: 8,
+                        sources: sources,
+                        sprite: sprite,
+                        glyphs: glyphs,
+                        layers: layers,
                     },
-                    afterRender: setupMap
-                }">
-            </div>
+                    center: grid_source_center,
+                    zoom: grid_source_zoom,
+                    interactive: false
+                },
+                afterRender: setupMap
+            }">
         </div>
     </div>
 </div>
