@@ -68,6 +68,8 @@ define([
                 this.bng_x.subscribe(function(value) {
                     if(!self.isDirty){
                         self.isDirty = true;
+                        self.bng("");
+                        self.validate();
                         self.validateXy();
                         let hasErr = ko.unwrap(self.xyHasError());
                         if(!hasErr){
@@ -88,6 +90,8 @@ define([
                 this.bng_y.subscribe(function(value) {
                     if(!self.isDirty){
                         self.isDirty = true;
+                        self.bng("");
+                        self.validate();
                         self.validateXy();
                         let hasErr = ko.unwrap(self.xyHasError());
                         if(!hasErr){
@@ -201,20 +205,20 @@ define([
                     if (self.bng() && self.bng().length > 0) {
                         // bng must have even number of chars
                         if (self.bng().length % 2 !== 0) {
-                            self.bngMessageError("BNG must have an even number of characters");
+                            self.bngMessageError("Grid reference must have an even number of characters");
                             return;
                         }
                         
                         //bng must be between 4 and 12 characters
                         if (self.bng().length < 4 || self.bng().length > 12) {
-                            self.bngMessageError("BNG must be between 4 and 12 characters");
+                            self.bngMessageError("Grid reference must be between 4 and 12 characters");
                             return;
                         }
                         
                         // the first tochars must be in the gridlist
                         var gridlist = Object.keys(self.gridList);
                         if (gridlist.indexOf(self.bng().toUpperCase().substring(0, 2)) === -1) {
-                            self.bngMessageError("BNG must start with a valid 100km grid square identifier");
+                            self.bngMessageError("Grid reference must start with a valid 100km grid square identifier");
                             return;
                         }
                         
@@ -222,7 +226,7 @@ define([
                         var regex = /^[a-zA-Z]{2}[0-9]{2,10}/;
                         var matches = regex.exec(self.bng());
                         if (matches.indexOf(self.bng()) === -1) {
-                            self.bngMessageError("BNG must start with two alpha characters followed by 2 to 10 digits");
+                            self.bngMessageError("Grid reference must start with two alpha characters followed by 2 to 10 digits");
                             return;
                         }                      
 
@@ -233,8 +237,20 @@ define([
                     self.xyMessageError("");
                     let x = parseFloat(self.bng_x());
                     let y = parseFloat(self.bng_y());
+
+                    if (x == 0 && y == 0) {
+                        return;
+                    }
+
                     if (isNaN(x) || x < 0 || isNaN(y) || y < 0) {
                         self.xyMessageError("X and Y must be numeric 0 or greater");
+                        return;
+                    }
+
+                    x = parseInt(self.bng_x());
+                    y = parseInt(self.bng_y());
+                    if(x < 100000 || y < 100000 || x > 999999 || y > 999999){
+                        self.xyMessageError("X and Y must be both be 6 digit coordinates");
                         return;
                     }
                 }
@@ -289,24 +305,26 @@ define([
 
                 this.bngFromXY = function(x,y) {
                     let bng = "";
-                    try {
-                        let gridlist = self.gridList;
-                        let xOneHundredKmGrid = Math.floor(x / 100000);
-                        let yOneHundredKmGrid = Math.floor(y / 100000);
-                        let oneHundredKmGrid = [xOneHundredKmGrid, yOneHundredKmGrid];
-                        let xGrid = x.toString().substring(xOneHundredKmGrid.toString().length,x.toString().length)//Math.floor((x % 100000) / 1000);
-                        let yGrid = y.toString().substring(yOneHundredKmGrid.toString().length,y.toString().length)//Math.floor((y % 100000) / 1000);
-                        let gridLetters = ""
-                        for (let key in gridlist) {
-                            if (gridlist[key][0] == oneHundredKmGrid[0] & gridlist[key][1] == oneHundredKmGrid[1]) {
-                                gridLetters = key;
-                                break;
-                            }
-                        }                     
-                        bng = gridLetters + xGrid + yGrid;
-                    }
-                    catch (error) {
-                        self.xyMessageError("Could not convert XY to BNG");
+                    if(x >= 100000 && y >= 100000 && x < 1000000 && y < 1000000) {
+                        try {
+                            let gridlist = self.gridList;
+                            let xOneHundredKmGrid = Math.floor(x / 100000);
+                            let yOneHundredKmGrid = Math.floor(y / 100000);
+                            let oneHundredKmGrid = [xOneHundredKmGrid, yOneHundredKmGrid];
+                            let xGrid = x.toString().substring(xOneHundredKmGrid.toString().length,x.toString().length)//Math.floor((x % 100000) / 1000);
+                            let yGrid = y.toString().substring(yOneHundredKmGrid.toString().length,y.toString().length)//Math.floor((y % 100000) / 1000);
+                            let gridLetters = ""
+                            for (let key in gridlist) {
+                                if (gridlist[key][0] == oneHundredKmGrid[0] & gridlist[key][1] == oneHundredKmGrid[1]) {
+                                    gridLetters = key;
+                                    break;
+                                }
+                            }                     
+                            bng = gridLetters + xGrid + yGrid;
+                        }
+                        catch (error) {
+                            self.xyMessageError("Could not convert X and Y coordinates to Grid reference");
+                        }
                     }
                     return bng;
                 }
@@ -523,7 +541,7 @@ define([
 
                 try {
                     self.map().getSource('grid-square')?.setData(geoJSON);
-                    bounds_geojson = isPoint ? turf.buffer(bounds_geojson, 100, {units: 'meters'}) : bounds_geojson;
+                    bounds_geojson = isPoint ? turf.buffer(bounds_geojson, 100, 'meters') : bounds_geojson;
                     var extent = geojsonExtent(bounds_geojson);
                     var bounds = new self.mapboxgl.LngLatBounds(extent);
                     self.map().fitBounds(bounds, {
@@ -531,7 +549,7 @@ define([
                         animate: false
                     });
                 } catch (error) {
-                    
+                    console.error("Unable to zoom to bng-filter bounds", error);
                 }
             }
 
