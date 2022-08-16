@@ -18,26 +18,27 @@ details = {
     "icon": "fa fa-compass",
     "modulename": "bng-filter.py",
     "classname": "BngFilter",
-    "type": "popup", #"filter",
+    "type": "popup",
     "componentpath": "views/components/search/bng-filter",
     "componentname": "bng-filter",
     "sortorder": "0",
     "enabled": True,
 }
 
+
 class BngFilter(BaseSearchFilter):
     def append_dsl(self, search_results_object, permitted_nodegroups, include_provisional):
-        
+
         search_query = Bool()
         querysting_params = self.request.GET.get(details["componentname"], "")
         bng_filter = JSONDeserializer().deserialize(querysting_params)
         bng = bng_filter["bng"].upper()
         buffer = bng_filter["buffer"]
         inverted = bng_filter["inverted"]
-        
-        #bng should have an even number of chars to be a correct grid
+
+        # bng should have an even number of chars to be a correct grid
         if len(bng) % 2 == 0:
-            spatial_filter = self.build_geojson_from_bng(bng, buffer);
+            spatial_filter = self.build_geojson_from_bng(bng, buffer)
             print(json.dumps(spatial_filter))
             if "features" in spatial_filter:
                 if len(spatial_filter["features"]) > 0:
@@ -46,7 +47,7 @@ class BngFilter(BaseSearchFilter):
                         grid_square_buffer = spatial_filter["features"][1]["geometry"]
                     except:
                         grid_square_buffer = None
-                    
+
                     dsl_geom = grid_square_geom if grid_square_buffer is None else grid_square_buffer
 
                     geoshape = GeoShape(
@@ -81,7 +82,6 @@ class BngFilter(BaseSearchFilter):
             search_results_object[details["componentname"]]["grid_square"] = spatial_filter
         except NameError:
             logger.info(_("Feature geometry is not defined"))
-        
 
     def view_data(self):
         """
@@ -98,36 +98,58 @@ class BngFilter(BaseSearchFilter):
         """
 
         pass
-    
+
     def build_geojson_from_bng(self, bng_value, buffer_value=0):
-        
+
         geometryValue = {"type": "FeatureCollection", "features": []}
-        
+
         if bng_value != None:
-            
+
             grid_square = self.bng_grid_square()
-            
+
             gridSquareLetters = bng_value[0:2]
             bngValueNumbers = bng_value[2:]
             splitSection = int(len(bngValueNumbers) / 2)
             gridSquareNumbers = grid_square[gridSquareLetters]
             eastingValue = f"{str(gridSquareNumbers[0])}{str(bngValueNumbers[:splitSection])}"
             northingValue = f"{str(gridSquareNumbers[1])}{str(bngValueNumbers[splitSection:])}"
-                        
-            xmin = self.pad_coord(eastingValue, '0', 6)
-            xmax = self.pad_coord(eastingValue, '9', 6)
-            ymin = self.pad_coord(northingValue, '0', 6)
-            ymax = self.pad_coord(northingValue, '9', 6)
+
+            xmin = self.pad_coord(eastingValue, "0", 6)
+            xmax = self.pad_coord(eastingValue, "9", 6)
+            ymin = self.pad_coord(northingValue, "0", 6)
+            ymax = self.pad_coord(northingValue, "9", 6)
             isPolygon = True
             if xmin == xmax and ymin == ymax:
                 isPolygon = False
                 wkt_geom = "POINT(" + xmin + " " + ymax + ")"
             else:
-                wkt_geom = "POLYGON((" + xmin + " " + ymin + "," + xmin + " " + ymax + "," + xmax + " " + ymax + "," + xmax + " " + ymin + "," + xmin + " " + ymin + "))"
-            
+                wkt_geom = (
+                    "POLYGON(("
+                    + xmin
+                    + " "
+                    + ymin
+                    + ","
+                    + xmin
+                    + " "
+                    + ymax
+                    + ","
+                    + xmax
+                    + " "
+                    + ymax
+                    + ","
+                    + xmax
+                    + " "
+                    + ymin
+                    + ","
+                    + xmin
+                    + " "
+                    + ymin
+                    + "))"
+                )
+
             bng_geom = self.transform_to_wgs84(GEOSGeometry(wkt_geom, srid=27700), from_srid=27700)
             bng_geojson = json.loads(bng_geom.geojson)
-            
+
             uuidForRecord = uuid4()
             bng_feature = {
                 "geometry": bng_geojson,
@@ -135,9 +157,9 @@ class BngFilter(BaseSearchFilter):
                 "id": str(uuidForRecord),
                 "properties": {"type": "grid_square", "bngref": str(bng_value)},
             }
-            
+
             geometryValue["features"].append(bng_feature)
-            
+
             if buffer_value > 0:
                 bng_buffer_polygon = _buffer(bng_geom, buffer_value)
                 bng_buffer_geojson = json.loads(bng_buffer_polygon.geojson)
@@ -152,7 +174,6 @@ class BngFilter(BaseSearchFilter):
 
         return geometryValue
 
-            
     def pad_coord(self, coord, pad_value, pad_length):
         """
         This function right pads a string with a given value to a given length.
@@ -160,7 +181,7 @@ class BngFilter(BaseSearchFilter):
         if len(coord) < pad_length:
             coord = coord + pad_value * (pad_length - len(coord)) + f".{pad_value}"
         return coord
-    
+
     def transform_to_wgs84(self, geom, from_srid):
         to_srid = 4326
         with connection.cursor() as cursor:
@@ -172,15 +193,14 @@ class BngFilter(BaseSearchFilter):
             res = cursor.fetchone()
             geom = GEOSGeometry(res[0], srid=4326)
         return geom
-        
-        
+
     def bng_grid_square(self):
         return {
             "HO": [3, 12],
             "HP": [4, 12],
             "HT": [3, 11],
             "HU": [4, 11],
-            "HW": [1, 10], 
+            "HW": [1, 10],
             "HX": [2, 10],
             "HY": [3, 10],
             "HZ": [4, 10],
@@ -255,7 +275,8 @@ class BngFilter(BaseSearchFilter):
             "TV": [5, 0],
             "TW": [6, 0],
         }
-        
+
+
 def _buffer(geojson, width=0):
     geojson = JSONSerializer().serialize(geojson)
     geom = GEOSGeometry(geojson, srid=4326)
