@@ -31,6 +31,15 @@ define([
                     inverted: ko.observable(false)
                 };
                 
+                this.selectedPopup.subscribe(function(tab){
+                    var self = this;
+                    if (tab === 'bng-filter') {
+                        if (ko.unwrap(self.map)) {
+                            setTimeout(function() { self.map().resize(); }, 1);
+                        }
+                    }
+                }, this);
+
                 this.bngMessageError = ko.observable("");
                 this.bufferMessageError = ko.observable("");
                 this.xyMessageError = ko.observable("");
@@ -38,9 +47,11 @@ define([
                 this.bngHasError = ko.computed(function() {
                     return self.bngMessageError().length > 0;
                 });
+
                 this.bufferHasError = ko.computed(function() {
                     return self.bufferMessageError().length > 0;
                 });
+
                 this.xyHasError = ko.computed(function() {
                     return self.xyMessageError().length > 0;
                 });
@@ -203,26 +214,22 @@ define([
                 this.validateBng = function() {
                     self.bngMessageError("");
                     if (self.bng() && self.bng().length > 0) {
-                        // bng must have even number of chars
                         if (self.bng().length % 2 !== 0) {
                             self.bngMessageError("Grid reference must have an even number of characters");
                             return;
                         }
                         
-                        //bng must be between 4 and 12 characters
                         if (self.bng().length < 4 || self.bng().length > 12) {
                             self.bngMessageError("Grid reference must be between 4 and 12 characters");
                             return;
                         }
                         
-                        // the first tochars must be in the gridlist
                         var gridlist = Object.keys(self.gridList);
                         if (gridlist.indexOf(self.bng().toUpperCase().substring(0, 2)) === -1) {
                             self.bngMessageError("Grid reference must start with a valid 100km grid square identifier");
                             return;
                         }
                         
-                        //must start with two letters and then all chars after the first two must be digits
                         var regex = /^[a-zA-Z]{2}[0-9]{2,10}/;
                         var matches = regex.exec(self.bng());
                         if (matches.indexOf(self.bng()) === -1) {
@@ -277,7 +284,6 @@ define([
                     return;
                 }
                 
-                //validate the inputs and
                 this.validate = function() {
                     self.validateBng();
                     self.validateBuffer();
@@ -311,9 +317,9 @@ define([
                             let xOneHundredKmGrid = Math.floor(x / 100000);
                             let yOneHundredKmGrid = Math.floor(y / 100000);
                             let oneHundredKmGrid = [xOneHundredKmGrid, yOneHundredKmGrid];
-                            let xGrid = x.toString().substring(xOneHundredKmGrid.toString().length,x.toString().length)//Math.floor((x % 100000) / 1000);
-                            let yGrid = y.toString().substring(yOneHundredKmGrid.toString().length,y.toString().length)//Math.floor((y % 100000) / 1000);
-                            let gridLetters = ""
+                            let xGrid = x.toString().substring(xOneHundredKmGrid.toString().length,x.toString().length);
+                            let yGrid = y.toString().substring(yOneHundredKmGrid.toString().length,y.toString().length);
+                            let gridLetters = "";
                             for (let key in gridlist) {
                                 if (gridlist[key][0] == oneHundredKmGrid[0] & gridlist[key][1] == oneHundredKmGrid[1]) {
                                     gridLetters = key;
@@ -458,7 +464,6 @@ define([
 
                 this.setupMap = function(map){
                     self.map = ko.observable(map);
-                    self.map().resize();
                     self.restoreState();
                 }
 
