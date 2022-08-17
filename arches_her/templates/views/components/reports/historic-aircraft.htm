@@ -106,7 +106,8 @@
                             <div class="firstchild-container">
                                 <!-- flight Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="flight-table_info">Flight table.</p>
+                                    <table id="flight-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -118,7 +119,7 @@
                                                 <th class="none">{% trans "Arrival Date" %}</th>
                                                 <th class="none">{% trans "Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Crew" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: flights, dataTableOptions: flightsTableConfig}">
@@ -175,7 +176,8 @@
                             <div class="firstchild-container">
                                 <!-- last flight Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="last-flight-table_info">Last flight table.</p>
+                                    <table id="last-flight-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -193,7 +195,7 @@
                                                 <th class="none">{% trans "Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Crash Site Type" %}</th>
                                                 <th class="none">{% trans "Crew" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: lastFlight, dataTableOptions: lastFlightTableConfig}">
