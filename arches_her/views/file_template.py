@@ -363,9 +363,10 @@ class FileTemplateView(View):
                 associate_heritage
             )
 
+        htmlTags = re.compile(r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
         for key in mapping_dict:
             html = False
-            if "<" in mapping_dict[key]:  # look for html tag, not ideal
+            if htmlTags.search(mapping_dict[key] if mapping_dict[key] is not None else ""):
                 html = True
             self.replace_string(self.doc, key, mapping_dict[key], html)
 
