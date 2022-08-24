@@ -9,7 +9,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                scrollY: "250px",
                 columns: Array(2).fill(null)
             };
 
@@ -19,7 +18,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                scrollY: "250px",
                 columns: Array(4).fill(null)
             };
 
@@ -29,7 +27,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                scrollY: "250px",
                 columns: Array(3).fill(null)
             };
 

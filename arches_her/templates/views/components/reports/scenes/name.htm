@@ -22,13 +22,14 @@
         <div class="aher-report-subsection" >
             <div>
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="names-table_info">Name table.</p>
+                    <table id="names-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
                                 <th class="">{% trans "Name Use Type" %}</th>
                                 <th class="">{% trans "Name Currency" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: names, dataTableOptions: nameTableConfig }">
@@ -57,12 +58,13 @@
         <div class="aher-report-subsection" >
             <div>
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="name-use-type-table_info">Name use type table.</p>
+                    <table id="name-use-type-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
                                 <th class="">{% trans "Name Use Type" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: names, dataTableOptions: nameTableConfig }">
@@ -107,14 +109,15 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="external-cross-references-table_info">External cross reference table.</p>
+                    <table id="external-cross-references-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
                                 <th class="min-tabletl">{% trans "Source" %}</th>
                                 <th class="none">{% trans "Note" %}</th>
                                 <th>{% trans "URL" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: crossReferences, dataTableOptions: crossReferenceTableConfig}">

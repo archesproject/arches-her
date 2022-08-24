@@ -19,11 +19,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-activity-table_info">Associated activity table.</p>
+                    <table id="associated-activity-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Activity" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: activities, dataTableOptions: relatedResourceTwoColumnTableConfig}">
@@ -73,13 +74,14 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-archive-table_info">Associated archive table.</p>
+                    <table id="associated-archive-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Archive Holder" %}</th>
                                 <th>{% trans "Title" %}</th>
                                 <th>{% trans "References" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: archive, dataTableOptions: archiveHolderTableConfig}">
@@ -131,11 +133,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-consultation-table_info">Associated consultation table.</p>
+                    <table id="associated-consultation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Consultation" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: consultations, dataTableOptions: relatedResourceTwoColumnTableConfig}">
@@ -184,11 +187,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-digital-file-table_info">Associated digital file table.</p>
+                    <table id="associated-digital-file-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "File Name" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: files, dataTableOptions: relatedResourceTwoColumnTableConfig}">
@@ -237,12 +241,13 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-monument-table_info">Associated monument/area/artefact table.</p>
+                    <table id="associated-monument-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Resource Name" %}</th>
                                 <th>{% trans "Association" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: assets, dataTableOptions: relatedResourceThreeColumnTableConfig}">
@@ -293,11 +298,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-people-and-organisation-table_info">Associated people and organisation table.</p>
+                    <table id="associated-people-and-organisation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Associated Person or Organisation" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: actors, dataTableOptions: relatedResourceTwoColumnTableConfig}">
@@ -343,11 +349,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="related-application-area-table_info">Related application area table.</p>
+                    <table id="related-application-area-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Application Area" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: applicationArea, dataTableOptions: applicationAreaTableConfig}">
@@ -394,11 +401,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="translation-table_info">Translation table.</p>
+                    <table id="translation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Translation" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: translation, dataTableOptions: relatedResourceTwoColumnTableConfig}">
@@ -440,11 +448,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="period-table_info">Period table.</p>
+                    <table id="period-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Period" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: period, dataTableOptions: relatedResourceTwoColumnTableConfig}">

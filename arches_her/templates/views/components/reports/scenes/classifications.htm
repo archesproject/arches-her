@@ -31,7 +31,8 @@
             
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="construction-phase-table_info">Construction phase table.</p>
+                    <table id="construction-phase-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Artefact Type" %}</th>
@@ -46,7 +47,7 @@
                                 <th class="none">{% trans "Material" %}</th>
                                 <th class="none">{% trans "Production Technique" %}</th>
                                 <th class="none">{% trans "Phase Description" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: artefactProdTableConfiguration}">
@@ -101,7 +102,8 @@
             
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="construction-phase-table_info">Construction phase table.</p>
+                    <table id="construction-phase-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Type" %}</th>
@@ -119,7 +121,7 @@
                                 <th class="none">{% trans "Covering Material" %}</th>
                                 <th class="none">{% trans "Construction Technique" %}</th>
                                 <th class="none">{% trans "Phase Description" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: conPhasesTableConfig}">
@@ -176,7 +178,8 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="construction-phase-table_info">Construction phase table.</p>
+                    <table id="construction-phase-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Period" %}</th>
@@ -197,7 +200,7 @@
                                 <th class="none">{% trans "Construction Method" %}</th>
                                 <th class="none">{% trans "Phase Description" %}</th>
                                 <th class="none">{% trans "Place of Manufacture" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: aircraftConstructionConfig}">
@@ -257,7 +260,8 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="construction-phase-table_info">Construction phase table.</p>
+                    <table id="construction-phase-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Period" %}</th>
@@ -280,7 +284,7 @@
                                 <th class="none">{% trans "Construction Method" %}</th>
                                 <th class="none">{% trans "Phase Description" %}</th>
                                 <th class="none">{% trans "Builder" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: production, dataTableOptions: maritimeProductionConfig}">
@@ -335,21 +339,22 @@
     <div data-bind="visible: visible.dimensions" class="aher-report-collapsible-container pad-lft">
 
         <!-- ko ifnot: dimensions().length -->
-        <div class="aher-nodata-note">No construction phases for this resource</div>
+        <div class="aher-nodata-note">No dimensions for this resource</div>
         <!-- /ko -->
 
         <!-- ko if: dimensions().length -->
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="dimension-table_info">Dimension table.</p>
+                    <table id="dimension-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Type" %}</th>
                                 <th>{% trans "Measurement Unit" %}</th>
                                 <th>{% trans "Value" %}</th>
                                 <th class="none">{% trans "Type Qualifier" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: dimensions, dataTableOptions: dimensionTableConfig}">
@@ -396,7 +401,8 @@
             
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="construction-component-table_info">Construction component table.</p>
+                    <table id="construction-component-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Construction Phase" %}</th>
@@ -404,7 +410,7 @@
                                 <th>{% trans "Technique" %}</th>
                                 <th>{% trans "Material" %}</th>
                                 <th class="medium">{% trans "Evidence" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: components, dataTableOptions: componentsTableConfig}">
@@ -455,7 +461,8 @@
             
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="use-phase-table_info">Use phase table.</p>
+                    <table id="use-phase-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Type" %}</th>
@@ -467,7 +474,7 @@
                                 <th class="none">{% trans "Use Evidence" %}</th>
                                 <th class="none">{% trans "Description Type" %}</th>
                                 <th class="none">{% trans "Description" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: usePhases, dataTableOptions: usePhasesTableConfig}">
@@ -522,14 +529,15 @@
             
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="organization-formation-table_info">Organization formation table.</p>
+                    <table id="organization-formation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Organization Type" %}</th>
                                 <th>{% trans "Start Date" %}</th>
                                 <th>{% trans "End Date" %}</th>
                                 <th>{% trans "Date Qualifier" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: organizationFormation, dataTableOptions: organizationFormationTableConfig}">
@@ -579,12 +587,13 @@
             
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="date-table_info">Date table.</p>
+                    <table id="date-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Start Date" %}</th>
                                 <th>{% trans "End Date" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: dates, dataTableOptions: datesTableConfig}">

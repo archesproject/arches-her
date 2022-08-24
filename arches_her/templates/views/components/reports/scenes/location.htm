@@ -150,7 +150,8 @@
             <div class="firstchild-container">
                 <!-- Address Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="address-table_info">Address table.</p>
+                    <table id="address-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Street Number" %}</th>
@@ -166,7 +167,7 @@
                                 <th class="none">{% trans "County" %}</th>
                                 <th class="none">{% trans "Full Address" %}</th>
                                 <th class="none">{% trans "Currency" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: addresses, dataTableOptions: addressTableConfig}">
@@ -223,12 +224,13 @@
             <div class="firstchild-container">
                 <!-- Statements Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="location-description-table_info">Location description table.</p>
+                    <table id="location-description-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Description" %}</th>
                                 <th>{% trans "Type" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: descriptions, dataTableOptions: locDescriptionsTableConfig }">
@@ -272,13 +274,14 @@
             <div class="firstchild-container">
                 <!-- Statements Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="administrative-area-table_info">Administrative area table.</p>
+                    <table id="administrative-area-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Name" %}</th>
                                 <th>{% trans "Type" %}</th>
                                 <th>{% trans "Currency" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: administrativeAreas, dataTableOptions: adminAreasTableConfig }">
@@ -324,11 +327,12 @@
             <div class="firstchild-container">
                 <!-- Statements Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="national-grid-reference-table_info">National grid reference table.</p>
+                    <table id="national-grid-reference-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "National Grid Reference" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: nationalGridReferences, dataTableOptions: gridReferencesTableConfig}">
@@ -372,11 +376,12 @@
             <div class="firstchild-container">
                 <!-- named Locations Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="named-location-table_info">Named location table.</p>
+                    <table id="named-location-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Placename" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: namedLocations, dataTableOptions: namedLocationsTableConfig }">

@@ -93,12 +93,13 @@
                             <div class="firstchild-container">
                                 <!-- Nationalities Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="nationality-table_info">Nationality table.</p>
+                                    <table id="nationality-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Nationality" %}</th>
                                                 <th>{% trans "Place of Registration" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: nationalities, dataTableOptions: nationalitiesTableConfig}">
@@ -141,7 +142,8 @@
                             <div class="firstchild-container">
                                 <!-- Owners Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="owner-table_info">Owner table.</p>
+                                    <table id="owner-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Owner" %}</th>
@@ -149,7 +151,7 @@
                                                 <th class="none">{% trans "Ownership Start Date" %}</th>
                                                 <th class="none">{% trans "Ownership End Date" %}</th>
                                                 <th class="none">{% trans "Ownership Date Qualifier" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: owners, dataTableOptions: ownersTableConfig}">
@@ -201,7 +203,8 @@
                             <div class="firstchild-container">
                                 <!-- Voyages Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="voyage-table_info">Voyage table.</p>
+                                    <table id="voyage-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -219,7 +222,7 @@
                                                 <th class="none">{% trans "Destination Name Currency" %}</th>
                                                 <th class="none">{% trans "Loss Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Crew" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: voyages, dataTableOptions: voyagesTableConfig}">
