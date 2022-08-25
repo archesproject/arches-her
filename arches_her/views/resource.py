@@ -17,12 +17,13 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 '''
 
 from django.http import HttpResponseNotFound
-from django.utils.translation import ugettext as _
+from django.utils.translation import get_language, ugettext as _
 from django.views.generic import View
 from arches.app.models.resource import Resource
 from arches.app.utils.response import JSONResponse
 from arches.app.search.search_engine_factory import SearchEngineFactory
 from arches.app.datatypes.datatypes import DataTypeFactory
+from arches.app.models.system_settings import settings
 from arches_her.views.active_consultations import build_resource_dict
 import logging
 
@@ -30,6 +31,16 @@ logger = logging.getLogger(__name__)
 
 
 class ResourceDescriptors(View):
+    def get_localized_descriptor(self, document, descriptor_type):
+        language_codes = (get_language(), settings.LANGUAGE_CODE)
+
+        descriptor = document["_source"][descriptor_type]
+        result = descriptor[0] if len(descriptor) > 0 else { "value": _("Undefined") }
+        for language_code in language_codes:
+            for entry in descriptor:
+                if entry["language"] == language_code and entry["value"] != "":
+                    result = entry
+        return result["value"]
 
     def get(self, request, resourceid=None):
         if Resource.objects.filter(pk=resourceid).exists():
@@ -63,9 +74,9 @@ class ResourceDescriptors(View):
                 ret = {
                     'graphid': document['_source']['graph_id'],
                     'graph_name': resource.graph.name,
-                    'displaydescription': document['_source']['displaydescription'],
-                    'map_popup': document['_source']['map_popup'],
-                    'displayname': document['_source']['displayname'],
+                    'displaydescription': self.get_localized_descriptor(document, 'displaydescription'),
+                    'map_popup': self.get_localized_descriptor(document, 'map_popup'),
+                    'displayname': self.get_localized_descriptor(document, 'displayname'),
                     'geometries': document['_source']['geometries']
                 }
                 ret.update(additional_data)
