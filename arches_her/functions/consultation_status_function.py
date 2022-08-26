@@ -6,6 +6,7 @@ from arches.app.functions.base import BaseFunction
 from arches.app.models import models
 from arches.app.models.tile import Tile
 from arches.app.datatypes.datatypes import DataTypeFactory
+import logging
 
 
 details = {
@@ -45,14 +46,14 @@ class ConsultationStatusFunction(BaseFunction):
                     return True
 
                 except Exception as e:
-                    print (e, "Could not create boolean tile")
+                    self.logger.error(e, "Could not create boolean tile")
                     return False
 
             else:
                 return False
 
         except Exception as e:
-                print (e, "Could not create boolean tile")
+                self.logger.error(e, "Could not create boolean tile")
                 return False
 
 
@@ -85,7 +86,7 @@ class ConsultationStatusFunction(BaseFunction):
                         self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,True,False)
                         return
                 except Exception as e:
-                    print(e,"Could not compare today's date and completed date")
+                    self.logger.error(e,"Could not compare today's date and completed date")
                     return
             else:
                 if tile.nodegroup_id == date_comp_node.nodegroup_id:
@@ -105,30 +106,34 @@ class ConsultationStatusFunction(BaseFunction):
 
 
     def save(self, tile, request, context=None):
-
-        self.save_cons_tile(tile=tile, request=request, is_function_save_method=True)
-        return
+        self.logger = logging.getLogger(__name__)
+        try:
+            self.save_cons_tile(tile=tile, request=request, is_function_save_method=True)
+            return
+        except Exception as e:
+            self.logger.error(e, "Could not save tile")
 
 
     def delete(self,tile,request):
-        date_comp_node = models.Node.objects.get(nodeid=self.config["cons_comp_date_nodeid"])
-        cons_status_bool_nodeid = self.config["cons_status_bool_nodeid"]
-        if tile.nodegroup_id == date_comp_node.nodegroup_id:
-            cons_status_bool_filter = Tile.objects.filter(resourceinstance_id=tile.resourceinstance_id,nodegroup_id=cons_status_bool_nodeid)
-            if len(cons_status_bool_filter) > 0:
-                self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,True,False)
-                return
+        self.logger = logging.getLogger(__name__)
+        try:
+            date_comp_node = models.Node.objects.get(nodeid=self.config["cons_comp_date_nodeid"])
+            cons_status_bool_nodeid = self.config["cons_status_bool_nodeid"]
+            if tile.nodegroup_id == date_comp_node.nodegroup_id:
+                cons_status_bool_filter = Tile.objects.filter(resourceinstance_id=tile.resourceinstance_id,nodegroup_id=cons_status_bool_nodeid)
+                if len(cons_status_bool_filter) > 0:
+                    self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,True,False)
+                    return
+                else:
+                    return
             else:
                 return
-        else:
-            return
+        except Exception as e:
+                self.logger.error(e, "Could not delete tile")
 
 
-    def on_import(self,tile,request):
-        print("========= on_import ===========")
-
-        self.save_cons_tile(tile=tile, request=request, is_function_save_method=True)
-        return
+    def on_import(self,tile):
+        raise NotImplementedError
 
 
     def after_function_save(self,tile,request):
