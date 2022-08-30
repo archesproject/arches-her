@@ -5,8 +5,11 @@
 {% block body %}
 <!-- Artefact condition section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.artefactCondition">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.artefactCondition)}, css: {'fa-angle-double-right': visible.artefactCondition(), 'fa-angle-double-up': !visible.artefactCondition()}"  class="fa toggle"></i> {% trans "Artefact Condition" %}</h2>
-    <a data-bind="{if: cards.artefactCondition, click: function(){addNewTile(cards.artefactCondition)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.artefactCondition)}, css: {'fa-angle-double-right': visible.artefactCondition(), 'fa-angle-double-up': !visible.artefactCondition()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Artefact Condition section"></i>
+        {% trans "Artefact Condition" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.artefactCondition, click: function(){addNewTile(cards.artefactCondition)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.artefactCondition" class="aher-report-collapsible-container pad-lft">
@@ -19,14 +22,15 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="artefact-condition-table_info">Artefact condition table.</p>
+                    <table id="artefact-condition-table"  class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>{% trans "Type" %}</th>
                                 <th>{% trans "Digital File" %}</th>
                                 <th>{% trans "Start Date" %}</th>
                                 <th>{% trans "End Date" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: artefactCondition, dataTableOptions: artefactConditionConfig}">
@@ -57,8 +61,11 @@
 
 <!-- Scientific date section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.scientificDate">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.scientificDate)}, css: {'fa-angle-double-right': visible.scientificDate(), 'fa-angle-double-up': !visible.scientificDate()}"  class="fa toggle"></i> {% trans "Scientific Date Determination" %}</h2>
-    <a data-bind="{if: cards.scientificDate, click: function(){addNewTile(cards.scientificDate)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.scientificDate)}, css: {'fa-angle-double-right': visible.scientificDate(), 'fa-angle-double-up': !visible.scientificDate()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Scientific Date Determination section"></i>
+        {% trans "Scientific Date Determination" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.scientificDate, click: function(){addNewTile(cards.scientificDate)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.scientificDate" class="aher-report-collapsible-container pad-lft">
@@ -71,7 +78,8 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="scientific-date-table_info">Scientific date determination table.</p>
+                    <table id="scientific-date-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>{% trans "Construction Phase" %}</th>
@@ -86,7 +94,7 @@
                                 <th class="none">{% trans "End Date of Date Determination" %}</th>
                                 <th class="none">{% trans "Date Determination Qualifier" %}</th>
                                 <th class="none">{% trans "General Note" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: scientificDate, dataTableOptions: scientificDatesTableConfig}">

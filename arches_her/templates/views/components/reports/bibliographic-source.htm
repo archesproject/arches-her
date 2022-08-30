@@ -41,7 +41,10 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'source'">
 
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}" class="fa toggle"></i> {% trans "Names" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Names section"></i>
+                        {% trans "Names" %}
+                    </h2>
                     <span data-bind="if: cards.sourceNames && (!sourceNames().length || cards.sourceNames.cardinality == 'n')">
                         <a class="aher-report-a" data-bind="click: function(){addNewTile(cards.sourceNames)}"><i class="fa fa-mail-reply"></i> {% trans "Add Bibliographic Source Name" %}</a>
                     </span>
@@ -124,7 +127,10 @@
             <!-- Publication Details Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'publication'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.publication)}, css: {'fa-angle-double-right': visible.publication(), 'fa-angle-double-up': !visible.publication()}" class="fa toggle"></i> {% trans "Publication" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.publication)}, css: {'fa-angle-double-right': visible.publication(), 'fa-angle-double-up': !visible.publication()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Publication section"></i>
+                        {% trans "Publication" %}
+                    </h2>
                     <span data-bind="if: cards.publication && (!publication().length || cards.publication.cardinality == 'n')">
                         <a class="aher-report-a" data-bind="click: function(){add(cards.publication)}"><i class="fa fa-mail-reply"></i> {% trans "Add Publication" %}</a>
                     </span>
@@ -176,8 +182,11 @@
                 </div>
                 <!-- Bibliographic Source Creation section -->
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}"  class="fa toggle"></i> {% trans "Source Creation" %}</h2>
-                    <a data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Source Creation section"></i>
+                        {% trans "Source Creation" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.sourceCreation" class="aher-report-collapsible-container pad-lft">
@@ -190,14 +199,15 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table" data-bind="">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="source-creation-table_info">Source creation table.</p>
+                                    <table id="source-creation-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Author" %}</th>
                                                 <th>{% trans "Editor" %}</th>
                                                 <th>{% trans "Contributor" %}</th>
                                                 <th class="none">{% trans "Statement of Responsibility" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: sourceCreation, dataTableOptions: sourceCreationConfig}">

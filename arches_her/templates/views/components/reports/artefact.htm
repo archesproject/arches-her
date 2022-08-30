@@ -83,8 +83,11 @@
             <!-- Discovery Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'discovery'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.discovery)}, css: {'fa-angle-double-right': visible.discovery(), 'fa-angle-double-up': !visible.discovery()}" class="fa toggle"></i> {% trans "Discovery" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.discovery, event:{ mousedown:function(d, e){addNewTile(cards.discovery, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: discovery().length">{% trans "Edit Discovery" %}</span><span data-bind="ifnot: discovery().length">{% trans "Add Discovery" %}</span></a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.discovery)}, css: {'fa-angle-double-right': visible.discovery(), 'fa-angle-double-up': !visible.discovery()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Discovery section"></i>
+                        {% trans "Discovery" %}
+                    </h2>
+                    <a href="#" class="aher-report-a" data-bind="{if: cards.discovery, event:{ mousedown:function(d, e){addNewTile(cards.discovery, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: discovery().length">{% trans "Edit Discovery" %}</span><span data-bind="ifnot: discovery().length">{% trans "Add Discovery" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.discovery" class="aher-report-collapsible-container pad-lft">
@@ -99,13 +102,14 @@
                             <div class="firstchild-container">
                                 <!-- discovery Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="discovery-table_info">Discovery table.</p>
+                                    <table id="discovery-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Method" %}</th>
                                                 <th>{% trans "Recovery Technique" %}</th>
                                                 <th class="none">{% trans "Note" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: discovery, dataTableOptions: discoveryTableConfig}">
@@ -133,7 +137,10 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.finders)}, css: {'fa-angle-double-right': visible.finders(), 'fa-angle-double-up': !visible.finders()}" class="fa toggle"></i> {% trans "Finders" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.finders)}, css: {'fa-angle-double-right': visible.finders(), 'fa-angle-double-up': !visible.finders()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Finders section"></i>
+                        {% trans "Finders" %}
+                    </h2>
                     <span data-bind="if: cards.finders && (!finders().length || cards.finders.cardinality == 'n')">
                         <a class="aher-report-a" data-bind="click: function(){addNewTile(cards.finders)}"><i class="fa fa-mail-reply"></i> {% trans "Add Finder" %}</a>
                     </span>

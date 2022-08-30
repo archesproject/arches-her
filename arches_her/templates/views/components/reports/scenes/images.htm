@@ -5,8 +5,11 @@
 {% block body %}
 <!-- Copyright section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.copyright">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.copyright)}, css: {'fa-angle-double-right': visible.copyright(), 'fa-angle-double-up': !visible.copyright()}" class="fa toggle"></i> {% trans "Copyrights" %}</h2>
-    <a data-bind="{if: cards.copyright, click: function(){addNewTile(cards.copyright)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Copyright" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.copyright)}, css: {'fa-angle-double-right': visible.copyright(), 'fa-angle-double-up': !visible.copyright()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Copyrights section"></i>
+        {% trans "Copyrights" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.copyright, click: function(){addNewTile(cards.copyright)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Copyright" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.copyright" class="aher-report-collapsible-container pad-lft">
@@ -19,12 +22,13 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="copyright-table_info">Copyright table.</p>
+                    <table id="copyright-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Type" %}</th>
                                 <th>{% trans "Statement" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: copyright, dataTableOptions: copyrightTableConfig}">
@@ -52,8 +56,11 @@
 </div>
 
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.images)}, css: {'fa-angle-double-right': visible.images(), 'fa-angle-double-up': !visible.images()}"  class="fa toggle"></i> {% trans "Images" %}</h2>
-    <a data-bind="{if: cards.images, click: function(){addNewTile(cards.images)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.images)}, css: {'fa-angle-double-right': visible.images(), 'fa-angle-double-up': !visible.images()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Images section"></i>
+        {% trans "Images" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.images, click: function(){addNewTile(cards.images)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.images" class="aher-report-collapsible-container pad-lft">

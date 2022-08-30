@@ -4,7 +4,10 @@
 
 {% block body %}
 <div class="aher-report-section" data-bind="foreach: {data: sections, as: 'section', noChildContext: true}">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible[section.title])}, css: {'fa-angle-double-right': visible[section.title](), 'fa-angle-double-up': !visible[section.title]()}" class="fa toggle"></i> <span data-bind="text: section.title"></span></h2>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible[section.title])}, css: {'fa-angle-double-right': visible[section.title](), 'fa-angle-double-up': !visible[section.title]()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse section"></i>
+        <span data-bind="text: section.title"></span>
+    </h2>
     <span data-bind="if: section.card && section.card.cardinality == '1'">
         <a class="aher-report-a" data-bind="click: function(){add(section.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:section.title"></span></a>
     </span>

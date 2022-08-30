@@ -6,8 +6,11 @@
 
 <!-- Bibliographic Source Creation section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.sourceCreation">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}"  class="fa toggle"></i> {% trans "Source Creation" %}</h2>
-    <a data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Source Creation section"></i>
+        {% trans "Source Creation" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.sourceCreation" class="aher-report-collapsible-container pad-lft">
@@ -20,14 +23,15 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="source-creation-table_info">Bibliographic source creation table.</p>
+                    <table id="source-creation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>{% trans "Author" %}</th>
                                 <th>{% trans "Editor" %}</th>
                                 <th>{% trans "Contributor" %}</th>
                                 <th>{% trans "Statement of Responsibility" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: sourceCreation, dataTableOptions: sourceCreationConfig}">
@@ -58,8 +62,11 @@
 
 <!-- Repository Storage section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.repositoryStorage">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.repositoryStorage)}, css: {'fa-angle-double-right': visible.repositoryStorage(), 'fa-angle-double-up': !visible.repositoryStorage()}"  class="fa toggle"></i> {% trans "Repository Storage Location" %}</h2>
-    <a data-bind="{if: cards.repositoryStorage, click: function(){addNewTile(cards.repositoryStorage)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.repositoryStorage)}, css: {'fa-angle-double-right': visible.repositoryStorage(), 'fa-angle-double-up': !visible.repositoryStorage()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Repository Storage Location section"></i>
+        {% trans "Repository Storage Location" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.repositoryStorage, click: function(){addNewTile(cards.repositoryStorage)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.repositoryStorage" class="aher-report-collapsible-container pad-lft">
@@ -72,13 +79,14 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="repository-storage-table_info">Repository storage location table.</p>
+                    <table id="repository-storage-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>{% trans "Owner" %}</th>
                                 <th>{% trans "Building Name" %}</th>
                                 <th>{% trans "Storage Area" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: repositoryStorage, dataTableOptions: repositoryStorageConfig}">

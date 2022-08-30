@@ -4,9 +4,12 @@
 
 {% block body %}
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Descriptions" %}</h2>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Descriptions section"></i>
+        {% trans "Descriptions" %}
+    </h2>
     <span data-bind="if: cards.descriptions && (!descriptions().length || cards.descriptions.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.descriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.descriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
     </span>
 
     <!-- Collapsible content -->
@@ -20,12 +23,13 @@
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="description-table_info">Description table.</p>
+                    <table id="description-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Content" %}</th>
                                 <th>{% trans "Type" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: descriptions, dataTableOptions: descriptionTableConfig }">
@@ -52,9 +56,12 @@
     </div>
 </div>
 <div class="aher-report-section" data-bind="visible: !!dataConfig.citation">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.citation)}, css: {'fa-angle-double-right': visible.citation(), 'fa-angle-double-up': !visible.citation()}" class="fa toggle"></i> {% trans "Citations" %}</h2>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.citation)}, css: {'fa-angle-double-right': visible.citation(), 'fa-angle-double-up': !visible.citation()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Citations section"></i>
+        {% trans "Citations" %}
+    </h2>
     <span data-bind="if: cards.citation && (!citations() || cards.citation.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.citation)}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.citation)}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
     </span>
 
     <!-- Collapsible content -->
@@ -68,7 +75,8 @@
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="citation-table_info">Citation table.</p>
+                    <table id="citation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Source" %}</th>
@@ -77,7 +85,7 @@
                                 <th class="none">{% trans "Figures" %}</th>
                                 <th class="none">{% trans "Plates" %}</th>
                                 <th class="none">{% trans "Comment" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: citations, dataTableOptions: citationTableConfig }">
@@ -109,8 +117,11 @@
 </div>
 <!-- Audience section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.audience">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.audience)}, css: {'fa-angle-double-right': visible.audience(), 'fa-angle-double-up': !visible.audience()}" class="fa toggle"></i> {% trans "Audience" %}</h2>
-    <a data-bind="{if: cards.audience, click: function(){addNewTile(cards.audience)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Audience" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.audience)}, css: {'fa-angle-double-right': visible.audience(), 'fa-angle-double-up': !visible.audience()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Audience section"></i>
+        {% trans "Audience" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.audience, click: function(){addNewTile(cards.audience)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Audience" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.audience" class="aher-report-collapsible-container pad-lft">
@@ -123,11 +134,12 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="audience-table_info">Audience table.</p>
+                    <table id="audience-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Audience Type" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: audience, dataTableOptions: relatedResourceTwoColumnTableConfig}">

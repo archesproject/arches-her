@@ -60,8 +60,11 @@
             <!-- File Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'file'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.files)}, css: {'fa-angle-double-right': visible.files(), 'fa-angle-double-up': !visible.files()}"  class="fa toggle"></i> {% trans "Files" %}</h2>
-                    <a data-bind="{if: cards['file'], click: function(){addNewTile(cards['file'])}}" class="aher-report-a">
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.files)}, css: {'fa-angle-double-right': visible.files(), 'fa-angle-double-up': !visible.files()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Files section"></i>
+                        {% trans "Files" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards['file'], click: function(){addNewTile(cards['file'])}}" class="aher-report-a">
                         <i class="fa fa-mail-reply"></i>
                         <span data-bind="if: cards.file.tiles().length">{% trans "Edit Files" %}</span>
                         <span data-bind="ifnot: cards.file.tiles().length">{% trans "Add Files" %}</span>

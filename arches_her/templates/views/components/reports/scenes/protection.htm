@@ -5,8 +5,11 @@
 {% block body %}
 <!-- Geometry/Map -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.protection">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.geospatial)}, css: {'fa-angle-double-right': visible.geospatial(), 'fa-angle-double-up': !visible.geospatial()}" class="fa toggle"></i> {% trans "Designation/Protection " %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.designations, click: function(){addNewTile(cards.designations)}}">
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.geospatial)}, css: {'fa-angle-double-right': visible.geospatial(), 'fa-angle-double-up': !visible.geospatial()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Designation/Protection section"></i>
+        {% trans "Designation/Protection " %}
+    </h2>
+    <a href="#" class="aher-report-a" data-bind="{if: cards.designations, click: function(){addNewTile(cards.designations)}}">
         <i class="fa fa-mail-reply"></i> {% trans "Add Designation" %}
     </a>
 
@@ -15,7 +18,7 @@
 
         <div class="aher-report-subsection" data-bind="if: geojson() && geojson().features.length">
             <h3><i data-bind="click: function() {toggleVisibility(visible.map)}, css: {'fa-angle-double-right': visible.map(), 'fa-angle-double-up': !visible.map()}" class="fa toggle"></i> {% trans "Geometry " %}</h3> 
-            <a class="aher-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+            <a href="#" class="aher-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
             <div data-bind="visible: visible.map">
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/map',
@@ -38,7 +41,8 @@
                 <div class="firstchild-container">
                     <!-- designation table  -->
                     <div class="aher-table" style="max-width: 100%">
-                        <table class="table table-striped designation" cellspacing="0" width="100%">
+                        <p class="aher-table-aria-describedby" id="designation-protection-table_info">Designation/protection detail table.</p>
+                        <table id="designation-protection-table" class="table table-striped designation" cellspacing="0" width="100%">
                             <thead>
                                 <tr class="aher-table-header">
                                     <th>{% trans "Designation Name" %}</th>
@@ -50,7 +54,7 @@
                                     <th class="none">{% trans "Amendment Date" %}</th>
                                     <th class="none">{% trans "Display Date" %}</th>
                                     <th class="none">{% trans "Reference" %}</th>
-                                    <th class="aher-table-control all"></th>
+                                    <th class="aher-table-control all">{% trans "Actions" %}</th>
                                 </tr>
                             </thead>
                             <tbody data-bind="dataTablesForEach: {data: designations, dataTableOptions: designationTableConfig}">
@@ -92,8 +96,11 @@
 
 <!-- Area Assignments -->
 <div class="aher-report-section" data-bind="if: dataConfig.areaAssignment">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.areaAssignment)}, css: {'fa-angle-double-right': visible.areaAssignment(), 'fa-angle-double-up': !visible.areaAssignment()}" class="fa toggle"></i> {% trans "Area Assignment" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.areaAssignment || locationRoot, click: function(){addNewTile(cards.areaAssignment || locationRoot)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.areaAssignment)}, css: {'fa-angle-double-right': visible.areaAssignment(), 'fa-angle-double-up': !visible.areaAssignment()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Area Assignment section"></i>
+        {% trans "Area Assignment" %}
+    </h2>
+    <a href="#" class="aher-report-a" data-bind="{if: cards.areaAssignment || locationRoot, click: function(){addNewTile(cards.areaAssignment || locationRoot)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.areaAssignment" class="aher-report-collapsible-container pad-lft">
@@ -108,7 +115,8 @@
             <div class="firstchild-container">
                 <!-- Area Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="area-assignment-table_info">Area assignment table.</p>
+                    <table id="area-assignment-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Status" %}</th>
@@ -118,7 +126,7 @@
                                 <th>{% trans "SHINE Form" %}</th>
                                 <th class="none">{% trans "SHINE Significance" %}</th>
                                 <th class="none">{% trans "Reference" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach:{ data: areaAssignment, dataTableOptions: areaAssignmentsTableConfig}" >
@@ -152,8 +160,11 @@
 
 <!-- Land Use Classification -->
 <div class="aher-report-section" data-bind="if: dataConfig.landUse">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.landUse)}, css: {'fa-angle-double-right': visible.landUse(), 'fa-angle-double-up': !visible.landUse()}" class="fa toggle"></i> {% trans "Land Use Classification" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.landUse || locationRoot, event:{ mousedown:function(d, e){addNewTile(cards.landUse || locationRoot, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: landUseClassification().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: landUseClassification().length">{% trans "Add Classification" %}</span></a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.landUse)}, css: {'fa-angle-double-right': visible.landUse(), 'fa-angle-double-up': !visible.landUse()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Land Use Classification section"></i>
+        {% trans "Land Use Classification" %}
+    </h2>
+    <a href="#" class="aher-report-a" data-bind="{if: cards.landUse || locationRoot, event:{ mousedown:function(d, e){addNewTile(cards.landUse || locationRoot, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: landUseClassification().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: landUseClassification().length">{% trans "Add Classification" %}</span></a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.landUse" class="aher-report-collapsible-container pad-lft">
@@ -168,7 +179,8 @@
             <div class="firstchild-container">
                 <!-- Land Use Table -->
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="land-use-classification-table_info">Land use classification table.</p>
+                    <table id="land-use-classification-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Land Use" %}</th>
@@ -177,7 +189,7 @@
                                 <th class="none">{% trans "Sub-soil" %}</th>
                                 <th class="none">{% trans "Geology" %}</th>
                                 <th class="none">{% trans "Reference" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: {data: landUseClassification, dataTableOptions: landUseTableConfig}">

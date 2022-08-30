@@ -39,7 +39,10 @@
             </div>
             <div class="aher-report-page" data-bind="if: activeSection() === 'person-name'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}" class="fa toggle"></i> {% trans "Names" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Names section"></i>
+                        {% trans "Names" %}
+                    </h2>
                     <span data-bind="if: cards.names && (!names().length || cards.names.cardinality == 'n')">
                         <a class="aher-report-a" data-bind="click: function(){addNewTile(cards.names)}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
                     </span>

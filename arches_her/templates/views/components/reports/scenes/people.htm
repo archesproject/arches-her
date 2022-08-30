@@ -5,8 +5,11 @@
 {% block body %}
 <!-- Associated Actors -->
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.people)}, css: {'fa-angle-double-right': visible.people(), 'fa-angle-double-up': !visible.people()}" class="fa toggle"></i> {% trans "Associated People and Organizations" %}</h2>
-    <a data-bind="{if: cards.people, click: function(){addNewTile(cards.people)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add People/Organizations" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.people)}, css: {'fa-angle-double-right': visible.people(), 'fa-angle-double-up': !visible.people()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Associated People and Organizations section"></i>
+        {% trans "Associated People and Organizations" %}
+    </h2>
+    <a href="#" data-bind="{if: cards.people, click: function(){addNewTile(cards.people)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add People/Organizations" %}</a>
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.people" class="aher-report-collapsible-container pad-lft">
@@ -19,7 +22,8 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="associated-people-and-organisation-table_info">Associated people and organization table.</p>
+                    <table id="associated-people-and-organisation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Actor" %}</th>
@@ -28,7 +32,7 @@
                                 <th>{% trans "End of Role" %}</th>
                                 <th class="none">{% trans "Display Date" %}</th>
                                 <th class="none">{% trans "Date Qualifier" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: people, dataTableOptions: peopleTableConfig}">

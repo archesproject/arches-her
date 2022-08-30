@@ -102,8 +102,11 @@
             </div>
             <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.activityArchive)}, css: {'fa-angle-double-right': visible.activityArchive(), 'fa-angle-double-up': !visible.activityArchive()}"  class="fa toggle"></i> {% trans "Activity Archive Material" %}</h2>
-                    <a data-bind="{if: cards.activityArchive, click: function(){addNewTile(cards.activityArchive)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Material" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.activityArchive)}, css: {'fa-angle-double-right': visible.activityArchive(), 'fa-angle-double-up': !visible.activityArchive()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Archive Material section"></i>
+                        {% trans "Activity Archive Material" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.activityArchive, click: function(){addNewTile(cards.activityArchive)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Material" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.activityArchive" class="aher-report-collapsible-container pad-lft">
@@ -116,14 +119,15 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table" data-bind="">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="activity-archive-material-table_info">Activity archive material table.</p>
+                                    <table id="activity-archive-material-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Source Type" %}</th>
                                                 <th>{% trans "Owner" %}</th>
                                                 <th>{% trans "Building Name" %}</th>
                                                 <th>{% trans "Storage Area" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: activityArchive, dataTableOptions: activityArchiveConfig}">

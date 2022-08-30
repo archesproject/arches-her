@@ -82,8 +82,11 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
                 <!-- HLC Phase section -->
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}" class="fa toggle"></i> {% trans "HLC Phase" %}</h2>
-                    <a data-bind="{if: cards.historicLandscapeClassificationPhase, click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse HLC Phase section"></i>
+                        {% trans "HLC Phase" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.historicLandscapeClassificationPhase, click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.historicLandscapeClassificationPhase" class="aher-report-collapsible-container pad-lft">
@@ -96,7 +99,8 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table" data-bind="">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="hlc-phase-table_info">Historic landscape classification phase table.</p>
+                                    <table id="hlc-phase-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -110,7 +114,7 @@
                                                 <th class="none">{% trans "End Date" %}</th>
                                                 <th class="none">{% trans "Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Confidence of Dating" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: historicLandscapeClassificationPhase, dataTableOptions: hlcPhaseTableConfig}">

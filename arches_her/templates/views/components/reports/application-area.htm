@@ -81,8 +81,11 @@
                 }"></div>
                 <!-- Application Area section -->
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationAreas)}, css: {'fa-angle-double-right': visible.applicationAreas(), 'fa-angle-double-up': !visible.applicationAreas()}" class="fa toggle"></i> {% trans "Associated Application Areas" %}</h2>
-                    <a data-bind="{if: cards.applicationAreas, click: function(){addNewTile(cards.applicationAreas)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.applicationAreas)}, css: {'fa-angle-double-right': visible.applicationAreas(), 'fa-angle-double-up': !visible.applicationAreas()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Associated Application Areas section"></i>
+                        {% trans "Associated Application Areas" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.applicationAreas, click: function(){addNewTile(cards.applicationAreas)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.applicationAreas" class="aher-report-collapsible-container pad-lft">
@@ -99,7 +102,7 @@
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Resource Name" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: applicationAreas, dataTableOptions: associatedApplicationAreaTableConfig}">

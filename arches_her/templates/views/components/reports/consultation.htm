@@ -78,8 +78,11 @@
             <!-- Planning Reference Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'references'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.references)}, css: {'fa-angle-double-right': visible.references(), 'fa-angle-double-up': !visible.references()}"  class="fa toggle"></i> {% trans "External Cross References" %}</h2>
-                    <a data-bind="{if: cards['external cross references'], click: function(){addNewTile(cards['external cross references'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external cross references" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.references)}, css: {'fa-angle-double-right': visible.references(), 'fa-angle-double-up': !visible.references()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse External Cross References section"></i>
+                        {% trans "External Cross References" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards['external cross references'], click: function(){addNewTile(cards['external cross references'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external cross references" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.references" class="aher-report-collapsible-container pad-lft">
@@ -92,14 +95,15 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="external-cross-reference-table_info">External cross reference table.</p>
+                                    <table id="external-cross-reference-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Cross Reference" %}</th>
                                                 <th>{% trans "Cross Reference Source" %}</th>
                                                 <th class="none">{% trans "Cross Reference Note" %}</th>
                                                 <th>{% trans "URI" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: references, dataTableOptions: createTableConfig(5)}">
@@ -128,8 +132,11 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferences)}, css: {'fa-angle-double-right': visible.systemReferences(), 'fa-angle-double-up': !visible.systemReferences()}"  class="fa toggle"></i> {% trans "External System References" %}</h2>
-                    <a data-bind="{if: cards['external system references'], click: function(){addNewTile(cards['external system references'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external system references" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.systemReferences)}, css: {'fa-angle-double-right': visible.systemReferences(), 'fa-angle-double-up': !visible.systemReferences()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse External System References section"></i>
+                        {% trans "External System References" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards['external system references'], click: function(){addNewTile(cards['external system references'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add external system references" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.systemReferences" class="aher-report-collapsible-container pad-lft">
@@ -142,13 +149,14 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="external-system-reference-table_info">External system reference table.</p>
+                                    <table id="external-system-reference-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Reference" %}</th>
                                                 <th>{% trans "Reference Type" %}</th>
                                                 <th>{% trans "Agency" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: systemReferences, dataTableOptions: createTableConfig(4)}">
@@ -178,8 +186,11 @@
             </div>
             <!-- Contacts Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'contacts'">
-                <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
-                <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
+                <h2 class="aher-report-section-title">
+                    <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Contacts section"></i>
+                    {% trans "Contacts" %}
+                </h2>
+                <a href="#" data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
                     <i class="fa fa-mail-reply"></i>
                     <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
                     <span data-bind="ifnot: cards.contacts.tiles().length">{% trans "Add Contacts" %}</span>
@@ -260,8 +271,11 @@
             <!-- Consultation Progression Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'progression'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.proposal)}, css: {'fa-angle-double-right': visible.proposal(), 'fa-angle-double-up': !visible.proposal()}"  class="fa toggle"></i> {% trans "Proposal" %}</h2>
-                    <a data-bind="{if: cards.proposal, click: function(){addNewTile(cards.proposal)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add proposal" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.proposal)}, css: {'fa-angle-double-right': visible.proposal(), 'fa-angle-double-up': !visible.proposal()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Proposal section"></i>
+                        {% trans "Proposal" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.proposal, click: function(){addNewTile(cards.proposal)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add proposal" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.proposal" class="aher-report-collapsible-container pad-lft">
@@ -274,12 +288,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="proposal-table_info">Proposal table.</p>
+                                    <table id="proposal-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Proposal" %}</th>
                                                 <th>{% trans "Related File(s)" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: proposal, dataTableOptions: proposalTableConfig}">
@@ -306,8 +321,11 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.advice)}, css: {'fa-angle-double-right': visible.advice(), 'fa-angle-double-up': !visible.advice()}"  class="fa toggle"></i> {% trans "Advice" %}</h2>
-                    <a data-bind="{if: cards.advice, click: function(){addNewTile(cards.advice)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add advice" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.advice)}, css: {'fa-angle-double-right': visible.advice(), 'fa-angle-double-up': !visible.advice()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Advice section"></i>
+                        {% trans "Advice" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.advice, click: function(){addNewTile(cards.advice)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add advice" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.advice" class="aher-report-collapsible-container pad-lft">
@@ -320,12 +338,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="advice-table_info">Advice table.</p>
+                                    <table id="advice-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Advice" %}</th>
                                                 <th>{% trans "Advice Type" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
@@ -353,8 +372,11 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.action)}, css: {'fa-angle-double-right': visible.action(), 'fa-angle-double-up': !visible.action()}"  class="fa toggle"></i> {% trans "Action" %}</h2>
-                    <a data-bind="{if: cards.actions, click: function(){addNewTile(cards.actions)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add action" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.action)}, css: {'fa-angle-double-right': visible.action(), 'fa-angle-double-up': !visible.action()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Action section"></i>
+                        {% trans "Action" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.actions, click: function(){addNewTile(cards.actions)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add action" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.action" class="aher-report-collapsible-container pad-lft">
@@ -367,13 +389,14 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="action-table_info">Action table.</p>
+                                    <table id="action-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Action" %}</th>
                                                 <th>{% trans "Action Type" %}</th>
                                                 <th>{% trans "Relatted Advice" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: action, dataTableOptions: actionTableConfig}">
@@ -401,8 +424,11 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.outcomes)}, css: {'fa-angle-double-right': visible.outcomes(), 'fa-angle-double-up': !visible.outcomes()}" class="fa toggle"></i> {% trans "Outcomes" %}</h2>
-                    <a data-bind="{if: cards.outcomes, click: function(){ addNewTile(cards.outcomes) }}" class="aher-report-a">
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.outcomes)}, css: {'fa-angle-double-right': visible.outcomes(), 'fa-angle-double-up': !visible.outcomes()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Outcomes section"></i>
+                        {% trans "Outcomes" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.outcomes, click: function(){ addNewTile(cards.outcomes) }}" class="aher-report-a">
                         <i class="fa fa-mail-reply"></i>
                         <span data-bind="if: cards.outcomes.tiles().length">{% trans "Edit outcomes" %}</span>
                         <span data-bind="ifnot: cards.outcomes.tiles().length">{% trans "Add outcomes" %}</span>
@@ -433,8 +459,11 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assessmentOfSignificance)}, css: {'fa-angle-double-right': visible.assessmentOfSignificance(), 'fa-angle-double-up': !visible.assessmentOfSignificance()}"  class="fa toggle"></i> {% trans "Assessment of Significance" %}</h2>
-                    <a data-bind="{if: cards['assessment of significance'], click: function(){addNewTile(cards['assessment of significance'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add assessment of significance" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.assessmentOfSignificance)}, css: {'fa-angle-double-right': visible.assessmentOfSignificance(), 'fa-angle-double-up': !visible.assessmentOfSignificance()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Assessment of Significance section"></i>
+                        {% trans "Assessment of Significance" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards['assessment of significance'], click: function(){addNewTile(cards['assessment of significance'])}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add assessment of significance" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.assessmentOfSignificance" class="aher-report-collapsible-container pad-lft">
@@ -447,11 +476,12 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="assessment-of-significance-table_info">Assessment of significance table.</p>
+                                    <table id="assessment-of-significance-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Notes" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: assessmentOfSignificance, dataTableOptions: createTableConfig(2)}">
@@ -480,8 +510,11 @@
             <!-- Correspondence Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'correspondence'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.correspondence)}, css: {'fa-angle-double-right': visible.correspondence(), 'fa-angle-double-up': !visible.correspondence()}"  class="fa toggle"></i> {% trans "Correspondence" %}</h2>
-                    <a data-bind="{if: cards.correspondence, click: function(){addNewTile(cards.correspondence)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Correspondence" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.correspondence)}, css: {'fa-angle-double-right': visible.correspondence(), 'fa-angle-double-up': !visible.correspondence()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Correspondence section"></i>
+                        {% trans "Correspondence" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.correspondence, click: function(){addNewTile(cards.correspondence)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Correspondence" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.correspondence" class="aher-report-collapsible-container pad-lft">
@@ -494,12 +527,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="correspondeance-table_info">Correspondence table.</p>
+                                    <table id="correspondeance-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Letter" %}</th>
                                                 <th>{% trans "Letter Type" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: correspondence, dataTableOptions: createTableConfig(3)}">
@@ -526,8 +560,11 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.communications)}, css: {'fa-angle-double-right': visible.communications(), 'fa-angle-double-up': !visible.communications()}"  class="fa toggle"></i> {% trans "Communications" %}</h2>
-                    <a data-bind="{if: cards.communications, click: function(){addNewTile(cards.communications)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add communications" %}</a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.communications)}, css: {'fa-angle-double-right': visible.communications(), 'fa-angle-double-up': !visible.communications()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Communications section"></i>
+                        {% trans "Communications" %}
+                    </h2>
+                    <a href="#" data-bind="{if: cards.communications, click: function(){addNewTile(cards.communications)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add communications" %}</a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.communications" class="aher-report-collapsible-container pad-lft">
@@ -540,7 +577,8 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="communication-table_info">Communication table.</p>
+                                    <table id="communication-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Subject" %}</th>
@@ -551,7 +589,7 @@
                                                 <th class="none">{% trans "Note" %}</th>
                                                 <th class="none">{% trans "Follow-On Action" %}</th>
                                                 <th class="none">{% trans "Related Digital File" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: communications, dataTableOptions: createTableConfig(9)}">
@@ -586,8 +624,11 @@
             </div>
             <!-- Site Visit Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'sitevisits'">
-                <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.siteVisits)}, css: {'fa-angle-double-right': visible.siteVisits(), 'fa-angle-double-up': !visible.siteVisits()}" class="fa toggle"></i> {% trans "Site Visits" %}</h2>
-                <a data-bind="{if: cards['site visits'], click: function(){ addNewTile(cards['site visits']) }}" class="aher-report-a">
+                <h2 class="aher-report-section-title">
+                    <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.siteVisits)}, css: {'fa-angle-double-right': visible.siteVisits(), 'fa-angle-double-up': !visible.siteVisits()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Site Visits section"></i>
+                    {% trans "Site Visits" %}
+                </h2>
+                <a href="#" data-bind="{if: cards['site visits'], click: function(){ addNewTile(cards['site visits']) }}" class="aher-report-a">
                     <i class="fa fa-mail-reply"></i>
                     <span data-bind="if: cards['site visits'].tiles().length">{% trans "Edit Site Visits" %}</span>
                     <span data-bind="ifnot: cards['site visits'].tiles().length">{% trans "Add Site Visits" %}</span>
@@ -623,12 +664,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-attendee-table_info">Visit attendee table.</p>
+                                                <table id="visit-attendee-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Attendee" %}</th>
                                                             <th>{% trans "Attendee Type" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.attendeesTableConfig}">
@@ -663,12 +705,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-observation-table_info">Visit observation table.</p>
+                                                <table id="visit-observation-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Observation" %}</th>
                                                             <th>{% trans "Observed by" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.observationsTableConfig}">
@@ -703,12 +746,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-recommendation-table_info">Visit recommendation table.</p>
+                                                <table id="visit-recommendation-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Recommendation" %}</th>
                                                             <th>{% trans "Recommended by" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.recommendationsTableConfig}">
@@ -822,8 +866,11 @@
 
 
 
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
-        <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Contacts section"></i>
+        {% trans "Contacts" %}
+    </h2>
+        <a href="#" data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
             <i class="fa fa-mail-reply"></i>
             <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
             <span data-bind="ifnot: cards.contacts.tiles().length">{% trans "Add Contacts" %}</span>

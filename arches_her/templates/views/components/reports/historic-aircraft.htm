@@ -100,8 +100,11 @@
             <!-- Journeys -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'journey'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.flights)}, css: {'fa-angle-double-right': visible.flights(), 'fa-angle-double-up': !visible.flights()}" class="fa toggle"></i> {% trans "Flights" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.flights, event:{ mousedown:function(d, e){addNewTile(cards.flights, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: flights().length">{% trans "Edit Flight" %}</span><span data-bind="ifnot: flights().length">{% trans "Add Flight" %}</span></a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.flights)}, css: {'fa-angle-double-right': visible.flights(), 'fa-angle-double-up': !visible.flights()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Flights section"></i>
+                        {% trans "Flights" %}
+                    </h2>
+                    <a href="#" class="aher-report-a" data-bind="{if: cards.flights, event:{ mousedown:function(d, e){addNewTile(cards.flights, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: flights().length">{% trans "Edit Flight" %}</span><span data-bind="ifnot: flights().length">{% trans "Add Flight" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.flights" class="aher-report-collapsible-container pad-lft">
@@ -116,7 +119,8 @@
                             <div class="firstchild-container">
                                 <!-- flight Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="flight-table_info">Flight table.</p>
+                                    <table id="flight-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -128,7 +132,7 @@
                                                 <th class="none">{% trans "Arrival Date" %}</th>
                                                 <th class="none">{% trans "Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Crew" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: flights, dataTableOptions: flightsTableConfig}">
@@ -169,8 +173,11 @@
                 </div>
 
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.lastFlight)}, css: {'fa-angle-double-right': visible.lastFlight(), 'fa-angle-double-up': !visible.lastFlight()}" class="fa toggle"></i> {% trans "Last Flight" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.lastFlight, event:{ mousedown:function(d, e){addNewTile(cards.lastFlight, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: lastFlight().length">{% trans "Edit Last Flight" %}</span><span data-bind="ifnot: lastFlight().length">{% trans "Add Flight" %}</span></a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.lastFlight)}, css: {'fa-angle-double-right': visible.lastFlight(), 'fa-angle-double-up': !visible.lastFlight()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Last Flight section"></i>
+                        {% trans "Last Flight" %}
+                    </h2>
+                    <a href="#" class="aher-report-a" data-bind="{if: cards.lastFlight, event:{ mousedown:function(d, e){addNewTile(cards.lastFlight, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: lastFlight().length">{% trans "Edit Last Flight" %}</span><span data-bind="ifnot: lastFlight().length">{% trans "Add Flight" %}</span></a>
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.lastFlight" class="aher-report-collapsible-container pad-lft">
@@ -185,7 +192,8 @@
                             <div class="firstchild-container">
                                 <!-- last flight Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="last-flight-table_info">Last flight table.</p>
+                                    <table id="last-flight-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -203,7 +211,7 @@
                                                 <th class="none">{% trans "Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Crash Site Type" %}</th>
                                                 <th class="none">{% trans "Crew" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: lastFlight, dataTableOptions: lastFlightTableConfig}">
