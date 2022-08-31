@@ -257,7 +257,7 @@ define([
                     x = parseInt(self.bng_x());
                     y = parseInt(self.bng_y());
                     if(x < 100000 || y < 100000 || x > 999999 || y > 999999){
-                        self.xyMessageError("X and Y must be both be 6 digit coordinates");
+                        self.xyMessageError("X and Y must both be 6 digit coordinates");
                         return;
                     }
                 }
