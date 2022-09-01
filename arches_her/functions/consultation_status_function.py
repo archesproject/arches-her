@@ -44,7 +44,7 @@ class ConsultationStatusFunction(BaseFunction):
                     return True
 
                 except Exception as e:
-                    self.logger.error(e, "Could not create boolean tile")
+                    self.logger.error(e, "Could not save boolean tile")
                     return False
 
             else:
@@ -60,35 +60,39 @@ class ConsultationStatusFunction(BaseFunction):
         if request is None and is_function_save_method == True:
             return
 
-        cons_status_bool_nodeid = self.config["cons_status_bool_nodeid"]
-        cons_status_bool_filter = Tile.objects.filter(resourceinstance_id=tile.resourceinstance_id,nodegroup_id=cons_status_bool_nodeid)
-        date_comp_node = models.Node.objects.get(nodeid=self.config["cons_comp_date_nodeid"])
-        if len(cons_status_bool_filter) > 0:
-            date_comp_tile = None
-            if tile.nodegroup_id == str(date_comp_node.nodegroup_id):
-                    date_comp_tile = tile
-            else:
-                date_comp_tile_filter = Tile.objects.filter(resourceinstance_id=tile.resourceinstance_id,nodegroup_id=date_comp_node.nodegroup_id)
-                if len(date_comp_tile_filter) > 0:
-                    date_comp_tile = date_comp_tile_filter[0]
-            if  date_comp_tile != None:
-                datatype_factory = DataTypeFactory()
-                datatype = datatype_factory.get_instance(date_comp_node.datatype)
-                date_comp_value = datatype.get_display_value(tile,date_comp_node)
-                if date_comp_value != None:
-                    try:
-                        self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,False)
-                        return
-                    except Exception as e:
-                        self.logger.error(e,"Could not compare today's date and completed date")
-                        return
+        try:
+            cons_status_bool_nodeid = self.config["cons_status_bool_nodeid"]
+            cons_status_bool_filter = Tile.objects.filter(resourceinstance_id=tile.resourceinstance_id,nodegroup_id=cons_status_bool_nodeid)
+            date_comp_node = models.Node.objects.get(nodeid=self.config["cons_comp_date_nodeid"])
+            if len(cons_status_bool_filter) > 0:
+                date_comp_tile = None
+                if tile.nodegroup_id == str(date_comp_node.nodegroup_id):
+                        date_comp_tile = tile
                 else:
-                    return
-        else:
-            self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,True)
-            return
+                    date_comp_tile_filter = Tile.objects.filter(resourceinstance_id=tile.resourceinstance_id,nodegroup_id=date_comp_node.nodegroup_id)
+                    if len(date_comp_tile_filter) > 0:
+                        date_comp_tile = date_comp_tile_filter[0]
+                if  date_comp_tile != None:
+                    datatype_factory = DataTypeFactory()
+                    datatype = datatype_factory.get_instance(date_comp_node.datatype)
+                    date_comp_value = datatype.get_display_value(tile,date_comp_node)
+                    if date_comp_value != None:
+                        try:
+                            self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,False)
+                            return
+                        except Exception as e:
+                            self.logger.error(e,"Could not handle boolean tile after confirmation completion date node is present")
+                            return
+                    else:
+                        return
+            else:
+                self.handle_boolean_tile(tile,cons_status_bool_nodeid,cons_status_bool_nodeid,True)
+                return
 
-        return
+            return
+        except Exception as e:
+            self.logger.error(e,"Could not check boolean tile")
+            return
 
 
     def save(self, tile, request, context=None):
