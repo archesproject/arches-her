@@ -15,7 +15,11 @@ APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe(
 APP_PATHNAME = "arches-her"
 STATICFILES_DIRS = (os.path.join(APP_ROOT, "media"),) + STATICFILES_DIRS
 
-DATATYPE_LOCATIONS.append("arches_her.datatypes")
+DATATYPE_LOCATIONS = [
+    "arches_her.datatypes",
+    "arches.app.datatypes",
+]
+
 FUNCTION_LOCATIONS.append("arches_her.functions")
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "functions", "templates"))
 TEMPLATES[0]["DIRS"].append(os.path.join(APP_ROOT, "widgets", "templates"))
