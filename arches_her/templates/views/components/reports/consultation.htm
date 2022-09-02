@@ -821,7 +821,7 @@
     </div>
 
     <div class="aher-report-section">
-        <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.advice)}, css: {'fa-angle-double-right': visible.advice(), 'fa-angle-double-up': !visible.advice()}"  class="fa toggle"></i> {% trans "Advice" %}</h2>
+        <h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.advice)}, css: {'fa-angle-double-right': visible.advice(), 'fa-angle-double-up': !visible.advice()}"  class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Advice" %}</h2>
         <a data-bind="{if: cards.advice, click: function(){addNewTile(cards.advice)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add advice" %}</a>
 
         <!-- Collapsible content -->
@@ -870,7 +870,7 @@
 
 
 
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
+    <h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Contacts" %}</h2>
         <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
             <i class="fa fa-mail-reply"></i>
             <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
