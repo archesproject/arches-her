@@ -55,7 +55,8 @@
                         <div class="aher-report-subsection" >
                             <div>
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="name-table_info">Name table.</p>
+                                    <table id="name-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Full Name" %}</th>
@@ -65,7 +66,7 @@
                                                 <th class="min-medium">{% trans "Initial(s)" %}</th>
                                                 <th class="min-medium">{% trans "Surname" %}</th>
                                                 <th class="min-medium">{% trans "Epithet" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: names, dataTableOptions: nameTableConfig }">

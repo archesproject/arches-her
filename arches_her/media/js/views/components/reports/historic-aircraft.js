@@ -22,7 +22,6 @@ define([
                 {id: 'classifications', title: 'Classifications and Dating'},
                 {id: 'location', title: 'Location Data'},
                 {id: 'protection', title: 'Designation and Protection Status'},
-                {id: 'assessments', title: 'Assessments'},
                 {id: 'status', title: 'Status and Ownership'},
                 {id: 'journey', title: 'Journey Details'},
                 {id: 'people', title: 'Associated People and Organizations'},
@@ -95,10 +94,6 @@ define([
                 self.classificationCards = {
                     production: self.cards?.['construction phase(s)'],
                     dimensions: self.cards?.['aircraft dimensions']
-                };
-
-                self.assessmentCards = {
-                    scientificDate: self.cards?.['scientific date assignment']
                 };
 
                 self.peopleCards = {

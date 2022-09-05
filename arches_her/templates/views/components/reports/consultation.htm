@@ -92,14 +92,15 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="external-cross-reference-table_info">External cross reference table.</p>
+                                    <table id="external-cross-reference-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Cross Reference" %}</th>
                                                 <th>{% trans "Cross Reference Source" %}</th>
                                                 <th class="none">{% trans "Cross Reference Note" %}</th>
                                                 <th>{% trans "URI" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: references, dataTableOptions: createTableConfig(5)}">
@@ -142,13 +143,14 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="external-system-reference-table_info">External system reference table.</p>
+                                    <table id="external-system-reference-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Reference" %}</th>
                                                 <th>{% trans "Reference Type" %}</th>
                                                 <th>{% trans "Agency" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: systemReferences, dataTableOptions: createTableConfig(4)}">
@@ -274,12 +276,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="proposal-table_info">Proposal table.</p>
+                                    <table id="proposal-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Proposal" %}</th>
                                                 <th>{% trans "Related File(s)" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: proposal, dataTableOptions: proposalTableConfig}">
@@ -320,12 +323,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="advice-table_info">Advice table.</p>
+                                    <table id="advice-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Advice" %}</th>
                                                 <th>{% trans "Advice Type" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
@@ -367,13 +371,14 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="action-table_info">Action table.</p>
+                                    <table id="action-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Action" %}</th>
                                                 <th>{% trans "Action Type" %}</th>
                                                 <th>{% trans "Relatted Advice" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: action, dataTableOptions: actionTableConfig}">
@@ -447,11 +452,12 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="assessment-of-significance-table_info">Assessment of significance table.</p>
+                                    <table id="assessment-of-significance-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Notes" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: assessmentOfSignificance, dataTableOptions: createTableConfig(2)}">
@@ -494,12 +500,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="correspondeance-table_info">Correspondence table.</p>
+                                    <table id="correspondeance-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Letter" %}</th>
                                                 <th>{% trans "Letter Type" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: correspondence, dataTableOptions: createTableConfig(3)}">
@@ -540,7 +547,8 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="communication-table_info">Communication table.</p>
+                                    <table id="communication-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Subject" %}</th>
@@ -551,7 +559,7 @@
                                                 <th class="none">{% trans "Note" %}</th>
                                                 <th class="none">{% trans "Follow-On Action" %}</th>
                                                 <th class="none">{% trans "Related Digital File" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: communications, dataTableOptions: createTableConfig(9)}">
@@ -623,12 +631,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-attendee-table_info">Visit attendee table.</p>
+                                                <table id="visit-attendee-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Attendee" %}</th>
                                                             <th>{% trans "Attendee Type" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.attendeesTableConfig}">
@@ -663,12 +672,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-observation-table_info">Visit observation table.</p>
+                                                <table id="visit-observation-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Observation" %}</th>
                                                             <th>{% trans "Observed by" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.observationsTableConfig}">
@@ -703,12 +713,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-recommendation-table_info">Visit recommendation table.</p>
+                                                <table id="visit-recommendation-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Recommendation" %}</th>
                                                             <th>{% trans "Recommended by" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.recommendationsTableConfig}">
