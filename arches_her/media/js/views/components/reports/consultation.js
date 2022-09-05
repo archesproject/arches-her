@@ -50,7 +50,7 @@ define([
                 location: ['Consultation Area'],
                 addresses: undefined,
                 locationDescription: undefined,
-                administrativeAreas: undefined,
+                administrativeAreas: 'localities/administrative areas',
                 nationalGrid: undefined,
                 namedLocations: undefined
             }
@@ -324,6 +324,8 @@ define([
                 const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
                 const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
                 const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer', 'resourceid');
+                const planningBody = self.getNodeValue(contactNode, 'planning officers', 'planning body');
+                const planningBodyLink = self.getNodeValue(contactNode, 'planning officers', 'planning body', 'resourceid');
                 const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
                 const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer', 'resourceid');
                 const agentsNodes = self.getRawNodeValue(contactNode, 'agents', 'agent', 'instance_details');
@@ -353,7 +355,7 @@ define([
                 const tileid = self.getTileId(contactNode);
 
                 self.contacts(
-                    { consultingContact, planningOfficer, planningOfficerLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
+                    { consultingContact, planningOfficer, planningOfficerLink, planningBody, planningBodyLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
                 )
             };
 
@@ -378,6 +380,7 @@ define([
                         card: null,
                         subCards: {
                             locationGeometry: 'consultation location',
+                            administrativeAreas: 'localities/administrative areas'
                         }
                     }
                 };
@@ -389,6 +392,21 @@ define([
                     relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
+
+            self.consultationLocationDescription = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Consultation Location Description',
+                            card: self.cards?.['consultation location'],
+                            data: [{
+                                key: 'Consultation Location Description',
+                                value: self.getNodeValue(self.resource(), 'consultation area', 'geometry', 'Consultation Location Descriptions', 'Consultation Location Description'),
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
 
             self.consultationDetails = ko.observable({
                 sections:
