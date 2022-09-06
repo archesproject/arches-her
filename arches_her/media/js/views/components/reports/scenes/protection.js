@@ -93,7 +93,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
             if(params?.compiled){
             } else {
-                const protectionNode = self.getRawNodeValue(params.data(), self.dataConfig.protection); 
+                const protectionNode = self.getRawNodeValue(params.data(), self.dataConfig.protection);
                 if (protectionNode?.length) {
                     this.designations(protectionNode.map(x => {
                         const name = self.getNodeValue(x, 'designation names', 'designation name');
@@ -112,7 +112,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable',
                             displayDate,
                             endDate,
                             geometry,
-                            grade, 
+                            grade,
                             name,
                             protectionType,
                             reference,
