@@ -2,7 +2,9 @@
 Django settings for arches_her project.
 """
 
+import json
 import os
+import sys
 from arches import __version__
 import inspect
 from django.utils.translation import gettext_lazy as _
@@ -207,3 +209,16 @@ if DOCKER:
         from .settings_docker import *
     except ImportError:
         pass
+
+# returns an output that can be read by NODEJS
+if __name__ == "__main__":
+    print(
+        json.dumps({
+            'ARCHES_NAMESPACE_FOR_DATA_EXPORT': ARCHES_NAMESPACE_FOR_DATA_EXPORT,
+            'STATIC_URL': STATIC_URL,
+            'ROOT_DIR': ROOT_DIR,
+            'APP_ROOT': APP_ROOT,
+            'WEBPACK_DEVELOPMENT_SERVER_PORT': WEBPACK_DEVELOPMENT_SERVER_PORT,
+        })
+    )
+    sys.stdout.flush()
