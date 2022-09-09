@@ -12,7 +12,7 @@ const { spawn } = require("child_process");
 const { buildTemplateFilePathLookup } = require('./webpack-utils/build-template-filepath-lookup');
 const { buildJavascriptFilepathLookup } = require('./webpack-utils/build-javascript-filepath-lookup');
 const { buildImageFilePathLookup } = require('./webpack-utils/build-image-filepath-lookup');
-const { PROJECT_NODE_MODULES_ALIASES } = require('./webpack-meta-config');
+const { PROJECT_NODE_MODULES_ALIASES } = require('./webpack-node-modules-aliases');
 
 let isTestEnvironment = false;
 

@@ -13,7 +13,7 @@ module.exports = () => {
         commonWebpackConfigPromise().then(commonWebpackConfig => {
             resolve(merge(commonWebpackConfig, {
                 mode: 'development',
-                devtool: 'inline-source-map',
+                // devtool: 'inline-source-map',
                 output: {
                     chunkFilename: 'js/[name].chunk.js',
                 },
