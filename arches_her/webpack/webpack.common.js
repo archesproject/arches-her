@@ -51,18 +51,22 @@ module.exports = () => {
                 ...projectJavascriptRelativeFilepathToAbsoluteFilepathLookup 
             };
             
-            const { ARCHES_CORE_NODE_MODULES_ALIASES } = require(`${ROOT_DIR}/webpack/webpack-meta-config.js`);
+            const { ARCHES_CORE_NODE_MODULES_ALIASES } = require(`${ROOT_DIR}/webpack/webpack-node-modules-aliases.js`);
             const parsedArchesCoreNodeModulesAliases = Object.entries(JSON.parse(ARCHES_CORE_NODE_MODULES_ALIASES)).reduce((acc, [alias, executeableString]) => {
                 // eval() should be safe here, it's running developer-defined code during build
                 acc[alias] = eval(executeableString);
                 return acc;
             }, {});
             
-            const parsedProjectNodeModulesAliases = Object.entries(JSON.parse(PROJECT_NODE_MODULES_ALIASES)).reduce((acc, [alias, executeableString]) => {
-                // eval() should be safe here, it's running developer-defined code during build
-                acc[alias] = eval(executeableString);
-                return acc;
-            }, {});
+            let parsedProjectNodeModulesAliases = {};
+            if (PROJECT_NODE_MODULES_ALIASES) {
+                parsedProjectNodeModulesAliases = Object.entries(JSON.parse(PROJECT_NODE_MODULES_ALIASES)).reduce((acc, [alias, executeableString]) => {
+                    // eval() should be safe here, it's running developer-defined code during build
+                    acc[alias] = eval(executeableString);
+                    return acc;
+                }, {});
+                
+            }
             
             const nodeModulesAliases = {
                 ...parsedArchesCoreNodeModulesAliases,
