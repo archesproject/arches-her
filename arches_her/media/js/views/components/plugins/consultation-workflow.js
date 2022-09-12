@@ -63,7 +63,7 @@ define([
                             ]
                         }
                     ],
-                    required: false
+                    required: true
                 },
                 {
                     title: 'Consultation Details/Type',

@@ -61,6 +61,12 @@
             <!-- Location Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
                 <div data-bind="component: {
+                    name: 'views/components/reports/scenes/default',
+                    params: {
+                        data: consultationLocationDescription,
+                    }
+                }"></div>
+                <div data-bind="component: {
                     name: 'views/components/reports/scenes/location',
                     params: {
                         data: resource,
@@ -199,6 +205,10 @@
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Planning Officer: </h4>
                                     <a class="aher-table-link" data-bind="text: contacts().planningOfficer, attr: {href: contacts().planningOfficerLink}"></a>
+                                </div>
+                                <div class="aher-block-attributes">
+                                    <h4 class="aher-block-key">Planning Body: </h4>
+                                    <a class="aher-table-link" data-bind="text: contacts().planningBody, attr: {href: contacts().planningBodyLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes">
                                     <h4 class="aher-block-key">Casework Officer: </h4>
