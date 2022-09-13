@@ -80,7 +80,8 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)',
-                archive: undefined
+                archive: undefined,
+                actors: undefined
             };
             self.nameCards = {};
             self.descriptionCards = {};
@@ -98,7 +99,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards);
 
                 self.nameCards = {
@@ -146,7 +147,7 @@ define([
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
             }
 

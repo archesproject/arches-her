@@ -1,6 +1,8 @@
 from arches.app.datatypes.base import BaseDataType
 from arches.app.models.models import Widget
 from arches.app.models.system_settings import settings
+from arches.app.search.elasticsearch_dsl_builder import Match, Exists
+import logging
 
 bngpoint = Widget.objects.get(name="bngpoint")
 
@@ -11,10 +13,10 @@ details = {
     "classname": "BNGCentreDataType",
     "defaultwidget": bngpoint,
     "defaultconfig": None,
-    "configcomponent": None,
-    "configname": None,
+    "configcomponent": "views/components/datatypes/bngcentrepoint",
+    "configname": "bngcentrepoint-datatype-config",
     "isgeometric": False,
-    "issearchable": False,
+    "issearchable": True,
 }
 
 
@@ -112,3 +114,20 @@ class BNGCentreDataType(BaseDataType):
 
     def get_search_terms(self, nodevalue, nodeid=None):
         return [nodevalue]
+
+    def append_search_filters(self, value, node, query, request):
+        self.logger = logging.getLogger(__name__)
+        try:
+            if value["op"] == "null" or value["op"] == "not_null":
+                self.append_null_search_filters(value, node, query, request)
+            elif value["val"] != "":
+                match_type = "phrase_prefix" if "~" in value["op"] else "phrase"
+                match_query = Match(field="tiles.data.%s" % (str(node.pk)), query=value["val"], type=match_type)
+                if "!" in value["op"]:
+                    query.must_not(match_query)
+                    query.filter(Exists(field="tiles.data.%s" % (str(node.pk))))
+                else:
+                    query.must(match_query)
+        except KeyError as e:
+            self.logger.error(str(e))
+

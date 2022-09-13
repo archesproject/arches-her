@@ -59,7 +59,8 @@ define([
                 activities: undefined,
                 files: undefined,
                 consultations: undefined,
-                archive: undefined
+                archive: undefined,
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -74,19 +75,39 @@ define([
             const hlcPhaseNode = self.getRawNodeValue(self.resource(), 'hlc phase');
             if(Array.isArray(hlcPhaseNode)){
                 self.historicLandscapeClassificationPhase(hlcPhaseNode.map(x => {
+                    let historicMap = ko.observableArray();
+                    let period = ko.observableArray();
                     const broadType = self.getNodeValue(x, 'hlc phase classification', 'broad type');
                     const hlcType = self.getNodeValue(x, 'hlc phase classification', 'broad type', 'hlc type');
                     const interpretationConfidence = self.getNodeValue(x, 'hlc phase classification', 'confidence of interpretation');
-                    const description = self.getNodeValue(x, 'hlc phase classification', 'hlc phase description');
-                    const historicMap = self.getNodeValue(x, 'hlc phase classification', 'historic map');
-                    const historicMapLink = self.getResourceLink(x, 'hlc phase classification', 'historic map');
+                    const description = self.getRawNodeValue(x, 'hlc phase classification', 'hlc phase classification description', 'hlc phase description', '@display_value');
+                    const historicMapInstanceDetails = self.getRawNodeValue(x, 'hlc phase classification', 'historic map', 'instance_details');
+                    if (Array.isArray(historicMapInstanceDetails)) {
+                        historicMap(historicMapInstanceDetails.map(x => {
+                            const mapName = self.getNodeValue(x);
+                            const mapLink = self.getResourceLink(x);
+                            return {
+                                mapName,
+                                mapLink
+                            };
+                        }));
+                    }
                     const displayDate = self.getNodeValue(x, 'hlc phase display date');
                     const dateConfidence = self.getNodeValue(x, 'hlc phase timespan', 'confidence of dating');
                     const dateQualifier = self.getNodeValue(x, 'hlc phase timespan', 'hlc phase date qualifier');
                     const endDate = self.getNodeValue(x, 'hlc phase timespan', 'hlc phase end date');
                     const startDate = self.getNodeValue(x, 'hlc phase timespan', 'hlc phase start date');
-                    const period = self.getNodeValue(x, 'period');
-                    const periodLink = self.getResourceLink(x, 'period');
+                    const periodInstanceDetails = self.getRawNodeValue(x, 'period', 'instance_details');
+                    if (Array.isArray(periodInstanceDetails)) {
+                        period(periodInstanceDetails.map(x => {
+                            const periodName = self.getNodeValue(x);
+                            const periodLink = self.getResourceLink(x);
+                            return {
+                                periodName,
+                                periodLink
+                            };
+                        }));
+                    }
                     const tileid = self.getTileId(x);
                     return {
                         broadType,
@@ -94,14 +115,12 @@ define([
                         description,
                         historicMap,
                         hlcType,
-                        historicMapLink,
                         displayDate,
                         dateConfidence,
                         dateQualifier,
                         endDate,
                         startDate,
                         period,
-                        periodLink,
                         tileid
                     };
                 }));
@@ -109,7 +128,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 Object.assign(self.cards, {
@@ -128,7 +147,7 @@ define([
                 };
 
                 self.resourcesCards = {
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 }
 
                 self.locationCards = {

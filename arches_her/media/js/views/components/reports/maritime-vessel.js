@@ -66,7 +66,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -90,7 +91,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
@@ -122,7 +123,7 @@ define([
                     activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.imagesCards = {
@@ -157,13 +158,13 @@ define([
             }
 
             self.statusData = ko.observable({
-                sections: 
+                sections:
                     [
                         {
-                            title: "Vessel Status", 
+                            title: "Vessel Status",
                             data: [{
-                                key: 'Status', 
-                                value: self.getNodeValue(self.resource(), 'status'), 
+                                key: 'Status',
+                                value: self.getNodeValue(self.resource(), 'status'),
                                 card: self.cards?.['status'],
                                 type: 'kv'
                             }]
@@ -171,7 +172,7 @@ define([
                     ]
             });
 
-            const nationalityNode = self.getRawNodeValue(self.resource(), 'nationalities'); 
+            const nationalityNode = self.getRawNodeValue(self.resource(), 'nationalities');
 
             if(Array.isArray(nationalityNode)){
                 self.nationalities(nationalityNode.map(node => {
@@ -182,7 +183,7 @@ define([
                 }));
             }
 
-            const ownersNode = self.getRawNodeValue(self.resource(), 'owner'); 
+            const ownersNode = self.getRawNodeValue(self.resource(), 'owner');
 
             if(Array.isArray(ownersNode)){
                 self.owners(ownersNode.map(node => {
@@ -198,12 +199,12 @@ define([
             }
 
 
-            const voyagesNode = self.getRawNodeValue(self.resource(), 'voyages'); 
+            const voyagesNode = self.getRawNodeValue(self.resource(), 'voyages');
 
             if(voyagesNode){
                 self.voyages(voyagesNode.map(node => {
                     const description = self.getNodeValue(node, 'voyage descriptions', 'voyage description');
-        
+
                     const crewNode = self.getRawNodeValue(node, 'crew');
                     let crew = [];
                     if(Array.isArray(crewNode))
@@ -236,7 +237,7 @@ define([
                         lossStartDate,
                         lossEndDate,
                         lossDateQualifier,
-                        description, 
+                        description,
                         crew,
                         departureName,
                         departureNameCurrency,

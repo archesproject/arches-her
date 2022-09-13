@@ -167,7 +167,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                             let currentTileCards = tileCards;
                             for (let i = 0; i < subCards.locationGeometry.length; ++i) {
                                 const nestedCard = currentTileCards?.[subCards.locationGeometry[i]];
-                                const nestedTile = nestedCard.tiles()?.[0];
+                                const nestedTile = nestedCard?.tiles()?.[0];
                                 currentTileCards = self.createCardDictionary(nestedTile?.cards);
                                 tileCards.locationGeometry = nestedCard;
                             }

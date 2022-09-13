@@ -50,17 +50,18 @@ define([
                 location: ['Consultation Area'],
                 addresses: undefined,
                 locationDescription: undefined,
-                administrativeAreas: undefined,
+                administrativeAreas: 'localities/administrative areas',
                 nationalGrid: undefined,
                 namedLocations: undefined
             }
 
             self.resourcesDataConfig = {
-                assets: 'related heritage assets and areas',
+                assets: 'related monuments and areas',
                 files: 'file(s)',
-                relatedApplicationArea: 'consultation area'
+                relatedApplicationArea: 'consultation area',
+                actors: undefined
             };
-            
+
             self.nameCards = {};
             self.locationCards = {};
             self.resourcesCards = {};
@@ -207,7 +208,7 @@ define([
             const proposalNode = self.getRawNodeValue(self.resource(), 'proposal');
             if(Array.isArray(proposalNode)){
                 self.proposal(proposalNode.map(node => {
-                    const proposal = self.getNodeValue(node, 'proposal text');
+                    const proposal = self.getRawNodeValue(node, 'proposal text', '@display_value');
                     const file = self.getNodeValue(node, 'digital file(s)');
                     const fileLink = self.getResourceLink(self.getRawNodeValue(node, 'digital file(s)'));
                     const tileid = self.getTileId(node);
@@ -218,7 +219,7 @@ define([
             const adviceNode = self.getRawNodeValue(self.resource(), 'advice');
             if(Array.isArray(adviceNode)){
                 self.advice(adviceNode.map(node => {
-                    const advice = self.getNodeValue(node, 'advice text');
+                    const advice = self.getRawNodeValue(node, 'advice text', '@display_value');
                     const adviceType = self.getNodeValue(node, 'advice type');
                     const tileid = self.getTileId(node);
                     return {advice, adviceType, tileid};
@@ -228,7 +229,7 @@ define([
             const actionNode = self.getRawNodeValue(self.resource(), 'action');
             if(Array.isArray(actionNode)){
                 self.action(actionNode.map(node => {
-                    const action = self.getNodeValue(node, 'action text');
+                    const action = self.getRawNodeValue(node, 'action text', '@display_value');
                     const actionType = self.getNodeValue(node, 'action type');
                     const relatedAdvice = self.getNodeValue(node, 'related advice');
                     const tileid = self.getTileId(node);
@@ -297,7 +298,7 @@ define([
                         })) : []);
                     const recommendations = ko.observable(Array.isArray(recommendationsNodes) ? (
                         recommendationsNodes.map(recommendationNode => {
-                            const recommendation = self.getNodeValue(recommendationNode, 'recommendation', 'recommendation value');
+                            const recommendation = self.getRawNodeValue(recommendationNode, 'recommendation', 'recommendation value', '@display_value');
                             const recommendedBy = self.getNodeValue(recommendationNode, 'recommended by');
                             const tileid = self.getTileId(recommendationNode);
                             return {recommendation, recommendedBy, tileid};
@@ -323,6 +324,8 @@ define([
                 const consultingContact = self.getNodeValue(contactNode, 'consulting contact');
                 const planningOfficer = self.getNodeValue(contactNode, 'planning officers', 'planning officer');
                 const planningOfficerLink = self.getNodeValue(contactNode, 'planning officers', 'planning officer', 'resourceid');
+                const planningBody = self.getNodeValue(contactNode, 'planning officers', 'planning body');
+                const planningBodyLink = self.getNodeValue(contactNode, 'planning officers', 'planning body', 'resourceid');
                 const caseworkOfficer = self.getNodeValue(contactNode, 'casework officers', 'casework officer');
                 const caseworkOfficerLink = self.getNodeValue(contactNode, 'casework officers', 'casework officer', 'resourceid');
                 const agentsNodes = self.getRawNodeValue(contactNode, 'agents', 'agent', 'instance_details');
@@ -352,7 +355,7 @@ define([
                 const tileid = self.getTileId(contactNode);
 
                 self.contacts(
-                    { consultingContact, planningOfficer, planningOfficerLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
+                    { consultingContact, planningOfficer, planningOfficerLink, planningBody, planningBodyLink, caseworkOfficer, caseworkOfficerLink, agents, owners, applicants, tileid }
                 )
             };
 
@@ -377,17 +380,33 @@ define([
                         card: null,
                         subCards: {
                             locationGeometry: 'consultation location',
+                            administrativeAreas: 'localities/administrative areas'
                         }
                     }
                 };
                 self.resourcesCards = {
                     consultations: self.cards?.['associated consultations'],
                     activities: self.cards?.['associated activities'],
-                    assets: self.cards?.['associated heritage assets and areas'],
+                    assets: self.cards?.['associated monuments and areas'],
                     files: self.cards?.['associated digital files'],
                     relatedApplicationArea: self.cards?.['consultation location']
                 };
             };
+
+            self.consultationLocationDescription = ko.observable({
+                sections:
+                    [
+                        {
+                            title: 'Consultation Location Description',
+                            card: self.cards?.['consultation location'],
+                            data: [{
+                                key: 'Consultation Location Description',
+                                value: self.getNodeValue(self.resource(), 'consultation area', 'geometry', 'Consultation Location Descriptions', 'Consultation Location Description'),
+                                type: 'kv'
+                            }]
+                        }
+                    ]
+            });
 
             self.consultationDetails = ko.observable({
                 sections:
