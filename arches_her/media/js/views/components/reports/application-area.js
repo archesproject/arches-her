@@ -47,7 +47,8 @@ define([
             };
 
             self.resourceDataConfig = {
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             };
 
             self.locationDataConfig = {
@@ -81,7 +82,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.resourcesCards = {
@@ -91,7 +92,7 @@ define([
                     assets: self.cards?.['associated heritage assets'],
                     applicationAreas: self.cards?.['associated application areas']
                 };
-                
+
                 self.nameCards = {
                     name: self.cards?.['application area names'],
                     externalCrossReferences: self.cards?.['external cross references'],

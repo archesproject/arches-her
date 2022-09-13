@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -35,7 +35,7 @@
                                     <!-- ko ifnot: resourceUrl -->
                                     <span data-bind="text:activity"></span>
                                     <!-- /ko -->
-                                
+
                                 </td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.activities">
@@ -221,9 +221,9 @@
     </div>
 </div>
 
-<!-- Associated Heritage Assets section -->
+<!-- Associated Monuments section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.assets">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assets)}, css: {'fa-angle-double-right': visible.assets(), 'fa-angle-double-up': !visible.assets()}" class="fa toggle"></i> {% trans "Associated Heritage Assets/Areas/Artefacts" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.assets)}, css: {'fa-angle-double-right': visible.assets(), 'fa-angle-double-up': !visible.assets()}" class="fa toggle"></i> {% trans "Associated Monuments/Areas/Artefacts" %}</h2>
     <a data-bind="{if: cards.assets, click: function(){addNewTile(cards.assets)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
 
     <!-- Collapsible content -->
@@ -277,6 +277,60 @@
     </div>
 </div>
 
+
+<!-- Associated People and Organisations section -->
+<div class="aher-report-section" data-bind="visible: !!dataConfig.actors">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.actors)}, css: {'fa-angle-double-right': visible.actors(), 'fa-angle-double-up': !visible.actors()}" class="fa toggle"></i> {% trans "Associated People and Organisations" %}</h2>
+    <a data-bind="{if: cards.actors, click: function(){addNewTile(cards.actors)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Person or Organisation" %}</a>
+    <!-- Collapsible content -->
+    <div data-bind="visible: visible.actors" class="aher-report-collapsible-container pad-lft">
+
+        <!-- ko ifnot: actors().length -->
+        <div class="aher-nodata-note">No associated people or organisations for this resource</div>
+        <!-- /ko -->
+
+        <!-- ko if: actors().length -->
+        <div class="aher-report-subsection">
+            <div class="firstchild-container">
+                <div class="aher-table" data-bind="">
+                    <table class="table table-striped" cellspacing="0" width="100%">
+                        <thead>
+                            <tr class="aher-table-header">
+                                <th>{% trans "Associated Person or Organisation" %}</th>
+                                <th class="aher-table-control all"></th>
+                            </tr>
+                        </thead>
+                        <tbody data-bind="dataTablesForEach: { data: actors, dataTableOptions: relatedResourceTwoColumnTableConfig}">
+                            <tr>
+                                <td data-bind="foreach: associatedActors">
+                                    <span data-bind="visible: $index() > 0">, </span>
+                                    <!-- ko if: actorLink -->
+                                    <a class="aher-table-link" data-bind="text: actor, attr: {href: actorLink}"></a>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: actorLink -->
+                                    <span data-bind="text: actor"></span>
+                                    <!-- /ko -->
+                                </td>
+                                <td class="aher-table-control">
+                                    <div data-bind="if: $parent.cards.actors">
+                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.actors)}">
+                                            <i class="fa fa-mail-reply"></i>
+                                        </a>
+                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.actors)">
+                                            <i class="fa fa-trash"></i>
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
 <!-- Related Application Area section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.relatedApplicationArea">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationArea)}, css: {'fa-angle-double-right': visible.applicationArea(), 'fa-angle-double-up': !visible.applicationArea()}" class="fa toggle"></i> {% trans "Related Application Areas" %}</h2>
@@ -284,7 +338,7 @@
     <div data-bind="visible: visible.applicationArea" class="aher-report-collapsible-container pad-lft">
         <!-- ko ifnot: applicationArea().length -->
         <div class="aher-nodata-note">No related application areas for this resource</div>
-        <!-- /ko -->    
+        <!-- /ko -->
         <!-- ko if: applicationArea().length -->
         <div class="aher-report-subsection">
             <div class="firstchild-container">
@@ -321,7 +375,7 @@
         </div>
         <!-- /ko -->
     </div>
-</div>  
+</div>
 
 
 <!-- Translation section -->
@@ -395,7 +449,15 @@
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: period, dataTableOptions: relatedResourceTwoColumnTableConfig}">
                             <tr>
-                                <td><a class="aher-table-link" data-bind="text: resource, attr: {href: resourceLink}"></a></td>
+                                <td data-bind="foreach: resource">
+                                    <span data-bind="visible: $index() > 0">, </span>
+                                    <!-- ko if: resourceUrl -->
+                                    <a data-bind="text: resourceName, attr: {href: resourceUrl}" class="aher-table-link"></a>
+                                    <!-- /ko -->
+                                    <!-- ko ifnot: resourceUrl -->
+                                    <span data-bind="text: resourceName"></span>
+                                    <!-- /ko -->
+                                </td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.period">
                                         <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.period)}">

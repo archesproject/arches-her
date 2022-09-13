@@ -8,7 +8,7 @@ define([
     'views/components/reports/scenes/name',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
-    return ko.components.register('heritage-asset-report', {
+    return ko.components.register('monument-report', {
         viewModel: function(params) {
             var self = this;
             params.configKeys = ['tabs', 'activeTabIndex'];
@@ -34,9 +34,9 @@ define([
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'heritage asset',
-                nameChildren: 'asset',
-                parent: 'parent asset'
+                name: 'monument',
+                nameChildren: 'child monument',
+                parent: 'parent monument or area'
             };
 
             self.classificationDataConfig = {
@@ -51,7 +51,8 @@ define([
 
             self.resourceDataConfig = {
                 activities: 'associated activities',
-                files: 'digital file(s)'
+                files: 'digital file(s)',
+                actors: undefined
             }
 
             self.nameCards = {};
@@ -69,14 +70,14 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
-                    name: self.cards?.['heritage asset names'],
+                    name: self.cards?.['monument names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
-                    parent: self.cards?.['parent assets'],
+                    parent: self.cards?.['parent monuments'],
                 };
 
                 self.descriptionCards = {
@@ -106,7 +107,7 @@ define([
                     activities: self.cards?.['associated_activities'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.locationCards = {
@@ -133,6 +134,6 @@ define([
             }
 
         },
-        template: { require: 'text!templates/views/components/reports/heritage-asset.htm' }
+        template: { require: 'text!templates/views/components/reports/monument.htm' }
     });
 });

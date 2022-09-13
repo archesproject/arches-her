@@ -80,7 +80,8 @@ define([
             self.resourceDataConfig = {
                 files: 'digital file(s)',
                 consultations: undefined,
-                archive: undefined
+                archive: undefined,
+                actors: undefined
             };
 
             self.nameCards = {};
@@ -105,7 +106,7 @@ define([
 
             if(params.report.cards){
                 const cards = params.report.cards;
-                
+
                 self.cards = self.createCardDictionary(cards)
 
                 const tileCards = self.cards?.['discovery']?.tiles()?.[0]?.cards;
@@ -146,7 +147,7 @@ define([
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
                     files: self.cards?.['associated digital files'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.discoveryCards = {
@@ -179,14 +180,14 @@ define([
                 }
             }
 
-            const discoveryNode = self.getRawNodeValue(self.resource(), 'discovery'); 
-            
+            const discoveryNode = self.getRawNodeValue(self.resource(), 'discovery');
+
             if(discoveryNode){
                 const method = self.getNodeValue(discoveryNode, 'discovery method');
                 const note = self.getRawNodeValue(discoveryNode, 'discovery notes', 'discovery note', '@display_value');
                 const technique = self.getNodeValue(discoveryNode, 'recovery technique');
                 const tileid = self.getTileId(discoveryNode);
-    
+
                 const finderNode = self.getRawNodeValue(discoveryNode, 'finder');
 
                 if(Array.isArray(finderNode))
@@ -196,7 +197,7 @@ define([
                         const currency = self.getNodeValue(finderNode, 'finder names', 'finder name currency');
                         const nameUseType = self.getNodeValue(finderNode, 'finder names', 'finder name use type');
                         const tileid = self.getTileId(finderNode);
-                        return { 
+                        return {
                             name,
                             currency,
                             nameUseType,
@@ -205,10 +206,10 @@ define([
                     }));
                 }
 
-                self.discovery.push({ 
-                    method, 
-                    note, 
-                    technique, 
+                self.discovery.push({
+                    method,
+                    note,
+                    technique,
                     tileid
                 });
 
