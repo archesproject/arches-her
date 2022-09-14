@@ -245,12 +245,16 @@ module.exports = () => {
             'python3',
             [Path.resolve(__dirname, Path.parse(__dirname)['dir'], 'settings.py')]
         );
+        projectSettings.stderr.on("data", process.stderr.write);
+        projectSettings.stdout.on("data", createWebpackConfig);
 
-        projectSettings.stdout.on("data", function (data) {
-           createWebpackConfig(data);
-        });
-        projectSettings.stderr.on("data", function (data) {
-            process.stderr.write(data);
+        projectSettings.on('error', () => {
+            projectSettings = spawn(
+                'python',
+                [Path.resolve(__dirname, Path.parse(__dirname)['dir'], 'settings.py')]
+            );
+            projectSettings.stderr.on("data", process.stderr.write);
+            projectSettings.stdout.on("data", createWebpackConfig);
         });
 
     });
