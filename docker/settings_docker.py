@@ -36,6 +36,7 @@ DATABASES = {
     }
 }
 
+ARCHES_NAMESPACE_FOR_DATA_EXPORT = "http://aher7-0:8000/"
 CELERY_BROKER_URL = "amqp://{}:{}@arches_rabbitmq".format(
     get_env_variable("RABBITMQ_USER"), get_env_variable("RABBITMQ_PASS")
 )  # RabbitMQ --> "amqp://guest:guest@localhost",  Redis --> "redis://localhost:6379/0"
