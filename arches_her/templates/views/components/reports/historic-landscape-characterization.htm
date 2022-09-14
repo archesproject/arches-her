@@ -83,7 +83,9 @@
                 <!-- HLC Phase section -->
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}" class="fa toggle"></i> {% trans "HLC Phase" %}</h2>
-                    <a data-bind="{if: cards.historicLandscapeClassificationPhase, click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+                    <!-- ko if: cards.historicLandscapeClassificationPhase -->
+                    <a href="#" data-bind="click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.historicLandscapeClassificationPhase" class="aher-report-collapsible-container pad-lft">

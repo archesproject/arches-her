@@ -6,7 +6,7 @@
 <div class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contact)}, css: {'fa-angle-double-right': visible.contact(), 'fa-angle-double-up': !visible.contact()}" class="fa toggle"></i> {% trans "Contact Details" %}</h2>
     <span data-bind="if: cards.contact && (!contact().length || cards.contact.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.contact)}"><i class="fa fa-mail-reply"></i> {% trans "Add Contact Details" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.contact)}"><i class="fa fa-mail-reply"></i> {% trans "Add Contact Details" %}</a>
     </span>
 
     <!-- Collapsible content -->

@@ -6,7 +6,9 @@
 <!-- Copyright section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.copyright">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.copyright)}, css: {'fa-angle-double-right': visible.copyright(), 'fa-angle-double-up': !visible.copyright()}" class="fa toggle"></i> {% trans "Copyrights" %}</h2>
-    <a data-bind="{if: cards.copyright, click: function(){addNewTile(cards.copyright)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Copyright" %}</a>
+    <!-- ko if: cards.copyright -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.copyright)}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Copyright" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.copyright" class="aher-report-collapsible-container pad-lft">
@@ -54,7 +56,9 @@
 
 <div class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.images)}, css: {'fa-angle-double-right': visible.images(), 'fa-angle-double-up': !visible.images()}"  class="fa toggle"></i> {% trans "Images" %}</h2>
-    <a data-bind="{if: cards.images, click: function(){addNewTile(cards.images)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+    <!-- ko if: cards.images -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.images)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Photo" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.images" class="aher-report-collapsible-container pad-lft">

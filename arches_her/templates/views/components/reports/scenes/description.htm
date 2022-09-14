@@ -6,7 +6,7 @@
 <div class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Descriptions" %}</h2>
     <span data-bind="if: cards.descriptions && (!descriptions().length || cards.descriptions.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.descriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.descriptions)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
     </span>
 
     <!-- Collapsible content -->
@@ -55,7 +55,7 @@
 <div class="aher-report-section" data-bind="visible: !!dataConfig.citation">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.citation)}, css: {'fa-angle-double-right': visible.citation(), 'fa-angle-double-up': !visible.citation()}" class="fa toggle"></i> {% trans "Citations" %}</h2>
     <span data-bind="if: cards.citation && (!citations() || cards.citation.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.citation)}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.citation)}"><i class="fa fa-mail-reply"></i> {% trans "Add Citation" %}</a>
     </span>
 
     <!-- Collapsible content -->
@@ -112,7 +112,9 @@
 <!-- Audience section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.audience">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.audience)}, css: {'fa-angle-double-right': visible.audience(), 'fa-angle-double-up': !visible.audience()}" class="fa toggle"></i> {% trans "Audience" %}</h2>
-    <a data-bind="{if: cards.audience, click: function(){addNewTile(cards.audience)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Audience" %}</a>
+    <!-- ko if: cards.audience -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.audience)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Audience" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.audience" class="aher-report-collapsible-container pad-lft">

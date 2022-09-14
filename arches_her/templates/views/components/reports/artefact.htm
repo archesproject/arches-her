@@ -84,7 +84,9 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'discovery'">
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.discovery)}, css: {'fa-angle-double-right': visible.discovery(), 'fa-angle-double-up': !visible.discovery()}" class="fa toggle"></i> {% trans "Discovery" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.discovery, event:{ mousedown:function(d, e){addNewTile(cards.discovery, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: discovery().length">{% trans "Edit Discovery" %}</span><span data-bind="ifnot: discovery().length">{% trans "Add Discovery" %}</span></a>
+                    <!-- ko if: cards.discovery -->
+                    <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.discovery, e)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: discovery().length">{% trans "Edit Discovery" %}</span><span data-bind="ifnot: discovery().length">{% trans "Add Discovery" %}</span></a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.discovery" class="aher-report-collapsible-container pad-lft">
@@ -136,7 +138,7 @@
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.finders)}, css: {'fa-angle-double-right': visible.finders(), 'fa-angle-double-up': !visible.finders()}" class="fa toggle"></i> {% trans "Finders" %}</h2>
                     <span data-bind="if: cards.finders && (!finders().length || cards.finders.cardinality == 'n')">
-                        <a class="aher-report-a" data-bind="click: function(){addNewTile(cards.finders)}"><i class="fa fa-mail-reply"></i> {% trans "Add Finder" %}</a>
+                        <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.finders)}"><i class="fa fa-mail-reply"></i> {% trans "Add Finder" %}</a>
                     </span>
                 
                     <!-- Collapsible content -->

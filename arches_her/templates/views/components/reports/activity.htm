@@ -103,7 +103,9 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.activityArchive)}, css: {'fa-angle-double-right': visible.activityArchive(), 'fa-angle-double-up': !visible.activityArchive()}"  class="fa toggle"></i> {% trans "Activity Archive Material" %}</h2>
-                    <a data-bind="{if: cards.activityArchive, click: function(){addNewTile(cards.activityArchive)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Material" %}</a>
+                    <!-- ko if: cards.activityArchive -->
+                    <a href="#" data-bind="click: function(){addNewTile(cards.activityArchive)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Material" %}</a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.activityArchive" class="aher-report-collapsible-container pad-lft">

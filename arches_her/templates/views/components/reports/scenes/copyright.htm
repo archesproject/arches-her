@@ -6,7 +6,7 @@
 <div class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.copyright)}, css: {'fa-angle-double-right': visible.copyright(), 'fa-angle-double-up': !visible.copyright()}" class="fa toggle"></i> {% trans "Copyright" %}</h2>
     <span data-bind="if: cards.copyright && (!copyright().length || cards.copyright.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.copyright)}"><i class="fa fa-mail-reply"></i> {% trans "Add Copyright" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.copyright)}"><i class="fa fa-mail-reply"></i> {% trans "Add Copyright" %}</a>
     </span>
 
     <!-- Collapsible content -->

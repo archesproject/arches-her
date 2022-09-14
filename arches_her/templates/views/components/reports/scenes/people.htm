@@ -6,7 +6,9 @@
 <!-- Associated Actors -->
 <div class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.people)}, css: {'fa-angle-double-right': visible.people(), 'fa-angle-double-up': !visible.people()}" class="fa toggle"></i> {% trans "Associated People and Organizations" %}</h2>
-    <a data-bind="{if: cards.people, click: function(){addNewTile(cards.people)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add People/Organizations" %}</a>
+    <!-- ko if: cards.people -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.people)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add People/Organizations" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.people" class="aher-report-collapsible-container pad-lft">

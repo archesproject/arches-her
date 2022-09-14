@@ -6,7 +6,7 @@
 <div class="aher-report-section">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.audit)}, css: {'fa-angle-double-right': visible.audit(), 'fa-angle-double-up': !visible.audit()}" class="fa toggle"></i> {% trans "Audit Metadata" %}</h2>
     <span data-bind="if: cards.audit && (!audit() || cards.audit.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.audit)}"><i class="fa fa-mail-reply"></i> {% trans "Add Audit" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.audit)}"><i class="fa fa-mail-reply"></i> {% trans "Add Audit" %}</a>
     </span>
 
     <!-- Collapsible content -->
