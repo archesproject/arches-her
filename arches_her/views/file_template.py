@@ -246,7 +246,7 @@ class FileTemplateView(View):
             mitigation = {}
             condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation_scopenote = mitigation_scope_dict.get(tile.data.get(action_type_node_id, ""),"")
+                mitigation_scopenote = mitigation_scope_dict.get(mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""), "")
                 if len(mitigation_scopenote) > 0:
                     mitigation_scopenote = "<br>" + mitigation_scopenote
                 mitigation["content"] = "<p>{}</p><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scopenote)
