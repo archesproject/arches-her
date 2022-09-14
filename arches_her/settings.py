@@ -197,18 +197,27 @@ DOCKER = False
 try:
     from .package_settings import *
 except ImportError:
-    pass
+    try: 
+        from package_settings import *
+    except ImportError as e:
+        pass
 
 try:
     from .settings_local import *
-except ImportError:
-    pass
+except ImportError as e:
+    try: 
+        from settings_local import *
+    except ImportError as e:
+        pass
 
 if DOCKER:
     try:
         from .settings_docker import *
     except ImportError:
-        pass
+        try: 
+            from settings_docker import *
+        except ImportError as e:
+            pass
 
 # returns an output that can be read by NODEJS
 if __name__ == "__main__":
