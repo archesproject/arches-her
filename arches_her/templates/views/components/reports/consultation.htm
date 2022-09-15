@@ -831,10 +831,58 @@
         }"></div>
     </div>
 
+    <div class="aher-report-section">
+        <h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.advice)}, css: {'fa-angle-double-right': visible.advice(), 'fa-angle-double-up': !visible.advice()}"  class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Advice" %}</h2>
+        <a data-bind="{if: cards.advice, click: function(){addNewTile(cards.advice)}}" class="aher-report-a" href="#"><i class="fa fa-mail-reply"></i> {% trans "Add advice" %}</a>
+
+        <!-- Collapsible content -->
+        <div data-bind="visible: visible.advice" class="aher-report-collapsible-container pad-lft">
+
+            <!-- ko ifnot: advice().length -->
+            <div class="aher-nodata-note">{% trans "No advice for this consultation" %}</div>
+            <!-- /ko -->
+
+            <!-- ko if: advice().length -->
+            <div class="aher-report-subsection">
+                <div class="firstchild-container">
+                    <div class="aher-table pad-btm">
+                        <table class="table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Advice" %}</th>
+                                    <th>{% trans "Advice Type" %}</th>
+                                    <th class="aher-table-control all"></th>
+                                </tr>
+                            </thead>
+                            <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
+                            <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: adviceTableConfig}">
+                                <tr>
+                                    <td data-bind="html: advice"></td>
+                                    <td data-bind="text: adviceType"></td>
+                                    <td class="aher-table-control">
+                                        <div data-bind="if: $parent.cards.advice">
+                                            <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.advice)}" href="#">
+                                                <i class="fa fa-mail-reply"></i>
+                                            </a>
+                                            <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.advice)}" href="#">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
 
 
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
-        <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
+
+    <h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Contacts" %}</h2>
+        <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a" href="#">
             <i class="fa fa-mail-reply"></i>
             <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
             <span data-bind="ifnot: cards.contacts.tiles().length">{% trans "Add Contacts" %}</span>
