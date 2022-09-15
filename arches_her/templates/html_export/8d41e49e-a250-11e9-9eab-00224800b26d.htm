@@ -356,15 +356,15 @@
          <hr/>
          {% endif %}
 
-         {# Related Heritage Assets and Areas #}
-         {% if resource_data|has_key:"Related Heritage Assets and Areas" %}
+         {# Related Monuments and Areas #}
+         {% if resource_data|has_key:"Related Monuments and Areas" %}
          <section>
             <div class="container">
-               <h3>Related Heritage Assets and Areas</h3>
+               <h3>Related Monuments and Areas</h3>
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
-                        {{ resource_data|val_from_key:"Related Heritage Assets and Areas"|val_from_key:"@display_value" }}
+                        {{ resource_data|val_from_key:"Related Monuments and Areas"|val_from_key:"@display_value" }}
                      </div>
                   </div>
                </div>

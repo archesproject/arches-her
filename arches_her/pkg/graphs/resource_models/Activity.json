@@ -518,7 +518,7 @@
                     "config": null,
                     "constraints": [],
                     "cssclass": null,
-                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a heritage asset. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
+                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a monument. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
                     "graph_id": "b9e0701e-5463-11e9-b5f5-000d3ab1e588",
                     "helpenabled": false,
                     "helptext": null,
@@ -712,7 +712,7 @@
                     "helptitle": null,
                     "instructions": null,
                     "is_editable": true,
-                    "name": "Associated Heritage Assets, Areas and Artefacts",
+                    "name": "Associated Monuments, Areas and Artefacts",
                     "nodegroup_id": "b9e07043-5463-11e9-bb70-000d3ab1e588",
                     "sortorder": 14,
                     "visible": true
@@ -3239,7 +3239,7 @@
                                 "text": "Woodland"
                             }
                         ],
-                        "placeholder": "Use to record a particular status associated with the Asset."
+                        "placeholder": "Use to record a particular status associated with the Monument."
                     },
                     "id": "a541e051-f121-11eb-a199-a87eeabdefba",
                     "label": "Land Use Classification",
@@ -5193,11 +5193,11 @@
                     "card_id": "b9e07045-5463-11e9-a695-000d3ab1e588",
                     "config": {
                         "defaultResourceInstance": [],
-                        "label": "Associated Asset, Area or Artefact",
+                        "label": "Associated Monument, Area or Artefact",
                         "placeholder": null
                     },
                     "id": "f7728fc7-6481-11ea-b4dc-001fb5264ca8",
-                    "label": "Associated Asset, Area or Artefact",
+                    "label": "Associated Monument, Area or Artefact",
                     "node_id": "b9e07043-5463-11e9-bb70-000d3ab1e588",
                     "sortorder": 0,
                     "visible": true,
@@ -5241,7 +5241,7 @@
             },
             "deploymentdate": null,
             "deploymentfile": null,
-            "description": "Used to record events relating to a particular Heritage Resource. Activities can be used to give context and meaning to the records of heritage assets. They provide information on \u2018how we know what we know\u2019 (for example investigative activities or research and analysis) or on how a particular Heritage Asset has been managed through time (management activities).",
+            "description": "Used to record events relating to a particular Heritage Resource. Activities can be used to give context and meaning to the records of monuments or areas. They provide information on \u2018how we know what we know\u2019 (for example investigative activities or research and analysis) or on how a particular Monument or Area has been managed through time (management activities).",
             "edges": [
                 {
                     "description": null,
@@ -10770,7 +10770,7 @@
                     "alias": "land_use_classification_assignment",
                     "config": null,
                     "datatype": "semantic",
-                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_ThingUsed to record the Land Use Classification associated with a heritage asset. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
+                    "description": "Links an E13_Attribute_Assignment to an E!8_Physical_Thing. Used to record the Land Use Classification associated with an activity. Included for migration purposes.Dependencies:> Land Use concept collection available in the RDM",
                     "exportable": false,
                     "fieldname": "",
                     "graph_id": "b9e0701e-5463-11e9-b5f5-000d3ab1e588",
@@ -10824,7 +10824,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area_assignments",
+                    "alias": "area_assignment",
                     "config": null,
                     "datatype": "semantic",
                     "description": "",
@@ -10835,7 +10835,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Area Assignments",
+                    "name": "Area Assignment",
                     "nodegroup_id": "a5416b3a-f121-11eb-b88d-a87eeabdefba",
                     "nodeid": "a5416b3a-f121-11eb-b88d-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
@@ -14343,7 +14343,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "area",
+                    "alias": "area_assignments",
                     "config": null,
                     "datatype": "semantic",
                     "description": null,
@@ -14354,7 +14354,7 @@
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Area",
+                    "name": "Area Assignments",
                     "nodegroup_id": "a5416b49-f121-11eb-8e2c-a87eeabdefba",
                     "nodeid": "a541e036-f121-11eb-9bed-a87eeabdefba",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
@@ -14404,7 +14404,7 @@
                     "sortorder": 0
                 },
                 {
-                    "alias": "associated_heritage_assets_and_areas",
+                    "alias": "associated_monuments_and_areas",
                     "config": {
                         "graphid": [
                             "076f9381-7b00-11e9-8d6b-80000b44d1d9",
@@ -14425,11 +14425,11 @@
                             },
                             {
                                 "graphid": "076f9381-7b00-11e9-8d6b-80000b44d1d9",
-                                "name": "Heritage Asset"
+                                "name": "Monument"
                             },
                             {
                                 "graphid": "979aaf0b-7042-11ea-9674-287fcf6a5e72",
-                                "name": "Heritage Area"
+                                "name": "Area"
                             }
                         ],
                         "searchDsl": "",
@@ -14438,13 +14438,13 @@
                     "datatype": "resource-instance-list",
                     "description": null,
                     "exportable": true,
-                    "fieldname": "Assoc_HAs",
+                    "fieldname": "Assoc_Mons",
                     "graph_id": "b9e0701e-5463-11e9-b5f5-000d3ab1e588",
                     "is_collector": true,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
-                    "name": "Associated Heritage Assets and Areas",
+                    "name": "Associated Monuments and Areas",
                     "nodegroup_id": "b9e07043-5463-11e9-bb70-000d3ab1e588",
                     "nodeid": "b9e07043-5463-11e9-bb70-000d3ab1e588",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
@@ -15198,7 +15198,7 @@
                 "sortorder": 0
             },
             "slug": null,
-            "subtitle": "Used to record events relating to a particular Heritage Resource. Activities can be used to give context and meaning to the records of heritage assets. They provide information on \u2018how we know what we know\u2019 (for example investigative activities or research and analysis) or on how a particular Heritage Asset has been managed through time (management activities).",
+            "subtitle": "Used to record events relating to a particular Heritage Resource. Activities can be used to give context and meaning to the records of monuments or areas. They provide information on \u2018how we know what we know\u2019 (for example investigative activities or research and analysis) or on how a particular Monument or Area has been managed through time (management activities).",
             "template_id": "eeb7054c-df37-45d1-8f09-39abb582077e",
             "version": ""
         }

@@ -43,7 +43,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 ...self.defaultTableConfig,
                 columns: Array(3).fill(null)
             };
-            
+
             // Organization Formation Table
             self.organizationFormationTableConfig = {
                 ...self.defaultTableConfig,
@@ -166,10 +166,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const startDate = self.getNodeValue(node, 'production time span', 'from date');
                         const tileid = self.getTileId(node);
 
-                        return { 
+                        return {
                             artefactType,
-                            dateQualifier, 
-                            endDate, 
+                            dateQualifier,
+                            endDate,
                             interpretationConfidence,
                             material,
                             method,
@@ -178,16 +178,16 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                             period,
                             periodLink,
                             phaseCertainty,
-                            phaseDescription, 
+                            phaseDescription,
                             phaseEvidence,
                             productionTechnique,
-                            startDate, 
+                            startDate,
                             tileid
                         };
                     }))
                 }
 
-                const constructionPhasesNode = self.getRawNodeValue(params.data(), self.dataConfig.production); 
+                const constructionPhasesNode = self.getRawNodeValue(params.data(), self.dataConfig.production);
                 if(Array.isArray(constructionPhasesNode)) {
                     self.production(constructionPhasesNode.map(x => {
                         const constructionMaterial = self.getNodeValue(x, {testPaths: [['main construction material'], ['material']]});
@@ -206,31 +206,35 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const phaseEvidence = self.getNodeValue(x, 'phase classification', 'construction phase evidence type');
                         const startDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase start date');
                         const tileid = self.getTileId(x);
-                        const assetType = self.getNodeValue(x, 'phase classification', 'asset type');
+                        const assetType = self.getNodeValue(x, {testPaths: [
+                            ['phase classification', 'asset type'],
+                            ['phase classification', 'monument type'],
+                            ['phase classification', 'area type']
+                        ]});
 
-                        return { 
+                        return {
                             assetType,
-                            constructionMaterial, 
-                            constructionTechnique, 
-                            coveringMaterial, 
-                            dateConfidence, 
-                            dateQualifier, 
-                            displayDate, 
-                            endDate, 
+                            constructionMaterial,
+                            constructionTechnique,
+                            coveringMaterial,
+                            dateConfidence,
+                            dateQualifier,
+                            displayDate,
+                            endDate,
                             interpretationConfidence,
-                            method, 
+                            method,
                             period,
                             periodLink,
-                            phase, 
-                            phaseDescription, 
-                            phaseEvidence, 
-                            startDate, 
+                            phase,
+                            phaseDescription,
+                            phaseEvidence,
+                            startDate,
                             tileid
                         };
                     }));
                 }
 
-                const aircraftProductionNode = self.getRawNodeValue(params.data(), self.dataConfig.aircraftProduction); 
+                const aircraftProductionNode = self.getRawNodeValue(params.data(), self.dataConfig.aircraftProduction);
                 if(Array.isArray(aircraftProductionNode)) {
                     self.production(aircraftProductionNode.map(x => {
                         const aircraftForm = self.getNodeValue(x, 'phase classification', 'aircraft form');
@@ -253,31 +257,31 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const startDate = self.getNodeValue(x, 'construction phase timespan', 'start date');
                         const tileid = self.getTileId(x);
 
-                        return { 
+                        return {
                             aircraftForm,
                             aircraftFunction,
                             aircraftType,
                             constructionMaterial,
                             constructionMethod,
-                            constructionTechnique, 
-                            dateQualifier, 
-                            displayDate, 
-                            endDate, 
+                            constructionTechnique,
+                            dateQualifier,
+                            displayDate,
+                            endDate,
                             interpretationConfidence,
-                            method, 
-                            period, 
-                            phase, 
-                            phaseDescription, 
+                            method,
+                            period,
+                            phase,
+                            phaseDescription,
                             phaseCertainty,
                             phaseEvidence,
                             placeOfManufacture,
-                            startDate, 
+                            startDate,
                             tileid
                         };
                     }));
                 }
 
-                const maritimeProductionNode = self.getRawNodeValue(params.data(), self.dataConfig.maritimeProduction); 
+                const maritimeProductionNode = self.getRawNodeValue(params.data(), self.dataConfig.maritimeProduction);
                 if(Array.isArray(maritimeProductionNode)) {
                     self.production(maritimeProductionNode.map(x => {
                         const coveringMaterial = self.getNodeValue(x, 'covering material');
@@ -286,7 +290,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const constructionTechnique = self.getNodeValue(x, 'construction technique');
                         const dateQualifier = self.getNodeValue(x, 'construction phase timespan', 'construction phase date qualifier');
                         const displayDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase display date');
-                        const endDate = self.getNodeValue(x, 'construction phase timespan', 'end date');
+                        const endDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase end date');
                         const interpretationConfidence = self.getNodeValue(x, 'phase classification', 'phase certainty');
                         const method = self.getNodeValue(x, 'construction method');
                         const period = self.getNodeValue(x, 'cultural period');
@@ -295,7 +299,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const phaseCertainty = self.getNodeValue(x, 'phase classification', 'phase certainty');
                         const phaseEvidence = self.getNodeValue(x, 'phase classification', 'construction phase evidence type');
                         const builder = self.getNodeValue(x, 'builder');
-                        const startDate = self.getNodeValue(x, 'construction phase timespan', 'start date');
+                        const startDate = self.getNodeValue(x, 'construction phase timespan', 'construction phase start date');
                         const riggingType = self.getNodeValue(x, 'phase classification', 'type of rigging');
                         const propulsionType = self.getNodeValue(x, 'phase classification', 'propulsion type');
                         const ordnanceType = self.getNodeValue(x, 'phase classification', 'ordnance type');
@@ -303,27 +307,27 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const fixtureType = self.getNodeValue(x, 'phase classification', 'fixtures and fittings type');
                         const tileid = self.getTileId(x);
 
-                        return { 
+                        return {
                             builder,
                             constructionMaterial,
                             constructionMethod,
-                            constructionTechnique, 
+                            constructionTechnique,
                             coveringMaterial,
-                            dateQualifier, 
-                            displayDate, 
-                            endDate, 
+                            dateQualifier,
+                            displayDate,
+                            endDate,
                             fixtureType,
                             interpretationConfidence,
-                            method, 
+                            method,
                             ordnanceType,
-                            period, 
-                            phase, 
-                            phaseDescription, 
+                            period,
+                            phase,
+                            phaseDescription,
                             phaseCertainty,
                             phaseEvidence,
                             propulsionType,
                             riggingType,
-                            startDate, 
+                            startDate,
                             tileid,
                             vesselType
                         };
@@ -331,7 +335,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 }
 
 
-                const dimensionsNode = self.getRawNodeValue(params.data(), self.dataConfig.dimensions); 
+                const dimensionsNode = self.getRawNodeValue(params.data(), self.dataConfig.dimensions);
                 if(Array.isArray(dimensionsNode)) {
                     self.dimensions(dimensionsNode.map(x => {
                         const measurementUnit = self.getNodeValue(x, 'dimension', 'dimension measurement unit');
@@ -340,7 +344,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const value = self.getNodeValue(x, 'dimension', 'dimension value');
                         const tileid = self.getTileId(x);
 
-                        return { 
+                        return {
                             measurementUnit,
                             type,
                             qualifier,
@@ -353,7 +357,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                 const componentsNode = self.getRawNodeValue(params.data(), 'components');
                 if(Array.isArray(componentsNode)) {
                     self.components(componentsNode.map(x => {
-                        const constructionPhase = self.getNodeValue(x, { 
+                        const constructionPhase = self.getNodeValue(x, {
                             testPaths:[
                                 ['associated area phase'],
                                 ['associated asset construction phase'],
@@ -362,7 +366,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const component = self.getNodeValue(x, 'component', 'component type');
                         const material = self.getNodeValue(x, 'component', 'component material');
                         const technique = self.getNodeValue(x, 'construction technique');
-                        const evidence = self.getNodeValue(x,  { 
+                        const evidence = self.getNodeValue(x,  {
                             testPaths:[
                                 ['component attribute assignment', 'evidence type'],
                                 ['component attribute assignment', 'component evidence type'],
@@ -370,7 +374,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         );
                         const tileid = self.getTileId(x);
 
-                        return { 
+                        return {
                             constructionPhase,
                             component,
                             material,
@@ -381,8 +385,8 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
                 if(self.dataConfig.usePhase) {
-                    const usePhaseNode = self.getRawNodeValue(params.data(), 'use phase') || []; 
-                    
+                    const usePhaseNode = self.getRawNodeValue(params.data(), 'use phase') || [];
+
                     self.usePhases(usePhaseNode.map(x => {
                         var type = self.getNodeValue(x, {
                             testPaths: [
@@ -414,7 +418,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                     }));
                 }
 
-                const organizationFormationNode = self.getRawNodeValue(params.data(), self.dataConfig.organizationFormation); 
+                const organizationFormationNode = self.getRawNodeValue(params.data(), self.dataConfig.organizationFormation);
                 if(Array.isArray(organizationFormationNode)) {
                     self.organizationFormation(organizationFormationNode.map(x => {
                         const startDate = self.getNodeValue(x,'timespan', 'start date');
@@ -424,21 +428,21 @@ define(['underscore', 'knockout', 'arches', 'utils/report','bindings/datatable']
                         const tileid = self.getTileId(x);
                         return {
                             startDate,
-                            endDate, 
-                            tileid, 
-                            organizationType, 
+                            endDate,
+                            tileid,
+                            organizationType,
                             dateQualifier
                         }
                     }));
                 }
 
-                const datesNode = self.getRawNodeValue(params.data(), self.dataConfig.dates); 
+                const datesNode = self.getRawNodeValue(params.data(), self.dataConfig.dates);
                 if(datesNode) {
                     const startDate = self.getNodeValue(datesNode, 'earliest possible start date');
                     const endDate = self.getNodeValue(datesNode, 'latest possible end date');
                     const tileid = self.getTileId(datesNode);
 
-                    self.dates([{ 
+                    self.dates([{
                         startDate,
                         endDate,
                         tileid
