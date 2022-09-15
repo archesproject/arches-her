@@ -1,4 +1,5 @@
 version: '3.8'
+name: arches_her6-1
 services:
     aher:
       container_name: aher
@@ -13,42 +14,15 @@ services:
       env_file:
         - ./docker/env_file.env
       ports:
-      #change this to avoid conflicts with other projects
         - 8002:8000
-        - 5679:5678
-      # depends_on:
-      #   - db_aher
-      #   - elasticsearch_aher
-      #   - couchdb_aher
       stdin_open: true
       tty: true
-
-    # aher_livereload:
-    #   profiles:
-    #     - livereload
-    #   container_name: aher_livereload
-    #   image: fargeo/aher
-    #   build:
-    #     context: ..
-    #     dockerfile: aher/Dockerfile
-    #   command: run_livereload
-    #   volumes:
-    #     - ../arches/:/web_root/arches
-    #     - ./:/web_root/arches_her
-    #   env_file:
-    #     - ./docker/env_file.env
-    #   ports:
-    #     - 35729:35729      
-    #   depends_on:
-    #       - aher
-    #   stdin_open: true
-    #   tty: true
 
     koop_aher:
       container_name: koop_aher
       image: ryana86/arches-koop:1.0
       ports:
-        - 3000:3000
+        - 3002:3000
       volumes:
       - ./arches_her/pkg/koop:/usr/src/app/config
       env_file:
