@@ -82,7 +82,7 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'classifications'">
                 <!-- HLC Phase section -->
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}" class="fa toggle"></i> {% trans "HLC Phase" %}</h2>
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.historicLandscapeClassificationPhase)}, css: {'fa-angle-double-right': visible.historicLandscapeClassificationPhase(), 'fa-angle-double-up': !visible.historicLandscapeClassificationPhase()}, attr: {'aria-expanded': visible.historicLandscapeClassificationPhase() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "HLC Phase" %}</h2>
                     <!-- ko if: cards.historicLandscapeClassificationPhase -->
                     <a href="#" data-bind="click: function(){addNewTile(cards.historicLandscapeClassificationPhase)}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
                     <!-- /ko -->

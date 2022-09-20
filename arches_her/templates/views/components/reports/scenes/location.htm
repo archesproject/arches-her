@@ -5,7 +5,7 @@
 {% block body %}
 <!-- Geometry/Map -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.geometry">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.coordinates)}, css: {'fa-angle-double-right': visible.coordinates(), 'fa-angle-double-up': !visible.coordinates()}" class="fa toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.coordinates)}, css: {'fa-angle-double-right': visible.coordinates(), 'fa-angle-double-up': !visible.coordinates()}, attr: {'aria-expanded': visible.coordinates() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Geospatial Coordinates" %}</h2>
     <!-- ko if: cards.locationGeometry && !coordinateData || locationRoot -->
     <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.locationGeometry || locationRoot)}">
         <i class="fa fa-mail-reply"></i> {% trans "Add Geometry" %}
@@ -138,7 +138,7 @@
 
 <!-- Addresses -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.addresses">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.addresses)}, css: {'fa-angle-double-right': visible.addresses(), 'fa-angle-double-up': !visible.addresses()}" class="fa toggle"></i> {% trans "Addresses" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.addresses)}, css: {'fa-angle-double-right': visible.addresses(), 'fa-angle-double-up': !visible.addresses()}, attr: {'aria-expanded': visible.addresses() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Addresses" %}</h2>
     <!-- ko if: cards.addresses || locationRoot -->
     <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.addresses || locationRoot)}"><i class="fa fa-mail-reply"></i> {% trans "Add Address" %}</a>
     <!-- /ko -->
@@ -213,7 +213,7 @@
 
 <!-- Location Description -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.locationDescription">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}" class="fa toggle"></i> {% trans "Location Descriptions" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.descriptions)}, css: {'fa-angle-double-right': visible.descriptions(), 'fa-angle-double-up': !visible.descriptions()}, attr: {'aria-expanded': visible.descriptions() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Location Descriptions" %}</h2>
     <!-- ko if: cards.locationDescriptions || locationRoot -->
     <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.locationDescriptions || locationRoot)}"><i class="fa fa-mail-reply"></i> {% trans "Add Description" %}</a>
     <!-- /ko -->
@@ -266,7 +266,7 @@
 
 <!-- Admin Areas -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.administrativeAreas">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.administrativeAreas)}, css: {'fa-angle-double-right': visible.administrativeAreas(), 'fa-angle-double-up': !visible.administrativeAreas()}" class="fa toggle"></i> {% trans "Administrative Areas" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.administrativeAreas)}, css: {'fa-angle-double-right': visible.administrativeAreas(), 'fa-angle-double-up': !visible.administrativeAreas()}, attr: {'aria-expanded': visible.administrativeAreas() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Administrative Areas" %}</h2>
     <!-- ko if: cards.administrativeAreas || locationRoot -->
     <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.administrativeAreas || locationRoot)}"><i class="fa fa-mail-reply"></i> {% trans "Add Area" %}</a>
     <!-- /ko -->
@@ -321,7 +321,7 @@
 
 <!-- National Grid References -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.nationalGrid">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.nationalGrid)}, css: {'fa-angle-double-right': visible.nationalGrid(), 'fa-angle-double-up': !visible.nationalGrid()}" class="fa toggle"></i> {% trans "National Grid References" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.nationalGrid)}, css: {'fa-angle-double-right': visible.nationalGrid(), 'fa-angle-double-up': !visible.nationalGrid()}, attr: {'aria-expanded': visible.nationalGrid() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "National Grid References" %}</h2>
     <!-- ko if: cards.nationalGridReferences || locationRoot -->
     <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.nationalGridReferences || locationRoot)}"><i class="fa fa-mail-reply"></i> {% trans "Add Grid Reference" %}</a>
     <!-- /ko -->
@@ -372,7 +372,7 @@
 
 <!-- Named Locations -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.namedLocations">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.namedLocations)}, css: {'fa-angle-double-right': visible.namedLocations(), 'fa-angle-double-up': !visible.namedLocations()}" class="fa toggle"></i> {% trans "Named Locations" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.namedLocations)}, css: {'fa-angle-double-right': visible.namedLocations(), 'fa-angle-double-up': !visible.namedLocations()}, attr: {'aria-expanded': visible.namedLocations() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Named Locations" %}</h2>
     <!-- ko if: cards.namedLocations || locationRoot -->
     <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.namedLocations || locationRoot)}"><i class="fa fa-mail-reply"></i> {% trans "Add Location" %}</a>
     <!-- /ko -->
