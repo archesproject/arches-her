@@ -209,9 +209,7 @@ class FileTemplateView(View):
             "Signature": "",
             "Archaeological Priority Area": "",
             "Assessment of Significance": "",
-            "Condition Type": "",
             "Condition": "",
-            "Mitigation Type": "",
             "Mitigation": "",
             "Casework Officer Email": "",
             "Casework Officer Number": "",
@@ -223,28 +221,54 @@ class FileTemplateView(View):
         def get_value_from_tile(tile, node_id):
             current_node = models.Node.objects.get(nodeid=node_id)
             datatype = datatype_factory.get_instance(current_node.datatype)
-            return datatype.get_display_value(tile, current_node)
+            returnvalue = datatype.get_display_value(tile, current_node)
+            return "" if returnvalue is None else returnvalue
 
+        # Advice and Conditions.
+        advice_nodegroup_id = '8d41e49f-a250-11e9-b6b3-00224800b26d'
+        advice_node_id = 'c36808b0-952c-11ea-9ff0-f875a44e0e11'
+        advice_type_node_id = '56fa335d-06fa-11eb-8328-f875a44e0e11'
+        conditions = []
+
+        # Action and Mitigations.
         action_nodegroup_id = 'a5e15f5c-51a3-11eb-b240-f875a44e0e11'
         action_node_id = 'bfd39106-51a3-11eb-9104-f875a44e0e11'
         action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
         mitigations = []
 
+        mitigation_scope_dict = {}
+        mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
+        with open(mitigation_notes_path, "rb") as openfile:
+            mitigation_scope_dict = json.loads(openfile.read())
+
         for tile in tiles:
             mitigation = {}
+            condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation["content"] = get_value_from_tile(tile, action_node_id)
+                mitigation_scopenote = mitigation_scope_dict.get(mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""), "")
+                if len(mitigation_scopenote) > 0:
+                    mitigation_scopenote = "<br>" + mitigation_scopenote
+                mitigation["content"] = "<p>{}</p><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scopenote)
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
+            elif str(tile.nodegroup_id) == advice_nodegroup_id:
+                condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
+                template_name = self.get_template_path(self.request._post['template_id'])
+                if template_name == "WSI Amend Letter.docx" or template_name == "WSI Approval Letter.docx":
+                    condition["type"] = ""
+                else:
+                    condition["type"] = get_value_from_tile(tile, advice_type_node_id)
             else:
                 for key, value in list(template_dict.items()):
                     if value in tile.data:
                         lookup_val = get_value_from_tile(tile, value)
                         try:
-                            mapping_dict[key] = "" if lookup_val is None else lookup_val
+                            mapping_dict[key] = lookup_val
                         except TypeError:
                             pass
             if len(mitigation) > 0:
                 mitigations.append(mitigation)
+            elif len(condition) > 0:
+                conditions.append(condition)
 
             contactNodeId = "b7304f4c-3ace-11eb-8884-f875a44e0e11"
             contacts = {
@@ -260,6 +284,8 @@ class FileTemplateView(View):
             contactDetailsNodegroupId = "2547c12f-9505-11ea-a507-f875a44e0e11"
             contactNameForCorrespondenceNodeId = "2beefb56-4084-11eb-bcc5-f875a44e0e11"
             fullnameNodeId = "5f8ded26-7ef9-11ea-8e29-f875a44e0e11"
+            firstnameNodeId = "2caeb5e7-7b44-11ea-a919-f875a44e0e11"
+            lastnameNodeId = "96a3942a-7e53-11ea-8b5a-f875a44e0e11"
             nameTitleNodeId = "6da2f03b-7e55-11ea-8fe5-f875a44e0e11"
             nameUseTypeNodeId = "4110f747-1a44-11e9-96b7-000d3ab1e588"
             forCorrespondenceNameValueId = "85c26c81-e356-4454-a2ba-67e7ad9b95cd"
@@ -305,15 +331,19 @@ class FileTemplateView(View):
                         if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
                             if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
                                 nameTitle = ConceptValue(contactTile.data[nameTitleNodeId]).value
-                                fullName = contactTile.data[fullnameNodeId]
+                                fullName = "{0} {1}".format(get_value_from_tile(contactTile, firstnameNodeId), get_value_from_tile(contactTile, lastnameNodeId))
                                 mapping_dict["Name of person consulting"] = "{0} {1}".format(nameTitle, fullName) if nameTitle else fullName
                         elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                             if contactTile.data[contactPointTypeNodeId] == contactPointTypeMailValueId:
                                 mapping_dict["Contact Name"] = contactTile.data[contactNameForCorrespondenceNodeId]
-                                mapping_dict["Address of consulting organisation"] = contactTile.data[contactPointNodeId]
+                                addressConsult = get_value_from_tile(contactTile, contactPointNodeId).replace(", ", "<br>").replace(",", "<br>")
+                                mapping_dict["Address of consulting organisation"] = addressConsult
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<p>{}</p>{}<br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
+        
+        for condition in conditions:
+            mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
