@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -25,17 +25,17 @@
                         }}">
                     </div>
                 </div>
-                <h3 class="" data-bind="click: function() {toggleVisibility(visible.geometryMetadata)}, css: {'shim': visible.geometryMetadata(), 'highlight': !visible.geometryMetadata()}"><i data-bind="click: function() {toggleVisibility(visible.geometryMetadata)}, css: {'fa-angle-double-right': visible.geometryMetadata(), 'fa-angle-double-up': !visible.geometryMetadata()}" class="fa toggle"></i> {% trans "Geometry Metadata" %}</h3>
+                <h3 class=""><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.geometryMetadata)}, css: {'fa-angle-double-right': visible.geometryMetadata(), 'fa-angle-double-up': !visible.geometryMetadata()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Geometry Metadata" %}</h3>
                 <div class="" data-bind="if: visible.geometryMetadata">
                     <!-- Record Authorization/Compilation/Update -->
                     <div class="aher-report-subsection-firstchild no-top-pad">
                         <h5 class="aher-geom-metadata-header">Record Edit History</h5>
-                        
+
                         <!-- ko ifnot: recordEditExists -->
                         <div class="aher-nodata-note">No authorization record for this resource</div>
                         <!-- /ko -->
 
-                        <!-- ko if: recordEditExists -->   
+                        <!-- ko if: recordEditExists -->
                         <div class="firstchild-container" data-bind="{with: geometryMetadata}">
                             <div class="aher-report-subsection-item flex">
                                 <div class="aher-block-attributes actor-name">
@@ -72,7 +72,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /ko -->   
+                        <!-- /ko -->
                     </div>
 
                     <!-- Geometry Sources/Scale -->
@@ -81,7 +81,7 @@
 
                         <!-- ko ifnot: geometryScaleExists -->
                         <div class="aher-nodata-note">No record sources/scale for this resource</div>
-                        <!-- /ko -->   
+                        <!-- /ko -->
 
                         <!-- ko if: geometryScaleExists -->
                         <div class="firstchild-container">
@@ -104,16 +104,16 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /ko -->   
+                        <!-- /ko -->
                     </div>
 
                     <!-- Record Description -->
                     <div class="aher-report-subsection-firstchild">
                         <h5 class="aher-geom-metadata-header">Description</h5>
-                        
+
                         <!-- ko if: !observableValueSet([geometryNotes]) || geometryNotes() == "" -->
                         <div class="aher-nodata-note">No description record for this resource</div>
-                        <!-- /ko -->   
+                        <!-- /ko -->
 
                         <!-- ko if: observableValueSet([geometryNotes]) -->
                         <div class="firstchild-container pad-btm">
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /ko -->   
+                        <!-- /ko -->
                     </div>
                 </div>
             </div>
@@ -146,7 +146,7 @@
 
         <!-- ko if: addresses().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <!-- Address Table -->
                 <div class="aher-table pad-btm">
@@ -217,9 +217,9 @@
         <!-- /ko -->
 
         <!-- ko if: descriptions().length -->
-        
+
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <!-- Statements Table -->
                 <div class="aher-table pad-btm">
@@ -268,7 +268,7 @@
 
         <!-- ko if: administrativeAreas().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <!-- Statements Table -->
                 <div class="aher-table pad-btm">
@@ -320,7 +320,7 @@
 
         <!-- ko if: nationalGridReferences().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <!-- Statements Table -->
                 <div class="aher-table pad-btm">
@@ -368,7 +368,7 @@
 
         <!-- ko if: namedLocations().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <!-- named Locations Table -->
                 <div class="aher-table pad-btm">
