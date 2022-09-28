@@ -78,16 +78,6 @@
                     }
                 }"></div>
             </div>
-            <!-- Assessments Tab -->
-            <div class="aher-report-page" data-bind="if: activeSection() === 'assessments'">
-                <div data-bind="component: {
-                    name: 'views/components/reports/scenes/assessments',
-                    params: {
-                        data: resource,
-                        cards: assessmentCards,
-                    }
-                }"></div>
-            </div>
             <!-- Status/Owner Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'status'">
                 <div data-bind="component: {

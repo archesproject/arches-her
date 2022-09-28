@@ -61,13 +61,14 @@
                             <div class="firstchild-container">
                                 <!-- Bibliographic Source Names Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="bibliographic-source-names-table_info">Bibliographic source names table.</p>
+                                    <table id="bibliographic-source-names-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Name" %}</th>
                                                 <th>{% trans "Volume" %}</th>
                                                 <th>{% trans "Part" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: sourceNames, dataTableOptions: sourceNamesTableConfig}">
@@ -147,13 +148,14 @@
                             <div class="firstchild-container">
                                 <!-- Publication Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="publication-table_info">Publications table.</p>
+                                    <table id="publication-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Publisher" %}</th>
                                                 <th>{% trans "Place of Publication" %}</th>
                                                 <th>{% trans "Date" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: publication, dataTableOptions: publicationTableConfig}">
