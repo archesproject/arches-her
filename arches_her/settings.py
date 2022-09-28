@@ -196,6 +196,11 @@ COPYRIGHT_TEXT = "All Rights Reserved."
 COPYRIGHT_YEAR = "2020"
 DOCKER = False
 
+SEARCH_COMPONENT_LOCATIONS = [
+    "arches.app.search.components",
+    "arches_her.search.components",
+]
+
 ACCESSIBILITY_MODE = True
 
 try:
