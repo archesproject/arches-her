@@ -99,13 +99,14 @@
                             <div class="firstchild-container">
                                 <!-- discovery Table -->
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="discovery-table_info">Discovery table.</p>
+                                    <table id="discovery-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Method" %}</th>
                                                 <th>{% trans "Recovery Technique" %}</th>
                                                 <th class="none">{% trans "Note" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: discovery, dataTableOptions: discoveryTableConfig}">
@@ -149,13 +150,14 @@
                         <div class="aher-report-subsection" >
                             <div>
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="finders-table_info">Finders table.</p>
+                                    <table id="finders-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Name" %}</th>
                                                 <th>{% trans "Name Use Type" %}</th>
                                                 <th class="none">{% trans "Name Use Currency" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: {data: finders, dataTableOptions: findersTableConfig}">

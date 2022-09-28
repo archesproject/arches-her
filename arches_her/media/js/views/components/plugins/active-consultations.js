@@ -12,7 +12,7 @@ define([
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
-            this.resourceEditorURL = '/arches-her' + arches.urls.resource_editor;
+            this.resourceEditorURL = arches.urls.resource_editor;
             this.moment = moment;
             this.layout = ko.observable('grid');
             this.setLayout = function(layout){ self.layout(layout); };
@@ -26,13 +26,23 @@ define([
             this.keywordSearch = function() {
                 if(self.keyword() && self.keyword() != "") {
                     self.orderByOption("");
+                    self.page(1);
                     self.getConsultations();
                     self.searched = true;
                 }
             };
+            this.keywordSearchOnEnter = function(data, event) {
+                if (event.keyCode === 13 || event.key === "Enter") {
+                    self.keywordSearch();
+                }
+                else{
+                    //pass
+                }
+            }
             this.resetKeywordSearch = function() {
                 self.keyword("");
                 self.orderByOption("");
+                self.page(1);
                 self.getConsultations();
                 self.searched = false;
             };

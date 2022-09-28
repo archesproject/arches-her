@@ -96,7 +96,8 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table" data-bind="">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="hlc-phase-table_info">Historic landscape classification phase table.</p>
+                                    <table id="hlc-phase-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr class="aher-table-header">
                                                 <th>{% trans "Type" %}</th>
@@ -110,7 +111,7 @@
                                                 <th class="none">{% trans "End Date" %}</th>
                                                 <th class="none">{% trans "Date Qualifier" %}</th>
                                                 <th class="none">{% trans "Confidence of Dating" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: historicLandscapeClassificationPhase, dataTableOptions: hlcPhaseTableConfig}">

@@ -393,12 +393,12 @@
                       <div class="keeptogether">
                          <div class="rtable">
                             <div class="rrow rheader">
-                               <div class="rcell">Associated Asset/Area/Artefact</div>
+                               <div class="rcell">Associated Monument/Area/Artefact</div>
                                <div class="rcell">Association Type</div>
                             </div>
                             {% for assocAAAVA in resource_data|val_from_key:"Associated Monuments, Areas and Artefacts" %}
                             <div class="rrow">
-                               <div class="rcell" data-title="Associated Asset/Area/Artefact">
+                               <div class="rcell" data-title="Associated Monument/Area/Artefact">
                                   {{ assocAAAVA|val_from_key:"Associated Monument, Area or Artefact"|val_from_key:"@display_value" }}
                                </div>
                                <div class="rcell" data-title="Association Type">

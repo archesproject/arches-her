@@ -20,14 +20,15 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="source-creation-table_info">Bibliographic source creation table.</p>
+                    <table id="source-creation-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>{% trans "Author" %}</th>
                                 <th>{% trans "Editor" %}</th>
                                 <th>{% trans "Contributor" %}</th>
                                 <th>{% trans "Statement of Responsibility" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: sourceCreation, dataTableOptions: sourceCreationConfig}">
@@ -72,13 +73,14 @@
         <div class="aher-report-subsection">
             <div class="firstchild-container">
                 <div class="aher-table" data-bind="">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="repository-storage-table_info">Repository storage location table.</p>
+                    <table id="repository-storage-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr>
                                 <th>{% trans "Owner" %}</th>
                                 <th>{% trans "Building Name" %}</th>
                                 <th>{% trans "Storage Area" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: repositoryStorage, dataTableOptions: repositoryStorageConfig}">

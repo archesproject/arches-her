@@ -1,0 +1,95 @@
+{% load i18n %}
+
+
+    <!-- ko if: alert() -->
+    <div>
+        <div data-bind="visible: alert().active" style="display: none ; height: 100px;" class="relative">
+            <div id="card-alert-panel" data-bind="css: 'ep-form-alert ' + (alert() ? alert().type() : '')">
+                <h4 class="ep-form-alert-title" data-bind="text: alert().title"></h4>
+                <p class="ep-form-alert-text" data-bind="html: alert().text"></p>
+
+                <div class="ep-form-alert-default-dismiss">
+                    <i class="fa fa-times-circle" data-bind="click: alert().close"></i>
+                </div>
+
+                <div class="ep-form-alert-buttons">
+                    <!-- ko if: alert().cancel -->
+                    <button id="" class="btn btn-sm btn-danger btn-labeled fa fa-times" data-bind="click: alert().cancel">{% trans "Cancel" %}</button>
+                    <!-- /ko -->
+                    <!-- ko if: alert().ok -->
+                    <button id="" class="btn btn-sm btn-primary btn-labeled fa fa-check" data-bind="click: alert().ok">{% trans "OK" %}</button>
+                    <!-- /ko -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+
+<div style="height:0px">
+
+  <div class="row widget-container">
+
+    <div>
+        <div>
+            <select data-placeholder="{% trans "Choose a card." %}" data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: chosen_card, options: cards_in_graph, optionsText: 'name', optionsValue: 'nodegroup_id', valueAllowUnset: true"></select>
+
+        </div>
+        <div>
+            <select data-placeholder="{% trans "Choose a node." %}" data-bind="chosen: {width: '100%', disable_search_threshold: 15}, value: target_node, options: nodes_in_card, optionsText: 'name', optionsValue: 'nodeid', valueAllowUnset: true" id="target_node"></select>
+        </div>
+        <div>
+            <input placeholder="{% trans 'Use bracketed node names like this: <node name>' %}" class="form-control input-lg widget-input" data-bind="value: string_template_calc">
+        </div>
+        <button data-bind="click: addAutopopulateConfig">Add/Amend Current Configuration</button>
+        <button data-bind="click: trigger_string_template_reset">Reset String Template</button>
+        <button data-bind="click: clear_configuration_options">Clear Current Configuration</button>
+        <div>
+            <p>
+                Overwrite existing values on save
+            </p>
+            <span class="switch switch-small arches-switch on" data-bind="css: {'on': overwrite()}, click: function(){overwrite(!overwrite())}">
+                <small></small>
+            </span>
+
+        </div>
+
+
+        <table width="100%" cellpadding="0" cellspacing="0">
+            <thead >
+                <tr>
+                    <th width="15%">Card</th>
+                    <th width="15%">Node to Populate</th>
+                    <th width="45%">String Template</th>
+                    <th width="45%">Overwrite Saved Value</th>
+                    <th width="7%" style="text-align:center">Delete</th>
+                    <th width="7%" style="text-align:center">Select for Update</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- ko foreach: return_calc_configs -->
+                    <tr>
+                        <td><span data-bind="text: card_name"></span></td>
+                        <td><span data-bind="text: target_name"></span></td>
+                        <td><span data-bind="text: string_template"></span></td>
+                        <td><span data-bind="text: overwrite_value"></span></td>
+                        <td style="text-align:center">
+                            <span class="rp-edit-buttons" style="margin-right:0%">
+                                <i class="fa fa-trash"data-bind="click: $parent.deleteAutopopulateConfig"></i>
+                            </span>
+                        </td>
+                        <td style="text-align:center">
+                            <span class="rp-edit-buttons" style="margin-right:0%">
+                                <i class="fa fa-pencil" data-bind="click: $parent.updateAutopopulateConfig"></i>
+                            </span>
+                        </td>
+                    </tr>
+                <!-- /ko -->
+            </tbody>
+        </table>
+
+
+
+
+  </div>
+</div>

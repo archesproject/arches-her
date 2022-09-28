@@ -20,7 +20,8 @@
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
-                    <table class="table table-striped" cellspacing="0" width="100%">
+                    <p class="aher-table-aria-describedby" id="audit-metadata-table_info">Audit metadata table.</p>
+                    <table id="audit-metadata-table" class="table table-striped" cellspacing="0" width="100%">
                         <thead>
                             <tr class="aher-table-header">
                                 <th>{% trans "Note" %}</th>
@@ -29,7 +30,7 @@
                                 <th>{% trans "Update Date" %}</th>
                                 <th>{% trans "Updater" %}</th>
                                 <th>{% trans "Validation" %}</th>
-                                <th class="aher-table-control all"></th>
+                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                             </tr>
                         </thead>
                         <tbody data-bind="dataTablesForEach: { data: audit, dataTableOptions: auditTableConfig }">
