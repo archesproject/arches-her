@@ -209,10 +209,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
                 const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation, 'instance_details');
                 if (Array.isArray(translationNode)) {
+                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.translation));
                     self.translation(translationNode.map(x => {
                         const resource = self.getNodeValue(x);
                         const resourceLink = self.getResourceLink(self.getRawNodeValue(x));
-                        const tileid = self.getTileId(x);
                         return { resource, resourceLink, tileid };
                     }));
                 }
