@@ -3,7 +3,7 @@ Django settings for arches_her project.
 """
 
 import os
-import arches
+from arches import __version__
 import inspect
 
 try:
@@ -180,6 +180,8 @@ CACHE_BY_USER = {"anonymous": 3600 * 24}
 
 MOBILE_OAUTH_CLIENT_ID = ""
 MOBILE_DEFAULT_ONLINE_BASEMAP = {"default": "mapbox://styles/mapbox/streets-v9"}
+
+SESSION_COOKIE_NAME = f"{APP_NAME}_{__version__}"
 
 PREFERRED_COORDINATE_SYSTEMS = (
     {
