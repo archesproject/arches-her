@@ -115,10 +115,10 @@
                                                 <td data-bind="html: note"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.discovery">
-                                                        <a tabindex ="0" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.discovery)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.discovery)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a tabindex="0" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.discovery)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.discovery)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -165,10 +165,10 @@
                                                 <td data-bind="text: currency"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.finders">
-                                                        <a tabindex="0" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.finders)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.finders)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a tabindex="0" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.finders)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.finders)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
