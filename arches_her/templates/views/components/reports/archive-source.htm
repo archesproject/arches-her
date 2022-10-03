@@ -75,7 +75,9 @@
                             <!-- ko foreach: { data: archive.data.section, as: "section", noChildContext: true} -->
                             <div class="aher-report-subsection">
                                 <h2 class="aher-report-section-subtitle" style="margin-bottom: 5px"><i data-bind="click: function() {toggleVisibility(section.visible)}, css: {'fa-angle-double-right': section.visible(), 'fa-angle-double-up': !section.visible()}" class="fa toggle"></i> <span data-bind="text: section.title"></span></h2>
-                                <a data-bind="{if: section.card, click: function(){addNewTile(section.card)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span data-bind="text:section.title"></span></a>
+                                <!-- ko if: section.card -->
+                                <a href="#" data-bind="click: function(){addNewTile(section.card)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span data-bind="text:section.title"></span></a>
+                                <!--/ko-->
 
                                 <div data-bind="visible: section.visible" class="aher-report-collapsible-container">
 

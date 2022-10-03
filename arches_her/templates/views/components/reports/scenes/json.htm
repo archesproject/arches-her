@@ -5,7 +5,7 @@
 {% block body %}
 <!-- JSON section -->
 <div class="aher-report-section aher-flex-col">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.json)}, css: {'fa-angle-double-right': visible.json(), 'fa-angle-double-up': !visible.json()}" class="fa toggle"></i> {% trans "Resource JSON" %}</h2>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.json)}, css: {'fa-angle-double-right': visible.json(), 'fa-angle-double-up': !visible.json()}, attr: {'aria-expanded': visible.json() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Resource JSON" %}</h2>
     
 
     <!-- Collapsible content -->

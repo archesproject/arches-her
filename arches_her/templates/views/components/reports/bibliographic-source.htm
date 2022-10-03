@@ -41,9 +41,9 @@
             <div class="aher-report-page" data-bind="if: activeSection() === 'source'">
 
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}" class="fa toggle"></i> {% trans "Names" %}</h2>
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceNames)}, css: {'fa-angle-double-right': visible.sourceNames(), 'fa-angle-double-up': !visible.sourceNames()}, attr: {'aria-expanded': visible.sourceNames() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Names" %}</h2>
                     <span data-bind="if: cards.sourceNames && (!sourceNames().length || cards.sourceNames.cardinality == 'n')">
-                        <a class="aher-report-a" data-bind="click: function(){addNewTile(cards.sourceNames)}"><i class="fa fa-mail-reply"></i> {% trans "Add Bibliographic Source Name" %}</a>
+                        <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.sourceNames)}"><i class="fa fa-mail-reply"></i> {% trans "Add Bibliographic Source Name" %}</a>
                     </span>
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.sourceNames" class="aher-report-collapsible-container pad-lft">
@@ -125,9 +125,9 @@
             <!-- Publication Details Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'publication'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.publication)}, css: {'fa-angle-double-right': visible.publication(), 'fa-angle-double-up': !visible.publication()}" class="fa toggle"></i> {% trans "Publication" %}</h2>
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.publication)}, css: {'fa-angle-double-right': visible.publication(), 'fa-angle-double-up': !visible.publication()}, attr: {'aria-expanded': visible.publication() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Publication" %}</h2>
                     <span data-bind="if: cards.publication && (!publication().length || cards.publication.cardinality == 'n')">
-                        <a class="aher-report-a" data-bind="click: function(){add(cards.publication)}"><i class="fa fa-mail-reply"></i> {% trans "Add Publication" %}</a>
+                        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.publication)}"><i class="fa fa-mail-reply"></i> {% trans "Add Publication" %}</a>
                     </span>
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.publication" class="aher-report-collapsible-container pad-lft">
@@ -178,8 +178,10 @@
                 </div>
                 <!-- Bibliographic Source Creation section -->
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}"  class="fa toggle"></i> {% trans "Source Creation" %}</h2>
-                    <a data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}, attr: {'aria-expanded': visible.sourceCreation() ? 'false' : 'true' }"  class="fa toggle"></i> {% trans "Source Creation" %}</h2>
+                    <!-- ko if: cards.sourceCreation -->
+                    <a href="#" data-bind="click: function(){addNewTile(cards.sourceCreation)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.sourceCreation" class="aher-report-collapsible-container pad-lft">

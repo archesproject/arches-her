@@ -7,7 +7,7 @@
 <div data-bind="ifnot: inline">
     <h4 style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></h4>
     <div class="aher-card-control" data-bind="if: item.card">
-        <a class="aher-report-a" data-bind="click: function(){add(item.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:item.key"></span></a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(item.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:item.key"></span></a>
     </div>        
  </div>
  <!-- /ko -->
@@ -140,7 +140,7 @@
 
 <!-- ko if: inline -->
 <div class="afs-card-control" data-bind="if: item.card">
-    <a class="aher-report-a" data-bind="click: function(){add(item.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:item.key"></span></a>
+    <a href="#" class="aher-report-a" data-bind="click: function(){add(item.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:item.key"></span></a>
 </div>
 <!-- /ko --> 
  {% endblock body %}

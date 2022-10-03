@@ -81,8 +81,10 @@
                 }"></div>
                 <!-- Application Area section -->
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationAreas)}, css: {'fa-angle-double-right': visible.applicationAreas(), 'fa-angle-double-up': !visible.applicationAreas()}" class="fa toggle"></i> {% trans "Associated Application Areas" %}</h2>
-                    <a data-bind="{if: cards.applicationAreas, click: function(){addNewTile(cards.applicationAreas)}}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationAreas)}, css: {'fa-angle-double-right': visible.applicationAreas(), 'fa-angle-double-up': !visible.applicationAreas()}, attr: {'aria-expanded': visible.applicationAreas() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Associated Application Areas" %}</h2>
+                    <!-- ko if: cards.applicationAreas -->
+                    <a href="#" data-bind="click: function(){addNewTile(cards.applicationAreas)}"  class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Resource" %}</a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.applicationAreas" class="aher-report-collapsible-container pad-lft">

@@ -5,17 +5,21 @@
 {% block body %}
 <!-- Geometry/Map -->
 <div class="aher-report-section" data-bind="if: !!dataConfig.protection">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.geospatial)}, css: {'fa-angle-double-right': visible.geospatial(), 'fa-angle-double-up': !visible.geospatial()}" class="fa toggle"></i> {% trans "Designation/Protection " %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.designations, click: function(){addNewTile(cards.designations)}}">
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.geospatial)}, css: {'fa-angle-double-right': visible.geospatial(), 'fa-angle-double-up': !visible.geospatial()}, attr: {'aria-expanded': visible.geospatial() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Designation/Protection " %}</h2>
+    <!-- ko if: cards.designations -->
+    <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.designations)}">
         <i class="fa fa-mail-reply"></i> {% trans "Add Designation" %}
     </a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.geospatial" class="aher-report-collapsible-container pad-lft">
 
         <div class="aher-report-subsection" data-bind="if: geojson() && geojson().features.length">
             <h3><i data-bind="click: function() {toggleVisibility(visible.map)}, css: {'fa-angle-double-right': visible.map(), 'fa-angle-double-up': !visible.map()}" class="fa toggle"></i> {% trans "Geometry " %}</h3> 
-            <a class="aher-report-a" data-bind="{if: cards.locationGeometry, click: function(){addNewTile(cards.locationGeometry)}}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+            <!-- ko if: cards.locationGeometry -->
+            <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.locationGeometry)}"><i class="fa fa-mail-reply"></i> {% trans "Edit location" %}</a>
+            <!-- /ko -->
             <div data-bind="visible: visible.map">
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/map',
@@ -93,8 +97,10 @@
 
 <!-- Area Assignments -->
 <div class="aher-report-section" data-bind="if: dataConfig.areaAssignment">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.areaAssignment)}, css: {'fa-angle-double-right': visible.areaAssignment(), 'fa-angle-double-up': !visible.areaAssignment()}" class="fa toggle"></i> {% trans "Area Assignment" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.areaAssignment || locationRoot, click: function(){addNewTile(cards.areaAssignment || locationRoot)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.areaAssignment)}, css: {'fa-angle-double-right': visible.areaAssignment(), 'fa-angle-double-up': !visible.areaAssignment()}, attr: {'aria-expanded': visible.areaAssignment() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Area Assignment" %}</h2>
+    <!-- ko if: cards.areaAssignment || locationRoot -->
+    <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.areaAssignment || locationRoot)}"><i class="fa fa-mail-reply"></i> <span data-bind="if: areaAssignment().length">{% trans "Edit Area Assignment" %}</span><span data-bind="ifnot: areaAssignment().length">{% trans "Add Area Assignment" %}</span></a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.areaAssignment" class="aher-report-collapsible-container pad-lft">
@@ -154,8 +160,10 @@
 
 <!-- Land Use Classification -->
 <div class="aher-report-section" data-bind="if: dataConfig.landUse">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.landUse)}, css: {'fa-angle-double-right': visible.landUse(), 'fa-angle-double-up': !visible.landUse()}" class="fa toggle"></i> {% trans "Land Use Classification" %}</h2>
-    <a class="aher-report-a" data-bind="{if: cards.landUse || locationRoot, event:{ mousedown:function(d, e){addNewTile(cards.landUse || locationRoot, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: landUseClassification().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: landUseClassification().length">{% trans "Add Classification" %}</span></a>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.landUse)}, css: {'fa-angle-double-right': visible.landUse(), 'fa-angle-double-up': !visible.landUse()}, attr: {'aria-expanded': visible.landUse() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Land Use Classification" %}</h2>
+    <!-- ko if: cards.landUse || locationRoot -->
+    <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.landUse || locationRoot, e)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: landUseClassification().length">{% trans "Edit Classification" %}</span><span data-bind="ifnot: landUseClassification().length">{% trans "Add Classification" %}</span></a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.landUse" class="aher-report-collapsible-container pad-lft">
