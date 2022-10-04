@@ -5,8 +5,10 @@
 {% block body %}
 <!-- Artefact condition section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.artefactCondition">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.artefactCondition)}, css: {'fa-angle-double-right': visible.artefactCondition(), 'fa-angle-double-up': !visible.artefactCondition()}"  class="fa toggle"></i> {% trans "Artefact Condition" %}</h2>
-    <a data-bind="{if: cards.artefactCondition, click: function(){addNewTile(cards.artefactCondition)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.artefactCondition)}, css: {'fa-angle-double-right': visible.artefactCondition(), 'fa-angle-double-up': !visible.artefactCondition()}, attr: {'aria-expanded': visible.artefactCondition() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Artefact Condition" %}</h2>
+    <!-- ko if: cards.artefactCondition -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.artefactCondition)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.artefactCondition" class="aher-report-collapsible-container pad-lft">
@@ -58,8 +60,10 @@
 
 <!-- Scientific date section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.scientificDate">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.scientificDate)}, css: {'fa-angle-double-right': visible.scientificDate(), 'fa-angle-double-up': !visible.scientificDate()}"  class="fa toggle"></i> {% trans "Scientific Date Determination" %}</h2>
-    <a data-bind="{if: cards.scientificDate, click: function(){addNewTile(cards.scientificDate)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.scientificDate)}, css: {'fa-angle-double-right': visible.scientificDate(), 'fa-angle-double-up': !visible.scientificDate()}, attr: {'aria-expanded': visible.scientificDate() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Scientific Date Determination" %}</h2>
+    <!-- ko if: cards.scientificDate -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.scientificDate)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Date" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.scientificDate" class="aher-report-collapsible-container pad-lft">
