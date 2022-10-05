@@ -14,7 +14,7 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -54,7 +54,7 @@
 
                         <!-- ko if: sourceNames().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- Bibliographic Source Names Table -->
                                 <div class="aher-table pad-btm">
@@ -75,10 +75,10 @@
                                                 <td data-bind="text: part"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.sourceNames">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceNames)}">
+                                                        <a tabindex="0" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceNames)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceNames)">
+                                                        <a tabindex="0" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceNames)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -99,7 +99,7 @@
                             data: bibliographicSourceData,
                         }
                     }"></div>
-                </div>  
+                </div>
             </div>
             <!-- Description Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'description'">
@@ -138,7 +138,7 @@
 
                         <!-- ko if: publication().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- Publication Table -->
                                 <div class="aher-table pad-btm">
@@ -159,10 +159,10 @@
                                                 <td data-bind="text: date"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.publication">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.publication)}">
+                                                        <a tabindex="0" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.publication)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.publication)">
+                                                        <a tabindex="0" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.publication)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -213,10 +213,10 @@
                                                 <td data-bind="html: statement"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.sourceCreation">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceCreation)}">
+                                                        <a tabindex="0" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceCreation)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceCreation)">
+                                                        <a tabindex="0" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceCreation)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -259,7 +259,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 

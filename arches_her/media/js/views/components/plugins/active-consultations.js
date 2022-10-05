@@ -59,6 +59,8 @@ define([
                 "sort config":{
                     "Log Date: Newest to Oldest":["Log Date",false],
                     "Log Date: Oldest to Newest":["Log Date",true],
+                    "Target Date: Newest to Oldest":["Target Date Start",false],
+                    "Target Date: Oldest to Newest":["Target Date Start",true],
                     "Casework Officer: A to Z":["Casework Officer",false],
                     "Casework Officer: Z to A":["Casework Officer",true],
                     "Consultation Type: A to Z":["Consultation Type",false],
