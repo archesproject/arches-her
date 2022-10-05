@@ -21,7 +21,7 @@ details = {
 
 
 class BNGCentreDataType(BaseDataType):
-    def validate(self, value, row_number=None, source=None, node=None, nodeid=None, strict=False):
+    def validate(self, value, row_number=None, source=None, node=None, nodeid=None, strict=False, request=None):
 
         errors = []
         if value is None:
