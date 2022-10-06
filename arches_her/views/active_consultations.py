@@ -25,6 +25,7 @@ from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
 from arches.app.datatypes.datatypes import DataTypeFactory
 import json
+import re
 
 
 class ActiveConsultationsView(View):
@@ -39,7 +40,7 @@ class ActiveConsultationsView(View):
             "Consultation Name": "4ad69684-951f-11ea-b5c3-f875a44e0e11",
             "Consultation Type": "771bb1e2-8895-11ea-8446-f875a44e0e11",
             "Proposal Text": "1b0e15ec-8864-11ea-8493-f875a44e0e11",
-            "Target Date": "7224417b-893a-11ea-b383-f875a44e0e11",
+            "Target Date Start": "7224417b-893a-11ea-b383-f875a44e0e11",
             "Casework Officer": "4ea4a197-184f-11eb-9152-f875a44e0e11",
             "Log Date": "40eff4cd-893a-11ea-b0cc-f875a44e0e11",
         }
@@ -76,22 +77,24 @@ class ActiveConsultationsView(View):
         if filtered_consultations is not None:
             if page_num == -1:
                 grouped_tile_list = build_resource_dict(
-                    filtered_consultations, self.active_cons_node_list, datatype_factory, layout="table"
+                    filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword, layout="table"
                 )
-                return JSONResponse({"results": grouped_tile_list})
             elif page_num >= 1:
                 grouped_tile_list = build_resource_dict(
                     filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword
                 )
-                if order_param in list(order_config.keys()) and order_param is not None and keyword is None:
-                    try:
-                        grouped_tile_list = sorted(
-                            grouped_tile_list,
-                            key=lambda resource: resource[order_config[order_param][0]],
-                            reverse=order_config[order_param][1],
-                        )
-                    except KeyError as e:
-                        print("Error: ", e)
+            if order_param in list(order_config.keys()) and order_param is not None:
+                try:
+                    grouped_tile_list = sorted(
+                        grouped_tile_list,
+                        key=lambda resource: resource[order_config[order_param][0]],
+                        reverse=order_config[order_param][1],
+                    )
+                except KeyError as e:
+                    print("Error: ", e)
+            if page_num == -1:
+                return JSONResponse({"results": grouped_tile_list})
+            else:
                 return self.get_paginated_data(grouped_tile_list, page_ct, page_num)
 
         return HttpResponseNotFound()
