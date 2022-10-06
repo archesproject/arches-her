@@ -102,7 +102,10 @@
             </div>
             <div class="aher-report-page" data-bind="if: activeSection() === 'archive'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.activityArchive)}, css: {'fa-angle-double-right': visible.activityArchive(), 'fa-angle-double-up': !visible.activityArchive()}, attr: {'aria-expanded': visible.activityArchive() ? 'false' : 'true' }"  class="fa toggle"></i> {% trans "Activity Archive Material" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.activityArchive)}, css: {'fa-angle-double-right': visible.activityArchive(), 'fa-angle-double-up': !visible.activityArchive()}, attr: {'aria-expanded': visible.activityArchive() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Archive Material section"></i>
+                        {% trans "Activity Archive Material" %}
+                    </h2>
                     <!-- ko if: cards.activityArchive -->
                     <a href="#" data-bind="click: function(){addNewTile(cards.activityArchive)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Archive Material" %}</a>
                     <!-- /ko -->
