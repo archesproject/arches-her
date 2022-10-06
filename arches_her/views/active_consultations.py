@@ -40,7 +40,7 @@ class ActiveConsultationsView(View):
             "Consultation Name": "4ad69684-951f-11ea-b5c3-f875a44e0e11",
             "Consultation Type": "771bb1e2-8895-11ea-8446-f875a44e0e11",
             "Proposal Text": "1b0e15ec-8864-11ea-8493-f875a44e0e11",
-            "Target Date": "7224417b-893a-11ea-b383-f875a44e0e11",
+            "Target Date Start": "7224417b-893a-11ea-b383-f875a44e0e11",
             "Casework Officer": "4ea4a197-184f-11eb-9152-f875a44e0e11",
             "Log Date": "40eff4cd-893a-11ea-b0cc-f875a44e0e11",
         }
@@ -87,7 +87,7 @@ class ActiveConsultationsView(View):
                 try:
                     grouped_tile_list = sorted(
                         grouped_tile_list,
-                        key=lambda resource: self.remove_prn_prefix(order_param, resource[order_config[order_param][0]]),
+                        key=lambda resource: resource[order_config[order_param][0]],
                         reverse=order_config[order_param][1],
                     )
                 except KeyError as e:
@@ -98,11 +98,6 @@ class ActiveConsultationsView(View):
                 return self.get_paginated_data(grouped_tile_list, page_ct, page_num)
 
         return HttpResponseNotFound()
-
-    def remove_prn_prefix(self, order_param, data):
-        if order_param.startswith("Casework Officer"):
-            return re.sub(r"^\[\d+\] ", "", data)
-        return data
 
     def get_paginated_data(self, grouped_tile_list, page_ct, page_num):
         paginator = Paginator(grouped_tile_list, page_ct)
