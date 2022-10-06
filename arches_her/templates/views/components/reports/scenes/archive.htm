@@ -7,10 +7,12 @@
 <!-- Bibliographic Source Creation section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.sourceCreation">
     <h2 class="aher-report-section-title">
-        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Source Creation section"></i>
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.sourceCreation)}, css: {'fa-angle-double-right': visible.sourceCreation(), 'fa-angle-double-up': !visible.sourceCreation()}, attr: {'aria-expanded': visible.sourceCreation() ? 'false' : 'true' }"" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Source Creation section"></i>
         {% trans "Source Creation" %}
     </h2>
-    <a href="#" data-bind="{if: cards.sourceCreation, click: function(){addNewTile(cards.sourceCreation)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+    <!-- ko if: cards.sourceCreation -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.sourceCreation)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Source Creation" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.sourceCreation" class="aher-report-collapsible-container pad-lft">
@@ -63,10 +65,12 @@
 <!-- Repository Storage section -->
 <div class="aher-report-section" data-bind="visible: !!dataConfig.repositoryStorage">
     <h2 class="aher-report-section-title">
-        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.repositoryStorage)}, css: {'fa-angle-double-right': visible.repositoryStorage(), 'fa-angle-double-up': !visible.repositoryStorage()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Repository Storage Location section"></i>
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.repositoryStorage)}, css: {'fa-angle-double-right': visible.repositoryStorage(), 'fa-angle-double-up': !visible.repositoryStorage()}, attr: {'aria-expanded': visible.repositoryStorage() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Repository Storage Location section"></i>
         {% trans "Repository Storage Location" %}
     </h2>
-    <a href="#" data-bind="{if: cards.repositoryStorage, click: function(){addNewTile(cards.repositoryStorage)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+    <!-- ko if: cards.repositoryStorage -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.repositoryStorage)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Condition Assessment" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.repositoryStorage" class="aher-report-collapsible-container pad-lft">

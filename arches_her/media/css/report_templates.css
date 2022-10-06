@@ -893,3 +893,35 @@ a.aher-block-value-url {
 .graph-designer .aher-tabbed-report {
     margin-top: auto;
 }
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    top: inherit !important;
+    left: inherit;
+    height: inherit;
+    width: inherit;
+    display: inline-block;
+    position: relative;
+    color: steelblue;
+    border: none;
+    border-radius: 0;
+    box-shadow: inherit;
+    box-sizing: inherit;
+    text-align: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    content: '\25BC  Show details';
+    background-color: inherit;
+    padding-right: 10px;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
+    content: '\25B2  Hide details';
+    background-color: inherit;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
+    padding-left: 0;
+}
