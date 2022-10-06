@@ -25,6 +25,7 @@ from arches.app.models.resource import Resource
 from arches.app.models.tile import Tile
 from arches.app.datatypes.datatypes import DataTypeFactory
 import json
+import re
 
 
 class ActiveConsultationsView(View):
@@ -76,25 +77,32 @@ class ActiveConsultationsView(View):
         if filtered_consultations is not None:
             if page_num == -1:
                 grouped_tile_list = build_resource_dict(
-                    filtered_consultations, self.active_cons_node_list, datatype_factory, layout="table"
+                    filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword, layout="table"
                 )
-                return JSONResponse({"results": grouped_tile_list})
             elif page_num >= 1:
                 grouped_tile_list = build_resource_dict(
                     filtered_consultations, self.active_cons_node_list, datatype_factory, keyword=keyword
                 )
-                if order_param in list(order_config.keys()) and order_param is not None and keyword is None:
-                    try:
-                        grouped_tile_list = sorted(
-                            grouped_tile_list,
-                            key=lambda resource: resource[order_config[order_param][0]],
-                            reverse=order_config[order_param][1],
-                        )
-                    except KeyError as e:
-                        print("Error: ", e)
+            if order_param in list(order_config.keys()) and order_param is not None:
+                try:
+                    grouped_tile_list = sorted(
+                        grouped_tile_list,
+                        key=lambda resource: self.remove_prn_prefix(order_param, resource[order_config[order_param][0]]),
+                        reverse=order_config[order_param][1],
+                    )
+                except KeyError as e:
+                    print("Error: ", e)
+            if page_num == -1:
+                return JSONResponse({"results": grouped_tile_list})
+            else:
                 return self.get_paginated_data(grouped_tile_list, page_ct, page_num)
 
         return HttpResponseNotFound()
+
+    def remove_prn_prefix(self, order_param, data):
+        if order_param.startswith("Casework Officer"):
+            return re.sub(r"^\[\d+\] ", "", data)
+        return data
 
     def get_paginated_data(self, grouped_tile_list, page_ct, page_num):
         paginator = Paginator(grouped_tile_list, page_ct)
