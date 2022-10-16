@@ -289,6 +289,7 @@
                            <div class="rrow rheader">
                               <div class="rcell">Construction Phase</div>
                               <div class="rcell">Period</div>
+                              <div class="rcell">Monument Type</div>
                               <div class="rcell">Construction Phase Start Date</div>
                               <div class="rcell">Construction Phase End Date</div>
                            </div>
@@ -299,6 +300,9 @@
                               </div>
                               <div class="rcell" data-title="Period">
                                  {{ conphase|val_from_key:"Cultural Period"|val_from_key:"@display_value" }}
+                              </div>
+                              <div class="rcell" data-title="Monument Type">
+                                 {{ conphase|val_from_key:"Phase Classification"|val_from_key:"Monument Type"|val_from_key:"@display_value" }}
                               </div>
                               <div class="rcell" data-title="Phase Start Date">
                                  {{ conphase|val_from_key:"Construction Phase Timespan"|val_from_key:"Construction Phase Start Date"|val_from_key:"@display_value" }}
@@ -389,12 +393,12 @@
                       <div class="keeptogether">
                          <div class="rtable">
                             <div class="rrow rheader">
-                               <div class="rcell">Associated Asset/Area/Artefact</div>
+                               <div class="rcell">Associated Monument/Area/Artefact</div>
                                <div class="rcell">Association Type</div>
                             </div>
                             {% for assocAAAVA in resource_data|val_from_key:"Associated Monuments, Areas and Artefacts" %}
                             <div class="rrow">
-                               <div class="rcell" data-title="Associated Asset/Area/Artefact">
+                               <div class="rcell" data-title="Associated Monument/Area/Artefact">
                                   {{ assocAAAVA|val_from_key:"Associated Monument, Area or Artefact"|val_from_key:"@display_value" }}
                                </div>
                                <div class="rcell" data-title="Association Type">
