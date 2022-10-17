@@ -90,7 +90,10 @@
             <!-- Journeys -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'journey'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.flights)}, css: {'fa-angle-double-right': visible.flights(), 'fa-angle-double-up': !visible.flights()}, attr: {'aria-expanded': visible.flights() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Flights" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.flights)}, css: {'fa-angle-double-right': visible.flights(), 'fa-angle-double-up': !visible.flights()}, attr: {'aria-expanded': visible.flights() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Flights section"></i>
+                        {% trans "Flights" %}
+                    </h2>
                     <!-- ko if: cards.flights -->
                     <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.flights, e)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: flights().length">{% trans "Edit Flight" %}</span><span data-bind="ifnot: flights().length">{% trans "Add Flight" %}</span></a>
                     <!-- /ko -->
@@ -162,7 +165,10 @@
                 </div>
 
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.lastFlight)}, css: {'fa-angle-double-right': visible.lastFlight(), 'fa-angle-double-up': !visible.lastFlight()}, attr: {'aria-expanded': visible.lastFlight() ? 'false' : 'true' }" class="fa toggle"></i> {% trans "Last Flight" %}</h2>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.lastFlight)}, css: {'fa-angle-double-right': visible.lastFlight(), 'fa-angle-double-up': !visible.lastFlight()}, attr: {'aria-expanded': visible.lastFlight() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Last Flight section"></i>
+                        {% trans "Last Flight" %}
+                    </h2>
                     <!-- ko if: cards.lastFlight -->
                     <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.lastFlight, e)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: lastFlight().length">{% trans "Edit Last Flight" %}</span><span data-bind="ifnot: lastFlight().length">{% trans "Add Flight" %}</span></a>
                     <!-- /ko -->
