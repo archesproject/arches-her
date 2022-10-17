@@ -5,9 +5,12 @@
 {% block body %}
 <!-- ko ifnot: hideNames() -->
 <div data-bind="visible: !!dataConfig.name" class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}" class="fa toggle"></i> {% trans "Names" %}</h2>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.names)}, css: {'fa-angle-double-right': visible.names(), 'fa-angle-double-up': !visible.names()}, attr: {'aria-expanded': visible.names() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Names section"></i>
+        {% trans "Names" %}
+    </h2>
     <span data-bind="if: cards.name && (!names().length || cards.name.cardinality == 'n')">
-        <a class="aher-report-a" data-bind="click: function(){add(cards.name)}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
+        <a href="#" class="aher-report-a" data-bind="click: function(){add(cards.name)}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
     </span>
 
     <!-- Collapsible content -->
@@ -96,8 +99,13 @@
 <!-- External Reference -->
 <!-- ko ifnot: hideCrossReferences() -->
 <div data-bind="visible: !!dataConfig.xref" class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}" class="fa toggle"></i> {% trans "External Cross References" %}</h2>
-    <a data-bind="{if: cards.externalCrossReferences, click: function(){addNewTile(cards.externalCrossReferences)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.crossReferences)}, css: {'fa-angle-double-right': visible.crossReferences(), 'fa-angle-double-up': !visible.crossReferences()}, attr: {'aria-expanded': visible.crossReferences() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse External Cross References section"></i>
+        {% trans "External Cross References" %}
+    </h2>
+    <!-- ko if: cards.externalCrossReferences -->
+    <a href="#" data-bind="click: function(){addNewTile(cards.externalCrossReferences)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Reference" %}</a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.crossReferences" class="aher-report-collapsible-container pad-lft">
@@ -155,12 +163,17 @@
 
 <!-- System Reference Numbers section -->
 <div class="aher-report-section">
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.systemReferenceNumbers)}, css: {'fa-angle-double-right': visible.systemReferenceNumbers(), 'fa-angle-double-up': !visible.systemReferenceNumbers()}" class="fa toggle"></i> {% trans "System Reference Numbers" %}</h2>
-    <a data-bind="{if: cards.systemReferenceNumbers, click: function(){ addNewTile(cards.systemReferenceNumbers) }}" class="aher-report-a">
+    <h2 class="aher-report-section-title">
+        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.systemReferenceNumbers)}, css: {'fa-angle-double-right': visible.systemReferenceNumbers(), 'fa-angle-double-up': !visible.systemReferenceNumbers()}, attr: {'aria-expanded': visible.systemReferenceNumbers() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse System Reference Numbers section"></i>
+        {% trans "System Reference Numbers" %}
+    </h2>
+    <!-- ko if: cards.systemReferenceNumbers -->
+    <a href="#" data-bind="click: function(){ addNewTile(cards.systemReferenceNumbers) }" class="aher-report-a">
         <i class="fa fa-mail-reply"></i>
         <span data-bind="if: cards.systemReferenceNumbers.tiles().length">{% trans "Edit Identifier" %}</span>
         <span data-bind="ifnot: cards.systemReferenceNumbers.tiles().length">{% trans "Add Identifier" %}</span>
     </a>
+    <!-- /ko -->
 
     <!-- Collapsible content -->
     <div data-bind="visible: visible.systemReferenceNumbers" class="aher-report-collapsible-container pad-lft">

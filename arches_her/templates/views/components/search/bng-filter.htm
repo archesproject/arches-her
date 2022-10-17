@@ -1,0 +1,72 @@
+{% load i18n %} {% load staticfiles %}
+<div class="search-container bng-search-container">
+    <div class="filter-title">{% trans "Filter by British National Grid" %}
+        <div class="pull-right">
+            <div class="btn-group">
+                <button class="btn btn-primary btn-active-primary dropdown-toggle" data-toggle="dropdown" type="button" aria-expanded="true" data-bind="click: function () { clear(); }"> <i class="fa fa-close"></i> {% trans "Clear" %}
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr class="title-underline">
+    <div>
+        <div class="bng-search-input-container">
+            <div class="bng-search-input">
+                <label for="bng-value">Grid reference: </label>
+                <input type="text" tabindex=0 id="bng-value" data-bind="value: bng" aria-describedby="bng-grid-ref-info">
+                <div data-bind="visible: bngHasError" class="bng-search-error">
+                    <span aria-live="polite" data-bind="text: bngMessageError"> </span>
+                </div>
+                <p id="bng-grid-ref-info" class="bng-search-info">
+                <i class="fa fa-info" aria-hidden="true"></i><span class="bng-search-info-text">Enter a valid British National Grid reference to create a grid square to search within - example: TG514131. Use a 12 character grid reference to create a point and this will auto-populate the X and Y input boxes.
+                    </span>
+                </p>
+            </div>
+        </div>
+        <div class="bng-search-input-container">
+            <div class="bng-search-input">
+                <label for="xValue">X: </label>
+                <input type="number" tabindex=0 id="xValue" data-bind="value: bng_x" aria-describedby="bng-xy-ref-info">
+            </div>
+            <div class="bng-search-input">
+                <label for="yValue">Y: </label>
+                <input type="number" tabindex=0 id="yValue" data-bind="value: bng_y" aria-describedby="bng-xy-ref-info">            
+            </div>
+            <div data-bind="visible: xyHasError" class="bng-search-error">
+                <span id="bng-xy-error-message" aria-live="polite" data-bind="text: xyMessageError"> </span>
+            </div>
+            <p id="bng-xy-ref-info" class="bng-search-info">
+                <i class="fa fa-info" aria-hidden="true"></i><span class="bng-search-info-text">Enter valid 6 digit x (eastings) and y (northings) coordinates to create a point to search with. This will autopopulate the Grid Reference input box</span>
+            </p>
+        </div>
+        <div class="bng-search-input-container">
+            <div class="bng-search-input">
+                <label for="buffer-value">Buffer radius in metres: </label>
+                <input type="number" tabindex=0 id="buffer-value" data-bind="value: buffer">
+                <div data-bind="visible: bufferHasError" class="bng-search-error">
+                    <span aria-live="polite" data-bind="text: bufferMessageError"> </span>
+                </div>
+                <p id="bng-xy-ref-info" class="bng-search-info">
+                    <i class="fa fa-info" aria-hidden="true"></i><span class="bng-search-info-text">Set a buffer distance in meters to extend the search area.</span>
+                </p>
+            </div> 
+        </div>
+        <hr class="title-underline">
+        <div id="bng-search-map" aria-hidden="true" id="map" class="relative bng-search-map" data-bind="mapboxgl: {
+                mapOptions: {
+                    style: {
+                        version: 8,
+                        sources: sources,
+                        sprite: sprite,
+                        glyphs: glyphs,
+                        layers: layers,
+                    },
+                    center: grid_source_center,
+                    zoom: grid_source_zoom,
+                    interactive: false
+                },
+                afterRender: setupMap
+            }">
+        </div>
+    </div>
+</div>

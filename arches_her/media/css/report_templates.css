@@ -87,7 +87,6 @@
 
 .aher-report-name {
     padding-right: 5px;
-    color: #888;
     font-size: 14px;
 }
 
@@ -116,9 +115,14 @@
 }
 
 .aher-report-a {
-    color: steelblue !important;
+    color: #315B7D !important;
     font-size: 13px;
     padding: 3px 8px;
+}
+
+.aher-report-a:focus,
+.aher-report-a:hover {
+    text-decoration: underline;
 }
 
 .aher-report-a.disabled {
@@ -640,7 +644,6 @@ h3.shim:hover {
 
 .aher-nodata-note {
     font-size: 14px;
-    color: #888;
     margin-bottom: 20px;
     margin-left: 10px;
     display: inline-block;
@@ -730,7 +733,6 @@ h3.shim:hover {
 }
 
 .aher-block-value {
-    color: #777;
     display: inline-block;
     font-size: 15px;
 }
@@ -892,4 +894,36 @@ a.aher-block-value-url {
 
 .graph-designer .aher-tabbed-report {
     margin-top: auto;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child:before {
+    top: inherit !important;
+    left: inherit;
+    height: inherit;
+    width: inherit;
+    display: inline-block;
+    position: relative;
+    color: steelblue;
+    border: none;
+    border-radius: 0;
+    box-shadow: inherit;
+    box-sizing: inherit;
+    text-align: inherit;
+    font-family: inherit;
+    line-height: inherit;
+    content: '\25BC  Show details';
+    background-color: inherit;
+    padding-right: 10px;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > td:first-child:before,
+table.dataTable.dtr-inline.collapsed > tbody > tr.parent > th:first-child:before {
+    content: '\25B2  Hide details';
+    background-color: inherit;
+}
+
+table.dataTable.dtr-inline.collapsed > tbody > tr > td:first-child,
+table.dataTable.dtr-inline.collapsed > tbody > tr > th:first-child {
+    padding-left: 0;
 }

@@ -77,8 +77,13 @@
                     }
                 }"></div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.nationalities)}, css: {'fa-angle-double-right': visible.nationalities(), 'fa-angle-double-up': !visible.nationalities()}" class="fa toggle"></i> {% trans "Nationalities" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.nationalities, event:{ mousedown:function(d, e){addNewTile(cards.nationalities, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: nationalities().length">{% trans "Edit Nationality" %}</span><span data-bind="ifnot: nationalities().length">{% trans "Add Nationality" %}</span></a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.nationalities)}, css: {'fa-angle-double-right': visible.nationalities(), 'fa-angle-double-up': !visible.nationalities()}, attr: {'aria-expanded': visible.nationalities() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Nationalities section"></i>
+                        {% trans "Nationalities" %}
+                    </h2>
+                    <!-- ko if: cards.nationalities -->
+                    <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.nationalities, e)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: nationalities().length">{% trans "Edit Nationality" %}</span><span data-bind="ifnot: nationalities().length">{% trans "Add Nationality" %}</span></a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.nationalities" class="aher-report-collapsible-container pad-lft">
@@ -126,8 +131,13 @@
                     </div>
                 </div>
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.owners)}, css: {'fa-angle-double-right': visible.owners(), 'fa-angle-double-up': !visible.owners()}" class="fa toggle"></i> {% trans "Owners" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.owners, event:{ mousedown:function(d, e){addNewTile(cards.owners, e)}}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: owners().length">{% trans "Edit Owner" %}</span><span data-bind="ifnot: owners().length">{% trans "Add Owner" %}</span></a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.owners)}, css: {'fa-angle-double-right': visible.owners(), 'fa-angle-double-up': !visible.owners()}, attr: {'aria-expanded': visible.owners() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Owners section"></i>
+                        {% trans "Owners" %}
+                    </h2>
+                    <!-- ko if: cards.owners -->
+                    <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.owners, e)}}"><i class="fa fa-mail-reply"></i> <span data-bind="if: owners().length">{% trans "Edit Owner" %}</span><span data-bind="ifnot: owners().length">{% trans "Add Owner" %}</span></a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.owners" class="aher-report-collapsible-container pad-lft">
@@ -187,8 +197,13 @@
             <!-- Journeys -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'journey'">
                 <div class="aher-report-section">
-                    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.voyages)}, css: {'fa-angle-double-right': visible.voyages(), 'fa-angle-double-up': !visible.voyages()}" class="fa toggle"></i> {% trans "Voyages" %}</h2>
-                    <a class="aher-report-a" data-bind="{if: cards.voyages, event:{ mousedown:function(d, e){addNewTile(cards.voyages, e)}}}"><i class="fa fa-mail-reply"></i> <span>{% trans "Add Voyage" %}</span></a>
+                    <h2 class="aher-report-section-title">
+                        <i tabindex="0" data-bind="click: function() {toggleVisibility(visible.voyages)}, css: {'fa-angle-double-right': visible.voyages(), 'fa-angle-double-up': !visible.voyages()}, attr: {'aria-expanded': visible.voyages() ? 'false' : 'true' }" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Voyages section"></i>
+                        {% trans "Voyages" %}
+                    </h2>
+                    <!-- ko if: cards.voyages -->
+                    <a href="#" class="aher-report-a" data-bind="event:{ mousedown:function(d, e){addNewTile(cards.voyages, e)}}"><i class="fa fa-mail-reply"></i> <span>{% trans "Add Voyage" %}</span></a>
+                    <!-- /ko -->
 
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.voyages" class="aher-report-collapsible-container pad-lft">
