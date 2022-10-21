@@ -14,7 +14,7 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -26,6 +26,7 @@
     </div>
     <div class="aher-tabbed-report">
         <div class="aher-tabbed-report-content">
+
             <!-- Names Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
                 <div data-bind="component: {
@@ -71,6 +72,18 @@
             </div>
             <!-- Resources Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+
+                <!-- Referenced By section -->
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/referenced-by',
+                    params: {
+                        resourceInstanceId: ko.unwrap(resourceinstanceid),
+                        graphs: ['Consultation']
+                    }
+                }"></div>
+
+
+
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/resources',
                     params: {
@@ -79,6 +92,7 @@
                         dataConfig: resourceDataConfig
                     }
                 }"></div>
+
                 <!-- Application Area section -->
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.applicationAreas)}, css: {'fa-angle-double-right': visible.applicationAreas(), 'fa-angle-double-up': !visible.applicationAreas()}" class="fa toggle"></i> {% trans "Associated Application Areas" %}</h2>
@@ -158,7 +172,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
@@ -183,6 +197,15 @@
             params: {
                 data: resource,
                 cards: descriptionCards,
+            }
+        }"></div>
+
+        <!-- Referenced By section -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/referenced-by',
+            params: {
+                resourceInstanceId: ko.unwrap(resourceinstanceid),
+                graphs: ['Consultation']
             }
         }"></div>
     </div>
