@@ -14,7 +14,7 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -60,7 +60,7 @@
                     }
                 }"></div>
             </div>
-            <!-- Period Names Tab --> 
+            <!-- Period Names Tab -->
             <div class="afs-report-page" data-bind="if: activeSection() === 'period'">
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/default',
@@ -76,14 +76,14 @@
                     <span data-bind="if: cards.name && (!names().length || cards.name.cardinality == 'n')">
                         <a href="#" class="aher-report-a" data-bind="click: function(){addNewTile(cards.name)}"><i class="fa fa-mail-reply"></i> {% trans "Add Name" %}</a>
                     </span>
-                
+
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.names" class="aher-report-collapsible-container pad-lft">
-                
+
                         <!-- ko ifnot: names().length -->
                         <div class="aher-nodata-note">No alternative names for this resource</div>
                         <!-- /ko -->
-                        
+
                         <!-- ko if: names().length -->
                         <div class="aher-report-subsection" >
                             <div>
@@ -103,10 +103,10 @@
                                                 <td data-bind="text: currency"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards && $parent.cards.name">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.name)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.name)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.name)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.name)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -120,7 +120,7 @@
                         <!-- /ko -->
                     </div>
                 </div>
-            </div>     
+            </div>
             <!-- Location Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'location'">
                 <div data-bind="component: {
@@ -142,7 +142,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 

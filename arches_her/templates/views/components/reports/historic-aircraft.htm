@@ -14,7 +14,7 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
@@ -107,7 +107,7 @@
 
                         <!-- ko if: flights().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- flight Table -->
                                 <div class="aher-table pad-btm">
@@ -146,10 +146,10 @@
                                                 </td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.flights">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -182,7 +182,7 @@
 
                         <!-- ko if: lastFlight().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- last flight Table -->
                                 <div class="aher-table pad-btm">
@@ -241,10 +241,10 @@
                                                 </td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.flights">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.flights)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.flights)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -290,7 +290,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
