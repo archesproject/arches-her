@@ -66,9 +66,9 @@ class FileTemplateView(View):
         if url is not None:
             return JSONResponse({'msg':'success','download':url })
         return HttpResponseNotFound("No letters tile matching query by parent tile")
-    
-    
-    def post(self, request): 
+
+
+    def post(self, request):
         datatype_factory = DataTypeFactory()
         template_id = request.POST.get('template_id')
         parenttile_id = request.POST.get('parenttile_id')
@@ -106,7 +106,7 @@ class FileTemplateView(View):
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
         file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11" # Digital Object
- 
+
         tile = json.dumps({
             "tileid":None,
             "data": {
@@ -195,7 +195,7 @@ class FileTemplateView(View):
             "Mitigation": "bfd39106-51a3-11eb-9104-f875a44e0e11"
         }
 
-        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)    
+        self.replace_in_letter(consultation.tiles, template_dict, datatype_factory)
 
     def replace_in_letter(self, tiles, template_dict, datatype_factory):
         mapping_dict = {
@@ -237,9 +237,21 @@ class FileTemplateView(View):
         mitigations = []
 
         mitigation_scope_dict = {}
-        mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
-        with open(mitigation_notes_path, "rb") as openfile:
-            mitigation_scope_dict = json.loads(openfile.read())
+        #mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
+        #with open(mitigation_notes_path, "rb") as openfile:
+        #    mitigation_scope_dict = json.loads(openfile.read())
+
+
+        concepts_from_mitigation_group = models.Relation.objects.filter(conceptfrom='f60c394e-c99f-4c91-9f68-791465036cde')
+        for mitigation_concept in concepts_from_mitigation_group:
+            mitigation_concept_to_value = models.Value.objects.filter(concept=mitigation_concept.conceptto_id)
+            for mitigation_value in mitigation_concept_to_value:
+                if str(mitigation_value.valuetype_id) == "scopeNote":
+                    mitigation_scope_dict[str(mitigation_value.valueid)] = mitigation_value.value
+                elif str(mitigation_value.valuetype_id) == "prefLabel":
+                    mitigation_scope_dict[mitigation_value.value] = str(mitigation_value.valueid)
+                else:
+                    pass
 
         for tile in tiles:
             mitigation = {}
@@ -322,7 +334,7 @@ class FileTemplateView(View):
                     contactResourceiId = tile.data[contacts["Owner"]][0]["resourceId"]
                 elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b" and tile.data[contacts["Agent"]]:
                     contactResourceiId = tile.data[contacts["Agent"]][0]["resourceId"]
-                
+
                 if contactResourceiId:
                     contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
                     contactResource.load_tiles()
@@ -341,7 +353,7 @@ class FileTemplateView(View):
 
         for mitigation in mitigations:
             mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
-        
+
         for condition in conditions:
             mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
 
@@ -350,7 +362,7 @@ class FileTemplateView(View):
             mapping_dict["Archaeological Priority Area"] = "The planning application is not in an area of archaeological interest."
         else:
             mapping_dict["Archaeological Priority Area"] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(associate_heritage)
-            
+
         for key in mapping_dict:
             html = False
             if '<' in mapping_dict[key]: # look for html tag, not ideal
@@ -361,7 +373,7 @@ class FileTemplateView(View):
         # Note that the intent here is to preserve how things are styled in the docx
         # easiest way is to iterate through p.runs, not as fast as iterating through parent.paragraphs
         # advantage of the former is that replacing run.text preserves styling, replacing p.text does not
-        
+
         def parse_html_to_docx(p, k, v):
             style = p.style
             if k in p.text:
@@ -369,7 +381,7 @@ class FileTemplateView(View):
                 document_html_parser = DocumentHTMLParser(p, document)
                 document_html_parser.insert_into_paragraph_and_feed(v)
 
-        
+
         def replace_in_runs(p_list, k, v):
             for paragraph in p_list:
                 if html is True:
@@ -386,7 +398,7 @@ class FileTemplateView(View):
                 for row in table.rows:
                     for cell in row.cells:
                         replace_in_runs(cell.paragraphs, k, v)
-        
+
         if v is not None and key is not None:
             k = "<"+key+">"
             doc = document
@@ -402,7 +414,7 @@ class FileTemplateView(View):
 
             if len(doc.tables) > 0:
                 iterate_tables(doc.tables, k, v)
-            
+
             if len(doc.sections) > 0:
                 for section in doc.sections:
                     replace_in_runs(section.footer.paragraphs, k, v)
@@ -410,7 +422,7 @@ class FileTemplateView(View):
                     replace_in_runs(section.header.paragraphs, k, v)
                     iterate_tables(section.header.tables, k, v)
 
-    
+
     def insert_image(self, document, k, v, image_path=None, config=None):
         # going to need to write custom logic depending on how images should be placed/styled
 
@@ -422,7 +434,7 @@ class FileTemplateView(View):
 
         return True
 
-        
+
 class DocumentHTMLParser(HTMLParser):
     def __init__(self, paragraph, document):
         HTMLParser.__init__(self)
@@ -469,7 +481,7 @@ class DocumentHTMLParser(HTMLParser):
                 c = docx.oxml.shared.OxmlElement('w:color')
                 c.set(docx.oxml.shared.qn('w:val'), color)
                 rPr.append(c) # #5384da ; rgb(83,132,218)
-            
+
             # Remove underlining if it is requested
             if not underline:
                 u = docx.oxml.shared.OxmlElement('w:u')
