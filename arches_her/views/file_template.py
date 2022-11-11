@@ -244,24 +244,19 @@ class FileTemplateView(View):
             mitigation_concept_to_value = models.Value.objects.filter(concept=mitigation_concept.conceptto_id)
             for mitigation_value in mitigation_concept_to_value:
                 if str(mitigation_value.valuetype_id) == "prefLabel":
-                    print(mitigation_value.value, str(mitigation_value.valueid))
                     mitigation_scope_dict[mitigation_value.value] = str(mitigation_value.valueid)
                 elif str(mitigation_value.valuetype_id) == "scopeNote":
                     value_id = models.Value.objects.filter(concept=mitigation_value.concept_id,valuetype="prefLabel")
                     mitigation_scope_dict[str(value_id[0].valueid)] = mitigation_value.value
-                    print(str(mitigation_value.valueid), mitigation_value.value)
                 else:
                     pass
 
-        print(mitigation_scope_dict)
 
         for tile in tiles:
             mitigation = {}
             condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation_type = mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), "")
-                print(mitigation_type)
-                mitigation_scopenote = mitigation_scope_dict.get(mitigation_type)
+                mitigation_scopenote = mitigation_scope_dict.get(mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""))
                 if len(mitigation_scopenote) > 0:
                     mitigation_scopenote = mitigation_scopenote + "<br />"
                 mitigation["content"] = "<p>{}</p><p>{}</p>".format(mitigation_scopenote, get_value_from_tile(tile, action_node_id))
