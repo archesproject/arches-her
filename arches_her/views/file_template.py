@@ -234,33 +234,37 @@ class FileTemplateView(View):
         action_nodegroup_id = 'a5e15f5c-51a3-11eb-b240-f875a44e0e11'
         action_node_id = 'bfd39106-51a3-11eb-9104-f875a44e0e11'
         action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
+        mitgations_concept_id = 'f60c394e-c99f-4c91-9f68-791465036cde'
         mitigations = []
 
         mitigation_scope_dict = {}
-        #mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
-        #with open(mitigation_notes_path, "rb") as openfile:
-        #    mitigation_scope_dict = json.loads(openfile.read())
 
-
-        concepts_from_mitigation_group = models.Relation.objects.filter(conceptfrom='f60c394e-c99f-4c91-9f68-791465036cde')
+        concepts_from_mitigation_group = models.Relation.objects.filter(conceptfrom=mitgations_concept_id)
         for mitigation_concept in concepts_from_mitigation_group:
             mitigation_concept_to_value = models.Value.objects.filter(concept=mitigation_concept.conceptto_id)
             for mitigation_value in mitigation_concept_to_value:
-                if str(mitigation_value.valuetype_id) == "scopeNote":
-                    mitigation_scope_dict[str(mitigation_value.valueid)] = mitigation_value.value
-                elif str(mitigation_value.valuetype_id) == "prefLabel":
+                if str(mitigation_value.valuetype_id) == "prefLabel":
+                    print(mitigation_value.value, str(mitigation_value.valueid))
                     mitigation_scope_dict[mitigation_value.value] = str(mitigation_value.valueid)
+                elif str(mitigation_value.valuetype_id) == "scopeNote":
+                    value_id = models.Value.objects.filter(concept=mitigation_value.concept_id,valuetype="prefLabel")
+                    mitigation_scope_dict[str(value_id[0].valueid)] = mitigation_value.value
+                    print(str(mitigation_value.valueid), mitigation_value.value)
                 else:
                     pass
+
+        print(mitigation_scope_dict)
 
         for tile in tiles:
             mitigation = {}
             condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
-                mitigation_scopenote = mitigation_scope_dict.get(mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""), "")
+                mitigation_type = mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), "")
+                print(mitigation_type)
+                mitigation_scopenote = mitigation_scope_dict.get(mitigation_type)
                 if len(mitigation_scopenote) > 0:
-                    mitigation_scopenote = "<br>" + mitigation_scopenote
-                mitigation["content"] = "<p>{}</p><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scopenote)
+                    mitigation_scopenote = mitigation_scopenote + "<br />"
+                mitigation["content"] = "<p>{}</p><p>{}</p>".format(mitigation_scopenote, get_value_from_tile(tile, action_node_id))
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
                 condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
