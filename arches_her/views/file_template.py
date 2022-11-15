@@ -258,7 +258,7 @@ class FileTemplateView(View):
             if str(tile.nodegroup_id) == action_nodegroup_id:
                 mitigation_scopenote = mitigation_scope_dict.get(mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""))
                 if len(mitigation_scopenote) > 0:
-                    mitigation_scopenote = mitigation_scopenote + "<br />"
+                    mitigation_scopenote = "<i>" + mitigation_scopenote + "</i><br />"
                 mitigation["content"] = "<p>{}</p><p>{}</p>".format(mitigation_scopenote, get_value_from_tile(tile, action_node_id))
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
@@ -351,7 +351,7 @@ class FileTemplateView(View):
                                 mapping_dict["Address of consulting organisation"] = addressConsult
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<b><i>{}</i></b>{}<br><br>".format(mitigation["type"], mitigation["content"])
 
         for condition in conditions:
             mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
@@ -481,7 +481,7 @@ class DocumentHTMLParser(HTMLParser):
                 c.set(docx.oxml.shared.qn('w:val'), color)
                 rPr.append(c) # #5384da ; rgb(83,132,218)
 
-            # Remove underlining if it is requested
+             # Remove underlining if it is requested
             if not underline:
                 u = docx.oxml.shared.OxmlElement('w:u')
                 u.set(docx.oxml.shared.qn('w:val'), 'none')
