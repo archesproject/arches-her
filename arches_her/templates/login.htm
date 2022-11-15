@@ -11,7 +11,7 @@
 
 	<header>
 		<div class="header-bar">
-			<div title="Arches - login page" class="header-bar__logo">
+			<div title="Keystone - login page" class="header-bar__logo">
 				<div class="header-bar__logo-heading">
 					<a href="/" class="header-bar__logo-link" aria-label="Link to homepage">
 						<img class="header-bar__logo-image" src="{{ STATIC_URL }}img/HE_Logo_RGB.svg" alt="Historic England logo">
@@ -34,7 +34,7 @@
 				{% csrf_token %}
 				<input type="hidden" name="next" value="{{ next }}" />
 				<div class="form-group">
-					<label class="reqlabel control-label widget-input-label" for="username">Email / Username</label>
+					<label class="reqlabel control-label widget-input-label" for="username">Username</label>
 					<input id="username" type="text" class="form-control input-lg" name="username" autofocus aria-required="true" required>
 				</div>
 				<div class="form-group">
