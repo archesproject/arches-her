@@ -102,6 +102,7 @@ class FileTemplateView(View):
         saved_file = open(new_file_path, "rb")
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
+
         file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11"  # Digital Object
 
         tile = json.dumps(
@@ -231,26 +232,40 @@ class FileTemplateView(View):
         conditions = []
 
         # Action and Mitigations.
+
         action_nodegroup_id = "a5e15f5c-51a3-11eb-b240-f875a44e0e11"
         action_node_id = "bfd39106-51a3-11eb-9104-f875a44e0e11"
         action_type_node_id = "e2585f8a-51a3-11eb-a7be-f875a44e0e11"
+        mitgations_concept_id = "f60c394e-c99f-4c91-9f68-791465036cde"
+
         mitigations = []
 
         mitigation_scope_dict = {}
-        mitigation_notes_path = os.path.join(settings.APP_ROOT, "docx/Mitigation Scope Notes.json")
-        with open(mitigation_notes_path, "rb") as openfile:
-            mitigation_scope_dict = json.loads(openfile.read())
+
+        concepts_from_mitigation_group = models.Relation.objects.filter(conceptfrom=mitgations_concept_id)
+        for mitigation_concept in concepts_from_mitigation_group:
+            mitigation_concept_to_value = models.Value.objects.filter(concept=mitigation_concept.conceptto_id)
+            for mitigation_value in mitigation_concept_to_value:
+                if str(mitigation_value.valuetype_id) == "prefLabel":
+                    mitigation_scope_dict[mitigation_value.value] = str(mitigation_value.valueid)
+                elif str(mitigation_value.valuetype_id) == "scopeNote":
+                    value_id = models.Value.objects.filter(concept=mitigation_value.concept_id, valuetype="prefLabel")
+                    mitigation_scope_dict[str(value_id[0].valueid)] = mitigation_value.value
+                else:
+                    pass
 
         for tile in tiles:
             mitigation = {}
             condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
+
                 mitigation_scopenote = mitigation_scope_dict.get(
-                    mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""), ""
+                    mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), "")
                 )
+
                 if len(mitigation_scopenote) > 0:
-                    mitigation_scopenote = "<br>" + mitigation_scopenote
-                mitigation["content"] = "<p>{}</p><p>{}</p>".format(get_value_from_tile(tile, action_node_id), mitigation_scopenote)
+                    mitigation_scopenote = "<i>" + mitigation_scopenote + "</i><br />"
+                mitigation["content"] = "<p>{}</p><p>{}</p>".format(mitigation_scopenote, get_value_from_tile(tile, action_node_id))
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
                 condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
@@ -346,7 +361,7 @@ class FileTemplateView(View):
                                 mapping_dict["Address of consulting organisation"] = addressConsult
 
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<b>{}</b>{}<br><br>".format(mitigation["type"], mitigation["content"])
+            mapping_dict["Mitigation"] += "<b><i>{}</i></b>{}<br><br>".format(mitigation["type"], mitigation["content"])
 
         for condition in conditions:
             mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
@@ -355,6 +370,7 @@ class FileTemplateView(View):
         if associate_heritage == "":
             mapping_dict["Archaeological Priority Area"] = "The planning application is not in an Archaeological Priority Area."
         else:
+
             mapping_dict[
                 "Archaeological Priority Area"
             ] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(
