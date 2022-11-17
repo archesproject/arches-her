@@ -65,7 +65,6 @@ class FileTemplateView(View):
             return JSONResponse({"msg": "success", "download": url})
         return HttpResponseNotFound("No letters tile matching query by parent tile")
 
-
     def post(self, request):
         datatype_factory = DataTypeFactory()
         template_id = request.POST.get("template_id")
@@ -104,33 +103,36 @@ class FileTemplateView(View):
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
 
-        file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11" # Digital Object
+        file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11"  # Digital Object
 
-        tile = json.dumps({
-            "tileid":None,
-            "data": {
-                file_list_node_id: [{
-                    "name":new_file_name,
-                    "accepted":True,
-                    "height":0,
-                    "lastModified":stat.st_mtime,
-                    "size":stat.st_size,
-                    "status":"queued",
-                    "type":"application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                    "width":0,
-                    "url":None,
-                    "file_id":None,
-                    "index":0,
-                    "content":"blob:"+host+"/{0}".format(uuid.uuid4())
-                }]
-            },
-            "nodegroup_id":"7db68c6c-8490-11ea-a543-f875a44e0e11",
-            "parenttile_id":None,
-            "resourceinstance_id":"",
-            "sortorder":0,
-            "tiles":{}
-        })
-
+        tile = json.dumps(
+            {
+                "tileid": None,
+                "data": {
+                    file_list_node_id: [
+                        {
+                            "name": new_file_name,
+                            "accepted": True,
+                            "height": 0,
+                            "lastModified": stat.st_mtime,
+                            "size": stat.st_size,
+                            "status": "queued",
+                            "type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+                            "width": 0,
+                            "url": None,
+                            "file_id": None,
+                            "index": 0,
+                            "content": "blob:" + host + "/{0}".format(uuid.uuid4()),
+                        }
+                    ]
+                },
+                "nodegroup_id": "7db68c6c-8490-11ea-a543-f875a44e0e11",
+                "parenttile_id": None,
+                "resourceinstance_id": "",
+                "sortorder": 0,
+                "tiles": {},
+            }
+        )
 
         new_req = HttpRequest()
         new_req.method = "POST"
@@ -231,10 +233,10 @@ class FileTemplateView(View):
 
         # Action and Mitigations.
 
-        action_nodegroup_id = 'a5e15f5c-51a3-11eb-b240-f875a44e0e11'
-        action_node_id = 'bfd39106-51a3-11eb-9104-f875a44e0e11'
-        action_type_node_id = 'e2585f8a-51a3-11eb-a7be-f875a44e0e11'
-        mitgations_concept_id = 'f60c394e-c99f-4c91-9f68-791465036cde'
+        action_nodegroup_id = "a5e15f5c-51a3-11eb-b240-f875a44e0e11"
+        action_node_id = "bfd39106-51a3-11eb-9104-f875a44e0e11"
+        action_type_node_id = "e2585f8a-51a3-11eb-a7be-f875a44e0e11"
+        mitgations_concept_id = "f60c394e-c99f-4c91-9f68-791465036cde"
 
         mitigations = []
 
@@ -247,19 +249,19 @@ class FileTemplateView(View):
                 if str(mitigation_value.valuetype_id) == "prefLabel":
                     mitigation_scope_dict[mitigation_value.value] = str(mitigation_value.valueid)
                 elif str(mitigation_value.valuetype_id) == "scopeNote":
-                    value_id = models.Value.objects.filter(concept=mitigation_value.concept_id,valuetype="prefLabel")
+                    value_id = models.Value.objects.filter(concept=mitigation_value.concept_id, valuetype="prefLabel")
                     mitigation_scope_dict[str(value_id[0].valueid)] = mitigation_value.value
                 else:
                     pass
-
 
         for tile in tiles:
             mitigation = {}
             condition = {}
             if str(tile.nodegroup_id) == action_nodegroup_id:
 
-                mitigation_scopenote = mitigation_scope_dict.get(mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), ""))
-
+                mitigation_scopenote = mitigation_scope_dict.get(
+                    mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), "")
+                )
 
                 if len(mitigation_scopenote) > 0:
                     mitigation_scopenote = "<i>" + mitigation_scopenote + "</i><br />"
@@ -392,7 +394,6 @@ class FileTemplateView(View):
                 p.clear()
                 document_html_parser = DocumentHTMLParser(p, document)
                 document_html_parser.insert_into_paragraph_and_feed(v)
-
 
         def replace_in_runs(p_list, k, v):
             for paragraph in p_list:
