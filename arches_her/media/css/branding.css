@@ -1,0 +1,204 @@
+/* General - Start */
+
+.arches-login {
+    font-family: Source Sans Pro, Arial, Helvetica;
+    font-size: 1.125rem;
+    font-weight: 300;
+}
+
+.arches-login a:focus,
+.arches-login input:focus,
+.arches-login button:focus,
+.arches-login .form-control:focus {
+    outline: 2px solid #EC6625!important;
+}
+
+/* General - End */
+
+/* Header - Start */
+
+.arches-login header {
+    width: 100%;
+    height: 80px;
+    box-shadow: 0px 3px 6px #00000029;
+}
+
+.arches-login .header-bar {
+    display: flex;
+    max-width: 1439px;
+    margin: 0 auto;
+    justify-content: space-between;
+}
+
+.arches-login .header-bar__logo {
+    padding: 17px 30px;
+}
+
+.arches-login .header-bar__logo-heading {
+    margin-top: 0;
+    font-size: 1.125rem;
+    line-height: 0;
+}
+
+.arches-login .header-bar__logo-image {
+    width: 200px;
+}
+
+/* Header - End */
+
+/* Login Page - Start */
+
+#container.cls-container.arches-login {
+    background: #fff;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+#login-form {
+    position: relative;
+    top: 80px;
+    max-width: 650px;
+    margin: 0 auto;
+    padding: 40px 108px;
+    background: transparent linear-gradient(123deg, #FFFFFF 0%, #FFFFFF 100%) 0% 0% no-repeat padding-box;
+    box-shadow: 10px 10px 20px #0000001A;
+    border: 2px solid #FFFFFF;
+    border-radius: 5px;
+    opacity: 1;
+    text-align: left;
+}
+
+#login-form p,
+#login-form label {
+    color: #000;
+    font-size: 1.8rem;
+}
+
+#login-form label {
+    font-weight: 500;
+}
+
+#login-form a {
+    color: #2579A4;
+    text-decoration: underline;
+}
+
+#login-form a:hover {
+    color: #B62126;
+}
+
+#login-form input {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #808080;
+    font-family: inherit;
+    font-size: 1.8rem;
+    font-weight: inherit;
+}
+
+#login-form .form-group {
+    margin-bottom: 19px;
+}
+
+#login-form .form-group:nth-of-type(1) {
+    margin-top: 15px;
+}
+
+.arches-signin-subtext {
+    border-bottom: none;
+    color: #555555;
+    font-size: 3.2rem;
+    padding: 0;
+}
+
+#sign-in-button,
+#login-cancel-button {
+    padding: 14px 20px;
+    background: #2579A4;
+    border: 1px solid #E3EFFA;
+    border-radius: 5px;
+    font-size: 1.8rem;
+    margin: 10px 0 5px;
+}
+
+#sign-in-button:hover {
+    border-color: #2579a4;
+    color: #2579a4;
+    background: #fff;
+}
+
+#login-cancel-button {
+    background: #E3EFFA;
+    color: #0D2937;
+    border: 1px solid #0D2937;
+    margin-top: 0;
+}
+
+#login-cancel-button:hover {
+    background: #fff;
+}
+
+.arches-login .row-cancel-button {
+    position: relative;
+    top: 180px;
+}
+
+#login-failed-alert {
+    background-color: #943725;
+    border-radius: 5px;
+    font-size: 1.8rem;
+}
+
+#login-failed-alert button.close {
+    opacity: 1; 
+}
+
+#login-form .alert-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 10px;
+}
+
+/* Login Page - End */
+
+/* Media Queries - Start */
+
+@media screen and (max-width: 768px) {
+    .arches-login header {
+        height: 60px;
+        box-shadow: none;
+        border-bottom: 1px solid #d4d4d4;
+    }
+
+    .arches-login .header-bar__logo {
+        padding: 13px 20px;
+    }
+
+    .arches-login .header-bar__logo-image {
+        width: 150px;
+    }
+    
+    #login-form {
+        background: none;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        padding: 20px;
+        top: 50px;
+    }
+
+    #sign-in-button,
+    #login-cancel-button {
+        width: 100%;
+    }
+
+    .arches-login .row-cancel-button {
+        margin: 5px auto;
+        padding: 20px;
+        top: 0;
+        max-width: 650px;
+    }
+}
+
+/* Media Queries - End */
