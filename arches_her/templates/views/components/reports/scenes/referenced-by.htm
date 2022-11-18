@@ -4,7 +4,7 @@
 
 {% block body %}
 
-<h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.referencedBy)}, css: {'fa-angle-double-right': visible.referencedBy(), 'fa-angle-double-up': !visible.referencedBy()}, attr: {'aria-expanded': visible.scientificDate() ? 'false' : 'true' }"  class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Referenced By section"></i> {% trans "Resource Referenced By" %}</h2>
+<h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.referencedBy)}, css: {'fa-angle-double-right': visible.referencedBy(), 'fa-angle-double-up': !visible.referencedBy()}, attr: {'aria-expanded': visible.referencedBy() ? 'false' : 'true' }"  class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Referenced By section"></i> {% trans "Resource Referenced By" %}</h2>
 <!-- Collapsible content -->
 <div data-bind="visible: visible.referencedBy" class="aher-report-collapsible-container pad-lft">
 
