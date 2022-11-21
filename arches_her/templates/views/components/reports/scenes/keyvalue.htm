@@ -5,7 +5,7 @@
 {% block body %}
  <!-- ko if: !inline && item.key -->
 <div data-bind="ifnot: inline">
-    <h4 style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></h4>
+    <span style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></span>
     <div class="aher-card-control" data-bind="if: item.card">
         <a href="#" class="aher-report-a" data-bind="click: function(){add(item.card)}"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span style="text-transform: capitalize;" data-bind="text:item.key"></span></a>
     </div>        
@@ -13,11 +13,11 @@
  <!-- /ko -->
 
  <!-- ko if: inline && !small && item.key -->
-<h4 style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></h4><span>:</span>
+<span style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></span><span>:</span>
 <!-- /ko --> 
 
 <!-- ko if: inline && small && item.key -->
-<h6 style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></h4><span>:</span>
+<span style="text-transform: capitalize;" data-bind="text: item.key" class="aher-block-key"></span><span>:</span>
 <!-- /ko -->
 
 <!-- ko if: !item.value && item.type != 'timespan' -->
@@ -48,31 +48,31 @@
             <div data-bind="text: item.value.beginningStart" class="aher-block-value"></div>
         </div>
         <div class="aher-block-attributes timespan">
-            <h6 class="aher-block-key">End of the beginning: </h6>
+            <span class="aher-block-key">End of the beginning: </span>
             <div data-bind="text: item.value.beginningComplete" class="aher-block-value">--</div>
         </div>
     </div>
     <div class="aher-report-subsection-item flex" style="margin-top: -5px;">
         <div class="aher-block-attributes timespan">
-            <h6 class="aher-block-key">Beginning of the end: </h6>
+            <span class="aher-block-key">Beginning of the end: </span>
             <div data-bind="text: item.value.endingStart" class="aher-block-value"></div>
         </div>
         <div class="aher-block-attributes timespan">
-            <h6 class="aher-block-key">End of the end: </h6>
+            <span class="aher-block-key">End of the end: </span>
             <div data-bind="text:item.value.endingComplete" class="aher-block-value"></div>
         </div>
     </div>
     <div class="aher-report-subsection-item flex column-order pad-top pad-btm">
         <div class="aher-block-attributes">
-            <h6 class="aher-block-key">Name of event timespan: </h6>
+            <span class="aher-block-key">Name of event timespan: </span>
             <div data-bind="text: item.value.name" class="aher-block-value"></div>
         </div>
         <div class="aher-block-attributes">
-            <h6 class="aher-block-key">Duration: </h6>
+            <span class="aher-block-key">Duration: </span>
             <div data-bind="text: item.value.duration" class="aher-block-value"></div>
         </div>
         <div class="aher-block-attributes">
-            <h6 class="aher-block-key">Name of event duration: </h6>
+            <span class="aher-block-key">Name of event duration: </span>
             <div data-bind="text: item.value.durationEventName" class="aher-block-value"></div>
         </div>
     </div>

@@ -36,8 +36,8 @@
                 <div class="" data-bind="if: visible.geometryMetadata">
                     <!-- Record Authorization/Compilation/Update -->
                     <div class="aher-report-subsection-firstchild no-top-pad">
-                        <h5 class="aher-geom-metadata-header">Record Edit History</h5>
-
+                        <h4 class="aher-geom-metadata-header">Record Edit History</h4>
+                        
                         <!-- ko ifnot: recordEditExists -->
                         <div class="aher-nodata-note">No authorization record for this resource</div>
                         <!-- /ko -->
@@ -46,35 +46,35 @@
                         <div class="firstchild-container" data-bind="{with: geometryMetadata}">
                             <div class="aher-report-subsection-item flex">
                                 <div class="aher-block-attributes actor-name">
-                                    <h6 class="aher-block-key compressed">Authorizer: </h6>
+                                    <span class="h6 aher-block-key compressed">Authorizer: </span>
                                     <div data-bind="text: authorizerName" class="aher-block-value"></div>
                                 </div>
                                 <div class="aher-block-attributes timespan">
-                                    <h6 class="aher-block-key compressed">Authorization Date: </h6>
+                                    <span class="h6 aher-block-key compressed">Authorization Date: </span>
                                     <div data-bind="text: authorizationDate" class="aher-block-value"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h6 class="aher-block-key compressed">Type of Authorization: </h6>
+                                    <span class="h6 aher-block-key compressed">Type of Authorization: </span>
                                     <div data-bind="text: typeOfAuthorization" class="aher-block-value"></div>
                                 </div>
                             </div>
                             <div class="aher-report-subsection-item flex">
                                 <div class="aher-block-attributes actor-name">
-                                    <h6 class="aher-block-key compressed">Compiler: </h6>
+                                    <span class="h6 aher-block-key compressed">Compiler: </span>
                                     <div data-bind="text: compilerName" class="aher-block-value"></div>
                                 </div>
                                 <div class="aher-block-attributes timespan">
-                                    <h6 class="aher-block-key compressed">Compile Date: </h6>
+                                    <span class="h6 aher-block-key compressed">Compile Date: </span>
                                     <div data-bind="text: compileDate" class="aher-block-value"></div>
                                 </div>
                             </div>
                             <div class="aher-report-subsection-item flex">
                                 <div class="aher-block-attributes actor-name">
-                                    <h6 class="aher-block-key compressed">Updater: </h6>
+                                    <span class="h6 aher-block-key compressed">Updater: </span>
                                     <div data-bind="text: updaterName"  class="aher-block-value"></div>
                                 </div>
                                 <div class="aher-block-attributes timespan">
-                                    <h6 class="aher-block-key compressed">Update Date: </h6>
+                                    <span class="h6 aher-block-key compressed">Update Date: </span>
                                     <div data-bind="text: updateDate"  class="aher-block-value"></div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@
 
                     <!-- Geometry Sources/Scale -->
                     <div class="aher-report-subsection-firstchild">
-                        <h5 class="aher-geom-metadata-header">Record Sources/Scale</h5>
+                        <h4 class="aher-geom-metadata-header">Record Sources/Scale</h4>
 
                         <!-- ko ifnot: geometryScaleExists -->
                         <div class="aher-nodata-note">No record sources/scale for this resource</div>
@@ -94,19 +94,19 @@
                         <div class="firstchild-container">
                             <div class="aher-report-subsection-item flex column-order pad-btm" data-bind="{with: geometryScale}">
                                 <div class="aher-block-attributes">
-                                    <h6 class="aher-block-key compressed">Coordinate System: </h6>
+                                    <span class="h6 aher-block-key compressed">Coordinate System: </span>
                                     <div data-bind="text: coordinateSystem" class="aher-block-value"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h6 class="aher-block-key compressed">Basemap: </h6>
+                                    <span class="h6 aher-block-key compressed">Basemap: </span>
                                     <div data-bind="text: basemap" class="aher-block-value"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h6 class="aher-block-key compressed">Capture Scale: </h6>
+                                    <span class="h6 aher-block-key compressed">Capture Scale: </span>
                                     <div data-bind="text: captureScale" class="aher-block-value">--</div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h6 class="aher-block-key compressed">Accuracy: </h6>
+                                    <span class="h6 aher-block-key compressed">Accuracy: </span>
                                     <div data-bind="text: accuracy" class="aher-block-value"></div>
                                 </div>
                             </div>
@@ -116,8 +116,8 @@
 
                     <!-- Record Description -->
                     <div class="aher-report-subsection-firstchild">
-                        <h5 class="aher-geom-metadata-header">Description</h5>
-
+                        <h4 class="aher-geom-metadata-header">Description</h4>
+                        
                         <!-- ko if: !observableValueSet([geometryNotes]) || geometryNotes() == "" -->
                         <div class="aher-nodata-note">No description record for this resource</div>
                         <!-- /ko -->
@@ -126,7 +126,7 @@
                         <div class="firstchild-container pad-btm">
                             <div class="aher-report-subsection-item">
                                 <div class="aher-block-attributes" style="margin-top: 5px;">
-                                    <h6 class="aher-block-key compressed">Metadata Description: </h6>
+                                    <span class="h6 aher-block-key compressed">Metadata Description: </span>
                                     <div data-bind="text: geometryNotes" class="aher-block-value"></div>
                                 </div>
                             </div>
