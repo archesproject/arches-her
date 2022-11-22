@@ -214,23 +214,23 @@
                         <div class="firstchild-container">
                             <div class="aher-report-subsection-ite">
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Consulting Contact: </h4>
+                                    <span class="aher-block-key">Consulting Contact: </span>
                                     <div class="aher-block-value" data-bind="text: contacts().consultingContact"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Planning Officer: </h4>
+                                    <span class="aher-block-key">Planning Officer: </span>
                                     <a class="aher-table-link" data-bind="text: contacts().planningOfficer, attr: {href: contacts().planningOfficerLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Planning Body: </h4>
+                                    <span class="aher-block-key">Planning Body: </span>
                                     <a class="aher-table-link" data-bind="text: contacts().planningBody, attr: {href: contacts().planningBodyLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Casework Officer: </h4>
+                                    <span class="aher-block-key">Casework Officer: </span>
                                     <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficerLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes pad-top">
-                                    <h4 class="aher-block-key">Agents: </h4>
+                                    <span class="aher-block-key">Agents: </span>
                                     <!-- ko ifnot: contacts().agents.length -->
                                     <div class="aher-nodata-note">No agent for this consultation</div>
                                     <!-- /ko -->
@@ -242,7 +242,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Owners: </h4>
+                                    <span class="aher-block-key">Owners: </span>
                                     <!-- ko ifnot: contacts().owners.length -->
                                     <div class="aher-nodata-note">No owner for this consultation</div>
                                     <!-- /ko -->
@@ -254,7 +254,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Applicants: </h4>
+                                    <span class="aher-block-key">Applicants: </span>
                                     <!-- ko ifnot: contacts().applicants.length -->
                                     <div class="aher-nodata-note">No applicant for this consultation</div>
                                     <!-- /ko -->
@@ -459,11 +459,11 @@
                             <div class="firstchild-container pad-btm">
                                 <div class="aher-report-subsection-item">
                                     <div class="aher-block-attributes">
-                                        <h4 class="aher-block-key">Planning Outcome: </h4>
+                                        <span class="aher-block-key">Planning Outcome: </span>
                                         <div class="aher-block-value" data-bind="text: outcomes().planningOutcome"></div>
                                     </div>
                                     <div class="aher-block-attributes">
-                                        <h4 class="aher-block-key">Audit Outcome: </h4>
+                                        <span class="aher-block-key">Audit Outcome: </span>
                                         <div class="aher-block-value" data-bind="text: outcomes().auditOutcome"></div>
                                     </div>
                                 </div>
@@ -669,15 +669,15 @@
                         <div class="firstchild-container">
                             <div class="aher-report-subsection-ite">
                                 <div class="aher-block-attributes highlighted">
-                                    <h4 class="aher-block-key">Date of Visit: </h4>
+                                    <span class="aher-block-key">Date of Visit: </span>
                                     <div class="aher-block-value" data-bind="text: visit.dateOfVisit"></div>
                                 </div>
                                 <div class="aher-block-attributes top-line">
-                                    <h4 class="aher-block-key">Location Description: </h4>
+                                    <span class="aher-block-key">Location Description: </span>
                                     <div class="aher-block-value" data-bind="text: visit.location"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Attendees</h4>
+                                    <span class="aher-block-key">Attendees</span>
                                     <!-- ko ifnot: visit.attendees().length -->
                                     <div class="aher-nodata-note">No attendee for this visit</div>
                                     <!-- /ko -->
@@ -718,7 +718,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Observations</h4>
+                                    <span class="aher-block-key">Observations</span>
                                     <!-- ko ifnot: visit.observations().length -->
                                     <div class="aher-nodata-note">No observation for this visit</div>
                                     <!-- /ko -->
@@ -759,7 +759,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Recommendations</h4>
+                                    <span class="aher-block-key">Recommendations</span>
                                     <!-- ko ifnot: visit.recommendations().length -->
                                     <div class="aher-nodata-note">No recommendation for this visit</div>
                                     <!-- /ko -->
@@ -800,7 +800,7 @@
                                     <!-- /ko -->
                                 </div>
 
-                                <h4 class="aher-block-key">Photographs</h4>
+                                <h3 class="aher-block-key">Photographs</h3>
                                 <div class="aher-report-photo-container">
                                     <!-- ko ifnot: visit.photographs.length -->
                                     <div class="aher-nodata-note">No photograph for this visit</div>
@@ -814,19 +814,19 @@
                                         </div>
                                         <div class="aher-report-photo-caption">
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Caption: </div>
+                                                <span class="aher-block-key">Caption: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.caption"></div>
                                             </div>
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Copyright Holder: </div>
+                                                <span class="aher-block-key">Copyright Holder: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.copyrightHolder"></div>
                                             </div>
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Copyright Type: </div>
+                                                <span class="aher-block-key">Copyright Type: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.copyrightType"></div>
                                             </div>
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Copyright Note: </div>
+                                                <span class="aher-block-key">Copyright Note: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.copyrightNote"></div>
                                             </div>
                                         </div>
@@ -958,19 +958,19 @@
                 <div class="firstchild-container">
                     <div class="aher-report-subsection-ite">
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Consulting Contact: </h4>
+                            <span class="aher-block-key">Consulting Contact: </span>
                             <div class="aher-block-value" data-bind="text: contacts().consultingContact"></div>
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Planning Officer: </h4>
+                            <span class="aher-block-key">Planning Officer: </span>
                             <a class="aher-table-link" data-bind="text: contacts().planningOfficer, attr: {href: contacts().planningOfficerLink}"></a>
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Casework Officer: </h4>
+                            <span class="aher-block-key">Casework Officer: </span>
                             <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficer}"></a>
                         </div>
                         <div class="aher-block-attributes pad-top">
-                            <h4 class="aher-block-key">Agents: </h4>
+                            <span class="aher-block-key">Agents: </span>
                             <!-- ko ifnot: contacts().agents.length -->
                             <div class="aher-nodata-note">No agent for this consultation</div>
                             <!-- /ko -->
@@ -982,7 +982,7 @@
                             <!-- /ko -->
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Owners: </h4>
+                            <span class="aher-block-key">Owners: </span>
                             <!-- ko ifnot: contacts().owners.length -->
                             <div class="aher-nodata-note">No owner for this consultation</div>
                             <!-- /ko -->
@@ -994,7 +994,7 @@
                             <!-- /ko -->
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Applicants: </h4>
+                            <span class="aher-block-key">Applicants: </span>
                             <!-- ko ifnot: contacts().applicants.length -->
                             <div class="aher-nodata-note">No applicant for this consultation</div>
                             <!-- /ko -->
