@@ -1,0 +1,58 @@
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
+{% block report %}
+
+{% block body %}
+
+<h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.referencedBy)}, css: {'fa-angle-double-right': visible.referencedBy(), 'fa-angle-double-up': !visible.referencedBy()}, attr: {'aria-expanded': visible.referencedBy() ? 'false' : 'true' }"  class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }" aria-label="Expand/collapse Referenced By section"></i> {% trans "Resource Referenced By" %}</h2>
+<!-- Collapsible content -->
+<div data-bind="visible: visible.referencedBy" class="aher-report-collapsible-container pad-lft">
+
+    <!-- ko ifnot: getRelatedResources() -->
+    <div class="aher-nodata-note">{% trans "No resource referenced by for this resource" %}</div>
+    <!-- /ko -->
+
+    <!-- ko if: getRelatedResources() -->
+    <div class="aher-report-subsection">
+        <div class="firstchild-container">
+            <div class="aher-table">
+                <table id="referenced-by-table" class="table table-striped" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+                            <th>{% trans "Related Resource" %}</th>
+                            <th>{% trans "Resource Type" %}</th>
+                        </tr>
+                    </thead>
+                    <tbody data-bind="dataTablesForEach: { data: relations, dataTableOptions: referencedByTwoColumnTableConfig}">
+                        <tr>
+                            <td>
+                                <!-- ko if: related_resource_link -->
+                                <a data-bind="text: related_resource_name, attr: {href: related_resource_link}" class="aher-table-link"></a>
+                                <!-- /ko -->
+                                <!-- ko ifnot: related_resource_link -->
+                                <span data-bind="text: related_resource_name"></span>
+                                <!-- /ko -->
+                            </td>
+                            <td data-bind="text: related_resource_type"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+</div>
+
+
+
+
+
+{% endblock body %}
+{% endblock report %}
+{% block summary %}
+
+<div class="model-summary-report">
+Do not use - yet.
+</div>
+
+{% endblock summary %}
