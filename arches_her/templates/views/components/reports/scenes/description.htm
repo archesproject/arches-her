@@ -34,10 +34,10 @@
                                 <td data-bind="text: type"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards && $parent.cards.descriptions">
-                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.descriptions)}">
+                                        <a href="#" data-bind="click: function() {$parent.edit(tileid, $parent.cards.descriptions)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.descriptions)">
+                                        <a href="#" data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.descriptions)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -90,10 +90,10 @@
                                 <td data-bind="text: comment"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards && $parent.cards.citation">
-                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.citation)}">
+                                        <a href="#" data-bind="click: function() {$parent.edit(tileid, $parent.cards.citation)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.citation)">
+                                        <a href="#" data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.citation)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -135,10 +135,10 @@
                                 <td data-bind="text: audienceType"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.audience">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.audience)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.audience)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.audience)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.audience)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>

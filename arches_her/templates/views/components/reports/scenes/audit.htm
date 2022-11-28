@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -15,7 +15,7 @@
         <!-- ko ifnot: audit() -->
         <div class="aher-nodata-note">No audit for this resource</div>
         <!-- /ko -->
-        
+
         <!-- ko if: audit() -->
         <div class="aher-report-subsection" >
             <div class="firstchild-container">
@@ -42,10 +42,10 @@
                                 <td data-bind="text: validation"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards && $parent.cards.audit">
-                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.audit)}">
+                                        <a href="#" data-bind="click: function() {$parent.edit(tileid, $parent.cards.audit)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.audit)">
+                                        <a href="#" data-bind="click: $parent.delete.bind($data, tileid, $parent.cards.audit)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -57,7 +57,7 @@
             </div>
         </div>
         <!-- /ko -->
- 
+
     </div>
 </div>
 <div data-bind="component: {
