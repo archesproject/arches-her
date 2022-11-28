@@ -14,18 +14,19 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
         <ol class="aher-report-anchors breadcrumb">
             <!-- ko foreach: {data: sections, as: 'section'} -->
-            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <li tabindex="0" data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></li>
             <!-- /ko -->
         </ol>
     </div>
     <div class="aher-tabbed-report">
         <div class="aher-tabbed-report-content">
+
             <!-- Names Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'name'">
                 <div data-bind="component: {
@@ -71,6 +72,18 @@
             </div>
             <!-- Resources Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
+
+                <!-- Referenced By section -->
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/referenced-by',
+                    params: {
+                        resourceInstanceId: ko.unwrap(resourceinstanceid),
+                        graphs: ['Consultation']
+                    }
+                }"></div>
+
+
+
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/resources',
                     params: {
@@ -79,6 +92,7 @@
                         dataConfig: resourceDataConfig
                     }
                 }"></div>
+
                 <!-- Application Area section -->
                 <div class="aher-report-section">
                     <h2 class="aher-report-section-title">
@@ -115,10 +129,10 @@
                                                 </td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.applicationAreas">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.applicationAreas)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.applicationAreas)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.applicationAreas)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.applicationAreas)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -164,7 +178,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
@@ -189,6 +203,15 @@
             params: {
                 data: resource,
                 cards: descriptionCards,
+            }
+        }"></div>
+
+        <!-- Referenced By section -->
+        <div data-bind="component: {
+            name: 'views/components/reports/scenes/referenced-by',
+            params: {
+                resourceInstanceId: ko.unwrap(resourceinstanceid),
+                graphs: ['Consultation']
             }
         }"></div>
     </div>
