@@ -75,7 +75,6 @@ define([
             self.descriptionCards = {};
             self.assessmentCards = {};
             self.classificationCards = {};
-            self.scientificDateCards = {};
             self.imagesCards = {};
             self.peopleCards = {};
             self.locationCards = {};
