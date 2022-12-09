@@ -90,7 +90,6 @@ define([
             self.archiveCards = {};
             self.descriptionCards = {};
             self.classificationCards = {};
-            self.scientificDateCards = {};
             self.peopleCards = {};
             self.locationCards = {};
             self.protectionCards = {};
