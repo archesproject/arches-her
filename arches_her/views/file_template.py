@@ -19,6 +19,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 import json
 import os
+import re
 import uuid
 from datetime import datetime
 import docx
@@ -102,7 +103,6 @@ class FileTemplateView(View):
         saved_file = open(new_file_path, "rb")
         stat = os.stat(new_file_path)
         file_data = UploadedFile(saved_file)
-
         file_list_node_id = "96f8830a-8490-11ea-9aba-f875a44e0e11"  # Digital Object
 
         tile = json.dumps(
@@ -260,20 +260,23 @@ class FileTemplateView(View):
             if str(tile.nodegroup_id) == action_nodegroup_id:
 
                 mitigation_scopenote = mitigation_scope_dict.get(
-                    mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id), "")
+                    mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id)), ""
                 )
 
-                if len(mitigation_scopenote) > 0:
-                    mitigation_scopenote = "<i>" + mitigation_scopenote + "</i><br />"
-                mitigation["content"] = "<p>{}</p><p>{}</p>".format(mitigation_scopenote, get_value_from_tile(tile, action_node_id))
+                # if len(mitigation_scopenote) > 0:
+                #     mitigation_scopenote = "<i>" + mitigation_scopenote + "</i>"
+                insert_break = len(mitigation_scopenote) > 0
+                mitigation[
+                    "content"
+                ] = f"{'<br>' if insert_break else ''}{mitigation_scopenote}{'<br>' if insert_break else ''}{get_value_from_tile(tile, action_node_id)}"
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
-                condition["content"] = "<p>{}</p>".format(get_value_from_tile(tile, advice_node_id))
+                condition["content"] = get_value_from_tile(tile, advice_node_id)
                 template_name = self.get_template_path(self.request._post["template_id"])
                 if template_name == "WSI Amend Letter.docx" or template_name == "WSI Approval Letter.docx":
                     condition["type"] = ""
                 else:
-                    condition["type"] = get_value_from_tile(tile, advice_type_node_id)
+                    condition["type"] = f"{get_value_from_tile(tile, advice_type_node_id)}"
             else:
                 for key, value in list(template_dict.items()):
                     if value in tile.data:
@@ -360,26 +363,32 @@ class FileTemplateView(View):
                                 )
                                 mapping_dict["Address of consulting organisation"] = addressConsult
 
+            mapping_dict["Casework Officer"] = re.sub("\[\d+\] ", "", mapping_dict["Casework Officer"])
+            mapping_dict["Signature"] = mapping_dict["Casework Officer"]
+
         for mitigation in mitigations:
-            mapping_dict["Mitigation"] += "<b><i>{}</i></b>{}<br><br>".format(mitigation["type"], mitigation["content"])
+            add_break = len(mitigation["content"]) > 0
+            mapping_dict[
+                "Mitigation"
+            ] += f'<br><b>{mitigation["type"]}</b>{"<br>"if add_break else ""}{mitigation["content"]}{"<br>" if add_break else ""}'
 
         for condition in conditions:
-            mapping_dict["Condition"] += "<b>{}</b>{}<br><br>".format(condition["type"], condition["content"])
+            mapping_dict["Condition"] += "<b>{}</b>{}<br>".format(condition["type"], condition["content"])
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
             mapping_dict["Archaeological Priority Area"] = "The planning application is not in an Archaeological Priority Area."
         else:
-
             mapping_dict[
                 "Archaeological Priority Area"
             ] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(
                 associate_heritage
             )
 
+        htmlTags = re.compile(r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
         for key in mapping_dict:
             html = False
-            if "<" in mapping_dict[key]:  # look for html tag, not ideal
+            if htmlTags.search(mapping_dict[key] if mapping_dict[key] is not None else ""):
                 html = True
             self.replace_string(self.doc, key, mapping_dict[key], html)
 
@@ -513,6 +522,7 @@ class DocumentHTMLParser(HTMLParser):
         return hyperlink
 
     def insert_into_paragraph_and_feed(self, html):
+        html = html.replace("\n\n", "<br>")
         self.run = self.paragraph.add_run()
         self.feed(html)
 
