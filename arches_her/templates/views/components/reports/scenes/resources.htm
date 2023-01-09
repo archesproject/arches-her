@@ -141,7 +141,9 @@
     <div data-bind="visible: visible.consultations" class="aher-report-collapsible-container pad-lft">
 
         <!-- ko ifnot: consultations().length -->
-        <div class="aher-nodata-note">No consultations for this resource</div>
+        <div class="aher-nodata-note">
+            <p data-bind="text:consultations_message"></p>
+        </div>
         <!-- /ko -->
 
         <!-- ko if: consultations().length -->
@@ -317,7 +319,7 @@
     <!-- ko if: cards.actors -->
     <a href="#" data-bind="click: function(){addNewTile(cards.actors)}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Add Person or Organisation" %}</a>
     <!-- /ko -->
-    
+
     <!-- Collapsible content -->
     <div data-bind="visible: visible.actors" class="aher-report-collapsible-container pad-lft">
 

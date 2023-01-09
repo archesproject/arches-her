@@ -50,11 +50,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             self.add = params.addTile || self.addNewTile;
             self.activities = ko.observableArray();
             self.consultations = ko.observableArray();
+            self.consultations_message = ko.observable(null);
             self.files = ko.observableArray();
             self.archive = ko.observableArray();
             self.actors = ko.observableArray();
             self.assets = ko.observableArray();
-            self.assets_rob = ko.observableArray();
             self.translation = ko.observableArray();
             self.applicationArea = ko.observableArray();
             self.period = ko.observableArray();
@@ -92,6 +92,28 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         const resourceUrl = self.getResourceLink(x);
                         return { consultation, resourceUrl, tileid };
                     }));
+                }
+
+
+                const userCanViewConsultations = () => {
+                    if (params.cards.consultations?.nodegroupid) {
+                        return window.fetch(arches.urls.api_nodegroup(params.cards.consultations.nodegroupid))
+                        .then(function(response) {
+                            if (response.ok && response.status === 200) {
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        })
+                    } else {
+                        return false;
+                    }
+                }
+
+                if (!userCanViewConsultations()) {
+                    self.consultations_message('You do not have permission to view this data');
+                } else if (associatedConsultationsNode === undefined || associatedConsultationsNode.length === 0) {
+                    self.consultations_message('No consultations for this resource');
                 }
 
 
@@ -206,10 +228,10 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
                 const translationNode = self.getRawNodeValue(params.data(), self.dataConfig.translation, 'instance_details');
                 if (Array.isArray(translationNode)) {
-                    const tileid = self.getTileId(self.getRawNodeValue(params.data(), self.dataConfig.translation));
                     self.translation(translationNode.map(x => {
                         const resource = self.getNodeValue(x);
                         const resourceLink = self.getResourceLink(self.getRawNodeValue(x));
+                        const tileid = self.getTileId(x);
                         return { resource, resourceLink, tileid };
                     }));
                 }
