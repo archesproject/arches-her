@@ -385,6 +385,9 @@ class FileTemplateView(View):
                 associate_heritage
             )
 
+        if mapping_dict["Assessment of Significance"] != "":
+            mapping_dict["Assessment of Significance"] += "<br>"
+
         htmlTags = re.compile(r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
         for key in mapping_dict:
             html = False
