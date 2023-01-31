@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -38,10 +38,10 @@
                                 <td data-bind="text: statement"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.sourceCreation">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceCreation)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.sourceCreation)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceCreation)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.sourceCreation)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -88,10 +88,10 @@
                                 <td data-bind="text: storageAreaName"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.repositoryStorage">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.repositoryStorage)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.repositoryStorage)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.repositoryStorage)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.repositoryStorage)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>

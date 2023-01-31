@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -16,7 +16,7 @@
         <!-- ko ifnot: names().length -->
         <div class="aher-nodata-note">No names for this resource</div>
         <!-- /ko -->
-        
+
         <!-- ko if: names().length -->
         <div class="aher-report-subsection" >
             <div>
@@ -37,10 +37,10 @@
                                 <td data-bind="text: currency"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards && $parent.cards.name">
-                                        <a data-bind="click: function() {$parent.edit(tileid, $parent.cards.name)}">
+                                        <a href="#" data-bind="click: function() {$parent.edit(tileid, $parent.cards.name)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.name)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.name)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -67,7 +67,7 @@
         <!-- ko ifnot: crossReferences().length -->
         <div class="aher-nodata-note">No references for this resource</div>
         <!-- /ko -->
-        
+
         <!-- ko if: crossReferences().length -->
         <div class="aher-report-subsection">
             <div class="firstchild-container">
@@ -96,10 +96,10 @@
                                 </td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.externalCrossReferences">
-                                        <a data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}">
+                                        <a href="#" data-bind="click: function(){$parent.editTile(tileid, $parent.cards.externalCrossReferences)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.externalCrossReferences)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.externalCrossReferences)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
