@@ -95,36 +95,42 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 }
 
                 const userAvailableConsulationCards = () => {
-                    if(self.dataConfig.resourceinstanceid){
                         return $.ajax({
                             url: arches.urls.api_card + self.dataConfig.resourceinstanceid,
                             context: this,
                         }).done(function(response) {
-                            console.log(response)
                             return response
-                        })
-                    }
-                    else{
-                        return false
-                    }
-                }
-
-                userAvailableConsulationCards().then(function(cards_response){
-                    if(cards_response !== false){
-                        var card_names = []
-                        for(card in cards_response.cards){
-                            card_names.push(cards_response.cards[card].name)
+                        }).fail(function(){
+                            return false
                         }
-                        if(card_names.includes("Associated Consultations")) {
-                            self.consultations_message('No consultations for this resource');
+                        )
+                    }
+
+
+                if(self.dataConfig.resourceinstanceid){
+                    userAvailableConsulationCards().then(function(cards_response){
+                        if(cards_response !== false){
+                            var card_names = []
+                            for(card in cards_response.cards){
+                                card_names.push(cards_response.cards[card].name)
+                            }
+                            if(card_names.includes("Associated Consultations")) {
+                                self.consultations_message('No consultations for this resource');
+                            }
+                            else{
+                                self.consultations_message('You do not have permission to see this information');
+                            }
                         }
                         else{
-                            self.consultations_message('You do not have permission to see this information');
+                            self.consultations_message('There was an issue checking for associated consultations.');
                         }
-                    }
+                        })
+                }
+                else{
+                    self.consultations_message('There was an issue checking for associated consultations.');
+                }
 
-                    }
-                )
+
 
 
 
