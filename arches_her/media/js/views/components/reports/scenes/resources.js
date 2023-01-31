@@ -96,12 +96,19 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
 
                 const userAvailableConsulationCards = () => {
                     if(self.dataConfig.resourceinstanceid){
-                        return window.fetch(arches.urls.api_card + self.dataConfig.resourceinstanceid)
+                        return $.ajax({
+                            url: arches.urls.api_card + self.dataConfig.resourceinstanceid,
+                            context: this,
+                        }).done(function(response) {
+                            console.log(response)
+                            return response
+                        })
                     }
                     else{
                         return false
                     }
                 }
+
 
                 const userCanViewConsultations = () => {
                     if(params.data()[self.dataConfig.consultations]){
