@@ -109,58 +109,23 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                     }
                 }
 
-
-                const userCanViewConsultations = () => {
-                    if(params.data()[self.dataConfig.consultations]){
-                        try{
-                            return window.fetch(arches.urls.api_nodes(params.data()[self.dataConfig.consultations]['@node_id']))
-                            .then(function(response){
-                                return $.ajax({
-                                    url: response.url,
-                                    context: this,
-                                }).done(function(node_response) {
-                                    return window.fetch(arches.urls.api_nodegroup(ko.unwrap(node_response)[0]["nodegroup_id"]))
-                                    .then(function(response) {
-                                    if (response.ok && response.status === 200) {
-                                        return true;
-                                    } else {
-                                        return false;
-                                        }
-                                    })
-                                }).fail(function() {
-                                    return false
-                            })})
-                            }
-                        catch{
-                            return false
+                userAvailableConsulationCards().then(function(cards_response){
+                    if(cards_response !== false){
+                        var card_names = []
+                        for(card in cards_response.cards){
+                            card_names.push(cards_response.cards[card].name)
                         }
+                        if(card_names.includes("Associated Consultations")) {
+                            self.consultations_message('No consultations for this resource');
+                        }
+                        else{
+                            self.consultations_message('You do not have permission to see this information');
+                        }
+                    }
 
                     }
-                     else {
-                        return false;
-                    }
-                }
+                )
 
-
-
-                if(!userCanViewConsultations()) {
-                    userAvailableConsulationCards().then(function(cards_response){
-                        if(cards_response !== false){
-                            var card_names = []
-                            for(card in cards_response.cards){
-                                card_names.push(cards_response.cards[card].name)
-                            }
-                            if(card_names.includes("Associated Consultations")) {
-                                self.consultations_message('No consultations for this resource');
-                            }
-                            else{
-                                self.consultations_message('You do not have permission to see this information');
-                            }
-                        }
-
-                        }
-                    )
-                }
 
 
                 const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive);
