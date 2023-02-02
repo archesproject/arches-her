@@ -66,7 +66,8 @@ define([
                 archive: 'associated archive objects',
                 files: 'digital files',
                 assets: 'associated monuments and areas',
-                actors: undefined
+                actors: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 
             self.cards = {};
