@@ -70,6 +70,16 @@
                 }"></div>
             </div>
             <!-- Resources Tab -->
+
+                <!-- Referenced By section -->
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/referenced-by',
+                    params: {
+                        resourceInstanceId: ko.unwrap(resourceinstanceid),
+                        graphs: ['Consultation']
+                    }
+                }"></div>
+
             <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/resources',

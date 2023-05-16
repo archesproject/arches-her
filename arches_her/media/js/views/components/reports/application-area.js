@@ -6,6 +6,7 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/referenced-by',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
     return ko.components.register('application-area-report', {
