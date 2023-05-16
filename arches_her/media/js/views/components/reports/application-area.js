@@ -33,6 +33,8 @@ define([
                 columns: Array(2).fill(null)
             };
 
+            self.resourceinstanceid = ko.observable(params.report?.report_json?.resourceinstanceid);
+
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
