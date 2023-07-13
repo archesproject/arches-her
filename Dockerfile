@@ -39,11 +39,10 @@ RUN set -ex \
   && add-apt-repository "deb http://apt.postgresql.org/pub/repos/apt/ $(lsb_release -sc)-pgdg main" \
   && apt-get update -y \
   && apt-get install -y --no-install-recommends $RUN_DEPS \
-  && curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py \
-  && python3.8 get-pip.py \
   && apt-get install -y nodejs \
-  && npm install -g yarn
+  && npm install -g yarn 
 
+RUN apt-get install python3-pip -y
 # Install Yarn components
 RUN mkdir -p ${APP_ROOT}/arches_her/app/media/packages
 WORKDIR ${APP_ROOT}/arches_her
@@ -60,7 +59,7 @@ COPY ./arches ${ARCHES_ROOT}
 # From here, run commands from ARCHES_ROOT
 WORKDIR ${ARCHES_ROOT}
 
-RUN pip install -e . --user --no-use-pep517 && pip install -r arches/install/requirements_dev.txt
+RUN pip install -e . --user --no-use-pep517 && pip install -r arches/install/requirements.txt && pip install -r arches/install/requirements_dev.txt
 
 COPY /arches_her/docker/entrypoint.sh ${WEB_ROOT}/entrypoint.sh
 RUN chmod -R 700 ${WEB_ROOT}/entrypoint.sh &&\
@@ -68,6 +67,7 @@ RUN chmod -R 700 ${WEB_ROOT}/entrypoint.sh &&\
 
 RUN mkdir /var/log/supervisor
 RUN mkdir /var/log/celery
+RUN apt-get install python-is-python3
 
 # Set default workdir
 WORKDIR ${APP_ROOT}
