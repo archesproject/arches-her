@@ -28,6 +28,7 @@ define([
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'json', title: 'JSON'},
             ];
+
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
@@ -52,7 +53,8 @@ define([
             self.resourceDataConfig = {
                 activities: 'associated activities',
                 files: 'digital file(s)',
-                actors: undefined
+                actors: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 
             self.nameCards = {};

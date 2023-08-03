@@ -59,7 +59,8 @@ define([
                 assets: 'related monuments and areas',
                 files: 'file(s)',
                 relatedApplicationArea: 'consultation area',
-                actors: undefined
+                actors: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             };
 
             self.nameCards = {};

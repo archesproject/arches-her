@@ -57,7 +57,8 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)',
-                actors: undefined
+                actors: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 
             self.nameCards = {};
