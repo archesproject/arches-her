@@ -55,12 +55,15 @@ define([
             };
 
             self.resourceDataConfig = {
+                files: 'digital file(s)',
                 activities: undefined,
                 archive: undefined,
                 consultations: undefined,
                 assets: undefined,
-                files: 'digital file(s)',
-                actors: undefined
+                period: undefined,
+                actors: undefined,
+                archive: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             };
 
             self.publication = ko.observableArray();

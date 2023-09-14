@@ -66,7 +66,10 @@ define([
                 archive: 'associated archive objects',
                 files: 'digital files',
                 assets: 'associated monuments and areas',
+                period: undefined,
                 actors: undefined,
+                consultations: 'associated consultations',
+                activities: 'associated activities',
                 resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 
