@@ -14,13 +14,13 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
         <ol class="aher-report-anchors breadcrumb">
             <!-- ko foreach: {data: sections, as: 'section'} -->
-            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <li tabindex="0" data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></li>
             <!-- /ko -->
         </ol>
     </div>
@@ -92,14 +92,15 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="external-cross-reference-table_info">External cross reference table.</p>
+                                    <table id="external-cross-reference-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Cross Reference" %}</th>
                                                 <th>{% trans "Cross Reference Source" %}</th>
                                                 <th class="none">{% trans "Cross Reference Note" %}</th>
                                                 <th>{% trans "URI" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: references, dataTableOptions: createTableConfig(5)}">
@@ -110,10 +111,10 @@
                                                 <td><a class="aher-table-link" data-bind="text: urlLabel, attr: {href: url}"></a></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards['external cross references']">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external cross references'])}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external cross references'])}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards['external cross references'])}">
+                                                        <a href="#" data-bind="click:  $parent.deleteTile.bind($data, tileid, $parent.cards['external cross references'])" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -142,26 +143,27 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="external-system-reference-table_info">External system reference table.</p>
+                                    <table id="external-system-reference-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Reference" %}</th>
                                                 <th>{% trans "Reference Type" %}</th>
                                                 <th>{% trans "Agency" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: systemReferences, dataTableOptions: createTableConfig(4)}">
                                             <tr>
                                                 <td data-bind="text: reference"></td>
                                                 <td data-bind="text: referenceType"></td>
-                                                <td><a class="aher-table-link" data-bind="text: agency, attr: {href: agencyLink}"></a></td>                                                
+                                                <td><a class="aher-table-link" data-bind="text: agency, attr: {href: agencyLink}"></a></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards['external system references']">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external system references'])}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards['external system references'])}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards['external system references'])}">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards['external system references'])" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -197,23 +199,23 @@
                         <div class="firstchild-container">
                             <div class="aher-report-subsection-ite">
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Consulting Contact: </h4>
+                                    <span class="aher-block-key">Consulting Contact: </span>
                                     <div class="aher-block-value" data-bind="text: contacts().consultingContact"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Planning Officer: </h4>
+                                    <span class="aher-block-key">Planning Officer: </span>
                                     <a class="aher-table-link" data-bind="text: contacts().planningOfficer, attr: {href: contacts().planningOfficerLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Planning Body: </h4>
+                                    <span class="aher-block-key">Planning Body: </span>
                                     <a class="aher-table-link" data-bind="text: contacts().planningBody, attr: {href: contacts().planningBodyLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Casework Officer: </h4>
+                                    <span class="aher-block-key">Casework Officer: </span>
                                     <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficerLink}"></a>
                                 </div>
                                 <div class="aher-block-attributes pad-top">
-                                    <h4 class="aher-block-key">Agents: </h4>
+                                    <span class="aher-block-key">Agents: </span>
                                     <!-- ko ifnot: contacts().agents.length -->
                                     <div class="aher-nodata-note">No agent for this consultation</div>
                                     <!-- /ko -->
@@ -225,7 +227,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Owners: </h4>
+                                    <span class="aher-block-key">Owners: </span>
                                     <!-- ko ifnot: contacts().owners.length -->
                                     <div class="aher-nodata-note">No owner for this consultation</div>
                                     <!-- /ko -->
@@ -237,7 +239,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Applicants: </h4>
+                                    <span class="aher-block-key">Applicants: </span>
                                     <!-- ko ifnot: contacts().applicants.length -->
                                     <div class="aher-nodata-note">No applicant for this consultation</div>
                                     <!-- /ko -->
@@ -256,7 +258,7 @@
                 </div>
 
             </div>
-            
+
             <!-- Consultation Progression Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'progression'">
                 <div class="aher-report-section">
@@ -274,24 +276,25 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="proposal-table_info">Proposal table.</p>
+                                    <table id="proposal-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Proposal" %}</th>
                                                 <th>{% trans "Related File(s)" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: proposal, dataTableOptions: proposalTableConfig}">
                                             <tr>
-                                                <td data-bind="text: proposal"></td>
+                                                <td data-bind="html: proposal"></td>
                                                 <td><a class="aher-table-link" data-bind="text: file, attr: {href: fileLink}"></a></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.proposal">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.proposal)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.proposal)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.proposal)}">
+                                                        <a href="#" data-bind="click:  $parent.deleteTile.bind($data, tileid, $parent.cards.proposal)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -320,25 +323,26 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="advice-table_info">Advice table.</p>
+                                    <table id="advice-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Advice" %}</th>
                                                 <th>{% trans "Advice Type" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
                                         <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: adviceTableConfig}">
                                             <tr>
-                                                <td data-bind="text: advice"></td>
+                                                <td data-bind="html: advice"></td>
                                                 <td data-bind="text: adviceType"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.advice">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.advice)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.advice)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.advice)}">
+                                                        <a href="#" data-bind="click:  $parent.deleteTile.bind($data, tileid, $parent.cards.advice)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -367,26 +371,27 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="action-table_info">Action table.</p>
+                                    <table id="action-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Action" %}</th>
                                                 <th>{% trans "Action Type" %}</th>
                                                 <th>{% trans "Relatted Advice" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: action, dataTableOptions: actionTableConfig}">
                                             <tr>
-                                                <td data-bind="text: action"></td>
+                                                <td data-bind="html: action"></td>
                                                 <td data-bind="text: actionType"></td>
                                                 <td data-bind="text: relatedAdvice"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.actions">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.actions)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.actions)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.actions)}">
+                                                        <a href="#" data-bind="click:  $parent.deleteTile.bind($data, tileid, $parent.cards.actions)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -407,23 +412,23 @@
                         <span data-bind="if: cards.outcomes.tiles().length">{% trans "Edit outcomes" %}</span>
                         <span data-bind="ifnot: cards.outcomes.tiles().length">{% trans "Add outcomes" %}</span>
                     </a>
-    
+
                     <!-- Collapsible content -->
                     <div data-bind="visible: visible.outcomes" class="aher-report-collapsible-container pad-lft">
                         <!-- ko ifnot: outcomes() -->
                         <div class="aher-nodata-note">No outcome for this consultation</div>
                         <!-- /ko -->
-    
+
                         <!-- ko if: outcomes() -->
                         <div class="aher-report-subsection">
                             <div class="firstchild-container pad-btm">
                                 <div class="aher-report-subsection-item">
                                     <div class="aher-block-attributes">
-                                        <h4 class="aher-block-key">Planning Outcome: </h4>
+                                        <span class="aher-block-key">Planning Outcome: </span>
                                         <div class="aher-block-value" data-bind="text: outcomes().planningOutcome"></div>
                                     </div>
                                     <div class="aher-block-attributes">
-                                        <h4 class="aher-block-key">Audit Outcome: </h4>
+                                        <span class="aher-block-key">Audit Outcome: </span>
                                         <div class="aher-block-value" data-bind="text: outcomes().auditOutcome"></div>
                                     </div>
                                 </div>
@@ -447,11 +452,12 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table pad-btm">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="assessment-of-significance-table_info">Assessment of significance table.</p>
+                                    <table id="assessment-of-significance-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Notes" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: assessmentOfSignificance, dataTableOptions: createTableConfig(2)}">
@@ -459,10 +465,10 @@
                                                 <td data-bind="text: notes"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards['assessment of significance']">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards['assessment of significance'])}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards['assessment of significance'])}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards['assessment of significance'])}">
+                                                        <a href="#" data-bind="click:  $parent.deleteTile.bind($data, tileid, $parent.cards['assessment of significance'])" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -494,12 +500,13 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="correspondeance-table_info">Correspondence table.</p>
+                                    <table id="correspondeance-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Letter" %}</th>
                                                 <th>{% trans "Letter Type" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: correspondence, dataTableOptions: createTableConfig(3)}">
@@ -508,10 +515,10 @@
                                                 <td data-bind="text: letterType"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.correspondence">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.correspondence)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.correspondence)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.correspondence)}">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.correspondence)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -540,18 +547,19 @@
                         <div class="aher-report-subsection">
                             <div class="firstchild-container">
                                 <div class="aher-table">
-                                    <table class="table table-striped" cellspacing="0" width="100%">
+                                    <p class="aher-table-aria-describedby" id="communication-table_info">Communication table.</p>
+                                    <table id="communication-table" class="table table-striped" cellspacing="0" width="100%">
                                         <thead>
                                             <tr>
                                                 <th>{% trans "Subject" %}</th>
                                                 <th>{% trans "Type" %}</th>
                                                 <th class="none">{% trans "Date" %}</th>
-                                                <th class="none"{% trans "Participants" %}</th>
+                                                <th class="none">{% trans "Participants" %}</th>
                                                 <th class="none">{% trans "Related Condition" %}</th>
                                                 <th class="none">{% trans "Note" %}</th>
                                                 <th class="none">{% trans "Follow-On Action" %}</th>
                                                 <th class="none">{% trans "Related Digital File" %}</th>
-                                                <th class="aher-table-control all"></th>
+                                                <th class="aher-table-control all">{% trans "Actions" %}</th>
                                             </tr>
                                         </thead>
                                         <tbody data-bind="dataTablesForEach: { data: communications, dataTableOptions: createTableConfig(9)}">
@@ -566,10 +574,10 @@
                                                 <td><a class="aher-table-link" data-bind="text: digitalFile, attr: {href: digitalFileLink}"></a></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.communications">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.communications)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.communications)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.communications)}">
+                                                        <a href="#" data-bind="click:  $parent.deleteTile.bind($data, tileid, $parent.cards.communications)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -606,15 +614,15 @@
                         <div class="firstchild-container">
                             <div class="aher-report-subsection-ite">
                                 <div class="aher-block-attributes highlighted">
-                                    <h4 class="aher-block-key">Date of Visit: </h4>
+                                    <span class="aher-block-key">Date of Visit: </span>
                                     <div class="aher-block-value" data-bind="text: visit.dateOfVisit"></div>
                                 </div>
                                 <div class="aher-block-attributes top-line">
-                                    <h4 class="aher-block-key">Location Description: </h4>
+                                    <span class="aher-block-key">Location Description: </span>
                                     <div class="aher-block-value" data-bind="text: visit.location"></div>
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Attendees</h4>
+                                    <span class="aher-block-key">Attendees</span>
                                     <!-- ko ifnot: visit.attendees().length -->
                                     <div class="aher-nodata-note">No attendee for this visit</div>
                                     <!-- /ko -->
@@ -623,12 +631,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-attendee-table_info">Visit attendee table.</p>
+                                                <table id="visit-attendee-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Attendee" %}</th>
                                                             <th>{% trans "Attendee Type" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.attendees, dataTableOptions: $parent.attendeesTableConfig}">
@@ -637,10 +646,10 @@
                                                             <td data-bind="text: attendeeType"></td>
                                                             <td class="aher-table-control">
                                                                 <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.attendees">
-                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
+                                                                    <a href="#" data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.attendees)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                                         <i class="fa fa-mail-reply"></i>
                                                                     </a>
-                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.attendees)}">
+                                                                    <a href="#" data-bind="click:  $parents[1].deleteTile.bind($data, tileid, $parents[1].siteVisitSubCards.attendees)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                                         <i class="fa fa-trash"></i>
                                                                     </a>
                                                                 </div>
@@ -654,7 +663,7 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Observations</h4>
+                                    <span class="aher-block-key">Observations</span>
                                     <!-- ko ifnot: visit.observations().length -->
                                     <div class="aher-nodata-note">No observation for this visit</div>
                                     <!-- /ko -->
@@ -663,12 +672,13 @@
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-observation-table_info">Visit observation table.</p>
+                                                <table id="visit-observation-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Observation" %}</th>
                                                             <th>{% trans "Observed by" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.observations, dataTableOptions: $parent.observationsTableConfig}">
@@ -677,10 +687,10 @@
                                                             <td data-bind="text: observedBy"></td>
                                                             <td class="aher-table-control">
                                                                 <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.observations">
-                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.observations)}">
+                                                                    <a href="#" data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.observations)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                                         <i class="fa fa-mail-reply"></i>
                                                                     </a>
-                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.observations)}">
+                                                                    <a href="#" data-bind="click:  $parents[1].deleteTile.bind($data, tileid, $parents[1].siteVisitSubCards.observations)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                                         <i class="fa fa-trash"></i>
                                                                     </a>
                                                                 </div>
@@ -694,33 +704,34 @@
                                     <!-- /ko -->
                                 </div>
                                 <div class="aher-block-attributes">
-                                    <h4 class="aher-block-key">Recommendations</h4>
+                                    <span class="aher-block-key">Recommendations</span>
                                     <!-- ko ifnot: visit.recommendations().length -->
                                     <div class="aher-nodata-note">No recommendation for this visit</div>
                                     <!-- /ko -->
-    
+
                                     <!-- ko if: visit.recommendations().length -->
                                     <div class="aher-report-subsection">
                                         <div class="firstchild-container">
                                             <div class="aher-table">
-                                                <table class="table table-striped" cellspacing="0" width="100%">
+                                                <p class="aher-table-aria-describedby" id="visit-recommendation-table_info">Visit recommendation table.</p>
+                                                <table id="visit-recommendation-table" class="table table-striped" cellspacing="0" width="100%">
                                                     <thead>
                                                         <tr>
                                                             <th>{% trans "Recommendation" %}</th>
                                                             <th>{% trans "Recommended by" %}</th>
-                                                            <th class="aher-table-control all"></th>
+                                                            <th class="aher-table-control all">{% trans "Actions" %}</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody data-bind="dataTablesForEach: { data: visit.recommendations, dataTableOptions: $parent.recommendationsTableConfig}">
                                                         <tr>
-                                                            <td data-bind="text: recommendation"></td>
+                                                            <td data-bind="html: recommendation"></td>
                                                             <td data-bind="text: recommendedBy"></td>
                                                             <td class="aher-table-control">
                                                                 <div data-bind="if: $parents && $parents[1] && $parents[1].siteVisitSubCards && $parents[1].siteVisitSubCards.recommendations">
-                                                                    <a data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
+                                                                    <a href="#" data-bind="click: function() {$parents[1].editTile(tileid, $parents[1].siteVisitSubCards.recommendations)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                                         <i class="fa fa-mail-reply"></i>
                                                                     </a>
-                                                                    <a data-bind="click:  function() {$parents[1].deleteTile(tileid, $parents[1].siteVisitSubCards.recommendations)}">
+                                                                    <a href="#" data-bind="click:  $parents[1].deleteTile.bind($data, tileid, $parents[1].siteVisitSubCards.recommendations)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                                         <i class="fa fa-trash"></i>
                                                                     </a>
                                                                 </div>
@@ -733,8 +744,8 @@
                                     </div>
                                     <!-- /ko -->
                                 </div>
-                            
-                                <h4 class="aher-block-key">Photographs</h4>
+
+                                <span class="aher-block-key">Photographs</span>
                                 <div class="aher-report-photo-container">
                                     <!-- ko ifnot: visit.photographs.length -->
                                     <div class="aher-nodata-note">No photograph for this visit</div>
@@ -748,19 +759,19 @@
                                         </div>
                                         <div class="aher-report-photo-caption">
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Caption: </div>
+                                                <span class="aher-block-key">Caption: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.caption"></div>
                                             </div>
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Copyright Holder: </div>
+                                                <span class="aher-block-key">Copyright Holder: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.copyrightHolder"></div>
                                             </div>
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Copyright Type: </div>
+                                                <span class="aher-block-key">Copyright Type: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.copyrightType"></div>
                                             </div>
                                             <div class="aher-block-attributes">
-                                                <div class="aher-block-key">Copyright Note: </div>
+                                                <span class="aher-block-key">Copyright Note: </span>
                                                 <div class="aher-block-value" data-bind="text: photo.copyrightNote"></div>
                                             </div>
                                         </div>
@@ -774,7 +785,7 @@
                     <!-- /ko -->
                     <!-- /ko -->
                 </div>
-            </div>            
+            </div>
             <!-- Resources Tab -->
             <div class="aher-report-page" data-bind="if: activeSection() === 'resources'">
                 <div data-bind="component: {
@@ -796,7 +807,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
@@ -820,10 +831,58 @@
         }"></div>
     </div>
 
+    <div class="aher-report-section">
+        <h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.advice)}, css: {'fa-angle-double-right': visible.advice(), 'fa-angle-double-up': !visible.advice()}"  class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Advice" %}</h2>
+        <a data-bind="{if: cards.advice, click: function(){addNewTile(cards.advice)}}" class="aher-report-a" href="#"><i class="fa fa-mail-reply"></i> {% trans "Add advice" %}</a>
+
+        <!-- Collapsible content -->
+        <div data-bind="visible: visible.advice" class="aher-report-collapsible-container pad-lft">
+
+            <!-- ko ifnot: advice().length -->
+            <div class="aher-nodata-note">{% trans "No advice for this consultation" %}</div>
+            <!-- /ko -->
+
+            <!-- ko if: advice().length -->
+            <div class="aher-report-subsection">
+                <div class="firstchild-container">
+                    <div class="aher-table pad-btm">
+                        <table class="table table-striped" cellspacing="0" width="100%">
+                            <thead>
+                                <tr>
+                                    <th>{% trans "Advice" %}</th>
+                                    <th>{% trans "Advice Type" %}</th>
+                                    <th class="aher-table-control all"></th>
+                                </tr>
+                            </thead>
+                            <!-- <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: createTableConfig(3)}"> -->
+                            <tbody data-bind="dataTablesForEach: { data: advice, dataTableOptions: adviceTableConfig}">
+                                <tr>
+                                    <td data-bind="html: advice"></td>
+                                    <td data-bind="text: adviceType"></td>
+                                    <td class="aher-table-control">
+                                        <div data-bind="if: $parent.cards.advice">
+                                            <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.advice)}" href="#">
+                                                <i class="fa fa-mail-reply"></i>
+                                            </a>
+                                            <a data-bind="click:  function() {$parent.deleteTile(tileid, $parent.cards.advice)}" href="#">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- /ko -->
+        </div>
+    </div>
 
 
-    <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle"></i> {% trans "Contacts" %}</h2>
-        <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a">
+
+    <h2 class="aher-report-section-title"><i tabindex="0" data-bind="click: function() {toggleVisibility(visible.contacts)}, css: {'fa-angle-double-right': visible.contacts(), 'fa-angle-double-up': !visible.contacts()}" class="fa toggle" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></i> {% trans "Contacts" %}</h2>
+        <a data-bind="{if: cards.contacts, click: function(){ addNewTile(cards.contacts) }}" class="aher-report-a" href="#">
             <i class="fa fa-mail-reply"></i>
             <span data-bind="if: cards.contacts.tiles().length">{% trans "Edit Contacts" %}</span>
             <span data-bind="ifnot: cards.contacts.tiles().length">{% trans "Add Contacts" %}</span>
@@ -841,19 +900,19 @@
                 <div class="firstchild-container">
                     <div class="aher-report-subsection-ite">
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Consulting Contact: </h4>
+                            <span class="aher-block-key">Consulting Contact: </span>
                             <div class="aher-block-value" data-bind="text: contacts().consultingContact"></div>
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Planning Officer: </h4>
+                            <span class="aher-block-key">Planning Officer: </span>
                             <a class="aher-table-link" data-bind="text: contacts().planningOfficer, attr: {href: contacts().planningOfficerLink}"></a>
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Casework Officer: </h4>
+                            <span class="aher-block-key">Casework Officer: </span>
                             <a class="aher-table-link" data-bind="text: contacts().caseworkOfficer, attr: {href: contacts().caseworkOfficer}"></a>
                         </div>
                         <div class="aher-block-attributes pad-top">
-                            <h4 class="aher-block-key">Agents: </h4>
+                            <span class="aher-block-key">Agents: </span>
                             <!-- ko ifnot: contacts().agents.length -->
                             <div class="aher-nodata-note">No agent for this consultation</div>
                             <!-- /ko -->
@@ -865,7 +924,7 @@
                             <!-- /ko -->
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Owners: </h4>
+                            <span class="aher-block-key">Owners: </span>
                             <!-- ko ifnot: contacts().owners.length -->
                             <div class="aher-nodata-note">No owner for this consultation</div>
                             <!-- /ko -->
@@ -877,7 +936,7 @@
                             <!-- /ko -->
                         </div>
                         <div class="aher-block-attributes">
-                            <h4 class="aher-block-key">Applicants: </h4>
+                            <span class="aher-block-key">Applicants: </span>
                             <!-- ko ifnot: contacts().applicants.length -->
                             <div class="aher-nodata-note">No applicant for this consultation</div>
                             <!-- /ko -->

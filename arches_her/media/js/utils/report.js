@@ -190,7 +190,13 @@ define([
             if(node) {
                 const resourceId = node?.resourceId || node?.instance_details?.[0]?.resourceId;
                 if(resourceId){
-                    return `${arches.urls.resource}/${resourceId}`;
+                    urlPathname = window.location.pathname
+                    if(urlPathname.includes("resource")){
+                        return `${arches.urls.resource}/${resourceId}`;
+                    }
+                    else{
+                        return `${arches.urls.resource_report}${resourceId}`;
+                    }
                 }
             }
         },        

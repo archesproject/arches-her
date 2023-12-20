@@ -9,7 +9,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                scrollY: "250px",
                 columns: Array(2).fill(null)
             };
 
@@ -19,7 +18,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                scrollY: "250px",
                 columns: Array(4).fill(null)
             };
 
@@ -29,7 +27,6 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                scrollY: "250px",
                 columns: Array(3).fill(null)
             };
 
@@ -42,7 +39,7 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 activities: 'associated activities',
                 consultations: 'associated consultations',
                 files: 'associated files',
-                assets: 'associated heritage assets, areas and artefacts',
+                assets: 'associated monuments, areas and artefacts',
                 archive: 'associated archives',
                 actors: 'associated actors'
             }
@@ -53,11 +50,11 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
             self.add = params.addTile || self.addNewTile;
             self.activities = ko.observableArray();
             self.consultations = ko.observableArray();
+            self.consultations_message = ko.observable(null);
             self.files = ko.observableArray();
             self.archive = ko.observableArray();
             self.actors = ko.observableArray();
             self.assets = ko.observableArray();
-            self.assets_rob = ko.observableArray();
             self.translation = ko.observableArray();
             self.applicationArea = ko.observableArray();
             self.period = ko.observableArray();
@@ -96,6 +93,45 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                         return { consultation, resourceUrl, tileid };
                     }));
                 }
+
+                const userAvailableConsulationCards = () => {
+                        return $.ajax({
+                            url: arches.urls.api_card + self.dataConfig.resourceinstanceid,
+                            context: this,
+                        }).done(function(response) {
+                            return response
+                        }).fail(function(){
+                            return false
+                        }
+                        )
+                    }
+
+
+                if(self.dataConfig.resourceinstanceid){
+                    userAvailableConsulationCards().then(function(cards_response){
+                        if(cards_response !== false){
+                            var card_names = []
+                            for(card in cards_response.cards){
+                                card_names.push(cards_response.cards[card].name)
+                            }
+                            if(card_names.includes("Associated Consultations")) {
+                                self.consultations_message('No consultations for this resource');
+                            }
+                            else{
+                                self.consultations_message('You do not have permission to see this information');
+                            }
+                        }
+                        else{
+                            self.consultations_message('There was an issue checking for associated consultations.');
+                        }
+                        })
+                }
+                else{
+                    self.consultations_message('There was an issue checking for associated consultations.');
+                }
+
+
+
 
 
                 const associatedArchiveNode = self.getRawNodeValue(params.data(), self.dataConfig.archive);
@@ -144,9 +180,9 @@ define(['underscore', 'knockout', 'arches', 'utils/report', 'bindings/datatable'
                 const associatedArtifactsNode = self.getRawNodeValue(params.data(), self.dataConfig.assets);
                 if (associatedArtifactsNode) {
                     if(Array.isArray(associatedArtifactsNode)){
-                        let key = 'Heritage Asset, Area or Artefact';
+                        let key = 'Monument, Area or Artefact';
                         if (!(key in associatedArtifactsNode[0])) {
-                            key = 'Associated Heritage Asset, Area or Artefact';
+                            key = 'Associated Monument, Area or Artefact';
                         }
                         self.assets(associatedArtifactsNode.map(x => {
                             var resource = [];

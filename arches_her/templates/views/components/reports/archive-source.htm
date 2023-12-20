@@ -14,13 +14,13 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
         <ol class="aher-report-anchors breadcrumb">
             <!-- ko foreach: {data: sections, as: 'section'} -->
-            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <li tabindex="0" data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></li>
             <!-- /ko -->
         </ol>
     </div>
@@ -71,7 +71,6 @@
                     <!-- ko foreach: { data: archiveHolding, as: "archive", noChildContext: true} -->
                     <!-- ko if: !!archive && archive.data -->
                     <div class="aher-report-subsection">
-                        <h2 class="aher-report-section-subtitle"><i data-bind="click: function() {toggleVisibility(archive.visible)}, css: {'fa-angle-double-right': archive.visible(), 'fa-angle-double-up': !archive.visible()}" class="fa toggle"></i> <span>{% trans "Holding" %}</span> <span data-bind="text: $index() + 1"></span></h2>
                         <div data-bind="visible: archive.visible">
                             <!-- ko foreach: { data: archive.data.section, as: "section", noChildContext: true} -->
                             <div class="aher-report-subsection">
@@ -79,7 +78,7 @@
                                 <a data-bind="{if: section.card, click: function(){addNewTile(section.card)}}" class="aher-report-a"><i class="fa fa-mail-reply"></i> {% trans "Edit" %} <span data-bind="text:section.title"></span></a>
 
                                 <div data-bind="visible: section.visible" class="aher-report-collapsible-container">
-                                    
+
                                     <div class="aher-report-event-section aher-report-subsection-container">
                                         <div style="width:95%" data-bind="foreach: {data: section.data, as: 'item'}" class="aher-report-subsection-two-column">
                                             <div class="aher-keyvalue" data-bind="component: {
@@ -133,7 +132,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 
