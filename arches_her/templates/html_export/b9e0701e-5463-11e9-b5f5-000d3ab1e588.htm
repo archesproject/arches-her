@@ -93,11 +93,7 @@
                 <div class="row">
                     <div class="column">
                         <div class="keeptogether">
-                            <ul>
-                                {% for type in resource_data|val_from_key:"Activity Type" %}
-                                <li>{{ type|val_from_key:"@display_value" }}</li>
-                                {% endfor %}
-                            </ul>
+                            {{ resource_data|val_from_key:"Activity Type"|val_from_key:"@display_value" }}
                         </div>
                     </div>
                 </div>
@@ -296,15 +292,15 @@
         <hr/>
         {% endif %}
 
-        {# Associated Heritage Assets/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
-        {% if resource_data|has_key:"Associated Heritage Assets and Areas" %}
+        {# Associated Monuments/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
+        {% if resource_data|has_key:"Associated Monuments and Areas" %}
         <section>
             <div class="container">
-                <h3>Associated Heritage Assets/Areas/Artefacts/Maritime Vessels/Historic Aircraft</h3>
+                <h3>Associated Monuments/Areas/Artefacts/Maritime Vessels/Historic Aircraft</h3>
                 <div class="row">
                     <div class="column">
                         <div class="keeptogether">
-                            {{ resource_data|val_from_key:"Associated Heritage Assets and Areas"|val_from_key:"@display_value" }}
+                            {{ resource_data|val_from_key:"Associated Monuments and Areas"|val_from_key:"@display_value" }}
                         </div>
                     </div>
                 </div>
