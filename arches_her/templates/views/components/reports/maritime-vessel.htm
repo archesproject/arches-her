@@ -14,13 +14,13 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
         <ol class="aher-report-anchors breadcrumb">
             <!-- ko foreach: {data: sections, as: 'section'} -->
-            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <li tabindex="0" data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></li>
             <!-- /ko -->
         </ol>
     </div>
@@ -89,7 +89,7 @@
 
                         <!-- ko if: nationalities().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- Nationalities Table -->
                                 <div class="aher-table pad-btm">
@@ -107,10 +107,10 @@
                                                 <td data-bind="text: placeOfRegistration"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.nationalities">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.nationalities)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.nationalities)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.nationalities)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.nationalities)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -137,7 +137,7 @@
 
                         <!-- ko if: owners().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- Owners Table -->
                                 <div class="aher-table pad-btm">
@@ -163,10 +163,10 @@
                                                 <td data-bind="text: dateQualifier"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.owners">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.owners)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.owners)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.owners)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.owners)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -197,7 +197,7 @@
 
                         <!-- ko if: voyages().length -->
                         <div class="aher-report-subsection">
-                            
+
                             <div class="firstchild-container">
                                 <!-- Voyages Table -->
                                 <div class="aher-table pad-btm">
@@ -247,10 +247,10 @@
                                                 </td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.voyages">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.voyages)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.voyages)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.voyages)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.voyages)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -336,7 +336,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 

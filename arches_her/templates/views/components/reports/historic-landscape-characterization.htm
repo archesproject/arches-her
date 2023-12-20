@@ -14,13 +14,13 @@
     </div>
     {% endblock report_title_bar %}
 
-    
+
     {% block body %}
     <!-- Link nav -->
     <div class="aher-report-anchor-container">
         <ol class="aher-report-anchors breadcrumb">
             <!-- ko foreach: {data: sections, as: 'section'} -->
-            <li data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a"></li>
+            <li tabindex="0" data-bind="click: function(){$parent.activeSection(section.id)}, css: {active: $parent.activeSection() === section.id}, text: section.title" class="aher-report-a" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }"></li>
             <!-- /ko -->
         </ol>
     </div>
@@ -144,10 +144,10 @@
                                                 <td data-bind="text: dateConfidence"></td>
                                                 <td class="aher-table-control">
                                                     <div data-bind="if: $parent.cards.historicLandscapeClassificationPhase">
-                                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.historicLandscapeClassificationPhase)}">
+                                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.historicLandscapeClassificationPhase)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-mail-reply"></i>
                                                         </a>
-                                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.historicLandscapeClassificationPhase)">
+                                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.historicLandscapeClassificationPhase)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                                             <i class="fa fa-trash"></i>
                                                         </a>
                                                     </div>
@@ -182,7 +182,7 @@
                 }"></div>
             </div>
         </div>
-    </div>            
+    </div>
     {% endblock body %}
 {% endblock report %}
 

@@ -1,5 +1,5 @@
-{% extends "views/report-templates/default.htm" %} 
-{% load i18n %} 
+{% extends "views/report-templates/default.htm" %}
+{% load i18n %}
 {% block report %}
 
 {% block body %}
@@ -28,7 +28,7 @@
 
         <!-- ko if: production().length && !!dataConfig.artefactProduction -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
                     <table class="table table-striped" cellspacing="0" width="100%">
@@ -65,10 +65,10 @@
                                 <td data-bind="text: phaseDescription"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.production">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -98,7 +98,7 @@
 
         <!-- ko if: production().length && !!dataConfig.production -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
                     <table class="table table-striped" cellspacing="0" width="100%">
@@ -141,10 +141,10 @@
                                 <td data-bind="text: phaseDescription"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.production">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -222,10 +222,10 @@
                                 <td data-bind="text: placeOfManufacture"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.production">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -307,10 +307,10 @@
                                 <td data-bind="text: builder"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.production">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.production)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.production)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -360,10 +360,10 @@
                                 <td data-bind="text: qualifier"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.dimensions">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.dimensions)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.dimensions)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.dimensions)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.dimensions)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -390,10 +390,10 @@
         <!-- ko ifnot: components().length -->
         <div class="aher-nodata-note">No components for this resource</div>
         <!-- /ko -->
-        
+
         <!-- ko if: components().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
                     <table class="table table-striped" cellspacing="0" width="100%">
@@ -416,10 +416,10 @@
                                 <td data-bind="text: evidence"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.components">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.components)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.components)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.components)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.components)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -438,7 +438,7 @@
 <div class="aher-report-section" data-bind="visible: !!dataConfig.usePhase">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.usePhase)}" class="fa fa-angle-double-right toggle"></i> {% trans "Use Phases" %}</h2>
     <a class="aher-report-a" data-bind="if: cards.usePhase, click: function(){addNewTile(cards.usePhase)}">
-        <i class="fa fa-mail-reply"></i> 
+        <i class="fa fa-mail-reply"></i>
         <span data-bind="ifnot: cards.usePhase.tiles().length">{% trans "Add Use Phase" %}</span>
         <span data-bind="if: cards.usePhase.tiles().length">{% trans "Edit Use Phase" %}</span>
     </a>
@@ -452,7 +452,7 @@
 
         <!-- ko if: usePhases().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
                     <table class="table table-striped" cellspacing="0" width="100%">
@@ -483,10 +483,10 @@
                                 <td data-bind="html: description"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.usePhase">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.usePhase)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.usePhase)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.usePhase)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.usePhase)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -494,7 +494,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>            
+                </div>
             </div>
         </div>
         <!-- /ko -->
@@ -505,7 +505,7 @@
 <div class="aher-report-section" data-bind="visible: !!dataConfig.organizationFormation">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.organizationFormation)}" class="fa fa-angle-double-right toggle"></i> {% trans "Organization Formation" %}</h2>
     <a class="aher-report-a" data-bind="if: cards.organizationFormation, click: function(){addNewTile(cards.organizationFormation)}">
-        <i class="fa fa-mail-reply"></i> 
+        <i class="fa fa-mail-reply"></i>
         <span data-bind="ifnot: cards.organizationFormation.tiles().length">{% trans "Add Dates" %}</span>
         <span data-bind="if: cards.organizationFormation.tiles().length">{% trans "Edit Dates" %}</span>
     </a>
@@ -519,7 +519,7 @@
 
         <!-- ko if: organizationFormation().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
                     <table class="table table-striped" cellspacing="0" width="100%">
@@ -540,10 +540,10 @@
                                 <td data-bind="text: dateQualifier"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.organizationFormation">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.organizationFormation)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.organizationFormation)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.organizationFormation)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.organizationFormation)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -551,7 +551,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>            
+                </div>
             </div>
         </div>
         <!-- /ko -->
@@ -562,7 +562,7 @@
 <div class="aher-report-section" data-bind="visible: !!dataConfig.dates">
     <h2 class="aher-report-section-title"><i data-bind="click: function() {toggleVisibility(visible.dates)}" class="fa fa-angle-double-right toggle"></i> {% trans "Dates" %}</h2>
     <a class="aher-report-a" data-bind="if: cards.dates, click: function(){addNewTile(cards.dates)}">
-        <i class="fa fa-mail-reply"></i> 
+        <i class="fa fa-mail-reply"></i>
         <span data-bind="ifnot: cards.dates.tiles().length">{% trans "Add Dates" %}</span>
         <span data-bind="if: cards.dates.tiles().length">{% trans "Edit Dates" %}</span>
     </a>
@@ -576,7 +576,7 @@
 
         <!-- ko if: dates().length -->
         <div class="aher-report-subsection">
-            
+
             <div class="firstchild-container">
                 <div class="aher-table pad-btm">
                     <table class="table table-striped" cellspacing="0" width="100%">
@@ -593,10 +593,10 @@
                                 <td data-bind="text: endDate"></td>
                                 <td class="aher-table-control">
                                     <div data-bind="if: $parent.cards.dates">
-                                        <a data-bind="click: function() {$parent.editTile(tileid, $parent.cards.dates)}">
+                                        <a href="#" data-bind="click: function() {$parent.editTile(tileid, $parent.cards.dates)}" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-mail-reply"></i>
                                         </a>
-                                        <a data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.dates)">
+                                        <a href="#" data-bind="click: $parent.deleteTile.bind($data, tileid, $parent.cards.dates)" onkeyup="if(event.which == 13 || event.keyCode == 13){ $(this).trigger('click'); }">
                                             <i class="fa fa-trash"></i>
                                         </a>
                                     </div>
@@ -604,7 +604,7 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>            
+                </div>
             </div>
         </div>
         <!-- /ko -->

@@ -6,14 +6,9 @@ define([
     'utils/resource',
     'utils/report',
     'views/components/reports/scenes/name',
-    'views/components/reports/scenes/assessments',
-    'views/components/reports/scenes/images',
-    'views/components/reports/scenes/people',
-    'views/components/reports/scenes/people',
-    'views/components/reports/scenes/resources',
     'views/components/reports/scenes/json'
 ], function($, _, ko, arches, resourceUtils, reportUtils) {
-    return ko.components.register('heritage-area-report', {
+    return ko.components.register('monument-report', {
         viewModel: function(params) {
             var self = this;
             params.configKeys = ['tabs', 'activeTabIndex'];
@@ -33,14 +28,16 @@ define([
                 {id: 'resources', title: 'Associated Resources'},
                 {id: 'json', title: 'JSON'},
             ];
+
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
 
             self.nameDataConfig = {
-                name: 'heritage area',
-                parent: 'parent area'
+                name: 'monument',
+                nameChildren: 'child monument',
+                parent: 'parent monument or area'
             };
 
             self.classificationDataConfig = {
@@ -54,22 +51,21 @@ define([
             };
 
             self.resourceDataConfig = {
+                activities: 'associated activities',
                 files: 'digital file(s)',
-                actors: undefined
-            };
-
-            self.locationDataConfig = {
-                namedLocations: undefined
+                actors: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 
             self.nameCards = {};
             self.descriptionCards = {};
             self.classificationCards = {};
             self.scientificDateCards = {};
+            self.assessmentCards = {};
             self.imagesCards = {};
-            self.peopleCards = {};
             self.locationCards = {};
             self.protectionCards = {};
+            self.peopleCards = {};
             self.resourcesCards = {};
             self.summary = params.summary;
             self.cards = {};
@@ -80,10 +76,10 @@ define([
                 self.cards = self.createCardDictionary(cards)
 
                 self.nameCards = {
-                    name: self.cards?.['heritage area names'],
+                    name: self.cards?.['monument names'],
                     externalCrossReferences: self.cards?.['external cross references'],
                     systemReferenceNumbers: self.cards?.['system reference numbers'],
-                    parent: self.cards?.['parent area']
+                    parent: self.cards?.['parent monuments'],
                 };
 
                 self.descriptionCards = {
@@ -94,7 +90,7 @@ define([
                 self.classificationCards = {
                     production: self.cards?.['construction phases'],
                     components: self.cards?.['components'],
-                    usePhase: self.cards?.['use phases']
+                    usePhase: self.cards?.['use phase']
                 };
 
                 self.assessmentCards = {
@@ -102,7 +98,7 @@ define([
                 };
 
                 self.imagesCards = {
-                    images: self.cards?.['images']
+                    images: self.cards?.['photographs']
                 }
 
                 self.peopleCards = {
@@ -111,9 +107,10 @@ define([
 
                 self.resourcesCards = {
                     activities: self.cards?.['associated activities'],
+                    archive: self.cards?.['associated archives'],
                     consultations: self.cards?.['associated consultations'],
                     files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated heritage assets, areas and artefacts']
+                    assets: self.cards?.['associated monuments, areas and artefacts']
                 };
 
                 self.locationCards = {
@@ -125,7 +122,9 @@ define([
                             administrativeAreas: 'localities/administrative areas',
                             locationDescriptions: 'location descriptions',
                             areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment'
+                            landUse: 'land use classification assignment',
+                            locationGeometry: 'geometry',
+                            namedLocations: 'named locations'
                         }
                     }
                 }
@@ -138,6 +137,6 @@ define([
             }
 
         },
-        template: { require: 'text!templates/views/components/reports/heritage-area.htm' }
+        template: { require: 'text!templates/views/components/reports/monument.htm' }
     });
 });

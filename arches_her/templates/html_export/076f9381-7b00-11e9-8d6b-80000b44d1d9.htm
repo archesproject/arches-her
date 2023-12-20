@@ -5,14 +5,14 @@
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Heritage Asset</title>
+      <title>Monument</title>
       {% include 'html_export/milligram.htm' %}
       {% include 'html_export/custom_style.htm' %}
    </head>
    <body>
       <header>
          {% include 'html_export/custom_header.htm' %}
-         <h1>Heritage Asset</h1>
+         <h1>Monument</h1>
       </header>
       <main>
          {% for resource in resources %}
@@ -43,11 +43,11 @@
          <hr/>
          {% endif %}
 
-         {# Asset Names #}
-         {% if resource_data|has_key:"Heritage Asset Names" %}
+         {# Monument Names #}
+         {% if resource_data|has_key:"Monument Names" %}
          <section >
             <div class="container">
-               <h3>Heritage Asset Names</h3>
+               <h3>Monument Names</h3>
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
@@ -56,16 +56,16 @@
                               <div class="rcell">Name</div>
                               <div class="rcell">Name Type</div>
                            </div>
-                           {% for names in resource_data|val_from_key:"Heritage Asset Names" %}
+                           {% for names in resource_data|val_from_key:"Monument Names" %}
                            <div class="rrow">
                               <div class="rcell" data-title="Name">
-                                 {% if names|has_key:"Asset Name" %}
-                                 {{ names|val_from_key:"Asset Name"|val_from_key:"@display_value" }}
+                                 {% if names|has_key:"Monument Name" %}
+                                 {{ names|val_from_key:"Monument Name"|val_from_key:"@display_value" }}
                                  {% endif %}
                               </div>
                               <div class="rcell" data-title="Name Type">
-                                 {% if names|has_key:"Asset Name Use Type" %}
-                                 {{ names|val_from_key:"Asset Name Use Type"|val_from_key:"@display_value" }}
+                                 {% if names|has_key:"Monument Name Use Type" %}
+                                 {{ names|val_from_key:"Monument Name Use Type"|val_from_key:"@display_value" }}
                                  {% endif %}
                               </div>
                            </div>
@@ -277,11 +277,11 @@
          <hr/>
          {% endif %}
 
-         {# Heritage Asset Construction Phase #}
+         {# Monument Construction Phase #}
          {% if resource_data|has_key:"Construction Phases" %}
          <section>
             <div class="container">
-               <h3>Heritage Asset Construction Phases</h3>
+               <h3>Monument Construction Phases</h3>
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
@@ -289,6 +289,7 @@
                            <div class="rrow rheader">
                               <div class="rcell">Construction Phase</div>
                               <div class="rcell">Period</div>
+                              <div class="rcell">Monument Type</div>
                               <div class="rcell">Construction Phase Start Date</div>
                               <div class="rcell">Construction Phase End Date</div>
                            </div>
@@ -299,6 +300,9 @@
                               </div>
                               <div class="rcell" data-title="Period">
                                  {{ conphase|val_from_key:"Cultural Period"|val_from_key:"@display_value" }}
+                              </div>
+                              <div class="rcell" data-title="Monument Type">
+                                 {{ conphase|val_from_key:"Phase Classification"|val_from_key:"Monument Type"|val_from_key:"@display_value" }}
                               </div>
                               <div class="rcell" data-title="Phase Start Date">
                                  {{ conphase|val_from_key:"Construction Phase Timespan"|val_from_key:"Construction Phase Start Date"|val_from_key:"@display_value" }}
@@ -319,11 +323,11 @@
          {% endif %}
 
 
-         {# Heritage Asset Use Phase #}
+         {# Monument Use Phase #}
          {% if resource_data|has_key:"Use Phase" %}
          <section>
             <div class="container">
-               <h3>Heritage Asset Use Phases</h3>
+               <h3>Monument Use Phases</h3>
                <div class="row">
                   <div class="column">
                      <div class="keeptogether">
@@ -361,15 +365,15 @@
          {% endif %}
 
 
-         {# Parent Asset #}
-         {% if resource_data|has_key:"Parent Asset" %}
+         {# Parent Monument #}
+         {% if resource_data|has_key:"Parent Monument" %}
          <section>
             <div class="container">
-                <h3>Parent Asset</h3>
+                <h3>Parent Monument</h3>
                <div class="row">
                   <div class="column">
                     <div class="keeptogether">
-                        {{resource_data|val_from_key:"Parent Asset"|val_from_key:"@display_value"}}
+                        {{resource_data|val_from_key:"Parent Monument"|val_from_key:"@display_value"}}
                      </div>
                   </div>
                </div>
@@ -379,23 +383,23 @@
          {% endif %}
 
 
-         {# Associated Heritage Assets/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
-         {% if resource_data|has_key:"Associated Heritage Assets, Areas and Artefacts" %}
+         {# Associated Monuments/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
+         {% if resource_data|has_key:"Associated Monuments, Areas and Artefacts" %}
          <section>
              <div class="container">
-                 <h3>Associated Heritage Assets, Areas and Artefacts</h3>
+                 <h3>Associated Monuments, Areas and Artefacts</h3>
                  <div class="row">
                    <div class="column">
                       <div class="keeptogether">
                          <div class="rtable">
                             <div class="rrow rheader">
-                               <div class="rcell">Associated Asset/Area/Artefact</div>
+                               <div class="rcell">Associated Monument/Area/Artefact</div>
                                <div class="rcell">Association Type</div>
                             </div>
-                            {% for assocAAAVA in resource_data|val_from_key:"Associated Heritage Assets, Areas and Artefacts" %}
+                            {% for assocAAAVA in resource_data|val_from_key:"Associated Monuments, Areas and Artefacts" %}
                             <div class="rrow">
-                               <div class="rcell" data-title="Associated Asset/Area/Artefact">
-                                  {{ assocAAAVA|val_from_key:"Associated Heritage Asset, Area or Artefact"|val_from_key:"@display_value" }}
+                               <div class="rcell" data-title="Associated Monument/Area/Artefact">
+                                  {{ assocAAAVA|val_from_key:"Associated Monument, Area or Artefact"|val_from_key:"@display_value" }}
                                </div>
                                <div class="rcell" data-title="Association Type">
                                   {{ assocAAAVA|val_from_key:"Association Type"|val_from_key:"@display_value" }}
