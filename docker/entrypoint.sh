@@ -107,11 +107,9 @@ setup_couchdb() {
 
 # Yarn
 install_yarn_components() {
-	if [[ ! -d ${YARN_MODULES_FOLDER} ]] || [[ ! "$(ls ${YARN_MODULES_FOLDER})" ]]; then
-		echo "Yarn modules do not exist, installing..."
-		cd ${PACKAGE_JSON_FOLDER}
+
+		cd ${APP_FOLDER}
 		yarn install
-	fi
 }
 
 #### Misc
@@ -119,6 +117,10 @@ copy_settings_local() {
 	# The settings_local.py in ${ARCHES_ROOT}/arches/ gets ignored if running manage.py from a custom Arches project instead of Arches core app
 	echo "Copying ${APP_FOLDER}/docker/settings_docker.py to ${APP_FOLDER}/${ARCHES_PROJECT}/settings_docker.py..."
 	cp ${APP_FOLDER}/docker/settings_docker.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_docker.py
+
+	# Copy settings_local if it does not exist
+	cp -n ${APP_FOLDER}/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
+
 }
 
 #### Run commands

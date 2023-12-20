@@ -1,8 +1,6 @@
 import os
 from django.core.exceptions import ImproperlyConfigured
 import ast
-import requests
-import sys
 
 
 def get_env_variable(var_name):
