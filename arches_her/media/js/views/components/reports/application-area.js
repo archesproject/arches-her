@@ -51,7 +51,12 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)',
-                actors: undefined
+                assets: 'associated monuments, areas and artefacts',
+                activities: 'associated activities',
+                actors: undefined,
+                consultations: 'associated consultations',
+                archive: undefined,
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid,
             };
 
             self.locationDataConfig = {
@@ -93,10 +98,10 @@ define([
                 })
 
                 self.resourcesCards = {
-                    activities: self.cards?.['associated activities'],
                     consultations: self.cards?.['associated consultations'],
+                    activities: self.cards?.['associated activities'],
+                    assets: self.cards?.['associated monuments, areas and artefacts'],
                     files: self.cards?.['associated digital files'],
-                    assets: self.cards?.['associated heritage assets'],
                 };
 
                 self.nameCards = {

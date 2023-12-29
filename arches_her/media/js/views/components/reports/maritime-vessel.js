@@ -67,7 +67,12 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)',
+                activities: 'associated activities',
+                consultations: 'associated consultations',
+                assets: 'associated monuments, areas and artefacts',
+                period: undefined,
                 actors: undefined,
+                archive: 'associated archives',
                 resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 

@@ -56,11 +56,14 @@ define([
                 citation: 'bibliographic source citation'
             };
             self.resourceDataConfig = {
-                activities: undefined,
                 files: undefined,
+                activities: undefined,
                 consultations: undefined,
+                assets: 'associated monuments, areas and artefacts',
+                period: undefined,
+                actors: undefined,
                 archive: undefined,
-                actors: undefined
+                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             }
 
             self.nameCards = {};

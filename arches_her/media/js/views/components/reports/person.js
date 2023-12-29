@@ -80,8 +80,12 @@ define([
 
             self.resourceDataConfig = {
                 files: 'digital file(s)',
-                archive: undefined,
+                activities: 'associated activities',
+                consultations: 'associated consultations',
+                assets: 'associated monuments, areas and artefacts',
+                period: undefined,
                 actors: undefined,
+                archive: undefined,
                 resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
             };
             self.nameCards = {};
