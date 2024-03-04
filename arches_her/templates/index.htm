@@ -75,11 +75,11 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             <a href="{% url p.slug %}">{{ p.name }}</a>
                         </li>
                         {% endfor %}
-                        
+
                         <li class="page-scroll">
                             <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
-                        
+
                         {% if user|can_create_resource_instance and user.username != 'anonymous' %}
                         <li class="page-scroll">
                             <a href="{% url 'resource' %}" target="_blank">{% trans "Manage" %}</a>
@@ -91,7 +91,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             <a href="{% url 'graph' '' %}" target="_blank">{% trans "Graphs" %}</a>
                         </li>
                         {% endif %}
-                        
+
                         <li class="page-scroll">
                             {% if user.username == 'anonymous' %}
                                 <a class="application-login" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
@@ -126,20 +126,20 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <!-- LAYERS -->
                         <!-- NEW LAYER -->
                         <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="-50" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-1">{% trans "Consultations at GLAAS..." %}</a></h2>
-                            <p>{% trans "How the Greater London Archaeology Advisory Service manages development" %}</p>
+                            <h2><a href="#info-block-1">{% trans "Demonstration of Arches for HERs" %}</a></h2>
+                            <p>{% trans "Learn more about this use of Arches to power cultural heritage consultation and resource management" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
                         <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-2">{% trans "Search and Discover..." %}</a></h2>
-                            <p>{% trans "Find and review information on our current and past consultations" %}</p>
+                            <h2><a href="#info-block-2">{% trans "Search and Discover" %}</a></h2>
+                            <p>{% trans "Experiment with a sample of authoritative consultation data provided by Historic England" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
                         <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="950" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-3">{% trans "Get Involved..." %}</a></h2>
-                            <p>{% trans "Want to help?  Here's how you can participate" %}</p>
+                            <h2><a href="#info-block-3">{% trans "Acknowledgements" %}</a></h2>
+                            <p>{% trans "Learn more about the organizations and initiatives behind this demonstration" %}</p>
                         </div>
 
                         <!-- Gradient -->
@@ -162,7 +162,15 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <div class="custom-content-container">
         <!-- Info Block 1 -->
         <div id="info-block-1" class="app-info-block">
-          <h2 class="">{% trans "Consultations at GLAAS" %}</h2>
+          <h2 class="">{% trans "Demonstration of Arches for HERs" %}</h2>
+          <p>
+            Arches provides organizations with powerful features and customization options to manage data in the cultural heritage domain and beyond. With Arches, organizations can customize how they organize data to suit their specific requirements, all the while benefiting from shared knowledge and interoperability capabilities through support of common data standards.
+          </p>
+
+          <img style="max-width: 100%; margin-left:auto; margin-right:auto;"
+          src="https://www.archesproject.org/wp-content/uploads/2022/04/cannon-fort-newstead-dp278055-for-web.jpeg"
+          alt="© Historic England Archive. General view of the grounds of Newstead Abbey, showing Cannon Fort from the west, with the upper lake beyond. Nottinghamshire."
+          title="© Historic England Archive. General view of the grounds of Newstead Abbey, showing Cannon Fort from the west, with the upper lake beyond. Nottinghamshire." />
 
         </div>
         <!-- End Info Block 1 -->
@@ -170,14 +178,35 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         <!-- Info Block 2 -->
         <div id="info-block-2" class="app-info-block">
           <h2 class="">{% trans "Find and Review Consultations" %}</h2>
+          <p>
+            Explore this Arches for HER demonstration site to learn how Arches simplifies the handling of complex cultural heritage and planning data. This demonstration showcases mapping and search capabilities, along with tools for integrating data into consultation and planning workflows.
+          </p>
+
+          <img style="max-width: 100%; margin-left:auto; margin-right:auto;"
+          src="https://storage.googleapis.com/opencontext-media/her-demo/her-demo-map.png"
+          alt="Illustrative map of the Greater London area, showing the location of monument resources found by a search for 'Roman'."
+          title="Illustrative map of the Greater London area, showing the location of monument resources found by a search for 'Roman'." />
 
         </div>
         <!-- End Info Block 2 -->
 
         <!-- Info Block 3 -->
         <div id="info-block-3" class="app-info-block">
-          <h2 class="">{% trans "Working with GLAAS" %}</h2>
+          <h2 class="">{% trans "Acknowledgements" %}</h2>
 
+          <p>
+            This Arches demonstration site is based on <a href="https://www.archesproject.org/arches-for-hers/">Arches for HERs</a>, which is a customization of the Arches platform for Historic Environment Records (HERs) in the United Kingdom. It illustrates the core capabilities of Arches while also highlighting how it has been adapted for use by the Greater London Historic Environment Record (GLHER) and other HERs by Historic England, in partnership with the City of Lincoln, UK and the <a href="https://www.getty.edu/conservation/">Getty Conservation Institute</a>.
+          </p>
+
+          <h4 style="margin-top: 4em;">Data Disclaimer</h4>
+          <p>
+            The Arches for HERs demo site includes a small sample of historic environment data from Greater London managed within GLHER Online. The data presented here is strictly for software evaluation purposes only. These data should not be used for research, compliance, or any other application other purpose other than the exploration of software features.
+          </p>
+
+          <h4 style="margin-top: 4em;">Speed and Performance Caveats</h4>
+          <p>
+            This demonstration uses an earlier version of Arches (v6). We are continually making enhancements to Arches features and performance and we are planning upgrades to this demonstration site. Until then, thanks for your patience!
+          </p>
         </div>
         <!-- End Info Block 3 -->
 
@@ -192,21 +221,32 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
             <!-- branding column -->
             <div class="app-footer-branding">
-                <img class="app-footer-image" src='/media/img/projects/consultations/HE_Logo_White.svg' title="Historic England" alt="Historic England">
 
                 <div class="organization-address">
-                  Greater London Archaeological Advisory Service<br>
-                  Historic England<br>
-                  4th floor, Cannon Bridge House<br>
-                  25 Dowgate Hill<br>
-                  London<br>
-                  EC4R 2YA
+
+                    <strong>Demonstration Site Sponsor</strong><br/>
+                    Getty Conservation Institute<br/>
+                    1200 Getty Center Drive, Suite 700<br/>
+                    Los Angeles, CA 90049-1684<br/>
+
+                </div>
+
+                <div class="organization-address">
+
+                    <strong>Creators of Customizations and Demonstration Data</strong><br/>
+                    Greater London Archaeological Advisory Service<br/>
+                    Historic England<br/>
+                    4th floor, Cannon Bridge House<br/>
+                    25 Dowgate Hill<br/>
+                    London<br/>
+                    EC4R 2YA
                 </div>
             </div>
 
             <!-- Info Column -->
             <div class="app-footer-info">
                 <h2 class="app-footer-heading">{% trans "Guides and Documentation" %}</h2>
+                <p>Please refer to the <a href="https://www.archesproject.org/demo/">official Arches project website</a> for guidance on how to explore and use the features demonstrated here.</p>
             </div>
         </div>
     </div>
