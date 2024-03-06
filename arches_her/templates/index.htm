@@ -211,6 +211,26 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         <!-- End Info Block 3 -->
 
     </div>
+
+    <div class="popup" data-popup="popup-1">
+        <div class="popup-inner">
+          <div>
+            <div class="popup-title">Welcome to this Arches demonstration site, managed by the Getty Conservation Institute!</div>
+          </br>
+          </br>
+            <p class="popup-content">
+                This demo showcases Arches for HERs, which includes Historic England’s customizations and use of Arches to support cultural heritage consultation and planning processes. It is currently running on an older version of the software (Arches Version 6), and planned updates will improve the performance of this demo. Until then, thank you for your patience!
+            </p>
+          </br>
+          </br>
+            <p class="popup-content">
+                Disclaimer: The sample data provided here is strictly for software evaluation purposes only.
+            </p>
+          </div>
+          <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
+        </div>
+      </div>
+
     <!-- End Page Custome Content -->
 
     <!-- Footer -->
@@ -303,10 +323,120 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
         var ViewModel = function(first, last) {
             this.showAuthMenu = ko.observable(false);
+
+            var popupdisplayed = localStorage.getItem('popupdisplayed');
+
+            jQuery(function() {
+                jQuery('[data-popup-close]').on('click', function(e) {
+                var targeted_popup_class = jQuery(this).attr('data-popup-close');
+                jQuery('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+                });
+            });
+
+            $(document).ready(function() {
+                //if popupdisplayed is null, the user has not visited the site before
+                if(popupdisplayed === null) {
+                    jQuery('.popup').show(0);
+                    var quarterbrowserHeight = $(window).height() / 4;
+                    jQuery(window).scroll(function() {
+                        var distance = $(window).scrollTop();
+                        if (distance >= quarterbrowserHeight && !popupdisplayed) {
+                        jQuery('.popup').show(0);
+                        localStorage.setItem('popupdisplayed', true); 
+                        }
+                    }
+                )};
+            });
         };
         ko.applyBindings(new ViewModel());
 
     </script>
+
+    <style>
+        .popup {
+        width: 100%;
+        height: 100%;
+        display: none;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        background: rgba(0, 0, 0, 0.75);
+        font-family: 'Raleway', sans-serif;
+        z-index: 1000;
+        }
+
+
+        /* Inner */
+
+        .popup-inner {
+        line-height: initial;
+        max-width: 700px;
+        width: 50%;
+        padding: 0px;
+        position: absolute;
+        top: 50%;
+        z-index: 99;
+        text-align: left;
+        left: 50%;
+        -webkit-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        border-radius: 10px;
+        background: #40434c;
+        background-size: cover;
+        color: #FFF;
+        height:25%;
+        background-color: white;
+        display: flex;
+        background: #c00000;
+        border: 5px solid #FFF;
+        }
+
+        .popup-title {
+        font-family: 'Poppins', sans-serif;
+        color: white;
+        display: block;
+        font-weight: bold;
+        text-transform: capitalize;
+        font-size: 26px;
+        padding: 10px 10px 10px 0;
+        text-align: center
+        }
+
+        .popup-content {
+            color: white;
+            text-align: center;
+        }
+        /* Close Button */
+
+        .popup-close {
+        width: 30px;
+        height: 30px;
+        padding: 4px 2px 0px;
+        display: inline-block;
+        position: absolute;
+        top: 0px;
+        right: 0px;
+        transition: ease 0.25s all;
+        -webkit-transform: translate(50%, -50%);
+        transform: translate(50%, -50%);
+        border-radius: 1000px;
+        background: #FFF;
+        font-family: Arial, Sans-Serif;
+        font-size: 20px;
+        text-align: center;
+        line-height: 100%;
+        color: #000 !important;
+        }
+
+        .popup-close:hover {
+        -webkit-transform: translate(50%, -50%) rotate(180deg);
+        transform: translate(50%, -50%) rotate(180deg);
+        background: white;
+        text-decoration: none;
+        }
+
+
+    </style>
 
 </body>
 
