@@ -328,24 +328,17 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
             jQuery(function() {
                 jQuery('[data-popup-close]').on('click', function(e) {
-                var targeted_popup_class = jQuery(this).attr('data-popup-close');
-                jQuery('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+                    var targeted_popup_class = jQuery(this).attr('data-popup-close');
+                    jQuery('[data-popup="' + targeted_popup_class + '"]').fadeOut(350);
+                    localStorage.setItem('popupdisplayed', true);
                 });
             });
 
             $(document).ready(function() {
                 //if popupdisplayed is null, the user has not visited the site before
-                if(popupdisplayed === null) {
+                if(popupdisplayed === null || !popupdisplayed) {
                     jQuery('.popup').show(0);
-                    var quarterbrowserHeight = $(window).height() / 4;
-                    jQuery(window).scroll(function() {
-                        var distance = $(window).scrollTop();
-                        if (distance >= quarterbrowserHeight && !popupdisplayed) {
-                        jQuery('.popup').show(0);
-                        localStorage.setItem('popupdisplayed', true); 
-                        }
-                    }
-                )};
+                };
             });
         };
         ko.applyBindings(new ViewModel());
@@ -371,7 +364,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         .popup-inner {
         line-height: initial;
         max-width: 700px;
-        width: 50%;
         padding: 0px;
         position: absolute;
         top: 50%;
@@ -384,11 +376,13 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         background: #40434c;
         background-size: cover;
         color: #FFF;
-        height:25%;
         background-color: white;
         display: flex;
         background: #c00000;
         border: 5px solid #FFF;
+        width: fit-content;
+        border: 5px solid #FFF;
+        padding: 2% 2% 2% 2%;
         }
 
         .popup-title {
