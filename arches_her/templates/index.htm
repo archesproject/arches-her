@@ -336,11 +336,8 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
             $(document).ready(function() {
                 //if popupdisplayed is null, the user has not visited the site before
-                if(popupdisplayed === null) {
+                if(popupdisplayed === null || !popupdisplayed) {
                     jQuery('.popup').show(0);
-                    if (!popupdisplayed) {
-                        jQuery('.popup').show(0);
-                    }
                 };
             });
         };
