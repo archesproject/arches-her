@@ -64,9 +64,14 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                 -->
 
                 <style type="text/css">
+                    .demo-nav {
+                        color: #CAFF00;
+                    }
                     .demo-captions {
-                        padding-left: 10px;
-                        padding-right: 4px;
+                        padding-top: 8px;
+                        padding-left: 20px;
+                        padding-right: 20px;
+                        width: 320px;
                         height: 180px;
                         background:rgba(0,0,0,0.82);
                         border-radius:6px;
@@ -76,7 +81,13 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         color: #FFF;
                         text-shadow: 4px 4px 4px #000;
                     }
-
+                    a.demo-nav-link {
+                        background-color: rgba(0,0,0,0.95) !important;
+                        border-color: #25476A !important;
+                    }
+                    a.demo-nav-link:hover {
+                        background-color: #25476A !important;
+                    }
                 </style>
 
                 <div class="navbar-brand-disco-icon-container" style="margin-left: 50px; height: 90px; width: 320px; padding: 6px; border-width: 0; border-radius:6px; background-color: rgba(0,0,0,0.75);">
@@ -99,21 +110,21 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                     <ul class="nav navbar-nav cons-splash-list">
                         {% for p in plugins %}
                         <li class="page-scroll">
-                            <a class="application-login" href="{% url p.slug %}">{{ p.name }}</a>
+                            <a class="application-login demo-nav-link" href="{% url p.slug %}"><span class="demo-nav">{{ p.name }}</span></a>
                         </li>
                         {% endfor %}
 
-                        <li class="page-scroll demo-nav">
-                            <a class="application-login" href="https://n2t.net/ark:/28722/k2rf66h3v" target="_blank" title="Demonstration Introduction Walkthrough and Guide">{% trans "Guide" %}</a>
+                        <li class="page-scroll">
+                            <a class="application-login demo-nav-link" href="https://n2t.net/ark:/28722/k2rf66h3v" target="_blank" title="Demonstration Introduction Walkthrough and Guide"><span class="demo-nav">{% trans "Guide" %}</span></a>
                         </li>
 
-                        <li class="page-scroll demo-nav">
-                            <a class="application-login" href="{% url 'search_home' %}">{% trans "Find" %}</a>
+                        <li class="page-scroll">
+                            <a class="application-login demo-nav-link" href="{% url 'search_home' %}"><span class="demo-nav">{% trans "Find" %}</span></a>
                         </li>
 
                         {% if user|can_create_resource_instance and user.username != 'anonymous' %}
-                        <li class="page-scroll demo-nav">
-                            <a class="application-login" href="{% url 'resource' %}" target="_blank">{% trans "Manage" %}</a>
+                        <li class="page-scroll">
+                            <a class="application-login demo-nav-link" href="{% url 'resource' %}" target="_blank"><span class="demo-nav">{% trans "Manage" %}</span></a>
                         </li>
                         {% endif %}
 
@@ -127,7 +138,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
                         <li class="page-scroll">
                             {% if user.username == 'anonymous' %}
-                                <a class="application-login" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
+                                <a class="application-login demo-nav-link" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}"><span class="demo-nav">{% trans "Login" %}</span></a>
                             {% else %}
                                 <a class="auth-welcome demo-login" href="{% url 'user_profile_manager' %}">
                                     <span class="demo-login">{% trans "Welcome, " %} {{ user.first_name|default:user.username }}</span>
@@ -241,7 +252,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
           <h4 style="margin-top: 4em;">Data Disclaimer</h4>
           <p>
-            The Arches for HERs demo site includes a small sample of historic environment data from Greater London managed within GLHER Online. The data presented here is strictly for software evaluation purposes only. These data should not be used for research, compliance, or any other purpose other than the exploration of software features.
+            The Arches for HERs demo site includes a small sample of historic environment data from Greater London managed within GLHER Online. The data presented here is strictly for software evaluation purposes only. These data should not be used for research, compliance, or any purpose beyond the exploration of software features.
           </p>
 
           <h4 style="margin-top: 4em;">Speed and Performance Caveats</h4>
@@ -265,7 +276,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
           </br>
           </br>
             <p class="popup-content">
-                Disclaimer: The sample data provided here is strictly for software evaluation purposes only.
+                <u>Disclaimer</u>: The sample data provided here is strictly for software evaluation purposes only.
             </p>
           </div>
           <a class="popup-close" data-popup-close="popup-1" href="#">x</a>
@@ -414,15 +425,13 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         -webkit-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         border-radius: 10px;
-        background: #40434c;
         background-size: cover;
         color: #FFF;
         background-color: white;
         display: flex;
         background: #581912;
-        border: 5px solid #FFF;
         width: fit-content;
-        border: 5px solid #FFF;
+        border: 5px solid white;
         padding: 2% 2% 2% 2%;
         }
 
