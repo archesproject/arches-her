@@ -1,4 +1,3 @@
-
 <!--
 ARCHES - a program developed to inventory and manage immovable cultural heritage.
 Copyright (C) 2013 J. Paul Getty Trust and World Monuments Fund
@@ -93,8 +92,10 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                 <div class="navbar-brand-disco-icon-container" style="margin-left: 50px; height: 90px; width: 320px; padding: 6px; border-width: 0; border-radius:6px; background-color: rgba(0,0,0,0.75);">
                     <!--
                     <img class="navbar-brand-disco-icon" src="{% static 'img/landing/arches_logo_dark.png' %}" style="" alt="Arches Logo">
-                    -->
+
                     <img src="https://storage.googleapis.com/opencontext-media/her-demo/Arches_logo_white.svg" alt="Arches Logo" />
+                    -->
+                    <img src="{% static 'img/landing/Arches_logo_white.svg' %}" alt="Arches Logo" />
                 </div>
                 <!--
                 <div class="application-name">
@@ -167,9 +168,9 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         <!-- MAIN IMAGE
                         <img src="{% static 'img/landing/the_shard.jpg' %}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
 
-                        <img src="https://storage.googleapis.com/opencontext-media/her-demo/flickr-cc-by-25468587703_2d234a4451_o.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat"  alt="York Cathedral"/>
-                        -->
                         <img src="https://storage.googleapis.com/opencontext-media/her-demo/flickr-cc-by-17939223706_c66649a56d_k.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat"  alt="Park tunnel, Nottingham"/>
+                        -->
+                        <img src="{% static 'img/landing/flickr-cc-by-17939223706_c66649a56d_k.jpg' %}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat"  alt="Park tunnel, Nottingham"/>
 
                         <!-- LAYERS -->
                         <!-- NEW LAYER -->
@@ -234,8 +235,14 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
             Explore this Arches for HER demonstration site to learn how Arches simplifies the handling of complex cultural heritage and planning data. This demonstration showcases mapping and search capabilities, along with tools for integrating data into consultation and planning workflows.
           </p>
 
+          <!--
           <img style="max-width: 100%; margin-left:auto; margin-right:auto;"
           src="https://storage.googleapis.com/opencontext-media/her-demo/her-demo-map.png"
+          alt="Illustrative map of the Greater London area, showing the location of monument resources found by a search for 'Roman'."
+          title="Illustrative map of the Greater London area, showing the location of monument resources found by a search for 'Roman'." />
+          -->
+          <img style="max-width: 100%; margin-left:auto; margin-right:auto;"
+          src="{% static 'img/landing/her-demo-map.png' %}"
           alt="Illustrative map of the Greater London area, showing the location of monument resources found by a search for 'Roman'."
           title="Illustrative map of the Greater London area, showing the location of monument resources found by a search for 'Roman'." />
 
