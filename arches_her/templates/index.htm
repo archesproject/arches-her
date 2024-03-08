@@ -91,9 +91,11 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         {% endif %}
 
                         {% if user|can_create_graph and user.username != 'anonymous' %}
+                        <!-- Deactivated in Demo
                         <li class="page-scroll">
                             <a href="{% url 'graph' '' %}" target="_blank">{% trans "Graphs" %}</a>
                         </li>
+                        -->
                         {% endif %}
 
                         <li class="page-scroll">
