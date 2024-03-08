@@ -57,13 +57,40 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <nav class="cons-splash-nav navbar" role="navigation">
         <div class="nav-container">
             <div class="navbar-brand-disco">
+                <!--
                 <div class="navbar-brand-disco-icon-container" style="">
                     <img class="navbar-brand-disco-icon" src="{% static 'img/landing/arches_logo_dark.png' %}" style="" alt="Arches Logo">
                 </div>
-                <div class="application-name">
-                    <h2>{{app_title}}</h2>
-                    <!-- <span>Data Integration for Science and Conservation</span> -->
+                -->
+
+                <style type="text/css">
+                    .demo-captions {
+                        padding-left: 10px;
+                        padding-right: 4px;
+                        height: 180px;
+                        background:rgba(0,0,0,0.82);
+                        border-radius:6px;
+                    }
+                    .demo-login {
+                        font-weight: strong;
+                        color: #FFF;
+                        text-shadow: 4px 4px 4px #000;
+                    }
+
+                </style>
+
+                <div class="navbar-brand-disco-icon-container" style="margin-left: 50px; height: 90px; width: 320px; padding: 6px; border-width: 0; border-radius:6px; background-color: rgba(0,0,0,0.75);">
+                    <!--
+                    <img class="navbar-brand-disco-icon" src="{% static 'img/landing/arches_logo_dark.png' %}" style="" alt="Arches Logo">
+                    -->
+                    <img src="https://storage.googleapis.com/opencontext-media/her-demo/Arches_logo_white.svg" alt="Arches Logo" />
                 </div>
+                <!--
+                <div class="application-name">
+                    <h2 style="font-size: 34px; font-weight: bold; color: #FFF; text-shadow: 3px 3px 3px #000;">{{app_title}}</h2>
+                    <span>Data Integration for Science and Conservation</span>
+                </div>
+                -->
             </div>
 
             <!-- Collect the nav links, forms, and other content for toggling -->
@@ -72,21 +99,21 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                     <ul class="nav navbar-nav cons-splash-list">
                         {% for p in plugins %}
                         <li class="page-scroll">
-                            <a href="{% url p.slug %}">{{ p.name }}</a>
+                            <a class="application-login" href="{% url p.slug %}">{{ p.name }}</a>
                         </li>
                         {% endfor %}
 
-                        <li class="page-scroll">
-                            <a href="https://n2t.net/ark:/28722/k2rf66h3v">{% trans "Guide" %}</a>
+                        <li class="page-scroll demo-nav">
+                            <a class="application-login" href="https://n2t.net/ark:/28722/k2rf66h3v" target="_blank" title="Demonstration Introduction Walkthrough and Guide">{% trans "Guide" %}</a>
                         </li>
 
-                        <li class="page-scroll">
-                            <a href="{% url 'search_home' %}">{% trans "Find" %}</a>
+                        <li class="page-scroll demo-nav">
+                            <a class="application-login" href="{% url 'search_home' %}">{% trans "Find" %}</a>
                         </li>
 
                         {% if user|can_create_resource_instance and user.username != 'anonymous' %}
-                        <li class="page-scroll">
-                            <a href="{% url 'resource' %}" target="_blank">{% trans "Manage" %}</a>
+                        <li class="page-scroll demo-nav">
+                            <a class="application-login" href="{% url 'resource' %}" target="_blank">{% trans "Manage" %}</a>
                         </li>
                         {% endif %}
 
@@ -102,12 +129,12 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             {% if user.username == 'anonymous' %}
                                 <a class="application-login" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">{% trans "Login" %}</a>
                             {% else %}
-                                <a class="auth-welcome" href="{% url 'user_profile_manager' %}">
-                                    {% trans "Welcome, " %} {{ user.first_name|default:user.username }}
+                                <a class="auth-welcome demo-login" href="{% url 'user_profile_manager' %}">
+                                    <span class="demo-login">{% trans "Welcome, " %} {{ user.first_name|default:user.username }}</span>
                                 </a>
                             </li>
                             <li>
-                                <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}">({% trans 'logoff' %})</a>
+                                <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}"><span class="demo-login">({% trans 'logoff' %})</span></a>
                             {% endif %}
                         </li>
                     </ul>
@@ -126,24 +153,29 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                 <ul>
                     <!-- SLIDE 1 -->
                     <li data-transition="fade" data-slotamount="9" data-masterspeed="0" data-title="Slide 1">
-                        <!-- MAIN IMAGE -->
+                        <!-- MAIN IMAGE
                         <img src="{% static 'img/landing/the_shard.jpg' %}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
+
+                        <img src="https://storage.googleapis.com/opencontext-media/her-demo/flickr-cc-by-25468587703_2d234a4451_o.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat"  alt="York Cathedral"/>
+                        -->
+                        <img src="https://storage.googleapis.com/opencontext-media/her-demo/flickr-cc-by-17939223706_c66649a56d_k.jpg" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat"  alt="Park tunnel, Nottingham"/>
 
                         <!-- LAYERS -->
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="-50" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
-                            <h2><a href="#info-block-1">{% trans "Demonstration of Arches for HERs" %}</a></h2>
+
+                        <div class="tp-caption sft start text-bold disco-caption demo-captions" delay="4500" data-x="-50" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                            <h2><a href="#info-block-1">Demonstration of Arches<br/>for HERs</a></h2>
                             <p>{% trans "Explore this use of Arches to power cultural heritage consultation and resource management" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                        <div class="tp-caption sft start text-bold disco-caption demo-captions" delay="4500" data-x="450" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
                             <h2><a href="#info-block-2">{% trans "Search and Discover" %}</a></h2>
                             <p>{% trans "Experiment with a sample of authoritative historic environment data for Greater London provided by Historic England" %}</p>
                         </div>
 
                         <!-- NEW LAYER -->
-                        <div class="tp-caption sft start text-bold disco-caption" delay="4500" data-x="950" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
+                        <div class="tp-caption sft start text-bold disco-caption demo-captions" delay="4500" data-x="950" data-hoffset="0" data-y="450" data-speed="800" data-start="100" data-easing="Back.easeInOut" data-endspeed="300">
                             <h2><a href="#info-block-3">{% trans "Acknowledgements" %}</a></h2>
                             <p>{% trans "Learn more about the organizations and initiatives behind this demonstration" %}</p>
                         </div>
@@ -153,7 +185,10 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
                         <!-- Attribution -->
                         <div class="image-attribution" style="">
+                            <!--
                             <span class="">{% trans "The Shard | https://www.flickr.com/photos/cathedraljack/ | Attribution 2.0 Generic (CC BY 2.0)" %}</span>
+                            -->
+                            <span class="">{% trans "Park Tunnel, Nottingham | https://flickr.com/photos/branestawm/17939223706/ | Attribution 2.0 Generic (CC BY 2.0)" %}</span>
                         </div>
                     </li>
 
@@ -168,7 +203,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
     <div class="custom-content-container">
         <!-- Info Block 1 -->
         <div id="info-block-1" class="app-info-block">
-          <h2 class="">{% trans "Demonstration of Arches for HERs" %}</h2>
+          <h2>{% trans "Demonstration of Arches for HERs" %}</h2>
           <p>
             Arches provides organizations with powerful features and customization options to manage data in the cultural heritage domain and beyond. With Arches, organizations can customize how they organize data to suit their specific requirements, all the while benefiting from shared knowledge and interoperability capabilities through support of common data standards. Arches for HERs is a customization of Arches to support Heritage Environment Records in England and can be used as the starting point for heritage inventory management using Arches worldwide.
           </p>
@@ -225,7 +260,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
           </br>
           </br>
             <p class="popup-content">
-                This demo showcases Arches for HERs, which includes Historic England’s customizations and use of Arches to support cultural heritage consultation and planning processes. It is currently running on an older version of the software (Arches Version 6), and planned updates will improve the performance of this demo. Until then, thank you for your patience!
+                This demo showcases Arches for HERs, which includes Historic England’s customizations and use of Arches to support cultural heritage consultation and planning processes. It is currently running on an earlier version of the software (Arches Version 6), and planned updates will improve the performance of this demo. Until then, thank you for your patience!
             </p>
           </br>
           </br>
@@ -271,7 +306,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
 
             <!-- Info Column -->
             <div class="app-footer-info">
-                <h2 class="app-footer-heading">{% trans "Guides and Documentation" %}</h2>
+                <h2 class="app-footer-heading" style="color: black;">{% trans "Guides and Documentation" %}</h2>
                 <p>Please refer to this <a href="https://n2t.net/ark:/28722/k2rf66h3v"><strong>Introduction and Guide</strong></a> for guidance on how to explore and use the features demonstrated here.</p>
             </div>
         </div>
@@ -384,7 +419,7 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         color: #FFF;
         background-color: white;
         display: flex;
-        background: #c00000;
+        background: #581912;
         border: 5px solid #FFF;
         width: fit-content;
         border: 5px solid #FFF;
@@ -396,7 +431,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
         color: white;
         display: block;
         font-weight: bold;
-        text-transform: capitalize;
         font-size: 26px;
         padding: 10px 10px 10px 0;
         text-align: center
