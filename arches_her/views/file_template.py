@@ -26,7 +26,7 @@ import docx
 import textwrap
 from docx import Document
 from docx.text.paragraph import Paragraph
-from docx.oxml.xmlchemy import OxmlElement
+from docx.oxml.parser import OxmlElement
 from html.parser import HTMLParser
 from html.entities import name2codepoint
 from django.core.files.uploadedfile import UploadedFile
@@ -78,7 +78,10 @@ class FileTemplateView(View):
         template_name = self.get_template_path(template_id)
         template_path = os.path.join(settings.APP_ROOT, "docx", template_name)
 
-        if os.path.exists(os.path.join(settings.APP_ROOT, "uploadedfiles", "docx")) is False:
+        if (
+            os.path.exists(os.path.join(settings.APP_ROOT, "uploadedfiles", "docx"))
+            is False
+        ):
             os.mkdir(os.path.join(settings.APP_ROOT, "uploadedfiles", "docx"))
 
         try:
@@ -89,9 +92,13 @@ class FileTemplateView(View):
         self.edit_letter(self.resource, datatype_factory)
 
         date = datetime.today()
-        date = date.strftime("%Y") + "-" + date.strftime("%m") + "-" + date.strftime("%d")
+        date = (
+            date.strftime("%Y") + "-" + date.strftime("%m") + "-" + date.strftime("%d")
+        )
         new_file_name = date + "_" + template_name
-        new_file_path = os.path.join(settings.APP_ROOT, "uploadedfiles/docx", new_file_name)
+        new_file_path = os.path.join(
+            settings.APP_ROOT, "uploadedfiles/docx", new_file_name
+        )
 
         new_req = HttpRequest()
         new_req.method = "POST"
@@ -242,15 +249,25 @@ class FileTemplateView(View):
 
         mitigation_scope_dict = {}
 
-        concepts_from_mitigation_group = models.Relation.objects.filter(conceptfrom=mitgations_concept_id)
+        concepts_from_mitigation_group = models.Relation.objects.filter(
+            conceptfrom=mitgations_concept_id
+        )
         for mitigation_concept in concepts_from_mitigation_group:
-            mitigation_concept_to_value = models.Value.objects.filter(concept=mitigation_concept.conceptto_id)
+            mitigation_concept_to_value = models.Value.objects.filter(
+                concept=mitigation_concept.conceptto_id
+            )
             for mitigation_value in mitigation_concept_to_value:
                 if str(mitigation_value.valuetype_id) == "prefLabel":
-                    mitigation_scope_dict[mitigation_value.value] = str(mitigation_value.valueid)
+                    mitigation_scope_dict[mitigation_value.value] = str(
+                        mitigation_value.valueid
+                    )
                 elif str(mitigation_value.valuetype_id) == "scopeNote":
-                    value_id = models.Value.objects.filter(concept=mitigation_value.concept_id, valuetype="prefLabel")
-                    mitigation_scope_dict[str(value_id[0].valueid)] = mitigation_value.value
+                    value_id = models.Value.objects.filter(
+                        concept=mitigation_value.concept_id, valuetype="prefLabel"
+                    )
+                    mitigation_scope_dict[str(value_id[0].valueid)] = (
+                        mitigation_value.value
+                    )
                 else:
                     pass
 
@@ -260,23 +277,33 @@ class FileTemplateView(View):
             if str(tile.nodegroup_id) == action_nodegroup_id:
 
                 mitigation_scopenote = mitigation_scope_dict.get(
-                    mitigation_scope_dict.get(get_value_from_tile(tile, action_type_node_id)), ""
+                    mitigation_scope_dict.get(
+                        get_value_from_tile(tile, action_type_node_id)
+                    ),
+                    "",
                 )
 
                 # if len(mitigation_scopenote) > 0:
                 #     mitigation_scopenote = "<i>" + mitigation_scopenote + "</i>"
                 insert_break = len(mitigation_scopenote) > 0
-                mitigation[
-                    "content"
-                ] = f"{'<br>' if insert_break else ''}{mitigation_scopenote}{'<br>' if insert_break else ''}{get_value_from_tile(tile, action_node_id)}"
+                mitigation["content"] = (
+                    f"{'<br>' if insert_break else ''}{mitigation_scopenote}{'<br>' if insert_break else ''}{get_value_from_tile(tile, action_node_id)}"
+                )
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
                 condition["content"] = get_value_from_tile(tile, advice_node_id)
-                template_name = self.get_template_path(self.request._post["template_id"])
-                if template_name == "WSI Amend Letter.docx" or template_name == "WSI Approval Letter.docx":
+                template_name = self.get_template_path(
+                    self.request._post["template_id"]
+                )
+                if (
+                    template_name == "WSI Amend Letter.docx"
+                    or template_name == "WSI Approval Letter.docx"
+                ):
                     condition["type"] = ""
                 else:
-                    condition["type"] = f"{get_value_from_tile(tile, advice_type_node_id)}"
+                    condition["type"] = (
+                        f"{get_value_from_tile(tile, advice_type_node_id)}"
+                    )
             else:
                 for key, value in list(template_dict.items()):
                     if value in tile.data:
@@ -325,45 +352,100 @@ class FileTemplateView(View):
                 caseAgentResourceId = None
                 contactResourceiId = None
                 if tile.data[contacts["Casework Officer"]]:
-                    caseAgentResourceId = tile.data[contacts["Casework Officer"]][0]["resourceId"]
+                    caseAgentResourceId = tile.data[contacts["Casework Officer"]][0][
+                        "resourceId"
+                    ]
                 if caseAgentResourceId:
-                    caseAgentResource = Resource.objects.get(resourceinstanceid=caseAgentResourceId)
+                    caseAgentResource = Resource.objects.get(
+                        resourceinstanceid=caseAgentResourceId
+                    )
                     caseAgentResource.load_tiles()
                     for caseAgentTile in caseAgentResource.tiles:
-                        if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
-                            if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                                mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
-                            elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                                mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
+                        if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(
+                            contactDetailsNodegroupId
+                        ):
+                            if (
+                                caseAgentTile.data[contactPointTypeNodeId]
+                                == "0f466b8b-a347-439f-9b61-bee9811ccbf0"
+                            ):
+                                mapping_dict["Casework Officer Email"] = (
+                                    caseAgentTile.data[contactPointNodeId]
+                                )
+                            elif (
+                                caseAgentTile.data[contactPointTypeNodeId]
+                                == "75e6cfad-7418-4ed3-841b-3c083d7df30b"
+                            ):
+                                mapping_dict["Casework Officer Number"] = (
+                                    caseAgentTile.data[contactPointNodeId]
+                                )
 
-                if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4" and tile.data[contacts["Planning Officer"]]:
-                    contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
-                elif tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912" and tile.data[contacts["Owner"]]:
+                if (
+                    tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4"
+                    and tile.data[contacts["Planning Officer"]]
+                ):
+                    contactResourceiId = tile.data[contacts["Planning Officer"]][0][
+                        "resourceId"
+                    ]
+                elif (
+                    tile.data[contactNodeId] == "d88aa873-848c-45cb-b967-4febe7397912"
+                    and tile.data[contacts["Owner"]]
+                ):
                     contactResourceiId = tile.data[contacts["Owner"]][0]["resourceId"]
-                elif tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b" and tile.data[contacts["Agent"]]:
+                elif (
+                    tile.data[contactNodeId] == "dcaf8850-9cfc-44ea-9fd4-0ca419806e2b"
+                    and tile.data[contacts["Agent"]]
+                ):
                     contactResourceiId = tile.data[contacts["Agent"]][0]["resourceId"]
 
                 if contactResourceiId:
-                    contactResource = Resource.objects.get(resourceinstanceid=contactResourceiId)
+                    contactResource = Resource.objects.get(
+                        resourceinstanceid=contactResourceiId
+                    )
                     contactResource.load_tiles()
 
                     for contactTile in contactResource.tiles:
-                        if contactTile.nodegroup.nodegroupid == uuid.UUID(nameNodegroupId):
-                            if mapping_dict["Name of person consulting"] == "" or contactTile.data[nameUseTypeNodeId] == primaryNameValueId:
-                                nameTitle = ConceptValue(contactTile.data[nameTitleNodeId]).value
+                        if contactTile.nodegroup.nodegroupid == uuid.UUID(
+                            nameNodegroupId
+                        ):
+                            if (
+                                mapping_dict["Name of person consulting"] == ""
+                                or contactTile.data[nameUseTypeNodeId]
+                                == primaryNameValueId
+                            ):
+                                nameTitle = ConceptValue(
+                                    contactTile.data[nameTitleNodeId]
+                                ).value
                                 fullName = "{0} {1}".format(
-                                    get_value_from_tile(contactTile, firstnameNodeId), get_value_from_tile(contactTile, lastnameNodeId)
+                                    get_value_from_tile(contactTile, firstnameNodeId),
+                                    get_value_from_tile(contactTile, lastnameNodeId),
                                 )
-                                mapping_dict["Name of person consulting"] = "{0} {1}".format(nameTitle, fullName) if nameTitle else fullName
-                        elif contactTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
-                            if contactTile.data[contactPointTypeNodeId] == contactPointTypeMailValueId:
-                                mapping_dict["Contact Name"] = contactTile.data[contactNameForCorrespondenceNodeId]
+                                mapping_dict["Name of person consulting"] = (
+                                    "{0} {1}".format(nameTitle, fullName)
+                                    if nameTitle
+                                    else fullName
+                                )
+                        elif contactTile.nodegroup.nodegroupid == uuid.UUID(
+                            contactDetailsNodegroupId
+                        ):
+                            if (
+                                contactTile.data[contactPointTypeNodeId]
+                                == contactPointTypeMailValueId
+                            ):
+                                mapping_dict["Contact Name"] = contactTile.data[
+                                    contactNameForCorrespondenceNodeId
+                                ]
                                 addressConsult = (
-                                    get_value_from_tile(contactTile, contactPointNodeId).replace(", ", "<br>").replace(",", "<br>")
+                                    get_value_from_tile(contactTile, contactPointNodeId)
+                                    .replace(", ", "<br>")
+                                    .replace(",", "<br>")
                                 )
-                                mapping_dict["Address of consulting organisation"] = addressConsult
+                                mapping_dict["Address of consulting organisation"] = (
+                                    addressConsult
+                                )
 
-            mapping_dict["Casework Officer"] = re.sub("\[\d+\] ", "", mapping_dict["Casework Officer"])
+            mapping_dict["Casework Officer"] = re.sub(
+                "\[\d+\] ", "", mapping_dict["Casework Officer"]
+            )
             mapping_dict["Signature"] = mapping_dict["Casework Officer"]
 
         for mitigation in mitigations:
@@ -373,16 +455,20 @@ class FileTemplateView(View):
             ] += f'<br><b>{mitigation["type"]}</b>{"<br>"if add_break else ""}{mitigation["content"]}{"<br>" if add_break else ""}'
 
         for condition in conditions:
-            mapping_dict["Condition"] += "<b>{}</b>{}<br>".format(condition["type"], condition["content"])
+            mapping_dict["Condition"] += "<b>{}</b>{}<br>".format(
+                condition["type"], condition["content"]
+            )
 
         associate_heritage = mapping_dict["Archaeological Priority Area"]
         if associate_heritage == "":
-            mapping_dict["Archaeological Priority Area"] = "The planning application is not in an Archaeological Priority Area."
+            mapping_dict["Archaeological Priority Area"] = (
+                "The planning application is not in an Archaeological Priority Area."
+            )
         else:
-            mapping_dict[
-                "Archaeological Priority Area"
-            ] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(
-                associate_heritage
+            mapping_dict["Archaeological Priority Area"] = (
+                "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(
+                    associate_heritage
+                )
             )
 
         if mapping_dict["Assessment of Significance"] != "":
@@ -391,7 +477,9 @@ class FileTemplateView(View):
         htmlTags = re.compile(r"<(?:\"[^\"]*\"['\"]*|'[^']*'['\"]*|[^'\">])+>")
         for key in mapping_dict:
             html = False
-            if htmlTags.search(mapping_dict[key] if mapping_dict[key] is not None else ""):
+            if htmlTags.search(
+                mapping_dict[key] if mapping_dict[key] is not None else ""
+            ):
                 html = True
             self.replace_string(self.doc, key, mapping_dict[key], html)
 
@@ -489,7 +577,9 @@ class DocumentHTMLParser(HTMLParser):
     def add_hyperlink(self, paragraph, url, text, color=None, underline=None):
         # This gets access to the document.xml.rels file and gets a new relation id value
         part = self.paragraph.part
-        r_id = part.relate_to(url, docx.opc.constants.RELATIONSHIP_TYPE.HYPERLINK, is_external=True)
+        r_id = part.relate_to(
+            url, docx.opc.constants.RELATIONSHIP_TYPE.HYPERLINK, is_external=True
+        )
 
         # Create the w:hyperlink tag and add needed values
         hyperlink = docx.oxml.shared.OxmlElement("w:hyperlink")
@@ -598,7 +688,9 @@ class DocumentHTMLParser(HTMLParser):
             self.add_hyperlink(self.paragraph, self.hyperlink, data, color)
             self.hyperlink = False
         elif self.td_cursor is True:
-            self.table.cell(self.table_rows - 1, self.table_cols - 1).add_paragraph(data)  # formatting?
+            self.table.cell(self.table_rows - 1, self.table_cols - 1).add_paragraph(
+                data
+            )  # formatting?
         else:
             self.run.add_text(data)
 
