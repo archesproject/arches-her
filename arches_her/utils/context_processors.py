@@ -17,10 +17,15 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 """
 
 from arches.app.models.system_settings import settings
+from django.contrib.auth import authenticate, login
+
 
 def project_settings(request):
-    return {
-        "project_settings": {
-            "APP_PATHNAME": settings.APP_PATHNAME
-        }
-    }
+    if (
+        not request.user or request.user.username == "anonymous"
+    ) and "/auth" not in request.path:
+        anon_user = authenticate(anon_login=True)
+        if anon_user is not None:
+            login(request, anon_user)
+
+    return {"project_settings": {"APP_PATHNAME": settings.APP_PATHNAME}}

@@ -37,10 +37,6 @@ SEARCH_COMPONENT_LOCATIONS.append("arches_her.search.components")
 
 LOCALE_PATHS.append(os.path.join(APP_ROOT, "locale"))
 
-TEMPLATES[0]["OPTIONS"]["context_processors"].append(
-    "arches_her.utils.context_processors.project_settings"
-)
-
 FILE_TYPE_CHECKING = False
 FILE_TYPES = [
     "bmp",
@@ -192,6 +188,20 @@ TEMPLATES = build_templates_config(
     debug=DEBUG,
     app_root=APP_ROOT,
     arches_applications=ARCHES_APPLICATIONS,
+    context_processors=[
+        "django.contrib.auth.context_processors.auth",
+        "django.template.context_processors.debug",
+        "django.template.context_processors.i18n",
+        "django.template.context_processors.media",
+        "django.template.context_processors.static",
+        "django.template.context_processors.tz",
+        "django.template.context_processors.request",
+        "django.contrib.messages.context_processors.messages",
+        "arches.app.utils.context_processors.livereload",
+        "arches.app.utils.context_processors.map_info",
+        "arches.app.utils.context_processors.app_settings",
+        "arches_her.utils.context_processors.project_settings",
+    ],
 )
 
 ALLOWED_HOSTS = []
@@ -468,7 +478,7 @@ AUTHENTICATION_BACKENDS = (
     "arches.app.utils.external_oauth_backend.ExternalOauthAuthenticationBackend",
     "arches_her.utils.demo_auth_backend.DemoAuthBackend",
 )
-
+DOCKER = False
 try:
     from .package_settings import *
 except ImportError:
@@ -485,14 +495,11 @@ except ImportError as e:
     except ImportError as e:
         pass
 
-DOCKER = False
-
 if DOCKER:
     try:
         from .settings_docker import *
-    except ImportError:
+    except ImportError as e:
         pass
-
 # returns an output that can be read by NODEJS
 if __name__ == "__main__":
     transmit_webpack_django_config(
