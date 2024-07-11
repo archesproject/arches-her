@@ -60,8 +60,4 @@ class IndexView(TemplateView):
             name="Resource Reviewer"
         ).exists()
 
-        anon_user = authenticate(anon_login=True)
-        if anon_user is not None:
-            login(request, anon_user)
-
         return render(request, "index.htm", context)

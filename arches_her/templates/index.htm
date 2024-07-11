@@ -133,11 +133,9 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                             <a class="application-login demo-nav-link" href="{% url 'search_home' %}"><span class="demo-nav">{% trans "Find" %}</span></a>
                         </li>
 
-                        {% if user|can_create_resource_instance and user.username != 'anonymous' %}
                         <li class="page-scroll">
                             <a class="application-login demo-nav-link" href="{% url 'resource' %}" target="_blank"><span class="demo-nav">{% trans "Manage" %}</span></a>
                         </li>
-                        {% endif %}
 
                         {% if user|can_create_graph and user.username != 'anonymous' %}
                         <!-- Deactivated in Demo
@@ -146,19 +144,6 @@ The data-spy and data-target are part of the built-in Bootstrap scrollspy functi
                         </li>
                         -->
                         {% endif %}
-
-                        <li class="page-scroll">
-                            {% if user.username == 'anonymous' %}
-                                <a class="application-login demo-nav-link" id="auth-link" href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}"><span class="demo-nav">{% trans "Login" %}</span></a>
-                            {% else %}
-                                <a class="auth-welcome demo-login" href="{% url 'user_profile_manager' %}">
-                                    <span class="demo-login">{% trans "Welcome, " %} {{ user.first_name|default:user.username }}</span>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="{% url 'auth' %}?next={% url 'home' %}{% if user.username != 'anonymous' %}&logout=true{% endif %}"><span class="demo-login">({% trans 'logoff' %})</span></a>
-                            {% endif %}
-                        </li>
                     </ul>
                 </div>
             </div>
