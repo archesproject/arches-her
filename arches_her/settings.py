@@ -175,6 +175,7 @@ MIDDLEWARE = [
     # "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "arches.app.utils.middleware.SetAnonymousUser",
     # "silk.middleware.SilkyMiddleware",
+    "arches_her.utils.auto_login.AutoLogin",
 ]
 
 STATICFILES_DIRS = build_staticfiles_dirs(
