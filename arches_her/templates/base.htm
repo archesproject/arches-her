@@ -64,22 +64,17 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 
 <body dir="{{ app_settings.ACTIVE_LANGUAGE_DIR }}" {% block body_attributes %}class="scroll-y-auto"{% endblock %}>
     {% block loading_mask %}
-    <div data-bind="value: console.log(self)"></div>
-    <!-- <div class="loading-mask" data-bind="visible: typeof(loading()) === 'boolean' && loading()"></div> -->
 
-    <!-- ko if: self.location.pathname.includes("search") -->
-        <div class="loading-mask" data-bind="visible: typeof(loading()) === 'boolean' && loading()">
-            <div class="her-demo loading-mask-string">In Penny Lane, there is a barber showing photographs
-                Of every head he's had the pleasure to know
-                And all the people that come and go
-                Stop and say hello
-                </div>
-        </div>
-     <!-- /ko -->
-
-    <!-- ko if: !self.location.pathname.includes("search") --> 
-        <div class="loading-mask" data-bind="visible: typeof(loading()) === 'boolean' && loading()"></div>
-    <!-- /ko -->
+    {% if main_script != 'views/search' %}
+    <div class="loading-mask" data-bind="visible: typeof(loading()) === 'boolean' && loading()"></div>
+    {% endif %}
+    
+    {% if main_script == 'views/search' %}
+    <div class="loading-mask" data-bind="visible: typeof(loading()) === 'boolean' && loading()">
+        <div class="her-demo loading-mask-string">Loading thousands of resources to this demo… Thanks for your patience!
+            </div>
+    </div>
+    {% endif %}
 
     <div class="loading-mask" style="display: none;" data-bind="visible: typeof(loading()==='string') && loading().length > 0">
         <div class="loading-mask-string" data-bind="text: loading"></div>
