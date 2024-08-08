@@ -71,8 +71,10 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
     
     {% if main_script == 'views/search' %}
     <div class="loading-mask" data-bind="visible: typeof(loading()) === 'boolean' && loading()">
-        <div class="her-demo loading-mask-string">Loading thousands of resources to this demo… Thanks for your patience!
-            </div>
+        <div class="her-demo loading-mask-string" style="display:flex; flex-direction: column;">
+            <div>Loading thousands of resources to this demo…</div>
+            <div>Thanks for your patience!</div>
+        </div>
     </div>
     {% endif %}
 
