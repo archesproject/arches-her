@@ -143,8 +143,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         }
 
         .caption-div {
-            position: fixed;
+            position: absolute;
             top: 80px;
+            z-index: 1000;
         }
         .demo-captions-row {
             margin-bottom: 25%;
@@ -185,8 +186,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
             white-space: normal;
             word-wrap: break-word;
             position: inherit;
-            margin-top: -5.7vh;
+            margin-top: -64px;
             width:92%;
+            z-index:2000;
         }
         .demo-captions h2 {
             /*
@@ -338,24 +340,7 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                 <div class="home-slider">
                     <div class="slide-img-container">
                         <img src="https://www.archesproject.org/wp-content/uploads/2024/03/HER_Demo_GCI_licensed_image_20240326_lr.jpg" alt="Whitby Abbey Evening Light. Photo by Neal Rylatt" aria-describedby="slide1-attribution" />
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-lg-3 col-md-4">
-                                </div>
-                                
-                                <div class="col-lg-3 col-md-4 col-lg-offset-1 col-md-offset-1 button-cell">
-                                    <a href="#info-block-1" class="down-button" aria-label="{% trans 'Go to content' %}"><i class="fa fa-angle-down down-button-icon"></i></a>
-                                </div>
-
-                                <div class="col-lg-3 col-md-4 col-sm-8 col-lg-offset-1 col-md-offset-0">
-                                    <div class="center-block attribution-div">
-                                        
-                                        <div id="slide1-attribution" class="attribution-cell">{% trans "Whitby Abbey Evening Light. Photo by Neal Rylatt" %}</div>
-                                            
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <div class="container-fluid caption-div">
 
                             <div class="row demo-captions-row">
@@ -382,15 +367,28 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
                                 </div>
                                
                             </div>
-
-                            <div class="row attribution-row">
-                               
+                        </div>
                         
+                        
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-3 col-md-4">
+                                </div>
+                                
+                                <div class="col-lg-3 col-md-4 col-lg-offset-1 col-md-offset-1 button-cell">
+                                    <a href="#info-block-1" class="down-button" aria-label="{% trans 'Go to content' %}"><i class="fa fa-angle-down down-button-icon"></i></a>
+                                </div>
+
+                                <div class="col-lg-3 col-md-4 col-sm-8 col-lg-offset-1 col-md-offset-0">
+                                    <div class="center-block attribution-div">
+                                        
+                                        <div id="slide1-attribution" class="attribution-cell">{% trans "Whitby Abbey Evening Light. Photo by Neal Rylatt" %}</div>
+                                            
+                                    </div>
+                                </div>
                             </div>
                         </div>
                         
-
-
 
                         <!--
                         <br/>
