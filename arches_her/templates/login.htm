@@ -19,7 +19,7 @@
          <div class="cls-content-sm panel login-panel" >
             <div class="panel-body">
                 <header>
-                    <h1 class="login-panel-header arches-signin">{% trans "Sign In" %}</h1>
+                    <h1 class="login-panel-header arches-signin">{% trans "Administrator Sign In" %}</h1>
                 </header>
 
                 <main>
@@ -34,7 +34,7 @@
                     <form id="login-form" action="?next={{ next }}" method='POST' {% if auth_failed %} autocomplete="off" {% endif %}>
                         <fieldset>
                             <legend class="arches-signin-subtext">
-                                {% trans "Sign in to Arches to access your data modeling, editing, and discovery tools." %}<br>
+                                {% trans "Access to this page is limited to demo site administrators." %}<br>
                             </legend>
 
                             {% csrf_token %}
@@ -45,7 +45,7 @@
                                     <div class="input-group-addon"><i class="text-lg ion-log-in"></i></div>
                                     <div class="floating-label-group">
                                         <input type="text" id="username" class="form-control input-lg floating-label-input" name='username' autofocus required>
-                                        <label class="floating-label" for="username">{% trans "Email or Username" %}</label>
+                                        <label class="floating-label" for="username">{% trans "Administrator Email or Username" %}</label>
                                     </div>
                                 </div>
                             </div>
@@ -90,14 +90,14 @@
                         {% endif %}
 
                         {% if user_signup_enabled %}
-                            <a href="{% url 'signup' %}" class="btn btn-link account-link" target="_blank">{% trans "Create a new account" %}</a>
+                            <!-- <a href="{% url 'signup' %}" class="btn btn-link account-link" target="_blank">{% trans "Create a new account" %}</a> -->
                         {% endif %}
                     </div>
                 </main>
             </div>
 
             <footer class="panel-footer">
-                {% trans "Learn more about "%}<a href='http://www.archesproject.org'>Arches</a> 
+                {% trans "Learn more about the "%}<a href='http://www.archesproject.org/her-demo/'>Arches for HERs Demo Site</a> 
             </footer>
         </div>
     </div>
