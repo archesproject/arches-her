@@ -28,7 +28,7 @@ class Migration(migrations.Migration):
         with connection.cursor() as cursor:
             sql = """
                 update map_sources 
-                set source = '{"data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11&include_geojson_link=true", "type": "geojson!"}' 
+                set source = '{"data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11&include_geojson_link=true", "type": "geojson"}' 
                 where name = 'select-application-area';
                 delete from map_sources where name in ('select-area', 'select-monument');
             """
