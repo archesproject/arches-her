@@ -281,6 +281,7 @@
                             <tr>
                                 <td data-bind="foreach: resource">
                                     <span data-bind="visible: $index() > 0">, </span>
+                                    <i class="fa arches-menu-icon" data-bind="css: cssIcon" ></i>
                                     <!-- ko if: resourceUrl -->
                                     <a data-bind="text: resourceName, attr: {href: resourceUrl}" class="aher-table-link"></a>
                                     <!-- /ko -->

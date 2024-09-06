@@ -1,7 +1,8 @@
 define([
     'arches',
-    'knockout'
-], function(arches, ko) {
+    'knockout',
+    'utils/resource',
+], function(arches, ko, resourceUtil) {
     const standardizeNode = (obj) => {
         if(obj){
             const keys = Object.keys(obj);
@@ -92,6 +93,46 @@ define([
             return '--';
         }
     };
+
+    const getGraphs = () => {
+        return $.ajax({
+            url: arches.urls.graphs_api,
+            context: this,
+        }).then(function(graphsResponse) {
+            graphs = ko.unwrap(graphsResponse);
+
+            const filteredGraphs = graphs.filter((x) => {
+                return x.isresource === true;
+            }) || [];
+            
+            return filteredGraphs;
+        }).fail(function() {
+            // error
+        });
+
+    }
+
+    const getResourceGraph = (resourceId) => {
+        let graphData = {};
+
+        Object.defineProperty(graphData, "iconClass", {value: ko.observable()});
+        Object.defineProperty(graphData, "graphId", {value: ko.observable()});
+
+        return Promise.all([getGraphs(), resourceUtil.lookupResourceInstanceData(resourceId)]).then((values) => {
+            const graphs = values[0]
+            const resourceInstanceData = values[1]
+            if (graphs && resourceInstanceData) {
+                graphData.graphId(resourceInstanceData["_source"].graph_id);
+                for (data of graphs) {
+                    if (data.graphid == resourceInstanceData["_source"].graph_id) {
+                        graphData.iconClass(data.iconclass || 'fa fa-question');
+                        break;
+                }};
+                return graphData
+            }
+        });
+    };
+
 
     return {
         // default table configuration - used for display
@@ -227,6 +268,10 @@ define([
 
         // see if there's any node with a valid displayable value.  If yes, return true.
         // potentially useful for deeply nested resources
-        nestedDataExists: checkNestedData
+        nestedDataExists: checkNestedData,
+
+        getGraphs: getGraphs,
+
+        getResourceGraph: getResourceGraph
     } 
 });
