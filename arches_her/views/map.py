@@ -1,10 +1,18 @@
 from django.views.generic import View
 from django.db import connection
 from django.http import HttpResponse
+from arches.app.utils.permission_backend import get_restricted_instances
+from arches.app.search.search_engine_factory import SearchEngineFactory
 
 
 class ApplicationAreas(View):
+
     def get(self, request, zoom, x, y):
+        se = SearchEngineFactory().create()
+        restricted_resource_ids = get_restricted_instances(request.user, search_engine=se)
+        if len(restricted_resource_ids) == 0:
+            restricted_resource_ids.append("10000000-0000-0000-0000-000000000001")  # This must have a uuid that will never be a resource id.
+        restricted_resource_ids = tuple(restricted_resource_ids)
         nodeid = '1909956f-3a3b-11eb-ae99-f875a44e0e11'
         with connection.cursor() as cursor:
             result = cursor.execute(
@@ -18,8 +26,10 @@ class ApplicationAreas(View):
                     ) AS geom,
                     1 AS total
                 FROM geojson_geometries
-                WHERE nodeid = %s and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
-                [zoom, x, y, nodeid, zoom, x, y],
+                WHERE nodeid = %s 
+                and resourceinstanceid not in %s
+                and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
+                [zoom, x, y, nodeid, restricted_resource_ids, zoom, x, y],
             )
             result = bytes(cursor.fetchone()[0]) if result is None else result
         return HttpResponse(result, content_type="application/x-protobuf")
