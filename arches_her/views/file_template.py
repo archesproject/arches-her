@@ -358,9 +358,9 @@ class FileTemplateView(View):
                     for caseAgentTile in caseAgentResource.tiles:
                         if caseAgentTile.nodegroup.nodegroupid == uuid.UUID(contactDetailsNodegroupId):
                             if caseAgentTile.data[contactPointTypeNodeId] == "0f466b8b-a347-439f-9b61-bee9811ccbf0":
-                                mapping_dict["Casework Officer Email"] = caseAgentTile.data[contactPointNodeId]
+                                mapping_dict["Casework Officer Email"] = get_value_from_tile(caseAgentTile, contactPointNodeId)
                             elif caseAgentTile.data[contactPointTypeNodeId] == "75e6cfad-7418-4ed3-841b-3c083d7df30b":
-                                mapping_dict["Casework Officer Number"] = caseAgentTile.data[contactPointNodeId]
+                                mapping_dict["Casework Officer Number"] = get_value_from_tile(caseAgentTile, contactPointNodeId)
 
                 if tile.data[contactNodeId] == "5cc97bfd-d76f-40fc-be60-fbb9dfb28fc4" and tile.data[contacts["Planning Officer"]]:
                     contactResourceiId = tile.data[contacts["Planning Officer"]][0]["resourceId"]
