@@ -139,11 +139,12 @@ You can also run Arches for HER for development in a Docker environment. To do t
 
    Navigate to the folder where the compose files exist, then compose up using `docker-compose-create-project.yml`:
 
-   > NOTE: This uses the `--abort-on-container-exit` and `--exit-code-from` flags to stop the containers once the `aherproject` container has completed. This is because the `aherproject` container will create the project and then exit.
+   > NOTE: This uses the `--abort-on-container-exit` and `--exit-code-from` flags to detach once the `aherproject` container has completed. This is because the `aherproject` container will create the project and then exit.
 
    ```bash
-   cd /my_workspacefolder/arches_her/docker/arches_her
-   docker compose -f docker-compose-create-project.yml up  --abort-on-container-exit --exit-code-from aherproject
+   cd /my_workspacefolder/arches_her/docker/aher_project
+   docker compose -f docker-compose-create-project.yml up  --abort-on-container-exit --exit-code-from aherproject \
+      && docker compose -f docker-compose-create-project.yml down
    ```
 
 3. Once the aher_project folder has been created, you can compose up the dependencies and the development container any time you want to run the application:
