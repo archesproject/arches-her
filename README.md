@@ -121,45 +121,62 @@ This will allow you to run your Arches project locally, but is not suitable for 
 
 ## Running Arches for HERs in a Docker Development Environment
 
-You can also run Arches in a Docker development environment. To do this, pull the `arches` repo and use the two compose files `docker-compose-dependencies.yml` and `docker-compose.yml`.
+You can also run Arches for HER for development in a Docker environment. To do this, clone the `arches` repo into the same directory as `arches_her` and use the compose files within `arches_her/docker/aher_project` to set up the development project and run the application and dependencies.
 
-- Clone both the [`arches`](https://github.com/archesproject/arches.git) and  [`arches-her`](https://github.com/archesproject/arches-her.git) repository:
+1. Clone both the [`arches`](https://github.com/archesproject/arches.git) and  [`arches-her`](https://github.com/archesproject/arches-her.git) repository:
+   > NOTE: the `arches-her` repo is cloned into a folder called `arches_her`. This is important as the compose files expect this folder structure.
 
-  ```bash
-  /workspace $ git clone https://github.com/archesproject/arches.git
-  /workspace $ git clone https://github.com/archesproject/arches-her.git arches_her
-  ```
+   ```bash
+   cd /my_workspacefolder
+   git clone https://github.com/archesproject/arches.git
+   git clone https://github.com/archesproject/arches-her.git arches_her
+   ```
 
-  Ensure the `arches` repo has `dev/7.5.x` checked-out.
+   Ensure the `arches` repo has branch `stable/7.5.4` checked-out. Currently arches-her is only compatable with 7.5, which is not accepting changes. Therefore you should not use dev/7.5.x.
 
-- Navigate to the folder where the compose files exist, then compose up:
 
-  ```bash
-  /workspace $ cd arches_her/docker/arches_her
-  /workspace/arches_her/docker/arches_her $ docker compose -f docker-compose-dependencies.yml up -d
-  /workspace/arches_her/docker/arches_her $ docker compose -f docker-compose.yml up -d
-  ```
+2. Create an arches project that will be used to host the arches-her app:
 
-  The first time you compose up - the database, Elastic indices and package data will get created and loaded. Be patient. Once complete, navigate to [`http://localhost:8002`](http://localhost:8002). 
+   Navigate to the folder where the compose files exist, then compose up using `docker-compose-create-project.yml`:
 
-When finished, compose down:
+   > NOTE: This uses the `--abort-on-container-exit` and `--exit-code-from` flags to stop the containers once the `aherproject` container has completed. This is because the `aherproject` container will create the project and then exit.
 
-  ```bash
-  docker compose -f docker-compose.yml down
-  docker compose -f docker-compose-dependencies.yml down
-  ```
+   ```bash
+   cd /my_workspacefolder/arches_her/docker/arches_her
+   docker compose -f docker-compose-create-project.yml up  --abort-on-container-exit --exit-code-from aherproject
+   ```
+
+3. Once the aher_project folder has been created, you can compose up the dependencies and the development container any time you want to run the application:
+
+   ```bash
+   cd arches_her/docker/arches_her
+   docker compose -f docker-compose-dependencies.yml up -d
+   docker compose -f docker-compose.yml up -d
+   ```
+
+   The first time you compose up - the database, Elastic indices and package data will get created and loaded. Be patient. Once complete, navigate to [`http://localhost:8002`](http://localhost:8002).
+
+   > NOTE: You can see the progress of the database and Elastic index creation by running `docker logs -f aherproject` in a separate terminal window.
+
+4. When you have finished, compose down in this order to ensure everything shuts down safely:
+
+   ```bash
+   docker compose -f docker-compose.yml down
+   docker compose -f docker-compose-dependencies.yml down
+   ```
 
 ## How Do I Configure Arches for HERs
 
-Administrators of an instance of Arches for HERs should configure their implementation having installed the out-of-the-box version.  Ways in which you can configure and customise an instance include:
+Administrators of an instance of Arches for HERs should configure their arches project having installed the out-of-the-box version.  Ways in which you can configure and customise an instance include:
 
-- The homepage provided (`arches_her/arches_her/templates/index.htm`) is a template that requires modification to suit the implementation. This should include branding, images, and replacing the highlighted content with appropriate information. A bespoke homepage can be created by replacing the contents of `index.htm`.
+- The homepage provided (`arches_her/arches_her/templates/index.htm`) is a template that requires modification to suit the implementation. This should include branding, images, and replacing the highlighted content with appropriate information. A bespoke homepage can be created by copying the content of `arches_her/arches_her/templates/index.htm` to your arches project and modifying it.
 - Configuring functions against specific graphs.  The initial installation of Arches for HERs includes the following functions:
-    - BNG Point to GeoJSON function
-    - GeoJSON to BNG Point function
-    - Consultation Status function
-- Branding emails sent by the application
-- Setting Accessibility mode to be on
+   - BNG Point to GeoJSON function
+   - GeoJSON to BNG Point function
+   - Consultation Status function
+   - Generate Unique References
+- Branding emails sent by the application. Copy the email templates from `arches_her/arches_her/templates/emails` to your arches project and modify them as required.
+- Setting Accessibility mode to be on.
 - Configuring basemaps available in your Arches for HERs instance (using the instructions in the [Core Arches Documentation](https://arches.readthedocs.io/en/latest/administering/managing-map-layers/#basemaps-and-overlays)).
 
 >❗️ Please note: you will need to configure a MapBox key in the user interface for the default mapping to appear, as per the [Default Map Settings](https://arches.readthedocs.io/en/latest/configuring/arches-system-settings/#default-map-settings) Core Arches documentation.
