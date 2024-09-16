@@ -83,7 +83,6 @@ init_arches() {
 	if [[ ! -d ${APP_FOLDER}/${ARCHES_PROJECT} ]] || [[ ! "$(ls ${APP_FOLDER}/${ARCHES_PROJECT})" ]]; then
 		echo ""
 		echo "----- Custom Arches project '${ARCHES_PROJECT}' does not exist. -----"
-		#echo "----- Use the "create_project" command to create the project and then restart the container -----"
 		echo ""
 		create_arches_project
 	else
@@ -96,7 +95,7 @@ init_arches() {
 		echo "Skipping Package Loading"
 	else
 		echo "Database ${PGDBNAME} does not exists yet."
-		run_setup_db #change to run_load_package if preferred 
+		run_setup_db
 	fi
 }
 
@@ -144,13 +143,6 @@ install_yarn_components() {
 
 #### Misc
 copy_settings_local() {
-	# The settings_local.py in ${ARCHES_ROOT}/arches/ gets ignored if running manage.py from a custom Arches project instead of Arches core app
-	#echo "Copying ${WEB_ROOT}/docker files to ${APP_FOLDER}/${ARCHES_PROJECT}..."
-
-	#yes | cp ${WEB_ROOT}/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
-	#yes | cp ${WEB_ROOT}/docker/settings.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings.py
-	#yes | cp ${WEB_ROOT}/docker/urls.py ${APP_FOLDER}/${ARCHES_PROJECT}/urls.py
-
 	echo "Copying ${AHER_ROOT}/docker/aher_project/docker files to ${APP_FOLDER}/${ARCHES_PROJECT}..."
 	yes | cp ${AHER_ROOT}/docker/aher_project/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
 	yes | cp ${AHER_ROOT}/docker/aher_project/docker/settings.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings.py
@@ -192,7 +184,6 @@ run_load_package() {
 	fi
 }
 
-# "exec" means that it will finish building???
 run_django_server() {
 	echo ""
 	echo "----- *** RUNNING DJANGO DEVELOPMENT SERVER *** -----"
