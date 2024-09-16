@@ -1,5 +1,5 @@
 try:
-    from .arches_her.settings import *
+    from .aher_project.settings import *
 except ImportError:
     pass
 
@@ -9,6 +9,8 @@ import ast
 import requests
 import sys
 
+
+# COPIED FROM ./arches_her/docker/aher_project/docker/settings_local.py
 
 def get_env_variable(var_name):
     msg = "Set the %s environment variable"
@@ -30,10 +32,6 @@ def get_optional_env_variable(var_name):
 MODE = get_env_variable("DJANGO_MODE")
 
 DEBUG = ast.literal_eval(get_env_variable("DJANGO_DEBUG"))
-
-#COUCHDB_URL = "http://{}:{}@{}:{}".format(
-#    get_env_variable("COUCHDB_USER"), get_env_variable("COUCHDB_PASS"), get_env_variable("COUCHDB_HOST"), get_env_variable("COUCHDB_PORT")
-#)  # defaults to localhost:5984
 
 DATABASES = {
     "default": {
@@ -72,3 +70,5 @@ if USER_SECRET_KEY:
 ARCHES_NAMESPACE_FOR_DATA_EXPORT = f"http://{get_env_variable('PUBLIC_SERVER_PROJECT_NAME')}:{get_env_variable('DJANGO_PORT')}"
 
 PUBLIC_SERVER_ADDRESS = f"http://{get_env_variable('PUBLIC_SERVER_PROJECT_NAME')}:{get_env_variable('DJANGO_PORT')}/"
+
+HER_ROOT = os.path.join(get_env_variable('AHER_ROOT'), 'arches_her')

@@ -1,0 +1,71 @@
+version: '3.8'
+services:
+    aherproject:
+      container_name: aherproject
+      image: he/aher_project:dev_build
+      build:
+        args:
+          - "PROJ_NAME=aher_project"
+          - "DOCKER_PATH=./arches_her/docker/aher_project/docker"
+        context: ../../..
+        dockerfile: ./arches_her/docker/aher_project/Dockerfile
+      command: run_arches
+      volumes:
+        - ../../../arches:/web_root/arches
+        - ../../../arches_her:/web_root/arches_her
+        - ../../../aher_project:/web_root/aher_project
+        - ./docker:/web_root/docker
+        - ../../../aher_project-package:/web_root/aher_project_package
+        - ../../../aher_project-data:/web_root/aher_project_data
+      env_file:
+        - ./docker/env_file.env
+      ports:
+        - 8002:8000
+        - 5678:5678
+      stdin_open: true
+      tty: true
+
+    aherproject-livereload:
+      profiles:
+        - livereload
+      container_name: aherproject-livereload
+      image: he/aher_project:dev_build
+      command: run_livereload
+      volumes:
+        - ../../../arches:/web_root/arches
+        - ../../../arches_her:/web_root/arches_her
+        - ../../../aher_project:/web_root/aher_project
+      env_file:
+        - ./docker/env_file.env
+      ports:
+        - 35729:35729      
+      depends_on:
+          - aherproject
+      stdin_open: true
+      tty: true
+    
+    aherproject-webpack:
+      container_name: aherproject-webpack
+      image: he/aher_project:dev_build
+      command: run_webpack
+      volumes:
+        - ../../../arches:/web_root/arches
+        - ../../../arches_her:/web_root/arches_her
+        - ../../../aher_project:/web_root/aher_project
+      env_file:
+        - ./docker/env_file.env
+      ports:
+        - 8028:8021
+      depends_on:
+          - aherproject
+      stdin_open: true
+      tty: true
+
+networks:
+  default:
+    external: true
+    name: aherproject-network
+
+volumes:
+    arches-log:
+    arches-static:

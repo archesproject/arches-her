@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+    aherproject:
+      container_name: aherproject
+      image: he/aher_project:dev_build
+      build:
+        args:
+          - "PROJ_NAME=aher_project"
+          - "DOCKER_PATH=./arches_her/docker/aher_project/docker"
+        context: ../../..
+        dockerfile: ./arches_her/docker/aher_project/Dockerfile
+      command: create_project
+      volumes:
+        - ../../..:/web_root
+      env_file:
+        - ./docker/env_file.env
+      ports:
+        - 8002:8000
+        - 5678:5678
+      stdin_open: true
+      tty: true

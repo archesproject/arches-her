@@ -105,9 +105,12 @@ create_arches_project_only(){
 	echo "----- Creating '${ARCHES_PROJECT}'... -----"
 	echo ""
 
+
 	cd ${WEB_ROOT}
-	python3 ${WEB_ROOT}/arches/arches/install/arches-project create ${ARCHES_PROJECT}
+	python3 ${WEB_ROOT}/arches/arches/install/arches-admin startproject ${ARCHES_PROJECT}
 	APP_FOLDER=${WEB_ROOT}/${ARCHES_PROJECT}
+
+	copy_settings_local
 }
 
 create_arches_project() {
@@ -117,7 +120,6 @@ create_arches_project() {
 		echo "----- Creating '${ARCHES_PROJECT}'... -----"
 		echo ""
 		create_arches_project_only
-		copy_settings_local
 		run_setup_db
 
 		exit_code=$?
@@ -143,8 +145,17 @@ install_yarn_components() {
 #### Misc
 copy_settings_local() {
 	# The settings_local.py in ${ARCHES_ROOT}/arches/ gets ignored if running manage.py from a custom Arches project instead of Arches core app
-	echo "Copying ${WEB_ROOT}/docker/settings_local.py to ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py..."
-	yes | cp ${WEB_ROOT}/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
+	#echo "Copying ${WEB_ROOT}/docker files to ${APP_FOLDER}/${ARCHES_PROJECT}..."
+
+	#yes | cp ${WEB_ROOT}/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
+	#yes | cp ${WEB_ROOT}/docker/settings.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings.py
+	#yes | cp ${WEB_ROOT}/docker/urls.py ${APP_FOLDER}/${ARCHES_PROJECT}/urls.py
+
+	echo "Copying ${AHER_ROOT}/docker/aher_project/docker files to ${APP_FOLDER}/${ARCHES_PROJECT}..."
+	yes | cp ${AHER_ROOT}/docker/aher_project/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
+	yes | cp ${AHER_ROOT}/docker/aher_project/docker/settings.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings.py
+	yes | cp ${AHER_ROOT}/docker/aher_project/docker/urls.py ${APP_FOLDER}/${ARCHES_PROJECT}/urls.py
+	
 }
 
 #### Run commands
@@ -166,12 +177,9 @@ run_setup_db() {
 	echo ""
 	echo "----- RUNNING SETUP_DB -----"
 	echo ""
-	cd ${WEB_ROOT}/${ARCHES_PROJECT}
-	if [[ -d ${APP_ROOT}/${ARCHES_PROJECT}/pkg ]];then
-		python3 manage.py packages -o load_package -s ${ARCHES_PROJECT}/pkg -db -dev -y
-	else
-		python3 manage.py setup_db --force
-	fi
+
+    cd ${WEB_ROOT}/${ARCHES_PROJECT}
+	python3 manage.py packages -o load_package -a arches_her -db -y
 }
 
 run_load_package() {
@@ -225,7 +233,7 @@ run_webpack() {
 	echo ""
 	cd ${APP_FOLDER}
     echo "Running Webpack"
-	exec sh -c "wait-for-it archesher:${DJANGO_PORT} -t 1200 && cd /web_root/arches_her/arches_her && yarn install && yarn start"
+	exec sh -c "wait-for-it aherproject:${DJANGO_PORT} -t 1200 && cd /web_root/aher_project/aher_project && yarn install && yarn start"
 }
 
 ### Starting point ###
@@ -241,7 +249,6 @@ run_webpack() {
 # If no arguments are supplied, assume the server needs to be run
 if [[ $#  -eq 0 ]]; then
 	echo "No arguments supplied, running Arches server..."
-	copy_settings_local
 	start_celery_supervisor
 	wait_for_db
 	run_arches
@@ -256,7 +263,6 @@ do
 
 	case ${key} in
 		run_arches)
-			copy_settings_local
 			wait_for_db
 			start_celery_supervisor
 			run_arches
@@ -268,12 +274,10 @@ do
 			run_webpack
 		;;
 		run_tests)
-			copy_settings_local
 			wait_for_db
 			run_tests
 		;;
 		run_migrations)
-			copy_settings_local
 			wait_for_db
 			run_migrations
 		;;
