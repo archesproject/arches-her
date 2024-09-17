@@ -121,7 +121,7 @@ This will allow you to run your Arches project locally, but is not suitable for 
 
 ## Running Arches for HERs in a Docker Development Environment
 
-You can also run Arches for HER for development in a Docker environment. To do this, clone the `arches` repo into the same directory as `arches_her` and use the compose files within `arches_her/docker/aher_project` to set up the development project and run the application and dependencies.
+You can also run Arches for HER for development in a Docker environment. To do this, clone the `arches` repo into the same directory as `arches_her` and use the compose files within `arches_her/docker/aher_project` to set up the development project and run the application and dependencies using the following steps.
 
 1. Clone both the [`arches`](https://github.com/archesproject/arches.git) and  [`arches-her`](https://github.com/archesproject/arches-her.git) repository:
    > NOTE: the `arches-her` repo is cloned into a folder called `arches_her`. This is important as the compose files expect this folder structure.
@@ -146,6 +146,8 @@ You can also run Arches for HER for development in a Docker environment. To do t
    docker compose -f docker-compose-create-project.yml up  --abort-on-container-exit --exit-code-from aherproject \
       && docker compose -f docker-compose-create-project.yml down
    ```
+
+   > NOTE: The Arches project created using this approach will have its default template files renamed with the suffix `.default` to avoid conflicts with the Arches for HERs templates. If you want to use any of the default templates, you will need to remove the `.default` suffix from the file.
 
 3. Once the aher_project folder has been created, you can compose up the dependencies and the development container any time you want to run the application:
 

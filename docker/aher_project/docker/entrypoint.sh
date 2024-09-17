@@ -11,7 +11,9 @@ else
 fi
 
 # SET DEFAULT WORKING DIRECTORY
-cd ${APP_FOLDER}
+if [[ -d ${APP_FOLDER} ]]; then
+	cd ${APP_FOLDER}
+fi
 
 YARN_MODULES_FOLDER=${PACKAGE_JSON_FOLDER}/$(awk \
 	-F '--install.modules-folder' '{print $2}' ${PACKAGE_JSON_FOLDER}/.yarnrc \
@@ -110,6 +112,15 @@ create_arches_project_only(){
 	APP_FOLDER=${WEB_ROOT}/${ARCHES_PROJECT}
 
 	copy_settings_local
+	rename_default_arches_templates
+	
+
+}
+
+rename_default_arches_templates() {
+	echo "Renaming default Arches project templates..."
+	cd ${APP_FOLDER}/${ARCHES_PROJECT}/templates
+	find . -type f -exec bash -c 'mv "$1" "${1}.default"' - '{}' \;
 }
 
 create_arches_project() {
