@@ -150,7 +150,7 @@ You can also run Arches for HER for development in a Docker environment. To do t
 3. Once the aher_project folder has been created, you can compose up the dependencies and the development container any time you want to run the application:
 
    ```bash
-   cd arches_her/docker/arches_her
+   cd /my_workspacefolder/arches_her/docker/aher_project
    docker compose -f docker-compose-dependencies.yml up -d
    docker compose -f docker-compose.yml up -d
    ```
@@ -162,6 +162,7 @@ You can also run Arches for HER for development in a Docker environment. To do t
 4. When you have finished, compose down in this order to ensure everything shuts down safely:
 
    ```bash
+   cd /my_workspacefolder/arches_her/docker/aher_project
    docker compose -f docker-compose.yml down
    docker compose -f docker-compose-dependencies.yml down
    ```
