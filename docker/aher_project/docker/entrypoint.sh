@@ -158,6 +158,7 @@ copy_settings_local() {
 	yes | cp ${AHER_ROOT}/docker/aher_project/docker/settings_local.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings_local.py
 	yes | cp ${AHER_ROOT}/docker/aher_project/docker/settings.py ${APP_FOLDER}/${ARCHES_PROJECT}/settings.py
 	yes | cp ${AHER_ROOT}/docker/aher_project/docker/urls.py ${APP_FOLDER}/${ARCHES_PROJECT}/urls.py
+	yes | cp ${AHER_ROOT}/docker/aher_project/docker/package.json ${APP_FOLDER}/${ARCHES_PROJECT}/package.json
 	
 }
 

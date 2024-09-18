@@ -101,6 +101,7 @@ RUN mkdir docker
 COPY $DOCKER_PATH/settings_local.py ${WEB_ROOT}/docker/settings_local.py
 COPY $DOCKER_PATH/settings.py ${WEB_ROOT}/docker/settings.py
 COPY $DOCKER_PATH/urls.py ${WEB_ROOT}/docker/urls.py
+COPY $DOCKER_PATH/package.json ${WEB_ROOT}/docker/package.json
 COPY $DOCKER_PATH/conf.d ${WEB_ROOT}/docker/conf.d
 COPY $DOCKER_PATH/supervisor.conf ${WEB_ROOT}/docker/supervisor.conf
 
