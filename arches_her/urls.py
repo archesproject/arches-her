@@ -6,6 +6,7 @@ from arches.app.views.plugin import PluginView
 from arches_her.views.file_template import FileTemplateView
 from arches_her.views.active_consultations import ActiveConsultationsView
 from arches_her.views.index import IndexView
+from arches_her.views.datatype_document import DatatypeDocumentView
 
 uuid_regex = settings.UUID_REGEX
 
@@ -22,6 +23,9 @@ urlpatterns = [
     re_path(r'^plugins/correspondence-workflow', PluginView.as_view(), name='correspondence-workflow'),
     re_path(r'^plugins/communication-workflow', PluginView.as_view(), name='communication-workflow'),
     re_path(r'^plugins/init-workflow', PluginView.as_view(), name='init-workflow'),
+    re_path(
+        r"^datatype_document/(?P<tileid>%s)/(?P<nodeid>%s)$" % (uuid_regex, uuid_regex), DatatypeDocumentView.as_view(), name="datatype_document"
+    ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # if settings.SHOW_LANGUAGE_SWITCH is True:
