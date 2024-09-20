@@ -6,7 +6,7 @@ from arches.app.views.plugin import PluginView
 from arches_her.views.file_template import FileTemplateView
 from arches_her.views.active_consultations import ActiveConsultationsView
 from arches_her.views.index import IndexView
-from arches_her.views.datatype_document import DatatypeDocumentView, ResourceDocumentView
+from arches_her.views.index_document import DatatypeDocumentView, ResourceDocumentView
 
 uuid_regex = settings.UUID_REGEX
 
