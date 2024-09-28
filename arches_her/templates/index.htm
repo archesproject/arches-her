@@ -19,7 +19,6 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
 {% load static %}
 {% load template_tags %}
 {% load i18n %}
-{% load compress %}
 {% load webpack_static from webpack_loader %}
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
@@ -49,13 +48,9 @@ along with this program. If not, see <http://www.gnu.org/licenses/>.
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.2/css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css">
         <link rel="stylesheet" type="text/css" href="{% webpack_static 'css/index.css' %}">
-        {% compress css %}
             <link rel="stylesheet" type="text/x-scss" href="{% webpack_static 'css/project.scss' %}" media="all">
-        {% endcompress %}
         {% if app_settings.ACCESSIBILITY_MODE %}
-            {% compress css %}
                 <link rel="stylesheet" type="text/x-scss" href="{% webpack_static 'css/accessibility.scss' %}" media="screen">
-            {% endcompress %}
         {% endif %}
     {% endblock css%}
 </head>

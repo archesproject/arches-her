@@ -2,7 +2,7 @@ from django.views.generic import View
 from django.db import connection
 from django.http import HttpResponse, Http404
 from arches.app.models import models
-from arches.app.utils.permission_backend import get_restricted_instances
+from arches.app.utils.permission_backend import get_filtered_instances
 from arches.app.search.search_engine_factory import SearchEngineFactory
 
 
@@ -15,7 +15,7 @@ class ApplicationAreas(View):
         try:
             node = models.Node.objects.get(nodeid=nodeid, nodegroup_id__in=viewable_nodegroups)
             se = SearchEngineFactory().create()
-            restricted_resource_ids = get_restricted_instances(request.user, search_engine=se)
+            restricted_resource_ids = get_filtered_instances(request.user, search_engine=se)
             if len(restricted_resource_ids) == 0:
                 restricted_resource_ids.append("10000000-0000-0000-0000-000000000001")  # This must have a uuid that will never be a resource id.
             restricted_resource_ids = tuple(restricted_resource_ids)

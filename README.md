@@ -89,8 +89,8 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
 
    ```javascript
    "dependencies": {
-        "arches": "archesproject/arches#stable/7.5.5",
-        "arches_her": "archesproject/arches_her#dev/1.0.x"
+        "arches": "archesproject/arches#stable/7.6.0",
+        "arches_her": "archesproject/arches_her#stable/1.0.x"
     },
     ```
 
@@ -111,8 +111,8 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
    Before you can use browse the application you will need to build the front end asset bundle. From the directory containing the package.json file ([workspace]/arches_her/arches_her)
 
    ```bash
-   yarn install
-   yarn build_development
+   npm install
+   npm run build_development
    ```
 
 This will allow you to run your Arches project locally, but is not suitable for running on a web server. Please see the guidance for deploying an Arches project like Arches for HERs into a server environment.
@@ -204,3 +204,14 @@ The Word files in the destination folder are processed in turn, and the command 
 A number of guidance documents are available in `arches_her/media/guides` that can be used to help users understand how to use the system. These documents are in PDF format and can be linked to within your implementation if you do not have your own help documentation.
 
 An example of how to include them within your implementation can be found in the index.htm template, which includes a link to the introduction guide.
+
+
+# Project Specific Styling
+
+For information, there are currently 2 project css/scss files for styling, this is in preparation for future scss migration:
+
+## - project.scss
+Used for the Arches-HER landing page. There are 3 other required related files: _project-breakpoints.scss, _project-functions.scss and _project-variables.scss.
+
+## - project.css
+Used for the rest of the site where the project.css is imported by the base.htm template.

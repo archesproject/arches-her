@@ -20,13 +20,10 @@ APP_NAME = 'arches_her'
 APP_VERSION = semantic_version.Version(major=0, minor=0, patch=0)
 APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 APP_PATHNAME = "arches-her"
-MIN_ARCHES_VERSION = arches.__version__
-MAX_ARCHES_VERSION = arches.__version__
-
 
 WEBPACK_LOADER = {
     "DEFAULT": {
-        "STATS_FILE": os.path.join(APP_ROOT, 'webpack/webpack-stats.json'),
+        "STATS_FILE": os.path.join(APP_ROOT, '..', 'webpack/webpack-stats.json'),
     },
 }
 
@@ -35,14 +32,14 @@ FUNCTION_LOCATIONS.append('arches_her.functions')
 ETL_MODULE_LOCATIONS.append('arches_her.etl_modules')
 SEARCH_COMPONENT_LOCATIONS.append('arches_her.search.components')
 
-LOCALE_PATHS.append(os.path.join(APP_ROOT, 'locale'))
+LOCALE_PATHS.insert(0, os.path.join(APP_ROOT, 'locale'))
 
 TEMPLATES[0]["OPTIONS"]["context_processors"].append(
     "arches_her.utils.context_processors.project_settings"
 )
 
 FILE_TYPE_CHECKING = False
-FILE_TYPES = ["bmp", "gif", "jpg", "jpeg", "pdf", "png", "psd", "rtf", "tif", "tiff", "xlsx", "csv", "zip"]
+FILE_TYPES = ["bmp", "gif", "jpg", "jpeg", "pdf", "png", "psd", "rtf", "tif", "tiff", "xlsx", "csv", "zip", "json"]
 FILENAME_GENERATOR = "arches.app.utils.storage_filename_generator.generate_filename"
 UPLOADED_FILES_DIR = "uploadedfiles"
 
@@ -144,12 +141,15 @@ INSTALLED_APPS = (
     "corsheaders",
     "oauth2_provider",
     "django_celery_results",
-    "compressor",
+    "django_hosts",
     # "silk",
     "arches_her",
 )
 
-ARCHES_APPLICATIONS = ()
+INSTALLED_APPS += ("arches.app",)
+
+ROOT_HOSTCONF = "arches_her.hosts"
+DEFAULT_HOST = "arches_her"
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
@@ -163,22 +163,25 @@ MIDDLEWARE = [
     "oauth2_provider.middleware.OAuth2TokenMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
-    # "django.middleware.clickjacking.XFrameOptionsMiddleware",
+    "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "arches.app.utils.middleware.SetAnonymousUser",
     # "silk.middleware.SilkyMiddleware",
 ]
 
-STATICFILES_DIRS = build_staticfiles_dirs(
-    root_dir=ROOT_DIR,
-    app_root=APP_ROOT,
-    arches_applications=ARCHES_APPLICATIONS,
+MIDDLEWARE.insert(  # this must resolve to first MIDDLEWARE entry
+    0, 
+    "django_hosts.middleware.HostsRequestMiddleware"
 )
 
+MIDDLEWARE.append(  # this must resolve last MIDDLEWARE entry
+    "django_hosts.middleware.HostsResponseMiddleware"
+)  
+
+STATICFILES_DIRS = build_staticfiles_dirs(app_root=APP_ROOT)
+
 TEMPLATES = build_templates_config(
-    root_dir=ROOT_DIR,
     debug=DEBUG,
     app_root=APP_ROOT,
-    arches_applications=ARCHES_APPLICATIONS,
 )
 
 ALLOWED_HOSTS = []
@@ -458,14 +461,3 @@ if DOCKER:
         from .settings_docker import *
     except ImportError:
         pass
-
-# returns an output that can be read by NODEJS
-if __name__ == "__main__":
-    transmit_webpack_django_config(
-        root_dir=ROOT_DIR,
-        app_root=APP_ROOT,
-        arches_applications=ARCHES_APPLICATIONS,
-        public_server_address=PUBLIC_SERVER_ADDRESS,
-        static_url=STATIC_URL,
-        webpack_development_server_port=WEBPACK_DEVELOPMENT_SERVER_PORT,
-    )
