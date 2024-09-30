@@ -81,7 +81,7 @@
                         "en": "System Reference Numbers"
                     },
                     "nodegroup_id": "4a1e68cd-f000-11eb-a1cc-a87eeabdefba",
-                    "sortorder": 10,
+                    "sortorder": 11,
                     "visible": true
                 },
                 {
@@ -388,6 +388,33 @@
                 },
                 {
                     "active": true,
+                    "cardid": "66d6e722-67b7-11ef-b5fa-1d2132ded220",
+                    "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
+                    "config": null,
+                    "constraints": [],
+                    "cssclass": null,
+                    "description": "",
+                    "graph_id": "934cd7f0-480a-11ea-9240-c4d9877d154e",
+                    "helpenabled": false,
+                    "helptext": {
+                        "en": ""
+                    },
+                    "helptitle": {
+                        "en": ""
+                    },
+                    "instructions": {
+                        "en": ""
+                    },
+                    "is_editable": true,
+                    "name": {
+                        "en": "Associated Digital Files"
+                    },
+                    "nodegroup_id": "66d6e721-67b7-11ef-b5fa-1d2132ded220",
+                    "sortorder": 8,
+                    "visible": true
+                },
+                {
+                    "active": true,
                     "cardid": "6eff45ba-ee0e-11eb-9cfd-a87eeabdefba",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
@@ -410,7 +437,7 @@
                         "en": "Resource Model Type"
                     },
                     "nodegroup_id": "6eff45b8-ee0e-11eb-a895-a87eeabdefba",
-                    "sortorder": 12,
+                    "sortorder": 13,
                     "visible": false
                 },
                 {
@@ -437,7 +464,7 @@
                         "en": "Audit Metadata"
                     },
                     "nodegroup_id": "71e5be8c-f001-11eb-94a2-a87eeabdefba",
-                    "sortorder": 11,
+                    "sortorder": 12,
                     "visible": false
                 },
                 {
@@ -464,7 +491,7 @@
                         "en": "External Cross References"
                     },
                     "nodegroup_id": "78dc0723-f000-11eb-979a-a87eeabdefba",
-                    "sortorder": 9,
+                    "sortorder": 10,
                     "visible": true
                 },
                 {
@@ -491,7 +518,7 @@
                         "en": "Associated Monuments, Areas and Artefacts"
                     },
                     "nodegroup_id": "86ce8acb-4eaa-11eb-8468-f875a44e0e11",
-                    "sortorder": 8,
+                    "sortorder": 9,
                     "visible": true
                 },
                 {
@@ -2982,6 +3009,27 @@
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
                 {
+                    "card_id": "66d6e722-67b7-11ef-b5fa-1d2132ded220",
+                    "config": {
+                        "defaultResourceInstance": [],
+                        "i18n_properties": [
+                            "placeholder"
+                        ],
+                        "label": "Digital Files",
+                        "placeholder": {
+                            "en": ""
+                        }
+                    },
+                    "id": "66d6e723-67b7-11ef-b5fa-1d2132ded220",
+                    "label": {
+                        "en": "Digital Files"
+                    },
+                    "node_id": "66d6e721-67b7-11ef-b5fa-1d2132ded220",
+                    "sortorder": null,
+                    "visible": true,
+                    "widget_id": "ff3c400a-76ec-11e7-a793-784f435179ea"
+                },
+                {
                     "card_id": "6eff45ba-ee0e-11eb-9cfd-a87eeabdefba",
                     "config": {
                         "defaultValue": "81492c82-8a7e-4537-8912-1f96728d1cea",
@@ -5349,6 +5397,15 @@
                 },
                 {
                     "description": null,
+                    "domainnode_id": "934cc466-480a-11ea-9b79-c4d9877d154e",
+                    "edgeid": "5b8ab71a-d9a8-43ab-bdfa-df82f795e94b",
+                    "graph_id": "934cd7f0-480a-11ea-9240-c4d9877d154e",
+                    "name": null,
+                    "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of",
+                    "rangenode_id": "66d6e721-67b7-11ef-b5fa-1d2132ded220"
+                },
+                {
+                    "description": null,
                     "domainnode_id": "e354ec6e-07b8-11eb-945e-f875a44e0e11",
                     "edgeid": "5bf5120c-4ea7-11eb-8c6d-f875a44e0e11",
                     "graph_id": "934cd7f0-480a-11ea-9240-c4d9877d154e",
@@ -7060,6 +7117,12 @@
                     "legacygroupid": null,
                     "nodegroupid": "6677dd1c-3dff-11eb-883a-f875a44e0e11",
                     "parentnodegroup_id": "6677b647-3dff-11eb-bbd8-f875a44e0e11"
+                },
+                {
+                    "cardinality": "1",
+                    "legacygroupid": null,
+                    "nodegroupid": "66d6e721-67b7-11ef-b5fa-1d2132ded220",
+                    "parentnodegroup_id": null
                 },
                 {
                     "cardinality": "1",
@@ -9761,6 +9824,43 @@
                     "nodeid": "66782b21-3dff-11eb-b4d9-f875a44e0e11",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
+                    "sortorder": 0,
+                    "sourcebranchpublication_id": null
+                },
+                {
+                    "alias": "digital_file_s_",
+                    "config": {
+                        "graphid": [
+                            "a535a235-8481-11ea-a6b9-f875a44e0e11"
+                        ],
+                        "graphs": [
+                            {
+                                "graphid": "a535a235-8481-11ea-a6b9-f875a44e0e11",
+                                "inverseRelationshipConcept": "ac41d9be-79db-4256-b368-2f4559cfbe55",
+                                "name": "Digital Object",
+                                "relationshipCollection": "00000000-0000-0000-0000-000000000005",
+                                "relationshipConcept": "ac41d9be-79db-4256-b368-2f4559cfbe55",
+                                "useOntologyRelationship": false
+                            }
+                        ],
+                        "searchDsl": "",
+                        "searchString": ""
+                    },
+                    "datatype": "resource-instance-list",
+                    "description": "",
+                    "exportable": false,
+                    "fieldname": null,
+                    "graph_id": "934cd7f0-480a-11ea-9240-c4d9877d154e",
+                    "hascustomalias": false,
+                    "is_collector": true,
+                    "isrequired": false,
+                    "issearchable": true,
+                    "istopnode": false,
+                    "name": "Digital File(s)",
+                    "nodegroup_id": "66d6e721-67b7-11ef-b5fa-1d2132ded220",
+                    "nodeid": "66d6e721-67b7-11ef-b5fa-1d2132ded220",
+                    "ontologyclass": "http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object",
+                    "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P129i_is_subject_of",
                     "sortorder": 0,
                     "sourcebranchpublication_id": null
                 },
