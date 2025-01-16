@@ -32,6 +32,42 @@ class Migration(migrations.Migration):
         standard_search_view.save()
     
 
+    def apply_bng_layout_type(apps, scheme_editor):
+        SearchComponent = apps.get_model("models", "SearchComponent")
+
+        SearchComponent.objects.update_or_create(
+            searchcomponentid="25ca3536-9eb4-4fd5-b2a5-badfd9a266de",
+            name="BNG Filter",
+            icon="fa fa-compass",
+            modulename="bng-filter.py",
+            classname="BngFilter",
+            componentpath="views/components/search/bng-filter",
+            componentname="bng-filter",
+            defaults={
+                "config":{"layoutType": "popup"}, # add previous layout type into new config
+                "type":"bng-filter-type" # previously "popup" which has now moved
+            }
+        )
+
+    def revert_bng_layout_type(apps, scheme_editor):
+        SearchComponent = apps.get_model("models", "SearchComponent")
+
+        # Revert BNG search component to how it used to be
+        SearchComponent.objects.update_or_create(
+            searchcomponentid="25ca3536-9eb4-4fd5-b2a5-badfd9a266de",
+            name="BNG Filter",
+            icon="fa fa-compass",
+            modulename="bng-filter.py",
+            classname="BngFilter",
+            componentpath="views/components/search/bng-filter",
+            componentname="bng-filter",
+            defaults={
+                "config":{},
+                "type":"popup"
+            }
+        )
+
     operations = [
-        migrations.RunPython(add_bng_component_to_search_view, remove_bng_component_from_search_view)
+        migrations.RunPython(add_bng_component_to_search_view, remove_bng_component_from_search_view),
+        migrations.RunPython(apply_bng_layout_type, revert_bng_layout_type)
     ]
