@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
         # Add/update map layers previously in preliminary_sql/search_overlays.sql
         # Previously layers were added using random uuid1, so name is only primary identifier
 
-        existing_map = MapLayer.objects.filter(name="Search Results Heat Map")
+        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-hashes"}])
         if not existing_map:
             MapLayer.objects.update_or_create(
                 maplayerid="ede8a6af-110a-4dab-9d0b-f0eccb4cef86",
@@ -62,7 +62,7 @@ class Migration(migrations.Migration):
                 ispublic=True,
             )
 
-        existing_map = MapLayer.objects.filter(name="Map Markers")
+        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-points"}])
         if not existing_map:
             MapLayer.objects.update_or_create(
                 maplayerid="77ec30f0-3dda-499a-a126-c67d41f7ba3a",
@@ -110,7 +110,7 @@ class Migration(migrations.Migration):
                 ispublic=True,
             )
 
-        existing_map = MapLayer.objects.filter(name="Hex")
+        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-hex"}])
         if not existing_map:
             MapLayer.objects.update_or_create(
                 maplayerid="604bd229-85ca-42db-a7ef-eb2ed81e8537",
