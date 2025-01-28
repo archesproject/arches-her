@@ -12,6 +12,10 @@ class Migration(migrations.Migration):
         ("models", "9945_file_thumbnail_bin_file_thumbnail_text"),
     ]
 
+    run_before = [
+        ("models", "9946_alter_notification_context"),
+    ]
+
     def add_plugins(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
 
