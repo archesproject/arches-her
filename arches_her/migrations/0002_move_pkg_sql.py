@@ -5,7 +5,8 @@ from django.utils.translation import gettext as _
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("arches_her", "0001_initial")
+        ("arches_her", "0001_initial"),
+        ("models", "11499_add_editlog_resourceinstance_idx")
     ]
 
     def add_map_layers(apps, schema_editor):
