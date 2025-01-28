@@ -5,8 +5,7 @@ from django.utils.translation import gettext as _
 class Migration(migrations.Migration):
 
     dependencies = [
-        ("arches_her", "0002_move_pkg_sql"),
-        ("models", "10804_core_search_filters"),        
+        ("arches_her", "0002_move_pkg_sql")
     ]
 
     def add_bng_component_to_search_view(apps, scheme_editor):
