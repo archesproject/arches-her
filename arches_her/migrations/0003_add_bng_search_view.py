@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         standard_search_view.config["linkedSearchFilters"].append(
             {
                 "componentname": "bng-filter",
-                "layoutSortorder": 14,
+                "layoutSortorder": 1,
                 "searchcomponentid": "25ca3536-9eb4-4fd5-b2a5-badfd9a266de"
             }
         )
