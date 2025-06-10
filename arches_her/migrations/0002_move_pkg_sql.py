@@ -13,7 +13,7 @@ class Migration(migrations.Migration):
         MapLayer = apps.get_model("models", "MapLayer")
 
         # Add/update map layers previously in preliminary_sql/search_overlays.sql
-        # Previously layers were added using random uuid1, so name is only primary identifier
+        # Previous layers were added using random uuid1, so name is only primary identifier
 
         existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-hashes"}])
         if not existing_map:
