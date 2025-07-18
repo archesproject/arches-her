@@ -364,29 +364,6 @@ class Migration(migrations.Migration):
             preload_resource_data=False
         )
 
-    def remove_reports(apps, schema_editor):
-        ReportTemplate = apps.get_model("models", "ReportTemplate")
-
-        for report_template in ReportTemplate.objects.filter(pk__in=[
-            "eeb7054c-df37-45d1-8f09-39abb582077e",
-            "9ed340ba-88c6-4982-9487-c3aae4b14d16",
-            "c6f163ca-3ca5-4c50-b398-bee406fe059d",
-            "b32fc2f2-5570-46c2-8d1e-09ca54c750ab",
-            "44fdae23-7883-4d5c-88fa-7498b6fc898d",
-            "465443ea-0e01-4895-a9cf-5144b02213da",
-            "2bf88426-a053-4134-b006-d4dc2e120a6e",
-            "6858ba4d-70a2-4e78-baf1-c827dd66956b",
-            "655f86f0-643a-4df4-be8b-9e9030d2ff94",
-            "5c757462-97d9-43fc-bd39-54367f6f3c2e",
-            "03871d64-7076-46e8-b0ed-4b8813b0afd4",
-            "523a5a7f-006b-4caf-a801-a1621967a88b",
-            "407019fd-69e4-4aa4-a054-1466acaf8687",
-            "4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3",
-            "9e9f8e55-3ea9-4bd3-8b11-c1a519fbcfcc",
-            "6b183add-a159-4d2b-a6b0-3f426d8c08a1",
-        ]):
-            report_template.delete()
-
 
     def add_functions(apps, schema_editor):
         Function = apps.get_model("models", "Function")
@@ -456,7 +433,7 @@ class Migration(migrations.Migration):
 
         for fn in Function.objects.filter(pk__in=[
             "0434df8d-b98a-4b41-9a0a-68cd9214ad73",
-            "96efa95a-1e2c-4562-ac1f-b415796f9f75"
+            "96efa95a-1e2c-4562-ac1f-b415796f9f75",
             "39d627ae-6973-4ddb-8b62-1f0230e1e3f9",
             "d9a01773-6092-4cad-b331-ae725ae8fa88",
         ]):
@@ -490,15 +467,6 @@ class Migration(migrations.Migration):
             }
         )
     
-    def remove_widgets(apps, schema_editor):
-        Widget = apps.get_model("models", "Widget")
-
-        for widget in Widget.objects.filter(pk__in=[
-            "bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf",
-            "31bc729d-6126-4301-8ec1-d6c4d98c68f8",
-        ]):
-            widget.delete()
-
 
     def add_datatypes(apps, schema_editor):
         Datatype = apps.get_model("models", "DDataType")
@@ -518,14 +486,6 @@ class Migration(migrations.Migration):
             isgeometric=False,
             issearchable=True,
         )
-
-    def remove_datatypes(apps, schema_editor):
-        Datatype = apps.get_model("models", "DDataType")
-
-        for datatype in Datatype.objects.filter(datatype__in=[
-            "bngcentrepoint",
-        ]):
-            datatype.delete()
 
 
     def add_search_components(apps, schema_editor):
@@ -569,10 +529,10 @@ INSERT INTO map_sources(name, source)
 
     operations = [
         migrations.RunPython(add_functions, remove_functions),
-        migrations.RunPython(add_widgets, remove_widgets),
-        migrations.RunPython(add_datatypes, remove_datatypes),
+        migrations.RunPython(add_widgets, reverse_code=migrations.RunPython.noop),
+        migrations.RunPython(add_datatypes, reverse_code=migrations.RunPython.noop),
         migrations.RunPython(add_search_components, remove_search_components),
         migrations.RunPython(add_plugins, remove_plugins),
-        migrations.RunPython(add_reports, remove_reports),
+        migrations.RunPython(add_reports, reverse_code=migrations.RunPython.noop),
         migrations.RunSQL(add_map_source, remove_map_source),
     ]
