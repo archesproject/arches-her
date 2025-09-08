@@ -312,7 +312,7 @@ define([
 
                 this.bngFromXY = function(x,y) {
                     let bng = "";
-                    if(x >= 100000 && y >= 100000 && x < 1000000 && y < 1000000) {
+                    if(x.length == 6 && y.length == 6) {
                         try {
                             let gridlist = self.gridList;
                             let xOneHundredKmGrid = Math.floor(x / 100000);
