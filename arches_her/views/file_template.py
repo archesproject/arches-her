@@ -24,6 +24,7 @@ import uuid
 from datetime import datetime
 import docx
 import textwrap
+import copy
 from docx import Document
 from docx.text.paragraph import Paragraph
 from docx.oxml.parser import OxmlElement
@@ -435,9 +436,10 @@ class FileTemplateView(View):
         def parse_html_to_docx(p, k, v):
             style = p.style
             if k in p.text:
-                p.clear()
-                document_html_parser = DocumentHTMLParser(p, document)
-                document_html_parser.insert_into_paragraph_and_feed(v)
+                for run in p.runs:
+                    run.clear() # clears text but retains formatting
+                    document_html_parser = DocumentHTMLParser(p, run, document)
+                    document_html_parser.insert_into_paragraph_and_feed(v)
 
         def replace_in_runs(p_list, k, v):
             for paragraph in p_list:
@@ -493,7 +495,7 @@ class FileTemplateView(View):
 
 
 class DocumentHTMLParser(HTMLParser):
-    def __init__(self, paragraph, document):
+    def __init__(self, paragraph, placeholder_run, document):
         HTMLParser.__init__(self)
         self.document = document
         self.paragraph = paragraph
@@ -505,7 +507,8 @@ class DocumentHTMLParser(HTMLParser):
         self.hyperlink = False
         self.list_style = "ul"
         self.ol_counter = 1
-        self.run = self.paragraph.add_run()
+        self.placeholder_run = placeholder_run
+        self.run = self.add_run_original_styles(self.placeholder_run)
 
     def insert_paragraph_after(self, paragraph, text=None, style=None):
         """Insert a new paragraph after the given paragraph."""
@@ -532,6 +535,7 @@ class DocumentHTMLParser(HTMLParser):
 
         # Create a w:r element
         new_run = docx.oxml.shared.OxmlElement("w:r")
+        new_run = self.placeholder_run._r
 
         # Create a new w:rPr element
         rPr = docx.oxml.shared.OxmlElement("w:rPr")
@@ -558,11 +562,11 @@ class DocumentHTMLParser(HTMLParser):
 
     def insert_into_paragraph_and_feed(self, html):
         html = html.replace("\n\n", "<br>")
-        self.run = self.paragraph.add_run()
+        self.run = self.add_run_original_styles(self.placeholder_run)
         self.feed(html)
 
     def handle_starttag(self, tag, attrs):
-        self.run = self.paragraph.add_run()
+        self.run = self.add_run_original_styles(self.placeholder_run)
         if tag == "i" or tag == "em":
             self.run.italic = True
         if tag == "b" or tag == "strong":
@@ -604,7 +608,7 @@ class DocumentHTMLParser(HTMLParser):
     def handle_endtag(self, tag):
         if tag in ["br", "li", "ul", "ol"]:
             self.run.add_break()
-        self.run = self.paragraph.add_run()
+        self.run = self.add_run_original_styles(self.placeholder_run)
         if tag == "ol":
             self.ol_counter = 1
         if tag == "table":
@@ -644,3 +648,20 @@ class DocumentHTMLParser(HTMLParser):
         else:
             c = chr(int(name))
         self.run.add_text(c)
+
+    def copy_run_format(self, run_src, run_dst):
+        """
+        Copy formatting from {run_src} to {run_dst}.
+        Taken from https://github.com/python-openxml/python-docx/issues/519.
+        """
+        rPr_target = run_dst._r.get_or_add_rPr()
+        rPr_target.addnext(copy.deepcopy(run_src._r.get_or_add_rPr()))
+        run_dst._r.remove(rPr_target)
+
+    def add_run_original_styles(self, original_run):
+        """
+        Function to return new runs based on placeholder run styling.
+        """
+        new_run = self.paragraph.add_run()
+        self.copy_run_format(original_run, new_run)
+        return new_run
