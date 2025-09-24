@@ -336,8 +336,7 @@ define([
                     return bng;
                 };
 
-
-                this.filters[componentName](this);
+                this.searchFilterVms[componentName](this);
                 this.pageLoaded = false;
                 var bufferColour = "#009ab9";
                 var gridSquareColour = "#f0c200";
@@ -481,8 +480,8 @@ define([
                     self.validate();
                     if(!self.bngHasError() && !self.bufferHasError()) {
                         var queryObj = self.query();
-                        if (self.getFilter('term-filter').hasTag(self.type) === false) {
-                            self.getFilter('term-filter').addTag('BNG Filter', self.name, self.filter.inverted);
+                        if (self.getFilterByType('term-filter-type').hasTag(self.type) === false) {
+                            self.getFilterByType('term-filter-type').addTag('BNG Filter', self.name, self.filter.inverted);
                         }
                         queryObj[componentName] = ko.toJSON(self.filter);
                     }
@@ -490,7 +489,7 @@ define([
                 else{
                     queryObj = self.query();
                     delete queryObj[componentName];
-                    self.getFilter('term-filter').removeTag('BNG Filter');
+                    self.getFilterByType('term-filter-type').removeTag('BNG Filter');
                 }
                 self.query(queryObj);
             },
@@ -501,7 +500,7 @@ define([
                 self.pageLoaded = true;
                 if (componentName in query) {
                     var bngVal = JSON.parse(query[componentName]);
-                    self.getFilter('term-filter').addTag(self.name, self.name, self.filter.inverted);
+                    self.getFilterByType('term-filter-type').addTag(self.name, self.name, self.filter.inverted);
                     self.filter.inverted(!!bngVal.inverted);
                     self.bng(bngVal.bng);
                     self.buffer(bngVal.buffer);
