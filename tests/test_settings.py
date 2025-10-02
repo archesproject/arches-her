@@ -71,3 +71,14 @@ SILENCED_SYSTEM_CHECKS.append(
 )
 
 ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
+
+try:
+    from arches_her.settings_local import *
+except ImportError:
+    pass
+
+if DOCKER:
+    try:
+        from arches_her.settings_docker import *
+    except ImportError:
+        pass
