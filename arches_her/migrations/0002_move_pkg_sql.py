@@ -4,10 +4,7 @@ from django.utils.translation import gettext as _
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("arches_her", "0001_initial"),
-        ("models", "11499_add_editlog_resourceinstance_idx")
-    ]
+    dependencies = [("arches_her", "0001_initial"), ("models", "11499_add_editlog_resourceinstance_idx")]
 
     def add_map_layers(apps, schema_editor):
         MapLayer = apps.get_model("models", "MapLayer")
@@ -15,7 +12,7 @@ class Migration(migrations.Migration):
         # Add/update map layers previously in preliminary_sql/search_overlays.sql
         # Previous layers were added using random uuid1, so name is only primary identifier
 
-        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-hashes"}])
+        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source": "search-results-hashes"}])
         if not existing_map:
             MapLayer.objects.update_or_create(
                 maplayerid="ede8a6af-110a-4dab-9d0b-f0eccb4cef86",
@@ -63,7 +60,7 @@ class Migration(migrations.Migration):
                 ispublic=True,
             )
 
-        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-points"}])
+        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source": "search-results-points"}])
         if not existing_map:
             MapLayer.objects.update_or_create(
                 maplayerid="77ec30f0-3dda-499a-a126-c67d41f7ba3a",
@@ -111,7 +108,7 @@ class Migration(migrations.Migration):
                 ispublic=True,
             )
 
-        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source":"search-results-hex"}])
+        existing_map = MapLayer.objects.filter(layerdefinitions__contains=[{"source": "search-results-hex"}])
         if not existing_map:
             MapLayer.objects.update_or_create(
                 maplayerid="604bd229-85ca-42db-a7ef-eb2ed81e8537",
@@ -157,13 +154,8 @@ class Migration(migrations.Migration):
     def remove_map_layers(apps, schema_editor):
         MapLayer = apps.get_model("models", "MapLayer")
 
-        for map_layers in MapLayer.objects.filter(name__in=[
-            "Search Results Heat Map",
-            "Map Markers",
-            "Hex"
-        ]):
+        for map_layers in MapLayer.objects.filter(name__in=["Search Results Heat Map", "Map Markers", "Hex"]):
             map_layers.delete()
-
 
     operations = [
         migrations.RunPython(add_map_layers, remove_map_layers),

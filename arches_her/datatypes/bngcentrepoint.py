@@ -132,4 +132,3 @@ class BNGCentreDataType(BaseDataType):
                     query.must(match_query)
         except KeyError as e:
             self.logger.error(str(e))
-
