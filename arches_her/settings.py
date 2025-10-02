@@ -16,27 +16,25 @@ try:
 except ImportError:
     pass
 
-APP_NAME = 'arches_her'
+APP_NAME = "arches_her"
 APP_VERSION = semantic_version.Version(major=0, minor=0, patch=0)
 APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 APP_PATHNAME = "arches-her"
 
 WEBPACK_LOADER = {
     "DEFAULT": {
-        "STATS_FILE": os.path.join(APP_ROOT, '..', 'webpack/webpack-stats.json'),
+        "STATS_FILE": os.path.join(APP_ROOT, "..", "webpack/webpack-stats.json"),
     },
 }
 
-DATATYPE_LOCATIONS.append('arches_her.datatypes')
-FUNCTION_LOCATIONS.append('arches_her.functions')
-ETL_MODULE_LOCATIONS.append('arches_her.etl_modules')
-SEARCH_COMPONENT_LOCATIONS.append('arches_her.search.components')
+DATATYPE_LOCATIONS.append("arches_her.datatypes")
+FUNCTION_LOCATIONS.append("arches_her.functions")
+ETL_MODULE_LOCATIONS.append("arches_her.etl_modules")
+SEARCH_COMPONENT_LOCATIONS.append("arches_her.search.components")
 
-LOCALE_PATHS.insert(0, os.path.join(APP_ROOT, 'locale'))
+LOCALE_PATHS.insert(0, os.path.join(APP_ROOT, "locale"))
 
-TEMPLATES[0]["OPTIONS"]["context_processors"].append(
-    "arches_her.utils.context_processors.project_settings"
-)
+TEMPLATES[0]["OPTIONS"]["context_processors"].append("arches_her.utils.context_processors.project_settings")
 
 FILE_TYPE_CHECKING = False
 FILE_TYPES = ["bmp", "gif", "jpg", "jpeg", "pdf", "png", "psd", "rtf", "tif", "tiff", "xlsx", "csv", "zip", "json"]
@@ -44,12 +42,12 @@ FILENAME_GENERATOR = "arches.app.utils.storage_filename_generator.generate_filen
 UPLOADED_FILES_DIR = "uploadedfiles"
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'z23n6ot1_fsturw_gor66k^d#tl9h8*8*_e7qb)tyoucdo-z+x'
+SECRET_KEY = "z23n6ot1_fsturw_gor66k^d#tl9h8*8*_e7qb)tyoucdo-z+x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ROOT_URLCONF = 'arches_her.urls'
+ROOT_URLCONF = "arches_her.urls"
 
 # Modify this line as needed for your project to connect to elasticsearch with a password that you generate
 ELASTICSEARCH_CONNECTION_OPTIONS = {"request_timeout": 30, "verify_certs": False, "basic_auth": ("elastic", "E1asticSearchforArche5")}
@@ -67,7 +65,7 @@ ELASTICSEARCH_CONNECTION_OPTIONS = {"request_timeout": 30, "verify_certs": False
 # Or Kibana: https://www.elastic.co/guide/en/kibana/current/api-keys.html
 
 # a prefix to append to all elasticsearch indexes, note: must be lower case
-ELASTICSEARCH_PREFIX = 'arches_her'
+ELASTICSEARCH_PREFIX = "arches_her"
 
 ELASTICSEARCH_CUSTOM_INDEXES = []
 # [{
@@ -100,14 +98,9 @@ DATABASES = {
         "PASSWORD": "postgis",
         "PORT": "5432",
         "POSTGIS_TEMPLATE": "template_postgis",
-        "TEST": {
-            "CHARSET": None,
-            "COLLATION": None,
-            "MIRROR": None,
-            "NAME": None
-        },
+        "TEST": {"CHARSET": None, "COLLATION": None, "MIRROR": None, "NAME": None},
         "TIME_ZONE": None,
-        "USER": "postgres"
+        "USER": "postgres",
     }
 }
 
@@ -168,14 +161,9 @@ MIDDLEWARE = [
     # "silk.middleware.SilkyMiddleware",
 ]
 
-MIDDLEWARE.insert(  # this must resolve to first MIDDLEWARE entry
-    0, 
-    "django_hosts.middleware.HostsRequestMiddleware"
-)
+MIDDLEWARE.insert(0, "django_hosts.middleware.HostsRequestMiddleware")  # this must resolve to first MIDDLEWARE entry
 
-MIDDLEWARE.append(  # this must resolve last MIDDLEWARE entry
-    "django_hosts.middleware.HostsResponseMiddleware"
-)  
+MIDDLEWARE.append("django_hosts.middleware.HostsResponseMiddleware")  # this must resolve last MIDDLEWARE entry
 
 STATICFILES_DIRS = build_staticfiles_dirs(app_root=APP_ROOT)
 
@@ -186,19 +174,19 @@ TEMPLATES = build_templates_config(
 
 ALLOWED_HOSTS = []
 
-SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, 'system_settings', 'System_Settings.json')
-WSGI_APPLICATION = 'arches_her.wsgi.application'
+SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, "system_settings", "System_Settings.json")
+WSGI_APPLICATION = "arches_her.wsgi.application"
 
 # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
 # It must end in a slash if set to a non-empty value.
-MEDIA_URL = '/files/'
+MEDIA_URL = "/files/"
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
-MEDIA_ROOT =  os.path.join(APP_ROOT)
+MEDIA_ROOT = os.path.join(APP_ROOT)
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = '/static/'
+STATIC_URL = "/static/"
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -209,37 +197,27 @@ STATIC_ROOT = os.path.join(APP_ROOT, "staticfiles")
 # when hosting Arches under a sub path set this value to the sub path eg : "/{sub_path}/"
 FORCE_SCRIPT_NAME = None
 
-RESOURCE_IMPORT_LOG = os.path.join(APP_ROOT, 'logs', 'resource_import.log')
-DEFAULT_RESOURCE_IMPORT_USER = {'username': 'admin', 'userid': 1}
+RESOURCE_IMPORT_LOG = os.path.join(APP_ROOT, "logs", "resource_import.log")
+DEFAULT_RESOURCE_IMPORT_USER = {"username": "admin", "userid": 1}
 
 LOGGING = {
-    'version': 1,
-    'disable_existing_loggers': False,
-    'formatters': {
-        'console': {
-            'format': '%(asctime)s %(name)-12s %(levelname)-8s %(message)s',
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "console": {
+            "format": "%(asctime)s %(name)-12s %(levelname)-8s %(message)s",
         },
     },
-    'handlers': {
-        'file': {
-            'level': 'WARNING',  # DEBUG, INFO, WARNING, ERROR
-            'class': 'logging.FileHandler',
-            'filename': os.path.join(APP_ROOT, 'arches.log'),
-            'formatter': 'console'
+    "handlers": {
+        "file": {
+            "level": "WARNING",  # DEBUG, INFO, WARNING, ERROR
+            "class": "logging.FileHandler",
+            "filename": os.path.join(APP_ROOT, "arches.log"),
+            "formatter": "console",
         },
-        'console': {
-            'level': 'WARNING',
-            'class': 'logging.StreamHandler',
-            'formatter': 'console'
-        }
+        "console": {"level": "WARNING", "class": "logging.StreamHandler", "formatter": "console"},
     },
-    'loggers': {
-        'arches': {
-            'handlers': ['file', 'console'],
-            'level': 'WARNING',
-            'propagate': True
-        }
-    }
+    "loggers": {"arches": {"handlers": ["file", "console"], "level": "WARNING", "propagate": True}},
 }
 
 # Rate limit for authentication views
@@ -255,12 +233,12 @@ SESSION_COOKIE_NAME = f"{APP_NAME}_{APP_VERSION}"
 
 # For more info on configuring your cache: https://docs.djangoproject.com/en/2.2/topics/cache/
 CACHES = {
-    'default': {
-        'BACKEND': 'django.core.cache.backends.dummy.DummyCache',
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",
     },
-    'user_permission': {
-        'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
-        'LOCATION': 'user_permission_cache',
+    "user_permission": {
+        "BACKEND": "django.core.cache.backends.db.DatabaseCache",
+        "LOCATION": "user_permission_cache",
     },
 }
 
@@ -270,14 +248,14 @@ HIDE_EMPTY_NODES_IN_REPORT = False
 BYPASS_UNIQUE_CONSTRAINT_TILE_VALIDATION = False
 BYPASS_REQUIRED_VALUE_TILE_VALIDATION = False
 
-DATE_IMPORT_EXPORT_FORMAT = "%Y-%m-%d" # Custom date format for dates imported from and exported to csv
+DATE_IMPORT_EXPORT_FORMAT = "%Y-%m-%d"  # Custom date format for dates imported from and exported to csv
 
 # This is used to indicate whether the data in the CSV and SHP exports should be
 # ordered as seen in the resource cards or not.
 EXPORT_DATA_FIELDS_IN_CARD_ORDER = False
 
 
-# British National Grid (BNG) and Latitude/Longitude set as preferred coordinate systems.  To revert to 
+# British National Grid (BNG) and Latitude/Longitude set as preferred coordinate systems.  To revert to
 # Geographic as the preferred coordinate system, comment out the preferred coordinate system setting below
 
 PREFERRED_COORDINATE_SYSTEMS = (
@@ -289,27 +267,24 @@ PREFERRED_COORDINATE_SYSTEMS = (
     },
     {"name": "LatLong", "srid": "4326", "proj4": "+proj=longlat +datum=WGS84 +no_defs", "default": False},  # Required
 )
-ANALYSIS_COORDINATE_SYSTEM_SRID=27700 # Comment out if using LatLong/WGS84
+ANALYSIS_COORDINATE_SYSTEM_SRID = 27700  # Comment out if using LatLong/WGS84
 
 # Europe/London set as the default time zone.  To revert to "America/Chicago," comment out the time zone setting below
 
 TIME_ZONE = "Europe/London"
 
-#Identify the usernames and duration (seconds) for which you want to cache the time wheel
-CACHE_BY_USER = {
-    "default": 3600 * 24, #24hrs
-    "anonymous": 3600 * 24 #24hrs
-    }
+# Identify the usernames and duration (seconds) for which you want to cache the time wheel
+CACHE_BY_USER = {"default": 3600 * 24, "anonymous": 3600 * 24}  # 24hrs  # 24hrs
 
-TILE_CACHE_TIMEOUT = 600 #seconds
-CLUSTER_DISTANCE_MAX = 5000 #meters
+TILE_CACHE_TIMEOUT = 600  # seconds
+CLUSTER_DISTANCE_MAX = 5000  # meters
 GRAPH_MODEL_CACHE_TIMEOUT = None
 
-OAUTH_CLIENT_ID = ''  #'9JCibwrWQ4hwuGn5fu2u1oRZSs9V6gK8Vu8hpRC4'
+OAUTH_CLIENT_ID = ""  #'9JCibwrWQ4hwuGn5fu2u1oRZSs9V6gK8Vu8hpRC4'
 
-APP_TITLE = 'Arches for Historic Environment Records'
-COPYRIGHT_TEXT = 'All Rights Reserved.'
-COPYRIGHT_YEAR = '2024'
+APP_TITLE = "Arches for Historic Environment Records"
+COPYRIGHT_TEXT = "All Rights Reserved."
+COPYRIGHT_YEAR = "2024"
 
 ENABLE_CAPTCHA = False
 # RECAPTCHA_PUBLIC_KEY = ''
@@ -330,10 +305,10 @@ EMAIL_HOST_USER = "xxxx@xxx.com"
 
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-CELERY_BROKER_URL = "amqp://guest:guest@localhost" # RabbitMQ --> "amqp://guest:guest@localhost",  Redis --> "redis://localhost:6379/0"
-CELERY_ACCEPT_CONTENT = ['json']
-CELERY_RESULT_BACKEND = 'django-db' # Use 'django-cache' if you want to use your cache as your backend
-CELERY_TASK_SERIALIZER = 'json'
+CELERY_BROKER_URL = "amqp://guest:guest@localhost"  # RabbitMQ --> "amqp://guest:guest@localhost",  Redis --> "redis://localhost:6379/0"
+CELERY_ACCEPT_CONTENT = ["json"]
+CELERY_RESULT_BACKEND = "django-db"  # Use 'django-cache' if you want to use your cache as your backend
+CELERY_TASK_SERIALIZER = "json"
 
 
 CELERY_SEARCH_EXPORT_EXPIRES = 24 * 3600  # seconds
@@ -398,7 +373,7 @@ RESTRICT_CELERY_EXPORT_FOR_ANONYMOUS_USER = False
 # Dictionary containing any additional context items for customising email templates
 EXTRA_EMAIL_CONTEXT = {
     "salutation": _("Hi"),
-    "expiration":(datetime.now() + timedelta(seconds=CELERY_SEARCH_EXPORT_EXPIRES)).strftime("%A, %d %B %Y")
+    "expiration": (datetime.now() + timedelta(seconds=CELERY_SEARCH_EXPORT_EXPIRES)).strftime("%A, %d %B %Y"),
 }
 
 # see https://docs.djangoproject.com/en/1.9/topics/i18n/translation/#how-django-discovers-language-preference
@@ -429,10 +404,10 @@ LANGUAGE_CODE = "en"
 # {langcode}-{regioncode} eg: en, en-gb ....
 # a list of language codes can be found here http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGES = [
-#   ('de', _('German')),
-    ('en', _('English')),
-#   ('en-gb', _('British English')),
-#   ('es', _('Spanish')),
+    #   ('de', _('German')),
+    ("en", _("English")),
+    #   ('en-gb', _('British English')),
+    #   ('es', _('Spanish')),
 ]
 
 # override this to permenantly display/hide the language switcher

@@ -4,6 +4,7 @@ from arches.app.search.base_index import BaseIndex
 from arches_her.search_indexes.sample_index import SampleIndex
 from django.test import TestCase
 
+
 class TestSampleIndex(TestCase):
     def test_prepare_index(self):
         sample_index = SampleIndex(index_name="Sample Index")
@@ -14,7 +15,7 @@ class TestSampleIndex(TestCase):
 
     def test_get_documents_to_index(self):
         sample_index = SampleIndex(index_name="Sample Index")
-        
+
         mock_resourceinstance = Mock(graph_id="test_graph_id")
         mock_tiles = [Mock(), Mock(), Mock()]  # Mock tiles list
 

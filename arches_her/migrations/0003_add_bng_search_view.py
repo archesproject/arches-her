@@ -4,23 +4,17 @@ from django.utils.translation import gettext as _
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ("arches_her", "0002_move_pkg_sql")
-    ]
+    dependencies = [("arches_her", "0002_move_pkg_sql")]
 
     def add_bng_component_to_search_view(apps, scheme_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
 
         standard_search_view = SearchComponent.objects.get(searchcomponentid="69695d63-6f03-4536-8da9-841b07116381")
         standard_search_view.config["linkedSearchFilters"].append(
-            {
-                "componentname": "bng-filter",
-                "layoutSortorder": 1,
-                "searchcomponentid": "25ca3536-9eb4-4fd5-b2a5-badfd9a266de"
-            }
+            {"componentname": "bng-filter", "layoutSortorder": 1, "searchcomponentid": "25ca3536-9eb4-4fd5-b2a5-badfd9a266de"}
         )
         standard_search_view.save()
-    
+
     def remove_bng_component_from_search_view(apps, scheme_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
 
@@ -29,7 +23,6 @@ class Migration(migrations.Migration):
             if search_filter["searchcomponentid"] == "25ca3536-9eb4-4fd5-b2a5-badfd9a266de":
                 standard_search_view.config["linkedSearchFilters"].remove(search_filter)
         standard_search_view.save()
-    
 
     def apply_bng_layout_type(apps, scheme_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
@@ -43,9 +36,9 @@ class Migration(migrations.Migration):
             componentpath="views/components/search/bng-filter",
             componentname="bng-filter",
             defaults={
-                "config":{"layoutType": "popup"}, # add previous layout type into new config
-                "type":"bng-filter-type" # previously "popup" which has now moved
-            }
+                "config": {"layoutType": "popup"},  # add previous layout type into new config
+                "type": "bng-filter-type",  # previously "popup" which has now moved
+            },
         )
 
     def revert_bng_layout_type(apps, scheme_editor):
@@ -60,13 +53,10 @@ class Migration(migrations.Migration):
             classname="BngFilter",
             componentpath="views/components/search/bng-filter",
             componentname="bng-filter",
-            defaults={
-                "config":{},
-                "type":"popup"
-            }
+            defaults={"config": {}, "type": "popup"},
         )
 
     operations = [
         migrations.RunPython(add_bng_component_to_search_view, remove_bng_component_from_search_view),
-        migrations.RunPython(apply_bng_layout_type, revert_bng_layout_type)
+        migrations.RunPython(apply_bng_layout_type, revert_bng_layout_type),
     ]

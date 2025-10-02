@@ -43,10 +43,7 @@ class GenerateUniqueReferences(BaseFunction):
                 """
                 Gets the max id for all simple_id nodes across all graphs where the GenerateUniqueReferences function has been configured
                 """
-                self.logger.debug(
-                    str(datetime.now())
-                    + " DEBUG: get_next_simple_id CALLED ========================================"
-                )
+                self.logger.debug(str(datetime.now()) + " DEBUG: get_next_simple_id CALLED ========================================")
 
                 if simpleid_nextval_table_exists():
                     return get_next_simpleid()
@@ -67,9 +64,7 @@ class GenerateUniqueReferences(BaseFunction):
                         x = UUID(sid)
                         x = UUID(ngid)
                     except Exception:
-                        raise TypeError(
-                            "Expected UUID values are not parsing correctly"
-                        )
+                        raise TypeError("Expected UUID values are not parsing correctly")
 
                     sql_node_str = sql_node_str + "t.tiledata ->> %s::text,"
                     sql_params.append(str(sid))
@@ -105,10 +100,7 @@ class GenerateUniqueReferences(BaseFunction):
                     create_simpleid_nextval_table(start=ret + 1)
 
                 self.logger.debug(
-                    str(datetime.now())
-                    + " DEBUG: get_next_simple_id COMPLETE ({0})========================================".format(
-                        ret
-                    )
+                    str(datetime.now()) + " DEBUG: get_next_simple_id COMPLETE ({0})========================================".format(ret)
                 )
                 return ret
 
@@ -181,18 +173,16 @@ class GenerateUniqueReferences(BaseFunction):
             resourceIdNode = self.config["resourceid_node"]
             refNodegroup = self.config["uniqueresource_nodegroup"]
 
-            def check_and_populate_uids(
-                currentTile, simpleid_node, resid_node, resourceidval
-            ):
+            def check_and_populate_uids(currentTile, simpleid_node, resid_node, resourceidval):
                 """
                 Checks the input tile to see if it contains the correct resource id and simpleid
                 values.  If not, populates these ids.
                 """
 
                 def populate_simple_id(currentTile, simple_node_id):
-                    nextsimpleval = get_next_simple_id()            
+                    nextsimpleval = get_next_simple_id()
                     currentTile.data[simple_node_id] = nextsimpleval
-                    
+
                 def format_string_value(id_string_value):
                     languages = models.Language.objects.all()
                     default_language = languages.get(code=settings.LANGUAGE_CODE)
@@ -203,12 +193,7 @@ class GenerateUniqueReferences(BaseFunction):
                         if currentTile.data[simpleid_node] != 0:
                             try:
                                 x = int(currentTile.data[simpleid_node])
-                                self.logger.debug(
-                                    "Resource "
-                                    + str(resourceidval)
-                                    + "has valid simpleid: "
-                                    + str(x)
-                                )
+                                self.logger.debug("Resource " + str(resourceidval) + "has valid simpleid: " + str(x))
                                 pass
                             except:
                                 populate_simple_id(currentTile, simpleid_node)
@@ -260,29 +245,18 @@ class GenerateUniqueReferences(BaseFunction):
 
             # if the current tile context is a refNG (i.e. it has trigger its own save then don't trigger another save)
             if str(tile.nodegroup_id) == refNodegroup:
-                check_and_populate_uids(
-                    tile, simpleNode, resourceIdNode, resourceIdValue
-                )
+                check_and_populate_uids(tile, simpleNode, resourceIdNode, resourceIdValue)
                 return
 
-            previously_saved_tiles = Tile.objects.filter(
-                nodegroup_id=refNodegroup, resourceinstance_id=resourceIdValue
-            )
+            previously_saved_tiles = Tile.objects.filter(nodegroup_id=refNodegroup, resourceinstance_id=resourceIdValue)
 
             if len(previously_saved_tiles) > 0:
                 for p in previously_saved_tiles:
                     try:
-                        if (
-                            check_and_populate_uids(
-                                p, simpleNode, resourceIdNode, resourceIdValue
-                            )
-                            == True
-                        ):
+                        if check_and_populate_uids(p, simpleNode, resourceIdNode, resourceIdValue) == True:
                             p.save()
                         else:
-                            self.logger.debug(
-                                "Error.  Could not save Unique Identifiers tile."
-                            )
+                            self.logger.debug("Error.  Could not save Unique Identifiers tile.")
                     except (
                         KeyboardInterrupt,
                         SystemExit,
@@ -309,15 +283,8 @@ class GenerateUniqueReferences(BaseFunction):
                     except Exception as ex:
                         self.logger.error(str(ex))
             else:
-                newRefTile = Tile().get_blank_tile_from_nodegroup_id(
-                    refNodegroup, resourceid=resourceIdValue, parenttile=None
-                )
-                if (
-                    check_and_populate_uids(
-                        newRefTile, simpleNode, resourceIdNode, resourceIdValue
-                    )
-                    == True
-                ):
+                newRefTile = Tile().get_blank_tile_from_nodegroup_id(refNodegroup, resourceid=resourceIdValue, parenttile=None)
+                if check_and_populate_uids(newRefTile, simpleNode, resourceIdNode, resourceIdValue) == True:
                     newRefTile.save()
                 else:
                     self.logger.debug("Error.  Could not save Unique Identifiers tile.")

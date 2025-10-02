@@ -232,7 +232,7 @@ class FileTemplateView(View):
             datatype = datatype_factory.get_instance(current_node.datatype)
             returnvalue = datatype.get_display_value(tile, current_node)
             return "" if returnvalue is None else returnvalue
-        
+
         def remove_non_xml_compatible_chars(s: str) -> str:
             """
             Remove characters that are not compatible with XML.
@@ -248,11 +248,7 @@ class FileTemplateView(View):
             """
             # For XML 1.0, adjust ranges if targeting XML 1.1
             return "".join(
-                char
-                for char in s
-                if ord(char) in (0x9, 0xA, 0xD)
-                or 0x20 <= ord(char) <= 0xD7FF
-                or 0xE000 <= ord(char) <= 0xFFFD
+                char for char in s if ord(char) in (0x9, 0xA, 0xD) or 0x20 <= ord(char) <= 0xD7FF or 0xE000 <= ord(char) <= 0xFFFD
             )
 
         # Advice and Conditions.
@@ -296,9 +292,9 @@ class FileTemplateView(View):
                 # if len(mitigation_scopenote) > 0:
                 #     mitigation_scopenote = "<i>" + mitigation_scopenote + "</i>"
                 insert_break = len(mitigation_scopenote) > 0
-                mitigation[
-                    "content"
-                ] = f"{'<br>' if insert_break else ''}{mitigation_scopenote}{'<br>' if insert_break else ''}{get_value_from_tile(tile, action_node_id)}"
+                mitigation["content"] = (
+                    f"{'<br>' if insert_break else ''}{mitigation_scopenote}{'<br>' if insert_break else ''}{get_value_from_tile(tile, action_node_id)}"
+                )
                 mitigation["type"] = get_value_from_tile(tile, action_type_node_id)
             elif str(tile.nodegroup_id) == advice_nodegroup_id:
                 condition["content"] = get_value_from_tile(tile, advice_node_id)
@@ -409,10 +405,10 @@ class FileTemplateView(View):
         if associate_heritage == "":
             mapping_dict["Archaeological Priority Area"] = "The planning application is not in an Archaeological Priority Area."
         else:
-            mapping_dict[
-                "Archaeological Priority Area"
-            ] = "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(
-                associate_heritage
+            mapping_dict["Archaeological Priority Area"] = (
+                "The planning application lies in an area of archaeological interest (Archaeological Priority Area) identified in the Local Plan: {}".format(
+                    associate_heritage
+                )
             )
 
         if mapping_dict["Assessment of Significance"] != "":
@@ -425,8 +421,6 @@ class FileTemplateView(View):
                 html = True
             xml_compatible_string = remove_non_xml_compatible_chars(mapping_dict[key])
             self.replace_string(self.doc, key, xml_compatible_string, html)
-            
-            
 
     def replace_string(self, document, key, v, html=False):
         # Note that the intent here is to preserve how things are styled in the docx
@@ -437,7 +431,7 @@ class FileTemplateView(View):
             style = p.style
             if k in p.text:
                 for run in p.runs:
-                    run.clear() # clears text but retains formatting
+                    run.clear()  # clears text but retains formatting
                     document_html_parser = DocumentHTMLParser(p, run, document)
                     document_html_parser.insert_into_paragraph_and_feed(v)
 
