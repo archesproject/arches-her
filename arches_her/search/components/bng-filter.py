@@ -33,7 +33,6 @@ class BngFilter(BaseSearchFilter):
         search_query = Bool()
         querysting_params = self.request.GET.get(details["componentname"], "")
         bng_filter = JSONDeserializer().deserialize(querysting_params)
-        print(bng_filter)
         bng = bng_filter["bng"].upper()
         buffer = bng_filter["buffer"]
         inverted = bng_filter["inverted"]
