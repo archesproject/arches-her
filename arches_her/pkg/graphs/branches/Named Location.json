@@ -8,14 +8,7 @@
                     "cardid": "185a8021-5782-11e9-9d37-18cf5eb368c4",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [
-                        {
-                            "card_id": "185a8021-5782-11e9-9d37-18cf5eb368c4",
-                            "constraintid": "44635e21-2f3f-4129-ade2-bb87b62ffebe",
-                            "nodes": [],
-                            "uniquetoallinstances": false
-                        }
-                    ],
+                    "constraints": [],
                     "cssclass": null,
                     "description": {
                         "en": "Currently controlled in AMIE by a reference data list"
@@ -31,12 +24,12 @@
                     "instructions": {
                         "en": null
                     },
-                    "is_editable": true,
                     "name": {
                         "en": "Named Location"
                     },
                     "nodegroup_id": "1852df00-5782-11e9-a354-18cf5eb368c4",
                     "sortorder": null,
+                    "source_identifier_id": null,
                     "visible": true
                 }
             ],
@@ -67,6 +60,7 @@
                     },
                     "node_id": "8b0fe32e-5782-11e9-a9c3-18cf5eb368c4",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -96,6 +90,7 @@
                     },
                     "node_id": "6e9786e1-5782-11e9-a429-18cf5eb368c4",
                     "sortorder": 1,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 },
@@ -125,6 +120,7 @@
                     },
                     "node_id": "57c62840-5782-11e9-94db-18cf5eb368c4",
                     "sortorder": 2,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000001"
                 }
@@ -144,7 +140,8 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "rangenode_id": "57c62840-5782-11e9-94db-18cf5eb368c4"
+                    "rangenode_id": "57c62840-5782-11e9-94db-18cf5eb368c4",
+                    "source_identifier_id": null
                 },
                 {
                     "description": null,
@@ -153,7 +150,8 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "rangenode_id": "6e9786e1-5782-11e9-a429-18cf5eb368c4"
+                    "rangenode_id": "6e9786e1-5782-11e9-a429-18cf5eb368c4",
+                    "source_identifier_id": null
                 },
                 {
                     "description": null,
@@ -162,13 +160,17 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
-                    "rangenode_id": "8b0fe32e-5782-11e9-a9c3-18cf5eb368c4"
+                    "rangenode_id": "8b0fe32e-5782-11e9-a9c3-18cf5eb368c4",
+                    "source_identifier_id": null
                 }
             ],
             "functions_x_graphs": [],
             "graphid": "1852df01-5782-11e9-9696-18cf5eb368c4",
+            "group_permissions": {},
+            "has_unpublished_changes": true,
             "iconclass": "fa fa-map-marker",
-            "is_editable": true,
+            "is_active": false,
+            "is_copy_immutable": false,
             "isresource": false,
             "jsonldcontext": null,
             "name": {
@@ -177,6 +179,7 @@
             "nodegroups": [
                 {
                     "cardinality": "n",
+                    "grouping_node_id": "1852df00-5782-11e9-a354-18cf5eb368c4",
                     "legacygroupid": null,
                     "nodegroupid": "1852df00-5782-11e9-a354-18cf5eb368c4",
                     "parentnodegroup_id": null
@@ -193,6 +196,7 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": true,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": true,
@@ -202,6 +206,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                     "parentproperty": "",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 },
                 {
@@ -214,6 +219,7 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": false,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
@@ -223,6 +229,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E41_Appellation",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 },
                 {
@@ -235,6 +242,7 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": false,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
@@ -244,6 +252,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E47_Spatial_Coordinates",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 },
                 {
@@ -256,6 +265,7 @@
                     "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": false,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
@@ -265,6 +275,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E47_Spatial_Coordinates",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P1_is_identified_by",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 }
             ],
@@ -272,6 +283,7 @@
             "publication": null,
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
+            "resource_instance_lifecycle": null,
             "root": {
                 "alias": "named_location",
                 "config": {},
@@ -282,6 +294,7 @@
                 "graph_id": "1852df01-5782-11e9-9696-18cf5eb368c4",
                 "hascustomalias": false,
                 "is_collector": true,
+                "is_immutable": false,
                 "isrequired": false,
                 "issearchable": true,
                 "istopnode": true,
@@ -290,13 +303,17 @@
                 "nodeid": "1852df00-5782-11e9-a354-18cf5eb368c4",
                 "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E53_Place",
                 "sortorder": 0,
+                "source_identifier_id": null,
                 "sourcebranchpublication_id": null
             },
-            "slug": null,
+            "slug": "named_location",
+            "source_identifier_id": null,
+            "spatial_views": [],
             "subtitle": {
                 "en": "Used to record the Named Location associated with the loss of a vessel"
             },
             "template_id": "50000000-0000-0000-0000-000000000001",
+            "user_permissions": {},
             "version": ""
         }
     ]

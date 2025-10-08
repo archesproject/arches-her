@@ -1,12 +1,12 @@
-define([
-    'knockout',
-    "templates/views/components/reports/consultations-site-visit-empty.htm"
-], function(ko, ConsultationSiteVisitEmptyTemplate) {
-    ko.components.register('consultations-site-visit-empty', {
-        viewModel: function(params) {
-            this.icon = params.activeTab().icon;
-            this.resourceId = params.report ? params.report.attributes.resourceid : undefined;
-        },
-        template: ConsultationSiteVisitEmptyTemplate
-    });
+import ko from "knockout";
+import ConsultationSiteVisitEmptyTemplate from "templates/views/components/reports/consultations-site-visit-empty.htm";
+
+export default ko.components.register("consultations-site-visit-empty", {
+    viewModel: function (params) {
+        this.icon = params.activeTab().icon;
+        this.resourceId = params.report
+            ? params.report.attributes.resourceid
+            : undefined;
+    },
+    template: ConsultationSiteVisitEmptyTemplate,
 });

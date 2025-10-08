@@ -8,14 +8,7 @@
                     "cardid": "b53d88d2-5780-11e9-a87d-18cf5eb368c4",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [
-                        {
-                            "card_id": "b53d88d2-5780-11e9-a87d-18cf5eb368c4",
-                            "constraintid": "6f12151d-bbb2-4239-9e44-6e94c6354021",
-                            "nodes": [],
-                            "uniquetoallinstances": false
-                        }
-                    ],
+                    "constraints": [],
                     "cssclass": null,
                     "description": {
                         "en": "Used to record the OSGB Grid ReferenceDependencies:> bngcentrepoint datatype"
@@ -31,12 +24,12 @@
                     "instructions": {
                         "en": "National Grid references, map names, and other common location identifiers for the resource"
                     },
-                    "is_editable": true,
                     "name": {
                         "en": "National Grid References"
                     },
                     "nodegroup_id": "b53d88d0-5780-11e9-9be9-18cf5eb368c4",
                     "sortorder": 5,
+                    "source_identifier_id": null,
                     "visible": true
                 }
             ],
@@ -53,6 +46,7 @@
                     },
                     "node_id": "e88ed1ca-993b-11ea-aafb-f875a44e0e11",
                     "sortorder": null,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf"
                 }
@@ -72,13 +66,17 @@
                     "graph_id": "b53d88cf-5780-11e9-86b6-18cf5eb368c4",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by",
-                    "rangenode_id": "e88ed1ca-993b-11ea-aafb-f875a44e0e11"
+                    "rangenode_id": "e88ed1ca-993b-11ea-aafb-f875a44e0e11",
+                    "source_identifier_id": null
                 }
             ],
             "functions_x_graphs": [],
             "graphid": "b53d88cf-5780-11e9-86b6-18cf5eb368c4",
+            "group_permissions": {},
+            "has_unpublished_changes": true,
             "iconclass": "fa fa-map-marker",
-            "is_editable": true,
+            "is_active": false,
+            "is_copy_immutable": false,
             "isresource": false,
             "jsonldcontext": null,
             "name": {
@@ -87,6 +85,7 @@
             "nodegroups": [
                 {
                     "cardinality": "1",
+                    "grouping_node_id": "b53d88d0-5780-11e9-9be9-18cf5eb368c4",
                     "legacygroupid": null,
                     "nodegroupid": "b53d88d0-5780-11e9-9be9-18cf5eb368c4",
                     "parentnodegroup_id": null
@@ -103,6 +102,7 @@
                     "graph_id": "b53d88cf-5780-11e9-86b6-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": true,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": true,
@@ -112,11 +112,14 @@
                     "ontologyclass": "http://www.ics.forth.gr/isl/CRMgeo/SP6_Declarative_Place",
                     "parentproperty": "",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 },
                 {
                     "alias": "national_grid_reference",
-                    "config": {},
+                    "config": {
+                        "en": ""
+                    },
                     "datatype": "bngcentrepoint",
                     "description": null,
                     "exportable": false,
@@ -124,6 +127,7 @@
                     "graph_id": "b53d88cf-5780-11e9-86b6-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": false,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
@@ -133,6 +137,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E94_Space_Primitive",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P168_place_is_defined_by",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 }
             ],
@@ -140,6 +145,7 @@
             "publication": null,
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
+            "resource_instance_lifecycle": null,
             "root": {
                 "alias": "national_grid_references",
                 "config": {},
@@ -150,6 +156,7 @@
                 "graph_id": "b53d88cf-5780-11e9-86b6-18cf5eb368c4",
                 "hascustomalias": false,
                 "is_collector": true,
+                "is_immutable": false,
                 "isrequired": false,
                 "issearchable": true,
                 "istopnode": true,
@@ -158,13 +165,17 @@
                 "nodeid": "b53d88d0-5780-11e9-9be9-18cf5eb368c4",
                 "ontologyclass": "http://www.ics.forth.gr/isl/CRMgeo/SP6_Declarative_Place",
                 "sortorder": 0,
+                "source_identifier_id": null,
                 "sourcebranchpublication_id": null
             },
-            "slug": null,
+            "slug": "national_grid_references",
+            "source_identifier_id": null,
+            "spatial_views": [],
             "subtitle": {
                 "en": "Used to record the OSGB Grid Reference"
             },
             "template_id": "50000000-0000-0000-0000-000000000001",
+            "user_permissions": {},
             "version": ""
         }
     ]

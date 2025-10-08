@@ -13,7 +13,7 @@
 To load data the target must be an arches project rather than the arches application:
 
 ```
-arches-project create myproject
+arches-admin startproject myproject
 cd myproject
 python manage.py packages -o load_package -s https://github.com/archesproject/consultations-pkg/archive/master.zip -db true -y
 ```

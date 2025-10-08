@@ -10,16 +10,26 @@
                     "config": null,
                     "constraints": [],
                     "cssclass": null,
-                    "description": "",
+                    "description": {
+                        "en": ""
+                    },
                     "graph_id": "02956e74-03d2-11ef-89f3-3736dd7ed53f",
                     "helpenabled": false,
-                    "helptext": null,
-                    "helptitle": null,
-                    "instructions": null,
-                    "is_editable": true,
-                    "name": "Record Type",
+                    "helptext": {
+                        "en": null
+                    },
+                    "helptitle": {
+                        "en": null
+                    },
+                    "instructions": {
+                        "en": null
+                    },
+                    "name": {
+                        "en": "Record Type"
+                    },
                     "nodegroup_id": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                     "sortorder": null,
+                    "source_identifier_id": null,
                     "visible": true
                 }
             ],
@@ -28,13 +38,21 @@
                     "card_id": "02956e76-03d2-11ef-89f3-3736dd7ed53f",
                     "config": {
                         "defaultValue": "",
+                        "i18n_properties": [
+                            "placeholder"
+                        ],
                         "label": "Record Type",
-                        "placeholder": "Select an option"
+                        "placeholder": {
+                            "en": "Select an option"
+                        }
                     },
                     "id": "02956e77-03d2-11ef-89f3-3736dd7ed53f",
-                    "label": "Record Type",
+                    "label": {
+                        "en": "Record Type"
+                    },
                     "node_id": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000015"
                 }
@@ -49,9 +67,11 @@
             "edges": [],
             "functions_x_graphs": [],
             "graphid": "02956e74-03d2-11ef-89f3-3736dd7ed53f",
+            "group_permissions": {},
+            "has_unpublished_changes": true,
             "iconclass": "fa fa-bank",
-            "is_editable": true,
-            "isactive": true,
+            "is_active": false,
+            "is_copy_immutable": false,
             "isresource": false,
             "jsonldcontext": null,
             "name": {
@@ -60,6 +80,7 @@
             "nodegroups": [
                 {
                     "cardinality": "1",
+                    "grouping_node_id": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                     "legacygroupid": null,
                     "nodegroupid": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                     "parentnodegroup_id": null
@@ -69,16 +90,23 @@
                 {
                     "alias": "record_type",
                     "config": {
+                        "i18n_config": {
+                            "fn": "arches.app.datatypes.datatypes.DomainDataType"
+                        },
                         "options": [
                             {
                                 "id": "534aefb3-b5c2-45a5-a1c8-b96da19f4e93",
                                 "selected": false,
-                                "text": "Monument"
+                                "text": {
+                                    "en": "Monument"
+                                }
                             },
                             {
                                 "id": "5e5d6f01-fcd9-4ba0-b86d-564456a520b2",
                                 "selected": false,
-                                "text": "Building"
+                                "text": {
+                                    "en": "Building"
+                                }
                             }
                         ]
                     },
@@ -89,6 +117,7 @@
                     "graph_id": "02956e74-03d2-11ef-89f3-3736dd7ed53f",
                     "hascustomalias": false,
                     "is_collector": true,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": true,
@@ -97,15 +126,22 @@
                     "nodeid": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "",
-                    "sortorder": 0
+                    "sortorder": 0,
+                    "source_identifier_id": null,
+                    "sourcebranchpublication_id": null
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
+            "publication": null,
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
+            "resource_instance_lifecycle": null,
             "root": {
                 "alias": "record_type",
                 "config": {
+                    "i18n_config": {
+                        "fn": "arches.app.datatypes.datatypes.DomainDataType"
+                    },
                     "options": [
                         {
                             "id": "534aefb3-b5c2-45a5-a1c8-b96da19f4e93",
@@ -126,6 +162,7 @@
                 "graph_id": "02956e74-03d2-11ef-89f3-3736dd7ed53f",
                 "hascustomalias": false,
                 "is_collector": true,
+                "is_immutable": false,
                 "isrequired": false,
                 "issearchable": true,
                 "istopnode": true,
@@ -133,13 +170,18 @@
                 "nodegroup_id": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                 "nodeid": "02956e75-03d2-11ef-89f3-3736dd7ed53f",
                 "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
-                "sortorder": 0
+                "sortorder": 0,
+                "source_identifier_id": null,
+                "sourcebranchpublication_id": null
             },
-            "slug": null,
+            "slug": "record_type",
+            "source_identifier_id": null,
+            "spatial_views": [],
             "subtitle": {
                 "en": ""
             },
             "template_id": "50000000-0000-0000-0000-000000000001",
+            "user_permissions": {},
             "version": ""
         }
     ]

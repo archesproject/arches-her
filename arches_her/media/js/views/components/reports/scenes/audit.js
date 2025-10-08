@@ -1,73 +1,102 @@
-define([
-    'underscore', 
-    'knockout', 
-    'arches', 
-    'utils/report',
-    'templates/views/components/reports/scenes/audit.htm',
-    'bindings/datatable',
-    'bindings/reports'], 
-function(_, ko, arches, reportUtils, AuditTemplate) {
-    return ko.components.register('views/components/reports/scenes/audit', {
-        viewModel: function(params) {
-            const self = this;
-            Object.assign(self, reportUtils);
+import _ from "underscore";
+import ko from "knockout";
+import arches from "arches";
+import reportUtils from "utils/report";
+import AuditTemplate from "templates/views/components/reports/scenes/audit.htm";
+import "bindings/datatable";
+import "bindings/reports";
 
-            self.auditTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(7).fill(null)
-            };
+export default ko.components.register("views/components/reports/scenes/audit", {
+    viewModel: function (params) {
+        const self = this;
+        Object.assign(self, reportUtils);
 
-            self.dataConfig = {
-                audit: 'audit metadata',
-                resource: 'resource model type'
+        self.auditTableConfig = {
+            ...self.defaultTableConfig,
+            columns: Array(7).fill(null),
+        };
+
+        self.dataConfig = {
+            audit: "audit metadata",
+            resource: "resource model type",
+        };
+
+        self.cards = Object.assign({}, params.cards);
+        self.resource = params?.data || undefined;
+        self.edit = params.editTile || self.editTile;
+        self.delete = params.deleteTile || self.deleteTile;
+        self.add = params.addTile || self.addNewTile;
+        self.audit = ko.observable();
+        self.visible = {
+            audit: ko.observable(true),
+        };
+        Object.assign(self.dataConfig, params.dataConfig || {});
+
+        // if params.compiled is set and true, the user has compiled their own data.  Use as is.
+        if (params?.compiled) {
+            self.audit(params.data.audit);
+        } else {
+            const auditData = self.getRawNodeValue(
+                params.data(),
+                self.dataConfig.audit
+            );
+            if (auditData) {
+                const audit = {};
+                audit.creationDate = self.getNodeValue(
+                    auditData,
+                    "audit creation",
+                    "creation timespan",
+                    "creation date"
+                );
+                audit.creator = self.getNodeValue(
+                    auditData,
+                    "audit creation",
+                    "creator",
+                    "creator names",
+                    "creator name"
+                );
+                audit.updateDate = self.getNodeValue(
+                    auditData,
+                    "audit update",
+                    "update timespan",
+                    "date of last update"
+                );
+                audit.updater = self.getNodeValue(
+                    auditData,
+                    "audit update",
+                    "updater",
+                    "updater names",
+                    "updater name"
+                );
+                audit.validation = self.getNodeValue(auditData, "validation");
+                audit.note = self.getNodeValue(
+                    auditData,
+                    "audit notes",
+                    "audit note"
+                );
+                audit.tileid = self.getTileId(auditData);
+                self.audit(audit);
             }
 
-            self.cards = Object.assign({}, params.cards);
-            self.resource = params?.data || undefined;
-            self.edit = params.editTile || self.editTile;
-            self.delete = params.deleteTile || self.deleteTile;
-            self.add = params.addTile || self.addNewTile;
-            self.audit = ko.observable();
-            self.visible = {
-                audit: ko.observable(true),
-            }
-            Object.assign(self.dataConfig, params.dataConfig || {});
-
-            // if params.compiled is set and true, the user has compiled their own data.  Use as is.
-            if(params?.compiled){
-                self.audit(params.data.audit);
-            } else {
-                const auditData = self.getRawNodeValue(params.data(), self.dataConfig.audit);
-                if(auditData) {
-                    const audit = {};
-                    audit.creationDate = self.getNodeValue(auditData, 'audit creation', 'creation timespan', 'creation date');
-                    audit.creator =  self.getNodeValue(auditData, 'audit creation', 'creator', 'creator names', 'creator name');
-                    audit.updateDate = self.getNodeValue(auditData, 'audit update', 'update timespan', 'date of last update');
-                    audit.updater =  self.getNodeValue(auditData, 'audit update', 'updater', 'updater names', 'updater name');
-                    audit.validation = self.getNodeValue(auditData, 'validation');
-                    audit.note = self.getNodeValue(auditData, 'audit notes', 'audit note');
-                    audit.tileid = self.getTileId(auditData)
-                    self.audit(audit);
-                }
-
-                self.resourceData =  ko.observable({
-                    sections:
-                        [
+            self.resourceData = ko.observable({
+                sections: [
+                    {
+                        title: "Type",
+                        data: [
                             {
-                                title: 'Type',
-                                data: [{
-                                    key: 'Resource Model Type',
-                                    value: self.getNodeValue(params.data(), self.dataConfig.resource),
-                                    type: 'kv',
-                                    card: self.cards?.['type']
-                                }]
-                            }
-                        ]
-                });
-
-            } 
-
-        },
-        template: AuditTemplate
-    });
+                                key: "Resource Model Type",
+                                value: self.getNodeValue(
+                                    params.data(),
+                                    self.dataConfig.resource
+                                ),
+                                type: "kv",
+                                card: self.cards?.["type"],
+                            },
+                        ],
+                    },
+                ],
+            });
+        }
+    },
+    template: AuditTemplate,
 });

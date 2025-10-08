@@ -1,16 +1,17 @@
-define([
-    'underscore', 
-    'knockout', 
-    'arches', 
-    'utils/report',
-    'templates/views/components/reports/scenes/default.htm',
-    'bindings/datatable',
-    'bindings/reports', 
-    'views/components/reports/scenes/keyvalue'], 
-function(_, ko, arches, reportUtils, DefaultTemplate) {
-    return ko.components.register('views/components/reports/scenes/default', {
-        // IMPORTANT:  this scene *requires* you to compile your own data. 
-        viewModel: function(params) {
+import _ from "underscore";
+import ko from "knockout";
+import arches from "arches";
+import reportUtils from "utils/report";
+import DefaultTemplate from "templates/views/components/reports/scenes/default.htm";
+import "bindings/datatable";
+import "bindings/reports";
+import "views/components/reports/scenes/keyvalue";
+
+export default ko.components.register(
+    "views/components/reports/scenes/default",
+    {
+        // IMPORTANT:  this scene *requires* you to compile your own data.
+        viewModel: function (params) {
             var self = this;
             Object.assign(self, reportUtils);
 
@@ -22,11 +23,11 @@ function(_, ko, arches, reportUtils, DefaultTemplate) {
             self.data = ko.observable();
             self.data(ko.unwrap(params.data));
             self.visible = {};
-            self.sections = ko.unwrap(params.data)?.sections || []
-            for(const section of self.sections) {
+            self.sections = ko.unwrap(params.data)?.sections || [];
+            for (const section of self.sections) {
                 self.visible[section.title] = ko.observable(true);
             }
         },
-        template: DefaultTemplate
-    });
-});
+        template: DefaultTemplate,
+    }
+);

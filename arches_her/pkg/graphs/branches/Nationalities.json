@@ -8,14 +8,7 @@
                     "cardid": "52182d0f-59f0-11e9-95ad-18cf5eb368c4",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [
-                        {
-                            "card_id": "52182d0f-59f0-11e9-95ad-18cf5eb368c4",
-                            "constraintid": "56bcc6b8-b0ed-4353-8a62-2f49f6a44ee3",
-                            "nodes": [],
-                            "uniquetoallinstances": false
-                        }
-                    ],
+                    "constraints": [],
                     "cssclass": null,
                     "description": {
                         "en": "Used to record the nationality of a vessel or aircraft. Includes Flags of Convenience.Dependencies:> Nationality concept collection in the RDM"
@@ -31,12 +24,12 @@
                     "instructions": {
                         "en": "Record the nationality of the vessel or aircraft"
                     },
-                    "is_editable": true,
                     "name": {
                         "en": "Nationalities"
                     },
                     "nodegroup_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
                     "sortorder": null,
+                    "source_identifier_id": null,
                     "visible": true
                 }
             ],
@@ -60,6 +53,7 @@
                     },
                     "node_id": "8a195591-59f0-11e9-98f4-18cf5eb368c4",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 },
@@ -82,6 +76,7 @@
                     },
                     "node_id": "bd52b5cc-28ef-11eb-b33b-f875a44e0e11",
                     "sortorder": 1,
+                    "source_identifier_id": null,
                     "visible": false,
                     "widget_id": "10000000-0000-0000-0000-000000000002"
                 }
@@ -101,7 +96,8 @@
                     "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
-                    "rangenode_id": "8a195591-59f0-11e9-98f4-18cf5eb368c4"
+                    "rangenode_id": "8a195591-59f0-11e9-98f4-18cf5eb368c4",
+                    "source_identifier_id": null
                 },
                 {
                     "description": null,
@@ -110,13 +106,17 @@
                     "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
                     "name": null,
                     "ontologyproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
-                    "rangenode_id": "bd52b5cc-28ef-11eb-b33b-f875a44e0e11"
+                    "rangenode_id": "bd52b5cc-28ef-11eb-b33b-f875a44e0e11",
+                    "source_identifier_id": null
                 }
             ],
             "functions_x_graphs": [],
             "graphid": "5211c471-59f0-11e9-a975-18cf5eb368c4",
+            "group_permissions": {},
+            "has_unpublished_changes": true,
             "iconclass": "fa fa-flag",
-            "is_editable": true,
+            "is_active": false,
+            "is_copy_immutable": false,
             "isresource": false,
             "jsonldcontext": null,
             "name": {
@@ -125,6 +125,7 @@
             "nodegroups": [
                 {
                     "cardinality": "n",
+                    "grouping_node_id": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
                     "legacygroupid": null,
                     "nodegroupid": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
                     "parentnodegroup_id": null
@@ -141,6 +142,7 @@
                     "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": true,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": true,
@@ -150,6 +152,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
                     "parentproperty": "",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 },
                 {
@@ -164,6 +167,7 @@
                     "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": false,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": false,
@@ -173,6 +177,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P141_assigned",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 },
                 {
@@ -187,6 +192,7 @@
                     "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": false,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": false,
                     "istopnode": false,
@@ -196,6 +202,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E55_Type",
                     "parentproperty": "http://www.cidoc-crm.org/cidoc-crm/P2_has_type",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 }
             ],
@@ -203,6 +210,7 @@
             "publication": null,
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
+            "resource_instance_lifecycle": null,
             "root": {
                 "alias": "nationalities",
                 "config": {},
@@ -213,6 +221,7 @@
                 "graph_id": "5211c471-59f0-11e9-a975-18cf5eb368c4",
                 "hascustomalias": false,
                 "is_collector": true,
+                "is_immutable": false,
                 "isrequired": false,
                 "issearchable": true,
                 "istopnode": true,
@@ -221,13 +230,17 @@
                 "nodeid": "5211c470-59f0-11e9-bbf6-18cf5eb368c4",
                 "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment",
                 "sortorder": 0,
+                "source_identifier_id": null,
                 "sourcebranchpublication_id": null
             },
-            "slug": null,
+            "slug": "nationalities",
+            "source_identifier_id": null,
+            "spatial_views": [],
             "subtitle": {
                 "en": "Used to record the nationality of a vessel or aircraft."
             },
             "template_id": "50000000-0000-0000-0000-000000000001",
+            "user_permissions": {},
             "version": ""
         }
     ]
