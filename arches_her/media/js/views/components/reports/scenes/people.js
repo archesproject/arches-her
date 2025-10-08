@@ -1,14 +1,15 @@
-define([
-    'underscore', 
-    'knockout', 
-    'arches', 
-    'utils/report',
-    'templates/views/components/reports/scenes/people.htm',
-    'bindings/datatable',
-    'bindings/reports'], 
-function(_, ko, arches, reportUtils, PeopleTemplate) {
-    return ko.components.register('views/components/reports/scenes/people', {
-        viewModel: function(params) {
+import _ from "underscore";
+import ko from "knockout";
+import arches from "arches";
+import reportUtils from "utils/report";
+import PeopleTemplate from "templates/views/components/reports/scenes/people.htm";
+import "bindings/datatable";
+import "bindings/reports";
+
+export default ko.components.register(
+    "views/components/reports/scenes/people",
+    {
+        viewModel: function (params) {
             const self = this;
             Object.assign(self, reportUtils);
 
@@ -17,11 +18,11 @@ function(_, ko, arches, reportUtils, PeopleTemplate) {
                 ...self.defaultTableConfig,
                 paging: true,
                 searching: true,
-                columns: Array(7).fill(null)
+                columns: Array(7).fill(null),
             };
 
             self.dataConfig = {
-                people: 'associated actors',
+                people: "associated actors",
             };
 
             self.cards = Object.assign({}, params.cards);
@@ -36,32 +37,65 @@ function(_, ko, arches, reportUtils, PeopleTemplate) {
             Object.assign(self.dataConfig, params.dataConfig || {});
 
             // if params.compiled is set and true, the user has compiled their own data.  Use as is.
-            if(params?.compiled){
+            if (params?.compiled) {
                 // do nothing
             } else {
-                const peopleNode = self.getRawNodeValue(params.data(), self.dataConfig.people); 
-                if(peopleNode?.length){
-                    self.people(peopleNode.map(x => {
-                        const actor = self.getNodeValue(x, 'associated actor', 'actor');
-                        const role = self.getNodeValue(x, 'associated actor', 'role type');
-                        const startOfRole = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor start date');
-                        const endOfRole = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor end date');
-                        const displayDate = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor display date');
-                        const dateQualifier = self.getNodeValue(x, 'associated actor', 'associated actor timespan', 'associated actor date qualifier');
-                        const tileid = self.getTileId(x); 
-                        return {
-                            actor,
-                            role,
-                            startOfRole,
-                            endOfRole,
-                            displayDate,
-                            dateQualifier,
-                            tileid
-                        };
-                    }));
+                const peopleNode = self.getRawNodeValue(
+                    params.data(),
+                    self.dataConfig.people
+                );
+                if (peopleNode?.length) {
+                    self.people(
+                        peopleNode.map((x) => {
+                            const actor = self.getNodeValue(
+                                x,
+                                "associated actor",
+                                "actor"
+                            );
+                            const role = self.getNodeValue(
+                                x,
+                                "associated actor",
+                                "role type"
+                            );
+                            const startOfRole = self.getNodeValue(
+                                x,
+                                "associated actor",
+                                "associated actor timespan",
+                                "associated actor start date"
+                            );
+                            const endOfRole = self.getNodeValue(
+                                x,
+                                "associated actor",
+                                "associated actor timespan",
+                                "associated actor end date"
+                            );
+                            const displayDate = self.getNodeValue(
+                                x,
+                                "associated actor",
+                                "associated actor timespan",
+                                "associated actor display date"
+                            );
+                            const dateQualifier = self.getNodeValue(
+                                x,
+                                "associated actor",
+                                "associated actor timespan",
+                                "associated actor date qualifier"
+                            );
+                            const tileid = self.getTileId(x);
+                            return {
+                                actor,
+                                role,
+                                startOfRole,
+                                endOfRole,
+                                displayDate,
+                                dateQualifier,
+                                tileid,
+                            };
+                        })
+                    );
                 }
-            } 
+            }
         },
-        template: PeopleTemplate
-    });
-});
+        template: PeopleTemplate,
+    }
+);

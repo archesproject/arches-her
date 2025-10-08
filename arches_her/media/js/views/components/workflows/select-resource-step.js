@@ -1,55 +1,53 @@
-define([
-    'underscore',
-    'jquery',
-    'arches',
-    'knockout',
-    'knockout-mapping',
-    'templates/views/components/workflows/select-resource-step.htm'
-], function(_, $, arches, ko, koMapping, SelectResourceStepTemplate) {
-    function viewModel(params) {
-        _.extend(this, params.form);
+import _ from "underscore";
+import $ from "jquery";
+import arches from "arches";
+import ko from "knockout";
+import koMapping from "knockout-mapping";
+import SelectResourceStepTemplate from "templates/views/components/workflows/select-resource-step.htm";
 
-        var self = this;
-        this.graphids = params.graphids;
-        this.resourceValue = ko.observable();
-        this.resourceValue.subscribe(val => {
-            if (val){
-                self.tile().resourceinstance_id = val;
-            }
-        });
-        this.tile().transactionId = this.workflowId;
-        this.tile().dirty.subscribe(function(dirty) {
-            self.dirty(dirty);
-        });
+function viewModel(params) {
+    _.extend(this, params.form);
 
-        this.initilize = function(){
-            if (ko.unwrap(self.savedData)) {
-                self.resourceValue(ko.unwrap(self.savedData).resourceInstanceId);
-            }
-        };
-
-        params.form.save = function() {
-            self.tile().save().then(
-                function(){
-                    params.form.savedData({
-                        tileData: koMapping.toJSON(self.tile().data),
-                        resourceInstanceId: self.tile().resourceinstance_id,
-                        tileId: self.tile().tileid,
-                        nodegroupId: self.tile().nodegroup_id,
-                    });
-                    self.locked(true);
-                    params.form.complete(true);
-                    params.form.saving(false);
-                }
-            );
-        };
-        this.initilize();
-    }
-
-    ko.components.register('select-resource-step', {
-        viewModel: viewModel,
-        template: SelectResourceStepTemplate
+    var self = this;
+    this.graphids = params.graphids;
+    this.resourceValue = ko.observable();
+    this.resourceValue.subscribe((val) => {
+        if (val) {
+            self.tile().resourceinstance_id = val;
+        }
+    });
+    this.tile().transactionId = this.workflowId;
+    this.tile().dirty.subscribe(function (dirty) {
+        self.dirty(dirty);
     });
 
-    return viewModel;
+    this.initilize = function () {
+        if (ko.unwrap(self.savedData)) {
+            self.resourceValue(ko.unwrap(self.savedData).resourceInstanceId);
+        }
+    };
+
+    params.form.save = function () {
+        self.tile()
+            .save()
+            .then(function () {
+                params.form.savedData({
+                    tileData: koMapping.toJSON(self.tile().data),
+                    resourceInstanceId: self.tile().resourceinstance_id,
+                    tileId: self.tile().tileid,
+                    nodegroupId: self.tile().nodegroup_id,
+                });
+                self.locked(true);
+                params.form.complete(true);
+                params.form.saving(false);
+            });
+    };
+    this.initilize();
+}
+
+ko.components.register("select-resource-step", {
+    viewModel: viewModel,
+    template: SelectResourceStepTemplate,
 });
+
+export default viewModel;

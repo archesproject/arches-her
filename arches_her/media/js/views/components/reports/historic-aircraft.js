@@ -1,203 +1,262 @@
-define([
-    'jquery',
-    'underscore',
-    'knockout',
-    'arches',
-    'utils/resource',
-    'utils/report',
-    'templates/views/components/reports/historic-aircraft.htm',
-    'views/components/reports/scenes/name',
-    'views/components/reports/scenes/json',
-    'bindings/reports'
-], function($, _, ko, arches, resourceUtils, reportUtils, HistoricAircraftTemplate) {
-    return ko.components.register('historic-aircraft-report', {
-        viewModel: function(params) {
-            var self = this;
-            params.configKeys = ['tabs', 'activeTabIndex'];
-            this.configForm = params.configForm || false;
-            this.configType = params.configType || 'header';
+import $ from "jquery";
+import _ from "underscore";
+import ko from "knockout";
+import arches from "arches";
+import resourceUtils from "utils/resource";
+import reportUtils from "utils/report";
+import HistoricAircraftTemplate from "templates/views/components/reports/historic-aircraft.htm";
+import "views/components/reports/scenes/name";
+import "views/components/reports/scenes/json";
+import "bindings/reports";
 
-            Object.assign(self, reportUtils);
-            self.sections = [
-                {id: 'name', title: 'Names and Identifiers'},
-                {id: 'description', title: 'Descriptions and Citations'},
-                {id: 'classifications', title: 'Classifications and Dating'},
-                {id: 'location', title: 'Location Data'},
-                {id: 'protection', title: 'Designation and Protection Status'},
-                {id: 'assessments', title: 'Assessments'},
-                {id: 'status', title: 'Status and Ownership'},
-                {id: 'journey', title: 'Journey Details'},
-                {id: 'people', title: 'Associated People and Organizations'},
-                {id: 'resources', title: 'Associated Resources'},
-                {id: 'json', title: 'JSON'},
-            ];
-            self.reportMetadata = ko.observable(params.report?.report_json);
-            self.resource = ko.observable(self.reportMetadata()?.resource);
-            self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
-            self.activeSection = ko.observable('name');
-            self.flights = ko.observableArray();
-            self.lastFlight = ko.observableArray();
+export default ko.components.register("historic-aircraft-report", {
+    viewModel: function (params) {
+        var self = this;
+        params.configKeys = ["tabs", "activeTabIndex"];
+        this.configForm = params.configForm || false;
+        this.configType = params.configType || "header";
 
-            self.flightsTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(10).fill(null)
+        Object.assign(self, reportUtils);
+        self.sections = [
+            { id: "name", title: "Names and Identifiers" },
+            { id: "description", title: "Descriptions and Citations" },
+            { id: "classifications", title: "Classifications and Dating" },
+            { id: "location", title: "Location Data" },
+            { id: "protection", title: "Designation and Protection Status" },
+            { id: "assessments", title: "Assessments" },
+            { id: "status", title: "Status and Ownership" },
+            { id: "journey", title: "Journey Details" },
+            { id: "people", title: "Associated People and Organizations" },
+            { id: "resources", title: "Associated Resources" },
+            { id: "json", title: "JSON" },
+        ];
+        self.reportMetadata = ko.observable(params.report?.report_json);
+        self.resource = ko.observable(self.reportMetadata()?.resource);
+        self.displayname = ko.observable(
+            ko.unwrap(self.reportMetadata)?.displayname
+        );
+        self.activeSection = ko.observable("name");
+        self.flights = ko.observableArray();
+        self.lastFlight = ko.observableArray();
+
+        self.flightsTableConfig = {
+            ...self.defaultTableConfig,
+            columns: Array(10).fill(null),
+        };
+
+        self.lastFlightTableConfig = {
+            ...self.defaultTableConfig,
+            columns: Array(16).fill(null),
+        };
+
+        self.classificationDataConfig = {
+            aircraftProduction: "aircraft_construction_phase",
+            dimensions: "aircraft dimensions",
+        };
+
+        self.descriptionDataConfig = {
+            citation: "bibliographic source citation",
+        };
+
+        self.resourceDataConfig = {
+            files: "digital file(s)",
+            activities: "associated activities",
+            consultations: "associated consultations",
+            assets: "associated monuments, areas and artefacts",
+            period: undefined,
+            actors: undefined,
+            archive: "associated archives",
+            resourceinstanceid: ko.unwrap(self.reportMetadata)
+                ?.resourceinstanceid,
+        };
+
+        self.nameCards = {};
+        self.descriptionCards = {};
+        self.classificationCards = {};
+        self.scientificDateCards = {};
+        self.imagesCards = {};
+        self.peopleCards = {};
+        self.locationCards = {};
+        self.protectionCards = {};
+        self.resourcesCards = {};
+        self.summary = params.summary;
+        self.cards = {};
+        self.visible = {
+            flights: ko.observable(true),
+            lastFlight: ko.observable(true),
+        };
+
+        if (params.report.cards) {
+            const cards = params.report.cards;
+
+            self.cards = self.createCardDictionary(cards);
+
+            self.nameCards = {
+                name: self.cards?.["names"],
+                externalCrossReferences:
+                    self.cards?.["external cross references"],
+                systemReferenceNumbers:
+                    self.cards?.["system reference numbers"],
             };
 
-            self.lastFlightTableConfig = {
-                ...self.defaultTableConfig,
-                columns: Array(16).fill(null)
+            self.descriptionCards = {
+                descriptions: self.cards?.["descriptions"],
+                citation: self.cards?.["bibliographic source citation"],
             };
 
-            self.classificationDataConfig = {
-                aircraftProduction: 'aircraft_construction_phase',
-                dimensions: 'aircraft dimensions'
+            self.classificationCards = {
+                production: self.cards?.["construction phase(s)"],
+                dimensions: self.cards?.["aircraft dimensions"],
             };
 
-            self.descriptionDataConfig = {
-                citation: 'bibliographic source citation'
+            self.assessmentCards = {
+                scientificDate: self.cards?.["scientific date assignment"],
             };
 
-            self.resourceDataConfig = {
-                files: 'digital file(s)',
-                activities: 'associated activities',
-                consultations: 'associated consultations',
-                assets: 'associated monuments, areas and artefacts',
-                period: undefined,
-                actors: undefined,
-                archive: 'associated archives',
-                resourceinstanceid: ko.unwrap(self.reportMetadata)?.resourceinstanceid
-            }
-
-            self.nameCards = {};
-            self.descriptionCards = {};
-            self.classificationCards = {};
-            self.scientificDateCards = {};
-            self.imagesCards = {};
-            self.peopleCards = {};
-            self.locationCards = {};
-            self.protectionCards = {};
-            self.resourcesCards = {};
-            self.summary = params.summary;
-            self.cards = {};
-            self.visible = {
-                flights: ko.observable(true),
-                lastFlight: ko.observable(true)
+            self.peopleCards = {
+                people: self.cards?.["associated people and organizations"],
             };
 
-            if(params.report.cards){
-                const cards = params.report.cards;
-
-                self.cards = self.createCardDictionary(cards)
-
-                self.nameCards = {
-                    name: self.cards?.['names'],
-                    externalCrossReferences: self.cards?.['external cross references'],
-                    systemReferenceNumbers: self.cards?.['system reference numbers'],
-                };
-
-                self.descriptionCards = {
-                    descriptions: self.cards?.['descriptions'],
-                    citation: self.cards?.['bibliographic source citation']
-                };
-
-                self.classificationCards = {
-                    production: self.cards?.['construction phase(s)'],
-                    dimensions: self.cards?.['aircraft dimensions']
-                };
-
-                self.assessmentCards = {
-                    scientificDate: self.cards?.['scientific date assignment']
-                };
-
-                self.peopleCards = {
-                    people: self.cards?.['associated people and organizations']
-                };
-
-                Object.assign(self.cards, {
-                    flights: self.cards?.['flights']
-                });
-
-                self.resourcesCards = {
-                    activities: self.cards?.['associated activities'],
-                    consultations: self.cards?.['associated consultations'],
-                    archive: self.cards?.['associated archives'],
-                    files: self.cards?.['associated digital file(s)'],
-                    assets: self.cards?.['associated monuments, areas and artefacts'],
-                    archive: self.cards?.['associated archives']
-                };
-
-                self.locationCards = {
-                    location: {
-                        card: self.cards?.['location data'],
-                        subCards: {
-                            addresses: 'addresses',
-                            nationalGrid: 'national grid references',
-                            administrativeAreas: 'localities/administrative areas',
-                            locationDescriptions: 'location descriptions',
-                            areaAssignment: 'area assignments',
-                            landUse: 'land use classification assignment',
-                            namedLocations: 'named locations'
-                        }
-                    }
-                }
-
-                self.protectionCards = {
-                    designations: self.cards?.['designation and protection assignment']
-                };
-
-                Object.assign(self.protectionCards, self.locationCards);
-            }
-
-            self.statusOwnerData = ko.observable({
-                sections:
-                    [
-                        {
-                            title: "Status and Ownership",
-                            data: [{
-                                key: 'Status',
-                                value: self.getNodeValue(self.resource(), 'status'),
-                                card: self.cards?.['status'],
-                                type: 'kv'
-                            }, {
-                                key: 'Nationality',
-                                value: self.getRawNodeValue(self.resource(), 'nationalities')?.map(node =>
-                                    self.getNodeValue(node, 'aircraft nationality')
-                                ),
-                                card: self.cards?.['nationality'],
-                                type: 'kv'
-                            }]
-                        }
-                    ]
+            Object.assign(self.cards, {
+                flights: self.cards?.["flights"],
             });
 
-            const flightsNode = self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Flight Type']['value'] !== 'Final');
+            self.resourcesCards = {
+                activities: self.cards?.["associated activities"],
+                consultations: self.cards?.["associated consultations"],
+                archive: self.cards?.["associated archives"],
+                files: self.cards?.["associated digital file(s)"],
+                assets: self.cards?.[
+                    "associated monuments, areas and artefacts"
+                ],
+                archive: self.cards?.["associated archives"],
+            };
 
-            if(Array.isArray(flightsNode)){
-                // const notFinalFlight = flightsNode.filter(f => f['Last Flight Type']['value'] !== 'Final');
-                self.flights(flightsNode.map(node => {
-                    const cargoType = self.getNodeValue(node, 'cargo', 'cargo type');
+            self.locationCards = {
+                location: {
+                    card: self.cards?.["location data"],
+                    subCards: {
+                        addresses: "addresses",
+                        nationalGrid: "national grid references",
+                        administrativeAreas: "localities/administrative areas",
+                        locationDescriptions: "location descriptions",
+                        areaAssignment: "area assignments",
+                        landUse: "land use classification assignment",
+                        namedLocations: "named locations",
+                    },
+                },
+            };
 
-                    const crewNode = self.getRawNodeValue(node, 'crew');
+            self.protectionCards = {
+                designations:
+                    self.cards?.["designation and protection assignment"],
+            };
+
+            Object.assign(self.protectionCards, self.locationCards);
+        }
+
+        self.statusOwnerData = ko.observable({
+            sections: [
+                {
+                    title: "Status and Ownership",
+                    data: [
+                        {
+                            key: "Status",
+                            value: self.getNodeValue(self.resource(), "status"),
+                            card: self.cards?.["status"],
+                            type: "kv",
+                        },
+                        {
+                            key: "Nationality",
+                            value: self
+                                .getRawNodeValue(
+                                    self.resource(),
+                                    "nationalities"
+                                )
+                                ?.map((node) =>
+                                    self.getNodeValue(
+                                        node,
+                                        "aircraft nationality"
+                                    )
+                                ),
+                            card: self.cards?.["nationality"],
+                            type: "kv",
+                        },
+                    ],
+                },
+            ],
+        });
+
+        const flightsNode = self
+            .getRawNodeValue(self.resource(), "flights")
+            ?.filter((f) => f["Flight Type"]["value"] !== "Final");
+
+        if (Array.isArray(flightsNode)) {
+            // const notFinalFlight = flightsNode.filter(f => f['Last Flight Type']['value'] !== 'Final');
+            self.flights(
+                flightsNode.map((node) => {
+                    const cargoType = self.getNodeValue(
+                        node,
+                        "cargo",
+                        "cargo type"
+                    );
+
+                    const crewNode = self.getRawNodeValue(node, "crew");
                     let crew = [];
-                    if(Array.isArray(crewNode))
-                    {
-                        crew = crewNode.map(crewNode => {
-                            const name = self.getNodeValue(crewNode, 'crew member');
-                            const link = self.getResourceLink(self.getRawNodeValue(crewNode, 'crew member'));
-                            const role = self.getNodeValue(crewNode, 'crew member', 'crew role');
+                    if (Array.isArray(crewNode)) {
+                        crew = crewNode.map((crewNode) => {
+                            const name = self.getNodeValue(
+                                crewNode,
+                                "crew member"
+                            );
+                            const link = self.getResourceLink(
+                                self.getRawNodeValue(crewNode, "crew member")
+                            );
+                            const role = self.getNodeValue(
+                                crewNode,
+                                "crew member",
+                                "crew role"
+                            );
                             return { name, link, role };
-                        })
+                        });
                     }
 
-                    const flightDescription = self.getRawNodeValue(node, 'flight descriptions', 'flight description', '@display_value');
-                    const flightDeparture = self.getNodeValue(node, 'place of departure', 'departure placenames', 'place of departure name');
-                    const flightDestination = self.getNodeValue(node, 'place of destination', 'destination placenames', 'place of destination name');
-                    const flightArrivalDate = self.getNodeValue(node, 'flight timespan', 'expected date of arrival', 'expected date start');
-                    const flightDepartureDate = self.getNodeValue(node, 'flight timespan', 'date of departure');
-                    const flightDateQualifier = self.getNodeValue(node, 'flight timespan', 'flight date qualifier');
-                    const flightType = self.getNodeValue(node, 'flight type');
+                    const flightDescription = self.getRawNodeValue(
+                        node,
+                        "flight descriptions",
+                        "flight description",
+                        "@display_value"
+                    );
+                    const flightDeparture = self.getNodeValue(
+                        node,
+                        "place of departure",
+                        "departure placenames",
+                        "place of departure name"
+                    );
+                    const flightDestination = self.getNodeValue(
+                        node,
+                        "place of destination",
+                        "destination placenames",
+                        "place of destination name"
+                    );
+                    const flightArrivalDate = self.getNodeValue(
+                        node,
+                        "flight timespan",
+                        "expected date of arrival",
+                        "expected date start"
+                    );
+                    const flightDepartureDate = self.getNodeValue(
+                        node,
+                        "flight timespan",
+                        "date of departure"
+                    );
+                    const flightDateQualifier = self.getNodeValue(
+                        node,
+                        "flight timespan",
+                        "flight date qualifier"
+                    );
+                    const flightType = self.getNodeValue(node, "flight type");
                     const tileid = self.getTileId(node);
-
 
                     return {
                         cargoType,
@@ -209,53 +268,117 @@ define([
                         flightDepartureDate,
                         flightDateQualifier,
                         flightType,
-                        tileid
-                    }
-                }));
+                        tileid,
+                    };
+                })
+            );
+        }
+
+        const finalFlight = Object.assign(
+            {},
+            self
+                .getRawNodeValue(self.resource(), "flights")
+                ?.filter((f) => f["Flight Type"]["value"] === "Final")
+        )[0];
+
+        if (finalFlight) {
+            const description = self.getRawNodeValue(
+                finalFlight,
+                "flight descriptions",
+                "flight description",
+                "@display_value"
+            );
+            const crashSiteType = self.getNodeValue(
+                finalFlight,
+                "crash site",
+                "crash site type"
+            );
+            const crashSiteNode = self.getRawNodeValue(
+                finalFlight,
+                "crash site",
+                "instance_details"
+            );
+            let crashSites = [];
+            if (Array.isArray(crashSiteNode)) {
+                crashSites = crashSiteNode.map((crashSiteNode) => {
+                    const crashSiteName = self.getNodeValue(crashSiteNode);
+                    const crashSiteLink = self.getResourceLink(crashSiteNode);
+                    return { crashSiteName, crashSiteLink };
+                });
             }
 
-            const finalFlight = Object.assign({}, self.getRawNodeValue(self.resource(), 'flights')?.filter(f => f['Flight Type']['value'] === 'Final'))[0];
+            const crewNode = self.getRawNodeValue(finalFlight, "crew");
+            let crew = [];
+            if (Array.isArray(crewNode)) {
+                crew = crewNode.map((crewNode) => {
+                    const name = self.getNodeValue(crewNode, "crew member");
+                    const link = self.getResourceLink(
+                        self.getRawNodeValue(crewNode, "crew member")
+                    );
+                    const role = self.getNodeValue(
+                        crewNode,
+                        "crew member",
+                        "crew role"
+                    );
+                    return { name, link, role };
+                });
+            }
 
-            if(finalFlight){
-                const description = self.getRawNodeValue(finalFlight, 'flight descriptions', 'flight description', '@display_value');
-                const crashSiteType = self.getNodeValue(finalFlight, 'crash site', 'crash site type');
-                const crashSiteNode = self.getRawNodeValue(finalFlight, 'crash site', 'instance_details');
-                let crashSites = [];
-                if(Array.isArray(crashSiteNode)){
-                    crashSites = crashSiteNode.map(crashSiteNode => {
-                        const crashSiteName = self.getNodeValue(crashSiteNode);
-                        const crashSiteLink = self.getResourceLink(crashSiteNode);
-                        return { crashSiteName, crashSiteLink };
-                    })
-                }
+            const departureName = self.getNodeValue(
+                finalFlight,
+                "place of departure",
+                "departure placenames",
+                "place of departure name"
+            );
+            const departureNameCurrency = self.getNodeValue(
+                finalFlight,
+                "place of departure",
+                "departure placenames",
+                "place of departure name currency"
+            );
+            const destinationName = self.getNodeValue(
+                finalFlight,
+                "place of destination",
+                "destination placenames",
+                "place of destination name"
+            );
+            const destinationNameCurrency = self.getNodeValue(
+                finalFlight,
+                "place of destination",
+                "destination placenames",
+                "place of destination name currency"
+            );
+            const cargo = self.getNodeValue(finalFlight, "cargo", "cargo type");
+            const departureDate = self.getNodeValue(
+                finalFlight,
+                "flight timespan",
+                "date of departure"
+            );
+            const lossDate = self.getNodeValue(
+                finalFlight,
+                "flight timespan",
+                "date of loss"
+            );
+            const expectedArrivalDate = self.getNodeValue(
+                finalFlight,
+                "flight timespan",
+                "expected date of arrival",
+                "expected date start"
+            );
+            const dateQualifier = self.getNodeValue(
+                finalFlight,
+                "flight timespan",
+                "flight date qualifier"
+            );
+            const type = self.getNodeValue(finalFlight, "flight type");
+            const mannerOfLoss = self.getNodeValue(
+                finalFlight,
+                "manner of loss"
+            );
+            const tileid = self.getTileId(finalFlight);
 
-
-                const crewNode = self.getRawNodeValue(finalFlight, 'crew');
-                let crew = [];
-                if(Array.isArray(crewNode))
+            self.lastFlight([
                 {
-                    crew = crewNode.map(crewNode => {
-                        const name = self.getNodeValue(crewNode, 'crew member');
-                        const link = self.getResourceLink(self.getRawNodeValue(crewNode, 'crew member'));
-                        const role = self.getNodeValue(crewNode, 'crew member', 'crew role');
-                        return { name, link, role };
-                    })
-                }
-
-                const departureName = self.getNodeValue(finalFlight, 'place of departure', 'departure placenames', 'place of departure name');
-                const departureNameCurrency = self.getNodeValue(finalFlight, 'place of departure', 'departure placenames', 'place of departure name currency');
-                const destinationName = self.getNodeValue(finalFlight, 'place of destination', 'destination placenames', 'place of destination name');
-                const destinationNameCurrency = self.getNodeValue(finalFlight, 'place of destination', 'destination placenames', 'place of destination name currency');
-                const cargo = self.getNodeValue(finalFlight, 'cargo', 'cargo type');
-                const departureDate = self.getNodeValue(finalFlight, 'flight timespan', 'date of departure');
-                const lossDate = self.getNodeValue(finalFlight, 'flight timespan', 'date of loss');
-                const expectedArrivalDate = self.getNodeValue(finalFlight, 'flight timespan', 'expected date of arrival', 'expected date start');
-                const dateQualifier = self.getNodeValue(finalFlight, 'flight timespan', 'flight date qualifier');
-                const type = self.getNodeValue(finalFlight, 'flight type');
-                const mannerOfLoss = self.getNodeValue(finalFlight, 'manner of loss');
-                const tileid = self.getTileId(finalFlight);
-
-                self.lastFlight([{
                     description,
                     crashSiteType,
                     crashSites,
@@ -271,11 +394,10 @@ define([
                     dateQualifier,
                     type,
                     mannerOfLoss,
-                    tileid
-                }]);;
-            }
-
-        },
-        template: HistoricAircraftTemplate
-    });
+                    tileid,
+                },
+            ]);
+        }
+    },
+    template: HistoricAircraftTemplate,
 });

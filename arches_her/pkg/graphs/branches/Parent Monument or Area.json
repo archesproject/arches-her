@@ -8,14 +8,7 @@
                     "cardid": "e5550183-59ef-11e9-bd5d-18cf5eb368c4",
                     "component_id": "f05e4d3a-53c1-11e8-b0ea-784f435179ea",
                     "config": null,
-                    "constraints": [
-                        {
-                            "card_id": "e5550183-59ef-11e9-bd5d-18cf5eb368c4",
-                            "constraintid": "85d22637-aaa7-4904-a446-e0d207f1fb0f",
-                            "nodes": [],
-                            "uniquetoallinstances": false
-                        }
-                    ],
+                    "constraints": [],
                     "cssclass": null,
                     "description": {
                         "en": ""
@@ -31,12 +24,12 @@
                     "instructions": {
                         "en": null
                     },
-                    "is_editable": true,
                     "name": {
                         "en": "Parent Monument or Area"
                     },
                     "nodegroup_id": "e5550181-59ef-11e9-af33-18cf5eb368c4",
                     "sortorder": 1,
+                    "source_identifier_id": null,
                     "visible": true
                 }
             ],
@@ -59,6 +52,7 @@
                     },
                     "node_id": "e5550181-59ef-11e9-af33-18cf5eb368c4",
                     "sortorder": null,
+                    "source_identifier_id": null,
                     "visible": true,
                     "widget_id": "ff3c400a-76ec-11e7-a793-784f435179ea"
                 }
@@ -107,8 +101,11 @@
             "edges": [],
             "functions_x_graphs": [],
             "graphid": "e5550180-59ef-11e9-9ce4-18cf5eb368c4",
+            "group_permissions": {},
+            "has_unpublished_changes": true,
             "iconclass": "fa fa-bank",
-            "is_editable": true,
+            "is_active": false,
+            "is_copy_immutable": false,
             "isresource": false,
             "jsonldcontext": null,
             "name": {
@@ -117,6 +114,7 @@
             "nodegroups": [
                 {
                     "cardinality": "1",
+                    "grouping_node_id": "e5550181-59ef-11e9-af33-18cf5eb368c4",
                     "legacygroupid": null,
                     "nodegroupid": "e5550181-59ef-11e9-af33-18cf5eb368c4",
                     "parentnodegroup_id": null
@@ -149,6 +147,7 @@
                     "graph_id": "e5550180-59ef-11e9-9ce4-18cf5eb368c4",
                     "hascustomalias": false,
                     "is_collector": true,
+                    "is_immutable": false,
                     "isrequired": false,
                     "issearchable": true,
                     "istopnode": true,
@@ -158,6 +157,7 @@
                     "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
                     "parentproperty": "",
                     "sortorder": 0,
+                    "source_identifier_id": null,
                     "sourcebranchpublication_id": null
                 }
             ],
@@ -165,6 +165,7 @@
             "publication": null,
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
+            "resource_instance_lifecycle": null,
             "root": {
                 "alias": "parent_monument_or_area",
                 "config": {
@@ -191,6 +192,7 @@
                 "graph_id": "e5550180-59ef-11e9-9ce4-18cf5eb368c4",
                 "hascustomalias": false,
                 "is_collector": true,
+                "is_immutable": false,
                 "isrequired": false,
                 "issearchable": true,
                 "istopnode": true,
@@ -199,13 +201,17 @@
                 "nodeid": "e5550181-59ef-11e9-af33-18cf5eb368c4",
                 "ontologyclass": "http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing",
                 "sortorder": 0,
+                "source_identifier_id": null,
                 "sourcebranchpublication_id": null
             },
-            "slug": null,
+            "slug": "parent_monument_or_area",
+            "source_identifier_id": null,
+            "spatial_views": [],
             "subtitle": {
                 "en": "Used to link a monument or area to its parent record."
             },
             "template_id": "50000000-0000-0000-0000-000000000002",
+            "user_permissions": {},
             "version": ""
         }
     ]

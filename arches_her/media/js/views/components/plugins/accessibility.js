@@ -1,10 +1,6 @@
-define([
-    'knockout',
-    'templates/views/components/plugins/accessibility.htm'
-], function(ko,accessibilityPluginTemplate) {
+import ko from "knockout";
+import accessibilityPluginTemplate from "templates/views/components/plugins/accessibility.htm";
 
-    return ko.components.register('accessibility', {
-        template: accessibilityPluginTemplate
-    });
-
+export default ko.components.register("accessibility", {
+    template: accessibilityPluginTemplate,
 });

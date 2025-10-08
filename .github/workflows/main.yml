@@ -11,10 +11,10 @@ jobs:
 
     services:
       postgres:
-        image: postgis/postgis:13-3.0
+        image: postgis/postgis:14-3.4
         env:
           POSTGRES_PASSWORD: postgis
-          POSTGRES_DB: arches_her
+          POSTGRES_DB: arches_her_8
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -44,7 +44,7 @@ jobs:
         uses: ./.github/actions/build-and-test-branch
         with:
           secrets: ${{ toJSON(secrets) }}
-          project-name: 'arches_her'
+          project-name: 'arches_her_8'
           branch-type: 'target'
 
   build_feature_branch:
@@ -52,10 +52,10 @@ jobs:
 
     services:
       postgres:
-        image: postgis/postgis:13-3.0
+        image: postgis/postgis:14-3.4
         env:
           POSTGRES_PASSWORD: postgis
-          POSTGRES_DB: arches_her
+          POSTGRES_DB: arches_her_8
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -63,7 +63,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11", "3.12"]
+        python-version: ["3.11", "3.12", "3.13"]
 
     steps:
       - uses: actions/checkout@v4
@@ -85,7 +85,7 @@ jobs:
         uses: ./.github/actions/build-and-test-branch
         with:
           secrets: ${{ toJSON(secrets) }}
-          project-name: 'arches_her'
+          project-name: 'arches_her_8'
           branch-type: 'feature'
 
   check_frontend_coverage:

@@ -16,6 +16,14 @@ try:
 except ImportError:
     pass
 
+
+def get_optional_env_variable(var_name, default=None) -> str:
+    try:
+        return os.environ[var_name]
+    except KeyError:
+        return default
+
+
 APP_NAME = "arches_her"
 APP_VERSION = semantic_version.Version(major=0, minor=0, patch=0)
 APP_ROOT = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
@@ -34,10 +42,28 @@ SEARCH_COMPONENT_LOCATIONS.append("arches_her.search.components")
 
 LOCALE_PATHS.insert(0, os.path.join(APP_ROOT, "locale"))
 
-TEMPLATES[0]["OPTIONS"]["context_processors"].append("arches_her.utils.context_processors.project_settings")
+TEMPLATES[0]["OPTIONS"]["context_processors"].append(
+    "arches_her.utils.context_processors.project_settings"
+)
 
 FILE_TYPE_CHECKING = False
-FILE_TYPES = ["bmp", "gif", "jpg", "jpeg", "pdf", "png", "psd", "rtf", "tif", "tiff", "xlsx", "csv", "zip", "json"]
+FILE_TYPES = [
+    "bmp",
+    "gif",
+    "jpg",
+    "jpeg",
+    "pdf",
+    "png",
+    "psd",
+    "rtf",
+    "tif",
+    "tiff",
+    "xlsx",
+    "csv",
+    "zip",
+    "json",
+    "docx",
+]
 FILENAME_GENERATOR = "arches.app.utils.storage_filename_generator.generate_filename"
 UPLOADED_FILES_DIR = "uploadedfiles"
 
@@ -45,12 +71,16 @@ UPLOADED_FILES_DIR = "uploadedfiles"
 SECRET_KEY = "z23n6ot1_fsturw_gor66k^d#tl9h8*8*_e7qb)tyoucdo-z+x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = bool(get_optional_env_variable("ARCHES_DJANGO_DEBUG", False))
 
 ROOT_URLCONF = "arches_her.urls"
 
 # Modify this line as needed for your project to connect to elasticsearch with a password that you generate
-ELASTICSEARCH_CONNECTION_OPTIONS = {"request_timeout": 30, "verify_certs": False, "basic_auth": ("elastic", "E1asticSearchforArche5")}
+ELASTICSEARCH_CONNECTION_OPTIONS = {
+    "request_timeout": 30,
+    "verify_certs": False,
+    "basic_auth": ("elastic", "E1asticSearchforArche5"),
+}
 
 # If you need to connect to Elasticsearch via an API key instead of username/password, use the syntax below:
 # ELASTICSEARCH_CONNECTION_OPTIONS = {"timeout": 30, "verify_certs": False, "api_key": "<ENCODED_API_KEY>"}
@@ -94,7 +124,9 @@ DATABASES = {
         "ENGINE": "django.contrib.gis.db.backends.postgis",
         "HOST": "localhost",
         "NAME": "arches_her",
-        "OPTIONS": {},
+        "OPTIONS": {
+            "options": "-c cursor_tuple_fraction=1",
+        },
         "PASSWORD": "postgis",
         "PORT": "5432",
         "POSTGIS_TEMPLATE": "template_postgis",
@@ -118,7 +150,6 @@ SEARCH_THUMBNAILS = False
 
 INSTALLED_APPS = (
     "webpack_loader",
-    "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -129,7 +160,9 @@ INSTALLED_APPS = (
     "arches.app.models",
     "arches.management",
     "guardian",
-    "captcha",
+    "django_recaptcha",
+    "pgtrigger",
+    "django_migrate_sql",
     "revproxy",
     "corsheaders",
     "oauth2_provider",
@@ -139,7 +172,7 @@ INSTALLED_APPS = (
     "arches_her",
 )
 
-INSTALLED_APPS += ("arches.app",)
+INSTALLED_APPS += ("arches.app", "django.contrib.admin")
 
 ROOT_HOSTCONF = "arches_her.hosts"
 DEFAULT_HOST = "arches_her"
@@ -161,9 +194,13 @@ MIDDLEWARE = [
     # "silk.middleware.SilkyMiddleware",
 ]
 
-MIDDLEWARE.insert(0, "django_hosts.middleware.HostsRequestMiddleware")  # this must resolve to first MIDDLEWARE entry
+MIDDLEWARE.insert(  # this must resolve to first MIDDLEWARE entry
+    0, "django_hosts.middleware.HostsRequestMiddleware"
+)
 
-MIDDLEWARE.append("django_hosts.middleware.HostsResponseMiddleware")  # this must resolve last MIDDLEWARE entry
+MIDDLEWARE.append(  # this must resolve last MIDDLEWARE entry
+    "django_hosts.middleware.HostsResponseMiddleware"
+)
 
 STATICFILES_DIRS = build_staticfiles_dirs(app_root=APP_ROOT)
 
@@ -174,7 +211,9 @@ TEMPLATES = build_templates_config(
 
 ALLOWED_HOSTS = []
 
-SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(APP_ROOT, "system_settings", "System_Settings.json")
+SYSTEM_SETTINGS_LOCAL_PATH = os.path.join(
+    APP_ROOT, "system_settings", "System_Settings.json"
+)
 WSGI_APPLICATION = "arches_her.wsgi.application"
 
 # URL that handles the media served from MEDIA_ROOT, used for managing stored files.
@@ -215,9 +254,19 @@ LOGGING = {
             "filename": os.path.join(APP_ROOT, "arches.log"),
             "formatter": "console",
         },
-        "console": {"level": "WARNING", "class": "logging.StreamHandler", "formatter": "console"},
+        "console": {
+            "level": "WARNING",
+            "class": "logging.StreamHandler",
+            "formatter": "console",
+        },
     },
-    "loggers": {"arches": {"handlers": ["file", "console"], "level": "WARNING", "propagate": True}},
+    "loggers": {
+        "arches": {
+            "handlers": ["file", "console"],
+            "level": "WARNING",
+            "propagate": True,
+        }
+    },
 }
 
 # Rate limit for authentication views
@@ -248,7 +297,9 @@ HIDE_EMPTY_NODES_IN_REPORT = False
 BYPASS_UNIQUE_CONSTRAINT_TILE_VALIDATION = False
 BYPASS_REQUIRED_VALUE_TILE_VALIDATION = False
 
-DATE_IMPORT_EXPORT_FORMAT = "%Y-%m-%d"  # Custom date format for dates imported from and exported to csv
+DATE_IMPORT_EXPORT_FORMAT = (
+    "%Y-%m-%d"  # Custom date format for dates imported from and exported to csv
+)
 
 # This is used to indicate whether the data in the CSV and SHP exports should be
 # ordered as seen in the resource cards or not.
@@ -265,7 +316,12 @@ PREFERRED_COORDINATE_SYSTEMS = (
         "proj4": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs",
         "default": True,
     },
-    {"name": "LatLong", "srid": "4326", "proj4": "+proj=longlat +datum=WGS84 +no_defs", "default": False},  # Required
+    {
+        "name": "LatLong",
+        "srid": "4326",
+        "proj4": "+proj=longlat +datum=WGS84 +no_defs",
+        "default": False,
+    },  # Required
 )
 ANALYSIS_COORDINATE_SYSTEM_SRID = 27700  # Comment out if using LatLong/WGS84
 
@@ -293,7 +349,7 @@ ENABLE_CAPTCHA = False
 NOCAPTCHA = True
 # RECAPTCHA_PROXY = 'http://127.0.0.1:8000'
 if DEBUG is True:
-    SILENCED_SYSTEM_CHECKS = ["captcha.recaptcha_test_key_error"]
+    SILENCED_SYSTEM_CHECKS = ["django_recaptcha.recaptcha_test_key_error"]
 
 
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  #<-- Only need to uncomment this for testing without an actual email server
@@ -307,7 +363,9 @@ DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 CELERY_BROKER_URL = "amqp://guest:guest@localhost"  # RabbitMQ --> "amqp://guest:guest@localhost",  Redis --> "redis://localhost:6379/0"
 CELERY_ACCEPT_CONTENT = ["json"]
-CELERY_RESULT_BACKEND = "django-db"  # Use 'django-cache' if you want to use your cache as your backend
+CELERY_RESULT_BACKEND = (
+    "django-db"  # Use 'django-cache' if you want to use your cache as your backend
+)
 CELERY_TASK_SERIALIZER = "json"
 
 
@@ -373,7 +431,9 @@ RESTRICT_CELERY_EXPORT_FOR_ANONYMOUS_USER = False
 # Dictionary containing any additional context items for customising email templates
 EXTRA_EMAIL_CONTEXT = {
     "salutation": _("Hi"),
-    "expiration": (datetime.now() + timedelta(seconds=CELERY_SEARCH_EXPORT_EXPIRES)).strftime("%A, %d %B %Y"),
+    "expiration": (
+        datetime.now() + timedelta(seconds=CELERY_SEARCH_EXPORT_EXPIRES)
+    ).strftime("%A, %d %B %Y"),
 }
 
 # see https://docs.djangoproject.com/en/1.9/topics/i18n/translation/#how-django-discovers-language-preference
@@ -409,6 +469,8 @@ LANGUAGES = [
     #   ('en-gb', _('British English')),
     #   ('es', _('Spanish')),
 ]
+
+FILE_TYPE_CHECKING = "lenient"
 
 # override this to permenantly display/hide the language switcher
 SHOW_LANGUAGE_SWITCH = len(LANGUAGES) > 1

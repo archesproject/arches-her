@@ -15,13 +15,35 @@ urlpatterns = [
     re_path(r"^index.htm", IndexView.as_view(), name="home"),
     path("", include("arches.urls")),
     re_path(r"^filetemplate", FileTemplateView.as_view(), name="filetemplate"),
-    re_path(r"^plugins/active-consultations$", PluginView.as_view(), name="active-consultations"),
-    re_path(r"^activeconsultations", ActiveConsultationsView.as_view(), name="activeconsultations"),
-    re_path(r"^plugins/application-area", PluginView.as_view(), name="application-area"),
-    re_path(r"^plugins/consultation-workflow", PluginView.as_view(), name="consultation-workflow"),
+    re_path(
+        r"^plugins/active-consultations$",
+        PluginView.as_view(),
+        name="active-consultations",
+    ),
+    re_path(
+        r"^activeconsultations",
+        ActiveConsultationsView.as_view(),
+        name="activeconsultations",
+    ),
+    re_path(
+        r"^plugins/application-area", PluginView.as_view(), name="application-area"
+    ),
+    re_path(
+        r"^plugins/consultation-workflow",
+        PluginView.as_view(),
+        name="consultation-workflow",
+    ),
     re_path(r"^plugins/site-visit", PluginView.as_view(), name="site-visit"),
-    re_path(r"^plugins/correspondence-workflow", PluginView.as_view(), name="correspondence-workflow"),
-    re_path(r"^plugins/communication-workflow", PluginView.as_view(), name="communication-workflow"),
+    re_path(
+        r"^plugins/correspondence-workflow",
+        PluginView.as_view(),
+        name="correspondence-workflow",
+    ),
+    re_path(
+        r"^plugins/communication-workflow",
+        PluginView.as_view(),
+        name="communication-workflow",
+    ),
     re_path(r"^plugins/init-workflow", PluginView.as_view(), name="init-workflow"),
     re_path(
         r"^application-areas/(?P<zoom>[0-9]+|\{z\})/(?P<x>[0-9]+|\{x\})/(?P<y>[0-9]+|\{y\}).pbf$",
@@ -36,6 +58,11 @@ urlpatterns.append(path("", include("arches.urls")))
 
 # Adds URL pattern to serve media files during development
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+handler400 = "arches.app.views.main.custom_400"
+handler403 = "arches.app.views.main.custom_403"
+handler404 = "arches.app.views.main.custom_404"
+handler500 = "arches.app.views.main.custom_500"
 
 # Only handle i18n routing in active project. This will still handle the routes provided by Arches core and Arches applications,
 # but handling i18n routes in multiple places causes application errors.

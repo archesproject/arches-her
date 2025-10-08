@@ -13,9 +13,13 @@ class ApplicationAreas(View):
             models.UserProfile.objects.create(user=request.user)
         viewable_nodegroups = request.user.userprofile.viewable_nodegroups
         try:
-            node = models.Node.objects.get(nodeid=nodeid, nodegroup_id__in=viewable_nodegroups)
+            node = models.Node.objects.get(
+                nodeid=nodeid, nodegroup_id__in=viewable_nodegroups
+            )
             se = SearchEngineFactory().create()
-            restricted_resource_ids = get_filtered_instances(request.user, search_engine=se)
+            exclusive_set, restricted_resource_ids = get_filtered_instances(
+                request.user, search_engine=se
+            )
             if len(restricted_resource_ids) == 0:
                 restricted_resource_ids.append(
                     "10000000-0000-0000-0000-000000000001"
