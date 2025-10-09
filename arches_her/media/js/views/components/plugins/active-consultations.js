@@ -47,7 +47,7 @@ define([
                 self.getConsultations();
                 self.searched = false;
             };
-            this.activeConsulationConfig = { // could pass this into GET req
+            this.activeConsultationConfig = { // could pass this into GET req
                 "nodes":{
                     "Geospatial Coordinates":"b949053a-184f-11eb-ac4a-f875a44e0e11",
                     "Consultation Name":"4ad69684-951f-11ea-b5c3-f875a44e0e11",
@@ -71,7 +71,7 @@ define([
                 }
             };
             this.sortOptions = ko.observableArray([]);
-            Object.keys(this.activeConsulationConfig["sort config"]).forEach(function(key) {
+            Object.keys(this.activeConsultationConfig["sort config"]).forEach(function(key) {
                 self.sortOptions.push(key);
             });
             this.orderByOption.subscribe(function(val) {
@@ -197,7 +197,7 @@ define([
                         "page": self.page(),
                         "order": self.orderByOption(),
                         "keyword": self.keyword()
-                        // "config": self.activeConsulationConfig
+                        // "config": self.activeConsultationConfig
                     },
                     context: self,
                     success: function(responseText, status, response){

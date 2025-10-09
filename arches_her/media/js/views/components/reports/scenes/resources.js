@@ -105,7 +105,7 @@ function (_, ko, arches, reportUtils, ResourcesTemplate) {
                     }));
                 }
 
-                const userAvailableConsulationCards = () => {
+                const userAvailableConsultationCards = () => {
                         return $.ajax({
                             url: arches.urls.api_card + self.dataConfig.resourceinstanceid,
                             context: this,
@@ -119,7 +119,7 @@ function (_, ko, arches, reportUtils, ResourcesTemplate) {
 
 
                 if(self.dataConfig.resourceinstanceid){
-                    userAvailableConsulationCards().then(function(cards_response){
+                    userAvailableConsultationCards().then(function(cards_response){
                         if(cards_response !== false){
                             var card_names = []
                             for(card in cards_response.cards){
