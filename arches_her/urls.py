@@ -25,24 +25,6 @@ urlpatterns = [
         ActiveConsultationsView.as_view(),
         name="activeconsultations",
     ),
-    re_path(r"^plugins/application-area", PluginView.as_view(), name="application-area"),
-    re_path(
-        r"^plugins/consultation-workflow",
-        PluginView.as_view(),
-        name="consultation-workflow",
-    ),
-    re_path(r"^plugins/site-visit", PluginView.as_view(), name="site-visit"),
-    re_path(
-        r"^plugins/correspondence-workflow",
-        PluginView.as_view(),
-        name="correspondence-workflow",
-    ),
-    re_path(
-        r"^plugins/communication-workflow",
-        PluginView.as_view(),
-        name="communication-workflow",
-    ),
-    re_path(r"^plugins/init-workflow", PluginView.as_view(), name="init-workflow"),
     re_path(
         r"^application-areas/(?P<zoom>[0-9]+|\{z\})/(?P<x>[0-9]+|\{x\})/(?P<y>[0-9]+|\{y\}).pbf$",
         ApplicationAreas.as_view(),
