@@ -168,7 +168,7 @@ define([
                     ],
                 },
                 {
-                    title: 'Add Consulation Complete',
+                    title: 'Add Consultation Complete',
                     name: 'consultation-complete',
                     description: 'Choose an option below',
                     layoutSections: [
