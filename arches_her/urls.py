@@ -25,9 +25,7 @@ urlpatterns = [
         ActiveConsultationsView.as_view(),
         name="activeconsultations",
     ),
-    re_path(
-        r"^plugins/application-area", PluginView.as_view(), name="application-area"
-    ),
+    re_path(r"^plugins/application-area", PluginView.as_view(), name="application-area"),
     re_path(
         r"^plugins/consultation-workflow",
         PluginView.as_view(),
