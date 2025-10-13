@@ -94,6 +94,7 @@ body {
     .container {
         width: 100%;
         max-width: 1440px;
+        padding: 0 64px;
         @include break-at(wide-max) {
             max-width: 1000px;
         }
@@ -103,7 +104,6 @@ body {
         @include break-at(mobile-lg-max) {
             max-width: 100vw;
         }
-        padding: 0 64px;
         @include break-at(wide-max) {
             padding: 0 60px;
         }
@@ -129,6 +129,7 @@ body {
 		}
 	}
     h1 {
+        color: $headings;
         font-size: 4.7rem;
         @include break-at(tablet-max) {
             font-size: 3.4rem;
@@ -136,9 +137,10 @@ body {
         @include break-at(mobile-xsmall-max) {
             font-size: 2.5rem;
         }
-        color: $headings;
     }
     h2 {
+        margin-bottom: 20px;
+        color: $headings;
         font-size: 3.4rem;
         @include break-at(mobile-lg-max) {
             font-size: 2.6rem;
@@ -146,8 +148,6 @@ body {
         @include break-at(mobile-xsmall-max) {
             font-size: 2.4rem;
         }
-        margin-bottom: 20px;
-        color: $headings;
     }
     
     h3 {
@@ -182,42 +182,42 @@ body {
         position: relative;
         width: 100%;
         height: 80px;
-        @include break-at(mobile-lg-max) {
-            height: 60px;
-        }
-        box-shadow: 0px 3px 6px $box-shadow;
-        @include break-at(mobile-lg-max) {
-            box-shadow: none;
-        }
-        margin-bottom: 30px;
-        @include break-at(mobile-lg-max) {
-            margin-bottom: 0;
-        }
         top: 0px;
         z-index: 500;
         background-color: $background-header;
         border: none;
+        border-radius: 0px;
+        box-shadow: 0px 3px 6px $box-shadow;
+        margin-bottom: 30px;
+        @include break-at(mobile-lg-max) {
+            height: 60px;
+        }
+        @include break-at(mobile-lg-max) {
+            box-shadow: none;
+        }
+        @include break-at(mobile-lg-max) {
+            margin-bottom: 0;
+        }
         @include break-at(mobile-lg-max) {
             border-bottom: 1px solid $header-border-mobile;
         }
-        border-radius: 0px;
         .navbar {
             .container-fluid {
                 padding-left: 60px;
+                max-width: 1440px;
+                padding-right: 60px;
                 @include break-at(tablet-max) {
                     padding-left: 50px;
                 }
                 @include break-at(mobile-lg-max) {
                     padding-left: 15px;
                 }
-                padding-right: 60px;
                 @include break-at(tablet-max) {
                     padding-right: 50px;
                 }
                 @include break-at(mobile-lg-max) {
                     padding-right: 15px;
                 }
-                max-width: 1440px;
                 @include break-at(wide-max) {
                     max-width: 1000px;
                 }
@@ -295,23 +295,23 @@ body {
                             z-index: 9999;
                             position: absolute;
                             top: 58px;
-                            @include break-at(mobile-lg-max) {
-                                top: 57px;
-                            }
                             right: -3px;
-                            @include break-at(mobile-lg-max) {
-                                right: 14px;
-                            }
-                            @include break-at(mobile-xsmall-max) {
-                                right: 14px;
-                            }
                             width: 40vw;
-                            @include break-at(mobile-xsmall-max) {
-                                width: 60vw;
-                            }
                             background: $background-header;
                             overflow-x: hidden;
                             padding: 20px!important;
+                            @include break-at(mobile-lg-max) {
+                                top: 57px;
+                            }
+                            @include break-at(mobile-lg-max) {
+                                right: 14px;
+                            }
+                            @include break-at(mobile-xsmall-max) {
+                                right: 14px;
+                            }
+                            @include break-at(mobile-xsmall-max) {
+                                width: 60vw;
+                            }
                             li {
                                 a {
                                     line-height: 20px;
@@ -336,6 +336,8 @@ body {
             box-shadow: 0px 3px 6px $box-shadow;
             max-width: 423px;
             margin: 10px;
+            padding: 0;
+            display: inline-block;
             @include break-at(wide-max) {
                 max-width: 440px;
             }
@@ -345,8 +347,6 @@ body {
             @include break-at(mobile-lg-max) {
                 max-width: 440px;
             }
-            padding: 0;
-            display: inline-block;
         }
         .featurette1 {
             margin-left: inherit;
@@ -354,6 +354,13 @@ body {
             position: relative;
             .featurette1-left-container {
                 width: 444px;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                border-radius: 10px;
+                background-color: $backgrounds;
+                padding: 0 20px 0 0;
                 @include break-at(wide-max) {
                     width: calc(100% - 148px);
                 }
@@ -363,8 +370,6 @@ body {
                 @include break-at(mobile-lg-max) {
                     width: 100vw;
                 }
-                position: absolute;
-                left: 0;
                 @include break-at(wide-max) {
                     left: 74px;
                 }
@@ -374,8 +379,6 @@ body {
                 @include break-at(mobile-xsmall-max) {
                     left: 15px;
                 }
-                top: 50%;
-                transform: translateY(-50%);
                 @include break-at(wide-max) {
                     top: 570px;
                 }
@@ -388,12 +391,9 @@ body {
                 @include break-at(mobile-mid-max) {
                     top: 88vw;
                 }
-                border-radius: 10px;
                 @include break-at(mobile-lg-max) {
                     border-radius: 0;
                 }
-                background-color: $backgrounds;
-                padding: 0 20px 0 0;
                 @include break-at(wide-max) {
                     padding: 0px 102px;
                 }
@@ -441,6 +441,9 @@ body {
         }
         .featurette2 {
             margin: 50px auto 0 auto;
+            border-top: 1px solid $page-content-seperators;
+            border-bottom: 1px solid $page-content-seperators;
+            max-width: 646px;
             @include break-at(wide-max) {
                 margin-top: 243px;
             }
@@ -453,9 +456,6 @@ body {
             @include break-at(mobile-xsmall-max) {
                 margin: 230px 15px 0 15px;
             }
-            border-top: 1px solid $page-content-seperators;
-            border-bottom: 1px solid $page-content-seperators;
-            max-width: 646px;
             @include break-at(wide-max) {
                 max-width: 500px;
             }
@@ -471,11 +471,11 @@ body {
                 -webkit-column-count: 2;
                 -webkit-column-gap: 20px;
                 column-count: 2;
+                column-gap: 20px;
                 @include break-at(mobile-lg-max) {
                     column-count: 1;
                     padding-left: 30px;
                 }
-                column-gap: 20px;
                 li {
                     @include break-at(mobile-lg-max) {
                         margin-bottom: 10px;
@@ -485,13 +485,13 @@ body {
         }
         .featurette3 {
             max-width: 646px;
+            margin: 50px auto 0 auto;
             @include break-at(wide-max) {
                 max-width: 500px;
             }
             @include break-at(tablet-max) {
                 max-width: 100%;
             }
-            margin: 50px auto 0 auto;
             @include break-at(mobile-lg-max) {
                 margin: 40px 15px 0 30px;
             }
@@ -503,6 +503,8 @@ body {
             }
             .featurette3-row{
                 margin-left: -128px;
+                margin-right: -128px;
+                margin-top: 30px;
                 @include break-at(wide-max) {
                     margin-left: -217px;
                 }
@@ -512,7 +514,6 @@ body {
                 @include break-at(mobile-lg-max) {
                     margin-left: 0;
                 }
-                margin-right: -128px;
                 @include break-at(wide-max) {
                     margin-right: -217px;
                 }
@@ -522,7 +523,6 @@ body {
                 @include break-at(mobile-lg-max) {
                     margin-right: 0;
                 }
-                margin-top: 30px;
                 .featurette3-first-block {
                     margin-right: 20px;
                     @include break-at(mobile-lg-max) {
@@ -538,13 +538,13 @@ body {
         }
         .featurette4 {
             max-width: 646px;
+            margin: 50px auto 0 auto;
             @include break-at(wide-max) {
                 max-width: 500px;
             }
             @include break-at(tablet-max) {
                 max-width: 100%;
             }
-            margin: 50px auto 0 auto;
             @include break-at(mobile-lg-max) {
                 margin: 40px 15px 0 30px;
             }
@@ -563,26 +563,26 @@ body {
         }
         .featurette5 {
             max-width: 646px;
+            margin: 50px auto 0 auto;
             @include break-at(wide-max) {
                 max-width: 500px;
             }
             @include break-at(tablet-max) {
                 max-width: 100%;
             }
-            margin: 50px auto 0 auto;
             @include break-at(mobile-lg-max) {
                 margin: 40px 15px 0 30px;
             }
         }
         .featurette6 {
             max-width: 646px;
+            margin: 50px auto 0 auto;
             @include break-at(wide-max) {
                 max-width: 500px;
             }
             @include break-at(tablet-max) {
                 max-width: 100%;
             }
-            margin: 50px auto 0 auto;
             @include break-at(mobile-lg-max) {
                 margin: 40px 15px 0 30px;
             }
@@ -591,6 +591,8 @@ body {
             }
             .featurette6-row {
                 margin-left: -346px;
+                margin-right: -346px;
+                margin-top: 30px;
                 @include break-at(wide-max) {
                     margin-left: -203px;
                 }
@@ -600,7 +602,6 @@ body {
                 @include break-at(mobile-lg-max) {
                     margin-left: 0;
                 }
-                margin-right: -346px;
                 @include break-at(wide-max) {
                     margin-right: -203px;
                 }
@@ -610,18 +611,17 @@ body {
                 @include break-at(mobile-lg-max) {
                     margin-right: 0;
                 }
-                margin-top: 30px;
             }
         }
         .featurette7 {
             max-width: 646px;
+            margin: 50px auto 0 auto;
             @include break-at(wide-max) {
                 max-width: 580px;
             }
             @include break-at(tablet-max) {
                 max-width: 100%;
             }
-            margin: 50px auto 0 auto;
             @include break-at(mobile-lg-max) {
                 margin: 40px 15px 0 30px;
             }
@@ -706,16 +706,17 @@ body {
                     }
                     .footer-your-logo {
                         max-height: 40px;
+                        width: auto;
                         @include break-at(tablet-max) {
                             max-height: 30px;
                         }
                         @include break-at(mobile-lg-max) {
                             max-height: 37px;
                         }
-                        width: auto;
                     }
                     .footer-getty-logo {
                         max-height: 40px;
+                        width: auto;
                         @include break-at(tablet-max) {
                             max-height: 30px;
                         }
@@ -723,17 +724,16 @@ body {
                             max-height: 37px;
                             margin: 30px 0; 
                         }
-                        width: auto;
                     }
                     .footer-arches-logo {
                         max-height: 40px;
+                        width: auto;
                         @include break-at(tablet-max) {
                             max-height: 30px;
                         }
                         @include break-at(mobile-lg-max) {
                             max-height: 37px;
                         }
-                        width: auto;
                     }
                 }
                 .glher-text-container {
