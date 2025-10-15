@@ -1,4 +1,4 @@
-FROM python:3.11
+FROM python:3.11-bookworm
 USER root
 
 ## Build Args
@@ -19,7 +19,7 @@ ENV DATA_ROOT=${APP_ROOT}_data
 ENV ARCHES_ROOT=${WEB_ROOT}/arches
 ENV WHEELS=/wheels
 ENV PYTHONUNBUFFERED=1
-ENV NODE_VERSION 16.20.1
+ENV NODE_VERSION=20.19.5
 
 RUN apt-get update && apt-get install -y make software-properties-common
 
@@ -51,12 +51,12 @@ RUN set -ex \
 
 
 # nvm environment variables
-ENV NVM_DIR /usr/local/nvm
+ENV NVM_DIR=/usr/local/nvm
 RUN mkdir $NVM_DIR
 
 # install nvm
 # https://github.com/nvm-sh/nvm#install-script
-RUN curl --silent -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.4/install.sh | bash -
+RUN curl --silent -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.3/install.sh | bash -
 
 # install node and npm
 RUN echo "source $NVM_DIR/nvm.sh \
@@ -65,8 +65,8 @@ RUN echo "source $NVM_DIR/nvm.sh \
   && nvm use default" | bash -
 
 # add node and npm to path so the commands are available
-ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
-ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
+ENV NODE_PATH=$NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH=$NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 RUN npm install -g yarn && apt install wait-for-it
 
