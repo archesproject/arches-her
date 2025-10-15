@@ -21,7 +21,7 @@ define([
                     required: true,
                     informationboxdata: {
                         heading: 'Site Visit Details',
-                        text: 'Select a consultation and enter datails for the site visit',
+                        text: 'Select a consultation and enter details for the site visit',
                     },
                     layoutSections: [
                         {
