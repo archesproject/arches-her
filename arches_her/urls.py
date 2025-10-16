@@ -3,7 +3,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.conf.urls.i18n import i18n_patterns
 from arches.app.views.plugin import PluginView
-from arches_her.views.file_template import FileTemplateView
 from arches_her.views.active_consultations import ActiveConsultationsView
 from arches_her.views.index import IndexView
 from arches_her.views.map import ApplicationAreas
@@ -14,7 +13,6 @@ urlpatterns = [
     re_path(r"^$", IndexView.as_view(), name="root"),
     re_path(r"^index.htm", IndexView.as_view(), name="home"),
     path("", include("arches.urls")),
-    re_path(r"^filetemplate", FileTemplateView.as_view(), name="filetemplate"),
     re_path(
         r"^plugins/active-consultations$",
         PluginView.as_view(),
