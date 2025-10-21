@@ -50,6 +50,8 @@ urlpatterns = [
     ),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
+urlpatterns.append(path("", include("arches_controlled_lists.urls")))
+urlpatterns.append(path("", include("arches_component_lab.urls")))
 
 # Ensure Arches core urls are superseded by project-level urls
 urlpatterns.append(path("", include("arches.urls")))
