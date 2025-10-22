@@ -12,6 +12,7 @@ import sys
 
 # COPIED FROM ./arches_her/docker/aher_project/docker/settings_local.py
 
+
 def get_env_variable(var_name):
     msg = "Set the %s environment variable"
     try:
@@ -68,4 +69,4 @@ ARCHES_NAMESPACE_FOR_DATA_EXPORT = f"http://{get_env_variable('PUBLIC_SERVER_PRO
 
 PUBLIC_SERVER_ADDRESS = f"http://{get_env_variable('PUBLIC_SERVER_PROJECT_NAME')}:{get_env_variable('DJANGO_PORT')}/"
 
-HER_ROOT = os.path.join(get_env_variable('AHER_ROOT'), 'arches_her')
+HER_ROOT = os.path.join(get_env_variable("AHER_ROOT"), "arches_her")

@@ -6,8 +6,8 @@ from django.urls import include, path
 # COPIED FROM ./arches_her/docker/aher_project/docker/urls.py
 
 urlpatterns = [
-    path('', include('arches.urls')),
-   path("", include("arches_her.urls")),
+    path("", include("arches.urls")),
+    path("", include("arches_her.urls")),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 # if settings.SHOW_LANGUAGE_SWITCH is True:

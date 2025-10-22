@@ -12,6 +12,10 @@ class Migration(migrations.Migration):
         ("models", "9945_file_thumbnail_bin_file_thumbnail_text"),
     ]
 
+    run_before = [
+        ("models", "9946_alter_notification_context"),
+    ]
+
     def add_plugins(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
 
@@ -24,7 +28,7 @@ class Migration(migrations.Migration):
             componentname="accessibility",
             slug="accessibility",
             config={},
-            sortorder=0
+            sortorder=0,
         )
 
         Plugin.objects.update_or_create(
@@ -35,8 +39,8 @@ class Migration(migrations.Migration):
             componentname="active-consultations",
             slug="active-consultations",
             config={},
-            sortorder=0
-            )
+            sortorder=0,
+        )
 
         Plugin.objects.update_or_create(
             pluginid="b2778828-a6ac-6481-c38b-fd463d878f1f",
@@ -44,10 +48,10 @@ class Migration(migrations.Migration):
             icon="fa fa-building",
             component="views/components/plugins/application-area",
             componentname="application-area",
-            config={"show":False},
+            config={"show": False},
             slug="application-area",
-            sortorder=0
-            )
+            sortorder=0,
+        )
 
         Plugin.objects.update_or_create(
             pluginid="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
@@ -55,10 +59,10 @@ class Migration(migrations.Migration):
             icon="fa fa-comment",
             component="views/components/plugins/communication-workflow",
             componentname="communication-workflow",
-            config={"show":False},
+            config={"show": False},
             slug="communication-workflow",
-            sortorder=1
-            )
+            sortorder=1,
+        )
 
         Plugin.objects.update_or_create(
             pluginid="a1667717-b7bd-4570-b27a-ec352c767e0e",
@@ -66,10 +70,10 @@ class Migration(migrations.Migration):
             icon="fa fa-file",
             component="views/components/plugins/consultation-workflow",
             componentname="consultation-workflow",
-            config={"show":False},
+            config={"show": False},
             slug="consultation-workflow",
-            sortorder=0
-            )
+            sortorder=0,
+        )
 
         Plugin.objects.update_or_create(
             pluginid="4bd762cf-b581-11e9-a7f9-784f435179ea",
@@ -77,10 +81,10 @@ class Migration(migrations.Migration):
             icon="fa fa-envelope",
             component="views/components/plugins/correspondence-workflow",
             componentname="correspondence-workflow",
-            config={"show":False},
+            config={"show": False},
             slug="correspondence-workflow",
-            sortorder=1
-            )
+            sortorder=1,
+        )
 
         Plugin.objects.update_or_create(
             pluginid="0b1499e0-6cdc-403b-a2e3-499c2201069d",
@@ -88,9 +92,9 @@ class Migration(migrations.Migration):
             icon="fa fa-clipboard",
             component="views/components/plugins/site-visit",
             componentname="site-visit",
-            config={"show":False},
+            config={"show": False},
             slug="site-visit",
-            sortorder=0
+            sortorder=0,
         )
 
         Plugin.objects.update_or_create(
@@ -103,66 +107,71 @@ class Migration(migrations.Migration):
                 "workflows": [
                     {
                         "workflowid": "b2778828-a6ac-6481-c38b-fd463d878f1f",
-                        "slug":"application-area",
+                        "slug": "application-area",
                         "name": "Application Area",
                         "icon": "fa fa-building",
                         "bgColor": "#87bceb",
                         "circleColor": "#a7cdf0",
-                        "desc": "An area that may be re-developed or newly built"
-                    },{
+                        "desc": "An area that may be re-developed or newly built",
+                    },
+                    {
                         "workflowid": "a1667717-b7bd-4570-b27a-ec352c767e0e",
-                        "slug":"consultation-workflow",
+                        "slug": "consultation-workflow",
                         "name": "Consultation",
                         "icon": "fa fa-file",
                         "bgColor": "#62a3db",
                         "circleColor": "#8bbfea",
-                        "desc": "Advice on the potential work related to an application area"
-                    },{
+                        "desc": "Advice on the potential work related to an application area",
+                    },
+                    {
                         "workflowid": "4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
-                        "slug":"communication-workflow",
+                        "slug": "communication-workflow",
                         "name": "Communication",
                         "icon": "fa fa-comment",
                         "bgColor": "#9795EE",
                         "circleColor": "#8bbbe4",
-                        "desc": "A conversation via phone, email, or other channel"
-                    },{
+                        "desc": "A conversation via phone, email, or other channel",
+                    },
+                    {
                         "workflowid": "0b1499e0-6cdc-403b-a2e3-499c2201069d",
-                        "slug":"site-visit",
+                        "slug": "site-visit",
                         "name": "Site Visit",
                         "icon": "fa fa-clipboard",
                         "bgColor": "#716FE0",
                         "circleColor": "#b0aff0",
-                        "desc": "A visit to ensure that a condition has been met"
-                    },{
+                        "desc": "A visit to ensure that a condition has been met",
+                    },
+                    {
                         "workflowid": "4bd762cf-b581-11e9-a7f9-784f435179ea",
-                        "slug":"correspondence-workflow",
+                        "slug": "correspondence-workflow",
                         "name": "Correspondence",
                         "icon": "fa fa-envelope",
                         "bgColor": "#fed04f",
                         "circleColor": "#fedc7d",
-                        "desc": "Letter or other document sent to an applicant"
-                    }
+                        "desc": "Letter or other document sent to an applicant",
+                    },
                 ],
-                "show":True
+                "show": True,
             },
             slug="init-workflow",
-            sortorder=0
-            )
-
+            sortorder=0,
+        )
 
     def remove_plugins(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
 
-        for plugin in Plugin.objects.filter(pk__in=[
-            "8688eaf9-3605-4384-823c-d01c0d210f82",
-            "76a27df9-6f16-47ed-bd47-bb95c0fe7173",
-            "b2778828-a6ac-6481-c38b-fd463d878f1f",
-            "4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
-            "a1667717-b7bd-4570-b27a-ec352c767e0e",
-            "4bd762cf-b581-11e9-a7f9-784f435179ea",
-            "0b1499e0-6cdc-403b-a2e3-499c2201069d",
-            "49507fb0-89c6-47b7-b506-9b2b29a3b8d8",
-        ]):
+        for plugin in Plugin.objects.filter(
+            pk__in=[
+                "8688eaf9-3605-4384-823c-d01c0d210f82",
+                "76a27df9-6f16-47ed-bd47-bb95c0fe7173",
+                "b2778828-a6ac-6481-c38b-fd463d878f1f",
+                "4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
+                "a1667717-b7bd-4570-b27a-ec352c767e0e",
+                "4bd762cf-b581-11e9-a7f9-784f435179ea",
+                "0b1499e0-6cdc-403b-a2e3-499c2201069d",
+                "49507fb0-89c6-47b7-b506-9b2b29a3b8d8",
+            ]
+        ):
             plugin.delete()
 
     def add_reports(apps, schema_editor):
@@ -171,218 +180,162 @@ class Migration(migrations.Migration):
         ReportTemplate.objects.update_or_create(
             name="Activity Template",
             component="views/components/reports/activity",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Activity report",
             componentname="activity-report",
             templateid="eeb7054c-df37-45d1-8f09-39abb582077e",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Application Area Template",
             component="views/components/reports/application-area",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Application Area report",
             componentname="application-area-report",
             templateid="9ed340ba-88c6-4982-9487-c3aae4b14d16",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Area Template",
             component="views/components/reports/area",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Area report",
             componentname="area-report",
             templateid="c6f163ca-3ca5-4c50-b398-bee406fe059d",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Artefact Template",
             component="views/components/reports/artefact",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Artefact report",
             componentname="artefact-report",
             templateid="b32fc2f2-5570-46c2-8d1e-09ca54c750ab",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Bibliographic Sourc3 Template",
             component="views/components/reports/bibliographic-source",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Bibliographic Source report",
             componentname="bibliographic-source-report",
             templateid="44fdae23-7883-4d5c-88fa-7498b6fc898d",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Consultation Template",
             component="views/components/reports/consultation",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Consultation report",
             componentname="consultation-report",
             templateid="465443ea-0e01-4895-a9cf-5144b02213da",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Digital Object Template",
             component="views/components/reports/digital-object",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Digital Object report",
             componentname="digital-object-report",
             templateid="2bf88426-a053-4134-b006-d4dc2e120a6e",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Heritage Story Template",
             component="views/components/reports/heritage-story",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Heritage Story report",
             componentname="heritage-story-report",
             templateid="6858ba4d-70a2-4e78-baf1-c827dd66956b",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Historic Aircraft Template",
             component="views/components/reports/historic-aircraft",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Historic Aircraft report",
             componentname="historic-aircraft-report",
             templateid="655f86f0-643a-4df4-be8b-9e9030d2ff94",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Historic Landscape Characterization Template",
             component="views/components/reports/historic-landscape-characterization",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Historic Landscape Characterization report",
             componentname="historic-landscape-characterization-report",
             templateid="5c757462-97d9-43fc-bd39-54367f6f3c2e",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Maritime Vessel Template",
             component="views/components/reports/maritime-vessel",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Maritime Vessel report",
             componentname="maritime-vessel-report",
             templateid="03871d64-7076-46e8-b0ed-4b8813b0afd4",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Monument Template",
             component="views/components/reports/monument",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Monument report",
             componentname="monument-report",
             templateid="523a5a7f-006b-4caf-a801-a1621967a88b",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Organization Template",
             component="views/components/reports/organization",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Organization report",
             componentname="organization-report",
             templateid="407019fd-69e4-4aa4-a054-1466acaf8687",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Period Template",
             component="views/components/reports/period",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Period report",
             componentname="period-report",
             templateid="4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Person Template",
             component="views/components/reports/person",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Person report",
             componentname="person-report",
             templateid="9e9f8e55-3ea9-4bd3-8b11-c1a519fbcfcc",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
 
         ReportTemplate.objects.update_or_create(
             name="Place Template",
             component="views/components/reports/place",
-            defaultconfig={
-                "uncompacted_reporting": True
-            },
+            defaultconfig={"uncompacted_reporting": True},
             description="Place report",
             componentname="place-report",
             templateid="6b183add-a159-4d2b-a6b0-3f426d8c08a1",
-            preload_resource_data=False
+            preload_resource_data=False,
         )
-
-    def remove_reports(apps, schema_editor):
-        ReportTemplate = apps.get_model("models", "ReportTemplate")
-
-        for report_template in ReportTemplate.objects.filter(pk__in=[
-            "eeb7054c-df37-45d1-8f09-39abb582077e",
-            "9ed340ba-88c6-4982-9487-c3aae4b14d16",
-            "c6f163ca-3ca5-4c50-b398-bee406fe059d",
-            "b32fc2f2-5570-46c2-8d1e-09ca54c750ab",
-            "44fdae23-7883-4d5c-88fa-7498b6fc898d",
-            "465443ea-0e01-4895-a9cf-5144b02213da",
-            "2bf88426-a053-4134-b006-d4dc2e120a6e",
-            "6858ba4d-70a2-4e78-baf1-c827dd66956b",
-            "655f86f0-643a-4df4-be8b-9e9030d2ff94",
-            "5c757462-97d9-43fc-bd39-54367f6f3c2e",
-            "03871d64-7076-46e8-b0ed-4b8813b0afd4",
-            "523a5a7f-006b-4caf-a801-a1621967a88b",
-            "407019fd-69e4-4aa4-a054-1466acaf8687",
-            "4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3",
-            "9e9f8e55-3ea9-4bd3-8b11-c1a519fbcfcc",
-            "6b183add-a159-4d2b-a6b0-3f426d8c08a1",
-        ]):
-            report_template.delete()
-
 
     def add_functions(apps, schema_editor):
         Function = apps.get_model("models", "Function")
@@ -398,21 +351,21 @@ class Migration(migrations.Migration):
             functionid="0434df8d-b98a-4b41-9a0a-68cd9214ad73",
         )
 
-        Function.objects.update_or_create(    
+        Function.objects.update_or_create(
             name="Consultation Status",
             functiontype="node",
             modulename="consultation_status_function.py",
             description="Triggers change in status node of consultation instance",
             defaultconfig={
-                "cons_comp_date_nodeid":"40eff4ce-893a-11ea-ae2e-f875a44e0e11",
-                "cons_status_bool_nodeid":"6a773228-db20-11e9-b6dd-784f435179ea",
-                },
+                "cons_comp_date_nodeid": "40eff4ce-893a-11ea-ae2e-f875a44e0e11",
+                "cons_status_bool_nodeid": "6a773228-db20-11e9-b6dd-784f435179ea",
+            },
             classname="ConsultationStatusFunction",
             component="",
-            functionid="96efa95a-1e2c-4562-ac1f-b415796f9f75"
+            functionid="96efa95a-1e2c-4562-ac1f-b415796f9f75",
         )
 
-        Function.objects.update_or_create(    
+        Function.objects.update_or_create(
             name="Generate Unique References",
             functiontype="node",
             modulename="generate_unique_references_function.py",
@@ -428,7 +381,7 @@ class Migration(migrations.Migration):
             component="views/components/functions/generate-unique-references-function",
             functionid="39d627ae-6973-4ddb-8b62-1f0230e1e3f9",
         )
-        
+
         Function.objects.update_or_create(
             name="GeoJSON to BNG Point",
             functiontype="node",
@@ -446,18 +399,18 @@ class Migration(migrations.Migration):
             functionid="d9a01773-6092-4cad-b331-ae725ae8fa88",
         )
 
-
     def remove_functions(apps, schema_editor):
         Function = apps.get_model("models", "Function")
 
-        for fn in Function.objects.filter(pk__in=[
-            "0434df8d-b98a-4b41-9a0a-68cd9214ad73",
-            "96efa95a-1e2c-4562-ac1f-b415796f9f75"
-            "39d627ae-6973-4ddb-8b62-1f0230e1e3f9",
-            "d9a01773-6092-4cad-b331-ae725ae8fa88",
-        ]):
+        for fn in Function.objects.filter(
+            pk__in=[
+                "0434df8d-b98a-4b41-9a0a-68cd9214ad73",
+                "96efa95a-1e2c-4562-ac1f-b415796f9f75",
+                "39d627ae-6973-4ddb-8b62-1f0230e1e3f9",
+                "d9a01773-6092-4cad-b331-ae725ae8fa88",
+            ]
+        ):
             fn.delete()
-
 
     def add_widgets(apps, schema_editor):
         Widget = apps.get_model("models", "Widget")
@@ -466,11 +419,9 @@ class Migration(migrations.Migration):
             widgetid="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf",
             name="bngpoint",
             component="views/components/widgets/bngpoint",
-            defaultconfig={
-                "placeholder": "Enter the centre point map reference of the resource."
-            },
+            defaultconfig={"placeholder": "Enter the centre point map reference of the resource."},
             helptext=None,
-            datatype="bngcentrepoint"
+            datatype="bngcentrepoint",
         )
 
         Widget.objects.update_or_create(
@@ -479,28 +430,14 @@ class Migration(migrations.Migration):
             datatype="file-list",
             component="views/components/widgets/photo",
             helptext=None,
-            defaultconfig={
-                "maxFilesize": "200",
-                "acceptedFiles": "",
-                "rerender": True
-            }
+            defaultconfig={"maxFilesize": "200", "acceptedFiles": "", "rerender": True},
         )
-    
-    def remove_widgets(apps, schema_editor):
-        Widget = apps.get_model("models", "Widget")
-
-        for widget in Widget.objects.filter(pk__in=[
-            "bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf",
-            "31bc729d-6126-4301-8ec1-d6c4d98c68f8",
-        ]):
-            widget.delete()
-
 
     def add_datatypes(apps, schema_editor):
         Datatype = apps.get_model("models", "DDataType")
         Widget = apps.get_model("models", "Widget")
 
-        bngpoint=Widget.objects.get(pk="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf")
+        bngpoint = Widget.objects.get(pk="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf")
 
         Datatype.objects.update_or_create(
             datatype="bngcentrepoint",
@@ -514,15 +451,6 @@ class Migration(migrations.Migration):
             isgeometric=False,
             issearchable=True,
         )
-
-    def remove_datatypes(apps, schema_editor):
-        Datatype = apps.get_model("models", "DDataType")
-
-        for datatype in Datatype.objects.filter(datatype__in=[
-            "bngcentrepoint",
-        ]):
-            datatype.delete()
-
 
     def add_search_components(apps, schema_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
@@ -539,15 +467,16 @@ class Migration(migrations.Migration):
             sortorder="0",
             enabled=True,
         )
-    
+
     def remove_search_components(apps, schema_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
 
-        for search_component in SearchComponent.objects.filter(pk__in=[
-            "25ca3536-9eb4-4fd5-b2a5-badfd9a266de",
-        ]):
+        for search_component in SearchComponent.objects.filter(
+            pk__in=[
+                "25ca3536-9eb4-4fd5-b2a5-badfd9a266de",
+            ]
+        ):
             search_component.delete()
-
 
     add_map_source = """
 INSERT INTO map_sources(name, source)
@@ -565,10 +494,10 @@ INSERT INTO map_sources(name, source)
 
     operations = [
         migrations.RunPython(add_functions, remove_functions),
-        migrations.RunPython(add_widgets, remove_widgets),
-        migrations.RunPython(add_datatypes, remove_datatypes),
+        migrations.RunPython(add_widgets, reverse_code=migrations.RunPython.noop),
+        migrations.RunPython(add_datatypes, reverse_code=migrations.RunPython.noop),
         migrations.RunPython(add_search_components, remove_search_components),
         migrations.RunPython(add_plugins, remove_plugins),
-        migrations.RunPython(add_reports, remove_reports),
+        migrations.RunPython(add_reports, reverse_code=migrations.RunPython.noop),
         migrations.RunSQL(add_map_source, remove_map_source),
     ]
