@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:skos="http://www.w3.org/2004/02/skos/core#" xmlns:owl="http://www.w3.org/2002/07/owl#" xmlns:xsd="http://www.w3.org/2001/XMLSchema#" xmlns:swrl="http://www.w3.org/2003/11/swrl#" xmlns:swrlb="http://www.w3.org/2003/11/swrlb#" xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#" xml:base="http://www.ics.forth.gr/isl/CRMdig/">
+  <!--
+						CRM Digital is an ontology and RDF Schema to encode metadata about the steps and methods of production ("provenance") of digitization products and synthetic digital representations such as 2D, 3D or even animated Models created by various technologies. Its distinct features compared to competitive models is the complete inclusion of the initial physical measurement processes and their parameters. It has been developed as compatible extension of CIDOC CRM, which allows for querying the most relevant facts and returning complete descriptions encoded in this model by generic ISO21127 terms without need to refer to its specific properties. In contrast, competitive models cannot be queried by a more general standard and are restricted to the computational provenance only. Data encoded in the major competitive models can be transformed without loss of meaning into a CRM-Digital-form.
+						Exported from OntoME: CRMdig version 4.0
+						Official URI : http://www.ics.forth.gr/isl/CRMdig/
+						-->
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D1</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises identifiable immaterial items that can be represented as sets of bit sequences, such as data sets, e-texts, images, audio or video items, software, etc., and are documented as single units.
+Any aggregation of instances of D1 Digital Object into a whole treated as single unit is also regarded as an instance of D1 Digital Object.
+This means that for instance, the content of a DVD, an XML file on it, and an element of this file, are regarded as distinct instances of D1 Digital Object, mutually related by the P106 is composed of (forms part of) property.
+A D1 Digital Object does not depend on a specific physical carrier, and it can exist on one or more carriers simultaneously.</rdfs:comment>
+    <rdfs:label xml:lang="en">Digital Object</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D2_Digitization_Process">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D2</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events that result in the creation of instances of D9 Data Object that represent the appearance and/or form of an instance of E18 Physical Thing such as paper documents, statues, buildings, paintings, etc.
+A particular case is the analogue-to-digital conversion of audiovisual material.
+This class represents the transition from a material thing to an immaterial representation of it.
+The characteristic subsequent processing steps on digital objects are regarded as instances of D3 Formal Derivation.</rdfs:comment>
+    <rdfs:label xml:lang="en">Digitization Process</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D11_Digital_Measurement_Event"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D3_Formal_Derivation">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D3</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events that result in the creation of a D1 Digital Object from another one following a deterministic algorithm, such that the resulting instance of digital object shares representative properties with the original object.
+In other words, this class describes the transition from an immaterial object referred to by property L21 used as derivation source (was derivation source for) to another immaterial object referred to by property L22 created derivative (was derivative created by) preserving the representation of some things but in a different form. Characteristic examples are colour corrections, contrast changes and resizing of images.</rdfs:comment>
+    <rdfs:label xml:lang="en">Formal Derivation</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D10_Software_Execution"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D7</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events that happen on physical digital devices following a human activity that intentionally caused its immediate or delayed initiation and results in the creation of a new instance of D1 Digital Object on behalf of the human actor.
+The input of a D7 Digital Machine Event may be parameter settings and/or data to be processed. Some D7 Digital Machine Events may form part of a wider E65 Creation event. In this case, all machine output of the partial events is regarded as creation of the overall activity.</rdfs:comment>
+    <rdfs:label xml:lang="en">Digital Machine Event</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E11_Modification"/>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E65_Creation"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D8_Digital_Device">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D8</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises identifiable material items such as computers, scanners, cameras, etc. that have the capability to process or produce instances of D1 Digital Object.</rdfs:comment>
+    <rdfs:label xml:lang="en">Digital Device</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D9_Data_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D9</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises instances of D1 Digital Object that are the direct result of a digital measurement or a formal derivative of it, containing quantitative properties of some physical things or other constellations of matter.</rdfs:comment>
+    <rdfs:label xml:lang="en">Data Object</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E54_Dimension"/>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D10_Software_Execution">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D10</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events by which a digital device runs a software program or a series of computing operations on a digital object as a single task, which is completely determined by its digital input, the software and the generic properties of the device.</rdfs:comment>
+    <rdfs:label xml:lang="en">Software Execution</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D11_Digital_Measurement_Event">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D11</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises actions measuring physical properties using a digital device, that are determined by a systematic procedure and creates an instance of D9 Data Object, which is stored on an instance of D13 Digital Information Carrier.
+In contrast to instances of D10 Software Execution, environmental factors have an intended influence on the outcome of an instance of D11 Digital Measurement Event.
+Measurement devices may include running distinct software, such as the RAW to JPEG conversion in digital cameras.
+In this case, the event is regarded as instance of both classes, D10 Software Execution and D11 Digital Measurement Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">Digital Measurement Event</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E16_Measurement"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D12_Data_Transfer_Event">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D12</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events that transfer a digital object from one digital carrier to another. Normally, the digital object remains the same. If in general or by observation the transfer implies or has implied some data corruption, the change of the digital objects may be documented distinguishing input and output rather than instantiating the property L14 transferred (was transferred by).</rdfs:comment>
+    <rdfs:label xml:lang="en">Data Transfer Event</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D13_Digital_Information_Carrier">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D13</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises all instances of E84 Information Carrier that are explicitly designed to be used as persistent digital physical carriers of instances of D1 Digital Object. A D13 Digital Information Carrier may or may not contain information, e.g., an empty diskette.</rdfs:comment>
+    <rdfs:label xml:lang="en">Digital Information Carrier</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D14_Software">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D14</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises software codes, computer programs, procedures and functions that are used to operate a system of digital objects.</rdfs:comment>
+    <rdfs:label xml:lang="en">Software</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D29_Annotation_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D29</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises objects that make propositions about other artefacts.Instances of this class are not the attributes themselves, by which things are annotated, but represent the connection between the concepts related in a proposition, and the activities of creation, modification and deletion.This class is specialized by appropriate subclasses to express more specific relationships between annotated things, such as knowledge object, same as etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">Annotation Object</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D30_Annotation_Event">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D30</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events that describe the creation of associations (“Annotation Objects”) between objects or areas of objects of the Repository, with other objects or regions or persons, places, events. It is the event that creates the Annotation Object.</rdfs:comment>
+    <rdfs:label xml:lang="en">Annotation Event</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E65_Creation"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.ics.forth.gr/isl/CRMdig/D35_Area">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">D35</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class describes a part (of any shape or size) of interest in basically any media object stored in the Object Repository, i.e., a text, an image, a video or a 3D model. It points to content consisting of just a portion or area of a file. In some contexts, however, the area can also point to content represented by an integral (i.e., proper) file. It is equal to the METS AREA element.</rdfs:comment>
+    <rdfs:label xml:lang="en">Area</rdfs:label>
+    <rdfs:subClassOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E26_Physical_Feature"/>
+    <rdfs:subClassOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E1</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises all things in the universe of discourse of the CIDOC Conceptual Reference Model. It is an abstract concept providing for three general properties:Identification by name or appellation, and in particular by a preferred identifierClassification by type, allowing further refinement of the specific subclass an instance belongs to Attachment of free text and other unstructured data for the expression of anything not captured by formal propertiesAll other classes within the CIDOC CRM are directly or indirectly specialisations of E1 CRM Entity. </rdfs:comment>
+    <rdfs:label xml:lang="en">CRM Entity</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E5_Event">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E5</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises distinct, delimited and coherent processes and interactions of a material nature, in cultural, social or physical systems, involving and affecting instances of E77 Persistent Item in a way characteristic of the kind of process. Typical examples are meetings, births, deaths, actions of decision taking, making or inventing things, but also more complex and extended ones such as conferences, elections, building of a castle, or battles.While the continuous growth of a tree lacks the limits characteristic of an event, its germination from a seed does qualify as an event. Similarly, the blowing of the wind lacks the distinctness and limits of an event, but a hurricane, flood or earthquake would qualify as an event. Mental processes are considered as events, in cases where they are connected with the material externalization of their results; for example, the creation of a poem, a performance or a change of intention that becomes obvious from subsequent actions or declarations.The effects of an instance of E5 Event may not lead to relevant permanent changes of properties or relations of the items involved in it, for example an unrecorded performance. Of course, in order to be documented, some kind of evidence for an event must exist, be it witnesses, traces or products of the event.While instances of E4 Period always require some form of coherence between its constituent phenomena, in addition, the essential constituents of instances of E5 Event should contribute to an overall effect; for example, the statements made during a meeting and the listening of the audience.Viewed at a coarse level of detail, an instance of E5 Event may appear as if it had an ‘instantaneous’ overall effect, but any process or interaction of material nature in reality have an extent in time and space. At a fine level, instances of E5 Event may be analysed into component phenomena and phases within a space and timeframe, and as such can be seen as a period, regardless of the size of the phenomena. The reverse is not necessarily the case: not all instances of E4 Period give rise to a noteworthy overall effect and are thus not instances of E5 Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">Event</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E7_Activity">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E7</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises actions intentionally carried out by instances of E39 Actor that result in changes of state in the cultural, social, or physical systems documented. This notion includes complex, composite and long-lasting actions such as the building of a settlement or a war, as well as simple, short-lived actions such as the opening of a door.</rdfs:comment>
+    <rdfs:label xml:lang="en">Activity</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E11_Modification">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E11</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises instances of E7 Activity that are undertaken to create, alter or change instances of E24 Physical Human-Made Thing.This class includes the production of an item from raw materials and other so far undocumented objects. It also includes the conservation treatment of an object.Since the distinction between modification and production is not always clear, modification is regarded as the more generally applicable concept. This implies that some items may be consumed or destroyed in an instance of E11 Modification, and that others may be produced as a result of it. An event should also be documented using an instance of E81 Transformation if it results in the destruction of one or more objects and the simultaneous production of others using parts or material from the originals. In this case, the new items have separate identities.An activity undertaken on an object which was designed to alter it, but which, in fact, it did not in any seemingly significant way (such as the application of a solvent during conservation which failed to dissolve any part of the object), is still considered as an instance of E11 Modification. Typically, any such activity will leave at least forensic traces of evidence on the object.If the instance of E29 Design or Procedure utilized for the modification prescribes the use of specific materials, they should be documented using property P68 foresees use of (use foreseen by): E57 Material of E29 Design or Procedure, rather than via P126 employed (was employed in): E57 Material.</rdfs:comment>
+    <rdfs:label xml:lang="en">Modification</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E13</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises the actions of making assertions about one property of an object or any single relation between two items or concepts. The type of the property asserted to hold between two items or concepts can be described by the property P177 assigned property of type (is type of property assigned): E55 Type. For example, the class describes the actions of people making propositions and statements during certain scientific/scholarly procedures, e.g., the person and date when a condition statement was made, an identifier was assigned, the museum object was measured, etc. Which kinds of such assignments and statements need to be documented explicitly in structures of a schema rather than free text, depends on whether this information should be accessible by structured queries.This class allows for the documentation of how the respective assignment came about, and whose opinion it was. Note that all instances of properties described in a knowledge base are the opinion of someone. Per default, they are the opinion of the team maintaining the knowledge base. This fact must not individually be registered for all instances of properties provided by the maintaining team, because it would result in an endless recursion of whose opinion was the description of an opinion. Therefore, the use of instances of E13 Attribute Assignment marks the fact, that the maintaining team is in general neutral to the validity of the respective assertion, but registers someone else’s opinion and how it came about.All properties assigned in such an action can also be seen as directly relating the respective pair of items or concepts. Multiple use of instances of E13 Attribute Assignment may possibly lead to a collection of contradictory values. All cases of properties in this model that are also described indirectly through a subclass of E13 Attribute Assignment are characterised as "short cuts" of a path via this subclass. This redundant modelling of two alternative views is preferred because many implementations may have good reasons to model either the action of assertion or the short cut, and the relation between both alternatives can be captured by simple rules.</rdfs:comment>
+    <rdfs:label xml:lang="en">Attribute Assignment</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E16_Measurement">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E16</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises actions measuring quantitative physical properties and other values that can be determined by a systematic, objective procedure of direct observation of particular states of physical reality. An instance of E16 Measurement may use simple counting or tools, such as yardsticks or radiation detection devices. The interest is in the method and care applied, so that the reliability of the result may be judged at a later stage, or research continued on the associated documents. The date of the event is important for dimensions, which may change value over time, such as the length of an object subject to shrinkage. Methods and devices employed should be associated with instances of E16 Measurement by properties such as P33 used specific technique: E29 Design or Procedure, P125 used object of type: E55 Type, P16 used specific object (was used for): E70 Thing, whereas basic techniques such as "carbon-14 dating" should be encoded using P2 has type (is type of): E55 Type. Details of methods and devices reused or reusable in other instances of E16 Measurement should be documented for these entities rather than the measurements themselves, whereas details of particular execution may be documented by free text or by instantiating adequate sub-activities, if the detail may be of interest for an overarching query.Regardless whether a measurement is made by an instrument or by human senses, it represents the initial transition from physical reality to information without any other documented information object in between within the reasoning chain that would represent the result of the interaction of the observer or device with reality. Therefore, determining properties of an instance of E90 Symbolic Object is regarded as an instance of E13 Attribute Assignment, which may be inferred from observing and measuring representative carriers. In the case that the carrier can be named, the property P16 used specific object (was used for): should be used to indicate the instance(s) of E18 Physical Thing that was used as the empirical basis for the attribute assignment. For instance, inferring properties of depicted items using image material, such as satellite images, is not regarded as an instance of E16 Measurement, but as a subsequent instance of E13 Attribute Assignment. Rather, only the production of the images, understood as arrays of radiation intensities, is regarded as an instance of E16 Measurement. The same reasoning holds for other sensor data.</rdfs:comment>
+    <rdfs:label xml:lang="en">Measurement</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E18</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises all persistent physical items with a relatively stable form, human-made or natural.Depending on the existence of natural boundaries of such things, the CIDOC CRM distinguishes the instances of E19 Physical Object from instances of E26 Physical Feature, such as holes, rivers, pieces of land etc. Most instances of E19 Physical Object can be moved (if not too heavy), whereas features are integral to the surrounding matter.An instance of E18 Physical Thing occupies not only a particular geometric space at any instant of its existence, but in the course of its existence it also forms a trajectory through spacetime, which occupies a real, that is phenomenal, volume in spacetime. We include in the occupied space the space filled by the matter of the physical thing and all its inner spaces, such as the interior of a box. For the purpose of more detailed descriptions of the presence of an instance of E18 Physical Thing in space and time it can be associated with its specific instance of E92 Spacetime Volume by the property P196 defines (is defined by). The CIDOC CRM is generally not concerned with amounts of matter in fluid or gaseous states, as long as they are not confined in an identifiable way for an identifiable minimal time-span.</rdfs:comment>
+    <rdfs:label xml:lang="en">Physical Thing</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E22_Human-Made_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E22</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises all persistent physical objects of any size that are purposely created by human activity and have physical boundaries that separate them completely in an objective way from other objects. The class also includes all aggregates of objects made for functional purposes of whatever kind, independent of physical coherence, such as a set of chessmen.</rdfs:comment>
+    <rdfs:label xml:lang="en">Human-Made Object</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E26_Physical_Feature">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E26</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises identifiable features that are physically attached in an integral way to particular physical objects. Instances of E26 Physical Feature share many of the attributes of instances of E19 Physical Object. They may have a one-, two- or three-dimensional geometric extent, but there are no natural borders that separate them completely in an objective way from the carrier objects. For example, a doorway is a feature but the door itself, being attached by hinges, is not. Instances of E26 Physical Feature can be features in a narrower sense, such as scratches, holes, reliefs, surface colours, reflection zones in an opal crystal or a density change in a piece of wood. In the wider sense, they are portions of particular objects with partially imaginary borders, such as the core of the Earth, an area of property on the surface of the Earth, a landscape or the head of a contiguous marble statue. They can be measured and dated, and it is sometimes possible to state who or what is or was responsible for them. They cannot be separated from the carrier object, but a segment of the carrier object may be identified (or sometimes removed) carrying the complete feature. This definition coincides with the definition of "fiat objects" (Smith   Varzi, 2000, pp.401-420), with the exception of aggregates of “bona fide objects”. </rdfs:comment>
+    <rdfs:label xml:lang="en">Physical Feature</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E28</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises non-material products of our minds and other human produced data that have become objects of a discourse about their identity, circumstances of creation or historical implication. The production of such information may have been supported by the use of technical devices such as cameras or computers.Characteristically, instances of this class are created, invented or thought by someone, and then may be documented or communicated between persons. Instances of E28 Conceptual Object have the ability to exist on more than one particular carrier at the same time, such as paper, electronic signals, marks, audio media, paintings, photos, human memories, etc.They cannot be destroyed. They exist as long as they can be found on at least one carrier or in at least one human memory. Their existence ends when the last carrier and the last memory are lost. </rdfs:comment>
+    <rdfs:label xml:lang="en">Conceptual Object</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E54_Dimension">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E54</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises quantifiable properties that can be measured by some calibrated means and can be approximated by values, i.e., by points or regions in a mathematical or conceptual space, such as natural or real numbers, RGB values etc.An instance of E54 Dimension represents the empirical or theoretically derived quantity, including the precision tolerances resulting from the particular method or calculation. The identity of an instance of E54 Dimension depends on the method of its determination because each method may produce different values even when determining comparable qualities. For instance, the wingspan of a bird alive or dead is a different dimension. Thermoluninescence dating and Rehydroxylation [RHX] dating are different dimensions of temporal distance from now, even if they aim at dating the same object. The method of determination should be expressed using the property P2 has type (is type of). Note that simple terms such as “diameter” or “length” are normally insufficient to unambiguously describe a respective dimension. In contrast, “maximum linear extent” may be sufficient.The properties of the class E54 Dimension allow for expressing the numerical approximation of the values of instances of E54 Dimension adequate to the precision of the applied method of determination. If the respective quantity belongs to a non-discrete space according to the laws of physics, such as spatial distances, it is recommended to record them as approximations by intervals or regions of indeterminacy enclosing the assumed true values. For instance, a length of 5 cm may be recorded as 4.5-5.5 cm, according to the precision of the respective observation. Note, that comparability of values described in different units depends critically on the representation as value regions.Numerical approximations in archaic instances of E58 Measurement Unit used in historical records should be preserved. Equivalents corresponding to current knowledge should be recorded as additional instances of E54 Dimension, as appropriate.</rdfs:comment>
+    <rdfs:label xml:lang="en">Dimension</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E55_Type">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E55</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises concepts denoted by terms from thesauri and controlled vocabularies used to characterize and classify instances of CIDOC CRM classes. Instances of E55 Type represent concepts in contrast to instances of E41 Appellation which are used to name instances of CIDOC CRM classes. E55 Type is the CIDOC CRM’s interface to domain specific ontologies and thesauri. These can be represented in the CIDOC CRM as subclasses of E55 Type, forming hierarchies of terms, i.e., instances of E55 Type linked via P127 has broader term (has narrower term): E55 Type. Such hierarchies may be extended with additional properties. </rdfs:comment>
+    <rdfs:label xml:lang="en">Type</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E65_Creation">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E65</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises events that result in the creation of conceptual items or immaterial products, such as legends, poems, texts, music, images, movies, laws, types etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">Creation</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E70_Thing">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E70</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This general class comprises discrete, identifiable, instances of E77 Persistent Item that are documented as single units, that either consist of matter or depend on being carried by matter and are characterized by relative stability. They may be intellectual products or physical things. They may for instance have a solid physical form, an electronic encoding, or they may be a logical concept or structure.</rdfs:comment>
+    <rdfs:label xml:lang="en">Thing</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E73_Information_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E73</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises identifiable immaterial items, such as poems, jokes, data sets, images, texts, multimedia objects, procedural prescriptions, computer program code, algorithm or mathematical formulae, that have an objectively recognizable structure and are documented as single units. The encoding structure known as a "named graph" also falls under this class, so that each "named graph" is an instance of E73 Information Object.An instance of E73 Information Object does not depend on a specific physical carrier, which can include human memory, and it can exist on one or more carriers simultaneously.Instances of E73 Information Object of a linguistic nature should be declared as instances of the E33 Linguistic Object subclass. Instances of E73 Information Object of a documentary nature should be declared as instances of the E31 Document subclass. Conceptual items such as types and classes are not instances of E73 Information Object, nor are ideas without a reproducible expression.</rdfs:comment>
+    <rdfs:label xml:lang="en">Information Object</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E77</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises items that have persistent characteristics of structural nature substantially related to their identity and their integrity, sometimes known as “endurants” in philosophy. Persistent Items may be physical entities, such as people, animals or things, conceptual entities such as ideas, concepts, products of the imagination or even names. Instances of E77 Persistent Item may be present or be part of interactions in different periods or events. They can repeatedly be recognized at disparate occasions during their existence by characteristics of structural nature. The respective characteristics need not be exactly the same during all the existence of an instance of E77 Persistent Item. Often, they undergo gradual change, still bearing some similarities with that of previous times, or disappear completely and new emerge. For instance, a person, from the time of being born on, will gradually change all its features and acquire new ones, such as a scar. Even the DNA in different body cells will develop defects and mutations. Nevertheless, relevant characteristics used should be sufficiently similar to recognize the instance for some substantial period of time. The more specific criteria that determine the identity of instances of subclasses of E77 Persistent Item may vary considerably and are described or referred to in the respective scope notes. The decision about which exact criteria to use depends on whether the observable behaviour of the respective part of reality such confined conforms to the reasoning the user is interested in. For example, a building can be regarded as no longer existing if it is dismantled and the materials reused in a different configuration. On the other hand, human beings go through radical and profound changes during their life-span, affecting both material composition and form, yet preserve their identity by other criteria, such as being bodily separated from other persons. Similarly, inanimate objects may be subject to exchange of parts and matter. On the opposite, the identity of a (version of a) text of a scientific publication is given by the exact arrangement of its relevant symbols. The main classes of objects that fall outside the scope of the E77 Persistent Item class are temporal objects such as periods, events and acts, and descriptive properties. An instance of E77 Persistent Item does not require actual knowledge of the identifying features of the instance being currently known. There may be cases, where the actual identifying features of an instance of E77 Persistent Item are not decidable at a particular state of knowledge. </rdfs:comment>
+    <rdfs:label xml:lang="en">Persistent Item</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E89_Propositional_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E89</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises immaterial items, including but not limited to stories, plots, procedural prescriptions, algorithms, laws of physics or images that are, or represent in some sense, sets of propositions about real or imaginary things and that are documented as single units or serve as topic of discourse. This class also comprises items that are “about” something in the sense of a subject. In the wider sense, this class includes expressions of psychological value such as non-figural art and musical themes. However, conceptual items such as types and classes are not instances of E89 Propositional Object. This should not be confused with the definition of a type, which is indeed an instance of E89 Propositional Object.</rdfs:comment>
+    <rdfs:label xml:lang="en">Propositional Object</rdfs:label>
+  </rdfs:Class>
+  <rdfs:Class rdf:about="http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object">
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">E90</skos:notation>
+    <rdfs:comment xml:lang="en" rdf:datatype="http://www.w3.org/2001/XMLSchema#string">This class comprises identifiable symbols and any aggregation of symbols, such as characters, identifiers, traffic signs, emblems, texts, data sets, images, musical scores, multimedia objects, computer program code or mathematical formulae that have an objectively recognizable structure and that are documented as single units.It includes sets of signs of any nature, which may serve to designate something, or to communicate some propositional content. An instance of E90 Symbolic Object may or may not have a specific meaning, for example an arbitrary character string.In some cases, the content of an instance of E90 Symbolic Object may completely be represented by a serialized digital content model, such as a sequence of ASCII-encoded characters, an XML or HTML document, or a TIFF image. The property P3 has note and its subproperty P190 has symbolic content allow for the description of this content model. In order to disambiguate which symbolic level is the carrier of the meaning, the property P3.1 has type can be used to specify the encoding (e.g., "bit", "Latin character", RGB pixel).</rdfs:comment>
+    <rdfs:label xml:lang="en">Symbolic Object</rdfs:label>
+  </rdfs:Class>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L1_digitized">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D2 Digitization Process with an instance of E18 Physical Thing which is a material thing.</rdfs:comment>
+    <rdfs:label xml:lang="en">digitized</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L1</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D2_Digitization_Process"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P39_measured"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L2_used_as_source">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D10 Software Execution with an instance of D1 Digital Object which is used as a source, software essential for the performance.</rdfs:comment>
+    <rdfs:label xml:lang="en">used as source</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L2</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D10_Software_Execution"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L10_had_input"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L10_had_input">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D7 Digital Machine Event with an instance of D1 Digital Object which is the input used to specify the machine action.</rdfs:comment>
+    <rdfs:label xml:lang="en">had input</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L10</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L11_had_output">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D7 Digital Machine Event with an instance of D1 Digital Object which is the output of the activity.</rdfs:comment>
+    <rdfs:label xml:lang="en">had output</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L11</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P94_has_created"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L12_happened_on_device">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D8_Digital_Device"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D7 Digital Machine Event with an object, the D8 Digital Device, which happened with, e.g a capturing event that happened on/with a digital camera, etc.</rdfs:comment>
+    <rdfs:label xml:lang="en">happened on device</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L12</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L13_used_parameters">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D10 Software Execution with a digital object used as a parameter during the process.</rdfs:comment>
+    <rdfs:label xml:lang="en">used parameters</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L13</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D10_Software_Execution"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L10_had_input"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L14_transferred">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property identifies a digital object transferred by a D12 Data Transfer Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">transferred</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L14</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D12_Data_Transfer_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L10_had_input"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L15_has_sender">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D8_Digital_Device"/>
+    <rdfs:comment xml:lang="en">This property identifies a digital device used as a medium on which data are transferred through a D12 Data Transfer Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">has sender</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L15</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D12_Data_Transfer_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L12_happened_on_device"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L16_has_receiver">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D8_Digital_Device"/>
+    <rdfs:comment xml:lang="en">This property identifies a digital device used as a medium to receive data through a D12 Data Transfer Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">has receiver</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L16</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D12_Data_Transfer_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L12_happened_on_device"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L17_measured_thing_of_type">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E55_Type"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D11 Digital Measurement Event with the instance of E55Type of object to which it applied.</rdfs:comment>
+    <rdfs:label xml:lang="en">measured thing of type</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L17</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D11_Digital_Measurement_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P125_used_object_of_type"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L18_has_modified">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D13_Digital_Information_Carrier"/>
+    <rdfs:comment xml:lang="en">This property identifies a Digital Information Carrier modified in a Digital Machine Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">has modified</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L18</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P31_has_modified"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L19_stores">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of a D13 Digital Information Carrier with the instance of Digital Object that is stored on it.</rdfs:comment>
+    <rdfs:label xml:lang="en">stores</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L19</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D13_Digital_Information_Carrier"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P128_carries"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L20_has_created">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D9_Data_Object"/>
+    <rdfs:comment xml:lang="en">This property identifies a Data Object that came into existence as a result of a D11 Digital Measurement Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">has created</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L20</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D11_Digital_Measurement_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P40_observed_dimension"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L11_had_output"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L21_used_as_derivation_source">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of a D3 Formal Derivation with the instance of D1 Digital Object that is used as a derivation source.</rdfs:comment>
+    <rdfs:label xml:lang="en">used as derivation source</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L21</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D3_Formal_Derivation"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L2_used_as_source"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L22_created_derivative">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D3 Formal Derivation with the Digital Object it used to create a version of.</rdfs:comment>
+    <rdfs:label xml:lang="en">created derivative</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L22</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D3_Formal_Derivation"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L11_had_output"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L23_used_software_or_firmware">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D14_Software"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of D7 Digital Machine Event with the instance of D14 Software that had used.</rdfs:comment>
+    <rdfs:label xml:lang="en">used software or firmware</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L23</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D7_Digital_Machine_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L24_created_logfile">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property identifies the logfile that was created by a D10 Software Execution in order to record all the activities in the system.</rdfs:comment>
+    <rdfs:label xml:lang="en">created logfile</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L24</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D10_Software_Execution"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.ics.forth.gr/isl/CRMdig/L11_had_output"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L43_annotates">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:comment xml:lang="en">This property describes the associations between objects or areas of objects of the RI, with other objects or regions or persons, places, events.</rdfs:comment>
+    <rdfs:label xml:lang="en">annotates</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L43</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D29_Annotation_Object"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L48_created_annotation">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D29_Annotation_Object"/>
+    <rdfs:comment xml:lang="en">This property identifies the D29 Annotation Object (associations) that came into existence as a result of a D30 Annotation Event.</rdfs:comment>
+    <rdfs:label xml:lang="en">created annotation</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L48</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D30_Annotation_Event"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P94_has_created"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L49_is_primary_area_of">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property describes the association between a particular area declared in an original digital object.</rdfs:comment>
+    <rdfs:label xml:lang="en">is primary area of</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L49</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D35_Area"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L50_is_propagated_area_of">
+    <rdfs:range rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D1_Digital_Object"/>
+    <rdfs:comment xml:lang="en">This property describes the association between an area and the digital object to which it is propagated.</rdfs:comment>
+    <rdfs:label xml:lang="en">is propagated area of</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L50</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D35_Area"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L54_is_same-as">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:comment xml:lang="en">This property describes a non unique identification applied to E1 CRM Entity.</rdfs:comment>
+    <rdfs:label xml:lang="en">is same-as</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L54</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.ics.forth.gr/isl/CRMdig/L60_documents">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:comment xml:lang="en">This property describes the CRM Entities documented by instances of Digitization Processes.</rdfs:comment>
+    <rdfs:label xml:lang="en">documents</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">L60</skos:notation>
+    <rdfs:domain rdf:resource="http://www.ics.forth.gr/isl/CRMdig/D2_Digitization_Process"/>
+    <rdfs:subPropertyOf rdf:resource="http://www.cidoc-crm.org/cidoc-crm/P140_assigned_attribute_to"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P12_occurred_in_the_presence_of">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E77_Persistent_Item"/>
+    <rdfs:comment xml:lang="en">This property describes the active or passive presence of an E77 Persistent Item in an instance of E5 Event without implying any specific role. It documents known events in which an instance of E77 Persistent Item was present during the course of its life or history. For example, an object may be the desk, now in a museum, on which a treaty was signed. The instance of E53 Place and the instance of E52 Time-Span where and when these events happened provide us with constraints about the presence of the related instance E77 Persistent Item in the past. Instances of E90 Symbolic Object, in particular information objects, are physically present in events via at least one of the instances of E18 Physical Thing carrying them. Note, that the human mind can be such a carrier. A precondition for a transfer of information to a person or another new physical carrier is the presence of the respective information object and this person or physical thing in one event.</rdfs:comment>
+    <rdfs:label xml:lang="en">occurred in the presence of</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P12</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E5_Event"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P16_used_specific_object">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E70_Thing"/>
+    <rdfs:comment xml:lang="en">This property describes the use of material or immaterial things in a way essential to the performance or the outcome of an instance of E7 Activity. This property typically applies to tools, instruments, moulds, raw materials and items embedded in a product. It implies that the presence of the object in question was a necessary condition for the action. For example, the activity of writing this text required the use of a computer. An immaterial thing can be used if at least one of its carriers is present. For example, the software tools on a computer.Another example is the use of a particular name by a particular group of people over some span to identify a thing, such as a settlement. In this case, the physical carriers of this name are at least the people understanding its use.</rdfs:comment>
+    <rdfs:label xml:lang="en">used specific object</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P16</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E7_Activity"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P31_has_modified">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing"/>
+    <rdfs:comment xml:lang="en">This property identifies the instance of E18 Physical Thing modified in an instance of E11 Modification.</rdfs:comment>
+    <rdfs:label xml:lang="en">has modified</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P31</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E11_Modification"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P39_measured">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of E16 Measurement with the instance of E18 Physical Thing upon which it acted. The instance of E16 Measurement is specific to the measured object. An instance of E18 Physical Thing may be measured more than once with different results, constituting different instances of E16 Measurement. </rdfs:comment>
+    <rdfs:label xml:lang="en">measured</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P39</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E16_Measurement"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P40_observed_dimension">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E54_Dimension"/>
+    <rdfs:comment xml:lang="en">This property records the dimension that was observed in an E16 Measurement Event.E54 Dimension can be any quantifiable aspect of E70 Thing. Weight, image colour depth and monetary value are dimensions in this sense. One measurement activity may determine more than one dimension of one object.Dimensions may be determined either by direct observation or using recorded evidence. In the latter case the measured Thing does not need to be present or extant.Even though knowledge of the value of a dimension requires measurement, the dimension may be an object of discourse prior to, or even without, any measurement being made.</rdfs:comment>
+    <rdfs:label xml:lang="en">observed dimension</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P40</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E16_Measurement"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P94_has_created">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E28_Conceptual_Object"/>
+    <rdfs:comment xml:lang="en">This property links an instance of E65 Creation to the instance of E28 Conceptual Object created by it. It represents the act of conceiving the intellectual content of the instance of E28 Conceptual Object. It does not represent the act of creating the first physical carrier of the instance of E28 Conceptual Object. As an example, this is the composition of a poem, not its commitment to paper.</rdfs:comment>
+    <rdfs:label xml:lang="en">has created</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P94</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E65_Creation"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P106_is_composed_of">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of E90 Symbolic Object with a part of it that is by itself an instance of E90 Symbolic Object, such as fragments of texts or clippings from an image.This property is transitive asymmetric.</rdfs:comment>
+    <rdfs:label xml:lang="en">is composed of</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P106</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P125_used_object_of_type">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E55_Type"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of E7 Activity to an instance of E55 Type, which classifies an instance of E70 Thing used in an instance of E7 Activity, when the specific instance is either unknown or not of interest, such as use of "a hammer".This property is a shortcut of the more fully developed path from E7 Activity through P16 used specific object, E70 Thing, P2 has type, to E55 Type</rdfs:comment>
+    <rdfs:label xml:lang="en">used object of type</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P125</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E7_Activity"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P128_carries">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E90_Symbolic_Object"/>
+    <rdfs:comment xml:lang="en">This property identifies an instance E90 Symbolic Object carried by an instance of E18 Physical Thing. Since an instance of E90 Symbolic Object is defined as an immaterial idealization over potentially multiple carriers, any individual realization on a particular physical carrier may be defective, due to deterioration or shortcomings in the process of creating the realization compared to the intended ideal. As long as such defects do not substantially affect the complete recognition of the respective symbolic object, it is still regarded as carrying an instance of this E90 Symbolic Object. If these defects are of scholarly interest, the particular realization can be modelled as an instance of E25 Human-Made Feature. Note, that any instance of E90 Symbolic Object incorporated (P165) in the carried symbolic object is also carried by the same instance of E18 Physical Thing.</rdfs:comment>
+    <rdfs:label xml:lang="en">carries</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P128</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E18_Physical_Thing"/>
+  </rdf:Property>
+  <rdf:Property rdf:about="http://www.cidoc-crm.org/cidoc-crm/P140_assigned_attribute_to">
+    <rdfs:range rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E1_CRM_Entity"/>
+    <rdfs:comment xml:lang="en">This property associates an instance of E13 Attribute Assignment with the instance of E1 CRM Entity about which it made an attribution. The instance of E1 CRM Entity plays the role of the domain of the attribution. The kind of attribution made should be documented using P177 assigned property of type (is type of property assigned).</rdfs:comment>
+    <rdfs:label xml:lang="en">assigned attribute to</rdfs:label>
+    <skos:notation rdf:datatype="http://www.w3.org/2001/XMLSchema#string">P140</skos:notation>
+    <rdfs:domain rdf:resource="http://www.cidoc-crm.org/cidoc-crm/E13_Attribute_Assignment"/>
+  </rdf:Property>
+</rdf:RDF>
