@@ -16,13 +16,13 @@
                     "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
                     "helpenabled": false,
                     "helptext": {
-                        "en": null
+                        "en": ""
                     },
                     "helptitle": {
-                        "en": null
+                        "en": ""
                     },
                     "instructions": {
-                        "en": null
+                        "en": ""
                     },
                     "name": {
                         "en": "Death"
@@ -88,12 +88,25 @@
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "config": {
-                        "defaultValue": "0a14ef3e-9dd1-4f62-a3a1-7fd762f591d4",
+                        "defaultValue": [
+                            {
+                                "labels": [
+                                    {
+                                        "id": "0a14ef3e-9dd1-4f62-a3a1-7fd762f591d4",
+                                        "language_id": "en",
+                                        "list_item_id": "c9e00e91-37da-4865-b979-9bbf96bde1ea",
+                                        "value": "Death Placename",
+                                        "valuetype_id": "prefLabel"
+                                    }
+                                ],
+                                "list_id": "3e545767-c46c-4fe7-8754-c24528ba0842",
+                                "uri": "http://localhost:8000/plugins/controlled-list-manager/item/c9e00e91-37da-4865-b979-9bbf96bde1ea"
+                            }
+                        ],
                         "i18n_properties": [
                             "placeholder"
                         ],
                         "label": "Death Place Type",
-                        "options": [],
                         "placeholder": {
                             "en": "Select an option"
                         }
@@ -106,17 +119,30 @@
                     "sortorder": null,
                     "source_identifier_id": null,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "19e56148-82b8-47eb-b66e-f6243639a1a8"
                 },
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
                     "config": {
-                        "defaultValue": "a0e096e2-f5ae-4579-950d-3040714713b4",
+                        "defaultValue": [
+                            {
+                                "labels": [
+                                    {
+                                        "id": "a0e096e2-f5ae-4579-950d-3040714713b4",
+                                        "language_id": "en",
+                                        "list_item_id": "5662d9b7-6185-4216-90f0-1379cebb9d1e",
+                                        "value": "Name Type",
+                                        "valuetype_id": "prefLabel"
+                                    }
+                                ],
+                                "list_id": "1e63c514-eb9d-48d3-94b5-35e060e5f368",
+                                "uri": "http://localhost:8000/plugins/controlled-list-manager/item/5662d9b7-6185-4216-90f0-1379cebb9d1e"
+                            }
+                        ],
                         "i18n_properties": [
                             "placeholder"
                         ],
                         "label": "Death Place Metatype",
-                        "options": [],
                         "placeholder": {
                             "en": "Select an option"
                         }
@@ -129,7 +155,7 @@
                     "sortorder": null,
                     "source_identifier_id": null,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "19e56148-82b8-47eb-b66e-f6243639a1a8"
                 },
                 {
                     "card_id": "048d19a0-9924-11ea-aff3-f875a44e0e11",
@@ -372,9 +398,10 @@
                 {
                     "alias": "death_place_type",
                     "config": {
-                        "rdmCollection": "3e545767-c46c-4fe7-8754-c24528ba0842"
+                        "controlledList": "3e545767-c46c-4fe7-8754-c24528ba0842",
+                        "multiValue": false
                     },
-                    "datatype": "concept",
+                    "datatype": "reference",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
@@ -397,9 +424,10 @@
                 {
                     "alias": "death_place_metatype",
                     "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                        "controlledList": "1e63c514-eb9d-48d3-94b5-35e060e5f368",
+                        "multiValue": false
                     },
-                    "datatype": "concept",
+                    "datatype": "reference",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
@@ -467,7 +495,13 @@
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
-            "publication": null,
+            "publication": {
+                "graph_id": "048cf280-9924-11ea-a9c7-f875a44e0e11",
+                "most_recent_edit_id": null,
+                "notes": "Migrated concept/concept-list nodes to reference datatype",
+                "publicationid": "0534a417-91b2-4482-95bd-da2faef90791",
+                "published_time": "2025-10-22T19:41:15.611"
+            },
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "resource_instance_lifecycle": null,
@@ -505,5 +539,11 @@
             "user_permissions": {},
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 14.5 (Debian 14.5-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit",
+        "git hash": "1802d76a82 2025-10-07 16:18:08 -0700",
+        "os": "Darwin",
+        "os version": "24.5.0"
+    }
 }
