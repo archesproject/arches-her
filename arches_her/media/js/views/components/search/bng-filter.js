@@ -297,7 +297,9 @@ define([
                             let oneHundredKmGrid = self.gridList[bng.substring(0, 2)];
                             let x = oneHundredKmGrid[0] * 100000 + parseInt(bng.substring(2, 7));
                             let y = oneHundredKmGrid[1] * 100000 + parseInt(bng.substring(7, 12));
-                            ret = {"x":x,"y":y};
+                            const x_string = String(x).padStart(6, '0')
+                            const y_string = String(y).padStart(6, '0')
+                            ret = {"x":x_string,"y":y_string};
                         }
                         else{
                             self.xyMessageError("Can only convert BNG to XY if BNG is 12 characters long");
