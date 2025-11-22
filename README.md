@@ -70,13 +70,7 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
    ARCHES_APPLICATIONS = ("arches_her",)
    ```
 
-5. If developing Arches for HERs, you'll need to add the HER_ROOT setting which indicates where on your file system your arches_her repository is located. You'll need to adjust the path according to where you have cloned the arches_her repo:
-
-   ```python
-   HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../')), 'arches-her', 'arches_her')
-   ```
-
-6. Next update your project's urls.py file to include the Arches for HERs urls like so:
+5. Next update your project's urls.py file to include the Arches for HERs urls like so:
 
    ```python
    urlpatterns = [
@@ -85,7 +79,7 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
    ```
 
-7. Add `arches_her` as a dependency in your project's `package.json` file:
+6. Add `arches_her` as a dependency in your project's `package.json` file:
 
    ```javascript
    "dependencies": {
@@ -184,20 +178,6 @@ Administrators of an instance of Arches for HERs should configure their arches p
 - Configuring basemaps available in your Arches for HERs instance (using the instructions in the [Core Arches Documentation](https://arches.readthedocs.io/en/latest/administering/managing-map-layers/#basemaps-and-overlays)).
 
 >❗️ Please note: you will need to configure a MapBox key in the user interface for the default mapping to appear, as per the [Default Map Settings](https://arches.readthedocs.io/en/latest/configuring/arches-system-settings/#default-map-settings) Core Arches documentation.
-
-## Working with Letter Templates
-
-Field tag replacement in the templates can easily break if styling changes occur within the Word documents. The internal &ldquo;style runs&rdquo; provide rich formatting for the letters, but if a style partially touches a field tag (a field name surrounded by angle brackets), the field tag is physically split across several style runs. When this happens, it is no longer possible for the field to be substituted with its data value.
-
-It is good practice to run the docx management command after working on the letter templates and before committing to source control. The full command is:
-
-```bash
-python manage.py docx fix_style_runs --dest_dir docx
-```
-
-The `--dest_dir` parameter is optional and defaults to the `docx` folder.
-
-The Word files in the destination folder are processed in turn, and the command looks for pairs of angle brackets that may span multiple style runs. When this happens, they are joined together, thus restoring the full field tag.
 
 ## Guidance Documentation
 
