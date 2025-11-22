@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/288d42c2-24a8-4939-8d65-504a3b4875f0">
+    <skos:prefLabel xml:lang="en">Non-Planning Application</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/14339cdc-46db-4ee6-b359-93e5e5bae5fb">
+        <dcterms:title>Consultation Type</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <dcterms:identifier>http://localhost:8000/288d42c2-24a8-4939-8d65-504a3b4875f0</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/2492b491-969b-4996-942c-79661c48cfc0">
+    <dcterms:identifier>http://localhost:8000/2492b491-969b-4996-942c-79661c48cfc0</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">Pre-Application</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/14339cdc-46db-4ee6-b359-93e5e5bae5fb"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/6fa135d9-b04f-4bcc-a7b2-acd23ca6c6de">
+    <skos:inScheme rdf:resource="http://localhost:8000/14339cdc-46db-4ee6-b359-93e5e5bae5fb"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:prefLabel xml:lang="en">Condition Application</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/6fa135d9-b04f-4bcc-a7b2-acd23ca6c6de</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/eaf2a776-9555-47b1-b1c4-3da0a01046dc">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <dcterms:identifier>http://localhost:8000/eaf2a776-9555-47b1-b1c4-3da0a01046dc</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">Post-Application</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/14339cdc-46db-4ee6-b359-93e5e5bae5fb"/>
+  </skos:Concept>
+</rdf:RDF>

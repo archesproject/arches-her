@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/bc178f81-622a-447d-ac6a-f13dd6945cfd">
+    <dcterms:identifier>http://localhost:8000/bc178f81-622a-447d-ac6a-f13dd6945cfd</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/7849cd3c-3f0d-454d-aaea-db9164629641">
+        <dcterms:title>Record Status</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <skos:prefLabel xml:lang="en">Backlog - Full/Published</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/78c8ead0-5510-430c-a4ce-68053110507d">
+    <skos:inScheme rdf:resource="http://localhost:8000/7849cd3c-3f0d-454d-aaea-db9164629641"/>
+    <skos:prefLabel xml:lang="en">Backlog - Skeleton</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/78c8ead0-5510-430c-a4ce-68053110507d</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/fc803721-d067-4942-8d22-796016e5cde6">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:inScheme rdf:resource="http://localhost:8000/7849cd3c-3f0d-454d-aaea-db9164629641"/>
+    <skos:prefLabel xml:lang="en">Active - Full/Published</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/fc803721-d067-4942-8d22-796016e5cde6</dcterms:identifier>
+  </skos:Concept>
+</rdf:RDF>

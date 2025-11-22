@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/e3ebe935-f011-410a-91c5-e262cf539549">
+    <dcterms:identifier>http://localhost:8000/e3ebe935-f011-410a-91c5-e262cf539549</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">Alternate</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:altLabel xml:lang="en">Alternative</skos:altLabel>
+    <skos:scopeNote xml:lang="en">A current valid alternative address. For example may be used to record a second address for a site or building which fronts on to 2 streets.</skos:scopeNote>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70">
+        <dcterms:title>Address Status Type</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/1b097069-bf5c-4509-a337-dd909229e634">
+    <skos:prefLabel xml:lang="en">Contemporary</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/1b097069-bf5c-4509-a337-dd909229e634</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/64c2ecf2-7d76-4a18-9e77-960cd6128587">
+    <skos:prefLabel xml:lang="en">Primary</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:scopeNote xml:lang="en">The main current address for the building or monument.</skos:scopeNote>
+    <dcterms:identifier>http://localhost:8000/64c2ecf2-7d76-4a18-9e77-960cd6128587</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/8344a7fc-3e04-4ba5-8108-de0568e34ce1">
+    <skos:inScheme rdf:resource="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</arches:sortorder>
+    <skos:prefLabel xml:lang="en">Former</skos:prefLabel>
+    <skos:scopeNote xml:lang="en">No longer in current use.</skos:scopeNote>
+    <dcterms:identifier>http://localhost:8000/8344a7fc-3e04-4ba5-8108-de0568e34ce1</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/20f99cf2-c1c3-4c7c-8d89-f4a5c6c3ca26">
+    <skos:prefLabel xml:lang="en">Latest</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</arches:sortorder>
+    <skos:scopeNote xml:lang="en">The most recently known address</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70"/>
+    <dcterms:identifier>http://localhost:8000/20f99cf2-c1c3-4c7c-8d89-f4a5c6c3ca26</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/174f2456-1491-44a7-b62c-aa8c5b00dcf6">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">5</arches:sortorder>
+    <skos:inScheme rdf:resource="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70"/>
+    <skos:prefLabel xml:lang="en">Statutory</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/174f2456-1491-44a7-b62c-aa8c5b00dcf6</dcterms:identifier>
+    <skos:scopeNote xml:lang="en">The address as identified in a statutory document. This may be the same as or different to the Primary address</skos:scopeNote>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/cd2c7058-7649-431c-a97c-479d54cf7e89">
+    <skos:prefLabel xml:lang="en">Subsequent</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">6</arches:sortorder>
+    <skos:inScheme rdf:resource="http://localhost:8000/46d6c3b3-fa78-48c0-8668-28362a608c70"/>
+    <dcterms:identifier>http://localhost:8000/cd2c7058-7649-431c-a97c-479d54cf7e89</dcterms:identifier>
+  </skos:Concept>
+</rdf:RDF>

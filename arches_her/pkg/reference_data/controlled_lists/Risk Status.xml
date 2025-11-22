@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/e47c8425-1dea-47f4-8ae1-d21c1d81e61e">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:prefLabel xml:lang="en">At Risk</skos:prefLabel>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/32b0bb10-84bf-4fba-bbd0-4fcd1bfff2e3">
+        <dcterms:title>Risk Status</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <dcterms:identifier>http://localhost:8000/e47c8425-1dea-47f4-8ae1-d21c1d81e61e</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/0b15f63a-75a7-4014-9436-8d972c8b0bcf">
+    <skos:prefLabel xml:lang="en">Not at risk</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/32b0bb10-84bf-4fba-bbd0-4fcd1bfff2e3"/>
+    <dcterms:identifier>http://localhost:8000/0b15f63a-75a7-4014-9436-8d972c8b0bcf</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+  </skos:Concept>
+</rdf:RDF>

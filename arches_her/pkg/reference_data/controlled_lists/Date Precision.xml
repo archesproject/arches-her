@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+>
+  <skos:Concept rdf:about="http://localhost:8000/eeea071a-293f-40f6-9fdd-b7d63683457e">
+    <dcterms:identifier>http://localhost:8000/eeea071a-293f-40f6-9fdd-b7d63683457e</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/dbd9e6e8-526e-4d36-9a23-149dea904253">
+        <dcterms:title>Date Precision</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <skos:scopeNote xml:lang="en">Precise to a century (eg. 18**)</skos:scopeNote>
+    <skos:prefLabel xml:lang="en">C</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/8e10c021-15e1-45df-980a-f0a74e39004e">
+    <skos:inScheme rdf:resource="http://localhost:8000/dbd9e6e8-526e-4d36-9a23-149dea904253"/>
+    <skos:scopeNote xml:lang="en">Precise to a decade (eg. 198*).</skos:scopeNote>
+    <dcterms:identifier>http://localhost:8000/8e10c021-15e1-45df-980a-f0a74e39004e</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</arches:sortorder>
+    <skos:prefLabel xml:lang="en">X</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/1732a855-f8f2-4b28-9594-7c78b2c8c8e0">
+    <skos:scopeNote xml:lang="en">Precise to a day (eg. 12-Sep-1968)</skos:scopeNote>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <dcterms:identifier>http://localhost:8000/1732a855-f8f2-4b28-9594-7c78b2c8c8e0</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">D</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/dbd9e6e8-526e-4d36-9a23-149dea904253"/>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/5da88c80-6800-4173-89a5-f65cf8a55644">
+    <skos:prefLabel xml:lang="en">Y</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/5da88c80-6800-4173-89a5-f65cf8a55644</dcterms:identifier>
+    <skos:scopeNote xml:lang="en">Precise to a year (eg. 1968)</skos:scopeNote>
+    <skos:inScheme rdf:resource="http://localhost:8000/dbd9e6e8-526e-4d36-9a23-149dea904253"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/be1727d3-eb8a-48bb-9cec-d72424447b45">
+    <skos:inScheme rdf:resource="http://localhost:8000/dbd9e6e8-526e-4d36-9a23-149dea904253"/>
+    <skos:scopeNote xml:lang="en">Precise to a month (eg. Sep-1968)</skos:scopeNote>
+    <skos:prefLabel xml:lang="en">M</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <dcterms:identifier>http://localhost:8000/be1727d3-eb8a-48bb-9cec-d72424447b45</dcterms:identifier>
+  </skos:Concept>
+</rdf:RDF>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/24bbb521-1361-40d1-8c61-10779323a0b1">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/8f72585f-f1ec-4177-b4a2-1b13a79599c9">
+        <dcterms:title>Recovery techniques</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <dcterms:identifier>http://www.archesproject.org/24bbb521-1361-40d1-8c61-10779323a0b1</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">Chance find</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/fcc39e94-1041-4230-bd7f-91633ba239ee">
+    <skos:inScheme rdf:resource="http://localhost:8000/8f72585f-f1ec-4177-b4a2-1b13a79599c9"/>
+    <skos:prefLabel xml:lang="en">Mechanical excavation</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <dcterms:identifier>http://www.archesproject.org/fcc39e94-1041-4230-bd7f-91633ba239ee</dcterms:identifier>
+    <skos:broader>
+      <skos:Concept rdf:about="http://localhost:8000/7b752e22-eb71-4e88-a21c-48774a4d352f">
+        <skos:narrower rdf:resource="http://localhost:8000/fcc39e94-1041-4230-bd7f-91633ba239ee"/>
+        <skos:narrower rdf:resource="http://localhost:8000/46734933-da4e-4de7-86d3-b0852b9b5315"/>
+        <skos:prefLabel xml:lang="en">Excavation</skos:prefLabel>
+        <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+        <dcterms:identifier>http://www.archesproject.org/7b752e22-eb71-4e88-a21c-48774a4d352f</dcterms:identifier>
+        <skos:inScheme rdf:resource="http://localhost:8000/8f72585f-f1ec-4177-b4a2-1b13a79599c9"/>
+      </skos:Concept>
+    </skos:broader>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/46734933-da4e-4de7-86d3-b0852b9b5315">
+    <skos:inScheme rdf:resource="http://localhost:8000/8f72585f-f1ec-4177-b4a2-1b13a79599c9"/>
+    <skos:prefLabel xml:lang="en">Hand excavation</skos:prefLabel>
+    <dcterms:identifier>http://www.archesproject.org/46734933-da4e-4de7-86d3-b0852b9b5315</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:broader rdf:resource="http://localhost:8000/7b752e22-eb71-4e88-a21c-48774a4d352f"/>
+  </skos:Concept>
+</rdf:RDF>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+>
+  <skos:Concept rdf:about="http://localhost:8000/ee804ff5-7763-4326-b2b4-108c06a1ae9c">
+    <skos:prefLabel xml:lang="en">Site Access Only</skos:prefLabel>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/e37789f0-3bb8-4063-a435-6f1c4108acdc">
+        <dcterms:title>Survey Access</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <dcterms:identifier>http://localhost:8000/ee804ff5-7763-4326-b2b4-108c06a1ae9c</dcterms:identifier>
+    <skos:scopeNote xml:lang="en">Access to the site was limited e.g. to the perimeter of a large complex.</skos:scopeNote>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/50e79dbe-43b2-47ce-b055-5ae80f417c24">
+    <dcterms:identifier>http://localhost:8000/50e79dbe-43b2-47ce-b055-5ae80f417c24</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:prefLabel xml:lang="en">Interior Access</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/e37789f0-3bb8-4063-a435-6f1c4108acdc"/>
+    <skos:scopeNote xml:lang="en">Full access to interior and exterior of buildings or structures.</skos:scopeNote>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/181e5dbb-6dde-420d-8868-e25a0b5dd682">
+    <skos:prefLabel xml:lang="en">Exterior Access Only</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:scopeNote xml:lang="en">Access for survey or assessment limited to the exterior of existing buildings and structures.</skos:scopeNote>
+    <dcterms:identifier>http://localhost:8000/181e5dbb-6dde-420d-8868-e25a0b5dd682</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/e37789f0-3bb8-4063-a435-6f1c4108acdc"/>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/2cd57a03-8b7e-4094-be63-0c9b62c9a2b9">
+    <skos:scopeNote xml:lang="en">Access for survey was not available at the time of the survey visit.</skos:scopeNote>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <skos:prefLabel xml:lang="en">No Access</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/e37789f0-3bb8-4063-a435-6f1c4108acdc"/>
+    <dcterms:identifier>http://localhost:8000/2cd57a03-8b7e-4094-be63-0c9b62c9a2b9</dcterms:identifier>
+  </skos:Concept>
+</rdf:RDF>
