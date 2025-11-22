@@ -124,9 +124,7 @@ TERM_SEARCH_TYPES = [
     },
 ]
 
-ES_MAPPING_MODIFIER_CLASSES = [
-    "arches_controlled_lists.search.references_es_mapping_modifier.ReferencesEsMappingModifier"
-]
+ES_MAPPING_MODIFIER_CLASSES = ["arches_controlled_lists.search.references_es_mapping_modifier.ReferencesEsMappingModifier"]
 
 ELASTICSEARCH_CUSTOM_INDEXES = []
 # [{
