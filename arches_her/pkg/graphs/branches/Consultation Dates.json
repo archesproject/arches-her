@@ -16,13 +16,13 @@
                     "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
                     "helpenabled": false,
                     "helptext": {
-                        "en": null
+                        "en": ""
                     },
                     "helptitle": {
-                        "en": null
+                        "en": ""
                     },
                     "instructions": {
-                        "en": null
+                        "en": ""
                     },
                     "name": {
                         "en": "Consultation Dates"
@@ -37,12 +37,25 @@
                 {
                     "card_id": "1f29ee7d-025c-11eb-a00b-f875a44e0e11",
                     "config": {
-                        "defaultValue": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
+                        "defaultValue": [
+                            {
+                                "labels": [
+                                    {
+                                        "id": "0493601e-3491-40a7-a651-6fd8d9dbdce5",
+                                        "language_id": "en",
+                                        "list_item_id": "b2f1cccc-65b7-4633-847f-ec9b09ef07f0",
+                                        "value": "On",
+                                        "valuetype_id": "prefLabel"
+                                    }
+                                ],
+                                "list_id": "366686d6-deb0-4245-81a3-f94d791a388c",
+                                "uri": "http://localhost:8000/plugins/controlled-list-manager/item/b2f1cccc-65b7-4633-847f-ec9b09ef07f0"
+                            }
+                        ],
                         "i18n_properties": [
                             "placeholder"
                         ],
                         "label": "Target Date Qualifier",
-                        "options": [],
                         "placeholder": {
                             "en": "Select an option"
                         }
@@ -55,7 +68,7 @@
                     "sortorder": 2,
                     "source_identifier_id": null,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "19e56148-82b8-47eb-b66e-f6243639a1a8"
                 },
                 {
                     "card_id": "1f29ee7d-025c-11eb-a00b-f875a44e0e11",
@@ -144,12 +157,25 @@
                 {
                     "card_id": "1f29ee7d-025c-11eb-a00b-f875a44e0e11",
                     "config": {
-                        "defaultValue": "a6dfc54c-a130-4ab9-ab29-ec659f8158a9",
+                        "defaultValue": [
+                            {
+                                "labels": [
+                                    {
+                                        "id": "a6dfc54c-a130-4ab9-ab29-ec659f8158a9",
+                                        "language_id": "en",
+                                        "list_item_id": "29b0400e-07ff-44cb-91c9-de7fb6c949b2",
+                                        "value": "Throughout",
+                                        "valuetype_id": "prefLabel"
+                                    }
+                                ],
+                                "list_id": "366686d6-deb0-4245-81a3-f94d791a388c",
+                                "uri": "http://localhost:8000/plugins/controlled-list-manager/item/29b0400e-07ff-44cb-91c9-de7fb6c949b2"
+                            }
+                        ],
                         "i18n_properties": [
                             "placeholder"
                         ],
                         "label": "Consultation Date Qualifier",
-                        "options": [],
                         "placeholder": {
                             "en": "Select an option"
                         }
@@ -162,7 +188,7 @@
                     "sortorder": 1,
                     "source_identifier_id": null,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "19e56148-82b8-47eb-b66e-f6243639a1a8"
                 }
             ],
             "color": "rgba(224,47,47,0.67)",
@@ -340,9 +366,10 @@
                 {
                     "alias": "consultation_date_qualifier",
                     "config": {
-                        "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
+                        "controlledList": "366686d6-deb0-4245-81a3-f94d791a388c",
+                        "multiValue": false
                     },
-                    "datatype": "concept",
+                    "datatype": "reference",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
@@ -488,9 +515,10 @@
                 {
                     "alias": "target_date_qualifier",
                     "config": {
-                        "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
+                        "controlledList": "366686d6-deb0-4245-81a3-f94d791a388c",
+                        "multiValue": false
                     },
-                    "datatype": "concept",
+                    "datatype": "reference",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
@@ -512,7 +540,13 @@
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
-            "publication": null,
+            "publication": {
+                "graph_id": "1f29ee7a-025c-11eb-89d0-f875a44e0e11",
+                "most_recent_edit_id": null,
+                "notes": "Migrated concept/concept-list nodes to reference datatype",
+                "publicationid": "787ea5ca-3047-4753-b145-af25edaea937",
+                "published_time": "2025-10-22T19:35:17.087"
+            },
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "resource_instance_lifecycle": null,
@@ -548,5 +582,11 @@
             "user_permissions": {},
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 14.5 (Debian 14.5-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit",
+        "git hash": "1802d76a82 2025-10-07 16:18:08 -0700",
+        "os": "Darwin",
+        "os version": "24.5.0"
+    }
 }

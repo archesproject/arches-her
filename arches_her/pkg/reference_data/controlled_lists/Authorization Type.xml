@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/dd174aff-6f27-4aaa-ac77-c0c4ec228734">
+    <dcterms:identifier>http://localhost:8000/dd174aff-6f27-4aaa-ac77-c0c4ec228734</dcterms:identifier>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/7da5e4d6-3865-4931-bed5-2df4d5d52e46">
+        <dcterms:title>Authorization Type</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <skos:prefLabel xml:lang="en">Awaiting Authorization</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/0df064b1-8da5-44d9-a3d4-7bed04826b07">
+    <skos:inScheme rdf:resource="http://localhost:8000/7da5e4d6-3865-4931-bed5-2df4d5d52e46"/>
+    <skos:prefLabel xml:lang="en">Authorized</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <dcterms:identifier>http://localhost:8000/0df064b1-8da5-44d9-a3d4-7bed04826b07</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/3324413d-2873-478c-8cb8-91b32b3e6534">
+    <dcterms:identifier>http://localhost:8000/3324413d-2873-478c-8cb8-91b32b3e6534</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/7da5e4d6-3865-4931-bed5-2df4d5d52e46"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <skos:prefLabel xml:lang="en">Not Authorized</skos:prefLabel>
+  </skos:Concept>
+</rdf:RDF>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+>
+  <skos:Concept rdf:about="http://localhost:8000/e0b26bf4-27e2-4f1a-a5f0-4034a5b06f4a">
+    <dcterms:identifier>http://localhost:8000/e0b26bf4-27e2-4f1a-a5f0-4034a5b06f4a</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">Alternative Title</skos:prefLabel>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/b45790a9-c300-44ab-8853-6e5f5b69dfb6">
+        <dcterms:title>Source Title Type</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:scopeNote xml:lang="en">Another title for a bibliographic source which differs from the recognized official title</skos:scopeNote>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/8678ed2f-27fc-4f12-a5e8-a1c97bdee48f">
+    <dcterms:identifier>http://localhost:8000/8678ed2f-27fc-4f12-a5e8-a1c97bdee48f</dcterms:identifier>
+    <skos:scopeNote xml:lang="en">A secondary title associated with a bibliographic reference.</skos:scopeNote>
+    <skos:prefLabel xml:lang="en">Subtitle</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:inScheme rdf:resource="http://localhost:8000/b45790a9-c300-44ab-8853-6e5f5b69dfb6"/>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/1e9d346e-b339-4a13-93f1-1ca71415db2b">
+    <skos:inScheme rdf:resource="http://localhost:8000/b45790a9-c300-44ab-8853-6e5f5b69dfb6"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <dcterms:identifier>http://localhost:8000/1e9d346e-b339-4a13-93f1-1ca71415db2b</dcterms:identifier>
+    <skos:scopeNote xml:lang="en">The main title of a bibliographic resource.</skos:scopeNote>
+    <skos:prefLabel xml:lang="en">Title</skos:prefLabel>
+  </skos:Concept>
+</rdf:RDF>

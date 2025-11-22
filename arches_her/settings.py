@@ -69,7 +69,7 @@ UPLOADED_FILES_DIR = "uploadedfiles"
 SECRET_KEY = "z23n6ot1_fsturw_gor66k^d#tl9h8*8*_e7qb)tyoucdo-z+x"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = bool(get_optional_env_variable("ARCHES_DJANGO_DEBUG", False))
+DEBUG = True
 
 ROOT_URLCONF = "arches_her.urls"
 
@@ -94,6 +94,37 @@ ELASTICSEARCH_CONNECTION_OPTIONS = {
 
 # a prefix to append to all elasticsearch indexes, note: must be lower case
 ELASTICSEARCH_PREFIX = "arches_her"
+
+REFERENCES_INDEX_NAME = "references"
+ELASTICSEARCH_CUSTOM_INDEXES = [
+    {
+        "module": "arches_controlled_lists.search_indexes.reference_index.ReferenceIndex",
+        "name": REFERENCES_INDEX_NAME,
+        "should_update_asynchronously": True,
+    }
+]
+TERM_SEARCH_TYPES = [
+    {
+        "type": "term",
+        "label": _("Term Matches"),
+        "key": "terms",
+        "module": "arches.app.search.search_term.TermSearch",
+    },
+    {
+        "type": "concept",
+        "label": _("Concepts"),
+        "key": "concepts",
+        "module": "arches.app.search.concept_search.ConceptSearch",
+    },
+    {
+        "type": "reference",
+        "label": _("References"),
+        "key": REFERENCES_INDEX_NAME,
+        "module": "arches_controlled_lists.search_indexes.reference_index.ReferenceIndex",
+    },
+]
+
+ES_MAPPING_MODIFIER_CLASSES = ["arches_controlled_lists.search.references_es_mapping_modifier.ReferencesEsMappingModifier"]
 
 ELASTICSEARCH_CUSTOM_INDEXES = []
 # [{
@@ -159,7 +190,6 @@ INSTALLED_APPS = (
     "arches.management",
     "guardian",
     "django_recaptcha",
-    "pgtrigger",
     "django_migrate_sql",
     "revproxy",
     "corsheaders",
@@ -168,6 +198,11 @@ INSTALLED_APPS = (
     "django_hosts",
     # "silk",
     "arches_her",
+    "django.contrib.postgres",
+    "arches_querysets",
+    "arches_component_lab",
+    "arches_controlled_lists",
+    "pgtrigger",
 )
 
 INSTALLED_APPS += ("arches.app", "django.contrib.admin")

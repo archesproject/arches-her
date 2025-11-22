@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+>
+  <skos:Concept rdf:about="http://localhost:8000/645c268e-5b26-4cba-b252-f39ceaa66525">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/93362f59-3658-47d8-8781-253fcf06374e">
+        <dcterms:title>Association Type</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <dcterms:identifier>http://localhost:8000/645c268e-5b26-4cba-b252-f39ceaa66525</dcterms:identifier>
+    <skos:altLabel xml:lang="en">GAS</skos:altLabel>
+    <skos:prefLabel xml:lang="en">General association</skos:prefLabel>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/f33ccf7e-6107-4eb7-96b1-fe231401e746">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:inScheme rdf:resource="http://localhost:8000/93362f59-3658-47d8-8781-253fcf06374e"/>
+    <skos:prefLabel xml:lang="en">Identified as</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/f33ccf7e-6107-4eb7-96b1-fe231401e746</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/03bf7d19-aa14-480d-aabf-ae17adfb6a05">
+    <skos:prefLabel xml:lang="en">Is referred to by</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <skos:inScheme rdf:resource="http://localhost:8000/93362f59-3658-47d8-8781-253fcf06374e"/>
+    <skos:altLabel xml:lang="en">REF</skos:altLabel>
+    <dcterms:identifier>http://localhost:8000/03bf7d19-aa14-480d-aabf-ae17adfb6a05</dcterms:identifier>
+  </skos:Concept>
+</rdf:RDF>

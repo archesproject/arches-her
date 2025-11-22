@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/7d64ed67-b98a-4133-8bfb-6f58fa961cc6">
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/8e8902f8-de47-4313-b7f0-d967246dadf5">
+        <dcterms:title>Street Frontage</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <skos:prefLabel xml:lang="en">No set back</skos:prefLabel>
+    <dcterms:identifier>http://localhost:8000/7d64ed67-b98a-4133-8bfb-6f58fa961cc6</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/8e0fe54f-435a-41a1-a7d1-510641370a9c">
+    <skos:prefLabel xml:lang="en">Large set back</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/8e8902f8-de47-4313-b7f0-d967246dadf5"/>
+    <dcterms:identifier>http://localhost:8000/8e0fe54f-435a-41a1-a7d1-510641370a9c</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/fed71f6d-2dcc-4bec-b9e5-371940b92e7f">
+    <skos:inScheme rdf:resource="http://localhost:8000/8e8902f8-de47-4313-b7f0-d967246dadf5"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+    <dcterms:identifier>http://localhost:8000/fed71f6d-2dcc-4bec-b9e5-371940b92e7f</dcterms:identifier>
+    <skos:prefLabel xml:lang="en">Small set back</skos:prefLabel>
+  </skos:Concept>
+</rdf:RDF>

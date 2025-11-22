@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rdf:RDF
+  xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+  xmlns:dcterms="http://purl.org/dc/terms/"
+  xmlns:arches="http://localhost:8000/"
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+>
+  <skos:Concept rdf:about="http://localhost:8000/01119de7-985e-4723-99e3-82082f09baf1">
+    <skos:prefLabel xml:lang="en">International impact</skos:prefLabel>
+    <dcterms:identifier>http://www.archesproject.org/01119de7-985e-4723-99e3-82082f09baf1</dcterms:identifier>
+    <skos:inScheme>
+      <skos:ConceptScheme rdf:about="http://localhost:8000/c419b0f6-30fb-429a-9b75-073ef94d8fa5">
+        <dcterms:title>Project Impact</dcterms:title>
+      </skos:ConceptScheme>
+    </skos:inScheme>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">0</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/b6cea8dd-c194-4677-b419-fcbc83983097">
+    <skos:inScheme rdf:resource="http://localhost:8000/c419b0f6-30fb-429a-9b75-073ef94d8fa5"/>
+    <skos:prefLabel xml:lang="en">Local impact</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">1</arches:sortorder>
+    <dcterms:identifier>http://www.archesproject.org/b6cea8dd-c194-4677-b419-fcbc83983097</dcterms:identifier>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/99af4762-e00d-4cb5-9fe3-018ccf38e29d">
+    <dcterms:identifier>http://www.archesproject.org/99af4762-e00d-4cb5-9fe3-018ccf38e29d</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/c419b0f6-30fb-429a-9b75-073ef94d8fa5"/>
+    <skos:prefLabel xml:lang="en">Regional impact</skos:prefLabel>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">4</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/51727de7-cb9e-485e-a440-45dc12806e34">
+    <skos:prefLabel xml:lang="en">National impact</skos:prefLabel>
+    <dcterms:identifier>http://www.archesproject.org/51727de7-cb9e-485e-a440-45dc12806e34</dcterms:identifier>
+    <skos:inScheme rdf:resource="http://localhost:8000/c419b0f6-30fb-429a-9b75-073ef94d8fa5"/>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">2</arches:sortorder>
+  </skos:Concept>
+  <skos:Concept rdf:about="http://localhost:8000/7be7f51d-cd4a-44b4-9a1b-e2787286bc36">
+    <dcterms:identifier>http://www.archesproject.org/7be7f51d-cd4a-44b4-9a1b-e2787286bc36</dcterms:identifier>
+    <arches:sortorder rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">3</arches:sortorder>
+    <skos:prefLabel xml:lang="en">Negligible impact</skos:prefLabel>
+    <skos:inScheme rdf:resource="http://localhost:8000/c419b0f6-30fb-429a-9b75-073ef94d8fa5"/>
+  </skos:Concept>
+</rdf:RDF>

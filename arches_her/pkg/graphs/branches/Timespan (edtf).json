@@ -16,13 +16,13 @@
                     "graph_id": "7541f73e-839c-11ea-b880-f875a44e0e11",
                     "helpenabled": false,
                     "helptext": {
-                        "en": null
+                        "en": ""
                     },
                     "helptitle": {
-                        "en": null
+                        "en": ""
                     },
                     "instructions": {
-                        "en": null
+                        "en": ""
                     },
                     "name": {
                         "en": "Timespan (edtf)"
@@ -67,12 +67,25 @@
                 {
                     "card_id": "75421e2d-839c-11ea-bb06-f875a44e0e11",
                     "config": {
-                        "defaultValue": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
+                        "defaultValue": [
+                            {
+                                "labels": [
+                                    {
+                                        "id": "59a0c936-3f60-44f9-9e37-67b6ed0f4fa4",
+                                        "language_id": "en",
+                                        "list_item_id": "3d70ebb6-7731-40ba-9522-0d7158b4a935",
+                                        "value": "Date Qualifier Type",
+                                        "valuetype_id": "prefLabel"
+                                    }
+                                ],
+                                "list_id": "1e63c514-eb9d-48d3-94b5-35e060e5f368",
+                                "uri": "http://localhost:8000/plugins/controlled-list-manager/item/3d70ebb6-7731-40ba-9522-0d7158b4a935"
+                            }
+                        ],
                         "i18n_properties": [
                             "placeholder"
                         ],
                         "label": "Date Qualifier Metatype",
-                        "options": [],
                         "placeholder": {
                             "en": "Select an option"
                         }
@@ -85,7 +98,7 @@
                     "sortorder": 4,
                     "source_identifier_id": null,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "19e56148-82b8-47eb-b66e-f6243639a1a8"
                 },
                 {
                     "card_id": "75421e2d-839c-11ea-bb06-f875a44e0e11",
@@ -139,7 +152,6 @@
                             "placeholder"
                         ],
                         "label": "Date Qualifier",
-                        "options": [],
                         "placeholder": {
                             "en": "Select an option"
                         }
@@ -152,7 +164,7 @@
                     "sortorder": 3,
                     "source_identifier_id": null,
                     "visible": false,
-                    "widget_id": "10000000-0000-0000-0000-000000000002"
+                    "widget_id": "19e56148-82b8-47eb-b66e-f6243639a1a8"
                 }
             ],
             "color": null,
@@ -359,9 +371,10 @@
                 {
                     "alias": "date_qualifier_metatype",
                     "config": {
-                        "rdmCollection": "1e63c514-eb9d-48d3-94b5-35e060e5f368"
+                        "controlledList": "1e63c514-eb9d-48d3-94b5-35e060e5f368",
+                        "multiValue": false
                     },
-                    "datatype": "concept",
+                    "datatype": "reference",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
@@ -407,9 +420,10 @@
                 {
                     "alias": "date_qualifier",
                     "config": {
-                        "rdmCollection": "366686d6-deb0-4245-81a3-f94d791a388c"
+                        "controlledList": "366686d6-deb0-4245-81a3-f94d791a388c",
+                        "multiValue": false
                     },
-                    "datatype": "concept",
+                    "datatype": "reference",
                     "description": null,
                     "exportable": false,
                     "fieldname": null,
@@ -431,7 +445,13 @@
                 }
             ],
             "ontology_id": "e6e8db47-2ccf-11e6-927e-b8f6b115d7dd",
-            "publication": null,
+            "publication": {
+                "graph_id": "7541f73e-839c-11ea-b880-f875a44e0e11",
+                "most_recent_edit_id": null,
+                "notes": "Migrated concept/concept-list nodes to reference datatype",
+                "publicationid": "5f1ce9fa-1701-4d6b-a8f3-8726a588896f",
+                "published_time": "2025-10-23T03:35:32.869"
+            },
             "relatable_resource_model_ids": [],
             "resource_2_resource_constraints": [],
             "resource_instance_lifecycle": null,
@@ -467,5 +487,11 @@
             "user_permissions": {},
             "version": ""
         }
-    ]
+    ],
+    "metadata": {
+        "db": "PostgreSQL 14.5 (Debian 14.5-1.pgdg110+1) on x86_64-pc-linux-gnu, compiled by gcc (Debian 10.2.1-6) 10.2.1 20210110, 64-bit",
+        "git hash": "1802d76a82 2025-10-07 16:18:08 -0700",
+        "os": "Darwin",
+        "os version": "24.5.0"
+    }
 }
