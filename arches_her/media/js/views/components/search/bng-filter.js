@@ -255,9 +255,9 @@ define([
                         return;
                     }
 
-                    x = parseInt(self.bng_x());
-                    y = parseInt(self.bng_y());
-                    if(x < 100000 || y < 100000 || x > 999999 || y > 999999){
+                    x = self.bng_x();
+                    y = self.bng_y();
+                    if(x.length !== 6 || y.length != 6){
                         self.xyMessageError("X and Y must both be 6 digit coordinates");
                         return;
                     }
@@ -297,7 +297,9 @@ define([
                             let oneHundredKmGrid = self.gridList[bng.substring(0, 2)];
                             let x = oneHundredKmGrid[0] * 100000 + parseInt(bng.substring(2, 7));
                             let y = oneHundredKmGrid[1] * 100000 + parseInt(bng.substring(7, 12));
-                            ret = {"x":x,"y":y};
+                            const x_string = String(x).padStart(6, '0')
+                            const y_string = String(y).padStart(6, '0')
+                            ret = {"x":x_string,"y":y_string};
                         }
                         else{
                             self.xyMessageError("Can only convert BNG to XY if BNG is 12 characters long");
@@ -312,7 +314,7 @@ define([
 
                 this.bngFromXY = function(x,y) {
                     let bng = "";
-                    if(x >= 100000 && y >= 100000 && x < 1000000 && y < 1000000) {
+                    if(x.length == 6 && y.length == 6) {
                         try {
                             let gridlist = self.gridList;
                             let xOneHundredKmGrid = Math.floor(x / 100000);
