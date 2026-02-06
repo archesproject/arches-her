@@ -546,7 +546,7 @@ define([
 
                 try {
                     self.map().getSource('grid-square')?.setData(geoJSON);
-                    bounds_geojson = isPoint ? turf.buffer(bounds_geojson, 100, 'meters') : bounds_geojson;
+                    bounds_geojson = isPoint ? turf.buffer(bounds_geojson, 100, {units: 'meters'}) : bounds_geojson;
                     var extent = geojsonExtent(bounds_geojson);
                     var bounds = new self.mapboxgl.LngLatBounds(extent);
                     self.map().fitBounds(bounds, {
