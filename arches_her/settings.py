@@ -74,6 +74,8 @@ ELASTICSEARCH_CUSTOM_INDEXES = []
 #     'should_update_asynchronously': False  <-- denotes if asynchronously updating the index would affect custom functionality within the project.
 # }]
 
+ES_MAPPING_MODIFIER_CLASSES = ["arches_her.utils.number_searching.NumberDataEsMappingModifier"]
+
 KIBANA_URL = "http://localhost:5601/"
 KIBANA_CONFIG_BASEPATH = "kibana"  # must match Kibana config.yml setting (server.basePath) but without the leading slash,
 # also make sure to set server.rewriteBasePath: true
