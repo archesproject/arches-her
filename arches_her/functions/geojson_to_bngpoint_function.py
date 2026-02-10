@@ -138,64 +138,66 @@ class GeoJSONToBNGPoint(BaseFunction):
             # Grab a copy of the Geometry collection.
             geoJsFeatures = geojsonValue["features"]
 
-            # Get the first feature as a GeosGeometry.
-            if geoJsFeatures:
-                geosGeom_union = GEOSGeometry(json.dumps(geoJsFeatures[0]["geometry"]))
+            if not geoJsFeatures:
+                return
 
-                # update list.
-                geoJsFeatures = geoJsFeatures[1:]
+            # Get the first feature as a GeosGeometry.            
+            geosGeom_union = GEOSGeometry(json.dumps(geoJsFeatures[0]["geometry"]))
 
-                # loop through list of geoJsFeatures.
-                for item in geoJsFeatures:
-                    # .union seems to generate 'GEOS_ERROR: IllegalArgumentException:'
-                    # exceptions, but they seem spurious and are automatically ignored.
-                    geosGeom_union = geosGeom_union.union(GEOSGeometry(json.dumps(item["geometry"])))
+            # update list.
+            geoJsFeatures = geoJsFeatures[1:]
 
-                # find the centroid of the envelope for the resultant Geometry Collection.
-                centroidPoint = geosGeom_union.envelope.centroid
-                original_centroid = centroidPoint.coords
+            # loop through list of geoJsFeatures.
+            for item in geoJsFeatures:
+                # .union seems to generate 'GEOS_ERROR: IllegalArgumentException:'
+                # exceptions, but they seem spurious and are automatically ignored.
+                geosGeom_union = geosGeom_union.union(GEOSGeometry(json.dumps(item["geometry"])))
 
-                # Explicitly declare the SRID for the current lat/long.
-                centroidPoint = GEOSGeometry(centroidPoint, srid=srid_LatLong)
+            # find the centroid of the envelope for the resultant Geometry Collection.
+            centroidPoint = geosGeom_union.envelope.centroid
+            original_centroid = centroidPoint.coords
 
-                # Transform to Absolute BNG.
-                centroidPoint.transform(srid_BngAbs, False)
+            # Explicitly declare the SRID for the current lat/long.
+            centroidPoint = GEOSGeometry(centroidPoint, srid=srid_LatLong)
 
-                # Get initial Easting and Northing digits. N.B. Left Zero pad integer coords to 6 digits!
-                easting = str(int(centroidPoint.coords[0])).zfill(6)
-                northing = str(int(centroidPoint.coords[1])).zfill(6)
-                gridref = easting[0] + northing[0]
+            # Transform to Absolute BNG.
+            centroidPoint.transform(srid_BngAbs, False)
 
-                # Get AlphaNumeric BNG
-                try:
-                    gridref = os_grid[gridref] + easting[1:6] + northing[1:6]
-                except KeyError:
-                    notification_string = (
-                        "User has tried to save a BNG Point outside of the British National Grid.  "
-                        f"Lat/Long: {original_centroid[0]:.6f}, {original_centroid[1]:.6f}"
-                    )
-                    logger.debug(notification_string)
-                    return
+            # Get initial Easting and Northing digits. N.B. Left Zero pad integer coords to 6 digits!
+            easting = str(int(centroidPoint.coords[0])).zfill(6)
+            northing = str(int(centroidPoint.coords[1])).zfill(6)
+            gridref = easting[0] + northing[0]
 
-                if self.config["bng_output_nodegroup"] == str(tile.nodegroup_id):
-                    tile.data[bngnode] = gridref
+            # Get AlphaNumeric BNG
+            try:
+                gridref = os_grid[gridref] + easting[1:6] + northing[1:6]
+            except KeyError:
+                notification_string = (
+                    "User has tried to save a BNG Point outside of the British National Grid.  "
+                    f"Lat/Long: {original_centroid[0]:.6f}, {original_centroid[1]:.6f}"
+                )
+                logger.debug(notification_string)
+                return
+
+            if self.config["bng_output_nodegroup"] == str(tile.nodegroup_id):
+                tile.data[bngnode] = gridref
+            else:
+
+                previously_saved_tiles = Tile.objects.filter(
+                    nodegroup_id=self.config["bng_output_nodegroup"], resourceinstance_id=tile.resourceinstance_id
+                )
+
+                # Update pre-existing tiles, or Create new one.
+                if len(previously_saved_tiles) > 0:
+                    for p in previously_saved_tiles:
+                        p.data[bngnode] = gridref
+                        p.save()
                 else:
-
-                    previously_saved_tiles = Tile.objects.filter(
-                        nodegroup_id=self.config["bng_output_nodegroup"], resourceinstance_id=tile.resourceinstance_id
+                    new_bng_tile = Tile().get_blank_tile_from_nodegroup_id(
+                        self.config["bng_output_nodegroup"], resourceid=tile.resourceinstance_id, parenttile=tile.parenttile
                     )
-
-                    # Update pre-existing tiles, or Create new one.
-                    if len(previously_saved_tiles) > 0:
-                        for p in previously_saved_tiles:
-                            p.data[bngnode] = gridref
-                            p.save()
-                    else:
-                        new_bng_tile = Tile().get_blank_tile_from_nodegroup_id(
-                            self.config["bng_output_nodegroup"], resourceid=tile.resourceinstance_id, parenttile=tile.parenttile
-                        )
-                        new_bng_tile.data[bngnode] = gridref
-                        new_bng_tile.save()
+                    new_bng_tile.data[bngnode] = gridref
+                    new_bng_tile.save()
 
             return
 
