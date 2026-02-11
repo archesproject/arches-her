@@ -1,4 +1,5 @@
 import uuid
+import logging
 from arches.app.functions.base import BaseFunction
 from arches.app.models import models
 from arches.app.models.tile import Tile
@@ -6,6 +7,8 @@ from arches.app.models.resource import Resource
 from django.contrib.gis.geos import GEOSGeometry
 import json
 from datetime import datetime
+
+logger = logging.getLogger(__name__)
 
 
 details = {
@@ -135,6 +138,9 @@ class GeoJSONToBNGPoint(BaseFunction):
             # Grab a copy of the Geometry collection.
             geoJsFeatures = geojsonValue["features"]
 
+            if not geoJsFeatures:
+                return
+
             # Get the first feature as a GeosGeometry.
             geosGeom_union = GEOSGeometry(json.dumps(geoJsFeatures[0]["geometry"]))
 
@@ -149,6 +155,7 @@ class GeoJSONToBNGPoint(BaseFunction):
 
             # find the centroid of the envelope for the resultant Geometry Collection.
             centroidPoint = geosGeom_union.envelope.centroid
+            original_centroid = centroidPoint.coords
 
             # Explicitly declare the SRID for the current lat/long.
             centroidPoint = GEOSGeometry(centroidPoint, srid=srid_LatLong)
@@ -165,7 +172,12 @@ class GeoJSONToBNGPoint(BaseFunction):
             try:
                 gridref = os_grid[gridref] + easting[1:6] + northing[1:6]
             except KeyError:
-                raise Exception("Conversion Error : Coordinates outside of BNG for England.")
+                notification_string = (
+                    "User has tried to save a BNG Point outside of the British National Grid.  "
+                    f"Lat/Long: {original_centroid[0]:.6f}, {original_centroid[1]:.6f}"
+                )
+                logger.debug(notification_string)
+                return
 
             if self.config["bng_output_nodegroup"] == str(tile.nodegroup_id):
                 tile.data[bngnode] = gridref
