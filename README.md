@@ -8,7 +8,6 @@ You can find out more about Arches for HERs at [https://www.archesproject.org/ar
 
 ## How do I get started with Arches for HERs
 
-
 If you are setting up a development environment then please see the Arches documentation on how to do this:
 
    https://arches.readthedocs.io/en/latest/installing/installation/
@@ -27,6 +26,7 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
       ```bash
       pip install arches_her
       ```
+
 2. If you don't already have an Arches project, you'll need to create one by running the following:
 
    ```bash
@@ -94,19 +94,19 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
     },
     ```
 
-7. Set up your database and load the package with the following command:
+8. Set up your database and load the package with the following command:
 
    ```bash
    python manage.py packages -o load_package -a arches_her -db -y
    ```
 
-8. Start the Arches for HERs project
+9. Start the Arches for HERs project
 
    ```bash
    python manage.py runserver
    ```
 
-9. Install and build front-end dependencies
+10. Install and build front-end dependencies
 
    Before you can use browse the application you will need to build the front end asset bundle. From the directory containing the package.json file ([workspace]/arches_her/arches_her)
 
@@ -115,59 +115,7 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
    npm run build_development
    ```
 
-This will allow you to run your Arches project locally, but is not suitable for running on a web server. Please see the guidance for deploying an Arches project like Arches for HERs into a server environment.
-
-   https://arches.readthedocs.io/en/latest/deployment/
-
-## Running Arches for HERs in a Docker Development Environment
-
-You can also run Arches for HER for development in a Docker environment. To do this, clone the `arches` repo into the same directory as `arches_her` and use the compose files within `arches_her/docker/aher_project` to set up the development project and run the application and dependencies using the following steps.
-
-1. Clone both the [`arches`](https://github.com/archesproject/arches.git) and  [`arches-her`](https://github.com/archesproject/arches-her.git) repository:
-   > NOTE: the `arches-her` repo is cloned into a folder called `arches_her`. This is important as the compose files expect this folder structure.
-
-   ```bash
-   cd /my_workspacefolder
-   git clone https://github.com/archesproject/arches.git
-   git clone https://github.com/archesproject/arches-her.git arches_her
-   ```
-
-   Ensure the `arches` repo has branch `stable/7.5.5` checked-out. Currently arches-her is only compatable with 7.5, which is not accepting changes. Therefore you should not use dev/7.5.x.
-
-
-2. Create an arches project that will be used to host the arches-her app:
-
-   Navigate to the folder where the compose files exist, then compose up using `docker-compose-create-project.yml`:
-
-   > NOTE: This uses the `--abort-on-container-exit` and `--exit-code-from` flags to detach once the `aherproject` container has completed. This is because the `aherproject` container will create the project and then exit.
-
-   ```bash
-   cd /my_workspacefolder/arches_her/docker/aher_project
-   docker compose -f docker-compose-create-project.yml up  --abort-on-container-exit --exit-code-from aherproject \
-      && docker compose -f docker-compose-create-project.yml down
-   ```
-
-   > NOTE: The Arches project created using this approach will have its default template files renamed with the suffix `.default` to avoid conflicts with the Arches for HERs templates. If you want to use any of the default templates, you will need to remove the `.default` suffix from the file.
-
-3. Once the aher_project folder has been created, you can compose up the dependencies and the development container any time you want to run the application:
-
-   ```bash
-   cd /my_workspacefolder/arches_her/docker/aher_project
-   docker compose -f docker-compose-dependencies.yml up -d
-   docker compose -f docker-compose.yml up -d
-   ```
-
-   The first time you compose up - the database, Elastic indices and package data will get created and loaded. Be patient. Once complete, navigate to [`http://localhost:8002`](http://localhost:8002).
-
-   > NOTE: You can see the progress of the database and Elastic index creation by running `docker logs -f aherproject` in a separate terminal window.
-
-4. When you have finished, compose down in this order to ensure everything shuts down safely:
-
-   ```bash
-   cd /my_workspacefolder/arches_her/docker/aher_project
-   docker compose -f docker-compose.yml down
-   docker compose -f docker-compose-dependencies.yml down
-   ```
+This will allow you to run your Arches project locally, but is not suitable for running on a web server. Please see the guidance for deploying an Arches project like Arches for HERs into a server environment: https://arches.readthedocs.io/en/latest/deployment/
 
 ## How Do I Configure Arches for HERs
 
@@ -175,10 +123,10 @@ Administrators of an instance of Arches for HERs should configure their arches p
 
 - The homepage provided (`arches_her/arches_her/templates/index.htm`) is a template that requires modification to suit the implementation. This should include branding, images, and replacing the highlighted content with appropriate information. A bespoke homepage can be created by copying the content of `arches_her/arches_her/templates/index.htm` to your arches project and modifying it.
 - Configuring functions against specific graphs.  The initial installation of Arches for HERs includes the following functions:
-   - BNG Point to GeoJSON function
-   - GeoJSON to BNG Point function
-   - Consultation Status function
-   - Generate Unique References
+  - BNG Point to GeoJSON function
+  - GeoJSON to BNG Point function
+  - Consultation Status function
+  - Generate Unique References
 - Branding emails sent by the application. Copy the email templates from `arches_her/arches_her/templates/emails` to your arches project and modify them as required.
 - Setting Accessibility mode to be on.
 - Configuring basemaps available in your Arches for HERs instance (using the instructions in the [Core Arches Documentation](https://arches.readthedocs.io/en/latest/administering/managing-map-layers/#basemaps-and-overlays)).
@@ -205,13 +153,14 @@ A number of guidance documents are available in `arches_her/media/guides` that c
 
 An example of how to include them within your implementation can be found in the index.htm template, which includes a link to the introduction guide.
 
-
-# Project Specific Styling
+## Project Specific Styling
 
 For information, there are currently 2 project css/scss files for styling, this is in preparation for future scss migration:
 
-## - project.scss
+### - project.scss
+
 Used for the Arches-HER landing page. There are 3 other required related files: _project-breakpoints.scss, _project-functions.scss and _project-variables.scss.
 
-## - project.css
+### - project.css
+
 Used for the rest of the site where the project.css is imported by the base.htm template.
