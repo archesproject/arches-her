@@ -141,7 +141,7 @@ class GeoJSONToBNGPoint(BaseFunction):
             if not geoJsFeatures:
                 return
 
-            # Get the first feature as a GeosGeometry.            
+            # Get the first feature as a GeosGeometry.
             geosGeom_union = GEOSGeometry(json.dumps(geoJsFeatures[0]["geometry"]))
 
             # update list.
