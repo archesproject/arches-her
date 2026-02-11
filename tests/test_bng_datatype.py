@@ -51,17 +51,13 @@ class BNGCentreDataTypeTests(TestCase):
         invalid_value = "NT12345"
         errors = datatype.validate(invalid_value)
         self.assertTrue(len(errors) > 0)
-        self.assertEqual(
-            errors[0]["message"], "Input data must be exactly 12 characters long."
-        )
+        self.assertEqual(errors[0]["message"], "Input data must be exactly 12 characters long.")
 
         # Invalid BNG value (invalid grid square)
         invalid_value = "ZZ1234567890"
         errors = datatype.validate(invalid_value)
         self.assertTrue(len(errors) > 0)
-        self.assertEqual(
-            errors[0]["message"], "Invalid grid square identifier in input data."
-        )
+        self.assertEqual(errors[0]["message"], "Invalid grid square identifier in input data.")
 
         # Invalid BNG value (non-numeric part)
         invalid_value = "NT12345ABCD"
