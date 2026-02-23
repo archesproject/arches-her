@@ -115,9 +115,6 @@
             </div>
             <!-- Resources Tab -->
             <div id="tabcontent_resources" class="aher-report-page" data-bind="if: activeSection() === 'resources'" aria-live="polite" role="tabpanel">
-                <p class="sr-only" data-bind="let: {tabTitleText: document.querySelector('.aher-report-anchors li.active').innerText + ' tab now displayed'}">
-                    <span data-bind="text: {% trans "tabTitleText" %}"></span>
-                </p>
                 <!-- Referenced By section -->
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/referenced-by',
