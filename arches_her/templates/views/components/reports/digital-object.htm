@@ -39,6 +39,13 @@
                         dataConfig: nameDataConfig
                     }
                 }"></div>
+                <!-- Referenced By section -->
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/referenced-by',
+                    params: {
+                        resourceInstanceId: ko.unwrap(resourceinstanceid),
+                    }
+                }"></div> 
             </div>
             <!-- Description Tab -->
             <div id="tabcontent_description" class="aher-report-page" data-bind="if: activeSection() === 'description'" aria-live="polite" role="tabpanel">

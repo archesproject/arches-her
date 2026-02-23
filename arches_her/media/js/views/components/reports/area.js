@@ -7,6 +7,7 @@ define([
     'utils/report',
     'templates/views/components/reports/area.htm',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/referenced-by',
     'views/components/reports/scenes/assessments',
     'views/components/reports/scenes/images',
     'views/components/reports/scenes/people',
@@ -39,6 +40,7 @@ define([
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+            self.resourceinstanceid = ko.observable(params.report?.report_json?.resourceinstanceid);
 
             self.nameDataConfig = {
                 name: 'area',

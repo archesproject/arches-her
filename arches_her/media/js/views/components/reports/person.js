@@ -7,6 +7,7 @@ define([
     'utils/report',
     'templates/views/components/reports/person.htm',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/referenced-by',
     'bindings/reports'
 ], function($, _, ko, arches, resourceUtils, reportUtils, PersonTemplate) {
     return ko.components.register('person-report', {
@@ -32,6 +33,7 @@ define([
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+            self.resourceinstanceid = ko.observable(params.report?.report_json?.resourceinstanceid);
             self.names = ko.observableArray();
 
             self.contactPointsTable = {
