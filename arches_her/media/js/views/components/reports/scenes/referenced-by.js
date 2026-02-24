@@ -20,6 +20,7 @@ function($, _, ko, arches, reportUtils, ReferencedByTemplate) {
             self.visible = {
                 referencedBy: ko.observable(true),
             };
+            self.loaderror = ko.observable(false);
 
             // referenced by table configuration
             self.referencedByTwoColumnTableConfig = {
@@ -43,12 +44,14 @@ function($, _, ko, arches, reportUtils, ReferencedByTemplate) {
                     }
                     return;
                 }).fail(function() {
-                    // error
+                    console.error("Unable to load graphs for referenced by scene");
+                    self.loaderror(true);
                 });
             };
 
 
-             self.getRelatedResources = function(){
+            self.getRelatedResources = function(){
+                self.loaderror(false);
                 return $.ajax({
                     url: arches.urls.related_resources + self.resourceinstanceid,
                     context: self,
@@ -83,7 +86,9 @@ function($, _, ko, arches, reportUtils, ReferencedByTemplate) {
                     });
                 })
                 .fail(function() {
-                    // error
+                    console.error("Unable to load related resources for referenced by scene");
+                    self.relations.removeAll();
+                    self.loaderror(true);
                 });
             };
 
