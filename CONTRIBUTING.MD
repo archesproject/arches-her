@@ -7,12 +7,11 @@ with Arches-HER specific requirements described below.
 - [Contributing to Arches-HER](#contributing-to-arches-her)
   - [Found an Issue?](#found-an-issue)
   - [Contributing Code](#contributing-code)
-    - [Important differences from core Arches](#important-differences-from-core-arches)
     - [Keeping your branch up to date](#keeping-your-branch-up-to-date)
   - [Shared Development Branches](#shared-development-branches)
   - [Commit Message Guidelines](#commit-message-guidelines)
   - [Arches-HER Specific Requirements](#arches-her-specific-requirements)
-    - [Model and package changes](#model-and-package-changes)
+    - [Model changes](#model-changes)
     - [Letter templates (DOCX)](#letter-templates-docx)
     - [Accessibility](#accessibility)
   - [Contributing Documentation](#contributing-documentation)
@@ -47,11 +46,6 @@ Please check existing open/closed issues first to avoid duplicates.
 5. Commit and push your branch.
 6. Open a pull request against `archesproject/arches-her`.
 
-### Important differences from core Arches
-
-- You **do not** need to sign a CLA for contributions to this repository.
-- Use `dev/1.1.x` as the default base branch for normal work unless maintainers request otherwise.
-
 ### Keeping your branch up to date
 
 If requested during review, rebase your branch against `dev/1.1.x` and force-push:
@@ -78,11 +72,14 @@ Contributors should normally branch from the current default branch unless a rev
 
 ## Arches-HER Specific Requirements
 
-### Model and package changes
+### Model changes
 
-- Prefer package-based changes under `arches_her/pkg/` (graphs, reference data, map layers, business data) rather than ad hoc runtime edits.
-- Treat graph/model changes as high-impact: keep them tightly scoped, explain migration/load implications in the PR, and include any required data/package update steps.
-- Avoid unrelated schema/model changes in the same PR.
+The models in Arches for HERs are shared application code, and changes to them can have wide-ranging impacts. They have been designed to meet the needs of a Historic Environment Record so alterations must be for the ongoing benefit of HERs and not for the needs of a specific project or use case. If you are proposing changes to the models, please:
+
+- Model changes will be reviewed with particular care to ensure they are necessary and appropriately scoped, and may require more discussion and iteration than other types of changes.
+- Explain the reasoning and benefits of the change in your PR description, and include any relevant discussions or references to Arches Forum or GitHub issues.
+- Include any necessary data migrations to update existing data to the new model, and explain the migration process and implications in your PR description.
+- PRs relating to model changes should not contain unrelated code changes, and should be clearly labelled as involving model changes in the PR title and description.
 
 ### Letter templates (DOCX)
 

@@ -32,16 +32,17 @@ Closes #
 
 ### Arches-HER Specific Checklist
 
-- [ ] Model/graph changes are scoped and explained (if applicable) and are accompanyed by migrations to update existing data where needed.
-- [ ] Model/graph changes have been discussed with the community (please link to Arches Forum discussions or GitHub issues where relevant)
-- [ ] Migration/load implications are documented below (if model/graph/package changed)
+- [ ] Model/graph changes are for the ongoing benefit of HERs and not for a specific project/use case.
+- [ ] Model/graph changes are clearly labelled in the PR title and description, and unrelated code changes are excluded.
+- [ ] Model/graph changes have been discussed with the community (link Arches Forum discussions or GitHub issues where relevant).
+- [ ] Migration/load implications are documented below (if model/graph/package changed).
 - [ ] If I edited letter templates, I ran `python manage.py docx fix_style_runs --dest_dir docx`
 
 Model/graph/package upgrade/load notes (if applicable):
 
 <!-- If your PR includes changes to models, graphs, or packages, explain any upgrade or load implications here. -->
 
-<!-- Discussion likes to Arches Forum or GitHub issues (if applicable): -->
+<!-- Discussion links to Arches Forum or GitHub issues (if applicable): -->
 
 ### Accessibility Checklist
 
