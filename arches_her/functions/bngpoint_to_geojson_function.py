@@ -1,4 +1,5 @@
 import uuid
+import logging
 from arches.app.functions.base import BaseFunction
 from arches.app.models.system_settings import settings
 from arches.app.models import models
@@ -9,12 +10,19 @@ from django.db import connection, transaction
 import json
 from datetime import datetime
 
+logger = logging.getLogger(__name__)
 
 details = {
     "name": "BNG Point to GeoJSON",
     "type": "node",
     "description": "Pushes the geometry from a BNG Point node to a related GeoJSON node",
-    "defaultconfig": {"bng_node": "", "geojson_node": "", "bng_nodegroup": "", "geojson_nodegroup": "", "triggering_nodegroups": []},
+    "defaultconfig": {
+        "bng_node": "",
+        "geojson_node": "",
+        "bng_nodegroup": "",
+        "geojson_nodegroup": "",
+        "triggering_nodegroups": [],
+    },
     "classname": "BNGPointToGeoJSON",
     "component": "views/components/functions/bngpoint-to-geojson-function",
     "functionid": "0434df8d-b98a-4b41-9a0a-68cd9214ad73",

@@ -257,7 +257,7 @@ define([
             const assessmentOfSignificanceNode = self.getRawNodeValue(self.resource(), 'assessment of significance');
             if(Array.isArray(assessmentOfSignificanceNode)){
                 self.assessmentOfSignificance(assessmentOfSignificanceNode.map(node => {
-                    const notes = self.getNodeValue(node, 'notes');
+                    const notes = self.getNodeValue(node, 'notes', '@display_value');
                     const tileid = self.getTileId(node);
                     return {notes, tileid};
                 }));

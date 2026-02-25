@@ -98,15 +98,42 @@ class BNGCentreDataType(BaseDataType):
         ]
         if value is not None:
             try:
-                # CS - Validation for datatype.  Replicates functionality in widget which will be removed once datatype validation is fixed.
+                # CS - Validation for datatype. Replicates functionality in widget which will be removed once datatype validation is fixed.
                 firstTwoCharacters = value[0:2]
                 numberElement = value[2:]
 
-                firstTwoCharacters in gridSquareArray
-                isinstance(int(numberElement), int)
-                len(value) == 12
-            except Exception:
-                errors.append({"type": "ERROR", "message": "Issue with input data"})
+                if firstTwoCharacters not in gridSquareArray:
+                    errors.append(
+                        {
+                            "type": "ERROR",
+                            "message": "Invalid grid square identifier in input data.",
+                        }
+                    )
+
+                try:
+                    int(numberElement)
+                except ValueError:
+                    errors.append(
+                        {
+                            "type": "ERROR",
+                            "message": "Numeric part of the input data is not a valid integer.",
+                        }
+                    )
+
+                if len(value) != 12:
+                    errors.append(
+                        {
+                            "type": "ERROR",
+                            "message": "Input data must be exactly 12 characters long.",
+                        }
+                    )
+            except Exception as e:
+                errors.append(
+                    {
+                        "type": "ERROR",
+                        "message": f"Unexpected error during validation: {str(e)}",
+                    }
+                )
 
         return errors
 
