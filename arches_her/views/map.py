@@ -15,16 +15,21 @@ class ApplicationAreas(View):
         try:
             node = models.Node.objects.get(nodeid=nodeid, nodegroup_id__in=viewable_nodegroups)
             se = SearchEngineFactory().create()
-            restricted_resource_ids = get_filtered_instances(request.user, search_engine=se)
-            if len(restricted_resource_ids) == 0:
-                restricted_resource_ids.append(
+            #restricted_resource_ids = get_filtered_instances(request.user, search_engine=se)
+            
+            # get_filtered_instances returns a list of ids and states whether they are exclusive (exclude the resourceids - from default deny)     
+            # or inclusive (only include these resourceids - from default allow).
+            is_exclusive, filtered_instances = get_filtered_instances(request.user, search_engine=se)
+
+            if len(filtered_instances) == 0:
+                filtered_instances.append(
                     "10000000-0000-0000-0000-000000000001"
-                )  # This must have a uuid that will never be a resource id.
-            restricted_resource_ids = tuple(restricted_resource_ids)
+                )  # This must have a uuid that will likely never be a resource id so to not break the SQL query when there are no resources to filter on.
+            filtered_instances = tuple(filtered_instances)
 
             with connection.cursor() as cursor:
                 result = cursor.execute(
-                    """SELECT ST_AsMVT(tile, 'app-area', 4096, 'geom', 'id') FROM (SELECT tileid,
+                    f"""SELECT ST_AsMVT(tile, 'app-area', 4096, 'geom', 'id') FROM (SELECT tileid,
                         id,
                         resourceinstanceid,
                         nodeid,
@@ -34,8 +39,8 @@ class ApplicationAreas(View):
                         ) AS geom,
                         1 AS total
                     FROM geojson_geometries
-                    WHERE nodeid = %s and resourceinstanceid not in %s and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
-                    [zoom, x, y, nodeid, restricted_resource_ids, zoom, x, y],
+                    WHERE nodeid = %s and resourceinstanceid {'' if is_exclusive else 'not'} in %s and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
+                    [zoom, x, y, nodeid, filtered_instances, zoom, x, y],
                 )
                 result = bytes(cursor.fetchone()[0]) if result is None else result
             return HttpResponse(result, content_type="application/x-protobuf")
