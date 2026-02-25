@@ -1,7 +1,183 @@
+{% load i18n %}
+
 <div class="workflow-select-plugin">
+
+    <!-- Modal -->
+    <!-- ko if: shouldShowIncompleteWorkflowsModal() -->
+    <div
+        style="
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            z-index: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        "
+    >
+        <div
+            style="
+                background-color: white;
+                width: 100%; 
+                max-height: 480px; 
+                border-radius: 4px; 
+                cursor: default; 
+                overflow: hidden;
+            "
+            data-bind="style: {maxWidth: $data.requestingUserIsSuperuser() ? '1200px' : '1000px'}"
+        >
+            <div style="width: 100%; display: flex; justify-content: flex-end; padding: 10px 12px;">
+                <i 
+                    aria-label="{% trans 'Close Incomplete Workflow Modal' %}"
+                    class="fa fa-times" style="font-size: 20px; cursor: pointer;"
+                    data-bind="click: function(){ $data.shouldShowIncompleteWorkflowsModal(false); }"
+                ></i>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: center;">
+                <h2>{% trans 'Incomplete Workflows' %}</h2>
+                <p>
+                    {% trans 'Please either complete or delete the workflows listed below.' %}
+                </p>
+            </div>
+
+            <div style="padding: 40px 100px; display: flex; justify-content: center;">
+                <table class="table table-striped" style="border: 1px solid #ddd;">
+                    <thead>
+                        <tr style="display: flex; justify-content: space-between;">
+                            <th style="flex-grow: 1; max-width: 200px;">
+                                {% trans 'Created' %}
+                            </th>
+                            <!-- ko if: requestingUserIsSuperuser() -->
+                                <th style="flex-grow: 1; max-width: 200px;">
+                                    {% trans 'User' %}
+                                </th>
+                            <!-- /ko -->
+                            <th style="flex-grow: 2; max-width: 400px;">
+                                {% trans 'Workflow Name' %}
+                            </th>
+                            <th style="flex-grow: 1; max-width: 200px;">
+                                {% trans 'Link' %}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody style="display:block; overflow:auto; max-height:200px; width:100%;">
+                        <!-- ko foreach: $data.incompleteWorkflows -->
+                        <tr style="display: flex; justify-content: space-between;">
+                            <td style="flex-grow: 1; max-width: 200px;" data-bind="text: $data.created"></td>
+                            <!-- ko if: $parent.requestingUserIsSuperuser() -->
+                                <td style="flex-grow: 1; max-width: 200px;" data-bind="text: $data.username"></td>
+                            <!-- /ko -->
+                            <td style="flex-grow: 2; max-width: 400px;" data-bind="text: $data.pluginname"></td>
+                            <td style="flex-grow: 1; max-width: 200px;">
+                                <a 
+                                    data-bind="attr: {'href': `/plugins/${$data.workflowname}?workflow-id=${$data.workflowid}`}"
+                                    style="text-decoration: underline; color: blue;"
+                                >{% trans 'Go to Workflow' %}</a>
+                            </td>
+                        </tr>
+                        <!-- /ko -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <!-- /ko -->
+
+    <div>
+        <div style="height: 50px; width: 100%; background-color: #eee; display: flex; justify-content: flex-end; border-bottom: 1px solid #ddd">
+            <!-- Modal button -->
+            <button 
+                class="btn btn-info btn-sm"
+                style="margin: 5px; border-radius: 4px;"
+                data-bind="
+                    enable: $data.incompleteWorkflows().length,
+                    click: function(){ $data.shouldShowIncompleteWorkflowsModal(true); }
+                "
+            >
+                {% trans 'Show Incomplete Workflows' %}
+            </button>
+
+            <!-- Workflow Help button -->
+            <button 
+                class="btn btn-info btn-sm"
+                style="margin: 5px; margin-right: 10px; margin-left: 0px; border-radius: 2px; font-weight: 600; font-size: 12px;"
+                data-bind="
+                    click: function(){ $data.shouldShowWorkflowHelp(true); }
+                "
+            >
+                {% trans 'Show Workflow Help' %}
+            </button>
+        </div>
+
+        <div id="ep-help-panel" 
+            class="ep-help" 
+            style="display: none"
+            data-bind="slide: shouldShowWorkflowHelp, duration: 400, direction: {direction: 'right'}, easing: 'slide'"
+        >
+            <div class="ep-edits-header">
+                <div class="ep-help-title">
+                    <span>{% trans "Workflow Guidance" %}</span>
+                </div>
+                <a 
+                    href="javascript:void(0);" 
+                    class="ep-help-toggle ep-help-close ep-tools ep-tools-right" 
+                    style="border:none; box-sizing: content-box; padding: 0px 15px; background: #f1f1f1;"
+                    data-bind="click: function(){shouldShowWorkflowHelp(false); selectedHelpTemplate(null);}"
+                >
+                    <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="{% trans "Close Help" %}">
+                        <i class="fa fa-times-circle fa-lg"></i>
+                    </div>
+                </a>
+            </div>
+            
+
+            <div style="padding: 20px;">
+                <select
+                    data-bind="
+                        select2Query: {
+                            select2Config: {
+                                clickBubble: false,
+                                disabled: false,
+                                data: $data.helpTemplateData,
+                                value: selectedHelpTemplate,
+                                dropdownCssClass: 'select2-zindex',
+                                closeOnSelect: true,
+                                allowClear: true,
+                                multiple: false,
+                                placeholder: '{% trans "Select A Workflow" %}'
+                            }
+                        }
+                    "
+                ></select>
+            </div>
+
+            <!-- ko if: $data.helpTemplateUrl() -->
+                <!-- ko if: $data.isHelpTemplateLoading() -->
+                    <div class="loading-mask" style="bottom: unset; right: unset; left: 30%"></div>
+                <!-- /ko -->
+                
+                <iframe
+                    width="100%"
+                    height="100%"
+                    frameBorder="0"
+                    data-bind="
+                        style: { visibility: $data.isHelpTemplateLoading() ? 'hidden' : 'visible' },
+                        attr: {
+                            src: $data.helpTemplateUrl(), 
+                            onload: setTimeout(function(){$data.isHelpTemplateLoading(false)}, 500) 
+                        }
+                    "
+                >
+                </iframe>
+            <!-- /ko -->
+        </div>
+    </div>
+
     <div>
         <h2 class="workflow-select-card-container-title">Create New...</h2>
     </div>
+
     <div class="workflow-select-card-container">
         <!-- ko foreach: {data: workflows, as: 'workflow'} -->
         <a data-bind="attr: {href: workflow.url, title: workflow.name}" href="#"><div data-bind="style: {'background-color': workflow.bgColor}" class="workflow-select-card">
