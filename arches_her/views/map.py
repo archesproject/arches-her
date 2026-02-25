@@ -15,9 +15,8 @@ class ApplicationAreas(View):
         try:
             node = models.Node.objects.get(nodeid=nodeid, nodegroup_id__in=viewable_nodegroups)
             se = SearchEngineFactory().create()
-            #restricted_resource_ids = get_filtered_instances(request.user, search_engine=se)
-            
-            # get_filtered_instances returns a list of ids and states whether they are exclusive (exclude the resourceids - from default deny)     
+
+            # get_filtered_instances returns a list of ids and states whether they are exclusive (exclude the resourceids - from default deny)
             # or inclusive (only include these resourceids - from default allow).
             is_exclusive, filtered_instances = get_filtered_instances(request.user, search_engine=se)
 
