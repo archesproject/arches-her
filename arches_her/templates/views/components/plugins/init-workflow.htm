@@ -107,12 +107,12 @@
 
         <div class="workflow-select-card-container">
             <!-- ko foreach: {data: workflows, as: 'workflow'} -->
-            <a data-bind="attr: {href: workflow.url, title: workflow.name}" href="#"><div data-bind="style: {'background-color': workflow.bgColor}" class="workflow-select-card">
+            <a data-bind="attr: {href: workflow.url, title: workflow.name}" href="#"><div data-bind="style: {'background-color': workflow.config.thumbnailBackgroundColor}" class="workflow-select-card">
                 <h4 class="workflow-select-title" data-bind="text: workflow.name"></h4>
-                <div data-bind="style: {'background-color': workflow.circleColor}" class="workflow-select-wf-circle">
+                <div data-bind="style: {'background-color': workflow.config.thumbnailCircleColor}" class="workflow-select-wf-circle">
                     <span><i data-bind="attr:{class: ('fa '+workflow.icon +' workflow-select-wf-icon')}"></i></span>
                 </div>
-                <p data-bind="text: workflow.desc" class="workflow-select-desc"></p>
+                <p data-bind="text: workflow.config.description" class="workflow-select-desc"></p>
             </div></a>
             <!-- /ko -->
         </div>
