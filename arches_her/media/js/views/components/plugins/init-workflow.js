@@ -9,11 +9,31 @@ define([
         this.workflows = ko.observableArray([]);
         this.helpTemplateData = ko.observableArray([]);
 
-        // retaining previous logic while all workflow config is stored in init-workflow
-        this.workflows = params.workflows.map(function(wf){
-            wf.url = arches.urls.plugin(wf.slug);
-            return wf;
-        }, this);
+        fetch(arches.urls.api_plugins).then(resp => {
+            if (resp.ok) {
+                return resp.json();
+            }
+            else {
+                params.alert(new JsonErrorAlertViewModel('ep-alert-red', resp.responseJSON));
+            }
+        }).then(respJSON => {
+            let workflows = respJSON.reduce((acc, plugin) => {
+                if (plugin.config.is_workflow) {
+                    plugin.url = arches.urls.plugin(plugin.slug);
+                    acc.push(plugin);
+                }
+                return acc;
+            }, []);
+
+            this.workflows(workflows);
+            this.helpTemplateData(workflows.reduce((acc, workflow) => {
+                if (workflow.helptemplate) {
+                    acc.push({'text': workflow.name, 'id': workflow.helptemplate});
+                }
+
+                return acc;
+            }, []));
+        });
 
         this.shouldShowWorkflowHelp = ko.observable(false);
         this.helpTemplateUrl = ko.observable();
