@@ -90,10 +90,10 @@
             </button>
         </div>
 
+        <!-- ko if: $data.shouldShowWorkflowHelp() -->
         <div id="ep-help-panel" 
             class="ep-help" 
-            style="display: none"
-            data-bind="slide: shouldShowWorkflowHelp, duration: 400, direction: {direction: 'right'}, easing: 'slide'"
+            style="display: flex; flex-direction: column; height: 100%;"
         >
             <div class="ep-edits-header">
                 <div class="ep-help-title">
@@ -136,11 +136,9 @@
                 <!-- ko if: $data.isHelpTemplateLoading() -->
                     <div class="loading-mask" style="bottom: unset; right: unset; left: 30%"></div>
                 <!-- /ko -->
-                
                 <iframe
-                    width="100%"
-                    height="100%"
                     frameBorder="0"
+                    style="width: 100%; flex: 1;"
                     data-bind="
                         style: { visibility: $data.isHelpTemplateLoading() ? 'hidden' : 'visible' },
                         attr: {
@@ -152,6 +150,7 @@
                 </iframe>
             <!-- /ko -->
         </div>
+        <!-- /ko -->
     </div>
 
     <div class="workflow-layout-afher">
