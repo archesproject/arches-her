@@ -4,19 +4,15 @@ from django.contrib.auth.models import User
 from django.test.utils import captured_stdout
 from arches.app.models.resource import Resource
 from arches.app.utils.data_management.resources.importer import BusinessDataImporter
-from arches.app.utils.betterJSONSerializer import JSONDeserializer
 from arches.app.models.system_settings import settings as arches_settings
 from arches.app.utils import permission_backend
-from arches.app.utils.data_management.resource_graphs.importer import (
-    import_graph as ResourceGraphImporter,
-)
 from guardian.shortcuts import assign_perm
 import mapbox_vector_tile
 import time
 
 class TestMVTLayer(ArchesTestCase):
 
-    # graph_fixtures = ["Application Area"]
+    graph_fixtures = ["Application Area"]
 
     @classmethod
     def setUpTestData(cls):
@@ -28,15 +24,8 @@ class TestMVTLayer(ArchesTestCase):
         cls.url = "/application-areas/9/255/170.pbf"
         cls.client = Client()
 
-        app_area_graph_path = "tests/fixtures/resource_graphs/Application Area.json"
         test_app_area_resources_path = "tests/fixtures/data/json/application_areas.json"
 
-        with captured_stdout():
-            with open(app_area_graph_path, "r") as f:
-                archesfile = JSONDeserializer().deserialize(f)
-                ResourceGraphImporter(
-                    archesfile["graph"], overwrite_graphs=True
-                )
         with captured_stdout():
             BusinessDataImporter(
                     test_app_area_resources_path
