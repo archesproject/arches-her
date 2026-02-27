@@ -95,6 +95,7 @@ class Migration(migrations.Migration):
             },
         ]
         init_workflow_plugin.config["workflows"] = workflows_config_list
+        init_workflow_plugin.save()
 
         # Revert config for each workflow plugin
         workflow_existing_config = {"show": False, "description": {"en": None}, "i18n_properties": ["description"]}
