@@ -1,6 +1,6 @@
 from django.views.generic import View
 from django.db import connection
-from django.http import HttpResponse, Http404
+from django.http import HttpResponse
 from arches.app.models import models
 from arches.app.utils.permission_backend import get_filtered_instances
 from arches.app.search.search_engine_factory import SearchEngineFactory
@@ -16,15 +16,41 @@ class ApplicationAreas(View):
             node = models.Node.objects.get(nodeid=nodeid, nodegroup_id__in=viewable_nodegroups)
             se = SearchEngineFactory().create()
 
-            # get_filtered_instances returns a list of ids and states whether they are exclusive (exclude the resourceids - from default deny)
-            # or inclusive (only include these resourceids - from default allow).
-            is_exclusive, filtered_instances = get_filtered_instances(request.user, search_engine=se)
+            if node is None:
+                return HttpResponse(status=503)
+            
+            candidate_resource_ids = [
+                str(resourceinstanceid)
+                for resourceinstanceid in models.ResourceInstance.objects.filter(
+                    graph_id=node.graph_id
+                ).values_list("resourceinstanceid", flat=True)
+            ]
 
-            if len(filtered_instances) == 0:
-                filtered_instances.append(
-                    "10000000-0000-0000-0000-000000000001"
-                )  # This must have a uuid that will likely never be a resource id so to not break the SQL query when there are no resources to filter on.
-            filtered_instances = tuple(filtered_instances)
+            resource_filter_sql = ""
+            resource_filter_params = []
+
+            if len(candidate_resource_ids) == 0:
+                resource_filter_sql = " and 1=0"
+            else:
+                # get_filtered_instances returns ids plus framework mode:
+                # - is_exclusive=True (default deny): ids are an allow-list (include only these ids)
+                # - is_exclusive=False (default allow): ids are a deny-list (exclude these ids)
+                is_exclusive, filtered_instances = get_filtered_instances(
+                    request.user,
+                    search_engine=se,
+                    resources=candidate_resource_ids,
+                )
+
+                if len(filtered_instances) > 0:
+                    filtered_instances = tuple(filtered_instances)
+                    resource_filter_sql = (
+                        " and resourceinstanceid in %s"
+                        if is_exclusive
+                        else " and resourceinstanceid not in %s"
+                    )
+                    resource_filter_params = [filtered_instances]
+                elif is_exclusive:
+                    resource_filter_sql = " and 1=0"
 
             with connection.cursor() as cursor:
                 result = cursor.execute(
@@ -38,8 +64,8 @@ class ApplicationAreas(View):
                         ) AS geom,
                         1 AS total
                     FROM geojson_geometries
-                    WHERE nodeid = %s and resourceinstanceid {'' if is_exclusive else 'not'} in %s and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
-                    [zoom, x, y, nodeid, filtered_instances, zoom, x, y],
+                    WHERE nodeid = %s{resource_filter_sql} and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
+                    [zoom, x, y, nodeid, *resource_filter_params, zoom, x, y],
                 )
                 result = bytes(cursor.fetchone()[0]) if result is None else result
             return HttpResponse(result, content_type="application/x-protobuf")
