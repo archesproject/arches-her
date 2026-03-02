@@ -25,6 +25,17 @@ define([
                 return acc;
             }, []);
 
+            let workflowOrder = [
+                'b2778828-a6ac-6481-c38b-fd463d878f1f', // application area
+                'a1667717-b7bd-4570-b27a-ec352c767e0e', // consultation
+                '4dc9bd5a-6e5c-440d-ae3c-af94396e2d72', // communication
+                '0b1499e0-6cdc-403b-a2e3-499c2201069d', // site visit
+                '4bd762cf-b581-11e9-a7f9-784f435179ea', // correspondence
+            ]
+            workflows.sort((a, b) => {
+                return workflowOrder.indexOf(a.pluginid) - workflowOrder.indexOf(b.pluginid);
+            });
+
             this.workflows(workflows);
             this.helpTemplateData(workflows.reduce((acc, workflow) => {
                 if (workflow.helptemplate) {
