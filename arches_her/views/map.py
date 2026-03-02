@@ -18,12 +18,12 @@ class ApplicationAreas(View):
 
             if node is None:
                 return HttpResponse(status=503)
-            
+
             candidate_resource_ids = [
                 str(resourceinstanceid)
-                for resourceinstanceid in models.ResourceInstance.objects.filter(
-                    graph_id=node.graph_id
-                ).values_list("resourceinstanceid", flat=True)
+                for resourceinstanceid in models.ResourceInstance.objects.filter(graph_id=node.graph_id).values_list(
+                    "resourceinstanceid", flat=True
+                )
             ]
 
             resource_filter_sql = ""
@@ -43,11 +43,7 @@ class ApplicationAreas(View):
 
                 if len(filtered_instances) > 0:
                     filtered_instances = tuple(filtered_instances)
-                    resource_filter_sql = (
-                        " and resourceinstanceid in %s"
-                        if is_exclusive
-                        else " and resourceinstanceid not in %s"
-                    )
+                    resource_filter_sql = " and resourceinstanceid in %s" if is_exclusive else " and resourceinstanceid not in %s"
                     resource_filter_params = [filtered_instances]
                 elif is_exclusive:
                     resource_filter_sql = " and 1=0"
