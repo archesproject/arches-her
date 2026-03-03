@@ -1,3 +1,4 @@
+import re
 import uuid
 from unittest.mock import patch
 from django.contrib.auth.models import User, Group
@@ -127,6 +128,30 @@ class ApplicationAreasPermissionTests(TestCase):
             return_value=(is_exclusive, filtered_ids),
         )
 
+    def _extract_strings_from_response(self, response):
+        """
+        Extract all UUIDs from protobuf response body.
+        """
+        # UUID pattern: 8-4-4-4-12 hexadecimal characters separated by hyphens
+        uuid_pattern = rb'[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}'
+        return [s.decode('ascii') for s in re.findall(uuid_pattern, response.content)]
+
+    def _assert_resources_in_response(self, response, expected_ids):
+        """
+        Assert that all expected resource IDs are present in the response.
+        """
+        response_strings = self._extract_strings_from_response(response)
+        for resource_id in expected_ids:
+            self.assertIn(resource_id, response_strings)
+
+    def _assert_resources_not_in_response(self, response, unexpected_ids):
+        """
+        Assert that all unexpected resource IDs are absent from the response.
+        """
+        response_strings = self._extract_strings_from_response(response)
+        for resource_id in unexpected_ids:
+            self.assertNotIn(resource_id, response_strings)
+
     def test_superuser_gets_200(self):
         """Superuser should always get a 200 response with tile data."""
         with self._patch_get_filtered_instances(False, []):
@@ -134,6 +159,8 @@ class ApplicationAreasPermissionTests(TestCase):
             response = self.view(request, self.zoom, self.x, self.y)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "application/x-protobuf")
+        # All resource IDs should be present in the response
+        self._assert_resources_in_response(response, self.resource_ids)
 
     def test_default_allow_no_restrictions(self):
         """
@@ -145,6 +172,8 @@ class ApplicationAreasPermissionTests(TestCase):
             response = self.view(request, self.zoom, self.x, self.y)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "application/x-protobuf")
+        # All resource IDs should be present
+        self._assert_resources_in_response(response, self.resource_ids)
 
     def test_default_allow_with_restrictions(self):
         """
@@ -156,6 +185,9 @@ class ApplicationAreasPermissionTests(TestCase):
             request = self._make_request(self.regular_user)
             response = self.view(request, self.zoom, self.x, self.y)
         self.assertEqual(response.status_code, 200)
+        # Restricted resource should NOT be in response, others should be
+        self._assert_resources_not_in_response(response, [restricted_id])
+        self._assert_resources_in_response(response, self.resource_ids[1:])
 
     def test_default_deny_with_allowed_instances(self):
         """
@@ -167,6 +199,9 @@ class ApplicationAreasPermissionTests(TestCase):
             request = self._make_request(self.regular_user)
             response = self.view(request, self.zoom, self.x, self.y)
         self.assertEqual(response.status_code, 200)
+        # Only allowed resources should be in response
+        self._assert_resources_in_response(response, allowed_ids)
+        self._assert_resources_not_in_response(response, [self.resource_ids[2]])
 
     def test_default_deny_empty_allowed_returns_empty_tile(self):
         """
@@ -178,6 +213,8 @@ class ApplicationAreasPermissionTests(TestCase):
             response = self.view(request, self.zoom, self.x, self.y)
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response["Content-Type"], "application/x-protobuf")
+        # No resource IDs should be in response
+        self._assert_resources_not_in_response(response, self.resource_ids)
 
     def test_user_without_nodegroup_access_gets_503(self):
         """
@@ -207,3 +244,5 @@ class ApplicationAreasPermissionTests(TestCase):
         request = self._make_request(self.regular_user)
         response = self.view(request, self.zoom, self.x, self.y)
         self.assertEqual(response.status_code, 200)
+        # No resource IDs should be in response
+        self._assert_resources_not_in_response(response, self.resource_ids)
