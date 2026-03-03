@@ -72,6 +72,12 @@ SILENCED_SYSTEM_CHECKS.append(
 
 ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
 
+ONTOLOGY_PATH = os.path.join(PROJECT_TEST_ROOT, "fixtures", "ontologies", "cidoc_crm")
+
+RESOURCE_GRAPH_LOCATIONS = [
+    os.path.join(PROJECT_TEST_ROOT, "fixtures", "resource_graphs"),
+]
+
 try:
     from arches_her.settings_local import *
 except ImportError:

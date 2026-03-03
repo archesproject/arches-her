@@ -2,6 +2,7 @@ from django.views.generic import View
 from django.db import connection
 from django.http import HttpResponse, Http404
 from arches.app.models import models
+from arches.app.models.resource import Resource
 from arches.app.utils.permission_backend import get_filtered_instances
 from arches.app.search.search_engine_factory import SearchEngineFactory
 
@@ -13,9 +14,18 @@ class ApplicationAreas(View):
             models.UserProfile.objects.create(user=request.user)
         viewable_nodegroups = request.user.userprofile.viewable_nodegroups
         try:
+            all_resources = [str(id) for id in Resource.objects.values_list('resourceinstanceid', flat=True)]
+
             node = models.Node.objects.get(nodeid=nodeid, nodegroup_id__in=viewable_nodegroups)
             se = SearchEngineFactory().create()
-            restricted_resource_ids = get_filtered_instances(request.user, search_engine=se)
+            exclusive_set, restricted_resource_ids = get_filtered_instances(request.user, search_engine=se, resources=all_resources)
+            
+            permission_framework_filter = (
+                    "resourceinstanceid in %s"
+                    if exclusive_set
+                    else "resourceinstanceid not in %s"
+                )
+            
             if len(restricted_resource_ids) == 0:
                 restricted_resource_ids.append(
                     "10000000-0000-0000-0000-000000000001"
@@ -34,7 +44,9 @@ class ApplicationAreas(View):
                         ) AS geom,
                         1 AS total
                     FROM geojson_geometries
-                    WHERE nodeid = %s and resourceinstanceid not in %s and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""",
+                    WHERE nodeid = %s and {filter} and (geom && ST_TileEnvelope(%s, %s, %s))) AS tile;""".format(
+                        filter=permission_framework_filter
+                    ),
                     [zoom, x, y, nodeid, restricted_resource_ids, zoom, x, y],
                 )
                 result = bytes(cursor.fetchone()[0]) if result is None else result
