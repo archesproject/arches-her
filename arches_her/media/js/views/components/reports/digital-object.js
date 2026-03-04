@@ -7,6 +7,7 @@ define([
     'utils/report',
     'templates/views/components/reports/digital-object.htm',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/referenced-by',
     'views/components/reports/scenes/copyright',
     'views/components/reports/scenes/json',
     'bindings/reports'
@@ -28,7 +29,8 @@ define([
             self.reportMetadata = ko.observable(params.report?.report_json);
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
-            self.activeSection = ko.observable('name');
+            self.activeSection = ko.observable('name');            
+            self.resourceinstanceid = ko.observable(params.report?.report_json?.resourceinstanceid);
 
             self.nameDataConfig = {};
 

@@ -64,6 +64,13 @@
             </div>
             <!-- Resources Tab -->
             <div id="tabcontent_resources" class="aher-report-page" data-bind="if: activeSection() === 'resources'" aria-live="polite" role="tabpanel">
+                <!-- Referenced By section -->
+                <div data-bind="component: {
+                    name: 'views/components/reports/scenes/referenced-by',
+                    params: {
+                        resourceInstanceId: ko.unwrap(resourceinstanceid),
+                    }
+                }"></div> 
                 <div data-bind="component: {
                     name: 'views/components/reports/scenes/resources',
                     params: {
