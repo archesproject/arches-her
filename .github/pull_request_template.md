@@ -1,4 +1,4 @@
-# Pull Request
+# Pull Request Template
 
 <!-- Provide a general summary of the Pull Request in the Title above -->
 
@@ -8,6 +8,7 @@
 - [ ] Bugfix (non-breaking change which fixes an issue)
 - [ ] New feature (non-breaking change which adds functionality)
 - [ ] Breaking change (fix or feature that would cause existing functionality to not work as expected)
+  - [ ] Involves changes to the Model/Graph, Concepts or Collections, or ontologies.
 
 ## Description of Change
 
@@ -30,15 +31,16 @@ Closes #
 - [ ] I added tests that prove my fix is effective or that my feature works
 - [ ] My test fails on the target branch (if claiming this, explain below)
 
-### Arches-HER Specific Checklist
+## Arches-HER Specific Checklist
 
-- [ ] Model/graph changes are for the ongoing benefit of HERs and not for a specific project/use case.
-- [ ] Model/graph changes are clearly labelled in the PR title and description, and unrelated code changes are excluded.
-- [ ] Model/graph changes have been discussed with the community (link Arches Forum discussions or GitHub issues where relevant).
-- [ ] Migration/load implications are documented below (if model/graph/package changed).
-- [ ] If I edited letter templates, I ran `python manage.py docx fix_style_runs --dest_dir docx`
+- Model/graph, concept and collection, or ontology changes will be closely reviewed. If your PR includes changes to these, please ensure they:
+  - [ ] Are for the ongoing benefit of HERs and not for a specific project/use case.
+  - [ ] Are clearly labelled in the PR title and description, and unrelated code changes are excluded.
+  - [ ] Have been discussed with the community (link Arches Forum discussions or GitHub issues where relevant).
+- [ ] Migration/load implications are documented below (if model/graph/package, concept or collection changed).
+- [ ] If I edited letter templates, I ran `python manage.py docx fix_style_runs --dest_dir docx`.
 
-Model/graph/package upgrade/load notes (if applicable):
+**Model/graph/concept and collection/package upgrade/load notes (if applicable):**
 
 <!-- If your PR includes changes to models, graphs, or packages, explain any upgrade or load implications here. -->
 
@@ -46,7 +48,7 @@ Model/graph/package upgrade/load notes (if applicable):
 
 ### Accessibility Checklist
 
-<!-- If your changes impacted the following areas, mark the appropriate columns. -->
+<!-- If your changes impacted the UI, please ensure the following areas are checked and mark the appropriate columns. -->
 
 | Topic             | Changed | Retested |
 | ----------------- | ------- | -------- |

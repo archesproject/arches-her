@@ -74,12 +74,12 @@ Contributors should normally branch from the current default branch unless a rev
 
 ### Model changes
 
-The models in Arches for HERs are shared application code, and changes to them can have wide-ranging impacts. They have been designed to meet the needs of a Historic Environment Record so alterations must be for the ongoing benefit of HERs and not for the needs of a specific project or use case. If you are proposing changes to the models, please:
+The models and controlled vocabularies in Arches for HERs are shared application code, and changes to them can have wide-ranging impacts. They have been designed to meet the needs of a Historic Environment Record so alterations must be for the ongoing benefit of HERs and not for the needs of a specific project or use case. If you are proposing changes to the models, please:
 
-- Model changes will be reviewed with particular care to ensure they are necessary and appropriately scoped, and may require more discussion and iteration than other types of changes.
+- Model and controlled vocabulary (concepts and collections) changes will be reviewed with particular care to ensure they are necessary and appropriately scoped, and may require more discussion and iteration than other types of changes.
 - Explain the reasoning and benefits of the change in your PR description, and include any relevant discussions or references to Arches Forum or GitHub issues.
-- Include any necessary data migrations to update existing data to the new model, and explain the migration process and implications in your PR description.
-- PRs relating to model changes should not contain unrelated code changes, and should be clearly labelled as involving model changes in the PR title and description.
+- Include any necessary data migrations to update existing data to the new model/vocabularies, and explain the migration process and implications in your PR description.
+- PRs relating to model and controlled vocabulary changes should not contain unrelated code changes, and should be clearly labelled as involving model and controlled vocabulary changes in the PR title and description.
 
 ### Letter templates (DOCX)
 
