@@ -49,6 +49,14 @@ class Migration(migrations.Migration):
         init_workflow_plugin.config["workflows"] = []
         init_workflow_plugin.save()
 
+    plugins = {
+        "application_area": {"id": "b2778828-a6ac-6481-c38b-fd463d878f1f", "help": "application-area-workflow-help"},
+        "communication": {"id": "4dc9bd5a-6e5c-440d-ae3c-af94396e2d72", "help": "communication-workflow-help"},
+        "consultation": {"id": "a1667717-b7bd-4570-b27a-ec352c767e0e", "help": "consultation-workflow-help"},
+        "correspondence": {"id": "4bd762cf-b581-11e9-a7f9-784f435179ea", "help": "correspondence-workflow-help"},
+        "site_visit": {"id": "0b1499e0-6cdc-403b-a2e3-499c2201069d", "help": "site-visit-workflow-help"},
+    }
+
     def revert_workflow_config(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
         init_workflow_plugin = Plugin.objects.get(pluginid="49507fb0-89c6-47b7-b506-9b2b29a3b8d8")
@@ -107,71 +115,24 @@ class Migration(migrations.Migration):
         # Revert config for each workflow plugin
         workflow_existing_config = {"show": False, "description": {"en": None}, "i18n_properties": ["description"]}
 
-        application_area = Plugin.objects.get(pluginid="b2778828-a6ac-6481-c38b-fd463d878f1f")
-        application_area.config = workflow_existing_config
-        application_area.save()
-
-        communication = Plugin.objects.get(pluginid="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72")
-        communication.config = workflow_existing_config
-        communication.save()
-
-        consultation = Plugin.objects.get(pluginid="a1667717-b7bd-4570-b27a-ec352c767e0e")
-        consultation.config = workflow_existing_config
-        consultation.save()
-
-        correspondence = Plugin.objects.get(pluginid="4bd762cf-b581-11e9-a7f9-784f435179ea")
-        correspondence.config = workflow_existing_config
-        correspondence.save()
-
-        site_visit = Plugin.objects.get(pluginid="0b1499e0-6cdc-403b-a2e3-499c2201069d")
-        site_visit.config = workflow_existing_config
-        site_visit.save()
+        for plugin_details in Migration.plugins.values():
+            plugin = Plugin.objects.get(pk=plugin_details["id"])
+            plugin.config = workflow_existing_config
+            plugin.save()
 
     def add_workflow_help_templates(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
-
-        application_area = Plugin.objects.get(pluginid="b2778828-a6ac-6481-c38b-fd463d878f1f")
-        application_area.helptemplate = "application-area-workflow-help"
-        application_area.save()
-
-        communication = Plugin.objects.get(pluginid="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72")
-        communication.helptemplate = "communication-workflow-help"
-        communication.save()
-
-        consultation = Plugin.objects.get(pluginid="a1667717-b7bd-4570-b27a-ec352c767e0e")
-        consultation.helptemplate = "consultation-workflow-help"
-        consultation.save()
-
-        correspondence = Plugin.objects.get(pluginid="4bd762cf-b581-11e9-a7f9-784f435179ea")
-        correspondence.helptemplate = "correspondence-workflow-help"
-        correspondence.save()
-
-        site_visit = Plugin.objects.get(pluginid="0b1499e0-6cdc-403b-a2e3-499c2201069d")
-        site_visit.helptemplate = "site-visit-workflow-help"
-        site_visit.save()
+        for plugin_details in Migration.plugins.values():
+            plugin = Plugin.objects.get(pk=plugin_details["id"])
+            plugin.helptemplate = plugin_details["help"]
+            plugin.save()
 
     def remove_workflow_help_templates(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
-
-        application_area = Plugin.objects.get(pluginid="b2778828-a6ac-6481-c38b-fd463d878f1f")
-        application_area.helptemplate = None
-        application_area.save()
-
-        communication = Plugin.objects.get(pluginid="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72")
-        communication.helptemplate = None
-        communication.save()
-
-        consultation = Plugin.objects.get(pluginid="a1667717-b7bd-4570-b27a-ec352c767e0e")
-        consultation.helptemplate = None
-        consultation.save()
-
-        correspondence = Plugin.objects.get(pluginid="4bd762cf-b581-11e9-a7f9-784f435179ea")
-        correspondence.helptemplate = None
-        correspondence.save()
-
-        site_visit = Plugin.objects.get(pluginid="0b1499e0-6cdc-403b-a2e3-499c2201069d")
-        site_visit.helptemplate = None
-        site_visit.save()
+        for plugin_details in Migration.plugins.values():
+            plugin = Plugin.objects.get(pk=plugin_details["id"])
+            plugin.helptemplate = None
+            plugin.save()
 
     operations = [
         migrations.RunSQL(add_plugin_show_true_accessibility_activecons, remove_plugin_show_accessibility_activecons),
