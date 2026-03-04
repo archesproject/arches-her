@@ -47,16 +47,21 @@ define([
         });
 
         this.shouldShowWorkflowHelp = ko.observable(false);
-        this.helpTemplateUrl = ko.observable();
+        this.helpTemplateHtml = ko.observable();
         this.isHelpTemplateLoading = ko.observable();
         this.selectedHelpTemplate = ko.observable();
         this.selectedHelpTemplate.subscribe(helpTemplateName => {
             if (helpTemplateName) {
                 this.isHelpTemplateLoading(true);
-                this.helpTemplateUrl(arches.urls.help_template + `?template=${helpTemplateName}`);
+                fetch(arches.urls.help_template + `?template=${helpTemplateName}`)
+                    .then(resp => resp.text())
+                    .then(html => {
+                        this.helpTemplateHtml(html);
+                        this.isHelpTemplateLoading(false);
+                    });
             }
             else {
-                this.helpTemplateUrl(null);
+                this.helpTemplateHtml(null);
             }
         })
 
