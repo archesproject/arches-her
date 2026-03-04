@@ -362,7 +362,6 @@ RENDERERS = [
     },
 ]
 
-X_FRAME_OPTIONS = "SAMEORIGIN"
 
 # By setting RESTRICT_MEDIA_ACCESS to True, media file requests outside of Arches will checked against nodegroup permissions.
 RESTRICT_MEDIA_ACCESS = False

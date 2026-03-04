@@ -132,22 +132,17 @@
                 ></select>
             </div>
             
-            <!-- ko if: $data.helpTemplateUrl() -->
+            <!-- ko if: $data.helpTemplateHtml() -->
                 <!-- ko if: $data.isHelpTemplateLoading() -->
                     <div class="loading-mask" style="bottom: unset; right: unset; left: 30%"></div>
                 <!-- /ko -->
-                <iframe
-                    frameBorder="0"
-                    style="width: 100%; flex: 1;"
+                <div
+                    style="width: 100%; flex: 1; overflow: auto;"
                     data-bind="
                         style: { visibility: $data.isHelpTemplateLoading() ? 'hidden' : 'visible' },
-                        attr: {
-                            src: $data.helpTemplateUrl(), 
-                            onload: setTimeout(function(){$data.isHelpTemplateLoading(false)}, 500) 
-                        }
+                        html: $data.helpTemplateHtml()
                     "
-                >
-                </iframe>
+                ></div>
             <!-- /ko -->
         </div>
         <!-- /ko -->
