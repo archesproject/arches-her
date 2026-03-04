@@ -7,6 +7,7 @@ define([
     'utils/report',
     'templates/views/components/reports/activity.htm',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/referenced-by',
     'views/components/reports/scenes/description',
     'views/components/reports/scenes/json',
     'views/components/reports/scenes/classifications',
@@ -38,6 +39,7 @@ define([
             self.activityArchive = ko.observableArray();
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+            self.resourceinstanceid = ko.observable(params.report?.report_json?.resourceinstanceid);
 
             self.activityArchiveConfig = {
                 ...self.defaultTableConfig,

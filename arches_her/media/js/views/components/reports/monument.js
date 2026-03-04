@@ -7,6 +7,7 @@ define([
     'utils/report',
     'templates/views/components/reports/monument.htm',
     'views/components/reports/scenes/name',
+    'views/components/reports/scenes/referenced-by',
     'views/components/reports/scenes/json',
     'bindings/reports'
 ], function($, _, ko, arches, resourceUtils, reportUtils, MonumentTemplate) {
@@ -35,6 +36,8 @@ define([
             self.resource = ko.observable(self.reportMetadata()?.resource);
             self.displayname = ko.observable(ko.unwrap(self.reportMetadata)?.displayname);
             self.activeSection = ko.observable('name');
+
+            self.resourceinstanceid = ko.observable(params.report?.report_json?.resourceinstanceid);
 
             self.nameDataConfig = {
                 name: 'monument',
