@@ -8,10 +8,14 @@
         <div class="workflow-incomplete-modal-container" data-bind="style: {maxWidth: $data.requestingUserIsSuperuser() ? '1200px' : '1000px'}">
             <div class="workflow-incomplete-modal-banner">
                 <button
+                    id="close-workflow-modal-btn"
                     aria-label="{% trans 'Close Incomplete Workflow Modal' %}"
                     tabindex="0"
                     class="close fa fa-times" style="font-size: 20px; cursor: pointer;"
-                    data-bind="click: function(){ $data.shouldShowIncompleteWorkflowsModal(false); }"
+                    data-bind="click: function(){
+                        $data.shouldShowIncompleteWorkflowsModal(false);
+                        $root.shiftFocus('#show-workflow-modal-btn');
+                    }"
                 ></button>
             </div>
             <div class="workflow-incomplete-modal-title">
@@ -68,22 +72,29 @@
         <div class="workflow-modal-buttons">
             <!-- Modal button -->
             <button 
+                id="show-workflow-modal-btn"
                 class="btn btn-info btn-sm"
                 style="margin: 5px; border-radius: 4px;"
                 data-bind="
                     enable: $data.incompleteWorkflows().length,
-                    click: function(){ $data.shouldShowIncompleteWorkflowsModal(true); }
+                    click: function(){
+                        $data.shouldShowIncompleteWorkflowsModal(true);
+                        $root.shiftFocus('#close-workflow-modal-btn');
+                    }
                 "
             >
                 {% trans 'Show Incomplete Workflows' %}
             </button>
 
             <!-- Workflow Help button -->
-            <button 
+            <button
+                id="show-workflow-help-btn"
                 class="btn btn-info btn-sm"
                 style="margin: 5px; margin-right: 10px; margin-left: 0px; border-radius: 4px;"
-                data-bind="
-                    click: function(){ $data.shouldShowWorkflowHelp(true); }
+                data-bind="click: function(){
+                    $data.shouldShowWorkflowHelp(true);
+                    $root.shiftFocus('#close-workflow-help-btn');
+                }
                 "
             >
                 {% trans 'Show Workflow Help' %}
@@ -99,11 +110,16 @@
                 <div class="ep-help-title">
                     <span>{% trans "Workflow Guidance" %}</span>
                 </div>
-                <a 
+                <a
+                    id="close-workflow-help-btn"
                     href="javascript:void(0);" 
                     class="ep-help-toggle ep-help-close ep-tools ep-tools-right" 
                     style="border:none; box-sizing: content-box; padding: 0px 15px; background: #f1f1f1;"
-                    data-bind="click: function(){shouldShowWorkflowHelp(false); selectedHelpTemplate(null);}"
+                    data-bind="click: function(){
+                        shouldShowWorkflowHelp(false); 
+                        selectedHelpTemplate(null);
+                        $root.shiftFocus('#show-workflow-help-btn');
+                    }"
                 >
                     <div class="" data-placement="bottom" data-toggle="tooltip" data-original-title="{% trans "Close Help" %}">
                         <i class="fa fa-times-circle fa-lg"></i>
