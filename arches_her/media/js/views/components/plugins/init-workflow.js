@@ -68,6 +68,19 @@ define([
         this.shouldShowIncompleteWorkflowsModal = ko.observable(false);
         this.requestingUserIsSuperuser = ko.observable(false);
 
+        // Subscribe to modal state to manage focus with delay for screen readers
+        this.shouldShowIncompleteWorkflowsModal.subscribe(isOpen => {
+            if (isOpen) {
+                // Delay focus to allow screen readers to announce dialog context
+                setTimeout(() => {
+                    const closeButton = document.getElementById('close-workflow-modal-btn');
+                    if (closeButton) {
+                        closeButton.focus();
+                    }
+                }, 100);
+            }
+        });
+
         this.incompleteWorkflows = ko.observableArray([]);
         this.incompleteWorkflows.subscribe(incompleteWorkflows => {
             if (incompleteWorkflows.length) {
@@ -92,6 +105,51 @@ define([
 
             this.requestingUserIsSuperuser(respJSON['requesting_user_is_superuser']);
        });
+
+        // Focus trap for incomplete workflows modal
+        this.handleModalKeydown = function(data, event) {
+            if (event.key === 'Tab' || event.keyCode === 9) {
+                const modal = event.currentTarget.querySelector('.workflow-incomplete-modal-container');
+                if (!modal) return true;
+
+                const focusableElements = modal.querySelectorAll(
+                    'button:not([disabled]), a[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+                );
+                
+                if (focusableElements.length === 0) return true;
+
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+
+                if (event.shiftKey) {
+                    // Shift + Tab: if on first element, move to last
+                    if (document.activeElement === firstElement) {
+                        lastElement.focus();
+                        event.preventDefault();
+                        return false;
+                    }
+                } else {
+                    // Tab: if on last element, move to first
+                    if (document.activeElement === lastElement) {
+                        firstElement.focus();
+                        event.preventDefault();
+                        return false;
+                    }
+                }
+            }
+            
+            // Allow Escape key to close modal
+            if (event.key === 'Escape' || event.keyCode === 27) {
+                this.shouldShowIncompleteWorkflowsModal(false);
+                setTimeout(() => {
+                    document.getElementById('show-workflow-modal-btn')?.focus();
+                }, 0);
+                event.preventDefault();
+                return false;
+            }
+
+            return true;
+        };
     };
 
     return ko.components.register('init-workflow', {
