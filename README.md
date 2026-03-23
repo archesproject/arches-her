@@ -34,8 +34,8 @@ Run `pip install arches-her`
    ```python
    INSTALLED_APPS = (
       ...
-      "arches_her",
       "my_project",
+      "arches_her",
    )
 
    INSTALLED_APPS += ("arches.app",)
