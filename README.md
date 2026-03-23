@@ -14,7 +14,7 @@ If you are installing Arches for HERs for the first time, you can install it as 
 
 Clone the arches-her repo and checkout to the latest dev/x.x.x branch. Navigate to the `arches-her` directory from your terminal and run:
       ```
-      pip install -e .
+      pip install -e .[dev]
       ```
 
 Important: Installing the arches-her app will install Python dependencies including Arches. This may replace your current install of Arches with a version from PyPi. If you've installed Arches for development using the --editable -e flag, you'll need to re pip install arches after installing arches-her.
