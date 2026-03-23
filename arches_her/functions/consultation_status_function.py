@@ -80,7 +80,7 @@ class ConsultationStatusFunction(BaseFunction):
                     datatype_factory = DataTypeFactory()
                     datatype = datatype_factory.get_instance(date_comp_node.datatype)
                     date_comp_value = datatype.get_display_value(tile, date_comp_node)
-                    if date_comp_value != None:
+                    if date_comp_value:
                         try:
                             self.handle_boolean_tile(tile, cons_status_bool_nodeid, cons_status_bool_nodeid, False)
                             return
