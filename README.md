@@ -8,32 +8,40 @@ You can find out more about Arches for HERs at [https://www.archesproject.org/ar
 
 ## How do I get started with Arches for HERs
 
-If you are setting up a development environment then please see the Arches documentation on how to do this:
+If you are installing Arches for HERs for the first time, you can install it as an Arches application into a project or run it directly as an Arches project. Running Arches for HERs as a project can provide some convienience if you are a developer contributing to the Arches for HERs project. Otherwise, we strongly recommend running Arches for HERs as an Arches Application within a project because that will allow greater flexibility in customizing your project without the risk of conflicts when upgrading to the next version of Arches for HERs.
 
-   https://arches.readthedocs.io/en/latest/installing/installation/
+### If installing for development
 
-If you are installing Arches for HERs on Windows,be sure to follow the [instructions relating to the GDAL_LIBRARY_PATH](https://arches.readthedocs.io/en/latest/installing/installation/#create-a-project) detailed in the Installing Core Arches documentation.
-
-1. Installing Arches for HERs. This step installs all Python dependencies including Arches.
-   - If installing for development, clone the arches-her repo, making sure to change the default target folder to **arches_her** and then run the following:
-
-      ```bash
+Clone the arches-her repo and checkout to the latest dev/x.x.x branch. Navigate to the `arches-her` directory from your terminal and run:
+      ```
       pip install -e .
       ```
 
-   - If not installing for development, simply run:
+Important: Installing the arches-her app will install Python dependencies including Arches. This may replace your current install of Arches with a version from PyPi. If you've installed Arches for development using the --editable -e flag, you'll need to re pip install arches after installing arches-her.
 
-      ```bash
-      pip install arches_her
-      ```
+### If installing for deployment
 
-2. If you don't already have an Arches project, you'll need to create one by running the following:
+Run `pip install arches-her`
 
-   ```bash
-   arches-admin startproject my_project
+### Project Configuration
+
+1. If you don't already have an Arches project, you'll need to create one by following the instructions in the [Arches documentation](http://archesproject.org/documentation/).
+
+   If you are installing Arches for HERs on Windows, be sure to follow the [instructions relating to the GDAL_LIBRARY_PATH](https://arches.readthedocs.io/en/latest/installing/installation/#create-a-project) detailed in the Installing Core Arches documentation.
+
+2. When your project is ready, add "arches_her" to `INSTALLED_APPS` **below** the name of your project in `settings.py`.
+
+   ```python
+   INSTALLED_APPS = (
+      ...
+      "arches_her",
+      "my_project",
+   )
+
+   INSTALLED_APPS += ("arches.app",)
    ```
 
-3. Add the following to your project's settings.py file
+3. Make sure the following settings are also added to the project's settings.py file
 
    ```python
    DATATYPE_LOCATIONS.append('arches_her.datatypes')
@@ -41,33 +49,21 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
    SEARCH_COMPONENT_LOCATIONS.append('arches_her.search.components')
    ```
 
-4. Add `arches_her` to your project's `INSTALLED_APPS` and `ARCHES_APPLICATIONS` settings in settings.py. Note that in `INSTALLED_APPS`, `arches_her` must be listed before your project:
-
+4. Add the following optional, UK specific settings to the project's settings.py file
    ```python
-   INSTALLED_APPS = (
-      "webpack_loader",
-      "django.contrib.admin",
-      "django.contrib.auth",
-      "django.contrib.contenttypes",
-      "django.contrib.sessions",
-      "django.contrib.messages",
-      "django.contrib.staticfiles",
-      "django.contrib.gis",
-      "arches",
-      "arches.app.models",
-      "arches.management",
-      "guardian",
-      "captcha",
-      "revproxy",
-      "corsheaders",
-      "oauth2_provider",
-      "django_celery_results",
-      "compressor",
-      "arches_her",
-      "my_project",
-   )
+   # British National Grid (BNG) and Latitude/Longitude set as preferred coordinate systems.  To revert to
+   # Geographic as the preferred coordinate system, comment out the preferred coordinate system setting below
 
-   ARCHES_APPLICATIONS = ("arches_her",)
+   PREFERRED_COORDINATE_SYSTEMS = (
+      {
+         "name": "BNG",
+         "srid": "27700",
+         "proj4": "+proj=tmerc +lat_0=49 +lon_0=-2 +k=0.9996012717 +x_0=400000 +y_0=-100000 +ellps=airy +datum=OSGB36 +units=m +no_defs",
+         "default": True,
+      },
+      {"name": "LatLong", "srid": "4326", "proj4": "+proj=longlat +datum=WGS84 +no_defs", "default": False},  # Required
+   )
+   ANALYSIS_COORDINATE_SYSTEM_SRID = 27700  # Comment out if using LatLong/WGS84
    ```
 
 5. If developing Arches for HERs, you'll need to add the HER_ROOT setting which indicates where on your file system your arches_her repository is located. You'll need to adjust the path according to where you have cloned the arches_her repo:
@@ -87,10 +83,10 @@ If you are installing Arches for HERs on Windows,be sure to follow the [instruct
 
 7. Add `arches_her` as a dependency in your project's `package.json` file:
 
-   ```javascript
+   ```json
    "dependencies": {
         "arches": "archesproject/arches#stable/7.6.0",
-        "arches_her": "archesproject/arches_her#stable/1.0.x"
+        "arches_her": "archesproject/arches_her#stable/1.1.x"
     },
     ```
 
