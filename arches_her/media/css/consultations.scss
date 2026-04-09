@@ -697,7 +697,6 @@ div.active-cons-hover-loading {
     color: #0066cc; /* Ensures 4.5:1 contrast ratio */
 }
 
-// https://github.com/archesproject/arches-her/issues/1437 hotfix
-.workbench-card-sidepanel .install-buttons {
-    background: none;
+.tabbed-workflow-step-body .workbench-card-sidepanel .install-buttons:not(.tabbed-workflow-step-body .workbench-card-sidepanel .create-resource-instance-card-component .install-buttons) {
+    display: none;
 }
