@@ -86,7 +86,7 @@ Run `pip install arches-her`
    ```json
    "dependencies": {
         "arches": "archesproject/arches#stable/7.6.0",
-        "arches_her": "archesproject/arches_her#stable/1.1.x"
+        "arches_her": "archesproject/arches_her#stable/1.1.0"
     },
     ```
 
