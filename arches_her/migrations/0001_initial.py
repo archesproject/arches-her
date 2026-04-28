@@ -516,19 +516,25 @@ class Migration(migrations.Migration):
         ):
             search_component.delete()
 
-    add_map_source = """
-        INSERT INTO map_sources(name, source)
-            VALUES ('select-application-area', '{
-                "data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11", 
-                "type": "vector", 
-                "tiles": ["/application-areas/{z}/{x}/{y}.pbf"], 
-                "minzoom": 6
-            }');
-                """
+    def add_map_source(apps, schema_editor):
+        MapSource = apps.get_model("models", "MapSource")
 
-    remove_map_source = """
-        DELETE FROM map_sources WHERE name = 'select-application-area';
-        """
+        if not MapSource.objects.filter(name="select-application-area").exists():
+            MapSource.objects.update_or_create(
+                name="select-application-area",
+                source={
+                    "data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11",
+                    "type": "vector",
+                    "tiles": ["/application-areas/{z}/{x}/{y}.pbf"],
+                    "minzoom": 6,
+                },
+            )
+
+    def remove_map_source(apps, schema_editor):
+        MapSource = apps.get_model("models", "MapSource")
+
+        for map_source in MapSource.objects.filter(name="select-application-area"):
+            map_source.delete()
 
     operations = [
         migrations.RunPython(add_functions, remove_functions),
@@ -537,5 +543,5 @@ class Migration(migrations.Migration):
         migrations.RunPython(add_search_components, remove_search_components),
         migrations.RunPython(add_plugins, remove_plugins),
         migrations.RunPython(add_reports, reverse_code=migrations.RunPython.noop),
-        migrations.RunSQL(add_map_source, remove_map_source),
+        migrations.RunPython(add_map_source, remove_map_source),
     ]
