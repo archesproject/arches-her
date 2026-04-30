@@ -20,142 +20,150 @@ class Migration(migrations.Migration):
         Plugin = apps.get_model("models", "Plugin")
 
         # Add Accessibility
-        Plugin.objects.update_or_create(
-            pluginid="8688eaf9-3605-4384-823c-d01c0d210f82",
-            name="Accessibility",
-            icon="fa fa-universal-access",
-            component="views/components/plugins/accessibility",
-            componentname="accessibility",
-            slug="accessibility",
-            config={},
-            sortorder=0,
-        )
+        if not Plugin.objects.filter(pk="8688eaf9-3605-4384-823c-d01c0d210f82").exists():
+            Plugin.objects.update_or_create(
+                pluginid="8688eaf9-3605-4384-823c-d01c0d210f82",
+                name="Accessibility",
+                icon="fa fa-universal-access",
+                component="views/components/plugins/accessibility",
+                componentname="accessibility",
+                slug="accessibility",
+                config={},
+                sortorder=0,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="76a27df9-6f16-47ed-bd47-bb95c0fe7173",
-            name="Active Consultations",
-            icon="fa fa-compass",
-            component="views/components/plugins/active-consultations",
-            componentname="active-consultations",
-            slug="active-consultations",
-            config={},
-            sortorder=0,
-        )
+        if not Plugin.objects.filter(pk="76a27df9-6f16-47ed-bd47-bb95c0fe7173").exists():
+            Plugin.objects.update_or_create(
+                pluginid="76a27df9-6f16-47ed-bd47-bb95c0fe7173",
+                name="Active Consultations",
+                icon="fa fa-compass",
+                component="views/components/plugins/active-consultations",
+                componentname="active-consultations",
+                slug="active-consultations",
+                config={},
+                sortorder=0,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="b2778828-a6ac-6481-c38b-fd463d878f1f",
-            name="Application Area",
-            icon="fa fa-building",
-            component="views/components/plugins/application-area",
-            componentname="application-area",
-            config={"show": False},
-            slug="application-area",
-            sortorder=0,
-        )
+        if not Plugin.objects.filter(pk="b2778828-a6ac-6481-c38b-fd463d878f1f").exists():
+            Plugin.objects.update_or_create(
+                pluginid="b2778828-a6ac-6481-c38b-fd463d878f1f",
+                name="Application Area",
+                icon="fa fa-building",
+                component="views/components/plugins/application-area",
+                componentname="application-area",
+                config={"show": False},
+                slug="application-area",
+                sortorder=0,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
-            name="Communication",
-            icon="fa fa-comment",
-            component="views/components/plugins/communication-workflow",
-            componentname="communication-workflow",
-            config={"show": False},
-            slug="communication-workflow",
-            sortorder=1,
-        )
+        if not Plugin.objects.filter(pk="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72").exists():
+            Plugin.objects.update_or_create(
+                pluginid="4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
+                name="Communication",
+                icon="fa fa-comment",
+                component="views/components/plugins/communication-workflow",
+                componentname="communication-workflow",
+                config={"show": False},
+                slug="communication-workflow",
+                sortorder=1,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="a1667717-b7bd-4570-b27a-ec352c767e0e",
-            name="Consultation",
-            icon="fa fa-file",
-            component="views/components/plugins/consultation-workflow",
-            componentname="consultation-workflow",
-            config={"show": False},
-            slug="consultation-workflow",
-            sortorder=0,
-        )
+        if not Plugin.objects.filter(pk="a1667717-b7bd-4570-b27a-ec352c767e0e").exists():
+            Plugin.objects.update_or_create(
+                pluginid="a1667717-b7bd-4570-b27a-ec352c767e0e",
+                name="Consultation",
+                icon="fa fa-file",
+                component="views/components/plugins/consultation-workflow",
+                componentname="consultation-workflow",
+                config={"show": False},
+                slug="consultation-workflow",
+                sortorder=0,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="4bd762cf-b581-11e9-a7f9-784f435179ea",
-            name="Correspondence",
-            icon="fa fa-envelope",
-            component="views/components/plugins/correspondence-workflow",
-            componentname="correspondence-workflow",
-            config={"show": False},
-            slug="correspondence-workflow",
-            sortorder=1,
-        )
+        if not Plugin.objects.filter(pk="4bd762cf-b581-11e9-a7f9-784f435179ea").exists():
+            Plugin.objects.update_or_create(
+                pluginid="4bd762cf-b581-11e9-a7f9-784f435179ea",
+                name="Correspondence",
+                icon="fa fa-envelope",
+                component="views/components/plugins/correspondence-workflow",
+                componentname="correspondence-workflow",
+                config={"show": False},
+                slug="correspondence-workflow",
+                sortorder=1,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="0b1499e0-6cdc-403b-a2e3-499c2201069d",
-            name="Site Visit",
-            icon="fa fa-clipboard",
-            component="views/components/plugins/site-visit",
-            componentname="site-visit",
-            config={"show": False},
-            slug="site-visit",
-            sortorder=0,
-        )
+        if not Plugin.objects.filter(pk="0b1499e0-6cdc-403b-a2e3-499c2201069d").exists():
+            Plugin.objects.update_or_create(
+                pluginid="0b1499e0-6cdc-403b-a2e3-499c2201069d",
+                name="Site Visit",
+                icon="fa fa-clipboard",
+                component="views/components/plugins/site-visit",
+                componentname="site-visit",
+                config={"show": False},
+                slug="site-visit",
+                sortorder=0,
+            )
 
-        Plugin.objects.update_or_create(
-            pluginid="49507fb0-89c6-47b7-b506-9b2b29a3b8d8",
-            name="Consultations",
-            icon="fa fa-play-circle",
-            component="views/components/plugins/init-workflow",
-            componentname="init-workflow",
-            config={
-                "workflows": [
-                    {
-                        "workflowid": "b2778828-a6ac-6481-c38b-fd463d878f1f",
-                        "slug": "application-area",
-                        "name": "Application Area",
-                        "icon": "fa fa-building",
-                        "bgColor": "#87bceb",
-                        "circleColor": "#a7cdf0",
-                        "desc": "An area that may be re-developed or newly built",
-                    },
-                    {
-                        "workflowid": "a1667717-b7bd-4570-b27a-ec352c767e0e",
-                        "slug": "consultation-workflow",
-                        "name": "Consultation",
-                        "icon": "fa fa-file",
-                        "bgColor": "#62a3db",
-                        "circleColor": "#8bbfea",
-                        "desc": "Advice on the potential work related to an application area",
-                    },
-                    {
-                        "workflowid": "4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
-                        "slug": "communication-workflow",
-                        "name": "Communication",
-                        "icon": "fa fa-comment",
-                        "bgColor": "#9795EE",
-                        "circleColor": "#8bbbe4",
-                        "desc": "A conversation via phone, email, or other channel",
-                    },
-                    {
-                        "workflowid": "0b1499e0-6cdc-403b-a2e3-499c2201069d",
-                        "slug": "site-visit",
-                        "name": "Site Visit",
-                        "icon": "fa fa-clipboard",
-                        "bgColor": "#716FE0",
-                        "circleColor": "#b0aff0",
-                        "desc": "A visit to ensure that a condition has been met",
-                    },
-                    {
-                        "workflowid": "4bd762cf-b581-11e9-a7f9-784f435179ea",
-                        "slug": "correspondence-workflow",
-                        "name": "Correspondence",
-                        "icon": "fa fa-envelope",
-                        "bgColor": "#fed04f",
-                        "circleColor": "#fedc7d",
-                        "desc": "Letter or other document sent to an applicant",
-                    },
-                ],
-                "show": True,
-            },
-            slug="init-workflow",
-            sortorder=0,
-        )
+        if not Plugin.objects.filter(pk="49507fb0-89c6-47b7-b506-9b2b29a3b8d8").exists():
+            Plugin.objects.update_or_create(
+                pluginid="49507fb0-89c6-47b7-b506-9b2b29a3b8d8",
+                name="Consultations",
+                icon="fa fa-play-circle",
+                component="views/components/plugins/init-workflow",
+                componentname="init-workflow",
+                config={
+                    "workflows": [
+                        {
+                            "workflowid": "b2778828-a6ac-6481-c38b-fd463d878f1f",
+                            "slug": "application-area",
+                            "name": "Application Area",
+                            "icon": "fa fa-building",
+                            "bgColor": "#87bceb",
+                            "circleColor": "#a7cdf0",
+                            "desc": "An area that may be re-developed or newly built",
+                        },
+                        {
+                            "workflowid": "a1667717-b7bd-4570-b27a-ec352c767e0e",
+                            "slug": "consultation-workflow",
+                            "name": "Consultation",
+                            "icon": "fa fa-file",
+                            "bgColor": "#62a3db",
+                            "circleColor": "#8bbfea",
+                            "desc": "Advice on the potential work related to an application area",
+                        },
+                        {
+                            "workflowid": "4dc9bd5a-6e5c-440d-ae3c-af94396e2d72",
+                            "slug": "communication-workflow",
+                            "name": "Communication",
+                            "icon": "fa fa-comment",
+                            "bgColor": "#9795EE",
+                            "circleColor": "#8bbbe4",
+                            "desc": "A conversation via phone, email, or other channel",
+                        },
+                        {
+                            "workflowid": "0b1499e0-6cdc-403b-a2e3-499c2201069d",
+                            "slug": "site-visit",
+                            "name": "Site Visit",
+                            "icon": "fa fa-clipboard",
+                            "bgColor": "#716FE0",
+                            "circleColor": "#b0aff0",
+                            "desc": "A visit to ensure that a condition has been met",
+                        },
+                        {
+                            "workflowid": "4bd762cf-b581-11e9-a7f9-784f435179ea",
+                            "slug": "correspondence-workflow",
+                            "name": "Correspondence",
+                            "icon": "fa fa-envelope",
+                            "bgColor": "#fed04f",
+                            "circleColor": "#fedc7d",
+                            "desc": "Letter or other document sent to an applicant",
+                        },
+                    ],
+                    "show": True,
+                },
+                slug="init-workflow",
+                sortorder=0,
+            )
 
     def remove_plugins(apps, schema_editor):
         Plugin = apps.get_model("models", "Plugin")
@@ -177,227 +185,253 @@ class Migration(migrations.Migration):
     def add_reports(apps, schema_editor):
         ReportTemplate = apps.get_model("models", "ReportTemplate")
 
-        ReportTemplate.objects.update_or_create(
-            name="Activity Template",
-            component="views/components/reports/activity",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Activity report",
-            componentname="activity-report",
-            templateid="eeb7054c-df37-45d1-8f09-39abb582077e",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="eeb7054c-df37-45d1-8f09-39abb582077e").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Activity Template",
+                component="views/components/reports/activity",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Activity report",
+                componentname="activity-report",
+                templateid="eeb7054c-df37-45d1-8f09-39abb582077e",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Application Area Template",
-            component="views/components/reports/application-area",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Application Area report",
-            componentname="application-area-report",
-            templateid="9ed340ba-88c6-4982-9487-c3aae4b14d16",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="9ed340ba-88c6-4982-9487-c3aae4b14d16").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Application Area Template",
+                component="views/components/reports/application-area",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Application Area report",
+                componentname="application-area-report",
+                templateid="9ed340ba-88c6-4982-9487-c3aae4b14d16",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Area Template",
-            component="views/components/reports/area",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Area report",
-            componentname="area-report",
-            templateid="c6f163ca-3ca5-4c50-b398-bee406fe059d",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="c6f163ca-3ca5-4c50-b398-bee406fe059d").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Area Template",
+                component="views/components/reports/area",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Area report",
+                componentname="area-report",
+                templateid="c6f163ca-3ca5-4c50-b398-bee406fe059d",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Artefact Template",
-            component="views/components/reports/artefact",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Artefact report",
-            componentname="artefact-report",
-            templateid="b32fc2f2-5570-46c2-8d1e-09ca54c750ab",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="b32fc2f2-5570-46c2-8d1e-09ca54c750ab").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Artefact Template",
+                component="views/components/reports/artefact",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Artefact report",
+                componentname="artefact-report",
+                templateid="b32fc2f2-5570-46c2-8d1e-09ca54c750ab",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Bibliographic Sourc3 Template",
-            component="views/components/reports/bibliographic-source",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Bibliographic Source report",
-            componentname="bibliographic-source-report",
-            templateid="44fdae23-7883-4d5c-88fa-7498b6fc898d",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="44fdae23-7883-4d5c-88fa-7498b6fc898d").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Bibliographic Sourc3 Template",
+                component="views/components/reports/bibliographic-source",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Bibliographic Source report",
+                componentname="bibliographic-source-report",
+                templateid="44fdae23-7883-4d5c-88fa-7498b6fc898d",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Consultation Template",
-            component="views/components/reports/consultation",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Consultation report",
-            componentname="consultation-report",
-            templateid="465443ea-0e01-4895-a9cf-5144b02213da",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="465443ea-0e01-4895-a9cf-5144b02213da").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Consultation Template",
+                component="views/components/reports/consultation",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Consultation report",
+                componentname="consultation-report",
+                templateid="465443ea-0e01-4895-a9cf-5144b02213da",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Digital Object Template",
-            component="views/components/reports/digital-object",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Digital Object report",
-            componentname="digital-object-report",
-            templateid="2bf88426-a053-4134-b006-d4dc2e120a6e",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="2bf88426-a053-4134-b006-d4dc2e120a6e").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Digital Object Template",
+                component="views/components/reports/digital-object",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Digital Object report",
+                componentname="digital-object-report",
+                templateid="2bf88426-a053-4134-b006-d4dc2e120a6e",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Heritage Story Template",
-            component="views/components/reports/heritage-story",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Heritage Story report",
-            componentname="heritage-story-report",
-            templateid="6858ba4d-70a2-4e78-baf1-c827dd66956b",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="6858ba4d-70a2-4e78-baf1-c827dd66956b").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Heritage Story Template",
+                component="views/components/reports/heritage-story",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Heritage Story report",
+                componentname="heritage-story-report",
+                templateid="6858ba4d-70a2-4e78-baf1-c827dd66956b",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Historic Aircraft Template",
-            component="views/components/reports/historic-aircraft",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Historic Aircraft report",
-            componentname="historic-aircraft-report",
-            templateid="655f86f0-643a-4df4-be8b-9e9030d2ff94",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="655f86f0-643a-4df4-be8b-9e9030d2ff94").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Historic Aircraft Template",
+                component="views/components/reports/historic-aircraft",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Historic Aircraft report",
+                componentname="historic-aircraft-report",
+                templateid="655f86f0-643a-4df4-be8b-9e9030d2ff94",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Historic Landscape Characterization Template",
-            component="views/components/reports/historic-landscape-characterization",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Historic Landscape Characterization report",
-            componentname="historic-landscape-characterization-report",
-            templateid="5c757462-97d9-43fc-bd39-54367f6f3c2e",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="5c757462-97d9-43fc-bd39-54367f6f3c2e").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Historic Landscape Characterization Template",
+                component="views/components/reports/historic-landscape-characterization",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Historic Landscape Characterization report",
+                componentname="historic-landscape-characterization-report",
+                templateid="5c757462-97d9-43fc-bd39-54367f6f3c2e",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Maritime Vessel Template",
-            component="views/components/reports/maritime-vessel",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Maritime Vessel report",
-            componentname="maritime-vessel-report",
-            templateid="03871d64-7076-46e8-b0ed-4b8813b0afd4",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="03871d64-7076-46e8-b0ed-4b8813b0afd4").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Maritime Vessel Template",
+                component="views/components/reports/maritime-vessel",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Maritime Vessel report",
+                componentname="maritime-vessel-report",
+                templateid="03871d64-7076-46e8-b0ed-4b8813b0afd4",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Monument Template",
-            component="views/components/reports/monument",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Monument report",
-            componentname="monument-report",
-            templateid="523a5a7f-006b-4caf-a801-a1621967a88b",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="523a5a7f-006b-4caf-a801-a1621967a88b").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Monument Template",
+                component="views/components/reports/monument",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Monument report",
+                componentname="monument-report",
+                templateid="523a5a7f-006b-4caf-a801-a1621967a88b",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Organization Template",
-            component="views/components/reports/organization",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Organization report",
-            componentname="organization-report",
-            templateid="407019fd-69e4-4aa4-a054-1466acaf8687",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="407019fd-69e4-4aa4-a054-1466acaf8687").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Organization Template",
+                component="views/components/reports/organization",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Organization report",
+                componentname="organization-report",
+                templateid="407019fd-69e4-4aa4-a054-1466acaf8687",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Period Template",
-            component="views/components/reports/period",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Period report",
-            componentname="period-report",
-            templateid="4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Period Template",
+                component="views/components/reports/period",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Period report",
+                componentname="period-report",
+                templateid="4c2ed0b0-c278-49e2-9ddf-ba44aa77a6f3",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Person Template",
-            component="views/components/reports/person",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Person report",
-            componentname="person-report",
-            templateid="9e9f8e55-3ea9-4bd3-8b11-c1a519fbcfcc",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="9e9f8e55-3ea9-4bd3-8b11-c1a519fbcfcc").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Person Template",
+                component="views/components/reports/person",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Person report",
+                componentname="person-report",
+                templateid="9e9f8e55-3ea9-4bd3-8b11-c1a519fbcfcc",
+                preload_resource_data=False,
+            )
 
-        ReportTemplate.objects.update_or_create(
-            name="Place Template",
-            component="views/components/reports/place",
-            defaultconfig={"uncompacted_reporting": True},
-            description="Place report",
-            componentname="place-report",
-            templateid="6b183add-a159-4d2b-a6b0-3f426d8c08a1",
-            preload_resource_data=False,
-        )
+        if not ReportTemplate.objects.filter(templateid="6b183add-a159-4d2b-a6b0-3f426d8c08a1").exists():
+            ReportTemplate.objects.update_or_create(
+                name="Place Template",
+                component="views/components/reports/place",
+                defaultconfig={"uncompacted_reporting": True},
+                description="Place report",
+                componentname="place-report",
+                templateid="6b183add-a159-4d2b-a6b0-3f426d8c08a1",
+                preload_resource_data=False,
+            )
 
     def add_functions(apps, schema_editor):
         Function = apps.get_model("models", "Function")
 
-        Function.objects.update_or_create(
-            name="BNG Point to GeoJSON",
-            functiontype="node",
-            modulename="bngpoint_to_geojson_function.py",
-            description="Pushes the geometry from a BNG Point node to a related GeoJSON node",
-            defaultconfig={"bng_node": "", "geojson_node": "", "bng_nodegroup": "", "geojson_nodegroup": "", "triggering_nodegroups": []},
-            classname="BNGPointToGeoJSON",
-            component="views/components/functions/bngpoint-to-geojson-function",
-            functionid="0434df8d-b98a-4b41-9a0a-68cd9214ad73",
-        )
+        if not Function.objects.filter(functionid="0434df8d-b98a-4b41-9a0a-68cd9214ad73").exists():
+            Function.objects.update_or_create(
+                name="BNG Point to GeoJSON",
+                functiontype="node",
+                modulename="bngpoint_to_geojson_function.py",
+                description="Pushes the geometry from a BNG Point node to a related GeoJSON node",
+                defaultconfig={
+                    "bng_node": "",
+                    "geojson_node": "",
+                    "bng_nodegroup": "",
+                    "geojson_nodegroup": "",
+                    "triggering_nodegroups": [],
+                },
+                classname="BNGPointToGeoJSON",
+                component="views/components/functions/bngpoint-to-geojson-function",
+                functionid="0434df8d-b98a-4b41-9a0a-68cd9214ad73",
+            )
 
-        Function.objects.update_or_create(
-            name="Consultation Status",
-            functiontype="node",
-            modulename="consultation_status_function.py",
-            description="Triggers change in status node of consultation instance",
-            defaultconfig={
-                "cons_comp_date_nodeid": "40eff4ce-893a-11ea-ae2e-f875a44e0e11",
-                "cons_status_bool_nodeid": "6a773228-db20-11e9-b6dd-784f435179ea",
-            },
-            classname="ConsultationStatusFunction",
-            component="",
-            functionid="96efa95a-1e2c-4562-ac1f-b415796f9f75",
-        )
+        if not Function.objects.filter(functionid="96efa95a-1e2c-4562-ac1f-b415796f9f75").exists():
+            Function.objects.update_or_create(
+                name="Consultation Status",
+                functiontype="node",
+                modulename="consultation_status_function.py",
+                description="Triggers change in status node of consultation instance",
+                defaultconfig={
+                    "cons_comp_date_nodeid": "40eff4ce-893a-11ea-ae2e-f875a44e0e11",
+                    "cons_status_bool_nodeid": "6a773228-db20-11e9-b6dd-784f435179ea",
+                },
+                classname="ConsultationStatusFunction",
+                component="",
+                functionid="96efa95a-1e2c-4562-ac1f-b415796f9f75",
+            )
 
-        Function.objects.update_or_create(
-            name="Generate Unique References",
-            functiontype="node",
-            modulename="generate_unique_references_function.py",
-            description="Checks for Simple UID and Resource ID nodes populated and, if not populated, generates them",
-            defaultconfig={
-                "simpleuid_node": "",
-                "resourceid_node": "",
-                "uniqueresource_nodegroup": "",
-                "triggering_nodegroups": [],
-                "nodegroup_nodes": [],
-            },
-            classname="GenerateUniqueReferences",
-            component="views/components/functions/generate-unique-references-function",
-            functionid="39d627ae-6973-4ddb-8b62-1f0230e1e3f9",
-        )
+        if not Function.objects.filter(functionid="39d627ae-6973-4ddb-8b62-1f0230e1e3f9").exists():
+            Function.objects.update_or_create(
+                name="Generate Unique References",
+                functiontype="node",
+                modulename="generate_unique_references_function.py",
+                description="Checks for Simple UID and Resource ID nodes populated and, if not populated, generates them",
+                defaultconfig={
+                    "simpleuid_node": "",
+                    "resourceid_node": "",
+                    "uniqueresource_nodegroup": "",
+                    "triggering_nodegroups": [],
+                    "nodegroup_nodes": [],
+                },
+                classname="GenerateUniqueReferences",
+                component="views/components/functions/generate-unique-references-function",
+                functionid="39d627ae-6973-4ddb-8b62-1f0230e1e3f9",
+            )
 
-        Function.objects.update_or_create(
-            name="GeoJSON to BNG Point",
-            functiontype="node",
-            modulename="geojson_to_bngpoint_function",
-            description="Pushes the geometry from a GeoJSON node's centroid to a related BNG Point node",
-            defaultconfig={
-                "geojson_input_node": "",
-                "bng_output_node": "",
-                "geojson_input_nodegroup": "",
-                "bng_output_nodegroup": "",
-                "triggering_nodegroups": [],
-            },
-            classname="GeoJSONToBNGPoint",
-            component="views/components/functions/geojson-to-bngpoint-function",
-            functionid="d9a01773-6092-4cad-b331-ae725ae8fa88",
-        )
+        if not Function.objects.filter(functionid="d9a01773-6092-4cad-b331-ae725ae8fa88").exists():
+            Function.objects.update_or_create(
+                name="GeoJSON to BNG Point",
+                functiontype="node",
+                modulename="geojson_to_bngpoint_function",
+                description="Pushes the geometry from a GeoJSON node's centroid to a related BNG Point node",
+                defaultconfig={
+                    "geojson_input_node": "",
+                    "bng_output_node": "",
+                    "geojson_input_nodegroup": "",
+                    "bng_output_nodegroup": "",
+                    "triggering_nodegroups": [],
+                },
+                classname="GeoJSONToBNGPoint",
+                component="views/components/functions/geojson-to-bngpoint-function",
+                functionid="d9a01773-6092-4cad-b331-ae725ae8fa88",
+            )
 
     def remove_functions(apps, schema_editor):
         Function = apps.get_model("models", "Function")
@@ -415,23 +449,25 @@ class Migration(migrations.Migration):
     def add_widgets(apps, schema_editor):
         Widget = apps.get_model("models", "Widget")
 
-        Widget.objects.update_or_create(
-            widgetid="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf",
-            name="bngpoint",
-            component="views/components/widgets/bngpoint",
-            defaultconfig={"placeholder": "Enter the centre point map reference of the resource."},
-            helptext=None,
-            datatype="bngcentrepoint",
-        )
+        if not Widget.objects.filter(pk="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf").exists():
+            Widget.objects.update_or_create(
+                widgetid="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf",
+                name="bngpoint",
+                component="views/components/widgets/bngpoint",
+                defaultconfig={"placeholder": "Enter the centre point map reference of the resource."},
+                helptext=None,
+                datatype="bngcentrepoint",
+            )
 
-        Widget.objects.update_or_create(
-            widgetid="31bc729d-6126-4301-8ec1-d6c4d98c68f8",
-            name="photo-widget",
-            datatype="file-list",
-            component="views/components/widgets/photo",
-            helptext=None,
-            defaultconfig={"maxFilesize": "200", "acceptedFiles": "", "rerender": True},
-        )
+        if not Widget.objects.filter(pk="31bc729d-6126-4301-8ec1-d6c4d98c68f8").exists():
+            Widget.objects.update_or_create(
+                widgetid="31bc729d-6126-4301-8ec1-d6c4d98c68f8",
+                name="photo-widget",
+                datatype="file-list",
+                component="views/components/widgets/photo",
+                helptext=None,
+                defaultconfig={"maxFilesize": "200", "acceptedFiles": "", "rerender": True},
+            )
 
     def add_datatypes(apps, schema_editor):
         Datatype = apps.get_model("models", "DDataType")
@@ -439,34 +475,36 @@ class Migration(migrations.Migration):
 
         bngpoint = Widget.objects.get(pk="bcae8e90-09f7-4ae3-906b-7c7bb71a6ddf")
 
-        Datatype.objects.update_or_create(
-            datatype="bngcentrepoint",
-            iconclass="fa fa-location-arrow",
-            modulename="bngcentrepoint.py",
-            classname="BNGCentreDataType",
-            defaultwidget=bngpoint,
-            defaultconfig=None,
-            configcomponent="views/components/datatypes/bngcentrepoint",
-            configname="bngcentrepoint-datatype-config",
-            isgeometric=False,
-            issearchable=True,
-        )
+        if not Datatype.objects.filter(datatype="bngcentrepoint").exists():
+            Datatype.objects.update_or_create(
+                datatype="bngcentrepoint",
+                iconclass="fa fa-location-arrow",
+                modulename="bngcentrepoint.py",
+                classname="BNGCentreDataType",
+                defaultwidget=bngpoint,
+                defaultconfig=None,
+                configcomponent="views/components/datatypes/bngcentrepoint",
+                configname="bngcentrepoint-datatype-config",
+                isgeometric=False,
+                issearchable=True,
+            )
 
     def add_search_components(apps, schema_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
 
-        SearchComponent.objects.update_or_create(
-            searchcomponentid="25ca3536-9eb4-4fd5-b2a5-badfd9a266de",
-            name="BNG Filter",
-            icon="fa fa-compass",
-            modulename="bng-filter.py",
-            classname="BngFilter",
-            type="popup",
-            componentpath="views/components/search/bng-filter",
-            componentname="bng-filter",
-            sortorder="0",
-            enabled=True,
-        )
+        if not SearchComponent.objects.filter(pk="25ca3536-9eb4-4fd5-b2a5-badfd9a266de").exists():
+            SearchComponent.objects.update_or_create(
+                searchcomponentid="25ca3536-9eb4-4fd5-b2a5-badfd9a266de",
+                name="BNG Filter",
+                icon="fa fa-compass",
+                modulename="bng-filter.py",
+                classname="BngFilter",
+                type="popup",
+                componentpath="views/components/search/bng-filter",
+                componentname="bng-filter",
+                sortorder="0",
+                enabled=True,
+            )
 
     def remove_search_components(apps, schema_editor):
         SearchComponent = apps.get_model("models", "SearchComponent")
@@ -478,19 +516,25 @@ class Migration(migrations.Migration):
         ):
             search_component.delete()
 
-    add_map_source = """
-INSERT INTO map_sources(name, source)
-    VALUES ('select-application-area', '{
-        "data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11", 
-        "type": "vector", 
-        "tiles": ["/application-areas/{z}/{x}/{y}.pbf"], 
-        "minzoom": 6
-    }');
-        """
+    def add_map_source(apps, schema_editor):
+        MapSource = apps.get_model("models", "MapSource")
 
-    remove_map_source = """
-        DELETE FROM map_sources WHERE name = 'select-application-area';
-        """
+        if not MapSource.objects.filter(name="select-application-area").exists():
+            MapSource.objects.update_or_create(
+                name="select-application-area",
+                source={
+                    "data": "/geojson?nodeid=1909956f-3a3b-11eb-ae99-f875a44e0e11",
+                    "type": "vector",
+                    "tiles": ["/application-areas/{z}/{x}/{y}.pbf"],
+                    "minzoom": 6,
+                },
+            )
+
+    def remove_map_source(apps, schema_editor):
+        MapSource = apps.get_model("models", "MapSource")
+
+        for map_source in MapSource.objects.filter(name="select-application-area"):
+            map_source.delete()
 
     operations = [
         migrations.RunPython(add_functions, remove_functions),
@@ -499,5 +543,5 @@ INSERT INTO map_sources(name, source)
         migrations.RunPython(add_search_components, remove_search_components),
         migrations.RunPython(add_plugins, remove_plugins),
         migrations.RunPython(add_reports, reverse_code=migrations.RunPython.noop),
-        migrations.RunSQL(add_map_source, remove_map_source),
+        migrations.RunPython(add_map_source, remove_map_source),
     ]
