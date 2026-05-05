@@ -189,27 +189,23 @@ class GenerateUniqueReferences(BaseFunction):
 
                 try:
                     has_changes = False
+                    simpleid = currentTile.data[simpleid_node]
 
                     languages = models.Language.objects.all()
                     default_language = languages.get(code=settings.LANGUAGE_CODE)
 
-                    if currentTile.data[simpleid_node] is not None:
-                        if currentTile.data[simpleid_node] != 0:
-                            try:
-                                x = int(currentTile.data[simpleid_node])
-                                self.logger.debug("Resource " + str(resourceidval) + "has valid simpleid: " + str(x))
-                                pass
-                            except:
-                                has_changes = populate_simple_id(currentTile, simpleid_node)
-                        else:
-                            has_changes = populate_simple_id(currentTile, simpleid_node)
-                    else:
+                    if simpleid is None or simpleid == 0:
                         has_changes = populate_simple_id(currentTile, simpleid_node)
+                    else:
+                        try:
+                            x = int(currentTile.data[simpleid_node])
+                            self.logger.debug("Resource " + str(resourceidval) + "has valid simpleid: " + str(x))
+                        except:
+                            has_changes = populate_simple_id(currentTile, simpleid_node)
 
                     if currentTile.data[resid_node] is not None:
                         try:
                             UUID(currentTile.data[resid_node])
-                            pass
                         except:
                             has_changes = populate_resid_id(currentTile, resid_node, resourceidval, default_language)
                     else:
