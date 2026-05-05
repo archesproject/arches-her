@@ -178,6 +178,7 @@ class GenerateUniqueReferences(BaseFunction):
                 def populate_simple_id(currentTile, simple_node_id):
                     nextsimpleval = get_next_simple_id()
                     currentTile.data[simple_node_id] = nextsimpleval
+                    return True
 
                 def populate_resid_id(currentTile, resid_node_id, resourceid_val, language):
                     currentTile.data[resid_node_id] = {language.code: {"value": resourceid_val, "direction": language.default_direction}}
