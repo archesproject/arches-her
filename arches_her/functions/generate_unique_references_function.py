@@ -124,25 +124,21 @@ class GenerateUniqueReferences(BaseFunction):
 
             def simpleid_nextval_table_exists():
                 with connection.cursor() as cursor:
-                    cursor.execute(
-                        """
+                    cursor.execute("""
                         SELECT EXISTS (
                             SELECT FROM information_schema.tables 
                             WHERE  table_schema = 'public'
                             AND    table_name   = 'simpleid_nextval'
                         );
-                    """
-                    )
+                    """)
                     return bool(cursor.fetchone()[0])
 
             def get_next_simpleid():
                 with connection.cursor() as cursor:
-                    cursor.execute(
-                        """
+                    cursor.execute("""
                         TRUNCATE TABLE simpleid_nextval;
                         INSERT INTO simpleid_nextval DEFAULT VALUES RETURNING id;
-                    """
-                    )
+                    """)
                     return int(cursor.fetchone()[0])
 
             def get_simple_id_nodeinfo(functionid=None):
@@ -187,6 +183,9 @@ class GenerateUniqueReferences(BaseFunction):
                     currentTile.data[resid_node_id] = {language.code: {"value": resourceid_val, "direction": language.default_direction}}
                     return True
 
+                def get_formatted_id(id_string, language):
+                    return id_string[language.code]["value"]
+
                 try:
                     has_changes = False
                     simpleid = currentTile.data[simpleid_node]
@@ -205,7 +204,8 @@ class GenerateUniqueReferences(BaseFunction):
 
                     if currentTile.data[resid_node] is not None:
                         try:
-                            UUID(currentTile.data[resid_node])
+                            resid_string = get_formatted_id(currentTile.data[resid_node], default_language)
+                            UUID(resid_string)
                         except:
                             has_changes = populate_resid_id(currentTile, resid_node, resourceidval, default_language)
                     else:
