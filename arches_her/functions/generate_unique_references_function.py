@@ -124,21 +124,25 @@ class GenerateUniqueReferences(BaseFunction):
 
             def simpleid_nextval_table_exists():
                 with connection.cursor() as cursor:
-                    cursor.execute("""
+                    cursor.execute(
+                        """
                         SELECT EXISTS (
                             SELECT FROM information_schema.tables 
                             WHERE  table_schema = 'public'
                             AND    table_name   = 'simpleid_nextval'
                         );
-                    """)
+                    """
+                    )
                     return bool(cursor.fetchone()[0])
 
             def get_next_simpleid():
                 with connection.cursor() as cursor:
-                    cursor.execute("""
+                    cursor.execute(
+                        """
                         TRUNCATE TABLE simpleid_nextval;
                         INSERT INTO simpleid_nextval DEFAULT VALUES RETURNING id;
-                    """)
+                    """
+                    )
                     return int(cursor.fetchone()[0])
 
             def get_simple_id_nodeinfo(functionid=None):
