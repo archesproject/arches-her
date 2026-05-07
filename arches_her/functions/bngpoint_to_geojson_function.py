@@ -209,10 +209,11 @@ class BNGPointToGeoJSON(BaseFunction):
                     new_geojson_tile.save()
 
             cursor = connection.cursor()
-            sql = """
-                    SELECT * FROM refresh_tile_geojson_geometries(%s);
-                """
-            cursor.execute(sql, (tile.tileid,))
+
+            cursor.execute(
+                "SELECT * FROM refresh_tile_geojson_geometries(%s);",
+                (tile.tileid,),
+            )
 
         else:
             pass
