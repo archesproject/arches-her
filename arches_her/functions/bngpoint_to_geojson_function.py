@@ -184,6 +184,7 @@ class BNGPointToGeoJSON(BaseFunction):
 
             if self.config["geojson_nodegroup"] == str(tile.nodegroup_id):
                 tile.data[geojsonNode] = geometryValueJson
+                tile.save()
                 tileid_to_refresh = tile.tileid
             else:
                 previously_saved_tiles = Tile.objects.filter(
