@@ -180,8 +180,12 @@ class BNGPointToGeoJSON(BaseFunction):
             The new tile is saved and then the mv_geojson_geoms materialised view is refreshed so the point geometry will be displayed
             on the Search map.
             """
+            tileid_to_refresh = None
+
             if self.config["geojson_nodegroup"] == str(tile.nodegroup_id):
                 tile.data[geojsonNode] = geometryValueJson
+                tile.save()
+                tileid_to_refresh = tile.tileid
             else:
                 previously_saved_tiles = Tile.objects.filter(
                     nodegroup_id=self.config["geojson_nodegroup"], resourceinstance_id=tile.resourceinstance_id
@@ -197,6 +201,7 @@ class BNGPointToGeoJSON(BaseFunction):
                                 p.data[geojsonNode]["features"].append(f)
 
                         p.save()
+                        tileid_to_refresh = p.tileid
                 else:
                     new_geojson_tile = Tile().get_blank_tile_from_nodegroup_id(
                         self.config["geojson_nodegroup"], resourceid=tile.resourceinstance_id, parenttile=tile.parenttile
@@ -207,12 +212,15 @@ class BNGPointToGeoJSON(BaseFunction):
                         del new_geojson_tile.data[self.config["geojson_nodegroup"]]
 
                     new_geojson_tile.save()
+                    tileid_to_refresh = new_geojson_tile.tileid
 
             cursor = connection.cursor()
-            sql = """
-                    SELECT * FROM refresh_geojson_geometries();
-                """
-            cursor.execute(sql)  #
+
+            if tileid_to_refresh:
+                cursor.execute(
+                    "SELECT * FROM refresh_tile_geojson_geometries(%s);",
+                    (str(tileid_to_refresh),),
+                )
 
         else:
             pass
