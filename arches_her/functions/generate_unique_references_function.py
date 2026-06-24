@@ -185,7 +185,9 @@ class GenerateUniqueReferences(BaseFunction):
                     return True
 
                 def populate_resid_id(currentTile, resid_node_id, resourceid_val, language):
-                    currentTile.data[resid_node_id] = {language.code: {"value": resourceid_val, "direction": language.default_direction}}
+                    currentTile.data[resid_node_id] = {
+                        language.code: {"value": str(resourceid_val), "direction": language.default_direction}
+                    }
                     return True
 
                 def get_formatted_id(id_string, language):
