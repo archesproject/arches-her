@@ -196,8 +196,7 @@ class GenerateUniqueReferences(BaseFunction):
                 try:
                     has_changes = False
 
-                    languages = models.Language.objects.all()
-                    default_language = languages.get(code=settings.LANGUAGE_CODE)
+                    default_language = models.Language.objects.get(code=settings.LANGUAGE_CODE)
 
                     if currentTile.data.get(simpleid_node):
                         try:
