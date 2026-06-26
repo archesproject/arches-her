@@ -198,7 +198,7 @@ class GenerateUniqueReferences(BaseFunction):
 
                     default_language = models.Language.objects.get(code=settings.LANGUAGE_CODE)
 
-                    if currentTile.data.get(simpleid_node):
+                    if currentTile.data[simpleid_node] is not None and currentTile.data[simpleid_node] != 0:
                         try:
                             x = int(currentTile.data[simpleid_node])
                             self.logger.debug(f"Resource {resourceidval} has valid simpleid: {x}")
@@ -206,15 +206,6 @@ class GenerateUniqueReferences(BaseFunction):
                             has_changes = populate_simple_id(currentTile, simpleid_node)
                     else:
                         has_changes = populate_simple_id(currentTile, simpleid_node)
-
-                    if currentTile.data[simpleid_node] is None or currentTile.data[simpleid_node] == 0:
-                        has_changes = populate_simple_id(currentTile, simpleid_node)
-                    else:
-                        try:
-                            x = int(currentTile.data[simpleid_node])
-                            self.logger.debug("Resource " + str(resourceidval) + "has valid simpleid: " + str(x))
-                        except (ValueError, TypeError):
-                            has_changes = populate_simple_id(currentTile, simpleid_node)
 
                     if currentTile.data[resid_node] is not None:
                         try:
