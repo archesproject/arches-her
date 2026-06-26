@@ -195,12 +195,11 @@ class GenerateUniqueReferences(BaseFunction):
 
                 try:
                     has_changes = False
-                    simpleid = currentTile.data[simpleid_node]
 
                     languages = models.Language.objects.all()
                     default_language = languages.get(code=settings.LANGUAGE_CODE)
 
-                    if simpleid is None or simpleid == 0:
+                    if currentTile.data[simpleid_node] is None or currentTile.data[simpleid_node] == 0:
                         has_changes = populate_simple_id(currentTile, simpleid_node)
                     else:
                         try:
