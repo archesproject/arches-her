@@ -214,14 +214,14 @@ class GenerateUniqueReferences(BaseFunction):
                         try:
                             x = int(currentTile.data[simpleid_node])
                             self.logger.debug("Resource " + str(resourceidval) + "has valid simpleid: " + str(x))
-                        except:
+                        except (ValueError, TypeError):
                             has_changes = populate_simple_id(currentTile, simpleid_node)
 
                     if currentTile.data[resid_node] is not None:
                         try:
                             resid_string = get_formatted_id(currentTile.data[resid_node], default_language)
                             UUID(resid_string)
-                        except:
+                        except (ValueError, TypeError):
                             has_changes = populate_resid_id(currentTile, resid_node, resourceidval, default_language)
                     else:
                         has_changes = populate_resid_id(currentTile, resid_node, resourceidval, default_language)
