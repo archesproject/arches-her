@@ -182,36 +182,41 @@ class GenerateUniqueReferences(BaseFunction):
                 def populate_simple_id(currentTile, simple_node_id):
                     nextsimpleval = get_next_simple_id()
                     currentTile.data[simple_node_id] = nextsimpleval
+                    return True
 
-                def format_string_value(id_string_value):
-                    languages = models.Language.objects.all()
-                    default_language = languages.get(code=settings.LANGUAGE_CODE)
-                    return {default_language.code: {"value": id_string_value, "direction": default_language.default_direction}}
+                def populate_resid_id(currentTile, resid_node_id, resourceid_val, language):
+                    currentTile.data[resid_node_id] = {
+                        language.code: {"value": str(resourceid_val), "direction": language.default_direction}
+                    }
+                    return True
+
+                def get_formatted_id(id_string, language):
+                    return id_string[language.code]["value"]
 
                 try:
-                    if currentTile.data[simpleid_node] is not None:
-                        if currentTile.data[simpleid_node] != 0:
-                            try:
-                                x = int(currentTile.data[simpleid_node])
-                                self.logger.debug("Resource " + str(resourceidval) + "has valid simpleid: " + str(x))
-                                pass
-                            except:
-                                populate_simple_id(currentTile, simpleid_node)
-                        else:
-                            populate_simple_id(currentTile, simpleid_node)
+                    has_changes = False
+
+                    default_language = models.Language.objects.get(code=settings.LANGUAGE_CODE)
+
+                    if currentTile.data[simpleid_node] is not None and currentTile.data[simpleid_node] != 0:
+                        try:
+                            x = int(currentTile.data[simpleid_node])
+                            self.logger.debug(f"Resource {resourceidval} has valid simpleid: {x}")
+                        except (ValueError, TypeError):
+                            has_changes = populate_simple_id(currentTile, simpleid_node)
                     else:
-                        populate_simple_id(currentTile, simpleid_node)
+                        has_changes = populate_simple_id(currentTile, simpleid_node)
 
                     if currentTile.data[resid_node] is not None:
                         try:
-                            UUID(currentTile.data[resid_node])
-                            pass
-                        except:
-                            currentTile.data[resid_node] = format_string_value(str(resourceidval))
+                            resid_string = get_formatted_id(currentTile.data[resid_node], default_language)
+                            UUID(resid_string)
+                        except (ValueError, TypeError):
+                            has_changes = populate_resid_id(currentTile, resid_node, resourceidval, default_language)
                     else:
-                        currentTile.data[resid_node] = format_string_value(str(resourceidval))
+                        has_changes = populate_resid_id(currentTile, resid_node, resourceidval, default_language)
 
-                    return True
+                    return has_changes
 
                 except (
                     KeyboardInterrupt,
