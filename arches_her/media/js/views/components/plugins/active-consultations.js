@@ -219,6 +219,20 @@ define([
                                         }
                                 }
                             }, arches.mapSources);
+
+                            _.each(consultation.sources, function(sourceConfig) {
+                                if (sourceConfig.tiles) {
+                                    sourceConfig.tiles.forEach(function(url, i) {
+                                        if (url.startsWith('/')) {
+                                            sourceConfig.tiles[i] = window.location.origin + url;
+                                        }
+                                    });
+                                }
+                                if (sourceConfig.data && typeof sourceConfig.data === 'string' && sourceConfig.data.startsWith('/')) {
+                                    sourceConfig.data = arches.urls.root + sourceConfig.data.substr(1);
+                                }
+                            });
+
                             if (consultation["Geospatial Coordinates"]) {
                                 if (consultation["Geospatial Coordinates"]["features"].length > 0) {
                                     consultation.bounds = geojsonExtent({
