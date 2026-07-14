@@ -79,9 +79,7 @@ class FileTemplateView(View):
 
         template_name = self.get_template_path(template_id)
         filename, file_extension = os.path.splitext(template_name)
-        template_path = os.path.join(sysconfig.get_path("purelib"), "arches_her", "docx", template_name)
-        if not os.path.exists(template_path):
-            template_path = os.path.join(settings.HER_ROOT, "docx", template_name)
+        template_path = os.path.join(settings.DOCX_DIR, template_name)
 
         uploaded_docx_path = os.path.join(settings.APP_ROOT, "uploadedfiles", "docx")
         if not os.path.exists(uploaded_docx_path):

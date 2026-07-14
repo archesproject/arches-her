@@ -72,7 +72,20 @@ Run `pip install arches-her`
    HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../')), 'arches-her', 'arches_her')
    ```
 
-6. Next update your project's urls.py file to include the Arches for HERs urls like so:
+6. If you intend to use the Arches for HERs Consultation workflows to write Letters, you'll need to supply the following docx directory path for the letter templates. The configured path will depend on whether you wish to use your own letters or the core Arches for HERs letters.
+
+   ```python
+   # If your docx directory lives within your project
+   DOCX_DIR = os.path.join(APP_ROOT, "docx")
+
+   # If developing or using the Arches for HERs cloned repo
+   DOCX_DIR = os.path.join(settings.HER_ROOT, "docx")
+
+   # If you want to use the pip installed Arches for HERs docx files
+   DOCX_DIR = os.path.join(sysconfig.get_path("purelib"), "arches_her", "docx")
+   ```
+
+7. Next update your project's urls.py file to include the Arches for HERs urls like so:
 
    ```python
    urlpatterns = [
@@ -81,7 +94,7 @@ Run `pip install arches-her`
    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
    ```
 
-7. Add `arches_her` as a dependency in your project's `package.json` file:
+8. Add `arches_her` as a dependency in your project's `package.json` file:
 
    ```json
    "dependencies": {
@@ -90,19 +103,19 @@ Run `pip install arches-her`
     },
     ```
 
-8. Set up your database and load the package with the following command:
+9. Set up your database and load the package with the following command:
 
    ```bash
    python manage.py packages -o load_package -a arches_her -db -y
    ```
 
-9. Start the Arches for HERs project
+10. Start the Arches for HERs project
 
    ```bash
    python manage.py runserver
    ```
 
-10. Install and build front-end dependencies
+11. Install and build front-end dependencies
 
    Before you can use browse the application you will need to build the front end asset bundle. From the directory containing the package.json file ([workspace]/arches_her/arches_her)
 
