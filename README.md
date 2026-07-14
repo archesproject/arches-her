@@ -72,7 +72,7 @@ Run `pip install arches-her`
    HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../')), 'arches-her', 'arches_her')
    ```
 
-6. If you intend to use the Arches for HERs Consultation workflows to write Letters, you'll need to supply the following docx directory path for the letter templates. The configured path will depend on whether you wish to use your own letters or the core Arches for HERs letters.
+6. If you intend to use the Arches for HERs Consultation workflows to write Letters, you'll need to supply the following docx directory path for the letter templates. The configured path will depend on whether you wish to use your own letters or the core Arches for HERs letters. For example:
 
    ```python
    # If your docx directory lives within your project
