@@ -42,7 +42,7 @@ from arches.app.models.system_settings import settings
 from arches.app.models.tile import Tile
 from arches.app.utils.response import JSONResponse
 from arches.app.views.tile import TileData
-import site
+import sysconfig
 
 
 class FileTemplateView(View):
@@ -79,7 +79,7 @@ class FileTemplateView(View):
 
         template_name = self.get_template_path(template_id)
         filename, file_extension = os.path.splitext(template_name)
-        template_path = os.path.join(site.getsitepackages()[0], "arches_her", "docx", template_name)
+        template_path = os.path.join(sysconfig.get_path("purelib"), "arches_her", "docx", template_name)
         if not os.path.exists(template_path):
             template_path = os.path.join(settings.HER_ROOT, "docx", template_name)
 
