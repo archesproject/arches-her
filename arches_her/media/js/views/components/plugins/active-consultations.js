@@ -1,5 +1,6 @@
 define([
     'knockout',
+    'underscore',
     'arches',
     'jquery',
     'moment',
@@ -9,7 +10,7 @@ define([
     'bindings/chosen',
     'bindings/mapbox-gl',
     'widgets'
-], function(ko, arches, $, moment, AlertViewModel, geojsonExtent, ActiveConsultationsTemplate) {
+], function(ko, _, arches, $, moment, AlertViewModel, geojsonExtent, ActiveConsultationsTemplate) {
     return ko.components.register('active-consultations',  {
         viewModel: function(params) {
             var self = this;
