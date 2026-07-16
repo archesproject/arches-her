@@ -10,7 +10,8 @@ class FileTemplateModifierFactory:
     def get_file_template_modifier_class():
         if settings.setting_exists("CONSULTATION_FILE_TEMPLATE_MODIFIER"):
             return import_class_from_string(settings.CONSULTATION_FILE_TEMPLATE_MODIFIER)
-
+        else:
+            return None
 
 class FileTemplateModifier:
     """
@@ -23,9 +24,9 @@ class FileTemplateModifier:
     @staticmethod
     def get_template_path():
         """
-        Adds custom Consultation letter template configuration
+        Adds custom Consultation letter template configuration.
 
-        :return: dict containing uuid: consultation letter doc name
+        :return: dict structured as uuid: consultation letter doc name
         :rtype dict
         """
         pass

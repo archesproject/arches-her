@@ -43,12 +43,13 @@ from arches.app.models.tile import Tile
 from arches.app.utils.response import JSONResponse
 from arches.app.views.tile import TileData
 import sysconfig
-
+from arches_her.utils.file_template_modifier_factory import FileTemplateModifierFactory
 
 class FileTemplateView(View):
     def __init__(self):
         self.doc = None
         self.resource = None
+        self.file_template_customisations = FileTemplateModifierFactory.get_file_template_modifier_class()
 
     def get(self, request):
         parenttile_id = request.GET.get("parenttile_id")
@@ -178,6 +179,11 @@ class FileTemplateView(View):
             "missing 0": "Conditions Scope Notes.docx",
             "missing 1": "Mitigation Scope Notes.docx",
         }
+
+        # Overwrite template_dict if customisations are available
+        if self.file_template_customisations:
+            template_dict = self.file_template_customisations.get_template_path()
+
         for key, value in list(template_dict.items()):
             if key == template_id:
                 return value
