@@ -72,6 +72,8 @@ SILENCED_SYSTEM_CHECKS.append(
 
 ELASTICSEARCH_HOSTS = [{"scheme": "http", "host": "localhost", "port": ELASTICSEARCH_HTTP_PORT}]
 
+CONSULTATION_FILE_TEMPLATE_MODIFIER = "tests.test_consultation_letters.TestFileTemplateModifier"
+
 try:
     from arches_her.settings_local import *
 except ImportError:
