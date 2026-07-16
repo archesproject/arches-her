@@ -145,9 +145,6 @@ Out of the box, Arches for HERs includes a subset of docx Letter templates and t
 
    # If developing or using the Arches for HERs cloned repo
    DOCX_DIR = os.path.join(settings.HER_ROOT, "docx")
-
-   # If you want to use the pip installed Arches for HERs docx files
-   DOCX_DIR = os.path.join(sysconfig.get_path("purelib"), "arches_her", "docx")
    ```
 
 2. To customise the template dictionary:
