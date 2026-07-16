@@ -45,6 +45,7 @@ from arches.app.views.tile import TileData
 import sysconfig
 from arches_her.utils.file_template_modifier import FileTemplateModifierFactory
 
+
 class FileTemplateView(View):
     def __init__(self):
         self.doc = None

@@ -13,6 +13,7 @@ class FileTemplateModifierFactory:
         else:
             return None
 
+
 class FileTemplateModifier:
     """
     Base class for adding custom information to the Consultation file template.
