@@ -66,13 +66,18 @@ Run `pip install arches-her`
    ANALYSIS_COORDINATE_SYSTEM_SRID = 27700  # Comment out if using LatLong/WGS84
    ```
 
-5. If developing Arches for HERs, you'll need to add the HER_ROOT setting which indicates where on your file system your arches_her repository is located. You'll need to adjust the path according to where you have cloned the arches_her repo:
+5. If you wish to work with docx, add the following to the project's settings.py file
+   ```python
+   FILE_TYPES.append("docx")
+   ```
+
+6. If developing Arches for HERs, you'll need to add the HER_ROOT setting which indicates where on your file system your arches_her repository is located. You'll need to adjust the path according to where you have cloned the arches_her repo:
 
    ```python
    HER_ROOT = os.path.join(os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe()) + '../../../')), 'arches-her', 'arches_her')
    ```
 
-6. Next update your project's urls.py file to include the Arches for HERs urls like so:
+7. Next update your project's urls.py file to include the Arches for HERs urls like so:
 
    ```python
    urlpatterns = [
@@ -81,7 +86,7 @@ Run `pip install arches-her`
    ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
    ```
 
-7. Add `arches_her` as a dependency in your project's `package.json` file:
+8. Add `arches_her` as a dependency in your project's `package.json` file:
 
    ```json
    "dependencies": {
@@ -90,19 +95,19 @@ Run `pip install arches-her`
     },
     ```
 
-8. Set up your database and load the package with the following command:
+9. Set up your database and load the package with the following command:
 
    ```bash
    python manage.py packages -o load_package -a arches_her -db -y
    ```
 
-9. Start the Arches for HERs project
+10. Start the Arches for HERs project
 
    ```bash
    python manage.py runserver
    ```
 
-10. Install and build front-end dependencies
+11. Install and build front-end dependencies
 
    Before you can use browse the application you will need to build the front end asset bundle. From the directory containing the package.json file ([workspace]/arches_her/arches_her)
 
