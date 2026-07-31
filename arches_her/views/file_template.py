@@ -42,13 +42,15 @@ from arches.app.models.system_settings import settings
 from arches.app.models.tile import Tile
 from arches.app.utils.response import JSONResponse
 from arches.app.views.tile import TileData
-import site
+import sysconfig
+from arches_her.utils.file_template_modifier import FileTemplateModifierFactory
 
 
 class FileTemplateView(View):
     def __init__(self):
         self.doc = None
         self.resource = None
+        self.file_template_customisations = FileTemplateModifierFactory.get_file_template_modifier_class()
 
     def get(self, request):
         parenttile_id = request.GET.get("parenttile_id")
@@ -79,9 +81,12 @@ class FileTemplateView(View):
 
         template_name = self.get_template_path(template_id)
         filename, file_extension = os.path.splitext(template_name)
-        template_path = os.path.join(site.getsitepackages()[0], "arches_her", "docx", template_name)
-        if not os.path.exists(template_path):
-            template_path = os.path.join(settings.HER_ROOT, "docx", template_name)
+
+        # Look at settings.DOCX_DIR for template files, if not, use AfHER pip package
+        if settings.setting_exists(settings.DOCX_DIR):
+            template_path = os.path.join(settings.DOCX_DIR, template_name)
+        else:
+            template_path = os.path.join(sysconfig.get_path("purelib"), "arches_her", "docx", template_name)
 
         uploaded_docx_path = os.path.join(settings.APP_ROOT, "uploadedfiles", "docx")
         if not os.path.exists(uploaded_docx_path):
@@ -180,6 +185,11 @@ class FileTemplateView(View):
             "missing 0": "Conditions Scope Notes.docx",
             "missing 1": "Mitigation Scope Notes.docx",
         }
+
+        # Overwrite template_dict if customisations are available
+        if self.file_template_customisations:
+            template_dict = self.file_template_customisations.get_template_path()
+
         for key, value in list(template_dict.items()):
             if key == template_id:
                 return value

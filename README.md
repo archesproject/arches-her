@@ -134,7 +134,47 @@ Administrators of an instance of Arches for HERs should configure their arches p
 
 >❗️ Please note: you will need to configure a MapBox key in the user interface for the default mapping to appear, as per the [Default Map Settings](https://arches.readthedocs.io/en/latest/configuring/arches-system-settings/#default-map-settings) Core Arches documentation.
 
-## Working with Letter Templates
+## Working with Consultation Letter Templates
+
+Arches for HERs ships with a Consultations module, consisting of workflows to create and add data to Consultation and Application Area resources.  The Correspondence workflow allows users to create Microsoft Word Letter douments with specific fields populated by the Arches resource data.
+
+Out of the box, Arches for HERs includes a subset of docx Letter templates and their respective controlled vocabulary terms. If you wish to supply your own letter templates and terminologies, see the following instructions for customisation. 
+
+### Configuration
+
+1. Update your settings.py file with a docx directory path for the letter templates. The configured path will depend on whether you wish to use your own letters or the core Arches for HERs letters. For example:
+
+   ```python
+   # If your docx directory lives within your project
+   DOCX_DIR = os.path.join(APP_ROOT, "docx")
+
+   # If developing or using the Arches for HERs cloned repo
+   DOCX_DIR = os.path.join(settings.HER_ROOT, "docx")
+   ```
+
+2. To customise the template dictionary:
+   1. Firstly add your new letter concepts to the Reference Data Manager, and ensure they are added to both the "Letters" ConceptScheme and Collection. For more information on the RDM, see the Arches documentation: https://arches.readthedocs.io/en/stable/administering/rdm/
+
+   2. With your custom concepts added, you'll need to use the Arches file template modifier hook to implement your own dictionary to overwrite the core Arches for HERs template list.
+
+      In your Arches project, create a new file in `arches_project/utils/file_template_modifier.py` and populate with the following, where the return value from `get_template_path` is your custom template dictionary.
+      ```python
+      class FileTemplateModifier:
+         """
+         Base class for adding custom information to the Consultation file template.
+         """
+
+         def __init__(self):
+            pass
+
+         @staticmethod
+         def get_template_path():
+            return {"UUID": "file_name.docx"}
+      ```
+      Lastly, add the following path to your `settings.py`
+      ```python
+      CONSULTATION_FILE_TEMPLATE_MODIFIER = "arches_project.utils.file_template_modifier.FileTemplateModifier"
+      ```
 
 Field tag replacement in the templates can easily break if styling changes occur within the Word documents. The internal &ldquo;style runs&rdquo; provide rich formatting for the letters, but if a style partially touches a field tag (a field name surrounded by angle brackets), the field tag is physically split across several style runs. When this happens, it is no longer possible for the field to be substituted with its data value.
 
