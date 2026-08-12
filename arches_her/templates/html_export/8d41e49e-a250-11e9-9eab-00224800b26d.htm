@@ -1,6 +1,8 @@
 {% load template_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
+   {% block head %}
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
@@ -9,11 +11,18 @@
       {% include 'html_export/milligram.htm' %}
       {% include 'html_export/custom_style.htm' %}
    </head>
+   {% endblock head %}
+
+   {% block body %}
    <body>
+      {% block header %}
       <header>
          {% include 'html_export/custom_header.htm' %}
          <h1>Consultations</h1>
       </header>
+      {% endblock header %}      
+
+      {% block main %} 
       <main>
          {% for resource in resources %}
          {% with resource_data=resource.resource %}
@@ -25,6 +34,7 @@
 
          {# System Ref #}
          {% if resource_data|has_key:"System Reference Numbers" %}
+         {% block system_reference_numbers %}
          <section>
             <div class="container">
                <div class="row">
@@ -42,9 +52,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock system_reference_numbers %}
 
          {# External References #}
          {% if resource_data|has_key:"References" %}
+         {% block references %}
          <section >
             <div class="container">
                <h3>External References</h3>
@@ -75,10 +87,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock references %}
 
          {# Consultation Names #}
          {% if resource_data|has_key:"Consultation Names" %}
+         {% block names %}
          <section >
             <div class="container">
                <h3>Consultation Names</h3>
@@ -113,9 +126,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock names %}
 
          {# Application Type #}
          {% if resource_data|has_key:"Application Type" %}
+         {% block application_types %}
          <section>
             <div class="container">
                <div class="row">
@@ -132,9 +147,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock application_types %}
 
          {# Consultation Type #}
          {% if resource_data|has_key:"Consultation Type" %}
+         {% block consultation_types %}
          <section>
             <div class="container">
                <div class="row">
@@ -151,10 +168,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock consultation_types %}
 
          {# Designation Type #}
          {% if resource_data|has_key:"Designation Type" %}
+         {% block designation_types %}
          <section>
             <div class="container">
                <div class="row">
@@ -171,10 +189,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock designation_types %}
 
          {# Proposals #}
          {% if resource_data|has_key:"Proposal" %}
+         {% block proposals %}
          <section>
             <div class="container">
                <h3>Proposals</h3>
@@ -193,9 +212,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock proposals %}
 
          {# Contacts #}
          {% if resource_data|has_key:"Contacts" %}
+         {% block contacts %}
          <section>
             <div class="container">
                <h3>Contacts</h3>
@@ -240,9 +261,11 @@
         </section>
         <hr />
          {% endif %}
+         {% endblock contacts %}
 
          {# Consultation Dates #}
          {% if resource_data|has_key:"Consultation Dates" %}
+         {% block dates %}
          <section>
             <div class="container">
                <h3>Consultation Dates</h3>
@@ -261,9 +284,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock dates %}
 
          {# Advice #}
          {% if resource_data|has_key:"Advice" %}
+         {% block advice %}
          <section >
             <div class="container">
                <h3>Advice</h3>
@@ -298,10 +323,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock advice %}
 
          {# Site Visits #}
          {% if resource_data|has_key:"Site Visits" %}
+         {% block site_visits %}
          <section >
             <div class="container">
                <h3>Site Visits</h3>
@@ -338,9 +364,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock site_visits %}
 
          {# Associated Consultations #}
          {% if resource_data|has_key:"Associated Consultations" %}
+         {% block associated_consultations %}
          <section>
             <div class="container">
                <h3>Associated Consultations</h3>
@@ -355,9 +383,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock associated_consultations %}
 
          {# Related Monuments and Areas #}
          {% if resource_data|has_key:"Related Monuments and Areas" %}
+         {% block associated_mons_areas %}
          <section>
             <div class="container">
                <h3>Related Monuments and Areas</h3>
@@ -372,9 +402,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock associated_mons_areas %}
 
          {# Associated Activities #}
          {% if resource_data|has_key:"Associated Activities" %}
+         {% block associated_activities %}
          <section>
             <div class="container">
                <h3>Associated Activities</h3>
@@ -389,10 +421,13 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock associated_activities %}
 
          {% endwith%}
          {% endfor %}
       </main>
+      {% endblock main %} 
    </body>
+   {% endblock body %} 
 </html>
 
