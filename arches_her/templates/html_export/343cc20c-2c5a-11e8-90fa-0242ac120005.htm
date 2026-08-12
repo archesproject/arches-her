@@ -1,7 +1,8 @@
 {% load template_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
-
+{% block head %}
 <head>
    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
    <meta charset="UTF-8">
@@ -10,12 +11,18 @@
    {% include 'html_export/milligram.htm' %}
    {% include 'html_export/custom_style.htm' %}
 </head>
+{% endblock head %}
 
+{% block body %}
 <body>
+   {% block header %}
    <header>
       {% include 'html_export/custom_header.htm' %}
       <h1>Artefact</h1>
    </header>
+   {% endblock header %}
+
+   {% block main %}
    <main>
       {% for resource in resources %}
       {% with resource_data=resource.resource %}
@@ -27,6 +34,7 @@
 
       {# Artefact Names #}
       {% if resource_data|has_key:"Artefact Names" %}
+      {% block names %}
       <section>
          <div class="container">
             <h3>Artefact Names</h3>
@@ -60,9 +68,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock names %}
 
       {# System Reference Numbers #}
       {% if resource_data|has_key:"System Reference Numbers" %}
+      {% block system_reference_numbers %}
       <section>
          <div class="container">
                <div class="row">
@@ -81,9 +91,11 @@
       </section>
       <hr/>
       {% endif %}
+      {% endblock system_reference_numbers %}
 
       {# Discovery #}
       {% if resource_data|has_key:"Discovery" %}
+      {% block discoveries %}
       <section>
          <div class="container">
             <h3>Discovery</h3>
@@ -205,10 +217,12 @@
          </div>
       </section>
       <hr />
+      {% endblock discoveries %}
       {% endif %}
 
       {# Artefact Production #}
       {% if resource_data|has_key:"Production" and resource_data|val_from_key:"Production" %}
+      {% block productions %}
       <section>
          <div class="container">
             <h3>Artefact Production</h3>
@@ -248,9 +262,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock productions %}
 
       {# Artefact Dimensions #}
       {% if resource_data|has_key:"Measurement Event" and resource_data|val_from_key:"Measurement Event" %}
+      {% block dimensions %}
       <section>
          <div class="container">
             <h3>Artefact Dimensions</h3>
@@ -278,9 +294,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock dimensions %}
 
       {# Inscriptions #}
       {% if resource_data|has_key:"Inscription" and resource_data|val_from_key:"Inscription" %}
+      {% block inscriptions %}
       <section>
          <div class="container">
             <h3>Inscriptions</h3>
@@ -312,9 +330,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock inscriptions %}
 
       {# Artefact Condition Assessment #}
       {% if resource_data|has_key:"Condition Assessment" and resource_data|val_from_key:"Condition Assessment" %}
+      {% block condition_assessments %}
       <section>
          <div class="container">
             <h3>Artefact Condition Assessment</h3>
@@ -342,9 +362,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock condition_assessments %}
 
       {# Copyright #}
       {% if resource_data|has_key:"Copyright" %}
+      {% block copyrights %}
       <section>
          <div class="container">
             <h3>Copyright</h3>
@@ -370,9 +392,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock copyrights %}
 
       {# Descriptions #}
       {% if resource_data|has_key:"Descriptions" %}
+      {% block descriptions %}
       <section>
          <div class="container">
                <h3>Descriptions</h3>
@@ -404,9 +428,11 @@
       </section>
       <hr/>
       {% endif %}
+      {% block descriptions %}
 
       {# Bibliographic Source Citation #}
       {% if resource_data|has_key:"Bibliographic Source Citation" %}
+      {% block bibliographic_source_citations %}
       <section>
          <div class="container">
                <h3>Bibliographic Source Citation</h3>
@@ -436,9 +462,11 @@
       </section>
       <hr/>
       {% endif %}
+      {% endblock bibliographic_source_citations %}
 
       {# Associated Monuments/Areas/Artefacts #}
       {% if resource_data|has_key:"Associated Monuments, Areas and Artefacts" %}
+      {% block associated_mons_areas_artefacts %}
       <section>
          <div class="container">
             <h3>Associated Monuments, Areas and Artefacts</h3>
@@ -467,9 +495,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock associated_mons_areas_artefacts %}
 
       {# Associated Activities #}
       {% if resource_data|has_key:"Associated Activities" %}
+      {% block associated_activities %}
       <section>
          <div class="container">
             <h3>Associated Activities</h3>
@@ -484,9 +514,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock associated_activities %}
 
       {# Associated Historic Event #}
       {% if resource_data|has_key:"Associated Historic Event" %}
+      {% block associated_historic_events %}
       <section>
          <div class="container">
             <h3>Associated Historic Event</h3>
@@ -505,9 +537,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock associated_historic_events %}
 
       {# Associated Heritage Story #}
       {% if resource_data|has_key:"Associated Heritage Story" %}
+      {% block associated_heritage_stories %}
       <section>
          <div class="container">
             <h3>Associated Heritage Story</h3>
@@ -526,9 +560,11 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock associated_heritage_stories %}
 
       {# Repository Storage Location #}
       {% if resource_data|has_key:"Repository Storage Location" %}
+      {% block repository_storage_locations %}
       <section>
          <div class="container">
             <h3>Repository Storage Location</h3>
@@ -554,9 +590,11 @@
       </section>
       <hr />
       {% endif %}
+      {% block repository_storage_locations %}
 
       {# External Cross References #}
       {% if resource_data|has_key:"External Cross References" %}
+      {% block external_cross_references %}
       <section>
          <div class="container">
             <h3>External Cross References</h3>
@@ -603,10 +641,12 @@
       </section>
       <hr />
       {% endif %}
+      {% endblock external_cross_references %}
 
       {% endwith%}
       {% endfor %}
    </main>
+   {% endblock main %}
 </body>
-
+{% endblock body %} 
 </html>

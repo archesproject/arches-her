@@ -1,6 +1,8 @@
 {% load template_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
+   {% block head %}
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta charset="UTF-8">
@@ -9,11 +11,18 @@
       {% include 'html_export/milligram.htm' %}
       {% include 'html_export/custom_style.htm' %}
    </head>
+   {% endblock head %}
+
+   {% block body %}
    <body>
+      {% block header %}
       <header>
          {% include 'html_export/custom_header.htm' %}
          <h1>Places</h1>
       </header>
+      {% endblock header %}      
+
+      {% block main %} 
       <main>
          {% for resource in resources %}
          {% with resource_data=resource.resource %}
@@ -25,6 +34,7 @@
 
          {# System Ref #}
          {% if resource_data|has_key:"System Reference Numbers" %}
+         {% block system_reference_numbers %}
          <section>
             <div class="container">
                <div class="row">
@@ -42,11 +52,11 @@
          </section>
          <hr/>
          {% endif %}
-
-
+         {% endblock system_reference_numbers %}
 
          {# Place Names #}
          {% if resource_data|has_key:"Names" %}
+         {% block names %}
          <section >
             <div class="container">
                <h3>Place Names</h3>
@@ -81,10 +91,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock names %}
 
          {# Place Type #}
          {% if resource_data|has_key:"Place Type" %}
+         {% block types %}
          <section>
             <div class="container">
                <div class="row">
@@ -101,10 +112,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock types %}
 
          {# Location Data #}
          {% if resource_data|has_key:"Localities/Administrative Areas" or "Addresses" %}
+         {% block locations %}
          <section>
             <div class="container location-details">
                <h3>Location Information</h3>
@@ -162,9 +174,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock locations %}
 
         {# Place Description #}
         {% if resource_data|has_key:"Descriptions" %}
+        {% block descriptions %}
         <section>
            <div class="container">
               <div class="row">
@@ -181,10 +195,11 @@
         </section>
         <hr/>
         {% endif %}
-
+        {% endblock descriptions %}
 
         {# External Cross References #}
         {% if resource_data|has_key:"External Cross References" %}
+        {% block external_cross_references %}
         <section>
            <div class="container">
               <h3>External Cross References</h3>
@@ -229,10 +244,13 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock external_cross_references %}
 
          {% endwith%}
          {% endfor %}
       </main>
+      {% endblock main %} 
    </body>
+   {% endblock body %} 
 </html>
 
