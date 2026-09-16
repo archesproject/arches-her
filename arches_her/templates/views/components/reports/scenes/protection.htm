@@ -54,6 +54,7 @@
                                     <th class="none">{% trans "Amendment Date" %}</th>
                                     <th class="none">{% trans "Display Date" %}</th>
                                     <th class="none">{% trans "Reference" %}</th>
+                                    <th class="none">{% trans "Local Heritage List Criteria" %}</th>
                                     <th class="aher-table-control all"></th>
                                 </tr>
                             </thead>
@@ -72,6 +73,7 @@
                                         <a data-bind="text: reference, attr: {href: reference, target: '_blank'}"></a>
                                         <!-- /ko -->
                                     </td>
+                                    <td data-bind="text: localHeritageListCriteria ? localHeritageListCriteria.replace(/,/g, ', ') : ''"></td>
                                     <td class="aher-table-control">
                                         <div data-bind="if: $parent.cards.designations">
                                             <a href="#" data-bind="onEnterkeyClick, onSpaceClick, click: function() {$parent.editTile(tileid, $parent.cards.designations)}">
