@@ -1,6 +1,8 @@
 {% load template_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
+   {% block head %}
    <head>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,11 +10,18 @@
       {% include 'html_export/milligram.htm' %}
       {% include 'html_export/custom_style.htm' %}
    </head>
+   {% endblock head %}
+
+   {% block body %}
    <body>
+      {% block header %}
       <header>
          {% include 'html_export/custom_header.htm' %}
          <h1>Areas</h1>
       </header>
+      {% endblock header %}
+
+      {% block main %}
       <main>
          {% for resource in resources %}
          {% with resource_data=resource.resource %}
@@ -23,6 +32,7 @@
          </section>
 
          {# System Ref #}
+         {% block system_reference_numbers %}
          {% if resource_data|has_key:"System Reference Numbers" %}
          <section>
             <div class="container">
@@ -41,9 +51,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock system_reference_numbers %}
 
          {# Area Names #}
          {% if resource_data|has_key:"Area Names" %}
+         {% block names %}
          <section >
             <div class="container">
                <h3>Area Names</h3>
@@ -77,9 +89,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock names %}
 
          {# Designation and Protection Assignment #}
          {% if resource_data|has_key:"Designation and Protection Assignment" %}
+         {% block designation_protections %}
          <section>
             <div class="container">
                <h3>Designation and Protection Assignment</h3>
@@ -113,9 +127,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock designation_protections %}
 
          {# Location Data #}
          {% if resource_data|has_key:"Location Data" %}
+         {% block locations %}
          <section>
             <div class="container location-details">
                <h3>Location Information</h3>
@@ -191,9 +207,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock locations %}
 
          {# Descriptions #}
          {% if resource_data|has_key:"Descriptions" %}
+         {% block descriptions %}
          <section>
             <div class="container">
                <h3>Descriptions</h3>
@@ -239,9 +257,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock descriptions %}
 
          {# Bibliographic Source Citation #}
          {% if resource_data|has_key:"Bibliographic Source Citation" %}
+         {% block bibliographic_source_citations %}
          <section>
             <div class="container">
                <h3>Bibliographic Source Citations</h3>
@@ -271,9 +291,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock bibliographic_source_citations %}
 
          {# Construction Phase #}
          {% if resource_data|has_key:"Construction Phases" %}
+         {% block construction_phases %}
          <section>
             <div class="container">
                <h3>Construction Phases</h3>
@@ -312,9 +334,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock construction_phases %}
 
          {# Use Phase #}
          {% if resource_data|has_key:"Use Phase" %}
+         {% block use_phases %}
          <section>
             <div class="container">
                <h3>Use Phases</h3>
@@ -353,10 +377,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock use_phases %}
 
          {# Associated Monuments/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
          {% if resource_data|has_key:"Associated Monuments, Areas and Artefacts"  %}
+         {% block associated_mons_areas_artefacts %}
          <section>
              <div class="container">
                  <h3>Associated Monuments, Areas and Artefacts</h3>
@@ -385,10 +410,11 @@
          </section>
          <hr/>
          {% endif %}
-
+         {% endblock associated_mons_areas_artefacts %}
 
          {# Associated Activities #}
          {% if resource_data|has_key:"Associated Activities" %}
+         {% block associated_activities %}
          <section>
             <div class="container">
                <h3>Associated Activities</h3>
@@ -403,9 +429,11 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock associated_activities %}
 
          {# External Cross References #}
          {% if resource_data|has_key:"External Cross References" %}
+         {% block external_cross_references %}
          <section>
             <div class="container">
                <h3>External Cross References</h3>
@@ -450,9 +478,12 @@
          </section>
          <hr/>
          {% endif %}
+         {% endblock external_cross_references %}
 
          {% endwith%}
          {% endfor %}
       </main>
+      {% endblock main %}
    </body>
+   {% endblock head %}
 </html>

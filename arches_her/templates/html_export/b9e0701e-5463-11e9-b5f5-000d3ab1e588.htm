@@ -1,6 +1,9 @@
 {% load template_tags %}
+
 <!DOCTYPE html>
 <html lang="en">
+
+{% block head %}
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta charset="UTF-8">
@@ -9,12 +12,16 @@
     {% include 'html_export/milligram.htm' %}
     {% include 'html_export/custom_style.htm' %}
 </head>
+{% endblock head %}
 
+{% block body %}
 <body>
     <header>
         {% include 'html_export/custom_header.htm' %}
         <h1>Activities</h1>
     </header>
+
+    {% block main %} 
     <main>
         {% for resource in resources %}
         {% with resource_data=resource.resource %}
@@ -27,6 +34,7 @@
 
         {# System Ref #}
         {% if resource_data|has_key:"System Reference Numbers" %}
+        {% block system_reference_numbers %}
         <section>
             <div class="container">
                 <div class="row">
@@ -43,10 +51,12 @@
             </div>
         </section>
         <hr/>
+        {% endblock system_reference_numbers %}
         {% endif %}
 
         {# Record Status #}
         {% if resource_data|has_key:"Record_Status_Assignment" %}
+        {% block record_status_assignments %}
         <section>
             <div class="container">
                 <div class="row">
@@ -63,9 +73,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock record_status_assignments %}
 
         {# Activity Names #}
         {% if resource_data|has_key:"Activity Names" %}
+        {% block names %}
         <section>
             <div class="container">
                 <h3>Activity Names</h3>
@@ -84,9 +96,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock names %}
 
         {# Activity Types #}
         {% if resource_data|has_key:"Activity Type" %}
+        {% block activity_types %}
         <section>
             <div class="container">
                 <h3>Activity Types</h3>
@@ -101,9 +115,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock activity_types %}
 
         {# Activity Timespan #}
         {% if resource_data|has_key:"Activity Timespan" %}
+        {% block timespans %}
         <section>
             <div class="container">
                 <h3>Activity Timespan</h3>
@@ -135,9 +151,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock timespans %}
 
         {# Location Data #}
         {% if resource_data|has_key:"Location Data" %}
+        {% block locations %}
         <section>
             <div class="container location-details">
                 <h3>Location Information</h3>
@@ -211,9 +229,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% block locations %}
 
         {# Descriptions #}
         {% if resource_data|has_key:"Activity Descriptions" %}
+        {% block descriptions %}
         <section>
             <div class="container">
                 <h3>Activity Descriptions</h3>
@@ -259,9 +279,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock descriptions %}
 
         {# Bibliographic Source Citation #}
         {% if resource_data|has_key:"Bibliographic Source Citation" %}
+        {% block bibliographic_source_citations %}
         <section>
             <div class="container">
                 <h3>Bibliographic Source Citations</h3>
@@ -291,9 +313,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock bibliographic_source_citations %}
 
         {# Associated Monuments/Areas/Artefacts/Maritime Vessels/Historic Aircraft #}
         {% if resource_data|has_key:"Associated Monuments and Areas" %}
+        {% block associated_mons_areas_artefacts %}
         <section>
             <div class="container">
                 <h3>Associated Monuments/Areas/Artefacts/Maritime Vessels/Historic Aircraft</h3>
@@ -308,9 +332,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock associated_mons_areas_artefacts %}
 
         {# Parent Activities #}
         {% if resource_data|has_key:"Parent_Activity" %}
+        {% block parent_activities %}
         <section>
             <div class="container">
                 <h3>Parent Activities</h3>
@@ -325,9 +351,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock parent_activities %}
 
         {# Associated Activities #}
         {% if resource_data|has_key:"Associated Activities" %}
+        {% block associated_activities %}
         <section>
             <div class="container">
                 <h3>Associated Activities</h3>
@@ -342,9 +370,11 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock associated_activities %}
 
         {# External Cross References #}
         {% if resource_data|has_key:"External Cross References" %}
+        {% block external_cross_references %}
         <section>
             <div class="container">
                 <h3>External Cross References</h3>
@@ -388,9 +418,14 @@
         </section>
         <hr/>
         {% endif %}
+        {% endblock external_cross_references %}
 
         {% endwith%}
         {% endfor %}
     </main>
+    {% endblock main %} 
+
 </body>
+{% endblock body %}
+
 </html>
