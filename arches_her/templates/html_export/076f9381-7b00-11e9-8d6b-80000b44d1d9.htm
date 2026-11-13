@@ -93,6 +93,7 @@
                               <div class="rcell">Designation Name</div>
                               <div class="rcell">Designation or Protection Type</div>
                               <div class="rcell">Grade</div>
+                              <div class="rcell">Local Heritage List Criteria</div>
                            </div>
                            {% for desig in resource_data|val_from_key:"Designation and Protection Assignment" %}
                            <div class="rrow">
@@ -104,6 +105,11 @@
                               </div>
                               <div class="rcell" data-title="Grade">
                                  {{ desig|val_from_key:"Grade"|val_from_key:"@display_value" }}
+                              </div>
+                              <div class="rcell" data-title="Local Heritage List Criteria">
+                                 {% with lhlc=desig|val_from_key:"Local Heritage List Criteria Type" %}
+                                 {% for detail in lhlc.concept_details %}{{ detail.value }}{% if not forloop.last %}, {% endif %}{% endfor %}
+                                 {% endwith %}
                               </div>
                            </div>
                            {% endfor %}
